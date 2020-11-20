@@ -60,9 +60,9 @@
 			<div class="thumbs">
 				<a href="<%=request.getContextPath()%>/resources/img/pd/tb01.png" title="image1"><img src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></a>
 	            <a href="<%=request.getContextPath()%>/resources/img/pd/tb02.png" title="image2"><img src="<%=request.getContextPath()%>/resources/img/pd/tb02.png"/></a>
-                <a href="<%=request.getContextPath()%>/resources/img/pd/tb03.png"" title="image3"><img src="<%=request.getContextPath()%>/resources/img/pd/tb03.png"/></a>
-				<a href="<%=request.getContextPath()%>/resources/img/pd/tb04.png"" title="image4"><img src="<%=request.getContextPath()%>/resources/img/pd/tb04.png"/></a>
-				<a href="<%=request.getContextPath()%>/resources/img/pd/tb05.png"" title="image5"><img src="<%=request.getContextPath()%>/resources/img/pd/tb05.png"/></a>
+                <a href="<%=request.getContextPath()%>/resources/img/pd/tb03.png" title="image3"><img src="<%=request.getContextPath()%>/resources/img/pd/tb03.png"/></a>
+				<a href="<%=request.getContextPath()%>/resources/img/pd/tb04.png" title="image4"><img src="<%=request.getContextPath()%>/resources/img/pd/tb04.png"/></a>
+				<a href="<%=request.getContextPath()%>/resources/img/pd/tb05.png" title="image5"><img src="<%=request.getContextPath()%>/resources/img/pd/tb05.png"/></a>
 			</div>
 			<div id="mainImg">
 				<img src="<%=request.getContextPath()%>/resources/img/pd/tb01.png" alt="image" />
@@ -82,7 +82,7 @@
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 					</div>
-					10 Review(s) | <a class="review-link" href="3">리뷰쓰기</a>
+					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
 				</div>
 				<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
 				<span class="product-available">재고</span>
@@ -109,16 +109,16 @@
 	</div>
 	<br/>
 	<div class="row">
-		<div class="col">
+		<div class="col-9">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#descript">상품정보</a>
+					<a class="nav-link active" data-toggle="tab" href="#descript"><span style="font-size:0.55em;">상품정보</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#info">배송/환불</a>
+					<a class="nav-link" data-toggle="tab" href="#info"><span style="font-size:0.55em;">배송환불</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#review">리뷰</a>
+					<a class="nav-link" data-toggle="tab" href="#review"><span style="font-size:0.55em;">구매리뷰</span></a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -126,12 +126,148 @@
 					<p>상품정보 영역 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id ornare libero. Vivamus iaculis, justo vel mattis pharetra, nisi ligula varius nisl, sit amet mollis tortor ligula vitae nisi.</p>
            		</div>
            		<div class="tab-pane fade" id="info">
-           			<p> 배송/환불 영역 Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p> 
+       				<p> 배송/환불 영역 Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
            		</div>
            		<div class="tab-pane fade" id="review">
-					<p>리뷰목록 영역Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
+					<h5>리뷰 <span style="color:#ee8374">8,127</span></h5><br/>
+					<div class="row">
+						<div class="col-6">
+							<h2 style="position:absolute;top:50%;margin-top:-50px;height:200px;">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<b>4.6</b>
+							</h2>
+						</div>
+						<div class="col-6">
+							5점 : 
+							<div class="progress">
+  								<div class="progress-bar" role="progressbar" style="width:30%;background-color:#ee8374" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							4점 :
+							<div class="progress">
+  								<div class="progress-bar" role="progressbar" style="width:32%;background-color:#ee8374" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							3점 :
+							<div class="progress">
+  								<div class="progress-bar" role="progressbar" style="width:18%;background-color:#ee8374" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							2점 :
+							<div class="progress">
+  								<div class="progress-bar" role="progressbar" style="width:13%;background-color:#ee8374" aria-valuenow="13" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							1점 :
+							<div class="progress">
+  								<div class="progress-bar" role="progressbar" style="width:7%;background-color:#ee8374" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>	
+					<br/>
+					<hr/>
+					<div class="row">
+						<div class="col-2">
+							<a href="#">베스트순</a>
+						</div>
+						<div class="col-2">
+							<a href="#">최신순</a>
+						</div>
+						<div class="col-3">
+							<a href="#">사진리뷰</a>
+						</div>
+						<div class="col-5" style="text-align:right;">
+							<label>
+								별점 : 
+								<select>
+									<option value="num5">5점</option>
+									<option value="num5">4점</option>
+									<option value="num5">3점</option>
+									<option value="num5">2점</option>
+									<option value="num5">1점</option>
+								</select>
+							</label>
+						</div>
+					</div>					
+					<hr/>
+					<div class="row" style="text-align:center;">
+						<div class="col-1">
+							<a href="#"><img src="<%=request.getContextPath()%>/resources/img/admin/user_basic.png" style="width:65%;"/></a>
+						</div>
+						<div class="col-11" style="text-align:left;">
+							회원닉네임
+						</div>
+					</div>
+					<div class="row" style="background-color:#eee;margin-top:15px;margin-bottom:25px;">
+						<div class="col-12" style="text-align:center;margin-bottom:5px;">
+							총점 :
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="col-3">
+							내구성 :
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="col-3">
+							가격 :
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="col-3">
+							디자인 :
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<div class="col-3">
+							배송 :
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							제품명 / 옵션 / 구매일
+						</div>
+						<div class="col-12" style="margin-bottom:25px;">
+							리뷰내용 <br/>
+							이미지 첨부시 리뷰내용 아래 세팅
+						</div>
+						<div class="col-3">
+							<button class="btn btn" style="background-color:#ee8374;color:#fff;">도움이 되요</button>
+						</div>
+						<div class="col-9">
+							<span style="font-size:0.85em;outline:1px;">230명에게 도움이 되었습니다.</span>
+						</div>
+						<hr/>
+					</div>				
 				</div>
            	</div>
+         	<br/>
+			<!-- 페이징 -->
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+			</ul>
+		</div>
+		<div class="col-3">
+			스티키 배너 위치
 		</div>
 	</div>
 </div>

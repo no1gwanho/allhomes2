@@ -11,7 +11,7 @@
 	<br/>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/tb/tb01.png"/></div>
+			<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></div>
 			<div class="col-md-3"><b style="font-size:1.5em;">상품명</b></div>
 			<div class="col-md-3">
 		  		<label>
