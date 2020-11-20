@@ -12,7 +12,7 @@ public class StoreController {
 		return "store/storeHome";		
 	}
 	
-	@RequestMapping("/storeCategori")
+	@RequestMapping("/storeCategory")
 	public String storeCate() {
 			
 		return "store/storeCate";

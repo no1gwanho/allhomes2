@@ -55,7 +55,7 @@
         </a></h4>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/myapp/storeHome">스토어홈</a>
-          <a class="dropdown-item" href="/myapp/storeCategori">카테고리</a>
+          <a class="dropdown-item" href="/myapp/storeCategory">카테고리</a>
           <a class="dropdown-item" href="/myapp/storeBest">베스트</a>
         </div>
       </li>
