@@ -1,0 +1,118 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>AllHomes에 오신 것을 환영합니다~</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
+<script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/allhomes_header.css" type="">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<style>
+	body{
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" style="width:50px"/></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <h4><a class="nav-link" href="/myapp/">올홈즈<span class="sr-only">(current)</span></a></h4>
+      </li>
+       <li class="nav-item dropdown">
+        <h4><a class="nav-link" href="/myapp/blogHome" id="navbarDropdown" role="button" data-hover="dropdown" aria-haspopup="true" aria-expanded="false" >
+          집들이
+        </a></h4>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/myapp/blogHome">집들이홈</a>
+          <a class="dropdown-item" href="/myapp/blogTop">베스트</a>
+          <a class="dropdown-item" href="/myapp/blogTheme">테마별</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <h4><a class="nav-link" href="/myapp/storeHome" id="navbarDropdown" role="button" data-hover="dropdown" aria-haspopup="true" aria-expanded="false">
+          스토어
+        </a></h4>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/myapp/storeHome">스토어홈</a>
+          <a class="dropdown-item" href="/myapp/storeCategori">카테고리</a>
+          <a class="dropdown-item" href="/myapp/storeBest">베스트</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <h4><a class="nav-link" href="/myapp/qnaMain">질문과답변</a></h4>
+      </li>
+   	<li class="nav-item dropdown">
+        <h4><a class="nav-link" href="/myapp/mypageHome"id="navbarDropdown" role="button" data-hover="dropdown" aria-haspopup="true" aria-expanded="false">
+          마이페이지
+        </a></h4>   
+        
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/myapp/mypageHome">마이페이지홈</a>
+          <a class="dropdown-item" href="/myapp/mypageShopping">나의쇼핑</a>
+          <a class="dropdown-item" href="/myapp/mypageWishlist">위시리스트</a>
+           <a class="dropdown-item" href="/myapp/userEdit">회원정보</a>
+        </div>
+      </li>
+    </ul>
+    
+    <form class="form-inline">
+					<div class="input-group" style="margin-right:20px;" >
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1"><i class="fas fa-search" style="color:white"></i></span>
+
+						</div>
+						<input type="text" class="form-control" placeholder="Search"
+							aria-label="Search" aria-describedby="basic-addon1">
+					</div>
+	</form>
+
+	 <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/myapp/cartList"><i class="fas fa-shopping-cart" style="color: #E98374"></i></a>
+      </li>
+      <li class="nav-item" style="margin:0px">
+       <h6><a  class="nav-link"href="/myapp/login">로그인</a></h6>
+      </li>
+      <li class="nav-item" style="margin:0px">
+      <h6><a class="nav-link" href="/myapp/register" style="margin-right:20px;">회원가입</a></h6> 
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link writeBtn btn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+          글쓰기
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/myapp/blogWrite">집들이</a>
+          <a class="dropdown-item" href="/myapp/qnaWrite">질문과답변</a>
+          <a class="dropdown-item" href="/myapp/mypageShopping">리뷰작성</a>
+          
+         
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+</div><!-- container DIV -->
