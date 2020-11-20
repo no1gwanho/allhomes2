@@ -1,12 +1,36 @@
 package com.allhomes.myapp.admin;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class AdminController {
 
+	
+	SqlSession sqlSession;
+
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
+	
+	/////////////////////////////////////////////////////////////
 	@RequestMapping("/adminHome")
 	public String adminHome() {
 		return "admin/adminHome";
@@ -112,10 +136,36 @@ public class AdminController {
 		return "admin/adminSales/adminSalesMain";
 	}
 	
+	//매출-스토어매출로 이동
 	@RequestMapping("/adminSalesStore")
 	public String adminSalesStore() {
 		return "admin/adminSales/adminSalesStore";
 	}
+	
+	///////////////////////////기능
+	
+	//관리자 회원가입
+	@RequestMapping(value="/adminRegisterOk", method=RequestMethod.POST)
+	public ModelAndView adminRegisterOk(AdminRegisterVO vo, HttpSession ses) {
+		
+		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		
+		//System.out.println("암호화 전==>"+vo.getEmppwd());
+		//비밀번호 암호화
+		vo.setEmppwd(passwordEncoder.encode(vo.getEmppwd()));
+		//System.out.println("암호화 후==>"+vo.getEmppwd());
+
+		
+		ModelAndView mav = new ModelAndView();
+		int result = dao.adminInsert(vo);
+		if(result>0) { //회원가입 성공
+			mav.setViewName("redirect:adminLogin");
+		}else { //회원가입 실패
+			mav.setViewName("redirect:adminJoin");
+		}
+		return mav;
+	}
+	
 	
 
 }

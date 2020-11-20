@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminRegisterDaoImp">
+	<insert id="adminInsert" parameterType="com.allhomes.myapp.admin.AdminRegisterVO">
+		insert into admin(empno,userid,emppwd,empname,tel,email,regdate)
+		values (admin_sq.nextval,#{userid},#{emppwd},#{empname}, #{tel}, #{email},sysdate)
+	</insert>
+</mapper>
