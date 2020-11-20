@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
+	
+	<!-- 해시태그를 위한 css/js파일 -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
+	<script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
+<style>
+		.label{background-color:#E98374;}
+</style>
 
 <style>
 #blogWriteTitle {
@@ -43,16 +50,10 @@
 	<!-- 테마선택 메뉴 끝 ======================== -->
 	<hr/>
 	
+
+	
 	<!-- 해시태그입력 창 시작====-->
-	<!-- 해시태그를 위한 css/js파일 -->
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
-	<script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
-	
-	
-	<style>
-		.label{background-color:#E98374;}
-	</style>
-	
+
 	<script>
 		$(function(){
 			var hashtag = $(document).$('.hashtag').text();
