@@ -43,6 +43,11 @@ public class BlogController {
 		return "/blog/blogView";
 	}
 	
+	@RequestMapping("/blogSearch")
+	public String blogSearchPage() {
+		return "/blog/blogSearch";
+		
+	}
 	
 	
 }
