@@ -17,6 +17,11 @@
 	#logo img{width:200px; display: block; margin: 0px auto;}
 	#button {background-color:#ee8374;border:none;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
+	
+	#snslogtitle{text-align:center;}
+	.login_logo{text-align:center;}
+	.login_logo img{width:50px;height:50px;}
+	
 </style>
 </head>
 <body>
@@ -35,7 +40,16 @@
 		<a href="">아이디/비밀번호찾기</a> &nbsp;&nbsp;
 		<a href="/myapp/register">  회원가입</a>
 	</div>
-
+	<br/>
+	<div id="snslogtitle">sns계정으로 로그인</div>
+	<br/>
+	<div class="login_logo">
+		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_google.jfif"></a>
+		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_naver.jfif" ></a>
+		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_cacao.jfif" ></a>
+	</div>
+	<hr/>
+	
 </div>
 </body>
 </html>
