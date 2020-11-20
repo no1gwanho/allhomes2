@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/signin.css" type="">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
 <style>
-	#idpw{text-align:center;}
-	#logo img{width:200px; display: block; margin: 0px auto;}
-	#button {background-color:#ee8374;border:none;}
+	.ah-btn {background-color:#ee8374;border:none;color:white;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
+	#logo{text-align:center;}
+	
 </style>
 
 
@@ -21,16 +21,15 @@
 <body>
 <div class="container">
 	<div id="logo">
-	
 	<a href="/myapp/">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt="" style="width:150px;"/>
 	</a>
-	
 	</div>
-    <h1 class="display-4">가입이 완료되었습니다.</h1>
+    <h1 class="display-5">가입이 완료되었습니다.</h1>
     <p class="lead">가입이 완료되었습니다! 등록하신 이메일로 인증 메일이 발송되었습니다. 인증 후 정상적으로 접속이 가능합니다.</p>
     
-    <button class="ah-btn"></button>
+    <button class="ah-btn btn">로그인하기</button>
+    <button class="btn btn-secondary">홈으로</button>
   </div>
 	
 </body>
