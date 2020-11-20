@@ -19,30 +19,56 @@
 		margin:0 auto;
 		padding-top:30px;
 	}
+	#formC{
+		float:left;
+		height:30px;
+		line-height:30px
+	}
 </style>
-<h1>카테고리 관리 페이지</h1>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-4">
+			
+			
             <div class="card shadow mb-4">
             	<div class="card-header py-3">
                       <h6 class="m-0 font-weight-bold text-primary">CATEGORY ADD</h6>
                 </div>
             	<div class="card-body">
             		<div class="card shadow col-lg-10" id="category">
-                		<img src="/myapp/resources/img/c_add.png"/>
+                		<img src="/myapp/resources/img/admin/c_add.png"/>
                 		<div class="my-2"></div>
                 		<hr/>
-                		카테고리명 : <input type="text"/>
-                		우선순위 : <input type="text"/>
+                		<form class="col-lg-10" style="text-align:center">
+                			<p>
+                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                			<p>
+                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                		</form>
                 		<br/>
+                		
+                		<!-- 버튼 -->
+                		<div class="" style="text-align:center">
+	                		<!-- 추가 버튼 -->
+							<a href="#" class="btn btn-primary btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-check"></i></span>
+			        			<span class="text">추가</span>
+			    			</a>
+			    			     
+		                </div><br/>
+		                <!-- 버튼 끝 -->
                 	</div>
-     
+     				
             	</div>
             </div>
        	</div><!-- col-lg-4 끝 -->
        	
        	<div class="col-lg-8">
+		    
        		<div class="card shadow mb-4" >
        			<div class="card-header py-3">
                      <h6 class="m-0 font-weight-bold text-primary">CATEGORY</h6>
@@ -50,40 +76,144 @@
                 <div class="card-body">
                 	<!-- 카테고리 1 -->
                 	<div class="card shadow col-lg-5" id="category">
-                		<img src="/myapp/resources/img/c1.jpg"/>
+                		<img src="/myapp/resources/img/admin/c1.jpg"/>
                 		<div class="my-2"></div>
                 		<hr/>
-                		카테고리명 : <input type="text"/>
-                		우선순위 : <input type="text"/>
+                		<form class="col-lg-10" style="text-align:center">
+                			<p>
+                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                			<p>
+                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                		</form>
                 		<br/>
+                		
+                		<!-- 버튼 -->
+                		<div class="" style="text-align:center">
+	                		<!-- 수정 버튼 -->
+							<a href="#" class="btn btn-secondary btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-check"></i></span>
+			        			<span class="text">수정</span>
+			    			</a>
+			    			<!-- 삭제 버튼 -->
+			    			<a href="#" class="btn btn-danger btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-trash"></i></span>
+			        			<span class="text">삭제</span>
+			    			</a>
+			    			
+		                </div>    
+			    		<br/>   
+		                <!-- 버튼 끝 -->
+		                
+		                
                 	</div>
                 	<!-- 카테고리 1 끝 -->
                 	
                 	<div class="card shadow col-lg-5" id="category">
-                		<img src="/myapp/resources/img/c2.jpg"/>
+                		<img src="/myapp/resources/img/admin/c2.jpg"/>
                 		<div class="my-2"></div>
                 		<hr/>
-                		카테고리명 : <input type="text"/>
-                		우선순위 : <input type="text"/>
+                		<form class="col-lg-10" style="text-align:center">
+                			<p>
+                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                			<p>
+                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                		</form>
                 		<br/>
+                		
+                		<!-- 버튼 -->
+                		<div class="" style="text-align:center">
+	                		<!-- 수정 버튼 -->
+							<a href="#" class="btn btn-secondary btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-check"></i></span>
+			        			<span class="text">수정</span>
+			    			</a>
+			    			<!-- 삭제 버튼 -->
+			    			<a href="#" class="btn btn-danger btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-trash"></i></span>
+			        			<span class="text">삭제</span>
+			    			</a>
+			    			
+		                </div>    
+			    		<br/>   
+		                <!-- 버튼 끝 -->
                 	</div>
                 	
                 	<div class="card shadow col-lg-5" id="category">
-                		<img src="/myapp/resources/img/c3.jpg" />
+                		<img src="/myapp/resources/img/admin/c3.jpg" />
                 		<div class="my-2"></div>
                 		<hr/>
-                		카테고리명 : <input type="text"/>
-                		우선순위 : <input type="text"/>
+                		<form class="col-lg-10" style="text-align:center">
+                			<p>
+                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                			<p>
+                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                		</form>
                 		<br/>
+                		
+                		<!-- 버튼 -->
+                		<div class="" style="text-align:center">
+	                		<!-- 수정 버튼 -->
+							<a href="#" class="btn btn-secondary btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-check"></i></span>
+			        			<span class="text">수정</span>
+			    			</a>
+			    			<!-- 삭제 버튼 -->
+			    			<a href="#" class="btn btn-danger btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-trash"></i></span>
+			        			<span class="text">삭제</span>
+			    			</a>
+			    			
+		                </div>    
+			    		<br/>   
+		                <!-- 버튼 끝 -->
+		                
+		                
                 	</div>
                 	
                 	<div class="card shadow col-lg-5" id="category">
-                		<img src="/myapp/resources/img/c4.jpg"/>
+                		<img src="/myapp/resources/img/admin/c4.jpg"/>
                 		<div class="my-2"></div>
                 		<hr/>
-                		카테고리명 : <input type="text"/>
-                		우선순위 : <input type="text"/>
+                		<form class="col-lg-10" style="text-align:center">
+                			<p>
+                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                			<p>
+                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                			</p>
+                		</form>
                 		<br/>
+                		
+                		<!-- 버튼 -->
+                		<div class="" style="text-align:center">
+	                		<!-- 수정 버튼 -->
+							<a href="#" class="btn btn-secondary btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-check"></i></span>
+			        			<span class="text">수정</span>
+			    			</a>
+			    			<!-- 삭제 버튼 -->
+			    			<a href="#" class="btn btn-danger btn-icon-split">
+		           				<span class="icon text-white-50">
+		           				<i class="fas fa-trash"></i></span>
+			        			<span class="text">삭제</span>
+			    			</a>
+			    			
+		                </div>    
+			    		<br/>   
+		                <!-- 버튼 끝 -->
                 	</div>
                 	
                 	

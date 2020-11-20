@@ -1,81 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
-<h1>스토어 추가</h1>
+
 <div class="container-fluid">
-	
-		<div class="row">
-		
-			<div class="col-lg-12">
-			
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-secondary">Store ADD</h6>
-					</div>
-					<div class="card-body">
+	<div class="row">
+		<div class="col-lg-4">
+            <div class="card shadow mb-4">
+            	<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Store ADD</h6>
+				</div>
+				<div class="card-body">
 					
+					<div class="center-block text-center">
 						<!-- 이미지 파일 업로드 -->
-						<div class="col-lg-6">
-							<div>
-								<img src="/myapp/resources/img/storeadd.png" style="width:200px; height:200px;"/>
-							</div>
+						<div class="col-lg-12">
+								<img src="/myapp/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/><br/><br/>
+								<text>대표 이미지</text>
+							<br/><hr/><br/>
 							<div class="file-field">
-			                	<div class="btn btn-primary btn-sm float-left ">
-			                    	<span>Choose file</span>
-			                    	<input type="file" id="fileInput">
-			                	</div>
-			                	<div class="file-path-wrapper">
-			                    	<input class="file-path validate" type="text" placeholder="Upload your file">
-			                	</div>
-			            	</div>
-						</div>
-					
-					<div class="col-lg-6">
-						<form class="md-form"  style="color: #757575;" method="post" action="">
-	                    	<label for="materialSaveFormName">스토어명</label>
-							<input type="text" id="materialSaveFormName" class="form-control"><br/>
-	                    	
-		                    <label for="materialSaveFormEmail">사업자등록번호</label>
-		                    <input type="email" id="materialSaveFormEmail" class="form-control"><br/>
-	
-		                    <label for="materialSaveFormLastName">ID</label>
-		                    <input type="email" id="materialSaveFormLastName" class="form-control"><br/>
-		
-							<label for="materialSaveFormLastName">이름</label>
-		                    <input type="email" id="materialSaveFormLastName" class="form-control"><br/>
-		
-							<label for="materialSaveFormLastName">E-mail</label>
-		                    <input type="email" id="materialSaveFormLastName" class="form-control"><br/>
-							
-							<label for="materialSaveFormLastName">Tel</label>
-		                    <input type="email" id="materialSaveFormLastName" class="form-control"><br/>
-							
-							<label for="materialSaveFormLastName">사업장 주소</label>
-		                    <input type="email" id="materialSaveFormLastName" class="form-control">
-		                    <div class="my-2"></div>
-							<input type="email" id="materialSaveFormLastName" class="form-control">
-							<div class="my-2"></div>
-							<input type="email" id="materialSaveFormLastName" class="form-control"><br/>
-							
-							
-							<!-- 버튼 -->
-							<a href="#" class="btn btn-success btn-icon-split">
-                                <span class="icon text-white-50">
-                                <i class="fas fa-check"></i>
-                                </span>
-                                <span class="text">추가</span>
-                            </a>
-                            
-                            <a href="/myapp/adminStore" class="btn btn-secondary btn-icon-split">
-                                <span class="text">취소</span>
-                            </a>
-                            <!-- 버튼 끝 -->
-                                    
-						</form>
+			                   <input class="col-md-12" type="file" id="fileInput">
+				                <div class="my-2"></div>
+				                <div class="file-path-wrapper">
+				                    <input class="file-path validate" type="text" placeholder="Upload your file">
+				              	</div>
+							</div>
+				         </div>
+				        
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+       	</div><!-- col-lg-4 끝 -->
+       	
+       	<div class="col-lg-8">
+       		<div class="card shadow mb-4">
+       			<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">상세 정보</h6>
+				</div>
+				<div class="card-body" style="text-align:center">
+		       			<form method="post" class="col-lg-10" style="display:inline-block">
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">스토어명</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+		       				</p>
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">사업자등록번호</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+		       				</p>
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">ID</span>
+			       				<input type="text" class="form-control col-lg-4"/>
+			       				<a href="" class="col-lg-2 btn alert-secondary" style="float:left">검색</a>
+		       				</p>
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">이름</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+		       				</p>
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">Email</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+		       				</p>
+		       				<p>
+			       				<span class="col-lg-4" style="float:left">Tel</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+							</p>
+							<p>
+			       				<span class="col-lg-4" style="float:left">우편번호</span>
+			       				<input type="text" class="form-control col-lg-6"/>
+							</p>
+							<p>
+			       				<span class="col-lg-4" style="float:left">주소</span>
+			       				<input type="text" class="form-control col-lg-8"/>
+							</p>
+							<p>
+			       				<span class="col-lg-4" style="float:left">상세주소</span>
+			       				<input type="text" class="form-control col-lg-8"/>
+							</p>
+								
+							<br/><hr/><br/>
+							<!-- 버튼 -->
+							<div class="text-center">
+								<a href="#" class="btn btn-success btn-icon-split">
+			                         <span class="icon text-white-50">
+			                         	 <i class="fas fa-check"></i></span>
+			                         <span class="text">추가</span>
+			                    </a>
+		                    </div>
+		                    <!-- 버튼 끝 -->
+						</form><br/><!-- 폼 끝 -->
+				</div><!-- card-body 끝 -->
+       		</div><!-- card 끝 -->
+       	
+       	</div><!-- col-lg-8 끝 -->
+     </div>
 </div>
+
+
 <%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

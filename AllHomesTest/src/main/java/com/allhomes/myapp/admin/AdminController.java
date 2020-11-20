@@ -32,9 +32,14 @@ public class AdminController {
 		return "admin/adminRegister/adminJoin";
 	}
 	
+	//비밀번호 찾기로 이동
+	@RequestMapping("/adminForgotPassword")
+	public String forgotPassword() {
+		return "admin/adminRegister/adminForgotPassword";
+	}
 	
 	//회원관리 페이지로 이동
-	@RequestMapping("/adminMember")
+	@RequestMapping("/adminMemberMain")
 	public String adminMember() {
 		return "admin/adminMember/adminMemberMain";
 	}
@@ -45,7 +50,26 @@ public class AdminController {
 	public String MemberDetail() {
 		return "admin/adminMember/adminMemberDetail";
 	}
-		
+	
+	//게시판관리-게시판 메인 페이지로 이동
+	@RequestMapping("/adminBoardMain")
+	public String adminBoardMain() {
+		return "admin/adminBoard/adminBoardMain";
+	}
+	
+	//게시판관리-게시판 카테고리 페이지로 이동
+	@RequestMapping("/adminBoardCategory")
+	public String BoardCategory() {
+		return "admin/adminBoard/adminBoardCategory";
+	}
+	
+	
+	//스토어-주문내역 페이지로 이동
+	@RequestMapping("/adminStoreOrder")
+	public String StoreOrder() {
+		return "admin/adminStore/adminStoreOrder";
+	}
+	
 	//스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")
 	public String adminStore() {
@@ -80,6 +104,17 @@ public class AdminController {
 	@RequestMapping("/adminCategory")
 	public String adminCategory() {
 		return "admin/adminStore/adminStoreCategory";
+	}
+	
+	//매출관리 메인 페이지로 이동-sales
+	@RequestMapping("/adminSalesMain")
+	public String adminSalesMain() {
+		return "admin/adminSales/adminSalesMain";
+	}
+	
+	@RequestMapping("/adminSalesStore")
+	public String adminSalesStore() {
+		return "admin/adminSales/adminSalesStore";
 	}
 	
 
