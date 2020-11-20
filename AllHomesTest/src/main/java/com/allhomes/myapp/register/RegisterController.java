@@ -36,7 +36,7 @@ public class RegisterController {
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
-		//로그인여부 : resultVO가 null이면 실패
+		//濡쒓렇�씤�뿬遺� : resultVO媛� null�씠硫� �떎�뙣
 		
 		if(resultVO == null){
 			mav.setViewName("redirect:login");
@@ -59,6 +59,11 @@ public class RegisterController {
 	@RequestMapping(value="/register")
 	public String register() {
 		return "landing/registerForm";
+	}
+	
+	@RequestMapping(value="/registerOkPage")
+	public String registerOkPage() {
+		return "landing/registerOkPage";
 	}
 	
 	
