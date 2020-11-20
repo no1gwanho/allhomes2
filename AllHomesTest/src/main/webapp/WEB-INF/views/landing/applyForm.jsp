@@ -94,7 +94,7 @@
 			<div class="col-12" style="text-align:center;">
 				<input style="font-size:1.2em;font-height:bold;" type="checkbox">&nbsp;&nbsp;입점신청을 위한 개인정보 수집 및 이용에 동의<span style="color:pink"><b>(필수)</b></span>
 			</div>
-			<button class="btn btn-block" style="background-color:#ee8374;color:#fff;">입점 신청 완료</button>
+			<button type="submit" class="btn btn-block" style="background-color:#ee8374;color:#fff;">입점 신청 완료</button>
 		</div>		
 	</form>	
 </div>

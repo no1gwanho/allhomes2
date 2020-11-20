@@ -72,11 +72,11 @@
 		<div class="col-3" style="text-align:center;">
 			<label style="font-size:0.8em;">
 				정렬방법
-				<select>
-					<option value="0">최신순</option>
-					<option value="0">좋아요순</option>
-					<option value="0">판매순</option>
-					<option value="0">최저가순</option>
+				<select id="sortPd">
+					<option value="1">최신순</option>
+					<option value="2">좋아요순</option>
+					<option value="3">판매순</option>
+					<option value="4">최저가순</option>
 				</select>
 			</label>			
 		</div>
