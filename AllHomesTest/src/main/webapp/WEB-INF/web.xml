@@ -103,4 +103,13 @@
 	</jsp-config>
 	<!-- 원하는 페이지에 include -->
 
+	<!-- bcrypt -->
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	        /WEB-INF/spring/root-context.xml
+	        /WEB-INF/spring/spring-security.xml
+	    </param-value>
+	</context-param>
+	<!-- bcrypt -->
 </web-app>
