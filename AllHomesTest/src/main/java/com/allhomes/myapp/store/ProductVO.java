@@ -1,15 +1,15 @@
 package com.allhomes.myapp.store;
 
 public class ProductVO {
-	private int pd_no;			//Á¦Ç°¹øÈ£
-	private int s_no;			//½ºÅä¾î¹øÈ£
-	private String pd_name;		// Á¦Ç°¸í
-	private int price;			// °¡°İ
-	private int discount;		// ÇÒÀÎ°¡°İ
-	private String main_img;	// ½æ³×ÀÏ´ëÇ¥ÀÌ¹ÌÁö
-	private int stock;			// Àç°í
-	private String status;		// »óÅÂ (Ç°ÀıÀÓ¹Ú, ÀÔ°í¿¹Á¤ µî)
-	private String sub_c;		// ¼­ºêÄ«Å×°í¸®
+	private int pd_no;			// ì œí’ˆë²ˆí˜¸
+	private int s_no;			// ìŠ¤í† ì–´ë²ˆí˜¸
+	private String pd_name;		// ì œí’ˆëª…
+	private int price;			// ê°€ê²©
+	private int discount;		// í• ì¸ê°€ê²©
+	private String main_img;	// ì¸ë„¤ì¼ëŒ€í‘œì´ë¯¸ì§€
+	private int stock;			// ì¬ê³ 
+	private String status;		// ìƒíƒœ(í’ˆì ˆì„ë°•, ì…ê³ ì˜ˆì • ë“±)
+	private String sub_c;		// ì„œë¸Œì¹´í…Œê³ ë¦¬
 	
 	public int getPd_no() {
 		return pd_no;
