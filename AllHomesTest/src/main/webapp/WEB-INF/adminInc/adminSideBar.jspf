@@ -9,18 +9,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Home</title>
-
+	
+	
+ 	<!-- Vendor CSS-->
+    <link href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     
+	<!--FORM CSS------------------------------ -->
+    <link href="${pageContext.request.contextPath}/resources/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" media="all">
+    
+    <!--MAIN CSS ------------------------------ -->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
-    
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	
+	
+ 	<!-- datepicker -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- datepicker -->
+	
+ 	
+    <title>Admin Home</title>
 </head>
+
 
 <body id="page-top">
 
@@ -33,7 +52,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src="/myapp/resources/img/logo.png" style="width:50px; heght:50px"> <!-- 로고 이미지 넣기 -->
+                    <img src="/myapp/resources/img/admin/logo.png" style="width:50px; heght:50px"> <!-- ë¡ê³  ì´ë¯¸ì§ ë£ê¸° -->
                 </div>
                 <div class="sidebar-brand-text mx-3" style="color:white">ALL HOMES </div>
             </a>
@@ -44,8 +63,8 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="/myapp/adminMain">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>HOME</span></a>
             </li>
 
             <!-- Divider -->
@@ -58,24 +77,44 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/myapp/adminMember" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseMember"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Member</span>
                 </a>
                
+              	<div id="collapseMember" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Member Manage</h6>
+                        <a class="collapse-item" href="/myapp/adminMemberMain">Member Main</a>
+                        <a class="collapse-item" href="/myapp/adminMemberDetail">Member Detail</a>
+                    </div>
+                </div>
+                
             </li>
 
-            <!-- 사이드바 -Board 게시판 관리 메뉴 -->
+            <!-- ì¬ì´ëë° -Board ê²ìí ê´ë¦¬ ë©ë´ -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-pen"></i>
                     <span>Board</span>
                 </a>
+                
+                <div id="collapseBoard" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Board Manage</h6>
+                        <a class="collapse-item" href="/myapp/adminBoardMain">Board</a>
+                        <a class="collapse-item" href="/myapp/adminBoardCategory">Board Category</a>
+                    </div>
+                </div>
+                
+                
             </li>
             
-            <!-- 사이드바 -Store 판매자 관리 메뉴-->
+            <!-- Store 사이드바-->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStore"
                     aria-expanded="true" aria-controls="collapseStore">
@@ -87,7 +126,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Store Manage</h6>
-                        <a class="collapse-item" href="utilities-color.html">Purchase</a>
+                        <a class="collapse-item" href="/myapp/adminStoreOrder">Order</a>
                         <a class="collapse-item" href="/myapp/adminStore">Store</a>
                         <a class="collapse-item" href="/myapp/adminCategory">Category</a>
                        
@@ -95,13 +134,22 @@
                 </div>
             </li>
             
-             <!-- 사이드바 -Sales 매출 관리 메뉴-->
+             <!--사이드바 메뉴   Sales================= -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="/myapp/adminSalesMain" data-toggle="collapse" data-target="#collapseSales"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Sales</span>
                 </a>
+                
+                <div id="collapseSales" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sales Manage</h6>
+                        <a class="collapse-item" href="/myapp/adminSalesMain">Sales</a>
+                        <a class="collapse-item" href="/myapp/adminSalesStore">Store Sales</a>
+                    </div>
+                </div>
                 
             </li>
             
@@ -171,7 +219,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
+                   <!-- Topbar Search -->
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -184,6 +232,7 @@
                             </div>
                         </div>
                     </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -279,38 +328,38 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="/myapp/resources/img/admin/undraw_profile_1.svg"
                                             alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                             problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        <div class="small text-gray-500">Emily Fowler Â· 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" src="/myapp/resources/img/admin/undraw_profile_2.svg"
                                             alt="">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
                                         <div class="text-truncate">I have the photos that you ordered last month, how
                                             would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                        <div class="small text-gray-500">Jae Chun Â· 1d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" src="/myapp/resources/img/admin/undraw_profile_3.svg"
                                             alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
                                         <div class="text-truncate">Last month's report looks great, I am very happy with
                                             the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                        <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -322,7 +371,7 @@
                                     <div>
                                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                                             told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                        <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -337,7 +386,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin ID</span>
                                 <img class="img-profile rounded-circle"
-                                    src="/myapp/resources/img/profile1.png">
+                                    src="/myapp/resources/img/admin/profile1.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -363,6 +412,6 @@
                 </nav>
                 <!-- End of Topbar -->
                 
-                <!-- div content wraper!!!!!랑 그냥 content div!!!!!!!닫아줘야됨 -->
+                <!-- div content wraper!!!!!ë ê·¸ë¥ content div!!!!!!!ë«ìì¤ì¼ë¨ -->
 
     
