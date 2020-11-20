@@ -52,6 +52,13 @@
            .fadeIn();                              //fadeIn()
            return false;                           //<a> 의 본래기능 (하이퍼링크) 작동방지
        });
+       
+       $("#cart").click(function(){
+    	    
+       });
+       $("#buy").click(function(){
+    	  location.href="/myapp/order" 
+       });
    });
 </script>
 <div class="container">
@@ -101,8 +108,8 @@
 					<div class="qty-label">
 						수량 : <input type="number"/>
 					</div>
-					<button class="btn" style="margin-top:15px;"><i class="fa fa-shopping-cart"></i> 장바구니</button>
-					<button class="btn" style="margin-top:15px;"><img src="<%=request.getContextPath()%>/resources/img/icon/card.png">&nbsp;바로구매</button>
+					<button id="cart" class="btn" style="margin-top:15px;"><i class="fa fa-shopping-cart"></i> 장바구니</button>
+					<button id="buy" class="btn" style="margin-top:15px;"><img src="<%=request.getContextPath()%>/resources/img/icon/card.png">&nbsp;바로구매</button>
 				</div>
 			</div>			
 		</div>
