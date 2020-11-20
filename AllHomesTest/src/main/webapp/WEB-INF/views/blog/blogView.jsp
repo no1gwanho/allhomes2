@@ -6,6 +6,18 @@
     margin-left: 4rem;
 	}
 	
+	.input-group{
+		width:90%;
+	}
+	
+	.blogImages{
+		max-width:900px;
+	}
+	
+	.blogImages>img{
+		width:90%
+	}
+		
 </style>
 
 
@@ -29,7 +41,9 @@
 
 <br/>
 	<div style="width:80%;" >
-		<img src="<%=request.getContextPath() %>/resources/img/banner/banner2.png" style="width:500px;"/><br/>
+		<div class="blogImages">
+		<img class="blogImages" src="<%=request.getContextPath() %>/resources/img/banner/banner2.png"/><br/>
+		</div>
 		<p>
 		이동통신 3사와 정부가 주파수 재할당 대가 공개 설명회에서 한 치의 견해차도 좁히지 못한 가운데, 적정한 산정방식이 적용되지 않을 경우 이통사 투자가 위축되고 역효과로 소비자 통신비 부담만 증가하게 될 것이라는 지적이 제기됐다.
 		
@@ -46,8 +60,10 @@
 	</div>
 	
 	<hr/>
-	
-	<h4>댓글 3개</h4>
+	<div style="margin:20px;">
+	<span style="font-size:16px;color:gray;">댓글 3개</span>&nbsp;&nbsp;<span style="font-size:16px;color:gray;">스크랩 1</span>
+	<hr/>
+	</div>
 	<div id="newComment">
 		<div class="input-group mb-3">
 		<i class="fas fa-user-circle fa-2x"></i>
@@ -66,7 +82,7 @@
 		<span style="margin:2px 10px 0 10px;width:100px;"><a href="#">유저아이디</a></span>
 		<span style="width:80%">루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡</span>
 		<br/>
-		<span style="margin-left:150px">1일전 댓글달기 (수정) (삭제) </span><span>신고</span>
+		<span style="margin-left:150px">1시간전</span>&nbsp;&nbsp;<a href="#">댓글달기</a>&nbsp;&nbsp;<a href="#">수정</a>&nbsp;&nbsp;<a href="#">삭제</a>&nbsp;&nbsp;<a href="#" style="color:gray;font-size:7px;">신고</a>
 		</div>
 		
 		<!-- 대댓글 예시 -->
@@ -75,7 +91,7 @@
 			<span style="margin:2px 10px 0 10px;width:100px;"><a href="#">유저아이디</a></span>
 			<span style="width:80%">루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡</span>
 			<br/>
-			<span style="margin-left:30px">1일전 (수정) (삭제) </span><span>신고</span>
+			<span style="margin-left:30px">1시간전</span>&nbsp;&nbsp;<a href="#">댓글달기</a>&nbsp;&nbsp;<a href="#">수정</a>&nbsp;&nbsp;<a href="#">삭제</a>&nbsp;&nbsp;<a href="#" style="color:gray;font-size:7px;">신고</a>
 		</div>
 		
 	</div>
@@ -85,7 +101,7 @@
 		<span style="margin:2px 10px 0 10px;width:100px;"><a href="#">유저아이디</a></span>
 		<span style="width:80%">루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡</span>
 		<br/>
-		<span style="margin-left:150px">1일전 댓글달기 (수정) (삭제) </span><span>신고</span>
+		<span style="margin-left:150px">1시간전</span>&nbsp;&nbsp;<a href="#">댓글달기</a>&nbsp;&nbsp;<a href="#">수정</a>&nbsp;&nbsp;<a href="#">삭제</a>&nbsp;&nbsp;<a href="#" style="color:gray;font-size:7px;">신고</a>
 		</div>
 		
 		
@@ -97,7 +113,7 @@
 		<span style="margin:2px 10px 0 10px;width:100px;"><a href="#">유저아이디</a></span>
 		<span style="width:80%">루이로즈를 이렇게 예쁘게 찍어주시다니요 ㅠㅠ 엔틱한 분위기와 찰떡콩떡입니다 ! ♡</span>
 		<br/>
-		<span style="margin-left:150px">1일전 댓글달기 (수정) (삭제) </span><span>신고</span>
+		<span style="margin-left:150px">1시간전</span>&nbsp;&nbsp;<a href="#">댓글달기</a>&nbsp;&nbsp;<a href="#">수정</a>&nbsp;&nbsp;<a href="#">삭제</a>&nbsp;&nbsp;<a href="#" style="color:gray;font-size:7px;">신고</a>
 		</div>
 		
 	</div>
