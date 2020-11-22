@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
-
-
-
 <style>
-	 #orderModal{
-	            display: none;
-	            width: 300px;
-	            padding: 20px 60px;
-	            background-color: #fefefe;
-	            border: 1px solid #888;
-                border-radius: 3px;
-	 }
+	.orderModal{
+	    width:100%;
+	    
+	}
+	#orderStatus>div{
+		float:left;
+	}
 </style>
 <script>
 	$(function(){
@@ -38,19 +34,80 @@
 			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			yearRange:"2019:2020"
 		});
+		
 	});
 </script>
 <div class="container-fluid">
 	<div class="row">
-	
-	<!-- 주문 모달 -->
-		<div id="orderModal">
-			asdfadsf
-			<a class="modal_close_btn">닫기</a>
+		<button class="btn btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
+		<!-- Modal -->
+		<div  id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
+			<div class="modal-dialog orderModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="orderModalTitle">주문상세</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      
+					</div>
+					<div class="modal-body" style="text-align:center">
+						<div style="display:inline-block">
+							<table class="table-bordered">
+								<thead>
+									<tr>
+										<th>주문번호</th>
+										<th>상품번호</th>
+										<th>상품명</th>
+										<th>스토어명</th>
+										<th>우편번호</th>
+										<th>배송지</th>
+										<th>주문자ID</th>
+										<th>구매일</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>142345123</td>
+										<td>512312</td>
+										<td>빈티지 체크 커튼</td>
+										<td>자연가구</td>
+										<td>42101</td>
+										<td>서울시 마포구 노고산동 101..</td>
+										<td>seran11</td>
+										<td>2020-11-11</td>
+										<td>배송중</td>
+									</tr>
+								</tbody>
+							</table>
+							<hr>
+							<div class="col-lg-12" id="orderStatus">
+								<div class="col-lg-3">
+									<select id="Select1" class="selectpicker">
+										<option value="">입금대기</option>
+										<option value="">결제완료</option>
+										<option value="">배송중</option>
+										<option value="">배송완료</option>
+										<option value="">구매확정</option>
+									</select>
+								</div>
+								<div class="col-lg-2">
+									<a href="" class="btn btn-user alert-secondary">상태 변경</a>
+								</div>
+								<div class="col-lg-3">
+									<input type="text" class="form-control" id=""/>
+								</div>
+								<div class="col-lg-3">
+									<a href="" class="btn btn-user alert-danger">송장번호입력</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- modal body 끝 -->
+			</div>
 		</div>
-		<a class="btn" id="popup_open_btn">모달</a>
-	<!-- 주문 모달 끝 -->
-	
+		<!-- Modal -->
 		<div class="col-lg-12">
 			<!-- 검색 옵션 -->
 			<a href="#" class="btn btn-light" style="color:#E98374;">                
