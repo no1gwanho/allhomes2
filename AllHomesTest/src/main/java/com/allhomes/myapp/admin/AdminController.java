@@ -1,5 +1,10 @@
 package com.allhomes.myapp.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -152,7 +160,7 @@ public class AdminController {
 		
 		//System.out.println("암호화 전==>"+vo.getEmppwd());
 		//비밀번호 암호화
-		vo.setEmppwd(passwordEncoder.encode(vo.getEmppwd()));
+		//vo.setEmppwd(passwordEncoder.encode(vo.getEmppwd()));
 		//System.out.println("암호화 후==>"+vo.getEmppwd());
 
 		
@@ -166,10 +174,78 @@ public class AdminController {
 		return mav;
 	}
 	
+	//관리자 로그인
+	@RequestMapping(value="/adminLogin", method=RequestMethod.POST)
+	public ModelAndView adminLogin(AdminRegisterVO vo, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+	
+		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		
+		//아이디, 비밀번호 체크
+		AdminRegisterVO regVo = dao.adminLogin(vo);
+		
+		if(regVo == null) { //로그인 실패
+			mav.setViewName("redirect:adminLogin");
+		}else { //아이디 가져옴
+			
+			regVo.getEmppwd();
+			ses.setAttribute("userid", regVo.getUserid());
+			ses.setAttribute("empname", regVo.getEmpname());
+			ses.setAttribute("logStatus", "Y");
+			mav.setViewName("redirect:adminHome");
+		}
+		
+		return mav;
+	}
+	
+	//ID중복체크
+	@RequestMapping(value="/idCheck")
+	public int idCheck(String userid) {
+		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		return dao.idCheck(userid);
+	}
+	
+	
 	//datepickerTest
 	@RequestMapping("/date")
 	public String datepicker() {
 		return "admin/adminStore/datapickerTest";
+	}
+	
+	//===========================Store========================
+	
+	
+	//스트어-메인카테고리 추가
+	@RequestMapping(value="/mainCategoryAdd", method=RequestMethod.POST)
+	public ModelAndView StoreCategoryInsert(AdminStoreCategoryVO vo, HttpServletRequest req, 
+			@RequestParam(value="file") MultipartFile mf,
+			HttpSession ses) {
+
+		//file upload
+		String path = ses.getServletContext().getRealPath("upload/storeCategory");//파일 저장할 위치
+		String originFileName = mf.getOriginalFilename();
+		
+		System.out.println("파일이름=="+originFileName);
+		System.out.println("파일이름=="+vo.getMain_c());
+		System.out.println("파일이름=="+vo.getPriority());
+		
+		vo.setImg(path+"/"+originFileName);
+		
+		//파일 업로드
+		try {
+			mf.transferTo(new File(path, originFileName));
+		}catch(IOException ie) {
+			ie.getStackTrace();
+		}
+		
+		//insert 작업
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		int result = dao.storeCategoryInsert(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("결과는=============="+result);
+		return mav;
 	}
 
 }

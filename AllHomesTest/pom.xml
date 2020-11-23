@@ -141,7 +141,7 @@
 		</dependency>
 		<!-- Mybatis===================================== -->
 		
-		<!-- ==============bcrypt -->
+		<!-- ==============bcrypt====================== -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-web</artifactId>
@@ -157,8 +157,16 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>4.2.1.RELEASE</version>
 		</dependency>
-
-
+		<!-- ==============bcrypt====================== -->
+		
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
 		
 		
 	</dependencies>

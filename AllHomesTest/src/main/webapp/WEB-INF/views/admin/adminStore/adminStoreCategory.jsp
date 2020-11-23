@@ -25,7 +25,21 @@
 		line-height:30px
 	}
 </style>
-
+<script>
+	$(function(){
+		$("#mainCFrm").submit(function(){
+			if($("#main_c").val()==""){
+				alert("카테고리명을 입력해주십시오.");
+				return false;
+			}else if($("#priority").val==""){
+				alert("우선순위를 입력해주십시오.");
+				return false;
+			}
+			return false;
+		});	
+	});
+	
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-4">
@@ -37,31 +51,37 @@
                 </div>
             	<div class="card-body">
             		<div class="card shadow col-lg-10" id="category">
-                		<img src="/myapp/resources/img/admin/c_add.png"/>
-                		<div class="my-2"></div>
-                		<hr/>
-                		<form class="col-lg-10" style="text-align:center">
-                			<p>
-                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
-                			</p>
-                			<p>
-                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
-                			</p>
-                		</form>
-                		<br/>
                 		
-                		<!-- 버튼 -->
-                		<div class="" style="text-align:center">
-	                		<!-- 추가 버튼 -->
-							<a href="#" class="btn btn-primary btn-icon-split">
-		           				<span class="icon text-white-50">
-		           				<i class="fas fa-check"></i></span>
-			        			<span class="text">추가</span>
-			    			</a>
-			    			     
-		                </div><br/>
-		                <!-- 버튼 끝 -->
-                	</div>
+                		
+                		<form id="mainCFrm" class="col-lg-12" method="post" style="text-align:center" action="<%=request.getContextPath()%>/mainCategoryAdd" enctype="multipart/form-data">
+                			<div style="display:inline-block"> 
+	                			<img src="/myapp/resources/img/admin/c_add.png"/>
+	                			<br/>
+	                			<input type="file" name="file"/>
+			                	<div class="my-2"></div>
+			                	<hr/>
+	                			<p>
+	                				<span id="formC" class="col-lg-6">카테고리명</span>
+	                				<input type="text" class="form-control col-lg-4" id="main_c" name="main_c" />
+	                			</p>
+	                			<p>
+	                				<span id="formC" class="col-lg-6">우선순위</span>
+	                				<input type="number" class="form-control col-lg-4" id="priority" name="priority"/>
+	                			</p>
+		                		<!-- 추가 버튼 -->
+		                		<div class="" style="text-align:center">
+			                		<!-- 추가 버튼 -->
+			                		<button type="submit" class="btn btn-primary btn-icon-split">
+			                			<span class="icon text-white-50">
+				           				<i class="fas fa-check"></i></span>
+					        			<span class="text">추가</span>
+			                		</button>
+				                </div><br/>
+			                </div>
+                		</form>
+	                </div>
+                	<br/>
+                		
      				
             	</div>
             </div>
@@ -81,10 +101,12 @@
                 		<hr/>
                 		<form class="col-lg-10" style="text-align:center">
                 			<p>
-                				<span id="formC" class="col-lg-6">카테고리명</span><input type="text" class="form-control col-lg-6"/>
+                				<span id="formC" class="col-lg-6">카테고리명</span>
+                				<input type="text" class="form-control col-lg-6" id="main_c" name="main_c"/>
                 			</p>
                 			<p>
-                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" class="form-control col-lg-6"/>
+                				<span id="formC" class="col-lg-6">우선순위</span>
+                				<input type="text" class="form-control col-lg-6" id="priority" name="priority"/>
                 			</p>
                 		</form>
                 		<br/>

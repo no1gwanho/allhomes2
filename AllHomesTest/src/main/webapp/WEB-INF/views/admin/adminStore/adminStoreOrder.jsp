@@ -2,16 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <style>
-	.orderModal{
-	    width:100%;
-	    
-	}
 	#orderStatus>div{
 		float:left;
+	}
+	
+	
+	.modalSize{
+		width:100%;
+		margin:0 auto;
 	}
 </style>
 <script>
 	$(function(){
+		
 		//상세조회 나타났다 사라졌다
 		$("#searchDetail").click(function(){
 			if($("#searchD").css("display")=="none"){
@@ -22,27 +25,14 @@
 		});
 		
 		
-		//datepicker
-		$("#datePicker").datepicker({
-			changeYear :true,
-			changeMonth: true,
-			constrainInput:true,
-			dateFormat:"yy/mm/dd",
-			dayNames:['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
-			dayNamesMin:['일','월','화','수','목','금','토'],
-			monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			yearRange:"2019:2020"
-		});
+		
 		
 	});
 </script>
-<div class="container-fluid">
-	<div class="row">
-		<button class="btn btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
-		<!-- Modal -->
-		<div  id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
-			<div class="modal-dialog orderModal" role="document">
+
+<!-- Modal -->
+		<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
+			<div class="modal-dialog modalSize" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="orderModalTitle">주문상세</h5>
@@ -51,8 +41,8 @@
 				        </button>
 				      
 					</div>
-					<div class="modal-body" style="text-align:center">
-						<div style="display:inline-block">
+					<div class="modal-body">
+						<div>
 							<table class="table-bordered">
 								<thead>
 									<tr>
@@ -107,7 +97,13 @@
 				</div><!-- modal body 끝 -->
 			</div>
 		</div>
-		<!-- Modal -->
+<!-- Modal -->
+		
+		
+<div class="container-fluid">
+	<div class="row">
+		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
+		
 		<div class="col-lg-12">
 			<!-- 검색 옵션 -->
 			<a href="#" class="btn btn-light" style="color:#E98374;">                
@@ -237,6 +233,7 @@
 				</div><!-- card-body 끝 -->
 			</div><!-- card 끝 -->
 		</div><!-- col-lg-12 끝 -->
+		
 	</div>
 </div>
 
