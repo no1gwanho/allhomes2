@@ -166,6 +166,10 @@ public class AdminController {
 		return mav;
 	}
 	
-	
+	//datepickerTest
+	@RequestMapping("/date")
+	public String datepicker() {
+		return "admin/adminStore/datapickerTest";
+	}
 
 }
