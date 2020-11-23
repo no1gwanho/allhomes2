@@ -7,4 +7,10 @@
 		insert into admin(empno,userid,emppwd,empname,tel,email,regdate)
 		values (admin_sq.nextval,#{userid},#{emppwd},#{empname}, #{tel}, #{email},sysdate)
 	</insert>
+	<select id="adminLogin" parameterType="com.allhomes.myapp.admin.AdminRegisterVO" resultType="com.allhomes.myapp.admin.AdminRegisterVO">
+		select userid,empname,emppwd from admin where userid=#{userid}
+	</select>
+	<select id="idCheck" parameterType="String" resultType="int">
+		select userid from admin where userid=#{userid}
+	</select>
 </mapper>

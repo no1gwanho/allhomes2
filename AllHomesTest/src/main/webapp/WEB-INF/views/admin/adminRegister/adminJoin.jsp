@@ -3,29 +3,70 @@
 <%@ include file="/WEB-INF/adminInc/adminRegisterHeader.jspf"%>
 <script>
 	$(function(){
-		$("#regForm").submit(function(){
-			if(("#userid").val()==""){
-				alert("아이디를 입력해주십시오.");
+		
+		var idChk = 0; //ID 중복검사
+		var emailChk = 0; //email 중복검사
+		
+		//아이디 중복체크
+		$("#idChk").click(function(){
+			if($("#userid").val()==""){
+				alert("ID를 입력하세요.");
 				return false;
 			}
-			if(("#empname").val()==""){
-				alert("이름을 입력해주십시오.");
+			
+			var url = "/myapp/idCheck";
+			var data = $("#userid").val();
+			
+			$.ajax({
+				url: url,
+				data: data,
+				success: function(result){
+					if(result==0){//사용가능
+						idChk = 1;
+						alert("사용 가능한 ID입니다.");
+												
+					}else{
+						alert("이미 사용중인 ID입니다.");
+					}
+				},error: function(){
+					console.log("ID중복체크 에러");
+				}
+			});
+			return false;
+		});
+		
+		
+		// 입력사항 체크
+		$("#regForm").submit(function(){			
+			
+			if($("#userid").val()==""){
+				alert("ID를 입력하세요.");
 				return false;
 			}
-			if(("#email").val()==""){
-				alert("이메일을 입력해주십시오.");
-				return false;
-			}
-			if(("#tel").val()==""){
-				alert("연락처를 입력해주십시오.");
-				return false;
-			}
-			if(("#emppwd").val()!=("#emppwdChk").val()){
-				alert("비밀번호가 일치하지 않습니다.");
-				return false;
-			}
+		
+			
+			var url = "/myapp/adminRegisterOk"
+			var data = $("#regForm").serialize();
+			
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : data,
+				success : function(result){
+					if(result > 0){
+						alert("회원 가입 완료")
+						location.href="/myapp/adminLogin";
+					} else{
+						alert("회원가입에 실패하였습니다.");
+					}
+				},error: function(){
+					console.log("회원 가입 오류");
+				}
+			});
+			return false;
 		});
 	});
+	
 
 
 </script>
@@ -55,7 +96,7 @@
                                             placeholder="ID">      
                                     </div>
                                     <div class="col-sm-4">
-                                        <input class="form-control form-control-user btn" placeholder="중복확인"/>
+                                        <input type="button" class="btn alert-secondary btn-user btn-block" id="idChk" value="중복검사"/>
                                     </div>
                                 </div>
                                 
@@ -72,8 +113,8 @@
                                 <!-- tel -->
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="tel"
-                                            name="tel" placeholder="tel (-은 제외하고 입력해주세요.)">
+                                        <input type="text" class="form-control form-control-user" id="tel" name="tel"
+                                         placeholder="tel">
                                     </div>
                                 </div>
                                 
@@ -86,7 +127,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="emppwdChk" placeholder="Repeat Password">
+                                           name="emppwdChk" id="emppwdChk" placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 

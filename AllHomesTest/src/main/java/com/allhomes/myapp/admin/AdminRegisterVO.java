@@ -9,6 +9,7 @@ public class AdminRegisterVO {
 	private String email;
 	private String regdate;
 	
+	
 	public int getEmpno() {
 		return empno;
 	}
