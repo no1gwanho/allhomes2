@@ -6,18 +6,22 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
 <!-- 글쓰기폼을 위한 CKEDITOR -->
+
 <script>
 	$(function() {
-		CKEDITOR.replace('content', {
+		var ckeditorEvent = CKEDITOR.replace('content', {
 			height:500,
-			extraPlugins : 'confighelper'
-			
+			extraPlugins : 'confighelper',
+			filebrowserUploadUrl : '/myapp/imageUpload'
 		});
+		
+		
 	});
-
 </script>
 
 <style>
+
+	#cke_129_label{value:"이미지 업로드"}
 
 	.label{background-color:#E98374;}
 	#blogWriteTitle {
