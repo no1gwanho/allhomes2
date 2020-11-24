@@ -6,18 +6,16 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
 <!-- 글쓰기폼을 위한 CKEDITOR -->
-
 <script>
 	$(function() {
-		var ckeditorEvent = CKEDITOR.replace('content', {
+		CKEDITOR.replace('content', {
+			filebrowserUploadUrl:'/myapp/editor/imageUpload.do',
 			height:500,
 			extraPlugins : 'confighelper',
-			filebrowserUploadUrl : '/myapp/imageUpload'
 		});
-		
-		
 	});
 </script>
+
 
 <style>
 
