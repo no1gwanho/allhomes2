@@ -11,5 +11,9 @@
 	<!-- 파일 업로드 경로(스토어카테고리)  -->
 	<beans:bean id="categoryUploadPath" class="java.lang.String">
 		<beans:constructor-arg value="/WEB-INF/upload/storeCategory"></beans:constructor-arg>
+	</beans:bean>
+	<!-- 스토어 이미지(썸네일) -->
+	<beans:bean id="storeImgUploadPath" class="java.lang.String">
+		<beans:constructor-arg value="/WEB-INF/upload/storeImg"></beans:constructor-arg>
 	</beans:bean>	
 </beans:beans>
