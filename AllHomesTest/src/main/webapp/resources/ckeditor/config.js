@@ -44,6 +44,16 @@ CKEDITOR.on('dialogDefinition', function( ev ){
             dialog.on('show', function (obj) {
         		this.selectPage('Upload'); //업로드텝으로 시작
             });
+            
+            var infoTab = dialogDefinition.getContents('info');
+            infoTab.remove('txtAlt'); //대체텍스트 제거
+            infoTab.remove( 'txtBorder'); // 테두리 
+            infoTab.remove( 'txtHSpace'); // 세로여백 
+            infoTab.remove( 'txtVSpace'); // 가로여백 
+            infoTab.remove( 'cmbAlign'); // 정렬 
+            
             break;
+            
+            
     }
 });
