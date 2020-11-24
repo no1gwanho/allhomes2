@@ -228,7 +228,8 @@ public class AdminController {
 	
 	//스트어-메인카테고리 추가
 	@RequestMapping(value="/mainCategoryAdd", method=RequestMethod.POST)
-	public ModelAndView StoreCategoryInsert(AdminStoreCategoryVO vo, HttpServletRequest req, 
+	public ModelAndView StoreCategoryInsert(AdminStoreCategoryVO vo, 
+			HttpServletRequest req, 
 			@RequestParam(value="file") MultipartFile mf,
 			HttpSession ses) {
 
