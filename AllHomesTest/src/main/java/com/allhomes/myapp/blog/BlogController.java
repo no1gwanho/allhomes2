@@ -64,8 +64,5 @@ public class BlogController {
 		return "/blog/blogSearch";
 		
 	}
-	
-	//집들이에 들어가는 이미지 처리 
-	 
 
 }
