@@ -1,28 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
-	
-	<!-- 해시태그를 위한 css/js파일 -->
+<script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>	
+<!-- 해시태그를 위한 css/js파일 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
-	<script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
-<style>
-		.label{background-color:#E98374;}
-</style>
+<script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
+<!-- 글쓰기폼을 위한 CKEDITOR -->
+<script>
+	$(function() {
+		CKEDITOR.replace('content', {
+			height:500,
+			extraPlugins : 'confighelper'
+			
+		});
+	});
+
+</script>
 
 <style>
-#blogWriteTitle {
-	margin: 20px 0 50px 20px;
-}
 
-.blogWriteSub {
-	margin-left: 20px;
-}
-.blogWriteSub{
-	font-size:15px;
-}
-.btn-info{background-color:#E98374;}
-.btn-info:hover, .btn-info:active, .btn-info:focus{background-color:#F9AA9F}
+	.label{background-color:#E98374;}
+	#blogWriteTitle {
+		margin: 20px 0 50px 20px;
+	}
+	
+	.blogWriteSub {
+		margin-left: 20px;
+	}
+	.blogWriteSub{
+		font-size:15px;
+	}
+	.btn-info{background-color:#E98374;}
+	.btn-info:hover, .btn-info:active, .btn-info:focus{background-color:#F9AA9F}
 </style>
 
 
@@ -49,18 +58,9 @@
 	</div>
 	<!-- 테마선택 메뉴 끝 ======================== -->
 	<hr/>
-	
 
 	
 	<!-- 해시태그입력 창 시작====-->
-
-	<script>
-		$(function(){
-			var hashtag = $(document).$('.hashtag').text();
-			console.log(hashtag);
-		});
-	</script>
-	
 	<!-- 해시태그 창 -->
 	<div class="row">
 		<div class="col-2">
@@ -74,57 +74,24 @@
 	</div> <!-- row -->
 	<hr/>
 
-	
-	
-	
-
 
 
 	<!-- 글쓰기 폼 여기부터  -->
 
 	<br />
 	<br />
-	<!-- 글쓰기폼을 위한 CKEDITOR -->
-	<script>
-	$(function() {
-		CKEDITOR.replace('content', {
-			height:500,
-			extraPlugins : 'confighelper',
-
-
-			
-		});
-		
-		
-	});
-	</script>
 
 	<form action="">
 		<div class="form-group">
-			<input type="text" class="form-control" name="title"
-				placeholder="제목을 입력하세요" /><br />
+			<input type="text" class="form-control" name="title" placeholder="제목을 입력하세요" />
+			<br/>
 			<textarea class="form-control rounded-0" name="content" id="content" placeholder="최소 열글자 이상 입력해주세요">
 			</textarea>
-			<br />
-			<br /> 
-			<div class="row">
-				
-				<div class="col-5"></div>
-				<div class="col-3">
-				<input type="submit" class="btn btn-primary" value="글작성" style="background-color:#E98374;border:1px solid #E98374;"/> <input
-				type="button" id="cancelBtn" class="btn btn-secondary" value="취소" />
-				</div>
-				<div class="col-4">
-				</div>
-			</div>
-			
-			
+			<br/>
+			<br/> 
+				<input type="submit" class="btn btn-primary" value="글작성" style="background-color:#E98374;border:1px solid #E98374;text-align:center;"/> 
+				<input type="button" id="cancelBtn" class="btn btn-secondary" value="취소" style="text-align:center;"/>
 		</div>
 	</form>
-
-
-
-
-
 
 </div>
