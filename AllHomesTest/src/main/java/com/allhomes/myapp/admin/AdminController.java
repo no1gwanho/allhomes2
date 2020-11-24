@@ -2,6 +2,7 @@ package com.allhomes.myapp.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.FileHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -132,11 +134,7 @@ public class AdminController {
 		return "admin/adminStore/adminStoreStoreAdd";
 	}
 	
-	//스토어-카테고리 페이지로 이동
-	@RequestMapping("/adminCategory")
-	public String adminCategory() {
-		return "admin/adminStore/adminStoreCategory";
-	}
+	
 	
 	//매출관리 메인 페이지로 이동-sales
 	@RequestMapping("/adminSalesMain")
@@ -150,7 +148,11 @@ public class AdminController {
 		return "admin/adminSales/adminSalesStore";
 	}
 	
-	///////////////////////////기능
+	///////////////////////////기능//////////////////////////////////
+	
+	
+	
+	//======================register=====================================================
 	
 	//관리자 회원가입
 	@RequestMapping(value="/adminRegisterOk", method=RequestMethod.POST)
@@ -223,13 +225,11 @@ public class AdminController {
 
 		//file upload
 		String path = ses.getServletContext().getRealPath("upload/storeCategory");//파일 저장할 위치
-		String originFileName = mf.getOriginalFilename();
+		String originFileName = mf.getOriginalFilename(); //파일 이름
 		
-		System.out.println("파일이름=="+originFileName);
-		System.out.println("파일이름=="+vo.getMain_c());
-		System.out.println("파일이름=="+vo.getPriority());
 		
-		vo.setImg(path+"/"+originFileName);
+		vo.setImg(path+"/"+originFileName); //경로+이름 => img컬럼에 세팅
+		
 		
 		//파일 업로드
 		try {
@@ -240,12 +240,62 @@ public class AdminController {
 		
 		//insert 작업
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		int result = dao.storeCategoryInsert(vo);
-		
+		int result = dao.storeCategoryInsert(vo); //insert
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println("결과는=============="+result);
+		if(result>0) { //insert 성공
+			mav.setViewName("redirect:adminCategory");
+		}else{//실패
+			mav.addObject("msg", "카테고리 추가에 실패했습니다.");
+			mav.setViewName("admin/result");
+		}
+		return mav;
+	}
+	
+	//스토어-카테고리 전체 불러오기(메인, 서브)
+	@RequestMapping("/adminCategory")
+	public ModelAndView storeCategoryAll() {
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		List<AdminStoreCategoryVO> list = dao.storeCategoryAll(); //메인카테고리
+		List<AdminStoreSubCategoryVO> subList = dao.storeSubCategoryAll(); //서브카테고리
+		List<String> mainList = dao.storeMainCategoryName(); //메인카테고리 이름
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("subList", subList);
+		mav.addObject("mainList", mainList);
+		
+		mav.setViewName("admin/adminStore/adminStoreCategory");
 		return mav;
 	}
 
+	//스토어-서브카테고리 추가
+	@RequestMapping("/adminSubCategoryAdd")
+	public int subCategoryAdd(String main_c, String sub_c) {
+		
+		AdminStoreSubCategoryVO vo = new AdminStoreSubCategoryVO();
+		vo.setMain_c(main_c);
+		vo.setSub_c(sub_c);
+		
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		
+		return dao.storeSubCategoryInsert(vo);
+		
+	}
+	
+	//스토어-서브카테고리 삭제
+	@RequestMapping("/adminSubCategoryDel")
+	public int subCategoryDel(String sub_c) {
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		
+		return dao.storeSubCategoryDel(sub_c);
+	}
+	
+	//스토어-메인카테고리 삭제
+	@RequestMapping("/adminMainCategoryDel")
+	public int mainCategoryDel(String main_c) {
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		
+		return dao.storeMainCategoryDel(main_c);
+	}
 }
