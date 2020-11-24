@@ -49,11 +49,5 @@
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
 	
-	<!-- 파일 업로드 경로(스토어카테고리)  -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="10485760"></beans:property>
-	</beans:bean>
-	<beans:bean id="categoryUploadPath" class="java.lang.String">
-		<beans:constructor-arg value="/WEB-INF/upload/storeCategory"></beans:constructor-arg>
-	</beans:bean>
+	
 </beans:beans>

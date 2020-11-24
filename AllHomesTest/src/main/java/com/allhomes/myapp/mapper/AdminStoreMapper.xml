@@ -3,7 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.allhomes.myapp.admin.AdminStoreDaoImp">
+  	<select id="storeCategoryAll" resultType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
+  		select main_c, priority, img from main_c order by priority 
+  	</select>
   	<insert id="storeCategoryInsert" parameterType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
   	  	insert into main_c(main_c, img, priority) values(#{main_c}, #{img}, #{priority})
   	</insert>
+  	<insert id="storeSubCategoryInsert" parameterType="com.allhomes.myapp.admin.AdminStoreSubCategoryVO">
+  		insert into sub_c(main_c, sub_c) values (#{main_c}, #{sub_c})
+  	</insert>
+  	<select id="storeSubCategoryAll" resultType="com.allhomes.myapp.admin.AdminStoreSubCategoryVO">
+  		select main_c, sub_c from sub_c
+  	</select>
+  	<select id="storeMainCategoryName" resultType="String">
+  		select main_c from main_c order by priority
+  	</select>
+  	<delete id="storeSubCategoryDel" parameterType="String">
+  		delete from sub_c where sub_c=#{sub_c}
+  	</delete>
+  	<delete id="storeMainCategoryDel" parameterType="String">
+  		delete from main_c where main_c=#{main_c}
+  	</delete>
   </mapper>
