@@ -93,8 +93,17 @@ public class AdminController {
 	
 	//게시판관리-게시판 카테고리 페이지로 이동
 	@RequestMapping("/adminBoardCategory")
-	public String BoardCategory() {
-		return "admin/adminBoard/adminBoardCategory";
+	public ModelAndView BoardCategory() {
+		
+		HomeBoardThemeDaoImp dao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		HomeBoardThemeVO vo = new HomeBoardThemeVO();
+		
+		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminBoard/adminBoardCategory");
+		
+		return mav;
 	}
 	
 	
