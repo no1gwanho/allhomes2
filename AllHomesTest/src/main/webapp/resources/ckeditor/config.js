@@ -4,9 +4,10 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
+
+	//메뉴버튼 
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-		
 		{ name: 'clipboard', groups: [ 'undo', 'clipboard' ] },
 		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
 		{ name: 'forms', groups: [ 'forms' ] },
@@ -16,13 +17,31 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
 		{ name: 'links', groups: [ 'links' ] },
 		{ name: 'insert', groups: [ 'insert' ] },
-		
-		
 		{ name: 'tools', groups: [ 'tools' ] },
 		{ name: 'others', groups: [ 'others' ] },
 		{ name: 'about', groups: [ 'about' ] },
 		
 	];
-
+	//숨길 버튼
 	config.removeButtons = 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,Format,Maximize,ShowBlocks,About,Subscript,Superscript,Blockquote,Checkbox,Radio,Styles';
+
 };
+
+CKEDITOR.on('dialogDefinition', function( ev ){
+	var dialog = ev.data.definition.dialog;
+	var dialogName = ev.data.name;
+    var dialogDefinition = ev.data.definition;
+  
+    switch (dialogName) {
+        case 'image': // 이미지 속성창이 보일때 안보이게 하기 위해서 .
+        	
+            //dialogDefinition.removeContents('info');
+            dialogDefinition.removeContents('Link');
+            dialogDefinition.removeContents('advanced');
+            
+            dialog.on('show', function (obj) {
+        		this.selectPage('Upload'); //업로드텝으로 시작
+            });
+            break;
+    }
+});
