@@ -49,6 +49,8 @@
 			<div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="123-45-67890" size="60"/></div>
 			<div class="col-4" style="margin-bottom:15px;">홈페이지</div>
 			<div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="www.allhomes.com" size="60"/></div>
+			<div class="col-4" style="margin-bottom:15px;">올홈즈 아이디<span>*</span></div>
+			<div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="allhomes1234" size="60"/></div>
 		</div>
 		<br/>
 		<hr/>
@@ -70,11 +72,14 @@
 			<div class="col-4" style="margin-bottom:15px;">대표브랜드 이름<span>*</span></div>
 			<div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="올홈즈 가구" size="60"/></div>
 			<div class="col-4" style="margin-bottom:15px;">취급 카테고리<span>*</span></div>
-			<div class="col-8" style="margin-bottom:15px;"><input type="checkbox"/></div>
+			<div class="col-2" style="margin-bottom:15px;"><input type="checkbox"/>메인1</div>
+			<div class="col-2" style="margin-bottom:15px;"><input type="checkbox"/>메인2</div>
+			<div class="col-2" style="margin-bottom:15px;"><input type="checkbox"/>메인3</div>
+			<div class="col-2" style="margin-bottom:15px;"><input type="checkbox"/>메인4</div>
+			<div class="col-6" style="margin-bottom:15px; left:380px;"><input type="checkbox"/>메인5</div>
+			<div class="col-6" style="margin-bottom:15px;"><input type="checkbox"/>메인6</div>
 			<div class="col-4" style="margin-bottom:15px;">상품 소개<span>*</span></div>
 			<div class="col-8" style="margin-bottom:15px;"><textarea name="" placeholder="판매하시는 상품에 대한 설명을 입력해주세요" style="width:700px;height:200px"></textarea></div>
-			<div class="col-4" style="margin-bottom:15px;">타 입점 쇼핑몰<span>*</span></div>		
-			<div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="예시) 11번가, 쿠팡 등 현재 입점몰을 입력해주세요" size="60"/></div>
 			<div class="col-4" style="margin-bottom:15px;">판매 관련 파일 첨부</div>		
 			<div class="col-8" style="margin-bottom:15px;">
 				<input type="file" name=""/><br/>
