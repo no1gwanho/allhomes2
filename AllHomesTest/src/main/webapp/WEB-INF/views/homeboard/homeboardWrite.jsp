@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
-<script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>	
 <!-- 해시태그를 위한 css/js파일 -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
+
+
 <!-- 글쓰기폼을 위한 CKEDITOR -->
 <script>
 	$(function() {
@@ -19,17 +20,15 @@
 
 <style>
 
-	#cke_129_label{value:"이미지 업로드"}
-
 	.label{background-color:#E98374;}
-	#blogWriteTitle {
+	#homeboardWriteTitle {
 		margin: 20px 0 50px 20px;
 	}
 	
-	.blogWriteSub {
+	.homeboardWriteSub {
 		margin-left: 20px;
 	}
-	.blogWriteSub{
+	.homeboardWriteSub{
 		font-size:15px;
 	}
 	.btn-info{background-color:#E98374;}
@@ -40,12 +39,12 @@
 
 <div class="container">
 
-	<h3 id="blogWriteTitle">집들이 글쓰기</h3>
+	<h3 id="homeboardWriteTitle">집들이 글쓰기</h3>
 
 	<!-- 테마선택 메뉴 -->
 	<div class="row">
 		<div class="col-2">
-			<h5 class="blogWriteSub">테마선택</h5>
+			<h5 class="homeboardWriteSub">테마선택</h5>
 		</div>
 		
 		<div class="col-2">
@@ -66,11 +65,11 @@
 	<!-- 해시태그 창 -->
 	<div class="row">
 		<div class="col-2">
-			<h5 class="blogWriteSub">태그입력</h5>
+			<h5 class="homeboardWriteSub">태그입력</h5>
 			
 		</div>
 		<div class="col-9"><!-- 태그는 엔터나 쉼표를 입력하면 확인됨 -->
-			<input id="hashtagForm" type="text" value="해시태그, 테스트" data-role="tagsinput" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
+			<input id="hashtagForm" type="text" value="해시태그,테스트" data-role="tagsinput" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
 			<span style="color:gray;font-size:11px;">해시태그는 최대 8개까지, 최대 10글자까지 입력 가능합니다.</span>
 		</div>
 	</div> <!-- row -->

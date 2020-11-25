@@ -1,4 +1,4 @@
-package com.allhomes.myapp.blog;
+package com.allhomes.myapp.homeboard;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

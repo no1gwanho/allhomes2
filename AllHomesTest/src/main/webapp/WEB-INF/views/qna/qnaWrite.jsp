@@ -2,7 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
-
+<!-- 글쓰기폼을 위한 CKEDITOR -->
+<script>
+	$(function() {
+		CKEDITOR.replace('content', {
+			filebrowserUploadUrl:'/myapp/editor/imageUpload.do',
+			height:500,
+			extraPlugins : 'confighelper',
+		});
+	});
+</script>
 <style>
 #blogWriteTitle {
 	margin: 20px 0 50px 20px;
@@ -26,16 +35,6 @@
 
 	<!-- 글쓰기 폼 여기부터  -->
 
-	<!-- 글쓰기폼을 위한 CKEDITOR -->
-	<script>
-	$(function() {
-		CKEDITOR.replace('content', {
-			height:400,
-			extraPlugins : 'confighelper',
-			
-		});
-	});
-	</script>
 
 	<form action="">
 		<div class="form-group">
@@ -59,10 +58,5 @@
 			
 		</div>
 	</form>
-
-
-
-
-
 
 </div>

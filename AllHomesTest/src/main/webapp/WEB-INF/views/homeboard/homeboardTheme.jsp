@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-#blogTitle {
+#homeboardTitle {
 	margin-top: 50px;
 	margin-bottom: 50px;
 	margin-left: 20px;
@@ -68,7 +68,7 @@
 </style>
 
 <div class="container">
-	<h3 id="blogTitle">테마별 인기글</h3>
+	<h3 id="homeboardTitle">테마별 인기글</h3>
 
 
 	<!-- 탭메뉴  -->
@@ -107,7 +107,7 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="/myapp/blogView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
+								<a href="/myapp/homeboardView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
 									변신할머니와 함께 살던 집의 변신</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
