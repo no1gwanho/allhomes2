@@ -69,6 +69,7 @@ BootPay.request({
 }).done(function (data) {
 	console.log(data);
 });
+
 </script>
 </body>
 </html>
