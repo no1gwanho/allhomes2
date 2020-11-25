@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-</beans>
 
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
+	<!-- 파일 업로드 경로(스토어카테고리)  -->
+	<beans:bean id="categoryUploadPath" class="java.lang.String">
+		<beans:constructor-arg value="/WEB-INF/upload/storeCategory"></beans:constructor-arg>
+	</beans:bean>
+	<!-- 스토어 이미지(썸네일) -->
+	<beans:bean id="storeImgUploadPath" class="java.lang.String">
+		<beans:constructor-arg value="/WEB-INF/upload/storeImg"></beans:constructor-arg>
+	</beans:bean>	
+</beans:beans>

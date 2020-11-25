@@ -1,14 +1,27 @@
 package com.allhomes.myapp.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.FileHandler;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.allhomes.myapp.store.StoreDaoImp;
+import com.allhomes.myapp.store.StoreVO;
 
 
 @Controller
@@ -83,52 +96,23 @@ public class AdminController {
 	
 	//게시판관리-게시판 카테고리 페이지로 이동
 	@RequestMapping("/adminBoardCategory")
-	public String BoardCategory() {
-		return "admin/adminBoard/adminBoardCategory";
-	}
-	
-	
-	//스토어-주문내역 페이지로 이동
-	@RequestMapping("/adminStoreOrder")
-	public String StoreOrder() {
-		return "admin/adminStore/adminStoreOrder";
-	}
-	
-	//스토어관리-스토어 페이지로 이동
-	@RequestMapping("/adminStore")
-	public String adminStore() {
-		return "admin/adminStore/adminStoreStore";
-	}
-	
-	
-	//스토어관리-스토어 상세 보기로 이동
-	@RequestMapping("/adminStoreDetail")
-	public ModelAndView StoreDetail() {
+	public ModelAndView BoardCategory() {
 		
+		HomeBoardThemeDaoImp dao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		HomeBoardThemeVO vo = new HomeBoardThemeVO();
+		
+		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminBoard/adminBoardCategory");
 		
-		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
 		return mav;
 	}
 	
-	//스토어관리-제품 추가 페이지로 이동
-	@RequestMapping("/productAdd")
-	public String productAdd() {
-		return "admin/adminStore/adminStoreProductAdd";
-	}
 	
 	
-	//스토어-스토어 추가 페이지로 이동
-	@RequestMapping("/storeAdd")
-	public String StoreAdd() {
-		return "admin/adminStore/adminStoreStoreAdd";
-	}
 	
-	//스토어-카테고리 페이지로 이동
-	@RequestMapping("/adminCategory")
-	public String adminCategory() {
-		return "admin/adminStore/adminStoreCategory";
-	}
+	
 	
 	//매출관리 메인 페이지로 이동-sales
 	@RequestMapping("/adminSalesMain")
@@ -142,7 +126,11 @@ public class AdminController {
 		return "admin/adminSales/adminSalesStore";
 	}
 	
-	///////////////////////////기능
+	///////////////////////////기능//////////////////////////////////
+	
+	
+	
+	//======================register=====================================================
 	
 	//관리자 회원가입
 	@RequestMapping(value="/adminRegisterOk", method=RequestMethod.POST)
@@ -154,7 +142,7 @@ public class AdminController {
 		
 		//System.out.println("암호화 전==>"+vo.getEmppwd());
 		//비밀번호 암호화
-		vo.setEmppwd(passwordEncoder.encode(vo.getEmppwd()));
+		//vo.setEmppwd(passwordEncoder.encode(vo.getEmppwd()));
 		//System.out.println("암호화 후==>"+vo.getEmppwd());
 
 		
@@ -168,10 +156,46 @@ public class AdminController {
 		return mav;
 	}
 	
+	//관리자 로그인
+	@RequestMapping(value="/adminLogin", method=RequestMethod.POST)
+	public ModelAndView adminLogin(AdminRegisterVO vo, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+	
+		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		
+		//아이디, 비밀번호 체크
+		AdminRegisterVO regVo = dao.adminLogin(vo);
+		
+		if(regVo == null) { //로그인 실패
+			mav.setViewName("redirect:adminLogin");
+		}else { //아이디 가져옴
+			
+			regVo.getEmppwd();
+			ses.setAttribute("userid", regVo.getUserid());
+			ses.setAttribute("empname", regVo.getEmpname());
+			ses.setAttribute("logStatus", "Y");
+			mav.setViewName("redirect:adminHome");
+		}
+		
+		return mav;
+	}
+	
+	//ID중복체크
+	@RequestMapping(value="/idCheck")
+	public int idCheck(String userid) {
+		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		return dao.idCheck(userid);
+	}
+	
+	
 	//datepickerTest
 	@RequestMapping("/date")
 	public String datepicker() {
 		return "admin/adminStore/datapickerTest";
 	}
-
+	
+	//===========================Store========================
+	
+	
+	
 }

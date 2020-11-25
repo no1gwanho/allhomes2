@@ -10,11 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
-<script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/69f9d4fad2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/allhomes_header.css" type="">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -40,13 +40,13 @@
         <h4><a class="nav-link" href="/myapp/">올홈즈<span class="sr-only">(current)</span></a></h4>
       </li>
        <li class="nav-item dropdown">
-        <h4><a class="nav-link" href="/myapp/blogHome" id="navbarDropdown" role="button" data-hover="dropdown" aria-haspopup="true" aria-expanded="false" >
+        <h4><a class="nav-link" href="/myapp/homeboardHome" id="navbarDropdown" role="button" data-hover="dropdown" aria-haspopup="true" aria-expanded="false" >
           집들이
         </a></h4>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/myapp/blogHome">집들이홈</a>
-          <a class="dropdown-item" href="/myapp/blogTop">베스트</a>
-          <a class="dropdown-item" href="/myapp/blogTheme">테마별</a>
+          <a class="dropdown-item" href="/myapp/homeboardHome">집들이홈</a>
+          <a class="dropdown-item" href="/myapp/homeboardTop">베스트</a>
+          <a class="dropdown-item" href="/myapp/homeboardTheme">테마별</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -103,7 +103,7 @@
           글쓰기
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/myapp/blogWrite">집들이</a>
+          <a class="dropdown-item" href="/myapp/homeboardWrite">집들이</a>
           <a class="dropdown-item" href="/myapp/qnaWrite">질문과답변</a>
           <a class="dropdown-item" href="/myapp/mypageShopping">리뷰작성</a>
           
