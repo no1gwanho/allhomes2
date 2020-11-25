@@ -13,7 +13,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("application")
+	@RequestMapping("/application")
 	public String applyStore() {
 		
 		return "landing/applyForm";
