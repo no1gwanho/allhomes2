@@ -10,11 +10,11 @@
 		width:90%;
 	}
 	
-	.blogImages{
+	.homeboardImages{
 		max-width:900px;
 	}
 	
-	.blogImages>img{
+	.homeboardImages>img{
 		width:90%
 	}
 		
@@ -28,7 +28,7 @@
 
 <nav aria-label="breadcrumb" style="background-color:none;">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/blog/blogMain">집들이</a></li>
+    <li class="breadcrumb-item"><a href="/homeboard/homeboardMain">집들이</a></li>
     <li class="breadcrumb-item active" aria-current="page">집들이 글보기</li>
   </ol>
 </nav>
@@ -41,8 +41,8 @@
 
 <br/>
 	<div style="width:80%;" >
-		<div class="blogImages">
-		<img class="blogImages" src="<%=request.getContextPath() %>/resources/img/banner/banner2.png"/><br/>
+		<div class="homeboardImages">
+		<img class="homeboardImages" src="<%=request.getContextPath() %>/resources/img/banner/banner2.png"/><br/>
 		</div>
 		<p>
 		이동통신 3사와 정부가 주파수 재할당 대가 공개 설명회에서 한 치의 견해차도 좁히지 못한 가운데, 적정한 산정방식이 적용되지 않을 경우 이통사 투자가 위축되고 역효과로 소비자 통신비 부담만 증가하게 될 것이라는 지적이 제기됐다.

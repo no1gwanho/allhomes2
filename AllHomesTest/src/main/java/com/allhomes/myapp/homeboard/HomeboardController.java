@@ -1,4 +1,4 @@
-package com.allhomes.myapp.blog;
+package com.allhomes.myapp.homeboard;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
-public class BlogController {
+public class HomeboardController {
 	SqlSession sqlSession;
 
 	public SqlSession getSqlSession() {
@@ -34,34 +34,40 @@ public class BlogController {
 		this.sqlSession = sqlSession;
 	}
 	
-	@RequestMapping("/blogHome")
-	public String blogHome() {
-		return "/blog/blogHome";
+	@RequestMapping("/homeboardHome")
+	public String homeboardHome() {
+		return "/homeboard/homeboardHome";
 	}
 	
-	@RequestMapping("/blogTop")
-	public String blogTop() {
-		return "/blog/blogTop";
+	@RequestMapping("/homeboardTop")
+	public String homeboardTop() {
+		return "/homeboard/homeboardTop";
 	}
 	
-	@RequestMapping("/blogTheme")
-	public String blogTheme() {
-		return "/blog/blogTheme";
+	@RequestMapping("/homeboardTheme")
+	public String homeboardTheme() {
+		return "/homeboard/homeboardTheme";
 	}
 	
-	@RequestMapping("/blogWrite")
-	public String blogWrite() {
-		return "/blog/blogWrite";
+	@RequestMapping("/homeboardWrite")
+	public String homeboardWrite() {
+		return "/homeboard/homeboardWrite";
 	}
 	
-	@RequestMapping("/blogView")
-	public String blogView() {
-		return "/blog/blogView";
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/homeboardView")
+	public String homeboardView() {
+		return "/homeboard/homeboardView";
 	}
 	
-	@RequestMapping("/blogSearch")
-	public String blogSearchPage() {
-		return "/blog/blogSearch";
+	@RequestMapping("/homeboardSearch")
+	public String homeboardSearchPage() {
+		return "/homeboard/homeboardSearch";
 		
 	}
 

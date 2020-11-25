@@ -105,7 +105,7 @@
 		<h3>인기글</h3>
 	</div>
 	<div style="text-align: right;">
-		<a href="/myapp/blogTop">더보기</a>
+		<a href="/myapp/homeboardTop">더보기</a>
 	</div>
 
 	<!-- Page Features -->
@@ -120,7 +120,7 @@
 				</div>
 				<div class="card-body">
 					<div class="card-title">
-						<a href="/myapp/blogView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
+						<a href="/myapp/homeboardView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
 							변신할머니와 함께 살던 집의 변신</a>
 					</div>
 					<a href="#" class="card-text">써니웨이</a>
@@ -132,13 +132,13 @@
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="/myapp/blogView"><img
+					<a href="/myapp/homeboardView"><img
 						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
 						alt="글번호" /></a>
 				</div>
 				<div class="card-body">
 					<div class="card-title">
-						<a href="/myapp/blogView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
+						<a href="/myapp/homeboardView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
 							변신할머니와 함께 살던 집의 변신</a>
 					</div>
 					<a href="#" class="card-text">써니웨이</a>
@@ -150,7 +150,7 @@
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="/myapp/blogView"><img
+					<a href="/myapp/homeboardView"><img
 						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
 						alt="글번호" /></a>
 				</div>
@@ -189,7 +189,7 @@
 		<h3>테마별</h3>
 	</div>
 	<div style="text-align: right;">
-		<a href="/myapp/blogTheme">더보기</a>
+		<a href="/myapp/homeboardTheme">더보기</a>
 	</div>
 
 	<!-- Page Features -->
