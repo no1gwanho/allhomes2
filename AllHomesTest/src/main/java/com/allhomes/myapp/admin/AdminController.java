@@ -148,7 +148,9 @@ public class AdminController {
 	@RequestMapping(value="/adminRegisterOk", method=RequestMethod.POST)
 	public ModelAndView adminRegisterOk(AdminRegisterVO vo, HttpSession ses) {
 		
+		
 		AdminRegisterDaoImp dao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		System.out.print("테스트 문장");
 		
 		//System.out.println("암호화 전==>"+vo.getEmppwd());
 		//비밀번호 암호화

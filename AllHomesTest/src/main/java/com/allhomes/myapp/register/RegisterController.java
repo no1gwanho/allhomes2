@@ -32,7 +32,9 @@ public class RegisterController {
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
 		
+		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
