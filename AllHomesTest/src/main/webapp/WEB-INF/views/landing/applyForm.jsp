@@ -26,7 +26,6 @@
 </head>
 <body>
 <div class="container">
-<<<<<<< HEAD
 	<div id="logo">
 		<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png"/>
 	</div>
@@ -103,7 +102,7 @@
 			<button type="submit" class="btn btn-block" style="background-color:#ee8374;color:#fff;">입점 신청 완료</button>
 		</div>		
 	</form>	
-=======
+
    <div id="logo">
       <img src="<%=request.getContextPath() %>/resources/img/allhomes3.png"/>
    </div>
@@ -119,6 +118,9 @@
    <hr/>
    <br/>
    <form>
+
+   <form method="post" action="" enctype="">
+
       <div class="row">
          <div class="col-12"><h4><b>회사 정보</b></h4></div>
          <div class="col-4" style="margin-bottom:15px;">회사 이름<span>*</span></div>
@@ -150,12 +152,20 @@
          <div class="col-4" style="margin-bottom:15px;">대표브랜드 이름<span>*</span></div>
          <div class="col-8" style="margin-bottom:15px;"><input type="text" name="" placeholder="올홈즈 가구" size="60"/></div>
          <div class="col-4" style="margin-bottom:15px;">취급 카테고리<span>*</span></div>
+
          <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>메인1</div>
          <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>메인2</div>
          <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>메인3</div>
          <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>메인4</div>
          <div class="col-6" style="margin-bottom:15px; left:380px;"><input type="checkbox" name="main_c"/>메인5</div>
          <div class="col-6" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>메인6</div>
+
+         <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>가구</div>
+         <div class="col-2" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>홈데코</div>
+         <div class="col-4" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>가전</div>
+         <div class="col-6" style="margin-bottom:15px;left:380px;"><input type="checkbox" name="main_c"/>수납</div>
+         <div class="col-6" style="margin-bottom:15px;"><input type="checkbox" name="main_c"/>DIY/공구</div>
+
          <div class="col-4" style="margin-bottom:15px;">상품 사진 첨부<span>*</span></div>
          <div class="col-8" style="margin-bottom:15px;">
          	<input type="file" name="main_img"/><br/>
@@ -185,7 +195,7 @@
          <button type="submit" class="btn btn-block" style="background-color:#ee8374;color:#fff;">입점 신청 완료</button>
       </div>      
    </form>   
->>>>>>> d2f79c89a5b3d1a5ae261b97e821e267b08a0d6b
+
 </div>
 <br/>
 </body>

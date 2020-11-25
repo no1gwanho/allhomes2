@@ -55,8 +55,11 @@
 <div class="container" style="margin-top:15px;">
 	<div class="title">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-9">
 				<h6>집들이</h6>
+			</div>
+			<div class="col-sm-3" style="text-align:right;">
+				<h6><a href="/myapp/blogHome">더보기</a></h6>
 			</div>
 		</div>
 		<hr/>
@@ -177,11 +180,14 @@
 	</div>
 </div>
 <!-- 스토어 리스트 -->
-<div class="container" style="margin-top:15px;">
+<div class="container" style="margin-top:45px;">
 	<div class="title">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-9">
 				<h6>스토어</h6>
+			</div>
+			<div class="col-sm-3" style="text-align:right;">
+				<h6><a href="/myapp/storeHome">더보기</a></h6>
 			</div>
 		</div>
 		<hr/>
