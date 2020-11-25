@@ -52,7 +52,7 @@ public class CkeditorFileUploadController {
             byte[] bytes = upload.getBytes();
             
             //이미지 경로 생성
-            String path = ses.getServletContext().getRealPath("/upload");  System.out.println("path="+path);
+            String path = ses.getServletContext().getRealPath("/homeboardUpload");  System.out.println("path="+path);
             String ckUploadPath = path + uid + "_" + fileName;
             
             File folder = new File(path);
@@ -107,7 +107,7 @@ public class CkeditorFileUploadController {
  throws ServletException, IOException{
     	HttpSession ses = request.getSession();
         //서버에 저장된 이미지 경로
-        String path = ses.getServletContext().getRealPath("/upload"); 
+        String path = ses.getServletContext().getRealPath("/homeboardUpload"); 
         String sDirPath = path + uid + "_" + fileName;
     
         File imgFile = new File(sDirPath);
