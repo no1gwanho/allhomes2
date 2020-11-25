@@ -61,7 +61,7 @@
 			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
-			<url-pattern>/WEB-INF/views/blog/*</url-pattern>
+			<url-pattern>/WEB-INF/views/homeboard/*</url-pattern>
 			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
 			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
 		</jsp-property-group>
