@@ -50,10 +50,11 @@
 		<div class="col-2">
 			<select class="browser-default custom-select">
 			  <option selected>테마 선택</option>
-			  <option value="1">테마1</option>
-			  <option value="2">테마2</option>
-			  <option value="3">테마3</option>
-			  <option value="3">테마4</option>
+			  <option value="1">모던</option>
+			  <option value="2">코지/내츄럴</option>
+			  <option value="3">러블리/로맨틱</option>
+			  <option value="3">빈티지/레트로</option>
+			  <option value="4">한국/아시아</option>
 			</select>
 		</div>
 	</div>
@@ -82,7 +83,7 @@
 	<br />
 	<br />
 
-	<form action="">
+	<form action="/myapp/homeboardWriteOk">
 		<div class="form-group">
 			<input type="text" class="form-control" name="title" placeholder="제목을 입력하세요" />
 			<br/>

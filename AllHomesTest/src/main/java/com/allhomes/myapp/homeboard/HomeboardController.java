@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeboardController {
@@ -55,10 +57,30 @@ public class HomeboardController {
 	}
 	
 	
-	
-	
-	
-	
+
+	@RequestMapping(value="/homeboardWriteOk", method =  {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
+		vo.setIp(r.getRemoteAddr());
+		vo.setUserid("hong1234"); //임시 아이디
+		vo.setNickname("길동이"); //임시 닉네임
+		vo.setTheme("모던"); //임시테마
+		vo.setThumbnail("ThumnailTest"); //임시썸네일
+		vo.setHashtag("hashtag");//임시해시태그
+		
+		
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		int result = dao.homeboardInsert(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:homeboardHome");
+		}else {
+			mav.setViewName("homeboard/result");
+		}
+		return mav;
+
+	}
+
 	
 	@RequestMapping("/homeboardView")
 	public String homeboardView() {

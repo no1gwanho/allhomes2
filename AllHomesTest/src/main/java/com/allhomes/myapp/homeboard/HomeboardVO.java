@@ -4,14 +4,19 @@ public class HomeboardVO {
 	
 	private int b_no;
 	private String title;
-	private String thumnail;
+	private String thumbnail;
 	private String content;
 	private String theme;
+	private String hashtag;
 	private String userid;
 	private String nickname;
 	private int hit;
 	private int scrap;
+	private String ip;
 	private String writedate;
+	
+	
+	
 	
 	
 	public int getB_no() {
@@ -26,12 +31,13 @@ public class HomeboardVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getThumnail() {
-		return thumnail;
+	public String getThumbnail() {
+		return thumbnail;
 	}
-	public void setThumnail(String thumnail) {
-		this.thumnail = thumnail;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
+
 	public String getContent() {
 		return content;
 	}
@@ -44,6 +50,13 @@ public class HomeboardVO {
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
+	public String getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -68,6 +81,14 @@ public class HomeboardVO {
 	public void setScrap(int scrap) {
 		this.scrap = scrap;
 	}
+	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
 	public String getWritedate() {
 		return writedate;
 	}
