@@ -4,18 +4,6 @@
 <style>
 	td{height:50px; line-height:50px}
 </style>
-<script>
-	$(function(){
-		//체크박스 전체체크
-		$("#checkall").click(function(){
-	        if($("#checkall").prop("checked")){
-	            $("input[name=chk]").prop("checked",true);
-	        }else{
-	            $("input[name=chk]").prop("checked",false);
-	        }
-		});
-	});
-</script>
 
 <div class="container-fluid">
 	    <!-- 검색 옵션 -->
@@ -29,87 +17,47 @@
         </div>
             
             
-		<!-- 버튼들 -->
+		<!-- 버튼 -->
 		<a href="/myapp/storeAdd" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                    <i class="fas fa-check"></i>
                 </span>
            <span class="text">추가</span>
         </a>
-        <a href="#" class="btn btn-danger btn-icon-split">
-                <span class="icon text-white-50">
-                   <i class="fas fa-trash"></i>
-                </span>
-           <span class="text">삭제</span>
-        </a>
-		
-		<!-- 버튼 끝 -->
 		
 		<div class="mb-2"></div>
-		<div class="card shadow mb-4"><!-- 테이블~~~~ -->
+		<div class="card shadow mb-4">
 			<div class="card-body" style="text-align:center">	
 				<table style="cursor:pointer;" class="table table-hover">
 					<thead>
 					<tr>
-						<th><input type="checkbox" id="checkall"/></th>
+						
 						<th>번호</th>
 						<th>스토어명</th>
 						<th>사업자등록번호</th>
 						<th>프로필</th>
 						<th>ID</th>
+						<th>담당자 Tel</th>
 						<th>입점일</th>
-						<th>제품</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr onClick="location.href='/myapp/adminStoreDetail'">
-						<td><input type="checkbox" name="chk"/></td>
-						<td>135213</td>
-						<td>자연가구</td>
-						<td>14531-23152</td>
+					
+					<c:forEach var="vo" items="${list}">
+					<tr onClick="location.href='/myapp/adminStoreDetail?s_no=${vo.s_no}'">
+						
+						<td>${vo.s_no}</td>
+						<td>${vo.s_name}</td>
+						<td>${vo.s_num}</td>
 						<td>
 							<img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:50px;height:50px;"/>
 						</td>
-						<td>seran13</td>
-						<td>2020-10-31</td>
-						<td>59</td>
+						<td>${vo.s_id}</td>
+						<td>${vo.staff_t}</td>
+						<td>${vo.openingdate}</td>
 					</tr>
-					<tr onClick="location.href='/myapp/adminStoreDetail'">
-						<td><input type="checkbox" name="chk"/></td>
-						<td>135213</td>
-						<td>자연가구</td>
-						<td>14531-23152</td>
-						<td>
-							<img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:50px;height:50px;"/>
-						</td>
-						<td>seran13</td>
-						<td>2020-10-31</td>
-						<td>59</td>
-					</tr>
-					<tr onClick="location.href='/myapp/adminStoreDetail'">
-						<td><input type="checkbox" name="chk"/></td>
-						<td>135213</td>
-						<td>자연가구</td>
-						<td>14531-23152</td>
-						<td>
-							<img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:50px;height:50px;"/>
-						</td>
-						<td>seran13</td>
-						<td>2020-10-31</td>
-						<td>59</td>
-					</tr>
-					<tr onClick="location.href='/myapp/adminStoreDetail'">
-						<td><input type="checkbox" name="chk"/></td>
-						<td>135213</td>
-						<td>자연가구</td>
-						<td>14531-23152</td>
-						<td>
-							<img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:50px;height:50px;"/>
-						</td>
-						<td>seran13</td>
-						<td>2020-10-31</td>
-						<td>59</td>
-					</tr>
+					</c:forEach>
+					
 					</tbody>	
 				</table>
 				

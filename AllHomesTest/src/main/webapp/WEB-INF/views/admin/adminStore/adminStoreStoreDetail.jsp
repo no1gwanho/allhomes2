@@ -11,12 +11,41 @@
 	            $("input[name=chk]").prop("checked",false);
 	        }
     	});
+		
+		//스토어 삭제 
+		$("#storeDel").click(function(){
+			var result = confirm("스토어를 삭제하시겠습니까? 스토어의 모든 상품들이 함께 삭제됩니다.");
+			if(result){
+				location.href="/myapp/storeDel?s_no=${vo.s_no}";
+			}
+		});
+		
+		
+		
 	});
+	
+	
 </script>
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-3">
+			<div><!-- 스토어  버튼 -->
+            	<a href="/myapp/storeEdit?s_no=${vo.s_no}" id="storeEdit" class="btn alert-clean btn-icon-split shadow-sm">
+	                <span class="icon text-white-50">
+	                   <i class="fas fa-check"></i>
+	                </span>
+	          	 	<span class="text">수정</span>
+        		</a>
+        		
+            	<button id="storeDel" class="btn alert-clean btn-icon-split shadow-sm">
+	                <span class="icon text-white-50">
+	                   <i class="fas fa-trash"></i>
+	                </span>
+	          	 	<span class="text">삭제</span>
+        		</button>
+            </div>     
+            <div class="my-2"></div>
             <div class="card shadow mb-4">
                   <div class="card-header py-3">
                       <h6 class="m-0 font-weight-bold text-primary">Store 상세</h6>
@@ -24,39 +53,47 @@
                   	<div class="card-body">
                   		<div  style="text-align:center">
 	                  		<div style="display:inline-block">
-	                            <img src="/myapp/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/>
+	                            <img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/>
 	                        </div>
                         </div>
                             <br/><hr/><br/>
-			                <p><label class="col-6">번호</label>1523<p>
-			               	<p><label class="col-6">스토어명</label>자연가구<p>
-			               	<p><label class="col-6">판매자 ID</label>seran11<p>
-			               	<p><label class="col-6">Tel</label>010-1231-1231<p>
-			               	<p><label class="col-6">입점일</label>2020-10-21<p>
+			                <p><label class="col-6">번호</label>${vo.s_no }<p>
+			               	<p><label class="col-6">스토어명</label>${vo.s_name }<p>
+			               	<p><label class="col-6">판매자 ID</label>${vo.s_id }<p>
+			               	<p><label class="col-6">입점일</label>${vo.openingdate}<p>
 							<hr/><br/>
 							<p><label class="col-7">제품</label><span style="color:#EE8374">132</span><p>
 			               	<p><label class="col-7">누적 판매</label><span style="color:#EE8374">22</span><p>
                   	</div>
-            </div>                     
+            </div>
+                
+                        
        </div><!-- col-lg-4 끝 -->
-
+		
        <div class="col-lg-9">
 			<div><!-- 버튼 -->
-				   <a href="/myapp/productAdd" class="btn btn-success btn-icon-split">
-                   <span class="icon text-white-50">
-                   <i class="fas fa-check"></i>
-                   </span>
-                   <span class="text">추가</span>
+				   <a href="/myapp/productAdd?s_no=${vo.s_no}" class="btn btn-primary btn-icon-split">
+	                   <span class="icon text-white-50">
+	                   <i class="fas fa-check"></i>
+	                   </span>
+	                   <span class="text">추가</span>
                    </a>
                             
                    <a href="#" class="btn btn-danger btn-icon-split">
-                   <span class="icon text-white-50">
-                   <i class="fas fa-trash"></i>
-                   </span>
-                   <span class="text">삭제</span>
+	                   <span class="icon text-white-50">
+	                   <i class="fas fa-trash"></i>
+	                   </span>
+	                   <span class="text">삭제</span>
                    </a>
-                 
+                   
+                   <select class="form-control col-lg-2" style="float:right">
+                       <option>제품명 순</option>
+                       <option>재고 순</optoin>
+                       <option>입고일 순</option>
+                       <option>판매량 순</option>
+                   </select>
        		</div><!-- 버튼 끝 -->
+       		
        		<div class="my-2"></div>
        		
 			<div class="card shadow mb-4">
