@@ -50,7 +50,7 @@
 						<td>${vo.s_name}</td>
 						<td>${vo.s_num}</td>
 						<td>
-							<img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:50px;height:50px;"/>
+							<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:50px;height:50px; border-radius:70%;"/>
 						</td>
 						<td>${vo.s_id}</td>
 						<td>${vo.staff_t}</td>

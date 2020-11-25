@@ -31,8 +31,6 @@ public class AdminStoreController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
 	
 	
 	
@@ -50,7 +48,7 @@ public class AdminStoreController {
 			String originFileName = mf.getOriginalFilename(); //파일 이름
 			
 			
-			vo.setImg(path+"/"+originFileName); //경로+이름 => img컬럼에 세팅
+			vo.setImg(originFileName); //경로+이름 => img컬럼에 세팅
 			
 			
 			//파일 업로드
@@ -193,7 +191,7 @@ public class AdminStoreController {
 		String path = ses.getServletContext().getRealPath("upload/storeImg");//파일 저장할 위치
 		String originFileName = mf.getOriginalFilename(); //파일 이름
 		
-		vo.setS_pic(path+"/"+originFileName); //경로+이름 => img컬럼에 세팅
+		vo.setS_pic(originFileName); //이름 => img컬럼에 세팅
 		
 		//파일 업로드
 		try {
@@ -235,7 +233,7 @@ public class AdminStoreController {
 	
 	//스토어 수정 페이지로 이동
 	@RequestMapping("/storeEdit")
-	public ModelAndView storeDeit(@RequestParam("s_no") int s_no) {
+	public ModelAndView storeEdit(@RequestParam("s_no") int s_no) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		StoreVO vo = dao.storeSelect(s_no);
 		
@@ -244,5 +242,14 @@ public class AdminStoreController {
 		mav.setViewName("admin/adminStore/adminStoreStoreEdit");
 		
 		return mav;
+	}
+	
+	//스토어 수정
+	@RequestMapping(value="/storeEditOk",method=RequestMethod.POST)
+	public int storeEditOk(StoreVO vo) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		int result = dao.storeEdit(vo);
+		return result;
+		
 	}
 }

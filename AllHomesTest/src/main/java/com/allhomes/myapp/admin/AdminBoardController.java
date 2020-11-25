@@ -1,5 +1,7 @@
 package com.allhomes.myapp.admin;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,44 @@ public class AdminBoardController {
 		this.sqlSession = sqlSession;
 	}
 	
-	//집들이 게시판 카테고리 추가
+	
+	
+	//Board 메인 페이지로 이동
+	@RequestMapping("/adminBoardMain")
+	public ModelAndView adminBoardMain() {
+		
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		int countHb = dao.countHomeBoardToday();
+		int countReview = dao.countReviewToday();
+		int countQa = dao.countQAToday();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("countHb",countHb);
+		mav.addObject("countQa",countQa);
+		mav.addObject("countReview",countReview);
+		
+		mav.setViewName("admin/adminBoard/adminBoardMain");
+		return mav;
+	}
+		
+	//Board Category 페이지로 이동
+	@RequestMapping("/adminBoardCategory")
+	public ModelAndView BoardCategory() {
+			
+		HomeBoardThemeDaoImp dao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		HomeBoardThemeVO vo = new HomeBoardThemeVO();
+			
+		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminBoard/adminBoardCategory");
+			
+		return mav;
+	}
+		
+		
+		
+	//Board Category 추가
 	@RequestMapping("/homeBoardThemeAdd")
 	public ModelAndView homeBoardThemeAdd(String theme) {
 		
@@ -38,7 +77,7 @@ public class AdminBoardController {
 		return mav;
 	}
 	
-	//집들이 게시판 카테고리 수정
+	//Board Category 수정
 	@RequestMapping("/homeBoardThemeEdit")
 	public ModelAndView homeBoardThemeEdit(HomeBoardThemeVO vo) {
 		
@@ -55,7 +94,7 @@ public class AdminBoardController {
 		return mav;
 	}
 	
-	//집들이 게시판 카테고리 삭제
+	//Board Category 삭제
 	@RequestMapping("/homeBoardThemeDel")
 	public ModelAndView homeBoardThemeDel(@RequestParam("no") int no) {
 		System.out.println("a;sldkjf;alkdsjf;alskj");

@@ -127,16 +127,12 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-4">
-			
-			
             <div class="card shadow mb-4">
             	<div class="card-header py-3">
                       <h6 class="m-0 font-weight-bold text-primary">MAIN CATEGORY ADD</h6>
                 </div>
             	<div class="card-body">
             		<div class="card shadow col-lg-10" id="category">
-                		
-                		
                 		<form id="mainCFrm" class="col-lg-12" method="post" style="text-align:center" action="<%=request.getContextPath()%>/mainCategoryAdd" enctype="multipart/form-data">
                 			<div style="display:inline-block"> 
 	                			<img src="/myapp/resources/img/admin/c_add.png"/>
@@ -181,7 +177,7 @@
                 	
                 	<c:forEach var="vo" items="${list}" varStatus="status">
 	                	<div class="card shadow col-lg-5" id="category">
-	                		<img src="${vo.img}"/>
+	                		<img src="<c:url value='/storeMainCategoryImg/${vo.img}'/>" style=""/>
 	                		<div class="my-2"></div>
 	                		<hr/>
 	                		<form class="col-lg-10" style="text-align:center">

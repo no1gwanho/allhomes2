@@ -4,46 +4,33 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.FileHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.allhomes.myapp.store.StoreDaoImp;
-import com.allhomes.myapp.store.StoreVO;
-
 
 @Controller
 public class AdminController {
 
-	
 	SqlSession sqlSession;
-
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
-	
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
 	
-	/////////////////////////////////////////////////////////////
+	
+	
 	@RequestMapping("/adminHome")
 	public String adminHome() {
 		return "admin/adminHome";
@@ -88,32 +75,6 @@ public class AdminController {
 		return "admin/adminMember/adminMemberDetail";
 	}
 	
-	//게시판관리-게시판 메인 페이지로 이동
-	@RequestMapping("/adminBoardMain")
-	public String adminBoardMain() {
-		return "admin/adminBoard/adminBoardMain";
-	}
-	
-	//게시판관리-게시판 카테고리 페이지로 이동
-	@RequestMapping("/adminBoardCategory")
-	public ModelAndView BoardCategory() {
-		
-		HomeBoardThemeDaoImp dao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		HomeBoardThemeVO vo = new HomeBoardThemeVO();
-		
-		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("admin/adminBoard/adminBoardCategory");
-		
-		return mav;
-	}
-	
-	
-	
-	
-	
-	
 	//매출관리 메인 페이지로 이동-sales
 	@RequestMapping("/adminSalesMain")
 	public String adminSalesMain() {
@@ -125,8 +86,6 @@ public class AdminController {
 	public String adminSalesStore() {
 		return "admin/adminSales/adminSalesStore";
 	}
-	
-	///////////////////////////기능//////////////////////////////////
 	
 	
 	
@@ -191,9 +150,6 @@ public class AdminController {
 	public String datepicker() {
 		return "admin/adminStore/datapickerTest";
 	}
-	
-	//===========================Store========================
-	
 	
 	
 }

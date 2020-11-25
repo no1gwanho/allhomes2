@@ -25,7 +25,7 @@
                            <div class="col mr-2">
                                <div class="text-xl font-weight-bold text-danger text-uppercase mb-1">
                                Home Board</div>
-                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+2,641</div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+${countHb}</div>
                            </div>
                            <div class="col-auto">
                                <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -42,7 +42,7 @@
                            <div class="col mr-2">
                                <div class="text-xl font-weight-bold text-warning text-uppercase mb-1">
                                Q&A Board</div>
-                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+7,243</div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+${countQa}</div>
                            </div>
                            <div class="col-auto">
                                <i class="fas fa-question fa-2x text-gray-300"></i>
@@ -59,7 +59,7 @@
                            <div class="col mr-2">
                                <div class="text-xl font-weight-bold text-info text-uppercase mb-1">
                                Review</div>
-                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+5,637</div>
+                                   <div class="h5 mb-0 font-weight-bold text-gray-800">+${countReview}</div>
                            </div>
                            <div class="col-auto">
                                <i class="fas fa-star fa-2x text-gray-300"></i>

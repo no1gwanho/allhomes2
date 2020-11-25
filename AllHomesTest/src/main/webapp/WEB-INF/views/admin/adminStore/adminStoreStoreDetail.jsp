@@ -53,7 +53,7 @@
                   	<div class="card-body">
                   		<div  style="text-align:center">
 	                  		<div style="display:inline-block">
-	                            <img src="<%=request.getContextPath()%>/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/>
+	                            <img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:150px;height:150px; border-radius:70%;"/>
 	                        </div>
                         </div>
                             <br/><hr/><br/>
