@@ -220,8 +220,8 @@
 		<div class="col-3">
 			<a href="">
 				<img src="${pageContext.request.contextPath}/resources/img/pd/pd04.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
+				[빈티지리빙] / 빙하의 잔 유리 풍경<br/>
+				0% / 21800<br/>
 				별 / 리뷰&nbsp;&nbsp;
 			</a>
 		</div>
