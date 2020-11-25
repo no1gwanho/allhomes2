@@ -20,6 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.store.StoreDaoImp;
+import com.allhomes.myapp.store.StoreVO;
+
 
 @Controller
 public class AdminController {
@@ -107,41 +110,7 @@ public class AdminController {
 	}
 	
 	
-	//스토어-주문내역 페이지로 이동
-	@RequestMapping("/adminStoreOrder")
-	public String StoreOrder() {
-		return "admin/adminStore/adminStoreOrder";
-	}
 	
-	//스토어관리-스토어 페이지로 이동
-	@RequestMapping("/adminStore")
-	public String adminStore() {
-		return "admin/adminStore/adminStoreStore";
-	}
-	
-	
-	//스토어관리-스토어 상세 보기로 이동
-	@RequestMapping("/adminStoreDetail")
-	public ModelAndView StoreDetail() {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
-		return mav;
-	}
-	
-	//스토어관리-제품 추가 페이지로 이동
-	@RequestMapping("/productAdd")
-	public String productAdd() {
-		return "admin/adminStore/adminStoreProductAdd";
-	}
-	
-	
-	//스토어-스토어 추가 페이지로 이동
-	@RequestMapping("/storeAdd")
-	public String StoreAdd() {
-		return "admin/adminStore/adminStoreStoreAdd";
-	}
 	
 	
 	
@@ -226,86 +195,5 @@ public class AdminController {
 	//===========================Store========================
 	
 	
-	//스트어-메인카테고리 추가
-	@RequestMapping(value="/mainCategoryAdd", method=RequestMethod.POST)
-	public ModelAndView StoreCategoryInsert(AdminStoreCategoryVO vo, 
-			HttpServletRequest req, 
-			@RequestParam(value="file") MultipartFile mf,
-			HttpSession ses) {
-
-		//file upload
-		String path = ses.getServletContext().getRealPath("upload/storeCategory");//파일 저장할 위치
-		String originFileName = mf.getOriginalFilename(); //파일 이름
-		
-		
-		vo.setImg(path+"/"+originFileName); //경로+이름 => img컬럼에 세팅
-		
-		
-		//파일 업로드
-		try {
-			mf.transferTo(new File(path, originFileName));
-		}catch(IOException ie) {
-			ie.getStackTrace();
-		}
-		
-		//insert 작업
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		int result = dao.storeCategoryInsert(vo); //insert
-		ModelAndView mav = new ModelAndView();
-		
-		if(result>0) { //insert 성공
-			mav.setViewName("redirect:adminCategory");
-		}else{//실패
-			mav.addObject("msg", "카테고리 추가에 실패했습니다.");
-			mav.setViewName("admin/result");
-		}
-		return mav;
-	}
 	
-	//스토어-카테고리 전체 불러오기(메인, 서브)
-	@RequestMapping("/adminCategory")
-	public ModelAndView storeCategoryAll() {
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		List<AdminStoreCategoryVO> list = dao.storeCategoryAll(); //메인카테고리
-		List<AdminStoreSubCategoryVO> subList = dao.storeSubCategoryAll(); //서브카테고리
-		List<String> mainList = dao.storeMainCategoryName(); //메인카테고리 이름
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.addObject("subList", subList);
-		mav.addObject("mainList", mainList);
-		
-		mav.setViewName("admin/adminStore/adminStoreCategory");
-		return mav;
-	}
-
-	//스토어-서브카테고리 추가
-	@RequestMapping("/adminSubCategoryAdd")
-	public int subCategoryAdd(String main_c, String sub_c) {
-		
-		AdminStoreSubCategoryVO vo = new AdminStoreSubCategoryVO();
-		vo.setMain_c(main_c);
-		vo.setSub_c(sub_c);
-		
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		
-		return dao.storeSubCategoryInsert(vo);
-		
-	}
-	
-	//스토어-서브카테고리 삭제
-	@RequestMapping("/adminSubCategoryDel")
-	public int subCategoryDel(String sub_c) {
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		
-		return dao.storeSubCategoryDel(sub_c);
-	}
-	
-	//스토어-메인카테고리 삭제
-	@RequestMapping("/adminMainCategoryDel")
-	public int mainCategoryDel(String main_c) {
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		
-		return dao.storeMainCategoryDel(main_c);
-	}
 }

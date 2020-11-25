@@ -3,6 +3,8 @@ package com.allhomes.myapp.admin;
 import java.util.List;
 
 public interface AdminStoreDaoImp {
+	
+	//스토어--스토어 카테고리
 	//category--메인카테고리 insert
 	public int storeCategoryInsert(AdminStoreCategoryVO vo);
 	

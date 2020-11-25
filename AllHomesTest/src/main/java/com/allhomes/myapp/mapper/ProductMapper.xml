@@ -9,9 +9,7 @@
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.store.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product where pd_no=#{param1}
   	</select>
-  	<insert id="insertProduct" parameterType="com.allhomes.myapp.store.ProductVO">
-  	  	insert into product(pd_name, price, discount, main_img, stock, status, sub_c) values()
-  	</insert>
+  	
   	<update id="editProduct" parameterType="com.allhomes.myapp.store.ProductVO">
   		update product set pd_no=#{pd_no}, s_no=#{s_no}, pd_name=#{pd_name}, price=#{price}, discount=#{discount},
   		main_img=#{main_img}, stock=#{stock}, status=#{status}, sub_c=#{sub_c} 
