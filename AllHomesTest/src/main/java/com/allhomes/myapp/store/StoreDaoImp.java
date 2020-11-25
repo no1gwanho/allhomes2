@@ -11,4 +11,6 @@ public interface StoreDaoImp {
 	public StoreVO storeSelect(int s_no);
 	//스토어 삭제
 	public int storeDel(int s_no);
+	//스토어 수정
+	public int storeEdit(StoreVO vo);
 }

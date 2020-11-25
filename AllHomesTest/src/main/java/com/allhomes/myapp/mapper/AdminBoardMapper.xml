@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminBoardDaoImp">
+	<select id="countHomeBoardToday" resultType="int">
+		select count(*) from homeboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+	</select>
+	<select id="countQAToday" resultType="int">
+		select count(*) from qaboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+	</select>
+	<select id="countReviewToday" resultType="int">
+		select count(*) from review where to_char(writedate, 'YYYY-MM-DD')= to_char(sysdate, 'YYYY-MM-DD')
+	</select>
+</mapper>

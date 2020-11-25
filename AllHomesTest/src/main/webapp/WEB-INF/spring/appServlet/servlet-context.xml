@@ -7,15 +7,14 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/storeImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\upload\storeImg/"/>
+	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -48,6 +47,7 @@
 		<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
+
 
 	<!-- 메일설정 -->
 	<context:component-scan base-package="kr.co.lty"/>

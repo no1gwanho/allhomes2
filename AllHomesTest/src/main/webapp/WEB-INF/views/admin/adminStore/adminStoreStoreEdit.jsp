@@ -1,7 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
-
+<script>
+	$(function(){
+		//스토어 수정
+		$("#storeEdit").click(function(){
+			if($("#s_name").val()==""){
+				alert("스토어명을 입력해주십시오.");
+				return false;
+			}else if($("#s_num").val()==""){
+				alert("사업자등록번호를 입력해주십시오.");
+				return false;
+			}else if($("#s_id").val()==""){
+				alert("판매자 ID를 입력해주십시오.");
+				return false;
+			}else if($("#staff_n").val()==""){
+				alert("담당자 이름을 입력해주십시오.");
+				return false;
+			}else if($("#staff_e").val()==""){
+				alert("담당자 이메일을 입력해주십시오.");
+				return false;
+			}else if($("#staff_t").val()==""){
+				alert("담당자 연락처를 입력해주십시오.");
+				return false;
+			}
+			
+			var url = "/myapp/storeEditOk";
+			var data = $("#storeEditOkForm").serialize();
+			
+			$.ajax({
+				type:'POST',
+				url: url,
+				data: data,
+				success:function(result){
+					if(result>0){
+						alert("수정이 완료됐습니다.");
+					}
+				},error: function(){
+					console.log("스토어 수정 에러");
+				}
+			});
+				
+		});
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		
@@ -11,8 +53,9 @@
 						<h6 class="m-0 font-weight-bold text-primary">STORE EDIT</h6>
 				</div>
 				<div class="card-body" style="text-align:center">
-		       			<form method="post" class="col-lg-10" action="/myapp/storeEditOk" enctype="multipart/form-data" style="display:inline-block">
+		       			<form method="post" id="storeEditOkForm" class="col-lg-10"  enctype="multipart/form-data" style="display:inline-block">
 		       				<br/><br/>
+		       				<input type="hidden" name="s_no" value="${vo.s_no}"/>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">스토어명</span>
 			       				<input type="text" name="s_name" class="form-control col-lg-6" value="${vo.s_name}"/>
@@ -46,14 +89,14 @@
 							<!-- 이미지 파일 업로드 -->
 							<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표 이미지</span>
 							<div class="col-lg-6" style="float:left">
-								<img src="/myapp/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/><br/>
+								<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:150px;height:150px; border-radius:70%;"/><br/>
 					            <input type="file" name="file">
 					        </div>
 						         
 							<br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/><br/>
 							<!-- 버튼 -->
 							<div class="text-center">
-			                    <button type="submit" class="btn btn-primary btn-icon-split">
+			                    <button id="storeEdit" class="btn btn-primary btn-icon-split">
 			                    	<span class="icon text-white-50"><i class="fas fa-check"></i>수정</span>
 			                    </button>
 		                    </div><br/>
