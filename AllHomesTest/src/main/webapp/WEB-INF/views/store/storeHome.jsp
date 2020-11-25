@@ -56,11 +56,11 @@
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
 	</ul>
 	<div class="row">
-		<div class="col" style="text-align:center;"><a href="#"><img src="${pageContext.request.contextPath}/resources/img/category/cate1.png"/><br/>&nbsp;&nbsp;메인1</a></div>
-		<div class="col" style="text-align:center;"><a href="#"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;&nbsp;메인2</a></div>
-		<div class="col" style="text-align:center;"><a href="#"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;&nbsp;메인3</a></div>
-		<div class="col" style="text-align:center;"><a href="#"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;&nbsp;메인4</a></div>
-		<div class="col" style="text-align:center;"><a href="#"><img src="${pageContext.request.contextPath}/resources/img/category/cate5.png"/><br/>&nbsp;&nbsp;메인5</a></div>
+		<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate1.png"/><br/>&nbsp;가구</a></div>
+		<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
+		<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
+		<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
+		<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate6.png"/><br/>&nbsp;DIY/공구</a></div>
 	</div>
 	<br/>
 	<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품리스트 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
