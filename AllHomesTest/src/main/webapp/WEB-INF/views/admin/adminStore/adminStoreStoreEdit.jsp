@@ -8,39 +8,39 @@
        	<div class="col-lg-12">
        		<div class="card shadow mb-4">
        			<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">STORE ADD</h6>
+						<h6 class="m-0 font-weight-bold text-primary">STORE EDIT</h6>
 				</div>
 				<div class="card-body" style="text-align:center">
-		       			<form method="post" class="col-lg-10" action="/myapp/storeAdd" enctype="multipart/form-data" style="display:inline-block">
+		       			<form method="post" class="col-lg-10" action="/myapp/storeEditOk" enctype="multipart/form-data" style="display:inline-block">
 		       				<br/><br/>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">스토어명</span>
-			       				<input type="text" name="s_name" class="form-control col-lg-6"/>
+			       				<input type="text" name="s_name" class="form-control col-lg-6" value="${vo.s_name}"/>
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">사업자등록번호</span>
-			       				<input type="text" name="s_num" class="form-control col-lg-6"/>
+			       				<input type="text" name="s_num" class="form-control col-lg-6" value="${vo.s_num}"/>
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">판매자 ID</span>
-			       				<input type="text" name="s_id" class="form-control col-lg-6"/>
+			       				<input type="text" name="s_id" class="form-control col-lg-6" value="${vo.s_id }"/>
 			       				<a href="" class="btn alert-secondary">검색</a>
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">담당자 이름</span>
-			       				<input type="text" name="staff_n" class="form-control col-lg-6"/>
+			       				<input type="text" name="staff_n" class="form-control col-lg-6" value="${vo.staff_n}"/>
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">담당자 Email</span>
-			       				<input type="text" name="staff_e" class="form-control col-lg-6"/>
+			       				<input type="text" name="staff_e" class="form-control col-lg-6" value="${vo.staff_e}"/>
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">담당자 Tel</span>
-			       				<input type="text" name="staff_t" class="form-control col-lg-6"/>
+			       				<input type="text" name="staff_t" class="form-control col-lg-6" value="${vo.staff_t}"/>
 							</p>
 							<p>
 			       				<span class="col-lg-4" style="float:left">홈페이지</span>
-			       				<input type="text" name="s_homepage" class="form-control col-lg-6"/>
+			       				<input type="text" name="s_homepage" class="form-control col-lg-6" value="${vo.s_homepage}"/>
 							</p>
 							
 							<!-- 이미지 파일 업로드 -->
@@ -54,7 +54,7 @@
 							<!-- 버튼 -->
 							<div class="text-center">
 			                    <button type="submit" class="btn btn-primary btn-icon-split">
-			                    	<span class="icon text-white-50"><i class="fas fa-check"></i>추가</span>
+			                    	<span class="icon text-white-50"><i class="fas fa-check"></i>수정</span>
 			                    </button>
 		                    </div><br/>
 		                    <!-- 버튼 끝 -->

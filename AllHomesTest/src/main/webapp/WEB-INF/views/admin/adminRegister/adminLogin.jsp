@@ -24,9 +24,9 @@
                                     </div>
                                     
                                     <!-- 로그인 폼 -->
-                                    <form method="post" id="login" action="" class="user">
+                                    <form method="post" id="login" action="/myapp/adminLogin" class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                 id="userid" name="userid" aria-describedby="emailHelp"
                                                 placeholder="Enter Admin ID...">
                                         </div>
@@ -35,11 +35,8 @@
                                                 id="userpwd" name="userpwd" placeholder="Password">
                                         </div>
                                         
-                                        <a href="index.html" class="btn btn-user btn-block" style="background-color:#EE8374; color:white">
-                                            Login
-                                        </a>
-                                        
-                                        
+                                        <button type="submit" class="btn btn-user btn-block" style="background-color:#EE8374; color:white">Login</button>
+                                       
                                     </form>
                                     <hr>
                                     <div class="text-center">
