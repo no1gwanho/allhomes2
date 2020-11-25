@@ -23,7 +23,7 @@
 				<h5>All Homes</h5>
 				<ul class="list-unstyled components mb-5">
 					<li>
-						<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인1</button></a>
+						<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가구</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu1">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
@@ -31,7 +31,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인2</button></a>
+						<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">홈데코</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu2">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
@@ -39,7 +39,7 @@
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인3</button></a>
+			        	<a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가전</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu3">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
@@ -47,7 +47,7 @@
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인4</button></a>
+			        	<a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">수납</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu4">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
@@ -55,21 +55,13 @@
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인5</button></a>
+			        	<a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">DIY/공구</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu5">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리3</button></a></li>
 						</ul>
 					</li>
-					<li>
-			        	<a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">메인6</button></a>
-						<ul class="collapse list-unstyled" id="pageSubmenu6">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리3</button></a></li>
-						</ul>
-					</li>										
 				</ul>
 			</nav>
 		</div>
