@@ -32,7 +32,7 @@
 	<div class="row">
 		<div class="col-3">
 			<a href="/myapp/storeDetail">
-				<img src="${pageContext.request.contextPath}/resources/img/tb01.png"/><br/>
+				<img src="${pageContext.request.contextPath}/resources/img/pd/tb01.png"/><br/>
 				[스토어명] / 상품명<br/>
 				할인율 / 가격<br/>
 				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>

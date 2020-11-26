@@ -1,18 +1,40 @@
 package com.allhomes.myapp.store;
 
+import java.util.List;
+
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.servlet.ModelAndView;
+
+import com.allhomes.myapp.product.PagingVO;
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.product.ProductVO;
 
 @Controller
 public class StoreController {
-
-	@RequestMapping("/storeHome")
-	public String storeHome() {
-
-		return "store/storeHome";
-	}
+	@Autowired 
+	SqlSession sqlSes;
+	 
+	@Autowired 
+	DataSourceTransactionManager transactionManager;
 	
+	@RequestMapping("/storeHome")	
+	public ModelAndView storeHome(PagingVO pVO) { 
+		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
+		List<ProductVO> list = dao.productAllList(pVO);
+	  
+		ModelAndView mav = new ModelAndView(); mav.addObject("list", list);
+		mav.setViewName("store/storeHome");
+		
+		return mav; 
+	 }
+
 	@RequestMapping("/storeCategory")
 	public String storeCate() {
 			
@@ -26,8 +48,14 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/storeDetail")
-	public String storeDetail(){
+	public ModelAndView storeDetail(int pd_no){
 		
-		return "store/storeDetail";
+		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
+		ProductVO vo = dao.selectProduct(pd_no);
+		
+		ModelAndView mav = new ModelAndView(); mav.addObject("vo", vo);
+		mav.setViewName("store/storeDetail");
+		
+		return mav;
 	}	
 }

@@ -59,7 +59,7 @@
 				<h6>집들이</h6>
 			</div>
 			<div class="col-sm-3" style="text-align:right;">
-				<h6><a href="/myapp/blogHome">더보기</a></h6>
+				<h6><a href="/myapp/homeboardHome">더보기</a></h6>
 			</div>
 		</div>
 		<hr/>

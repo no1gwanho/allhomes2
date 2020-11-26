@@ -77,42 +77,44 @@
 		</div>
 		
 		<!-- 상품명/재고/설명/옵션 -->
-		<div class="col-md-6">
-			<div class="product-details">
-				Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
-				<h2 class="product-name">상품명</h2>
-				<div>
-					<div class="product-ration">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
+		<form method="post" action="/myapp/">
+			<div class="col-md-6">
+				<div class="product-details">
+					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
+					<h2 class="product-name">상품명</h2>
+					<div>
+						<div class="product-ration">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
 					</div>
-					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
-				</div>
-				<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
-				<span class="product-available">재고</span>
-				<p>간단한 설명</p>
-				<div class="product-options">
-					<label>
-						옵션 : 
-						<select class="input-select">
-							<option value="1">옵션1</option>
-							<option value="2">옵션2</option>
-							<option value="3">옵션3</option>	
-						</select>
-					</label>
-				</div>
-				<div class="add-to-cart">
-					<div class="qty-label">
-						수량 : <input type="number"/>
+					<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
+					<span class="product-available">재고</span>
+					<p>간단한 설명</p>
+					<div class="product-options">
+						<label>
+							옵션 : 
+							<select class="input-select">
+								<option value="1">옵션1</option>
+								<option value="2">옵션2</option>
+								<option value="3">옵션3</option>	
+							</select>
+						</label>
 					</div>
-					<button id="cart" class="btn" style="margin-top:15px;"><i class="fa fa-shopping-cart"></i> 장바구니</button>
-					<button id="buy" class="btn" style="margin-top:15px;"><img src="<%=request.getContextPath()%>/resources/img/icon/card.png">&nbsp;바로구매</button>
-				</div>
-			</div>			
-		</div>
+					<div class="add-to-cart">
+						<div class="qty-label">
+							수량 : <input type="number"/>
+						</div>
+						<i class="fa fa-shopping-cart"></i><input type="submit" id="cart" class="btn" style="margin-top:15px;" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="submit" id="buy" class="btn" style="margin-top:15px;" value="바로구매"/>
+					</div>
+				</div>			
+			</div>
+		</form>
 	</div>
 	<br/>
 	<div class="row">

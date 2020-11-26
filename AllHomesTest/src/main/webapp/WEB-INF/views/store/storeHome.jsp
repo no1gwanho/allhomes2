@@ -81,9 +81,31 @@
 		</div>
 	</div>
 	<hr/>
-	<div class="row">
+<%-- 	<c:forEach var="vo" items="${list}">
+		<div class="row">
+			<div class="col-3">
+				<a href="/myapp/storeDetail?no=${vo.pd_no}">
+					<img src="${vo.main_img}"/><br/>
+					[${vo.s_no }] ${vo.pd_name }<br/>
+					<c:if test="${vo.discount != 0}">
+						${vo.price - vo.discount} <del>${vo.price }</del><br/> 
+					</c:if>
+					<c:if test="${vo.discount == 0 }">
+						${vo.price }<br/>
+					</c:if>
+					<h6>별 / 리뷰&nbsp;&nbsp;
+					<c:if test="${vo.status!=null }">
+						<span class="badge badge-secondary">${vo.status }</span>
+					</c:if>
+					</h6>
+				</a>
+			</div>
+		</div>				
+	</c:forEach> --%>
+ 	<div class="row">
 		<div class="col-3">
 			<a href="/myapp/storeDetail">
+				
 				<img src="${pageContext.request.contextPath}/resources/img/pd/tb01.png"/><br/>
 				[스토어명] / 상품명<br/>
 				할인율 / 가격<br/>
@@ -214,7 +236,7 @@
 		</div>
 	</div>
 	<br/>
-<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 페이징 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+	<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 페이징 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 	<ul class="pagination justify-content-center">
 		<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
 		<li class="page-item"><a class="page-link" href="#">1</a></li>

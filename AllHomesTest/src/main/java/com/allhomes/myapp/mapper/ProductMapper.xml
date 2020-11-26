@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
+
+<mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
   	<!-- 모든 제품 조회 -->
   	<select id="productAllList" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc
