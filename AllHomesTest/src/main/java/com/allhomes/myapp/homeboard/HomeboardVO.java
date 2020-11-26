@@ -55,6 +55,9 @@ public class HomeboardVO {
 	}
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
+		
+		
+		
 	}
 	
 	public String getUserid() {
