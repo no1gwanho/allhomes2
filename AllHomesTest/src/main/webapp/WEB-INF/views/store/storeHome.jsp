@@ -104,8 +104,7 @@
 	</c:forEach> --%>
  	<div class="row">
 		<div class="col-3">
-			<a href="/myapp/storeDetail">
-				
+			<a href="/myapp/storeDetail">				
 				<img src="${pageContext.request.contextPath}/resources/img/pd/tb01.png"/><br/>
 				[스토어명] / 상품명<br/>
 				할인율 / 가격<br/>
