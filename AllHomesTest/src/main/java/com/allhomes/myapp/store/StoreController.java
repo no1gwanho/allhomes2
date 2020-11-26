@@ -25,9 +25,9 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome(PagingVO pVO) { 
+	public ModelAndView storeHome() { 
 		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
-		List<ProductVO> list = dao.productAllList(pVO);
+		List<ProductVO> list = dao.productAllList();
 	  
 		ModelAndView mav = new ModelAndView(); mav.addObject("list", list);
 		mav.setViewName("store/storeHome");
@@ -48,7 +48,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(int pd_no){
+/*	public ModelAndView storeDetail(int pd_no){
 		
 		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
 		ProductVO vo = dao.selectProduct(pd_no);
@@ -57,5 +57,9 @@ public class StoreController {
 		mav.setViewName("store/storeDetail");
 		
 		return mav;
-	}	
+	}	*/
+	public String storeDetail() {
+		
+		return "store/storeDetail";
+	}
 }
