@@ -1,4 +1,4 @@
-package com.allhomes.myapp.store;
+package com.allhomes.myapp.product;
 
 public class ProductVO {
 	private int pd_no;			// 제품번호
@@ -10,7 +10,14 @@ public class ProductVO {
 	private int stock;			// 재고
 	private String status;		// 상태(품절임박, 입고예정 등)
 	private String sub_c;		// 서브카테고리
+	private String pd_img;      // 제품 설명사진(여러개 가능)
 	
+	public String getPd_img() {
+		return pd_img;
+	}
+	public void setPd_img(String pd_img) {
+		this.pd_img = pd_img;
+	}
 	public int getPd_no() {
 		return pd_no;
 	}
