@@ -1,9 +1,16 @@
 package com.allhomes.myapp.register;
 
 public class RegisterVO {
+	private int m_no;
 	private String userid;
 	private String userpwd;
 	private String username;
+	private String nickname;
+	private String m_pic;
+	private String tel;
+	private String email;
+	private String regdate;
+	private String regcode;
 	
 	
 	public String getUserid() {
@@ -23,6 +30,48 @@ public class RegisterVO {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	public String getRegcode() {
+		return regcode;
+	}
+	public void setRegcode(String regcode) {
+		this.regcode = regcode;
 	}
 	
 	

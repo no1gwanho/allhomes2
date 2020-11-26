@@ -51,71 +51,25 @@
 							<th>이름</th>
 							<th>이메일</th>
 							<th>Tel</th>
-							<th>생년월일</th>
+							<th>가입일</th>
 							<th>비밀번호</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
+						<c:forEach var="vo" items="${list}">
+							<tr onClick="location.href='/myapp/adminMemberDetail?m_no=${vo.m_no}'">
+								<td>${vo.m_no}</td>
+								<td>
+									<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
+								</td>
+								<td>${vo.userid}</td>
+								<td>${vo.username}</td>
+								<td>${vo.email}</td>
+								<td>${vo.tel}</td>
+								<td>${vo.regdate}</td>
+								<td>${vo.userpwd}</td>
+							</tr>
+						</c:forEach>
 						</tbody>	
 					</table>
 					

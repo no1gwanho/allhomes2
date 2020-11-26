@@ -1,10 +1,6 @@
 package com.allhomes.myapp.admin;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.FileHandler;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,18 +58,7 @@ public class AdminController {
 		return "admin/adminRegister/adminForgotPassword";
 	}
 	
-	//회원관리 페이지로 이동
-	@RequestMapping("/adminMemberMain")
-	public String adminMember() {
-		return "admin/adminMember/adminMemberMain";
-	}
 	
-	
-	//회원관리 회원정보 상세 페이지로 이동
-	@RequestMapping("/adminMemberDetail")
-	public String MemberDetail() {
-		return "admin/adminMember/adminMemberDetail";
-	}
 	
 	//매출관리 메인 페이지로 이동-sales
 	@RequestMapping("/adminSalesMain")
