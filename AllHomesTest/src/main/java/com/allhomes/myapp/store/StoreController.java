@@ -1,29 +1,16 @@
 package com.allhomes.myapp.store;
 
-import java.util.List;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class StoreController {
-	@Autowired
-	SqlSession sqlSes;
-	
+
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome() {
-		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class);
-		List<ProductVO> list = dao.productAllList();
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("store/storeHome");
-		
-		return mav;		
+	public String storeHome() {
+
+		return "store/storeHome";
 	}
 	
 	@RequestMapping("/storeCategory")
@@ -39,14 +26,8 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(int pd_no){
-		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class);
-		ProductVO vo = dao.selectProduct(pd_no);
+	public String storeDetail(){
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
-		mav.setViewName("store/storeDetail");
-		
-		return mav;
+		return "store/storeDetail";
 	}	
 }
