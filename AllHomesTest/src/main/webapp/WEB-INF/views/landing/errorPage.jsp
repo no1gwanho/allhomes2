@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>404 HTML Template by Colorlib</title>
+	<title>올홈즈</title>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.css" type="">
 	<script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
 

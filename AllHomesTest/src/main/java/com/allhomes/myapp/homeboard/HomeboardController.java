@@ -84,8 +84,15 @@ public class HomeboardController {
 
 	
 	@RequestMapping("/homeboardView")
-	public String homeboardView() {
-		return "/homeboard/homeboardView";
+	public ModelAndView homeboardView(int b_no) {
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		HomeboardVO vo = dao.homeboardSelect(b_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("homeboard/homeboardView");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/homeboardSearch")
