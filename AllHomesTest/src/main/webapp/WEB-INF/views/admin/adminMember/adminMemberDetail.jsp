@@ -16,7 +16,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-2">
+		<div class="col-lg-3">
             <div class="card shadow mb-4">
                   <div class="card-header py-3">
                       <h6 class="m-0 font-weight-bold text-primary">Member</h6>
@@ -26,10 +26,12 @@
                             <img src="/myapp/resources/img/admin/user_basic.png" style="width:100px;height:100px"/>
                             <br/><br/><hr/><br/>
                         	
-			                <p><label class="col-4">ID</label>seran11<p>
-			               	<p><label class="col-4">이름</label>권세란<p>
-			               	<p><label class="col-4">Email</label>seran11@nate.com<p>
-			               	<p><label class="col-4">Tel</label>010-1231-1231<p>
+			                <p><label class="col-4">ID</label>${mVo.userid}<p>
+			               	<p><label class="col-4">이름</label>${mVo.username}<p>
+			               	<p><label class="col-4">닉네임</label>${mVo.nickname}<p>
+			               	<p><label class="col-4">Email</label>${mVo.email}<p>
+			               	<p><label class="col-4">Tel</label>${mVo.tel}<p>
+			               	<p><label class="col-4">등록일</label>${mVo.regdate}<p>
 		                    
 							<hr/><br/>
 							
@@ -42,7 +44,7 @@
             </div>                     
        </div><!-- col-lg-4 끝 -->
 
-       <div class="col-lg-10">
+       <div class="col-lg-9">
 			<div><!-- 검색옵션 -->
 	            <select class="selectpicker">
 	               <option value="" disabled selected>option</option>

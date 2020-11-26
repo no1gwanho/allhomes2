@@ -10,6 +10,11 @@ public interface RegisterDaoImp {
 	
 	//전체 회원 조회
 	public List<RegisterVO> memberAllSelect();
+	//전체 회원 정렬
+	public List<RegisterVO> memberAllSelectOrder(String val);
+	//회원번호로 회원 조회
+	public RegisterVO memberSelect(int m_no);
+	
 	
 
 }

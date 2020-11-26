@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
+<script>
+	$(function(){
+		$("#orderMember").click(function(){
+			var order = $("#orderVal option:selected").val()+" "+$("#order option:selected").val();
+			alert(order);
+			
+			location.href="/myapp/adminMemberMainOrder?val="+order;
+		});
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
@@ -18,21 +28,21 @@
 			</div> -->
 			
 			<div>
-	              <select class="selectpicker">
+	              <select id="orderVal" class="selectpicker">
 	               		<optgroup label="검색 필터"> 
-		                   <option value="userid">ID</option>
-		                   <option value="username">이름</option>
-		                   <option value="regdate">등록일</option>
+		                   <option name="order" value="userid">ID</option>
+		                   <option name="order" value="username">이름</option>
+		                   <option name="order" value="regdate">가입일</option>
 	                   </optgroup>
 	               </select>
-	               <select class="selectpicker">
+	               <select id="order" class="selectpicker">
 	               		<optgroup label="정렬">
-		                   <option value="username">오름차순</option>
-		                   <option value="regdate">내림차순</option>
+		                   <option name="" value="asc">오름차순</option>
+		                   <option name="" value="desc">내림차순</option>
 	                   </optgroup>
 	               </select>
 	               
-	               <a href="#" class="btn alert-light"><span class="text">정렬</span></a>
+	               <button id="orderMember" class="btn alert-light"><span class="text">정렬</span></button>
 	               
 	        </div>
 	        <div class="my-2"></div>
