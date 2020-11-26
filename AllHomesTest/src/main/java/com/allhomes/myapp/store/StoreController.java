@@ -13,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class StoreController {
 	@Autowired
 	SqlSession sqlSes;
-	@Autowired
-	DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("/storeHome")
 	public ModelAndView storeHome() {
