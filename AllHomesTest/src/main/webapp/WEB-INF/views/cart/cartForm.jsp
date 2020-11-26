@@ -31,8 +31,8 @@
 				총 배송비&nbsp;&nbsp;0원<br/>
 				총 할인금액&nbsp;&nbsp;3000원<br/>
 				<b>결제금액&nbsp;&nbsp;125,800</b><br/>
-				<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;">상품구매</button></a>
-				<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;">위시리스트</button>
+				<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-top:15px;">상품구매</button></a>
+				<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-top:15px;">위시리스트</button>
 			</div>
 		</div>
 	</div>
