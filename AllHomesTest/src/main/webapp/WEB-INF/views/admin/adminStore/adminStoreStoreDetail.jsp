@@ -110,38 +110,20 @@
 								<th>카테고리</th>
 								<th>재고</th>
 								<th>상태</th>
-								<th>등록일</th>
 								<th>판매량</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr onClick="location.href=''">
-								<td>6234251</td>
-								<td>빈티지 체크 커튼</td>
-								<td>홈데코</td>
-								<td>142</td>
-								<td>입고</td>
-								<td>2019-12-21</td>
-								<td>521</td>
-							</tr>
-							<tr onClick="location.href=''">
-								<td>6234251</td>
-								<td>빈티지 체크 커튼</td>
-								<td>홈데코</td>
-								<td>142</td>
-								<td>입고</td>
-								<td>2019-12-21</td>
-								<td>521</td>
-							</tr>
-							<tr onClick="location.href=''">
-								<td>6234251</td>
-								<td>빈티지 체크 커튼</td>
-								<td>홈데코</td>
-								<td>142</td>
-								<td>입고</td>
-								<td>2019-12-21</td>
-								<td>521</td>
-							</tr>
+							<c:forEach var="pVo" items="${pVo}">
+								<tr>
+									<td>${pVo.pd_no}</td>
+									<td>${pVo.pd_name}</td>
+									<td>${pVo.sub_c}</td>
+									<td>${pVo.stock}</td>
+									<td>${pVo.status}</td>
+									<td>521</td>
+								</tr>
+							</c:forEach>
 						</tbody>	
 					</table><!-- table 제품 테이블 끝 -->
 					

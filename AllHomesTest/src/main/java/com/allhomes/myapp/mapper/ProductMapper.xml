@@ -2,18 +2,30 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.allhomes.myapp.store.ProductDaoImp">
-  	<select id="productAllList" resultType="com.allhomes.myapp.store.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product order by pd_no desc
+  <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
+  	<!-- 모든 제품 조회 -->
+  	<select id="productAllList" resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc
   	</select>
-  	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.store.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product where pd_no=#{param1}
+  	<!-- 스토어번호로 제품 검색 -->
+  	<select id="selectStoreProduct" resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c,pd_img from product where s_no=#{s_no}
   	</select>
-  	
-  	<update id="editProduct" parameterType="com.allhomes.myapp.store.ProductVO">
+  	<!-- 제품 번호로 검색 -->
+  	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c,pd_img from product where pd_no=#{param1}
+  	</select>
+  	<!-- 제품 추가 -->
+  	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
+  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img)
+  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status}, #{sub_c}, #{pd_img})
+  	</insert>
+  	<!-- 제품 수정 -->
+  	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set pd_no=#{pd_no}, s_no=#{s_no}, pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		main_img=#{main_img}, stock=#{stock}, status=#{status}, sub_c=#{sub_c} 
+  		main_img=#{main_img}, stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_img=#{pd_img}
   	</update>
+  	<!-- 제품 삭제 -->
   	<delete id="delProduct" parameterType="int">
   		delete from product where pd_no=#{param1}
   	</delete>

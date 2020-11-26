@@ -6,32 +6,26 @@
 </style>
 
 <div class="container-fluid">
-	    <!-- 검색 옵션 -->
-		<div>
-              <select class="mdb-select md-form mb-4 initialized" id="select">
-                   <option value="" disabled selected>option</option>
-                   <option value="1">스토어명 순</option>
-                   <option value="2">입점일 순</option>
-                   <option value="3">제품 순</option>
-               </select>
-        </div>
-            
-            
-		<!-- 버튼 -->
+	    <!-- 버튼 -->
 		<a href="/myapp/storeAdd" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                   <i class="fas fa-check"></i>
-                </span>
-           <span class="text">추가</span>
+            <span class="icon text-white-50">
+                 <i class="fas fa-check"></i>
+            </span>
+           	<span class="text">추가</span>
         </a>
+        <!-- 검색 옵션 -->
+        <select class="col-lg-2 form-control mdb-select md-form mb-4 initialized" id="select" style="float:right">
+          	<option value="" disabled selected>option</option>
+            <option value="1">스토어명 순</option>
+            <option value="2">입점일 순</option>
+            <option value="3">제품 순</option>
+        </select>
 		
-		<div class="mb-2"></div>
-		<div class="card shadow mb-4">
+		<div class="card shadow mb-4 col-lg-12">
 			<div class="card-body" style="text-align:center">	
 				<table style="cursor:pointer;" class="table table-hover">
 					<thead>
 					<tr>
-						
 						<th>번호</th>
 						<th>스토어명</th>
 						<th>사업자등록번호</th>
