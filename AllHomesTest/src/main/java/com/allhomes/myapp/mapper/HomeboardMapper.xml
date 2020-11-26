@@ -3,10 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
+  	<!-- 글 작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
   	  	insert into homeboard
   	  	(b_no, title, thumbnail, content, theme, hashtag, userid, nickname, hit, scrap, writedate, ip) values
   	  	(homeboard_sq.nextval, #{title}, #{thumbnail}, #{content}, #{theme}, #{hashtag}, #{userid}, #{nickname}, 0, 0, sysdate, #{ip})
-  	  	
   	</insert>
+  	
+  	
 </mapper>

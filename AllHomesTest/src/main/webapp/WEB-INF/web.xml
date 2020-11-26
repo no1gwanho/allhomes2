@@ -112,4 +112,23 @@
 	    </param-value>
 	</context-param>
 	<!-- bcrypt -->
+	
+	<!-- 에러페이지 설정 ===시작====-->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/views/landing/errorPage.jsp</location>
+	</error-page>
+		
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/landing/errorPage404.jsp</location>
+	</error-page>
+		
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/landing/errorPage500.jsp</location>
+	</error-page>
+	
+	
+	
 </web-app>

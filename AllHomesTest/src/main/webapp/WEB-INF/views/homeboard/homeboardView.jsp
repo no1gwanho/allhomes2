@@ -36,21 +36,15 @@
 <div class="row">
 <div class="col-9" style="border-right:0.3px solid lightgray">
 
-<h3>비오는 날의 침실</h3>
-<h6>2020-10-12 13:14 질문자:아이디 조회수:3회 스크랩:10회 </h6>
+<h3>{vo.title}</h3>
+<h6>{vo.writedate} 2020-10-12 13:14 작성자:{vo.userid} 조회수:{vo.hit} 스크랩:{vo.scrap}회 </h6>
 
 <br/>
 	<div style="width:80%;" >
 		<div class="homeboardImages">
 		<img class="homeboardImages" src="<%=request.getContextPath() %>/resources/img/banner/banner2.png"/><br/>
 		</div>
-		<p>
-		이동통신 3사와 정부가 주파수 재할당 대가 공개 설명회에서 한 치의 견해차도 좁히지 못한 가운데, 적정한 산정방식이 적용되지 않을 경우 이통사 투자가 위축되고 역효과로 소비자 통신비 부담만 증가하게 될 것이라는 지적이 제기됐다.
-		
-		정부는 이통 3사가 5세대 이동통신(5G)에 적극 투자하는 조건으로 주파수 재할당 대가를 낮춰주겠다는 조건을 내걸었다.
-		
-		반면 이통사는 롱텀에볼루션(LTE) 주파수 재할당에 5G 투자를 연계하는 것은 ‘위법’ 소지가 있으며, 정부가 현실적인 5G 투자 계획과 동떨어진 과도한 수준을 요구하고 있다며 거세게 반발했다.
-		</p>
+		{vo.content}
 		<div id="hashtag">
 		<a href="#" class="badge badge-light">#해시태그</a>
 		<a href="#" class="badge badge-light">#해시태그</a>

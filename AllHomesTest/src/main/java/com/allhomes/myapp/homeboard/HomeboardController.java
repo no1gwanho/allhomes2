@@ -72,8 +72,9 @@ public class HomeboardController {
 		int result = dao.homeboardInsert(vo);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
 		if(result>0) {
-			mav.setViewName("redirect:homeboardHome");
+			mav.setViewName("redirect:homeboardView?{vo.b_no}");
 		}else {
 			mav.setViewName("homeboard/result");
 		}
