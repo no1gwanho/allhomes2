@@ -29,6 +29,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 	<!-- POST방식의 접속에 대한 한글인코딩 (UTF-8)-->
 	<filter>
 		<description></description>
@@ -50,9 +51,7 @@
 		<filter-name>SpringEncodeFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!-- POST방식의 접속에 대한 한글인코딩 (UTF-8)-->
-	
+		
 	<!-- 원하는 페이지에 include -->
 	<jsp-config>
 		<jsp-property-group>
