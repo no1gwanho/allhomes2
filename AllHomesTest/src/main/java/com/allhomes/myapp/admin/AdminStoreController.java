@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.store.StoreDaoImp;
 import com.allhomes.myapp.store.StoreVO;
 
@@ -145,33 +147,23 @@ public class AdminStoreController {
 	//스토어관리-스토어 상세 보기로 이동
 	@RequestMapping("/adminStoreDetail")
 	public ModelAndView StoreDetail(@RequestParam("s_no") int s_no) {
-		//클릭한 스토어 정보 가지고 오기
 		
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
 		StoreVO vo = dao.storeSelect(s_no);
+		
+		//스토어의 제품 가지고 오기
+		List<ProductVO> pVo = pDao.selectStoreProduct(s_no);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("vo", vo);
+		mav.addObject("pVo", pVo);
 		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
 		return mav;
 	}
 		
-	//스토어관리-제품 추가 페이지로 이동
-	@RequestMapping("/productAdd")
-	public ModelAndView productAdd(@RequestParam("s_no")int s_no) { //스토어번호 가져오기 
-		
-		//서브카테고리 값 가져와서 세팅
-		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		List<AdminStoreSubCategoryVO> subList = dao.storeSubCategoryAll(); //서브카테고리명
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("subList", subList);//서브카테고리명 세팅
-		mav.addObject("s_no", s_no);//스토어 번호 세팅
-		mav.setViewName("admin/adminStore/adminStoreProductAdd");
-		return mav;
 	
-	}
-		
 		
 	//스토어-스토어 추가 페이지로 이동
 	@RequestMapping("/storeAdd")

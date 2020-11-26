@@ -17,6 +17,11 @@
 	.homeboardImages>img{
 		width:90%
 	}
+	
+	.contentDiv>p>img{
+		max-width:90%;
+		max-height:90%;
+	}
 		
 </style>
 
@@ -24,34 +29,27 @@
 <div class="container">
 
 
+<br/>
+<br/>
 
 
-<nav aria-label="breadcrumb" style="background-color:none;">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/homeboard/homeboardMain">집들이</a></li>
-    <li class="breadcrumb-item active" aria-current="page">집들이 글보기</li>
-  </ol>
-</nav>
 
 <div class="row">
 <div class="col-9" style="border-right:0.3px solid lightgray">
-
-<h3>{vo.title}</h3>
-<h6>{vo.writedate} 2020-10-12 13:14 작성자:{vo.userid} 조회수:{vo.hit} 스크랩:{vo.scrap}회 </h6>
-
+<h6 style="color:gray">테마 > <a href="#">${vo.theme}</a></h6>
+<h3>${vo.title}</h3>
+<hr/>
 <br/>
-	<div style="width:80%;" >
-		<div class="homeboardImages">
-		<img class="homeboardImages" src="<%=request.getContextPath() %>/resources/img/banner/banner2.png"/><br/>
-		</div>
-		{vo.content}
-		<div id="hashtag">
-		<a href="#" class="badge badge-light">#해시태그</a>
-		<a href="#" class="badge badge-light">#해시태그</a>
-		<a href="#" class="badge badge-light">#해시태그</a>
-		<a href="#" class="badge badge-light">#해시태그</a>
-		</div>
+	<div class="contentDiv">
+		${vo.content}
 	</div>
+	<h6 style="font-size:12px;color:gray;"> ${vo.writedate} ⊙ 조회수 ${vo.hit} ⊙ 스크랩 ${vo.scrap}회</h6>
+	<div id="hashtag">
+			<c:forEach var="i" items="${hashtagList}">
+				<a href="#" class="badge badge-light"><span>#</span>${i}</a>
+			</c:forEach>
+	</div>
+	
 	
 	<hr/>
 	<div style="margin:20px;">
@@ -125,9 +123,9 @@
 	
 
 	<div class="col-3">
-	<i class="fas fa-user-circle fa-3x"></i>&nbsp; <a href="#">유저아이디</a> &nbsp;&nbsp;
+	<i class="fas fa-user-circle fa-3x"></i>&nbsp; <a href="#">${vo.userid }</a> &nbsp;&nbsp;
 	<br/><br/>
-	<button class="btn btn-lg" style="background-color:#E98374">팔로우</button>&nbsp;<button class="btn btn-secondary btn-lg"><i class="fas fa-file"></i>스크랩하기</button><br/>
+	<button class="btn btn-secondary" style="background-color:#E98374"><i class="fas fa-file">&nbsp;</i>스크랩하기</button><br/>
 	카카오 | 페이스북 | 이메일로 보내기 버튼
 	<br/><br/>
 	

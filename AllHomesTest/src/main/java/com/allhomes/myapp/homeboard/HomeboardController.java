@@ -1,27 +1,22 @@
 package com.allhomes.myapp.homeboard;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.allhomes.myapp.admin.HomeBoardThemeDaoImp;
+import com.allhomes.myapp.admin.HomeBoardThemeVO;
 
 @Controller
 public class HomeboardController {
@@ -51,35 +46,40 @@ public class HomeboardController {
 		return "/homeboard/homeboardTheme";
 	}
 	
+	
 	@RequestMapping("/homeboardWrite")
-	public String homeboardWrite() {
-		return "/homeboard/homeboardWrite";
+	public ModelAndView homeboardWrite() {
+		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //테마 리스트 불러오기 
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("themeList", themeList);
+		mav.setViewName("/homeboard/homeboardWrite");
+		
+		return mav;
 	}
-	
-	
 
-	@RequestMapping(value="/homeboardWriteOk", method =  {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/homeboardWriteOk", method = RequestMethod.POST)
 	public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
 		vo.setIp(r.getRemoteAddr());
 		vo.setUserid("hong1234"); //임시 아이디
 		vo.setNickname("길동이"); //임시 닉네임
-		vo.setTheme("모던"); //임시테마
 		vo.setThumbnail("ThumnailTest"); //임시썸네일
-		vo.setHashtag("hashtag");//임시해시태그
 		
-		
+
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		int result = dao.homeboardInsert(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		
 		if(result>0) {
-			mav.setViewName("redirect:homeboardView?{vo.b_no}");
+			mav.setViewName("redirect:homeboardHome");
+			
 		}else {
-			mav.setViewName("homeboard/result");
+			mav.setViewName("/homeboard/result");
 		}
 		return mav;
-
 	}
 
 	
@@ -88,7 +88,18 @@ public class HomeboardController {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
 		
+		//해시태그 전체 가져와서 자르기
 		ModelAndView mav = new ModelAndView();
+		
+		String hashtag = vo.getHashtag(); //System.out.println(hashtag);
+		if(hashtag!=null) {
+			String hashtagStr[] = hashtag.split(",");
+			List<String> hashtagList = new ArrayList<String>();
+			hashtagList = Arrays.asList(hashtagStr);
+			mav.addObject("hashtagList", hashtagList);
+		
+		}
+					
 		mav.addObject("vo", vo);
 		mav.setViewName("homeboard/homeboardView");
 		

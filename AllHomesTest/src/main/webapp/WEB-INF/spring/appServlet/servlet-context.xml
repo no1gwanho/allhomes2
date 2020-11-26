@@ -11,8 +11,10 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/storeImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\upload\storeImg/"/>
-	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
+	<resources mapping="/storeImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\storeImg/"/>
+	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
+	<resources mapping="/productImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\productImg\"/>
+	<resources mapping="/productMainImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\productMainImg\"/>
 
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

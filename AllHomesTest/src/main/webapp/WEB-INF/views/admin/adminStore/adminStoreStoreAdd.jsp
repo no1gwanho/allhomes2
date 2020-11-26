@@ -25,7 +25,7 @@
 				return false;
 			}
 			
-			var url = "/myapp/storeAdd";
+			var url = "/myapp/storeAddOk";
 			var data = $("#storeAddForm").serialize();
 			
 			$.ajax({
