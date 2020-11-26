@@ -1,4 +1,4 @@
-package com.allhomes.myapp.store;
+package com.allhomes.myapp.product;
 
 import java.util.List;
 

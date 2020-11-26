@@ -1,4 +1,4 @@
-package com.allhomes.myapp.store;
+package com.allhomes.myapp.product;
 
 public class ProductVO {
 	private int pd_no;			// 제품번호
