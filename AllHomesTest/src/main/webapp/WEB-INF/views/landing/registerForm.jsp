@@ -26,7 +26,7 @@
 		$("#regFrm").submit(function(){
 			//아이디 검사
 			if($("#userid").val()==""){
-				alert("아이디를 입력하세요");
+				alert("아이디를 입력해주세요");
 				return false;
 			}
 			/*if($("#idStatus").val()=="N"){
@@ -70,16 +70,44 @@
  	
  		<label for="userid">아이디</label>
  		<input type="text" name="userid" id="userid" placeholder="아이디입력" class="form-control"/>
+ 		
  		<label for="userpwd"> 비밀번호</label>
  		<input type="password" name="userpwd" id="userpwd" class="form-control" placeholder="비밀번호" />
+ 		
  		<label for="userpwd">비밀번호 확인</label>
  		<input type="password" name="userpwdChk" id="userpwdChk" class="form-control" placeholder="비밀번호 확인" />
  		
  		<label for="username">이름</label> 
  		<input type="text" name="username" id="username" placeholder="본명으로 입력해주세요" class="form-control"/>
+		
+		<label for="nickname">닉네임</label> 
+ 		<input type="text" name="nickname" id="nickname" placeholder="3~10자이내" class="form-control"/>
+		
 		<label for="email">이메일</label>
  		<input type="text" name="email" value="이메일" class="form-control"/>
+			
 		<br/>
+			<div class="btn-group">  	<!-- dropdown 버튼 세팅 -->
+	 			 <input type="text" name="email2" placeholder="직접입력" class="form-control"/>
+	 			 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+	   			
+	   			</button>
+			  	
+			  	<div class="dropdown-menu">
+				    <a class="dropdown-item" href="#">Action</a>
+				    <a class="dropdown-item" href="#">Another action</a>
+				    <a class="dropdown-item" href="#">Something else here</a>
+				    <div class="dropdown-divider"></div>
+				   
+		 		</div>
+			</div>
+		<br/>
+		
+		
+		
+		
+		<br/>
+		
 		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="회원가입" />
  		
  		</form>
