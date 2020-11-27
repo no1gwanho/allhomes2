@@ -64,14 +64,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<img src="<%=request.getContextPath()%>/resources/img/pd/tb01.png" alt="image" style="width:400px;height:380px;" />
+			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
 		</div>
-		
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-8">
 			<div class="product-details">
 				Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
-				<h2 class="product-name">상품명</h2>
+				<h2 class="product-name">${vo.pd_name }</h2>
 				<div>
 					<div class="product-ration">
 						<i class="fa fa-star"></i>
@@ -79,8 +78,11 @@
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
-            
-		<form method="post" action="/myapp/"> <!-- 액션 넣어주세요 -->
+					</div>
+				</div>
+        	</div>
+        </div>
+		<form action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
 			<div class="col-md-6">
 				<div class="product-details">
 					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
@@ -107,7 +109,6 @@
 								<option value="3">옵션3</option>	
 							</select>
 						</label>
-
 					</div>
 					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
 				</div>
@@ -131,9 +132,8 @@
 					<i class="fa fa-shopping-cart"></i><input type="submit" id="cart" class="btn" style="margin-top:15px;" value="장바구니"/>
 					<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn" style="margin-top:15px;">바로구매</button>
 				</div>
-			</div>			
-		</div>
-
+			</div>	
+		</form>		
 	</div>
 	<br/>
 	<div class="row">
@@ -293,9 +293,6 @@
 				<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
 				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
 			</ul>
-		</div>
-		<div class="col-4">
-			스티키 배너 위치
 		</div>
 	</div>
 </div>

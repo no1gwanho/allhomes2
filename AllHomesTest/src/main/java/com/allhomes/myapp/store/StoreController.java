@@ -1,5 +1,7 @@
 package com.allhomes.myapp.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.review.ReviewVO;
 
 @Controller
 public class StoreController {
@@ -52,9 +55,11 @@ public class StoreController {
 		
 		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
 		ProductVO vo = dao.selectProduct(pd_no);
+		List<ReviewVO> list = dao.productReviewList(pd_no);
 		
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("vo", vo);
+		mav.addObject("list", list);
 		mav.setViewName("store/storeDetail");
 		
 		return mav;
