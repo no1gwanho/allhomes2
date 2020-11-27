@@ -66,15 +66,21 @@ public class HomeboardController {
 		vo.setNickname("길동이"); //임시 닉네임
 		vo.setThumbnail("ThumnailTest"); //임시썸네일
 		
-
+		int b_no = 0;
+		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		int result = dao.homeboardInsert(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
 		
+		
 		if(result>0) {
-			mav.setViewName("redirect:homeboardHome");
+			b_no = dao.getHomeboardNumber(); //System.out.println(b_no); --> 현재 저장된 글번호가 몇인지 확인 
+			vo.setB_no(b_no);
+			
+			mav.addObject("b_no", b_no);
+			mav.setViewName("redirect:/homeboardView");
 			
 		}else {
 			mav.setViewName("/homeboard/result");
@@ -85,6 +91,7 @@ public class HomeboardController {
 	
 	@RequestMapping("/homeboardView")
 	public ModelAndView homeboardView(int b_no) {
+		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
 		
