@@ -38,7 +38,7 @@
   	<!-- 제품 수정 테스트-->
   	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c} where pd_no=#{pd_no}
+  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_exp=#{pd_exp} where pd_no=#{pd_no}
   	</update>
   	
   	<!--제품수정

@@ -7,9 +7,27 @@
 		$("#searchSelect").change(function(){
 			if($("#searchSelect option:selected").val()=="writedate"){
 				$("#searchKey").css("display", "none");
-			}else if($("#searchSelect option:selected").val()!="writedate"){
-				$("#searchKey").css("display", "block");
 			}
+			
+			
+		});
+		
+		//search 클릭
+		$("#searchBtn").click(function(){
+			var col = $("#searchSelect option:selected").val();
+			var keyword = $("#searchKeyword").val();
+			
+			if(col=="userid"){ //아이디로 검색
+				location.href = "/myapp/adminHomeboardSearchUserid?key="+keyword;
+			}else if(col=="title"){ //제목으로 검색
+				keyword = "%"+keyword+"%";
+				alert(keyword);
+				location.href = "/myapp/adminHomeboardSearchTitle?key="+keyword;
+			}
+			
+			
+			
+			
 		});
 	});
 </script>
@@ -33,11 +51,11 @@
 
 				<!-- search 검색 -->
 				<div class="input-group col-lg-3" id="searchKey">
-					<input type="text" class="form-control bg-light border-0 small"
+					<input type="text" id="searchKeyword" class="form-control bg-light border-0 small"
 						placeholder="Search for..." aria-label="Search"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
-						<button class="btn btn-dark" type="button">
+						<button class="btn btn-dark" type="button" id="searchBtn">
 							<i class="fas fa-search fa-sm"></i>
 						</button>
 					</div>
