@@ -5,8 +5,16 @@
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
   	<!-- 모든 제품 조회 -->
+  	<select id="productAllList" parameterType="com.allhomes.myapp.product.PagingVO" resultType="com.allhomes.myapp.product.ProductVO">
+  	    <![CDATA[select * from (select * from (select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc) 
+  	    where rownum <= #{nowPage} * #{onePageRecord} order by pd_no asc) where rownum >= #{lastPageRecordCount} order by pd_no desc]]>
+  	</select>
+  	<!-- 등록된 상품 수 조회 -->
+  	<select id="getAllProductCount" parameterType="com.allhomes.myapp.product.PagingVO" resultType="int">
+  		select count(pd_no) from product
   	<select id="productAllList" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img,pd_exp from product order by pd_no desc
+
   	</select>
   	
   	<!-- 스토어번호로 제품 검색 -->
@@ -16,6 +24,7 @@
   	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c,pd_img from product where pd_no=#{pd_no}
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c,pd_img,pd_exp from product where pd_no=#{pd_no}
   	</select>
   	
