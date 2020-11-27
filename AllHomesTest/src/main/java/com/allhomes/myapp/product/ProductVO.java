@@ -10,8 +10,15 @@ public class ProductVO {
 	private int stock;			// 재고
 	private String status;		// 상태(품절임박, 입고예정 등)
 	private String sub_c;		// 서브카테고리
-  private String pd_img;      // 제품 설명사진(여러개 가능)
+	private String pd_img;      // 제품 설명사진(여러개 가능)
+	private String pd_exp;      // 짧은 제품설명
 	
+	public String getPd_exp() {
+		return pd_exp;
+	}
+	public void setPd_exp(String pd_exp) {
+		this.pd_exp = pd_exp;
+	}
 	public String getPd_img() {
 		return pd_img;
 	}

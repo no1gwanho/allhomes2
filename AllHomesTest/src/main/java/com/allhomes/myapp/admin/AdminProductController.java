@@ -130,6 +130,7 @@ public class AdminProductController {
 		return mav;
 	}
 	
+	//제품 수정
 	@RequestMapping("/productEditOk")
 	public ModelAndView productEditOk(ProductVO vo) {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
@@ -142,10 +143,25 @@ public class AdminProductController {
 		}else {
 			mav.setViewName("admin/result");
 		}
-		
 		return mav;
-		
-		
 	}
 	
+	
+	//제품 삭제
+	@RequestMapping("/productDel")
+	public ModelAndView productDel(@RequestParam("pd_no") int pd_no,@RequestParam("s_no") int s_no) {
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		
+		int result = dao.delProduct(pd_no);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {
+			mav.setViewName("redirect:adminStoreDetail?s_no="+s_no); //제품 정보 페이지로 이동
+		}else {
+			mav.setViewName("admin/result");
+		}
+		return mav;
+		
+	}
 }

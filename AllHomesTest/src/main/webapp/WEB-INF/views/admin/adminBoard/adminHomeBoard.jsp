@@ -1,10 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
-
+<script>
+	$(function(){
+		//select-기간 선택하면 input box 바꾸기
+		$("#searchSelect").change(function(){
+			if($("#searchSelect option:selected").val()=="writedate"){
+				$("#searchKey").css("display", "none");
+			}else if($("#searchSelect option:selected").val()!="writedate"){
+				$("#searchKey").css("display", "block");
+			}
+		});
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
+			<div class="my-2"></div>
+			
+			<!-- 검색 옵션 -->
+			<div>
+				<div style="float:left">
+					<select class="selectpicker" id="searchSelect">
+						<optgroup label="검색 필터">
+							<option value="userid">회원 ID로 검색</option>
+							<option value="title">제목으로 검색</option>
+							<option value="content">글 내용으로 검색</option>
+							<option value="writedate">기간으로 검색</option>
+						</optgroup>
+					</select>
+				</div>
+
+				<!-- search 검색 -->
+				<div class="input-group col-lg-3" id="searchKey">
+					<input type="text" class="form-control bg-light border-0 small"
+						placeholder="Search for..." aria-label="Search"
+						aria-describedby="basic-addon2">
+					<div class="input-group-append">
+						<button class="btn btn-dark" type="button">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
+					</div>
+				</div>
+				<!-- search 검색 끝 -->
+				
+			</div>
+			<!-- 검색 옵션 끝 -->
 			<div class="my-2"></div>
 			
 			<div class="card shadow mb-4">
