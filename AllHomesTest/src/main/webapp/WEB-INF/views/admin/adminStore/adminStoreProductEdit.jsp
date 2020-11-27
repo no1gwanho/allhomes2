@@ -26,7 +26,6 @@
 		});
 		
 		
-		
 	});
 
 </script>
@@ -110,11 +109,11 @@
 			                         	 <i class="fas fa-check"></i></span>
 			                         <span class="text">수정</span>
 			                    </button>
-			                    <button id="productDel" class="btn btn-danger btn-icon-split">
+			                    <a href="/myapp/productDel?pd_no=${vo.pd_no}&s_no=${vo.s_no}" id="productDel" class="btn btn-danger btn-icon-split">
 			                         <span class="icon text-white-50">
 			                         	 <i class="fas fa-trash"></i></span>
 			                         <span class="text">삭제</span>
-			                    </button>
+			                    </a>
 		                    </div><br/>
 		                    <!-- 버튼 끝 -->
 						</form><br/><!-- 폼 끝 -->

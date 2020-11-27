@@ -7,16 +7,7 @@ td {
 	line-height: 40px;
 }
 </style>
-<script>
-	$(function(){
-		$("#searchSelect").change(function(){
-			if($("#searchSelect option:selected").val()=="writedate"){
-				$("#searchDate").css("display","block");
-			}
-		});
-		
-	});
-</script>
+
 <div class="container-fluid">
 	<div class="row">
 		<!-- 카드 들 -->
@@ -78,39 +69,7 @@ td {
 		
 
 		<div class="col-lg-12">
-			<br />
-			<br />
-			<br />
-			<!-- 검색 옵션 -->
-			<div>
-				<select class="selectpicker" id="searchSelect">
-					<optgroup label="검색 필터">
-						<option value="userid">회원 ID로 검색</option>
-						<option value="subject">제목으로 검색</option>
-						<option value="content">글 내용으로 검색</option>
-						<option value="writedate">기간으로 검색</option>
-					</optgroup>
-				</select>
-
-
-				<!-- search 검색 -->
-				<form
-					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-					<div class="input-group">
-						<input type="text" class="form-control bg-light border-0 small"
-							placeholder="Search for..." aria-label="Search"
-							aria-describedby="basic-addon2">
-						<div class="input-group-append">
-							<button class="btn btn-dark" type="button">
-								<i class="fas fa-search fa-sm"></i>
-							</button>
-						</div>
-					</div>
-				</form>
-				<!-- search 검색 끝 -->
-			</div>
-			<!-- 검색 옵션 끝 -->
-
+			
 			<div style="display: none" id="searchDate">
 				<!-- 기간으로 검색 눌러야 나오는 검색창 -->
 				<input type="text" />-<input type="text" />
