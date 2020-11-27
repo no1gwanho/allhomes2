@@ -3,9 +3,10 @@ package com.allhomes.myapp.product;
 import java.util.List;
 
 public interface ProductDaoImp {
-
 	//제품전체보기
-	public List<ProductVO> productAllList();
+	public List<ProductVO> productAllList(PagingVO vo);
+	// 등록된 상품 수
+	public int getAllProductCount(PagingVO pVo);
 	//제품선택(제품번호로)
 	public ProductVO selectProduct(int pd_no);
 	//제품추가

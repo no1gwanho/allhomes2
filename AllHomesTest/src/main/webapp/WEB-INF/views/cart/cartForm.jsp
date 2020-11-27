@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container">
-	<h2>장바구니</h2>
+<h2>장바구니</h2>
 	<div class="row">
 		<div class="col-md-7">
 			<input type ="checkbox" value="allChk" style="background-color:#ee8374;"/>&nbsp;모두 체크
@@ -38,6 +38,3 @@
 	</div>
 </div>
 <br/>
-<div>
-	
-</div>

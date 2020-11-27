@@ -4,14 +4,10 @@ public class PagingVO {
 	private int nowPage=1;				// 전체페이지	
 	private int totalRecord;				// 총 레코드 수
 	private int totalPage;				// 총 페이지 수
-	private int onePageRecord=10; 		//한페이지에 표시할 레코드 수
-	private int onePageNumberCount=10;	//한번에 표시할 페이지 번호 숫자
+	private int onePageRecord=20; 		//한페이지에 표시할 레코드 수
+	private int onePageNumberCount=5;	//한번에 표시할 페이지 번호 숫자
 	private int startPageNum=1;			// 페이지번호의 시작 페이지
-	private int lastPageRecordCount=10;
-	
-	// 검색어에 관련
-	private String searchKey;
-	private String searchWord;
+	private int lastPageRecordCount;
 	
 	public int getNowPage() {
 		return nowPage;
@@ -20,7 +16,7 @@ public class PagingVO {
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
 		// 시작페이지 번호 계산
-		startPageNum=(nowPage-1)/onePageNumberCount*onePageNumberCount+1;
+		startPageNum=((nowPage-1)/onePageNumberCount*onePageNumberCount)+1;
 	}
 	
 	public int getTotalRecord() {
@@ -78,20 +74,4 @@ public class PagingVO {
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
 	}
-	
-	public String getSearchKey() {
-		return searchKey;
-	}
-	
-	public void setSearchKey(String searchKey) {
-		this.searchKey = searchKey;
-	}
-	
-	public String getSearchWord() {
-		return searchWord;
-	}
-	
-	public void setSearchWord(String searchWord) {
-		this.searchWord = searchWord;
-	}	
 }
