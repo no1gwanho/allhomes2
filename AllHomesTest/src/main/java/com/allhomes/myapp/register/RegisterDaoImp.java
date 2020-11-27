@@ -16,5 +16,9 @@ public interface RegisterDaoImp {
 	public RegisterVO memberSelect(int m_no);
 	
 	
+	//회원가입
+	
+	
+	
 
 }
