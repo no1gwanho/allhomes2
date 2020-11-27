@@ -16,5 +16,6 @@ public interface ProductDaoImp {
 	public int delProduct(int pd_no);
 	//제품 선택(스토어 번호로)
 	public List<ProductVO> selectStoreProduct(int s_no);
-
+	//스토어의 총 제품 개수
+	public int countProduct(int s_no);
 }
