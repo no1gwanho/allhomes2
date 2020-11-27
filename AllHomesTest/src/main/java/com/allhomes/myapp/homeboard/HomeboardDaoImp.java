@@ -7,5 +7,6 @@ public interface HomeboardDaoImp {
 	
 	public HomeboardVO homeboardSelect(int b_no);
 	
+	public int getHomeboardNumber();
 	
 }

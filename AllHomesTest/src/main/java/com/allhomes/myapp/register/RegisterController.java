@@ -58,10 +58,24 @@ public class RegisterController {
 		
 	}
 	
+	
+	
+	
+	
+	//회원가입페이지 이동 매핑
 	@RequestMapping(value="/register")
 	public String register() {
 		return "landing/registerForm";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/registerOkPage")
 	public String registerOkPage() {

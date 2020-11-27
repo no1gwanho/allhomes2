@@ -48,10 +48,10 @@
 $(function(){
 	$("#changebutton").click(function(){
 		//정규식 설정
-		var formatTest = /^[A-Za-z0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\]{6,15}$/;
+		var pwdPattern = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{6,15}$/;
 		
 		//정규식 결과 저장
-		var testResult = formatTest.test($("#newPwd").val());
+		var testResult = pwdPattern.test($("#newPwd").val());
 		
 		var url = "/myapp/changebutton";
 		var data = "userpwd="+document.getElementById("newPwd").value+"&userpwdChk="+document.getElementById("newPwdChk").value;
@@ -98,7 +98,7 @@ $(function(){
 		
 		<h7 class="subbox">새 비밀번호</h7>
 			<input id="newPwd" name="userpwd" type="password"  class="form-control" placeholder="새 비밀번호 입력" required autofocus>
-				<div id=newnote>알파벳 대소문자, 특수문자 포함(최소 6글자)</div>
+				<div id=newnote>알파벳 대소문자, 숫자, 특수문자 포함(6~15글자)</div>
 					<div class="blank1"></div>
 		<h7 class="subbox">비밀번호 확인</h7>
 			<input id="newPwdChk" name="userpwdChk" type="password" class="form-control" placeholder="비밀번호 재입력" required>

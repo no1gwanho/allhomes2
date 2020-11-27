@@ -50,7 +50,7 @@ public class HomeboardController {
 	@RequestMapping("/homeboardWrite")
 	public ModelAndView homeboardWrite() {
 		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //테마 리스트 불러오기 
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //�뀒留� 由ъ뒪�듃 遺덈윭�삤湲� 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("themeList", themeList);
@@ -62,19 +62,26 @@ public class HomeboardController {
 	@RequestMapping(value="/homeboardWriteOk", method = RequestMethod.POST)
 	public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
 		vo.setIp(r.getRemoteAddr());
-		vo.setUserid("hong1234"); //임시 아이디
-		vo.setNickname("길동이"); //임시 닉네임
-		vo.setThumbnail("ThumnailTest"); //임시썸네일
+		vo.setUserid("hong1234"); //�엫�떆 �븘�씠�뵒
+		vo.setNickname("湲몃룞�씠"); //�엫�떆 �땳�꽕�엫
+		vo.setThumbnail("ThumnailTest"); //�엫�떆�뜽�꽕�씪
+		vo.setTheme("모던");
 		
-
+		int b_no = 0;
+		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		int result = dao.homeboardInsert(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
 		
+		
 		if(result>0) {
-			mav.setViewName("redirect:homeboardHome");
+			b_no = dao.getHomeboardNumber(); //System.out.println(b_no); --> �쁽�옱 ���옣�맂 湲�踰덊샇媛� 紐뉗씤吏� �솗�씤 
+			vo.setB_no(b_no);
+			
+			mav.addObject("b_no", b_no);
+			mav.setViewName("redirect:/homeboardView");
 			
 		}else {
 			mav.setViewName("/homeboard/result");
@@ -85,10 +92,11 @@ public class HomeboardController {
 	
 	@RequestMapping("/homeboardView")
 	public ModelAndView homeboardView(int b_no) {
+		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
 		
-		//해시태그 전체 가져와서 자르기
+		//�빐�떆�깭洹� �쟾泥� 媛��졇���꽌 �옄瑜닿린
 		ModelAndView mav = new ModelAndView();
 		
 		String hashtag = vo.getHashtag(); //System.out.println(hashtag);

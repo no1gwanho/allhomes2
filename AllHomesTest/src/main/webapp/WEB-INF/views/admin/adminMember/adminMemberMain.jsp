@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
+<script>
+	$(function(){
+		$("#orderMember").click(function(){
+			var order = $("#orderVal option:selected").val()+" "+$("#order option:selected").val();
+			alert(order);
+			
+			location.href="/myapp/adminMemberMainOrder?val="+order;
+		});
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
@@ -18,21 +28,21 @@
 			</div> -->
 			
 			<div>
-	              <select class="selectpicker">
+	              <select id="orderVal" class="selectpicker">
 	               		<optgroup label="검색 필터"> 
-		                   <option value="userid">ID</option>
-		                   <option value="username">이름</option>
-		                   <option value="regdate">등록일</option>
+		                   <option name="order" value="userid">ID</option>
+		                   <option name="order" value="username">이름</option>
+		                   <option name="order" value="regdate">가입일</option>
 	                   </optgroup>
 	               </select>
-	               <select class="selectpicker">
+	               <select id="order" class="selectpicker">
 	               		<optgroup label="정렬">
-		                   <option value="username">오름차순</option>
-		                   <option value="regdate">내림차순</option>
+		                   <option name="" value="asc">오름차순</option>
+		                   <option name="" value="desc">내림차순</option>
 	                   </optgroup>
 	               </select>
 	               
-	               <a href="#" class="btn alert-light"><span class="text">정렬</span></a>
+	               <button id="orderMember" class="btn alert-light"><span class="text">정렬</span></button>
 	               
 	        </div>
 	        <div class="my-2"></div>
@@ -51,71 +61,25 @@
 							<th>이름</th>
 							<th>이메일</th>
 							<th>Tel</th>
-							<th>생년월일</th>
+							<th>가입일</th>
 							<th>비밀번호</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
-						<tr onClick="location.href='/myapp/adminMemberDetail'">
-							<td>2352622</td>
-							<td>
-								<img src="/myapp/resources/img/admin/user_basic.png" style="width:50px;height:50px"/>
-							</td>
-							<td>seran111</td>
-							<td>권세란</td>
-							<td>rnjstpfk@nate.com</td>
-							<td>010-1231-1231</td>
-							<td>961221</td>
-							<td>SJF252#FDFAW!LF</td>
-						</tr>
+						<c:forEach var="vo" items="${list}">
+							<tr onClick="location.href='/myapp/adminMemberDetail?m_no=${vo.m_no}'">
+								<td>${vo.m_no}</td>
+								<td>
+									<img src="/myapp/resources/img/mypage/user_basic.png" style="width:50px;height:50px"/>
+								</td>
+								<td>${vo.userid}</td>
+								<td>${vo.username}</td>
+								<td>${vo.email}</td>
+								<td>${vo.tel}</td>
+								<td>${vo.regdate}</td>
+								<td>${vo.userpwd}</td>
+							</tr>
+						</c:forEach>
 						</tbody>	
 					</table>
 					

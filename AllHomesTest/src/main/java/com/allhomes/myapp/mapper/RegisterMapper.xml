@@ -6,4 +6,17 @@
  	<select id="login" resultType="com.allhomes.myapp.register.RegisterVO">
  		select userid, username from ah_register where userid=#{userid} and userpwd=#{userpwd}
  	</select>
+ 	
+ 	<!-- 회원 전체 조회 -->
+ 	<select id="memberAllSelect" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 	</select>
+ 	<!-- 회원 전체 조회(정렬) -->
+ 	<select id="memberAllSelectOrder" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register order by #{val}
+ 	</select>
+ 	<!-- 회원번호로 조회 -->
+ 	<select id="memberSelect" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register where m_no=#{m_no}
+ 	</select>
 </mapper>

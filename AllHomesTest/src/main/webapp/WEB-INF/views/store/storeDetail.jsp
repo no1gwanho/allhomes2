@@ -68,7 +68,6 @@
 		</div>
 		
 		<!-- 상품명/재고/설명/옵션 -->
-
 		<div class="col-md-8">
 			<div class="product-details">
 				Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
@@ -80,6 +79,35 @@
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
+            
+		<form method="post" action="/myapp/"> <!-- 액션 넣어주세요 -->
+			<div class="col-md-6">
+				<div class="product-details">
+					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
+					<h2 class="product-name">상품명</h2>
+					<div>
+						<div class="product-ration">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</div>
+						<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
+					</div>
+					<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
+					<span class="product-available">재고</span>
+					<p>간단한 설명</p>
+					<div class="product-options">
+						<label>
+							옵션 : 
+							<select class="input-select">
+								<option value="1">옵션1</option>
+								<option value="2">옵션2</option>
+								<option value="3">옵션3</option>	
+							</select>
+						</label>
+
 					</div>
 					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
 				</div>

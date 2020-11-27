@@ -12,4 +12,8 @@
 	<select id="countReviewToday" resultType="int">
 		select count(*) from review where to_char(writedate, 'YYYY-MM-DD')= to_char(sysdate, 'YYYY-MM-DD')
 	</select>
+	<!-- 모든 homeboard 글 가져오기 -->
+	<select id="selectAllHomeBoard" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+	</select>
 </mapper>
