@@ -47,40 +47,47 @@ public class HomeboardController {
 	}
 	
 	
-	@RequestMapping("/homeboardWrite")
-	public ModelAndView homeboardWrite() {
-		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //테마 리스트 불러오기 
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("themeList", themeList);
-		mav.setViewName("/homeboard/homeboardWrite");
-		
-		return mav;
-	}
+	   @RequestMapping("/homeboardWrite")
+	   public ModelAndView homeboardWrite() {
+	      HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+	      List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //테마 리스트 불러오기 
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("themeList", themeList);
+	      mav.setViewName("/homeboard/homeboardWrite");
+	      
+	      return mav;
+	   }
 
-	@RequestMapping(value="/homeboardWriteOk", method = RequestMethod.POST)
-	public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
-		vo.setIp(r.getRemoteAddr());
-		vo.setUserid("hong1234"); //임시 아이디
-		vo.setNickname("길동이"); //임시 닉네임
-		vo.setThumbnail("ThumnailTest"); //임시썸네일
-		
 
-		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		int result = dao.homeboardInsert(vo);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
-		
-		if(result>0) {
-			mav.setViewName("redirect:homeboardHome");
-			
-		}else {
-			mav.setViewName("/homeboard/result");
-		}
-		return mav;
-	}
+	   @RequestMapping(value="/homeboardWriteOk", method = RequestMethod.POST)
+	   public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
+	      vo.setIp(r.getRemoteAddr());
+	      vo.setUserid("hong1234"); //임시 아이디
+	      vo.setNickname("길동이"); //임시 닉네임
+	      vo.setThumbnail("ThumnailTest"); //임시썸네일
+	      
+	      int b_no = 0;
+	      
+	      HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+	      int result = dao.homeboardInsert(vo);
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("vo", vo);
+	      
+	      
+	      if(result>0) {
+	         b_no = dao.getHomeboardNumber(); //System.out.println(b_no); --> 현재 저장된 글번호가 몇인지 확인 
+	         vo.setB_no(b_no);
+	         
+	         mav.addObject("b_no", b_no);
+	         mav.setViewName("redirect:/homeboardView");
+	         
+	      }else {
+	         mav.setViewName("/homeboard/result");
+	      }
+	      return mav;
+	   }
 
 	
 	@RequestMapping("/homeboardView")
