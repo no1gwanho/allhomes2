@@ -10,15 +10,16 @@
   	  	(homeboard_sq.nextval, #{title}, #{thumbnail}, #{content}, #{theme}, #{hashtag}, #{userid}, #{nickname}, 0, 0, sysdate, #{ip})
   	</insert>
   	
-  	<!-- 집들이보기 -->
+  	<!-- 글내용보기 -->
   	<select id="homeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
   		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
   		from homeboard where b_no=#{param1}
   	</select>
   	
   	<!-- 글번호꺼내기 -->
-     <select id="getHomeboardNumber" resultType="int">
-        select nvl(max(b_no), 1) from homeboard
-     </select>
+  	<select id="getHomeboardNumber" resultType="int">
+  		select nvl(max(b_no), 1) from homeboard
+  	</select>
+
   	
 </mapper>

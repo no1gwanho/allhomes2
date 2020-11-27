@@ -47,6 +47,7 @@ public class HomeboardController {
 	}
 	
 	
+
 	   @RequestMapping("/homeboardWrite")
 	   public ModelAndView homeboardWrite() {
 	      HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
@@ -89,29 +90,8 @@ public class HomeboardController {
 	      return mav;
 	   }
 
-	
-	@RequestMapping("/homeboardView")
-	public ModelAndView homeboardView(int b_no) {
-		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		HomeboardVO vo = dao.homeboardSelect(b_no);
-		
-		//해시태그 전체 가져와서 자르기
-		ModelAndView mav = new ModelAndView();
-		
-		String hashtag = vo.getHashtag(); //System.out.println(hashtag);
-		if(hashtag!=null) {
-			String hashtagStr[] = hashtag.split(",");
-			List<String> hashtagList = new ArrayList<String>();
-			hashtagList = Arrays.asList(hashtagStr);
-			mav.addObject("hashtagList", hashtagList);
-		
-		}
-					
-		mav.addObject("vo", vo);
-		mav.setViewName("homeboard/homeboardView");
-		
-		return mav;
-	}
+
+
 	
 	@RequestMapping("/homeboardSearch")
 	public String homeboardSearchPage() {
