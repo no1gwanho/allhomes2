@@ -21,6 +21,8 @@ public class AdminController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+	
+	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	

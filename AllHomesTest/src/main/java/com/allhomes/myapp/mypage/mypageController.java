@@ -2,6 +2,8 @@ package com.allhomes.myapp.mypage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class mypageController {
@@ -43,6 +45,10 @@ public class mypageController {
 		return "mypage/mypageMyboard";
 	}
 	
-	
+	//mypage 회원 정보 수정으로 이동
+	@RequestMapping("/mypageEdit")
+	public String mypageSetting() {
+		return "mypage/userEditForm";
+	}
 	
 }

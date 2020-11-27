@@ -21,10 +21,11 @@
 			var ckContent = CKEDITOR.instances.content.getData(); //ckeditor글내용
 			var ckContentLength = CKEDITOR.instances.content.getData().length; //ckeditor에 쓴 글자수
 			
-			if($('#theme').val()==""){
+			 if($('#theme').val()==""){
 				alert("테마를 선택해주세요"); 
 				$('#theme').focus();
 				return false;
+			
 				
 			}
 			if($('#title').val()==''){ //제목이 입력되지 않았을때

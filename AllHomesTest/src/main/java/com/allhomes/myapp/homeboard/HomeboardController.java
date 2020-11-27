@@ -46,7 +46,7 @@ public class HomeboardController {
 		return "/homeboard/homeboardTheme";
 	}
 	
-	
+
 	   @RequestMapping("/homeboardWrite")
 	   public ModelAndView homeboardWrite() {
 	      HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
@@ -92,10 +92,11 @@ public class HomeboardController {
 	
 	@RequestMapping("/homeboardView")
 	public ModelAndView homeboardView(int b_no) {
+		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
 		
-		//해시태그 전체 가져와서 자르기
+		//�빐�떆�깭洹� �쟾泥� 媛��졇���꽌 �옄瑜닿린
 		ModelAndView mav = new ModelAndView();
 		
 		String hashtag = vo.getHashtag(); //System.out.println(hashtag);

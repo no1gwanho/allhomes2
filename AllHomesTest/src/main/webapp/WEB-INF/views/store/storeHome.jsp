@@ -22,6 +22,16 @@
 	font-height: bold;
 	font-size: 1.2em;
 }
+#list>ul, #list li{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+#list li{
+	float:left;
+	width:25%;
+	text-align:center;
+}
 </style>
 <script>
 	$(function() {
@@ -81,10 +91,10 @@
 		</div>
 	</div>
 	<hr/>
-<%-- 	<c:forEach var="vo" items="${list}">
-		<div class="row">
+	<div class="row">
+		<c:forEach var="vo" items="${list}">
 			<div class="col-3">
-				<a href="/myapp/storeDetail?no=${vo.pd_no}">
+				<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 					<img src="${vo.main_img}"/><br/>
 					[${vo.s_no }] ${vo.pd_name }<br/>
 					<c:if test="${vo.discount != 0}">
@@ -100,9 +110,10 @@
 					</h6>
 				</a>
 			</div>
-		</div>				
-	</c:forEach> --%>
- 	<div class="row">
+		</c:forEach>
+	</div>				
+
+<%--  	<div class="row">
 		<div class="col-3">
 			<a href="/myapp/storeDetail">				
 				<img src="${pageContext.request.contextPath}/resources/img/pd/tb01.png"/><br/>
@@ -233,18 +244,33 @@
 				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
 			</a>
 		</div>
-	</div>
+	</div> --%>
 	<br/>
 	<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 페이징 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-	<ul class="pagination justify-content-center">
-		<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">4</a></li>
-		<li class="page-item"><a class="page-link" href="#">5</a></li>
-		<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-	</ul>
+ 	<div id="paging">
+		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<c:if test="${pageVO.nowPage>1}">
+					<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${pageVO.nowPage-1}">&laquo;</a>
+				</c:if>
+				<c:if test="${pageVO.nowPage==1}">
+					<a style="color:pink;background-color:#fff;" class="page-link">&laquo;</a>
+				</c:if>
+			</li>
+			<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageRecord-1}">
+				<c:if test="${p<=pageVO.totalPage}">	
+					<li class="page-item">
+						<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${p}">${p}</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<li class="page-item">
+				<c:if test="${pageVO.nowPage<pageVO.totalPage}">
+					<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${pageVO.nowPage+1}">&raquo;</a>
+				</c:if>
+			</li>
+		</ul>
+	</div>
 </div>
 
 
