@@ -19,6 +19,8 @@ public interface AdminBoardDaoImp {
 	
 	//모든 q&a 가져오기
 	
-	//homeboard 에서 검색 (Userid)
+	//homeboard에서 검색 (Userid)
 	public List<HomeboardVO> homeBoardSearchUserid(String key);
+	//homeboard에서 검색(글제목)
+	public List<HomeboardVO> homeBoardSearchTitle(String key);
 }

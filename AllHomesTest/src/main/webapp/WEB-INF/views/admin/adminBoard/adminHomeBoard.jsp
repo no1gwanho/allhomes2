@@ -17,8 +17,12 @@
 			var col = $("#searchSelect option:selected").val();
 			var keyword = $("#searchKeyword").val();
 			
-			if(col=="userid"){
+			if(col=="userid"){ //아이디로 검색
 				location.href = "/myapp/adminHomeboardSearchUserid?key="+keyword;
+			}else if(col=="title"){ //제목으로 검색
+				keyword = "%"+keyword+"%";
+				alert(keyword);
+				location.href = "/myapp/adminHomeboardSearchTitle?key="+keyword;
 			}
 			
 			
