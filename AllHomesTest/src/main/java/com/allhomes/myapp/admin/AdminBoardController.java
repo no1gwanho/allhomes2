@@ -62,6 +62,20 @@ public class AdminBoardController {
 	}
 	
 	
+	//Homeboard 검색(Userid)
+	@RequestMapping("/adminHomeboardSearchUserid")
+	public ModelAndView homeBoardSearch(@RequestParam("key") String key) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		List<HomeboardVO> hList = dao.homeBoardSearchUserid(key);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("hList", hList);
+		
+		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		return mav;
+	}
+	
 	//Board Category 페이지로 이동
 	@RequestMapping("/adminBoardCategory")
 	public ModelAndView BoardCategory() {

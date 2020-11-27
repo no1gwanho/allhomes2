@@ -16,4 +16,9 @@
 	<select id="selectAllHomeBoard" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
 	</select>
+	
+	<!-- Homeboard에서 글 검색(userid) -->
+	<select id="homeBoardSearchUserid" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard where userid = #{param1}
+	</select>
 </mapper>

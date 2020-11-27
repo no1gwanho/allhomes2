@@ -66,6 +66,11 @@
 								</div>
 		       				<br/><br/><br/><br/><br/>
 		       				<p>
+		       					<span class="col-lg-4" style="float:left">제품 설명</span>
+			       				<textarea  id="pd_exp" name="pd_exp" class="form-control col-lg-6">${vo.pd_exp}</textarea>
+		       				</p>
+		       				
+		       				<p>
 			       				<span class="col-lg-4" style="float:left">가격</span>
 			       				<input type="number" id="price" name="price" class="form-control col-lg-6" value="${vo.price}"/>
 		       				</p>
