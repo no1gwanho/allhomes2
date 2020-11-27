@@ -79,8 +79,7 @@ public class FindController {
 				}else{
 					notePwd="비밀번호 변경 중 에러가 발생했습니다.";
 				}
-				
-			
+						
 			}else{
 				notePwd = "입력하신 비밀번호가 일치하지 않습니다.";
 				
@@ -137,7 +136,7 @@ public class FindController {
 				MimeMessage message= mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				messageHelper.setFrom("parkghgame@naver.com");
-				messageHelper.setTo("parkghgame@naver.com");  
+				messageHelper.setTo(resultVO.getEmail());  
 				messageHelper.setSubject(subject);	
 				messageHelper.setText("text/html;charset=UTF-8",content);
 				mailSender.send(message);
