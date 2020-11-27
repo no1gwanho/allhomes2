@@ -23,7 +23,7 @@
                   </div>
                   	<div class="card-body">
                   		<div class="">
-                            <img src="/myapp/resources/img/admin/user_basic.png" style="width:100px;height:100px"/>
+                            <img src="/myapp/resources/img/mypage/user_basic.png" style="width:100px;height:100px"/>
                             <br/><br/><hr/><br/>
                         	
 			                <p><label class="col-4">ID</label>${mVo.userid}<p>

@@ -62,7 +62,7 @@
 			               	<p><label class="col-6">판매자 ID</label>${vo.s_id }<p>
 			               	<p><label class="col-6">입점일</label>${vo.openingdate}<p>
 							<hr/><br/>
-							<p><label class="col-7">제품</label><span style="color:#EE8374">132</span><p>
+							<p><label class="col-7">제품</label><span style="color:#EE8374">${cntPd}</span><p>
 			               	<p><label class="col-7">누적 판매</label><span style="color:#EE8374">22</span><p>
                   	</div>
             </div>
@@ -115,7 +115,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="pVo" items="${pVo}">
-								<tr>
+								<tr onclick="location.href='/myapp/productEdit?pd_no=${pVo.pd_no}'">
 									<td>${pVo.pd_no}</td>
 									<td>${pVo.pd_name}</td>
 									<td>${pVo.sub_c}</td>
