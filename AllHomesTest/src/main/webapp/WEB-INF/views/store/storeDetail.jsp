@@ -77,7 +77,7 @@
 		</div>
 		
 		<!-- 상품명/재고/설명/옵션 -->
-		<form method="post" action="/myapp/">
+		<form method="post" action="/myapp/"> <!-- 액션 넣어주세요 -->
 			<div class="col-md-6">
 				<div class="product-details">
 					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
