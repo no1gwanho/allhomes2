@@ -87,6 +87,7 @@
 			       				<input type="text" id="s_homepage" name="s_homepage" class="form-control col-lg-6"/>
 							</p>
 							
+						
 							<!-- 이미지 파일 업로드 -->
 							<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표 이미지</span>
 							<div class="col-lg-6" style="float:left" id="preview">
