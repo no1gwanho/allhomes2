@@ -136,8 +136,8 @@ public class AdminProductController {
 		}
 		
 		//옵션 시퀀스 초기화
-		oDao.confirmLastSq();
-		oDao.adjustSq();
+		oDao.dropOptionSq();
+		oDao.createOptionSq();
 		
 		
 	}
