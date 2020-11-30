@@ -27,9 +27,12 @@
 				
 		});
 		
+		//미리보기
 		$("#previewImg").on("change", selectImgPreview);
 	});
 	
+	
+	//미리보기 function
 	function selectImgPreview(e){
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
