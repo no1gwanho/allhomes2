@@ -114,13 +114,13 @@
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="/myapp/homeboardView?b_no=9"><img
+					<a href="/myapp/homeboardView?b_no=13"><img
 						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
 						alt="글번호" /></a>
 				</div>
 				<div class="card-body">
 					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=9">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
+						<a href="/myapp/homeboardView?b_no=13">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
 							변신할머니와 함께 살던 집의 변신</a>
 					</div>
 					<a href="#" class="card-text">써니웨이</a>
