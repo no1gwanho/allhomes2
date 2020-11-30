@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <style>
 	#myShopping{
 		text-align:center;
@@ -86,6 +87,49 @@
 		</div><!-- col-lg-12 끝 -->
 	</div>
 	<br/>
+<%-- 		<c:forEach var="v" items="${vo}">
+		<div id="list1">
+			<div class="row">
+				<div class="col-lg-3">		
+					주문번호 : ${v.pc_no }
+				</div>
+				<div class="col-lg-9">
+					주문일자: ${v.pc_date }
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></div>
+				<div class="col-md-4">
+					<b style="font-size:1.5em;">${v.pd_no }</b><br/>
+					<b>결제금액 : ${v.total_c }</b>
+				</div>
+				<div class="col-md-2">
+					옵션 : ${v.o_no} /  수량 : ${v.num }
+				</div>
+				<c:if test="${v.confirm!=Y }">
+					<div class="col-md-2">
+						<a href="#">업체명 : ${v.s_no }</a><br/>
+						<a href="#">문의하기</a>
+					</div>
+					<div class="col-md-2">
+						<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
+						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
+						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">구매확정</button>
+					</div>
+				</c:if>
+				<c:if test="${v.confirm==Y}">
+					<div class="col-md-2">
+						<a href="#">업체명 : ${v.s_no }</a><br/>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
+						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
+					</div>
+				</c:if>
+			</div>
+		</div>		
+	</c:forEach> --%>
 	<div id="list1">
 		<div class="row">
 			<div class="col-lg-3">
@@ -145,7 +189,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
+</div>
+<!-- 리뷰 내용 -->
+<form>
 	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content contentSize">
@@ -215,9 +261,7 @@
        		<br/>
         	<div>
         		<h6>사진첨부(최대 1장)</h6>
- 				<form>
- 					<input type="file">
- 				</form>
+				<input type="file" name="img">
         	</div>
         	<br/>
         	<textarea placeholder="내용을 입력하세요." style="width:450px;height:150px;"></textarea>
@@ -228,6 +272,6 @@
 	      </div>
 	    </div>
 	  </div>
-	</div>		
-</div>
+	</div>	
+</form>
 <br/>

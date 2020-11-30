@@ -98,7 +98,7 @@
 					<img src="${vo.main_img}"/><br/>
 					[${vo.s_no }] ${vo.pd_name }<br/>
 					<c:if test="${vo.discount != 0}">
-						${vo.price - vo.discount} <del>${vo.price }</del><br/> 
+						${vo.price - (vo.price*vo.discount/100)} <del>${vo.price }</del><br/> 
 					</c:if>
 					<c:if test="${vo.discount == 0 }">
 						${vo.price }<br/>
