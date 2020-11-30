@@ -56,4 +56,10 @@
   	<select id="countProduct" resultType="int">
   		select count(*) from product where s_no=#{s_no}
   	</select>
+  	
+  	<!-- option-제품번호 가지고 오기 -->
+  	<select id="selectOptionProductNo" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
+  		SELECT pd_no FROM(SELECT  *  FROM product ORDER BY ROWNUM DESC) WHERE ROWNUM = 1
+  	</select>
+  	
   </mapper>

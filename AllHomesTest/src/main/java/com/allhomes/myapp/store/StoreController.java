@@ -56,12 +56,14 @@ public class StoreController {
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class); 
 		ProductVO vo = dao.selectProduct(pd_no);
+
 		ReviewDaoImp dAo = sqlSession.getMapper(ReviewDaoImp.class);
 		List<ReviewVO> list = dAo.productReviewList(pd_no);
+
 		
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("vo", vo);
-		mav.addObject("list", list);
+		//mav.addObject("list", list);
 		mav.setViewName("store/storeDetail");
 		
 		return mav;
