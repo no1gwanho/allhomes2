@@ -3,6 +3,7 @@ package com.allhomes.myapp.admin;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -175,18 +176,21 @@ public class AdminStoreController {
 		String path = ses.getServletContext().getRealPath("upload/storeImg");// 파일 저장할 위치
 		String originFileName = mf.getOriginalFilename(); // 파일 이름
 		
+		UUID uuid = UUID.randomUUID(); //중복 방지 위해 UUID 더하기 
+		String filename = uuid + "_" + originFileName;
+		
 		if(mf.isEmpty()) { //파일 추가 안했을 때는 기본 파일로
 			System.out.println("파일 없음~~~");
 			//기본 이미지 나오게하기
 			vo.setS_pic("store_basic.png");
 		}else {
-			vo.setS_pic(originFileName); // 이름 => img컬럼에 세팅			
+			vo.setS_pic(filename); // 이름 => img컬럼에 세팅			
 		}
 		
 
 		// 파일 업로드
 		try {
-			mf.transferTo(new File(path, originFileName));
+			mf.transferTo(new File(path, filename));
 		} catch (IOException ie) {
 			ie.getStackTrace();
 		}

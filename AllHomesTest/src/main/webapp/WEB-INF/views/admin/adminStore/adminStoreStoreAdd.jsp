@@ -26,7 +26,24 @@
 			}
 				
 		});
+		
+		$("#previewImg").on("change", selectImgPreview);
 	});
+	
+	function selectImgPreview(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
 
 </script>
 <div class="container-fluid">
@@ -72,9 +89,9 @@
 							
 							<!-- 이미지 파일 업로드 -->
 							<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표 이미지</span>
-							<div class="col-lg-6" style="float:left">
-								<img src="/myapp/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/><br/>
-					            <input type="file" name="file">
+							<div class="col-lg-6" style="float:left" id="preview">
+								<img src="/myapp/resources/img/admin/storeBasic.png" id="img" style="width:150px;height:150px"/><br/><br/>
+					            <input type="file" name="file" id="previewImg">
 					        </div>
 						         
 							<br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/><br/>
