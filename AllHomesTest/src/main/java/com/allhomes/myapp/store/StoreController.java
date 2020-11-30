@@ -19,14 +19,14 @@ import com.allhomes.myapp.review.ReviewVO;
 @Controller
 public class StoreController {
 	@Autowired 
-	SqlSession sqlSes;
+	SqlSession sqlSession;
 	 
 	@Autowired 
 	DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(PagingVO pvo) {
-		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class);		
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
 		PagingVO pageVO = new PagingVO();
 		
 		pageVO.setTotalRecord(dao.getAllProductCount(pageVO));
@@ -54,10 +54,12 @@ public class StoreController {
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
 		
-		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class); 
 		ProductVO vo = dao.selectProduct(pd_no);
-		//ReviewDaoImp dAo = sqlSes.getMapper(ReviewDaoImp.class);
-		//List<ReviewVO> list = dAo.productReviewList(pd_no);
+
+		ReviewDaoImp dAo = sqlSession.getMapper(ReviewDaoImp.class);
+		List<ReviewVO> list = dAo.productReviewList(pd_no);
+
 		
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("vo", vo);

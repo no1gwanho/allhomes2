@@ -81,7 +81,7 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 							</div>
-							<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span>리뷰</a>
+							<a class="review-link" href="#review"><span style="color:#ee8374">8,154</span>&nbsp;&nbsp;리뷰</a>
 						</div>
 						<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
 						<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</h3></span><br/>
@@ -128,7 +128,54 @@
 					<p>상품정보 영역 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id ornare libero. Vivamus iaculis, justo vel mattis pharetra, nisi ligula varius nisl, sit amet mollis tortor ligula vitae nisi.</p>
            		</div>
            		<div class="tab-pane fade" id="info">
-       				<p> 배송/환불 영역 Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
+       				<div class="row">
+       					<div class="col-10" style="margin-bottom:18px;">
+       						<span style="font-size:1.5em;">배송 안내</span>
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						배송		
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						일반택배
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						2500원 (50000원 이상 구매시 무료배송)
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						도서산간 추가 배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						5000원
+       					</div>
+       				</div>
+       				
+       				<div class="row" style="margin-top:30px;">
+       					<div class="col-10" style="margin-bottom:18px;">
+       						<span style="font-size:1.5em">교환/환불 안내</span>
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						반품배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						2500원 (최초 배송비가 무료인 경우 5000원 부과)
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						교환배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						5000원
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						교환/반품 주소
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						주소 : 서울시 서대문구 올홈즈스토리 / 대표전화 : 02-222-1111 
+       					</div>
+       				</div>
+       				<p></p>
            		</div>
            		<div class="tab-pane fade" id="review">
 					<h5>리뷰 <span style="color:#ee8374">8,127</span></h5><br/>
@@ -215,9 +262,11 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>	
 						</div>
 						<div class="col-3">
 							가격 :
+							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -229,6 +278,7 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
 						</div>
 						<div class="col-3">
 							배송 :
@@ -236,6 +286,7 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>							
 						</div>
 					</div>
 					<div class="row">
