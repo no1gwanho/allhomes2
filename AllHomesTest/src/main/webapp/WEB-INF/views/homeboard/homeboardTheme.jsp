@@ -107,7 +107,7 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="/myapp/homeboardView">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
+								<a href="/myapp/homeboardView?b_no=13">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
 									변신할머니와 함께 살던 집의 변신</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
