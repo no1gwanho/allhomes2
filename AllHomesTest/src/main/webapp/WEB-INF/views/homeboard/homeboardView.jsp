@@ -27,7 +27,18 @@
 
 <script>
 	$(function(){
-		console.log("commetlist실행111")
+		
+		$('textarea').keypress(function(e) {
+		    var tval = $('textarea').val(),
+		        tlength = tval.length,
+		        set = 100,
+		        remain = parseInt(set - tlength);
+		    $('#textLength').text(remain);
+		    if (remain <= 0 && e.which !== 0 && e.charCode !== 0) {
+		        $('textarea').val((tval).substring(0, tlength - 1))
+		    }
+		})
+		
 		//댓글리스트 구하기
 		function commentListSelect(){
 			console.log("commetlist실행??")
@@ -41,7 +52,7 @@
 					var $result = $(result);
 					var tag = "";
 					$result.each(function(i,v){	
-						tag += '<div class="input-group mb-3">';
+						tag += '<div class="input-group" style="margin-bottom:20px;">';
 						tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
 						tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid+'</a></span>';
 						tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
@@ -150,20 +161,24 @@
 			<!-- 댓글입력창 -->
 			<div id="comment">
 			<form method="post" id="commentWriteForm">
-				<div class="input-group mb-3">
+				<div class="input-group">
 					<i class="fas fa-user-circle fa-2x"></i> 
 					<input type="hidden" name="userid" value="${vo.userid }"/> <!-- userid보내기 -->
 					<input type="hidden" name="b_no" value="${vo.b_no }"/> <!-- b_no보내기 -->
 					<span style="margin: 2px 10px 0 10px"><a href="#">${vo.userid }</a></span> 
-					<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요"></textarea>
+					<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100"></textarea>
 					<div class="input-group-append">
 					<input type="submit" style="background-color: #E98374" class="btn" value="등록"/>
 					</div>
+					
 				</div>
 			</form>
+			
 			</div>
-
-			<br />
+			<div>
+				<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">0</span><span style="color:gray;font-size:12px;">/100 글자</span>
+			</div>
+			<br /><br/>
 			<!-- 댓글 리스트 -->
 			<div id="commentList">
 				<!-- 댓글리스트 나오는 곳 -->

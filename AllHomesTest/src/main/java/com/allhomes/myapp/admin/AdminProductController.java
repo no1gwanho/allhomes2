@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.product.OptionDaoImp;
-import com.allhomes.myapp.product.OptionVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 
@@ -118,8 +116,8 @@ public class AdminProductController {
 	public void optionAdd(String o_value) {
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
-		OptionVO opVo = new OptionVO(); //옵션 VO
+		//OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
+		//OptionVO opVo = new OptionVO(); //옵션 VO
 	
 		
 		
@@ -130,14 +128,14 @@ public class AdminProductController {
 		
 		//System.out.println(";alksjdf;lkajds;f!!!!!!!!!!!!!!=="+pd_no);
 		
-		opVo.setPd_no(pd_no);
+		//opVo.setPd_no(pd_no);
 		
 		//옵션 처리(,으로 잘라서 배열 => 옵션 있는만큼 insert실행)
 		String[] oList = o_value.split(",");
 		
 		for(int i=0; i<oList.length; i++) {
-			opVo.setO_value(oList[i]);
-			oDao.optionInsert(opVo);
+			//Vo.setO_value(oList[i]);
+			//oDao.optionInsert(opVo);
 		}
 		
 	}
