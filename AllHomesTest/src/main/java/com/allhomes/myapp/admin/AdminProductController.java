@@ -53,7 +53,7 @@ public class AdminProductController {
 
 	//제품 추가
 	@RequestMapping(value = "/productAddOk", method = RequestMethod.POST)
-	public ModelAndView productAdd(ProductVO vo, @RequestParam("s_no") int s_no, HttpServletRequest req,
+	public ModelAndView productAdd(ProductVO vo, @RequestParam("s_no") int s_no, @RequestParam("o_value") String o_value,  HttpServletRequest req,
 			@RequestParam(value = "mainImg") MultipartFile mainMf,
 			@RequestParam(value = "img") List<MultipartFile> imgmf, HttpSession ses) {
 
@@ -96,8 +96,10 @@ public class AdminProductController {
 
 		vo.setPd_img(voImgName); // vo에 이미지명 세팅
 
+		//옵션 처리
+		System.out.println("옵션---------------"+o_value);
+		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-
 		int result = dao.insertProduct(vo);
 
 		ModelAndView mav = new ModelAndView();
