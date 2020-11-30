@@ -92,23 +92,25 @@
 				</div>modal body 끝
 			</div>
 		</div>
+		
+		모달 버튼
+		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
 Modal -->
 
 
-		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
 		
 		<div class="col-lg-12">
 			<!-- 검색 옵션 -->
-			<a href="#" class="btn btn-light" style="color:#E98374;">                
+			<a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">당일</span>
-            </a>
-			<a href="#" class="btn btn-light" style="color:#E98374;">                
+            </a>&nbsp;
+			<a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">1개월</span>
-            </a>
-            <a href="#" class="btn btn-light" style="color:#E98374;">                
+            </a>&nbsp;
+            <a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">3개월</span>
-            </a>
-            <a href="#" class="btn btn-light" id="searchDetail" style="background-color:#E98374; color:white">                
+            </a>&nbsp;
+            <a href="#" class="btn btn-user alert-clean shadow-sm" id="searchDetail">                
                 <span class="text">상세조회</span>
             </a>
             
@@ -116,16 +118,14 @@ Modal -->
             
             <!-- 상세조회 누르면 나오는 거 -->
             <div class="card shadow" id="searchD" style="display:none">
-            	<div class="card-body" style="text-align:center">
-            		<br/>
-	            	<div style="display:inline-block">
-		            	<form>
-		            		<input id="datePicker" type="text" class="form-control"/> ~ <input id="datePicker" type="text" class="form-control"/>
-		            	
-			            	<a href="#" class="btn btn-light" style="background-color:#E98374; color:white">                
-			                	<span class="text">검색</span>
-			           		</a>
-		            	</form>
+            	<div class="card-body">
+	            	<div class="col-lg-12" style="display:inline-block;margin:0 auto;">
+		            	<select class="form-control col-lg-1" style="float:left">
+		            		<option>주문번호</option>
+		            		<option>ID</option>
+		            		<option>우편번호</option>
+		            	</select>
+		            	<input type="text" class="form-control col-lg-3"/>
 	           		</div>
             	</div>
             </div><!-- 상세조회 끝 -->
