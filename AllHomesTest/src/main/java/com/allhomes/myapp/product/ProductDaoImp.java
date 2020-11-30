@@ -21,4 +21,6 @@ public interface ProductDaoImp {
 	public List<ProductVO> selectStoreProduct(int s_no);
 	//스토어의 총 제품 개수
 	public int countProduct(int s_no);
+	//방금 insert한 제품의 제품번호
+	public ProductVO selectOptionProductNo();
 }
