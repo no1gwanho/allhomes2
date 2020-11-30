@@ -8,6 +8,7 @@ public class ReviewVO {
 	private String content;
 	private String writedate;
 	private int s_no;
+	
 	public String getUserid() {
 		return userid;
 	}
