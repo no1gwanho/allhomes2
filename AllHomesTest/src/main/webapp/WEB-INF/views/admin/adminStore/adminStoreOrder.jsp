@@ -2,15 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <style>
-	#orderStatus>div{
-		float:left;
-	}
-	
-	
-	.modalSize{
-		width:100%;
-		margin:0 auto;
-	}
+	#orderStatus>div{float:left;}
+	.wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+	td{width:8%}
+	td:nth-child(6){width:15%}
+	td:nth-child(9n+6){width:20%}
 </style>
 <script>
 	$(function(){
@@ -23,14 +19,16 @@
 				$("#searchD").css("display", "none");
 			}
 		});
-		
-		
-		
-		
 	});
 </script>
 
-<!-- Modal -->
+		
+		
+<div class="container-fluid">
+	<div class="row">
+	
+	
+<!-- <!-- Modal 
 		<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-xl" role="document">
 				<div class="modal-content">
@@ -64,7 +62,7 @@
 										<td>빈티지 체크 커튼</td>
 										<td>자연가구</td>
 										<td>42101</td>
-										<td>서울시 마포구 노고산동 101..</td>
+										<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
 										<td>seran11</td>
 										<td>2020-11-11</td>
 										<td>배송중</td>
@@ -94,14 +92,12 @@
 							</div>
 						</div>
 					</div>
-				</div><!-- modal body 끝 -->
+				</div>modal body 끝
 			</div>
 		</div>
-<!-- Modal -->
-		
-		
-<div class="container-fluid">
-	<div class="row">
+Modal -->
+
+
 		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
 		
 		<div class="col-lg-12">
@@ -164,55 +160,12 @@
 							<td>체크무늬 빈티지 커튼</td>
 							<td>자연가구</td>
 							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
+							<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
 							<td>seran22</td>
 							<td>2020-11-13</td>
 							<td>구매확정</td>
 						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
+						
 						</tbody>	
 					</table>
 					
