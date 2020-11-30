@@ -121,10 +121,6 @@ public class AdminProductController {
 		OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
 		OptionVO opVo = new OptionVO(); //옵션 VO
 	
-		
-		
-		
-		
 		ProductVO optionPd_no = dao.selectOptionProductNo();
 		int pd_no = optionPd_no.getPd_no(); //가장 최근 insert된 제품의 제품번호값 가져옴
 		
@@ -134,11 +130,15 @@ public class AdminProductController {
 		
 		//옵션 처리(,으로 잘라서 배열 => 옵션 있는만큼 insert실행)
 		String[] oList = o_value.split(",");
-		
 		for(int i=0; i<oList.length; i++) {
 			opVo.setO_value(oList[i]);
 			oDao.optionInsert(opVo);
 		}
+		
+		//옵션 시퀀스 초기화
+		oDao.confirmLastSq();
+		oDao.adjustSq();
+		
 		
 	}
 	
