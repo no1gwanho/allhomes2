@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.review.ReviewDaoImp;
 import com.allhomes.myapp.review.ReviewVO;
 
 @Controller
@@ -55,7 +56,8 @@ public class StoreController {
 		
 		ProductDaoImp dao = sqlSes.getMapper(ProductDaoImp.class); 
 		ProductVO vo = dao.selectProduct(pd_no);
-		List<ReviewVO> list = dao.productReviewList(pd_no);
+		ReviewDaoImp dAo = sqlSes.getMapper(ReviewDaoImp.class);
+		List<ReviewVO> list = dAo.productReviewList(pd_no);
 		
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("vo", vo);

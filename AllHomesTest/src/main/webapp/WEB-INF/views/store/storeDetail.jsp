@@ -67,67 +67,51 @@
 			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
-		<div class="col-md-8">
+		<div class="col-md-8" style="left:380px;">
 			<div class="product-details">
-			<img src="${vo.main_img }"/>
-			</div>
-        </div>
-		<form action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
-			<div class="col-md-6">
-				<div class="product-details">
-					Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
-					<h2 class="product-name">${vo.pd_name}</h2>
-					<div>
-						<div class="product-ration">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
+				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
+					<div class="product-details">
+						Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
+						<h2 class="product-name">${vo.pd_name}</h2>
+						<div>
+							<div class="product-ration">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span>리뷰</a>
 						</div>
-						<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
+						<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
+						<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</h3></span><br/>
+						<span class="product-available">재고:${vo.stock}</span>
+						<p>${vo.pd_exp }</p>
+						<div class="product-options">
+							<label>
+								옵션 : 
+								<select class="input-select">
+									<option value="1">옵션1</option>
+									<option value="2">옵션2</option>
+									<option value="3">옵션3</option>	
+								</select>
+							</label>
+						</div>
+						<div class="qty-label">
+							수량 : <input type="number"/>
+						</div>
 					</div>
-					<h3 class="product-price">${vo.price-(vo.price*vo.discount/100)}<del class="product-old-price">${vo.price}</del></h3><br/>
-					<span class="product-available">재고</span>
-					<p>${vo.pd_exp }</p>
-					<div class="product-options">
-						<label>
-							옵션 : 
-							<select class="input-select">
-								<option value="1">옵션1</option>
-								<option value="2">옵션2</option>
-								<option value="3">옵션3</option>	
-							</select>
-						</label>
+					<div class="add-to-cart">
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn">바로구매</button>
 					</div>
-					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span>${list. }</a>
-				</div>
-				<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
-				<span class="product-available">재고</span>
-				<p>간단한 설명</p>
-				<div class="product-options">
-					<label>
-						옵션 : 
-						<select class="input-select">
-							<option value="1">옵션1</option>
-							<option value="2">옵션2</option>
-							<option value="3">옵션3</option>	
-						</select>
-					</label>
-				</div>
-				<div class="add-to-cart">
-					<div class="qty-label">
-						수량 : <input type="number"/>
-					</div>
-					<i class="fa fa-shopping-cart"></i><input type="submit" id="cart" class="btn" style="margin-top:15px;" value="장바구니"/>
-					<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn" style="margin-top:15px;">바로구매</button>
-				</div>
+				</form>
 			</div>	
-		</form>		
-	</div>
+		</div>
+    </div>
 	<br/>
 	<div class="row">
-		<div class="col-8">
+		<div class="col-10">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a class="nav-link active" data-toggle="tab" href="#descript">상품정보</a>
@@ -273,16 +257,9 @@
 				</div>
            	</div>
          	<br/>
-			<!-- 페이징 -->
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Prev</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-			</ul>
+		</div>
+		<div class="col-2">
+			스티키 배너 들어갈 자리
 		</div>
 	</div>
 </div>

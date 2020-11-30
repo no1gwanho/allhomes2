@@ -9,8 +9,6 @@ public interface ProductDaoImp {
 	public List<ProductVO> productAllList(PagingVO vo);
 	// 등록된 상품 수
 	public int getAllProductCount(PagingVO pVo);
-	// 제품 리뷰 조회
-	public List<ReviewVO> productReviewList(int pd_no);
 	//제품선택(제품번호로)
 	public ProductVO selectProduct(int pd_no);
 	//제품추가
