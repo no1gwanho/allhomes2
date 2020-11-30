@@ -167,15 +167,22 @@ public class AdminStoreController {
 	}
 
 	// 스토어 추가
-	@RequestMapping(value = "/storeAdd", method = RequestMethod.POST)
+	@RequestMapping(value = "/storeAddOk", method = RequestMethod.POST)
 	public ModelAndView storeAdd(StoreVO vo, HttpServletRequest req, @RequestParam(value = "file") MultipartFile mf,
 			HttpSession ses) {
 
 		// file upload
 		String path = ses.getServletContext().getRealPath("upload/storeImg");// 파일 저장할 위치
 		String originFileName = mf.getOriginalFilename(); // 파일 이름
-
-		vo.setS_pic(originFileName); // 이름 => img컬럼에 세팅
+		
+		if(mf.isEmpty()) { //파일 추가 안했을 때는 기본 파일로
+			System.out.println("파일 없음~~~");
+			//기본 이미지 나오게하기
+			vo.setS_pic("store_basic.png");
+		}else {
+			vo.setS_pic(originFileName); // 이름 => img컬럼에 세팅			
+		}
+		
 
 		// 파일 업로드
 		try {

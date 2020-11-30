@@ -4,21 +4,18 @@
 <style>
 	#orderStatus>div{float:left;}
 	.wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-	td{width:8%}
-	td:nth-child(6){width:15%}
 	td:nth-child(9n+6){width:20%}
 </style>
 <script>
 	$(function(){
-		
-		//상세조회 나타났다 사라졌다
+		 //상세조회 나타났다 사라졌다
 		$("#searchDetail").click(function(){
 			if($("#searchD").css("display")=="none"){
 				$("#searchD").css("display", "block");
 			}else{
 				$("#searchD").css("display", "none");
 			}
-		});
+		}); 
 	});
 </script>
 
@@ -139,7 +136,7 @@ Modal -->
             <!-- 테이블 -->
             <div class="card shadow mb-4">
             	<div class="card-body" style="text-align:center">
-		            <table style="cursor:pointer;" class="table table-hover">
+		            <table style="cursor:pointer;" class="table table-hover" id="order">
 						<thead>
 						<tr>
 							<th>주문번호</th>

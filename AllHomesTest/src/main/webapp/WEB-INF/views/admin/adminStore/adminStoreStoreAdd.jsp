@@ -24,15 +24,6 @@
 				alert("담당자 연락처를 입력해주십시오.");
 				return false;
 			}
-			
-			var url = "/myapp/storeAddOk";
-			var data = $("#storeAddForm").serialize();
-			
-			$.ajax({
-				type:'POST',
-				url: url,
-				data: data
-			});
 				
 		});
 	});
@@ -47,7 +38,7 @@
 						<h6 class="m-0 font-weight-bold text-primary">STORE ADD</h6>
 				</div>
 				<div class="card-body" style="text-align:center">
-		       			<form method="post" id="storeAddForm" class="col-lg-10" enctype="multipart/form-data" style="display:inline-block">
+		       			<form method="post" action="/myapp/storeAddOk" id="storeAddForm" class="col-lg-10" enctype="multipart/form-data" style="display:inline-block">
 		       				<br/><br/>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">스토어명</span>
