@@ -3,20 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
+<mapper namespace="com.allhomes.myapp.cart.CartDaoImp">
 <select id="allCartList" resultType="com.allhomes.myapp.cart.CartVO">
 	select m_no, pd_no, num, price, o_no from cart order by pd_no
 </select>
 <select id="selectCartList" resultType="com.allhomes.myapp.cart.CartVO">
-	select m_no, pd_no, num, price, o_no from cart where m_no=#{m_no}, pd_no=#{pd_no}
+	select m_no, pd_no, num, price, o_no from cart where m_no=#{m_no} and pd_no=#{pd_no}
 </select>
 <insert id="addCartList" parameterType="com.allhomes.myapp.cart.CartVO">
 	insert into cart(m_no, pd_no, num, price, o_no) values(m_no=#{m_no}, pd_no=#{pd_no}, num=#{num}, price=#{price}, o_no=#{o_no})
 </insert>
 <update id="editCartList" parameterType="com.allhomes.myapp.cart.CartVO">
-	update cart set m_no=#{m_no}, pd_no=#{pd_no}, num=#{num}, price=#{price}, o_no=#{o_no} where m_no=#{m_no}, pd_no=#{pd_no}  
+	update cart set m_no=#{m_no}, pd_no=#{pd_no}, num=#{num}, price=#{price}, o_no=#{o_no} where m_no=#{m_no} and pd_no=#{pd_no}  
 </update>
 <delete id="delCartList" parameterType="int">
-	delete from cart where m_no=#{m_no}, pd_no=#{pd_no}
+	delete from cart where m_no=#{m_no} and pd_no=#{pd_no}
 </delete>
 </mapper>

@@ -69,24 +69,14 @@
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-8">
 			<div class="product-details">
-				Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
-				<h2 class="product-name">${vo.pd_name }</h2>
-				<div>
-					<div class="product-ration">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-        	</div>
+			<img src="${vo.main_img }"/>
+			</div>
         </div>
 		<form action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
 			<div class="col-md-6">
 				<div class="product-details">
-					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
-					<h2 class="product-name">상품명</h2>
+					Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
+					<h2 class="product-name">${vo.pd_name}</h2>
 					<div>
 						<div class="product-ration">
 							<i class="fa fa-star"></i>
@@ -97,9 +87,9 @@
 						</div>
 						<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
 					</div>
-					<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
+					<h3 class="product-price">${vo.price-(vo.price*vo.discount/100)}<del class="product-old-price">${vo.price}</del></h3><br/>
 					<span class="product-available">재고</span>
-					<p>간단한 설명</p>
+					<p>${vo.pd_exp }</p>
 					<div class="product-options">
 						<label>
 							옵션 : 
@@ -110,7 +100,7 @@
 							</select>
 						</label>
 					</div>
-					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
+					<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span>${list. }</a>
 				</div>
 				<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
 				<span class="product-available">재고</span>
