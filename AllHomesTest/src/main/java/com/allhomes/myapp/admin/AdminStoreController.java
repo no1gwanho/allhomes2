@@ -22,6 +22,8 @@ import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.store.StoreDaoImp;
 import com.allhomes.myapp.store.StoreVO;
 
+import jdk.nashorn.internal.runtime.Context;
+
 @Controller
 public class AdminStoreController {
 
@@ -173,9 +175,11 @@ public class AdminStoreController {
 			HttpSession ses) {
 
 		// file upload
-		String path = ses.getServletContext().getRealPath("upload/storeImg");// 파일 저장할 위치
+		String path = ses.getServletContext().getRealPath("/upload/storeImg/");// 파일 저장할 위치
 		String originFileName = mf.getOriginalFilename(); // 파일 이름
 		
+		//String path2 = "/AllHomesTest/src/main/webapp/resources/upload/storeImg";
+		//String save = req.getSession().getServletContext().getRealPath("/resources/upload/storeImg/");
 		UUID uuid = UUID.randomUUID(); //중복 방지 위해 UUID 더하기 
 		String filename = uuid + "_" + originFileName;
 		
@@ -190,7 +194,7 @@ public class AdminStoreController {
 
 		// 파일 업로드
 		try {
-			mf.transferTo(new File(path, filename));
+			mf.transferTo(new File(path+"/"+filename));
 		} catch (IOException ie) {
 			ie.getStackTrace();
 		}

@@ -23,6 +23,20 @@
 			
 		});
 		
+		var i=2;
+		//옵션 + 클릭
+		$("#optionAdd").click(function(){
+			$("#optionDiv").append("<p><span class='col-lg-4' style='float:left'>옵션"+i+"</span><input type='text' name='o_value' class='col-lg-6 form-control'/></p>");
+			i++;
+		});
+		
+		//옵션 - 클릭
+		$("#optionDel").click(function(){
+			$("#optionDiv > p").last().remove();
+			i--;
+		});
+		
+		
 		//미리보기
 		$("#mainImgFile").on("change", selectImgPreview);
 		
@@ -79,7 +93,18 @@
 										</c:forEach>
 									</div>
 								</div>
-		       				<br/><br/><br/><br/><br/>
+							<br/><br/><br/><br/><br/>
+							
+							<div id="optionDiv">
+								<p>
+									<span class="col-lg-4" style="float:left">옵션1</span>
+									<span id="optionDel" class="btn alert-clean shadow-sm" style="float:right;margin-right:80px">-</span>
+									<span id="optionAdd" class="btn alert-clean shadow-sm" style="float:right;margin-right:20px">+</span>
+			       					<input type="text" name="o_value" class="col-lg-6 form-control"/>
+			       				</p>
+								
+			       			</div>	
+							
 		       				<p>
 		       					<span class="col-lg-4" style="float:left">제품 설명</span>
 			       				<textarea  id="pd_exp" name="pd_exp" class="form-control col-lg-6"></textarea>
