@@ -2,35 +2,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <style>
-	#orderStatus>div{
-		float:left;
-	}
-	
-	
-	.modalSize{
-		width:100%;
-		margin:0 auto;
-	}
+	#orderStatus>div{float:left;}
+	.wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+	td:nth-child(9n+6){width:20%}
 </style>
 <script>
 	$(function(){
-		
-		//상세조회 나타났다 사라졌다
+		 //상세조회 나타났다 사라졌다
 		$("#searchDetail").click(function(){
 			if($("#searchD").css("display")=="none"){
 				$("#searchD").css("display", "block");
 			}else{
 				$("#searchD").css("display", "none");
 			}
-		});
-		
-		
-		
-		
+		}); 
 	});
 </script>
 
-<!-- Modal -->
+		
+		
+<div class="container-fluid">
+	<div class="row">
+	
+	
+<!-- <!-- Modal 
 		<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-xl" role="document">
 				<div class="modal-content">
@@ -64,7 +59,7 @@
 										<td>빈티지 체크 커튼</td>
 										<td>자연가구</td>
 										<td>42101</td>
-										<td>서울시 마포구 노고산동 101..</td>
+										<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
 										<td>seran11</td>
 										<td>2020-11-11</td>
 										<td>배송중</td>
@@ -94,28 +89,28 @@
 							</div>
 						</div>
 					</div>
-				</div><!-- modal body 끝 -->
+				</div>modal body 끝
 			</div>
 		</div>
-<!-- Modal -->
 		
-		
-<div class="container-fluid">
-	<div class="row">
+		모달 버튼
 		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
+Modal -->
+
+
 		
 		<div class="col-lg-12">
 			<!-- 검색 옵션 -->
-			<a href="#" class="btn btn-light" style="color:#E98374;">                
+			<a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">당일</span>
-            </a>
-			<a href="#" class="btn btn-light" style="color:#E98374;">                
+            </a>&nbsp;
+			<a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">1개월</span>
-            </a>
-            <a href="#" class="btn btn-light" style="color:#E98374;">                
+            </a>&nbsp;
+            <a href="#" class="btn btn-user alert-clean shadow-sm">                
                 <span class="text">3개월</span>
-            </a>
-            <a href="#" class="btn btn-light" id="searchDetail" style="background-color:#E98374; color:white">                
+            </a>&nbsp;
+            <a href="#" class="btn btn-user alert-clean shadow-sm" id="searchDetail">                
                 <span class="text">상세조회</span>
             </a>
             
@@ -123,16 +118,14 @@
             
             <!-- 상세조회 누르면 나오는 거 -->
             <div class="card shadow" id="searchD" style="display:none">
-            	<div class="card-body" style="text-align:center">
-            		<br/>
-	            	<div style="display:inline-block">
-		            	<form>
-		            		<input id="datePicker" type="text" class="form-control"/> ~ <input id="datePicker" type="text" class="form-control"/>
-		            	
-			            	<a href="#" class="btn btn-light" style="background-color:#E98374; color:white">                
-			                	<span class="text">검색</span>
-			           		</a>
-		            	</form>
+            	<div class="card-body">
+	            	<div class="col-lg-12" style="display:inline-block;margin:0 auto;">
+		            	<select class="form-control col-lg-1" style="float:left">
+		            		<option>주문번호</option>
+		            		<option>ID</option>
+		            		<option>우편번호</option>
+		            	</select>
+		            	<input type="text" class="form-control col-lg-3"/>
 	           		</div>
             	</div>
             </div><!-- 상세조회 끝 -->
@@ -143,7 +136,7 @@
             <!-- 테이블 -->
             <div class="card shadow mb-4">
             	<div class="card-body" style="text-align:center">
-		            <table style="cursor:pointer;" class="table table-hover">
+		            <table style="cursor:pointer;" class="table table-hover" id="order">
 						<thead>
 						<tr>
 							<th>주문번호</th>
@@ -164,55 +157,12 @@
 							<td>체크무늬 빈티지 커튼</td>
 							<td>자연가구</td>
 							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
+							<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
 							<td>seran22</td>
 							<td>2020-11-13</td>
 							<td>구매확정</td>
 						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 어쩌구...</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
+						
 						</tbody>	
 					</table>
 					

@@ -1,20 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Insert title here</title>
-<!-- 
-http://jquery.com/download/all/에서 다운로드 한다.
-​
-1. jquery-ui.min.css
-2. jquery.js
-3. jquery-ui.min.js
-​
--->
-<!-- <link rel="stylesheet" href="jquery-ui.min.css" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="jquery-ui.min.js"></script> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -47,8 +33,7 @@ http://jquery.com/download/all/에서 다운로드 한다.
 		});
 	});
 </script>
-</head>
-<body>
+
 <div id="dialogOpen">일정등록</div>
 <hr/>
 <div id="schedule"></div>
@@ -59,5 +44,5 @@ http://jquery.com/download/all/에서 다운로드 한다.
 <label for="event-name">일정제목 : </label><input type="text" id="event-name"/><br/> 
 <label for="event-date">날짜선택 : </label><input type="text" id="event-date"/> 
 </div>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

@@ -16,11 +16,34 @@
 			}else if($("#status").val()==""){
 				alert("상태를 선택해주십시오.");
 				return false;
+			}else if($("#mainImgFile").val()==""){
+				alert("대표 이미지를 선택해주십시오.");
+				return false;
 			}
 			
 		});
+		
+		//미리보기
+		$("#mainImgFile").on("change", selectImgPreview);
+		
 	});
 
+	//미리보기 function
+	function selectImgPreview(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#mainImg").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+	
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -86,8 +109,8 @@
 								<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표이미지</span>
 								<div class="col-lg-6 shadow-sm" style="border:1px solid #dddddd;border-radius:10px;float:left;">
 									<br/>
-									<img src="<%=request.getContextPath()%>/resources/img/admin/pd_basic01.png" style="width:150px;height:150px"/><br/>
-									<input type="file" name="mainImg">
+									<img src="<%=request.getContextPath()%>/resources/img/admin/pd_basic01.png" style="width:150px;height:150px" id="mainImg"/><br/><br/>
+									<input type="file" name="mainImg" id="mainImgFile">
 									<br/><br/>
 								</div>
 							

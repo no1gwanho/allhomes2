@@ -45,7 +45,7 @@
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a href="/myapp/adminMain" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon">
                     <img src="/myapp/resources/img/admin/logo.png" style="width:50px; heght:50px"> <!-- ë¡ê³  ì´ë¯¸ì§ ë£ê¸° -->
                 </div>
@@ -72,7 +72,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseMember"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMember"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Member</span>
@@ -83,13 +83,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Member Manage</h6>
                         <a class="collapse-item" href="/myapp/adminMemberMain">Member Main</a>
-                        <a class="collapse-item" href="/myapp/adminMemberDetail">Member Detail</a>
                     </div>
                 </div>
                 
             </li>
 
-            <!-- ì¬ì´ëë° -Board ê²ìí ê´ë¦¬ ë©ë´ -->
+            <!-- Board-->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoard"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -101,7 +100,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Board Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminBoardMain">Board</a>
+                        <a class="collapse-item" href="/myapp/adminBoardMain">Board Main</a>
+                        <a class="collapse-item" href="/myapp/adminHomeBoard">Home Board</a>
+                        <a class="collapse-item" href="#">Q&A Board</a>
+                        <a class="collapse-item" href="#">Review</a>
                         <a class="collapse-item" href="/myapp/adminBoardCategory">Board Category</a>
                     </div>
                 </div>
@@ -109,7 +111,7 @@
                 
             </li>
             
-            <!-- Store 사이드바-->
+            <!-- Store-->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStore"
                     aria-expanded="true" aria-controls="collapseStore">
@@ -129,7 +131,7 @@
                 </div>
             </li>
             
-             <!--사이드바 메뉴   Sales================= -->
+             <!--Sales -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/myapp/adminSalesMain" data-toggle="collapse" data-target="#collapseSales"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -141,7 +143,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminSalesMain">Sales</a>
+                        <a class="collapse-item" href="/myapp/adminSalesMain">Sales Main</a>
                         <a class="collapse-item" href="/myapp/adminSalesStore">Store Sales</a>
                     </div>
                 </div>
