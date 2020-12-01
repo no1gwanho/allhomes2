@@ -12,21 +12,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.css" type="">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/signin.css" type="">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
-<script>
-	$(function(){
-		$("#frm").submit(function(){
-			if($("#userid").val()==""){
-				alert("아이디를 입력하세요...");
-				return false;
-			}
-			if($("#userpwd").val()==""){
-				alert("비밀번호 입력하세요..")
-				return false;
-			}
-			return true;			
-		});
-	});
-</script>
 <style>
 	#idpw{text-align:center;}
 	#logo img{width:200px; display: block; margin: 0px auto;}
