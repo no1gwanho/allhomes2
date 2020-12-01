@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-	SqlSession sqlSes;
+	SqlSession sqlSession;
 	
 	public SqlSession getSqlSes() {
-		return sqlSes;
+		return sqlSession;
 	}
 
 	@Autowired
 	public void setSqlSes(SqlSession sqlSes) {
-		this.sqlSes = sqlSes;
+		this.sqlSession = sqlSession;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)

@@ -19,4 +19,20 @@
  	<select id="memberSelect" resultType="com.allhomes.myapp.register.RegisterVO">
  		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register where m_no=#{m_no}
  	</select>
-</mapper>
+ 	
+ 	
+ 	
+ 	<!-- 회원정보 입력 -->
+ 	<insert id="registerMember" parameterType="com.allhomes.myapp.register.RegisterVO">
+ 		insert into ah_register(m_no, userid,userpwd,username,nickname,tel,email,regdate,regcode)
+ 		values(a_sq.nextval,#{userid},#{userpwd},#{username},#{nickname},#{tel},#{email},sysdate,'')
+ 	</insert>
+ 	
+ 	<!-- 아이디 중복검사 -->
+ 	<select id="dupFilter" resultType="com.allhomes.myapp.register.RegisterVO">
+ 	
+ 	</select>
+ 	
+ 	
+ 	
+</mapper> 
