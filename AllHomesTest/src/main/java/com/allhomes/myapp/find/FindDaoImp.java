@@ -7,4 +7,6 @@ public interface FindDaoImp {
 	public FindVO findPwd(FindVO vo);
 	
 	public int changeInstert(FindVO vo);
+	
+	
 }

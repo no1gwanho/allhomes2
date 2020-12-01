@@ -93,6 +93,10 @@ $(function(){
 </head>
 <body>
 <div class="container">
+	
+	<div id="logo">
+	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	</div>
 	<form id="pwdbox"class="form-signin" method="post" action="/myapp/loginOk">
 		<h2 id="mainnotice" class="form-signin-heading text-center">새로운 비밀번호 설정</h2><br/>
 		

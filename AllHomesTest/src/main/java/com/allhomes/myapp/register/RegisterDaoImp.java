@@ -16,9 +16,12 @@ public interface RegisterDaoImp {
 	public RegisterVO memberSelect(int m_no);
 	
 	
+	
+	
 	//회원가입
+	public int registerMember(RegisterVO vo);
 	
-	
-	
+	//아이디 중복검사
+	public RegisterVO dupFilter(RegisterVO vo);
 
 }

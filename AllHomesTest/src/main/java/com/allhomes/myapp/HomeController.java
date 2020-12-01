@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	SqlSession sqlSession;
 	
+
 	public SqlSession getSqlSession() {
+
 		return sqlSession;
 	}
 
 	@Autowired
+
 	public void setSqlSession(SqlSession sqlSession) {
+
 		this.sqlSession = sqlSession;
 	}
 

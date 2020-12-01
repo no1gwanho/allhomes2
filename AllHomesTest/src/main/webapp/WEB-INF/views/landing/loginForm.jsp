@@ -38,7 +38,7 @@
 	<div id="idpw">
 		<a href="/myapp/">홈으로</a>
 		<a href="/myapp/find">아이디/비밀번호찾기</a> &nbsp;&nbsp;
-		<a href="/myapp/register">  회원가입</a>
+		<a href="/myapp/register">회원가입</a>
 	</div>
 	<br/>
 	<div id="snslogtitle">sns계정으로 로그인</div>
