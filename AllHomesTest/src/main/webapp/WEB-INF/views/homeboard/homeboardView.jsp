@@ -51,6 +51,8 @@
 					console.log("commetlist실행22")
 					var $result = $(result);
 					var tag = "";
+					var commentNum = $result.length;
+					$("#commentNum").html(commentNum);
 					$result.each(function(i,v){	
 						tag += '<div class="input-group" style="margin-bottom:20px;">';
 						tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
@@ -62,6 +64,7 @@
 						tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a></div>';
 					});		
 					$("#commentList").html(tag);
+					
 				}, error: function(){
 					console.log("댓글 전체리스트 불러오기 에러 발생..");
 				}
@@ -154,7 +157,7 @@
 
 			<!-- 댓글개수 표시창 -->
 			<div style="margin: 20px;">
-				<span style="font-size: 15px; color: gray;">댓글 3개</span>
+				<span style="font-size: 15px; color: gray;">댓글&nbsp;&nbsp;</span><span id="commentNum" style="font-size: 15px; color: #E98374;font-weight:bold">3</span>
 			</div>
 			
 			
@@ -176,7 +179,7 @@
 			
 			</div>
 			<div>
-				<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">0</span><span style="color:gray;font-size:12px;">/100 글자</span>
+				<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">100</span><span style="color:gray;font-size:12px;">/100 글자</span>
 			</div>
 			<br /><br/>
 			<!-- 댓글 리스트 -->

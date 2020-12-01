@@ -27,13 +27,18 @@ public class StoreController {
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(PagingVO pvo) {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
+		ReviewDaoImp review = sqlSession.getMapper(ReviewDaoImp.class);
+		
 		PagingVO pageVO = new PagingVO();
-		
 		pageVO.setTotalRecord(dao.getAllProductCount(pageVO));
-		ModelAndView mav = new ModelAndView();
+				
+		ReviewVO rv = new ReviewVO();
+		int pd_no = rv.getPd_no();
 		
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", dao.productAllList(pvo));		
 		mav.addObject("pageVO", pageVO);		
+		mav.addObject("rv", review.selectOneReview(pd_no));
 		mav.setViewName("store/storeHome");
 		
 		return mav;

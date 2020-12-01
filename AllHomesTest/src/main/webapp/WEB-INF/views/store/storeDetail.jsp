@@ -1,73 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<br/>
-<style>
-   ul, li {
-      margin:0px;
-      padding:0px;
-      list-style-type:none;
-   }
-   li{
-      float:left;
-      width:8%;
-   }
-   
-   <!-- 썸네일 이미지 -->
-   
-   .thumbs {
-      width:100px; 
-      float:left;
-      margint-left:15px;
-   }
-   .thumbs img {
-       border:1px solid #ccc;
-       padding:5px;
-       margin-bottom:3px;
-       width:90px;
-       height:80px;
-   }
-   .thumbs img:hover {
-       border-color:tomato;
-   }
-    
-   #mainImg {
-       border:solid 1px #ccc;
-       width:430px;
-       height:300px;
-       padding:5px;
-       margin-left:20px;
-   }
-   #mainImg>img{
-      width:420px;
-      height:290px;
-   }
-   .thumbs img{
-   	width:90%
-   }
-</style>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
    $(function(){
-       $(".thumbs>a").click(function(){            //클릭 시
-           var imgPath = $(this).attr("href");     //클릭한 a태그의 하이퍼링크를 변수저장
-           $("#mainImg>img").attr({src:imgPath})   //메인 이미지의 주소 속성에 할당
-           .hide()                                 //fadein()효과를 보여주기 위해 숨김처리
-           .fadeIn();                              //fadeIn()
-           return false;                           //<a> 의 본래기능 (하이퍼링크) 작동방지
-       });
+       	$(".thumbs>a").click(function(){            //클릭 시
+           	var imgPath = $(this).attr("href");     //클릭한 a태그의 하이퍼링크를 변수저장
+		$("#mainImg>img").attr({src:imgPath})   //메인 이미지의 주소 속성에 할당
+           	.hide()                                 //fadein()효과를 보여주기 위해 숨김처리
+           	.fadeIn();                              //fadeIn()
+        	return false;                           //<a> 의 본래기능 (하이퍼링크) 작동방지
+       	});
        
-       $("#buy").click(function(){
-    	  location.href="/myapp/order" 
-       });
+       	$("#buy").click(function(){
+			location.href="/myapp/order" 
+       	});
+		$(window).scroll(function(event){
+			if(jQuery(window).scrollTop() > jQuery("#banner").offset().top) {
+    			jQuery("#chase").css("position", "fixed");
+    		}else if((jQuery(window).scrollTop() < jQuery(".banner").offset().top)) {
+    			jQuery("#chase").css("position", "static");
+    		}
+    	});
    });
 </script>
+<style>
+	.nav nav-tabs, .nav-item{
+		list-style-type:none;
+	}
+	.nav-item{
+		float:left;
+	}
+</style>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
 			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
-		<div class="col-md-8" style="left:380px;">
+		<div class="col-md-8" style="left:350px;">
 			<div class="product-details">
 				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
 					<div class="product-details">
@@ -83,8 +52,13 @@
 							</div>
 							<a class="review-link" href="#review"><span style="color:#ee8374">8,154</span>&nbsp;&nbsp;리뷰</a>
 						</div>
-						<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
-						<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</h3></span><br/>
+						<c:if test="${vo.discount != 0}">
+							<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
+							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</span><br/>
+						</c:if>
+						<c:if test="${vo.discount == 0 }">
+							<span style="font-size:1.4em;">원가:${vo.price}</span><br/>
+						</c:if>
 						<span class="product-available">재고:${vo.stock}</span>
 						<p>${vo.pd_exp }</p>
 						<div class="product-options">
@@ -102,8 +76,8 @@
 						</div>
 					</div>
 					<div class="add-to-cart">
-						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
-						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn">바로구매</button>
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn">바로구매</button>
 					</div>
 				</form>
 			</div>	
@@ -125,7 +99,186 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<p>상품정보 영역 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id ornare libero. Vivamus iaculis, justo vel mattis pharetra, nisi ligula varius nisl, sit amet mollis tortor ligula vitae nisi.</p>
+					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
+					  					<p>상품정보 영역 Lorem ipsum dolor 
+					sit amet, consectetur adipiscing
+					 elit. Nunc id ornare libero. Vivamus iaculis,
+					  justo vel mattis pharetra, nisi ligula varius n
+					  isl, sit amet mollis tortor ligula vitae nisi
+					  .</p>
            		</div>
            		<div class="tab-pane fade" id="info">
        				<div class="row">
@@ -309,8 +462,30 @@
            	</div>
          	<br/>
 		</div>
-		<div class="col-2">
-			스티키 배너 들어갈 자리
+		<div class="col-2" id="banner">
+			<div id="chase" style="top:600px;">
+				<form>
+					<div class="product-options">
+						<label>
+							옵션 : 
+								<select class="input-select">
+									<option value="1">옵션1</option>
+									<option value="2">옵션2</option>
+									<option value="3">옵션3</option>	
+								</select>
+							</label>
+						</div>
+						<div class="qty-label">
+							수량 : <input type="text" size="3"/>
+						</div>
+						<br/>
+						<div class="add-to-cart">
+							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart_f" class="btn" value="장바구니"/>
+							<br/>
+							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy_f" class="btn">바로구매</button>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
