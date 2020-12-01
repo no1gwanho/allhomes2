@@ -46,7 +46,7 @@ public class RegisterController {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");
-			mav.setViewName("redirect:/");
+			mav.setViewName("landing/loginResult");
 		}
 		return mav;
 	}
