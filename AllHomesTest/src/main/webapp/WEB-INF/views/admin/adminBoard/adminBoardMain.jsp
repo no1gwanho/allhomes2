@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-td {
+td{
 	height: 40px;
 	line-height: 40px;
 }
@@ -104,7 +104,7 @@ td {
 									<td>${vo.writedate}</td>
 									<td>${vo.hit}</td>
 									<td>${vo.scrap}</td>
-									<td><a href="#" class="btn btn-danger btn-circle"> <i
+									<td><a href="#" class="btn alert-secondary btn-circle"> <i
 											class="fas fa-trash"></i>
 									</a></td>
 								</tr>
