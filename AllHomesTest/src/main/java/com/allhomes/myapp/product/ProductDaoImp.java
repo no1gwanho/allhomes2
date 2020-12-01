@@ -2,8 +2,6 @@ package com.allhomes.myapp.product;
 
 import java.util.List;
 
-import com.allhomes.myapp.review.ReviewVO;
-
 public interface ProductDaoImp {
 	//제품전체보기
 	public List<ProductVO> productAllList(PagingVO vo);

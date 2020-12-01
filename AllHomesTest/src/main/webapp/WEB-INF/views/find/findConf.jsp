@@ -65,7 +65,7 @@ $(function(){
 		
 		}else if(testResult!=true){
 			//신규비밀번호 정규식
-			alert("비밀번호 규격에 맞지않습니다.")
+			alert("비밀번호 형식이 맞지않습니다.")
 				
 		}else{
 			

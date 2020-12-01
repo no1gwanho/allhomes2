@@ -30,7 +30,7 @@
  	
  	<!-- 아이디 중복검사 -->
  	<select id="dupFilter" resultType="com.allhomes.myapp.register.RegisterVO">
- 	
+ 		select userid from ah_register where userid=#{userid}
  	</select>
  	
  	

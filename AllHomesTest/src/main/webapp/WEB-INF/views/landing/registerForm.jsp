@@ -29,12 +29,12 @@
 	
 	#widthblank2{margin-left:161px;}
 	#widthblank{margin-left:225px;}
-	#dupResult{margin-left:37px;color:#ee8374;display:none;}
-	#logo{margin-top:100px;}
+	#dupResult{color:#ee8374;display:none;}
+	#logo{margin-top:230px;}
 	#proPhoto{width:45%;}
 	
 	#dupFilter,#photoBtn{background-color:#ee8374;color:white;}
-	
+	#photoBtn{width:65%;}
 	
 </style>
 <script>
@@ -72,22 +72,59 @@
 		});
 		
 		
+		
+		
+	$(function(){
+		$("#photoBtn").click(function(){
+			var url = "/myapp/photoBtn";
+			
+			$.ajax({
+				url:url,
+				data:data,
+				success:function(result){
+					
+					
+					
+				},error:function(){
+					
+				}
+							
+			});
+			
+			
+		});
+	});	
+		
+		
+		
+		
+		
+		
 	$(function(){
 		$("#dupFilter").click(function(){
 			var url = "/myapp/dupFilter";
-			var data = "userid="+document.getElementById("dupFilter").value			
+			var data = "userid="+document.getElementById("userid").value			
 			
-			if($("#dupFilter").val()==""){
+			//아이디 정규식 설정(영문 숫자조합 최소5~13글자)
+			var idPattern =  /^[A-Za-z0-9]{5,13}$/;
+			
+			//정규식 결과 저장
+			var pattResult = idPattern.test($("#userid").val());
+					
+			
+			if($("#userid").val()==""){
 				alert("아이디를 입력해주세요.");
-				
+			
+			}else if(pattResult!=true){
+				alert("아이디 형식이 맞지않습니다.")
 			}else{
 				$.ajax({
 					url:url,
 					data:data,
 					success:function(result){
-						$("#widthblank").css("display","none");
 						$("#dupResult").css("display","block");
-						
+										
+						$("#dupResult").html(result);
 					},error:function(){
 						console.log("정보받기 에러 발생");
 						
@@ -117,17 +154,19 @@
 		<div class="form-row align-items-center">
 			<label for="userid">*아이디</label> 
 				<div id="widthblank"></div>
-			<label id=dupResult>사용가능한 아이디 입니다.</label>
+			
 				
 			<div class="col-auto">
 				<div id=dupFilter type="button" class="input-group-text">중복검사</div>
 			</div>
+			
 		</div>
- 		<input type="text" name="userid" id="userid" placeholder="아이디입력" class="form-control"/>				<!-- 아이디 input 영역 -->
+		<div id=dupResult></div>
+		<input type="text" name="userid" id="userid" placeholder="영문,숫자조합 6~13글자" class="form-control"/>				<!-- 아이디 input 영역 -->
  		
  		 		
  		<label for="userpwd">*비밀번호</label>
- 		<input type="password" name="userpwd" id="userpwd" class="form-control" placeholder="비밀번호" />			<!-- 비밀번호 input 영역 -->
+ 		<input type="password" name="userpwd" id="userpwd" class="form-control" placeholder="영문,숫자,특수문자조합 6~15글자" />			<!-- 비밀번호 input 영역 -->
  		
  		<label for="userpwd">*비밀번호 확인</label>
  		<input type="password"  id="userpwdChk" class="form-control" placeholder="비밀번호 확인" />					<!-- 비밀번호 확인 input 영역 -->
@@ -135,16 +174,15 @@
  		<label for="username">*이름</label> 
  		<input type="text" name="username" id="username" placeholder="본명으로 입력해주세요" class="form-control"/>	<!-- 이름 input 영역 -->
 				
-		<div class="form-row align-items-center">
-		<label for="nickname">닉네임</label>
-			<div id="widthblank2"></div>
 		
-		<div id=proPhoto class="col-auto">
-			<div id=photoBtn type="button" class="input-group-text">프로필사진 올리기</div>
-			</div>
- 		<input type="text" name="nickname" id="nickname" placeholder="3~10자이내" class="form-control"/>			<!-- 닉네임 input 영역 -->
-		</div>
+		<label for="nickname">닉네임</label>
+		<input type="text" name="nickname" id="nickname" placeholder="3~10자이내" class="form-control"/>			<!-- 닉네임 input 영역 -->
 	
+	
+		<label for="photoBtn">프로필 사진</label>
+		<input id=photoBtn type="file" name="photoBtn" class="form-control"></input>										<!-- 프로필사진 업로드 -->
+			
+		
 		<label for="username">*연락처</label> 																	<!-- 연락처 input 영역 -->
  		<input type="text" name="tel" id="tel" placeholder="'-생략 입력'" class="form-control"/>
 	
