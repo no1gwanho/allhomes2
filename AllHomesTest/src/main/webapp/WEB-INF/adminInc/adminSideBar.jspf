@@ -83,6 +83,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Member Manage</h6>
                         <a class="collapse-item" href="/myapp/adminMemberMain">Member Main</a>
+                        <a class="collapse-item" href="/myapp/adminMemberList">Member List</a>
                     </div>
                 </div>
                 

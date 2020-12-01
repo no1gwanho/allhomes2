@@ -97,8 +97,14 @@
 			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
 			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
 		</jsp-property-group>
+		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/admin/adminMember/*</url-pattern>
+			<include-prelude>/WEB-INF/adminInc/adminSideBar.jspf</include-prelude>
+			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
+		</jsp-property-group>
+		<jsp-property-group>
+			<url-pattern>/WEB-INF/views/admin/adminBoard/*</url-pattern>
 			<include-prelude>/WEB-INF/adminInc/adminSideBar.jspf</include-prelude>
 			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
 		</jsp-property-group>

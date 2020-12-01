@@ -6,75 +6,36 @@ td {
 	height: 50px;
 	line-height: 50px;
 }
-
 #memberChart {
 	height: 500px;
 }
-
 .cardSize {
 	height: 240px;
 }
-
 #cards {
 	float: left
 }
-
 #cards>div {
 	float: left
 }
 </style>
+<script src="/myapp/resources/js/demo/chart-memberChart.js"></script>
 <script>
-	$(function(){
-		$("#orderMember").click(function(){
-			var order = $("#orderVal option:selected").val()+" "+$("#order option:selected").val();
-			alert(order);
-			
-			location.href="/myapp/adminMemberMainOrder?val="+order;
-		});
-	});
+	
 </script>
 <div class="container-fluid">
 	<div class="row">
-
-
-		<!-- 검색 옵션 -->
-		<!-- <div>
-				<select class="selectpicker">
-	               	<optgroup label="검색 필터"> 
-		     	    <option value="">번호</option>
-		            <option value="">ID</option>
-		            <option value="">이름</option>
-	                </optgroup>
-	            </select>
-	            <input type="text"/>
-			</div> 
-			
-			<div>
-	              <select id="orderVal" class="selectpicker">
-	               		<optgroup label="검색 필터"> 
-		                   <option name="order" value="userid">ID</option>
-		                   <option name="order" value="username">이름</option>
-		                   <option name="order" value="regdate">가입일</option>
-	                   </optgroup>
-	               </select>
-	               <select id="order" class="selectpicker">
-	               		<optgroup label="정렬">
-		                   <option name="" value="asc">오름차순</option>
-		                   <option name="" value="desc">내림차순</option>
-	                   </optgroup>
-	               </select>
-	               
-	               <button id="orderMember" class="btn alert-light"><span class="text">정렬</span></button>
-	               
-	        </div>-->
-
 		<div class="col-xl-6 col-md-6 mb-4">
 			<div class="card shadow" id="memberChart">
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
 						style="float: left">Member Chart</h6>
 				</div>
-				<div class="card-body"></div>
+				<div class="card-body">
+					<div>
+                        <canvas id="memberChart" style="width:500px;height:400px"></canvas>
+                    </div>
+				</div>
 			</div>
 		</div>
 
