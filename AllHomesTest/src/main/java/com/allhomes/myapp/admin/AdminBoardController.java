@@ -104,6 +104,22 @@ public class AdminBoardController {
 		return mav;
 	}
 	
+	//Homeboard 보기
+	@RequestMapping("/adminHomeBoardView")
+	public ModelAndView homeboardView(@RequestParam("b_no") int b_no) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		HomeboardVO vo = dao.adminHomeboardSelect(b_no);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", vo);
+			
+		mav.setViewName("admin/adminBoard/adminHomeBoardView");
+		return mav;
+	}
+	
+	
+	
 	//Board Category 페이지로 이동
 	@RequestMapping("/adminBoardCategory")
 	public ModelAndView BoardCategory() {
@@ -114,7 +130,7 @@ public class AdminBoardController {
 		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-		mav.setViewName("admin/adminBoard/adminBoardCategory");
+		mav.setViewName("admin/adminBoard/adminHomeBoardView");
 			
 		return mav;
 	}

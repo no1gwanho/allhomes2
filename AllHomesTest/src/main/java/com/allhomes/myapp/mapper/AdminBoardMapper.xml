@@ -34,4 +34,9 @@
 		where content LIKE '%'||#{content}||'%' 
 	</select>
 	
+	<!-- 글내용보기 -->
+  	<select id="adminHomeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+  		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
+  		from homeboard where b_no=#{param1}
+  	</select>
 </mapper>
