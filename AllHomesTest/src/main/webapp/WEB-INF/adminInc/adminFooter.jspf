@@ -44,10 +44,15 @@
     
 
 
-<!-- Bootstrap core JavaScript-->
+	<!--애니메이션-->
+    <!-- <script src="/myapp/resources/js/animations-extended.min.js"></script>
+    <script src="/myapp/resources/js/mdb.js"></script>
+	<script src="/myapp/resources/js/popper.js"></script> -->
+	
+	
     <!-- <script src="/myapp/resources/vendor/jquery/jquery.min.js"></script> -->
     <script src="/myapp/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	
     <!-- Core plugin JavaScript-->
    <!--  <script src="/myapp/resources/vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
