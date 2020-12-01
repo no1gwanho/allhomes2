@@ -24,7 +24,43 @@
 	
 	<!-- Homeboard에서 글 검색(글제목) -->
 	<select id="homeBoardSearchTitle" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard where title like #{param1}
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where title LIKE '%'||#{title}||'%' 
 	</select>
 	
+	<!-- Homeboard에서 글 검색(글내용) -->
+	<select id="homeBoardSearchContent" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where content LIKE '%'||#{content}||'%' 
+	</select>
+	
+	<!-- 글내용보기 -->
+  	<select id="adminHomeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+  		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
+  		from homeboard where b_no=#{param1}
+  	</select>
+  	
+  	<!-- homeboard 상세 검색-userid -->
+  	<select id="HBDetailSearchUserid" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where userid = #{param1} and to_char(writedate, 'YYYY-MM-DD') between #{param2} and #{param3}
+	</select>
+	
+  	<!-- homeboard 상세 검색-title -->
+  	<select id="HBDetailSearchTitle" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where title LIKE '%'||#{param1}||'%' and to_char(writedate, 'YYYY-MM-DD') between #{param2} and #{param3}
+	</select>
+	
+  	<!-- homeboard 상세 검색-content -->
+  	<select id="HBDetailSearchContent" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where content LIKE '%'||#{param1}||'%' and to_char(writedate, 'YYYY-MM-DD') between #{param2} and #{param3}
+	</select>
+	
+  	<!-- homeboard 상세 검색-기간만 -->
+  	<select id="HBDetailSearch" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where to_char(writedate, 'YYYY-MM-DD') between #{param1} and #{param2}
+	</select>
 </mapper>

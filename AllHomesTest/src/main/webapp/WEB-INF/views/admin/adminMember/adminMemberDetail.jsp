@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <script>
 	$(function(){
 		//체크박스 전체체크
@@ -274,4 +273,3 @@
          </div>
 	</div>
 </div>
-<%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>
