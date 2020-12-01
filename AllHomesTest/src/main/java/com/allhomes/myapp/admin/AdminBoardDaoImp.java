@@ -23,4 +23,6 @@ public interface AdminBoardDaoImp {
 	public List<HomeboardVO> homeBoardSearchUserid(String key);
 	//homeboard에서 검색(글제목)
 	public List<HomeboardVO> homeBoardSearchTitle(String key);
+	//homeboard에서 검색(글내용)
+		public List<HomeboardVO> homeBoardSearchContent(String key);
 }

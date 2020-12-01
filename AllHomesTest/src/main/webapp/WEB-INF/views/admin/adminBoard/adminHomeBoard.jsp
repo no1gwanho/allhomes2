@@ -20,9 +20,9 @@
 			if(col=="userid"){ //아이디로 검색
 				location.href = "/myapp/adminHomeboardSearchUserid?key="+keyword;
 			}else if(col=="title"){ //제목으로 검색
-				keyword = "%"+keyword+"%";
-				alert(keyword);
 				location.href = "/myapp/adminHomeboardSearchTitle?key="+keyword;
+			}else if(col=="content"){ //글내용으로 검색
+				location.href = "/myapp/adminHomeboardSearchContent?key="+keyword;
 			}
 			
 			

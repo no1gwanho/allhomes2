@@ -24,7 +24,14 @@
 	
 	<!-- Homeboard에서 글 검색(글제목) -->
 	<select id="homeBoardSearchTitle" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard where title like #{param1}
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where title LIKE '%'||#{title}||'%' 
+	</select>
+	
+	<!-- Homeboard에서 글 검색(글내용) -->
+	<select id="homeBoardSearchContent" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+		where content LIKE '%'||#{content}||'%' 
 	</select>
 	
 </mapper>

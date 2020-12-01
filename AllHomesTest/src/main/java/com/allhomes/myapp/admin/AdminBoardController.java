@@ -78,14 +78,28 @@ public class AdminBoardController {
 	
 	//Homeboard 검색(글제목)
 	@RequestMapping("/adminHomeboardSearchTitle")
-	public ModelAndView homeBoardSearchTitle(@RequestParam("key") String key) {
+	public ModelAndView homeBoardSearchTitle(@RequestParam("key") String title) {
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchTitle(key);
+		List<HomeboardVO> hList = dao.homeBoardSearchTitle(title);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("hList", hList);
 		
+		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		return mav;
+	}
+	
+	//Homeboard 검색(글내용)
+	@RequestMapping("/adminHomeboardSearchContent")
+	public ModelAndView homeBoardSearchContent(@RequestParam("key") String content) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		List<HomeboardVO> hList = dao.homeBoardSearchContent(content);
+			
+		ModelAndView mav = new ModelAndView();
+			
+		mav.addObject("hList", hList);
+			
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
 		return mav;
 	}
