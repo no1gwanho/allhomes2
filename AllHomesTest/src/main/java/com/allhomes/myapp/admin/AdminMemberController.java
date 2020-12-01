@@ -24,16 +24,24 @@ public class AdminMemberController {
 	}
 	
 	
-	//회원관리 페이지로 이동
+	//회원관리 페이지로 이동(메인)
 	@RequestMapping("/adminMemberMain")
 	public ModelAndView adminMember() {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		List<RegisterVO> list = dao.memberAllSelect();
 		
+		//count register
+		int month = dao.countRegisterMonth();
+		int total = dao.countRegisterTotal();
+		int today = dao.countRegisterToday();
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", list);
+		mav.addObject("month", month);
+		mav.addObject("total", total);
+		mav.addObject("today", today);
+		
 		mav.setViewName("admin/adminMember/adminMemberMain");
 		return mav;
 	}
@@ -63,5 +71,68 @@ public class AdminMemberController {
 		mav.addObject("mVo", mVo);
 		mav.setViewName("admin/adminMember/adminMemberDetail");
 		return mav;
+	}
+	
+	//멤버리스트 페이지로 이동
+	@RequestMapping("/adminMemberList")
+	public ModelAndView memberList() {
+		
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.memberAllSelect();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+	}
+	
+	//회원리스트 -> 아이디로 검색
+	@RequestMapping("/adminMemberSearchUserid")
+	public ModelAndView searchMemberUserid(@RequestParam("key") String userid) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberUserid(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
+	//회원리스트 -> 이름으로 검색
+	@RequestMapping("/adminMemberSearchUsername")
+	public ModelAndView searchMemberUsername(@RequestParam("key") String username) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberUsername(username);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
+	
+	//회원리스트 -> 이메일로 검색
+	@RequestMapping("/adminMemberSearchEmail")
+	public ModelAndView searchMemberEmail(@RequestParam("key") String email) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberEmail(email);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
+	//회원리스트 -> 연락처로 검색
+	@RequestMapping("/adminMemberSearchTel")
+	public ModelAndView searchMemberTel(@RequestParam("key") String tel) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberTel(tel);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
 	}
 }

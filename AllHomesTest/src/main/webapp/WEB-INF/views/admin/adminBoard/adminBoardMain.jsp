@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <style>
-td {
+td{
 	height: 40px;
 	line-height: 40px;
 }
@@ -97,7 +96,7 @@ td {
 						</thead>
 						<tbody>
 							<c:forEach var="vo" items="${hList}">
-								<tr onClick="location.href=''">
+								<tr onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
 									<td>${vo.b_no}</td>
 									<td>${vo.title}</td>
 									<td>${vo.theme}</td>
@@ -105,7 +104,7 @@ td {
 									<td>${vo.writedate}</td>
 									<td>${vo.hit}</td>
 									<td>${vo.scrap}</td>
-									<td><a href="#" class="btn btn-danger btn-circle"> <i
+									<td><a href="#" class="btn alert-secondary btn-circle"> <i
 											class="fas fa-trash"></i>
 									</a></td>
 								</tr>
@@ -246,5 +245,3 @@ td {
 		<!-- col-lg-12 끝 -->
 	</div>
 </div>
-
-<%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

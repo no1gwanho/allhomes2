@@ -46,49 +46,9 @@ public class AdminBoardController {
 		return mav;
 	}
 	
-	//HomeBoard 페이지로 이동
-	@RequestMapping("/adminHomeBoard")
-	public ModelAndView adminHomeBoard() {
-		
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.selectAllHomeBoard(); //homeboard 모든 게시물 가져오기
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("hList", hList);
-		
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
 	
 	
-	//Homeboard 검색(Userid)
-	@RequestMapping("/adminHomeboardSearchUserid")
-	public ModelAndView homeBoardSearch(@RequestParam("key") String key) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchUserid(key);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("hList", hList);
-		
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
 	
-	//Homeboard 검색(글제목)
-	@RequestMapping("/adminHomeboardSearchTitle")
-	public ModelAndView homeBoardSearchTitle(@RequestParam("key") String key) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchTitle(key);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("hList", hList);
-		
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
 	
 	//Board Category 페이지로 이동
 	@RequestMapping("/adminBoardCategory")
