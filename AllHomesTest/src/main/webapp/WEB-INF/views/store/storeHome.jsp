@@ -3,7 +3,6 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
-
 <style>
 #bxslider img{
 	width:1400px;
@@ -15,8 +14,8 @@
 }
 .col-3 img {
 	left: 100px;
-	width: 180px;
-	height: 230px;
+	width: 315px;
+	height: 280px;
 }
 .title {
 	font-height: bold;
@@ -53,7 +52,6 @@
 			,
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
-
 		});
 	});
 </script>
