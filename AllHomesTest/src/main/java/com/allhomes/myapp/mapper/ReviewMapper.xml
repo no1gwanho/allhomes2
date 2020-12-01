@@ -7,9 +7,6 @@
 <select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating_price, rating_delivery, rating_design, rating_durability, img, content, writedate, s_no from review order by writedate desc
 </select>
-<select id="selectOneReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select userid, pd_no, avg(rating_price) price, avg(rating_delivery) delivery, avg(rating_design) design, avg(rating_durability) durability, img, content, writedate, s_no from review where pd_no=#{pd_no}
-</select>
 <select id="countReview" parameterType="int" resultType="int">
 	select count(pd_no) from review where pd_no=#{pd_no}
 </select>

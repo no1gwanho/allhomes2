@@ -38,7 +38,6 @@ public class HomeController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", dao.productMainList());		
-		mav.addObject("rev", review.selectOneReview(pd_no));
 		mav.setViewName("home");
 		
 		return mav;
