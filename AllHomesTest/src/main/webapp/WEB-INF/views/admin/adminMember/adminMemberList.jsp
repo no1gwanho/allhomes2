@@ -11,8 +11,10 @@
 				location.href = "/myapp/adminMemberSearchUserid?key="+keyword;
 			}else if(col=="username"){ //이름으로 검색
 				location.href = "/myapp/adminMemberSearchUsername?key="+keyword;
-			}else if(col=="m_no"){
-				
+			}else if(col=="email"){//이메일로 검색
+				location.href = "/myapp/adminMemberSearchEmail?key="+keyword;
+			}else if(col=="tel"){//연락처로 검색
+				location.href = "/myapp/adminMemberSearchTel?key="+keyword;
 			}
 			
 			alert(col+" "+keyword);
@@ -32,7 +34,8 @@
 						<optgroup label="검색 필터">
 							<option value="userid">회원 ID로 검색</option>
 							<option value="username">이름으로 검색</option>
-							<option value="regdate">가입일로 검색</option>
+							<option value="email">이메일로 검색</option>
+							<option value="tel">연락처로 검색</option>
 						</optgroup>
 					</select>
 				</div>

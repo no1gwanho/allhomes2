@@ -111,5 +111,28 @@ public class AdminMemberController {
 		
 	}
 	
-	//회원리스트 -> 회원번호로 검색
+	//회원리스트 -> 이메일로 검색
+	@RequestMapping("/adminMemberSearchEmail")
+	public ModelAndView searchMemberEmail(@RequestParam("key") String email) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberEmail(email);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
+	//회원리스트 -> 연락처로 검색
+	@RequestMapping("/adminMemberSearchTel")
+	public ModelAndView searchMemberTel(@RequestParam("key") String tel) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		List<RegisterVO> list = dao.searchMemberTel(tel);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
 }

@@ -44,10 +44,17 @@
  		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
  		 where username=#{username}
  	</select>
-	<!-- 검색: 회원번호로 검색 -->
-	<select id="searchMemberNo" resultType="com.allhomes.myapp.register.RegisterVO">
+ 	<!-- 검색: 이메일로 검색 -->
+	<select id="searchMemberEmail" resultType="com.allhomes.myapp.register.RegisterVO">
  		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
- 		 where m_no=#{param1}
+ 		 where email LIKE '%'||#{email}||'%' 
+
  	</select>
+ 	<!-- 검색: 연락처로 검색 -->
+	<select id="searchMemberTel" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 		 where tel LIKE '%'||#{tel}||'%'
+ 	</select>
+	
  	
 </mapper>

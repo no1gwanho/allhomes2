@@ -26,9 +26,10 @@ public interface RegisterDaoImp {
 	public List<RegisterVO> searchMemberUserid(String userid);
 	//이름으로 검색
 	public List<RegisterVO> searchMemberUsername(String username);
-	//회원번호로 검색
-	public List<RegisterVO> searchMemberNo(int m_no);
-	
+	//이메일로 검색
+	public List<RegisterVO> searchMemberEmail(String email);
+	//연락처로 검색
+	public List<RegisterVO> searchMemberTel(String tel);
 	
 	
 
