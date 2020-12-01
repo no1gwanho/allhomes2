@@ -60,7 +60,7 @@ public class AdminBoardController {
 		List<HomeBoardThemeVO> list = dao.HomeBoardThemeAll(); //테마 전체 가지고 오기
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-		mav.setViewName("admin/adminBoard/adminHomeBoardView");
+		mav.setViewName("admin/adminBoard/adminBoardCategory");
 			
 		return mav;
 	}

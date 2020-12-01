@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+td{
+	height:40px;
+	line-height:40px
+}
+</style>
 <script>
 	$(function(){
 		//search 클릭
@@ -7,6 +13,10 @@
 			var col = $("#searchSelect option:selected").val();
 			var keyword = $("#searchKeyword").val();
 			
+			if(keyword==""){
+				alert("값을 입력해주십시오.");
+				return false;
+			}
 			if(col=="userid"){ //아이디로 검색
 				location.href = "/myapp/adminMemberSearchUserid?key="+keyword;
 			}else if(col=="username"){ //이름으로 검색
@@ -17,7 +27,6 @@
 				location.href = "/myapp/adminMemberSearchTel?key="+keyword;
 			}
 			
-			alert(col+" "+keyword);
 		});
 		
 	});
@@ -61,7 +70,6 @@
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
 						style="float: left">Member List</h6>
-					<a href="/myapp/adminMemberList" style="float: right; height: 10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">
