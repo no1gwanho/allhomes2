@@ -82,14 +82,14 @@
 				<div class="card border-left-info shadow h-100 py-2">
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div
-									class="text-xl font-weight-bold text-info text-uppercase mb-1">
-									Today</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">+142</div>
-							</div>
 							<div class="col-auto">
-								<i class="fas fa-user fa-2x text-gray-300"></i>
+								<div class="h3 font-weight-bold text-info text-uppercase mb-1" style="float:right">
+								Today</div>
+								<i  class="fas fa-user fa-3x text-gray-300"></i>
+							</div>
+							<div class="col-lg-12 mr-2">
+								<br/><br/>
+								<div class="h1 mb-0 font-weight-bold text-gray-600">&nbsp;&nbsp;&nbsp;+142</div>
 							</div>
 						</div>
 					</div>
@@ -164,6 +164,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary" style="float:left">Member List</h6>
+					<a href="/myapp/adminMemberList" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">
