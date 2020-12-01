@@ -96,7 +96,7 @@ td {
 						</thead>
 						<tbody>
 							<c:forEach var="vo" items="${hList}">
-								<tr onClick="location.href=''">
+								<tr onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
 									<td>${vo.b_no}</td>
 									<td>${vo.title}</td>
 									<td>${vo.theme}</td>

@@ -121,7 +121,26 @@
 				}
 			});
 		});
+		
+		//미리보기
+		$("#previewMainImg").on("change", selectImgPreview);
 	});
+	
+	//미리보기 function
+	function selectImgPreview(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
 	
 </script>
 <div class="container-fluid">
@@ -135,9 +154,9 @@
             		<div class="card shadow col-lg-10" id="category">
                 		<form id="mainCFrm" method="post" style="text-align:center" action="<%=request.getContextPath()%>/mainCategoryAdd" enctype="multipart/form-data">
                 			<div style="display:inline-block"> 
-	                			<img src="/myapp/resources/img/admin/c_add.png"/>
-	                			<br/>
-	                			<input type="file" name="file"/>
+	                			<img src="/myapp/resources/img/admin/c_add.png" id="img"/>
+	                			<br/><br/>
+	                			<input type="file" name="file" id="previewMainImg"/>
 			                	<div class="my-2"></div>
 			                	<hr/>
 	                			<p>
@@ -177,7 +196,7 @@
                 	
                 	<c:forEach var="vo" items="${list}" varStatus="status">
 	                	<div class="card shadow col-lg-5" id="category">
-	                		<img src="<c:url value='/storeMainCategoryImg/${vo.img}'/>" style=""/>
+	                		<img src="<c:url value='/storeMainCategoryImg/${vo.img}'/>" />
 	                		<div class="my-2"></div>
 	                		<hr/>
 	                		<form class="col-lg-10" style="text-align:center">
