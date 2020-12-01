@@ -94,14 +94,14 @@
 			<div class="col-3">
 				<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 					<img src="${vo.main_img}"/><br/>
-					[${vo.s_no }] ${vo.pd_name }<br/>
+					[${vo.s_no}] ${vo.pd_name }<br/>
 					<c:if test="${vo.discount != 0}">
 						${vo.price - (vo.price*vo.discount/100)} <del>${vo.price }</del><br/> 
 					</c:if>
 					<c:if test="${vo.discount == 0 }">
 						${vo.price }<br/>
 					</c:if>
-					<h6>별 / 리뷰&nbsp;&nbsp;
+					<h6>${(rv.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;
 					<c:if test="${vo.status!=null }">
 						<span class="badge badge-secondary">${vo.status }</span>
 					</c:if>
