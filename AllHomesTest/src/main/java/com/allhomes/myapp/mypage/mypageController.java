@@ -1,10 +1,18 @@
 package com.allhomes.myapp.mypage;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.allhomes.myapp.purchase.PurchaseDaoImp;
 
 @Controller
 public class mypageController {
+	@Autowired
+	SqlSession sqlSession;
 
 	//mypage홈으로 이동
 	@RequestMapping("/mypageHome")
@@ -21,8 +29,14 @@ public class mypageController {
 	
 	//mypage 나의 쇼핑으로 이동
 	@RequestMapping("/mypageShopping")
-	public String mypageShopping() {
-		return "mypage/mypageShopping";
+	public ModelAndView purchaseList() {
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class); 
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", dao.allPurchaseList());
+		mav.setViewName("mypage/mypageShopping");
+		
+		return mav;
 	}
 	
 	//mypage 위시리스트로 이동
@@ -43,6 +57,10 @@ public class mypageController {
 		return "mypage/mypageMyboard";
 	}
 	
-	
+	//mypage 회원 정보 수정으로 이동
+	@RequestMapping("/mypageEdit")
+	public String mypageSetting() {
+		return "mypage/userEditForm";
+	}
 	
 }

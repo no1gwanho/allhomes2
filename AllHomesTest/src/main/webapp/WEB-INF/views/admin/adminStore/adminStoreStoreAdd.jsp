@@ -24,18 +24,29 @@
 				alert("담당자 연락처를 입력해주십시오.");
 				return false;
 			}
-			
-			var url = "/myapp/storeAddOk";
-			var data = $("#storeAddForm").serialize();
-			
-			$.ajax({
-				type:'POST',
-				url: url,
-				data: data
-			});
 				
 		});
+		
+		//미리보기
+		$("#previewImg").on("change", selectImgPreview);
 	});
+	
+	
+	//미리보기 function
+	function selectImgPreview(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
 
 </script>
 <div class="container-fluid">
@@ -47,7 +58,7 @@
 						<h6 class="m-0 font-weight-bold text-primary">STORE ADD</h6>
 				</div>
 				<div class="card-body" style="text-align:center">
-		       			<form method="post" id="storeAddForm" class="col-lg-10" enctype="multipart/form-data" style="display:inline-block">
+		       			<form method="post" action="/myapp/storeAddOk" id="storeAddForm" class="col-lg-10" enctype="multipart/form-data" style="display:inline-block">
 		       				<br/><br/>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">스토어명</span>
@@ -79,11 +90,12 @@
 			       				<input type="text" id="s_homepage" name="s_homepage" class="form-control col-lg-6"/>
 							</p>
 							
+						
 							<!-- 이미지 파일 업로드 -->
 							<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표 이미지</span>
-							<div class="col-lg-6" style="float:left">
-								<img src="/myapp/resources/img/admin/storeBasic.png" style="width:150px;height:150px"/><br/>
-					            <input type="file" name="file">
+							<div class="col-lg-6" style="float:left" id="preview">
+								<img src="/myapp/resources/img/admin/storeBasic.png" id="img" style="width:150px;height:150px"/><br/><br/>
+					            <input type="file" name="file" id="previewImg">
 					        </div>
 						         
 							<br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/><br/>

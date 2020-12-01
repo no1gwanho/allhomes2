@@ -41,6 +41,9 @@
       width:420px;
       height:290px;
    }
+   .thumbs img{
+   	width:90%
+   }
 </style>
 
 <script>
@@ -53,9 +56,6 @@
            return false;                           //<a> 의 본래기능 (하이퍼링크) 작동방지
        });
        
-       $("#cart").click(function(){
-    	    
-       });
        $("#buy").click(function(){
     	  location.href="/myapp/order" 
        });
@@ -63,71 +63,64 @@
 </script>
 <div class="container">
 	<div class="row">
-		<div class="col-md-6">
-			<div class="thumbs">
-				<a href="<%=request.getContextPath()%>/resources/img/pd/tb01.png" title="image1"><img src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></a>
-	            <a href="<%=request.getContextPath()%>/resources/img/pd/tb02.png" title="image2"><img src="<%=request.getContextPath()%>/resources/img/pd/tb02.png"/></a>
-                <a href="<%=request.getContextPath()%>/resources/img/pd/tb03.png" title="image3"><img src="<%=request.getContextPath()%>/resources/img/pd/tb03.png"/></a>
-				<a href="<%=request.getContextPath()%>/resources/img/pd/tb04.png" title="image4"><img src="<%=request.getContextPath()%>/resources/img/pd/tb04.png"/></a>
-				<a href="<%=request.getContextPath()%>/resources/img/pd/tb05.png" title="image5"><img src="<%=request.getContextPath()%>/resources/img/pd/tb05.png"/></a>
-			</div>
-			<div id="mainImg">
-				<img src="<%=request.getContextPath()%>/resources/img/pd/tb01.png" alt="image" />
-			</div>
+		<div class="col-md-4">
+			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
 		</div>
-		
 		<!-- 상품명/재고/설명/옵션 -->
-		<form method="post" action="/myapp/">
-			<div class="col-md-6">
-				<div class="product-details">
-					Category : <a href="#">메인카테고리</a> > <a href="#">서브카테고리</a><br/>
-					<h2 class="product-name">상품명</h2>
-					<div>
-						<div class="product-ration">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
+		<div class="col-md-8" style="left:380px;">
+			<div class="product-details">
+				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
+					<div class="product-details">
+						Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
+						<h2 class="product-name">${vo.pd_name}</h2>
+						<div>
+							<div class="product-ration">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<a class="review-link" href="#review"><span style="color:#ee8374">8,154</span>&nbsp;&nbsp;리뷰</a>
 						</div>
-						<a class="review-link" href="#rev"><span style="color:#ee8374">8,154</span> 리뷰</a>
-					</div>
-					<h3 class="product-price">할인가 <del class="product-old-price">원가</del></h3><br/>
-					<span class="product-available">재고</span>
-					<p>간단한 설명</p>
-					<div class="product-options">
-						<label>
-							옵션 : 
-							<select class="input-select">
-								<option value="1">옵션1</option>
-								<option value="2">옵션2</option>
-								<option value="3">옵션3</option>	
-							</select>
-						</label>
-					</div>
-					<div class="add-to-cart">
+						<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
+						<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</h3></span><br/>
+						<span class="product-available">재고:${vo.stock}</span>
+						<p>${vo.pd_exp }</p>
+						<div class="product-options">
+							<label>
+								옵션 : 
+								<select class="input-select">
+									<option value="1">옵션1</option>
+									<option value="2">옵션2</option>
+									<option value="3">옵션3</option>	
+								</select>
+							</label>
+						</div>
 						<div class="qty-label">
 							수량 : <input type="number"/>
 						</div>
-						<i class="fa fa-shopping-cart"></i><input type="submit" id="cart" class="btn" style="margin-top:15px;" value="장바구니"/>
-						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="submit" id="buy" class="btn" style="margin-top:15px;" value="바로구매"/>
 					</div>
-				</div>			
-			</div>
-		</form>
-	</div>
+					<div class="add-to-cart">
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn">바로구매</button>
+					</div>
+				</form>
+			</div>	
+		</div>
+    </div>
 	<br/>
 	<div class="row">
-		<div class="col-9">
+		<div class="col-10">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#descript"><span style="font-size:0.55em;">상품정보</span></a>
+					<a class="nav-link active" data-toggle="tab" href="#descript">상품정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#info"><span style="font-size:0.55em;">배송환불</span></a>
+					<a class="nav-link" data-toggle="tab" href="#info">배송환불</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#review"><span style="font-size:0.55em;">구매리뷰</span></a>
+					<a class="nav-link" data-toggle="tab" href="#review">구매리뷰</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -135,7 +128,54 @@
 					<p>상품정보 영역 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id ornare libero. Vivamus iaculis, justo vel mattis pharetra, nisi ligula varius nisl, sit amet mollis tortor ligula vitae nisi.</p>
            		</div>
            		<div class="tab-pane fade" id="info">
-       				<p> 배송/환불 영역 Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
+       				<div class="row">
+       					<div class="col-10" style="margin-bottom:18px;">
+       						<span style="font-size:1.5em;">배송 안내</span>
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						배송		
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						일반택배
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						2500원 (50000원 이상 구매시 무료배송)
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						도서산간 추가 배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						5000원
+       					</div>
+       				</div>
+       				
+       				<div class="row" style="margin-top:30px;">
+       					<div class="col-10" style="margin-bottom:18px;">
+       						<span style="font-size:1.5em">교환/환불 안내</span>
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						반품배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						2500원 (최초 배송비가 무료인 경우 5000원 부과)
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						교환배송비
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						5000원
+       					</div>
+       					<div class="col-3" style="border-bottom:1px solid #eee;">
+       						교환/반품 주소
+       					</div>
+       					<div class="col-7" style="border-bottom:1px solid #eee;">
+       						주소 : 서울시 서대문구 올홈즈스토리 / 대표전화 : 02-222-1111 
+       					</div>
+       				</div>
+       				<p></p>
            		</div>
            		<div class="tab-pane fade" id="review">
 					<h5>리뷰 <span style="color:#ee8374">8,127</span></h5><br/>
@@ -222,9 +262,11 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>	
 						</div>
 						<div class="col-3">
 							가격 :
+							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -236,6 +278,7 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
 						</div>
 						<div class="col-3">
 							배송 :
@@ -243,6 +286,7 @@
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>							
 						</div>
 					</div>
 					<div class="row">
@@ -264,19 +308,9 @@
 				</div>
            	</div>
          	<br/>
-			<!-- 페이징 -->
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Prev</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-			</ul>
 		</div>
-		<div class="col-3">
-			스티키 배너 위치
+		<div class="col-2">
+			스티키 배너 들어갈 자리
 		</div>
 	</div>
 </div>

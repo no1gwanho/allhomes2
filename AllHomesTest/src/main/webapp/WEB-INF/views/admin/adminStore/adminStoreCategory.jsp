@@ -133,7 +133,7 @@
                 </div>
             	<div class="card-body">
             		<div class="card shadow col-lg-10" id="category">
-                		<form id="mainCFrm" class="col-lg-12" method="post" style="text-align:center" action="<%=request.getContextPath()%>/mainCategoryAdd" enctype="multipart/form-data">
+                		<form id="mainCFrm" method="post" style="text-align:center" action="<%=request.getContextPath()%>/mainCategoryAdd" enctype="multipart/form-data">
                 			<div style="display:inline-block"> 
 	                			<img src="/myapp/resources/img/admin/c_add.png"/>
 	                			<br/>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 집들이 코멘트 Mapper -->
+<mapper namespace="com.allhomes.myapp.homeboard.HomeboardCommentDaoImp">
+	<!-- 댓글리스트 불러오기 -->
+	<select id="commentAllSelect" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
+		select hb_c_no, userid, nickname, hb_comment, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate, b_no
+		from hb_comment
+		where b_no=#{b_no}
+		order by hb_c_no asc
+	</select>
+	
+	
+	<!-- 댓글쓰기 -->
+	<insert id="commentInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
+		insert into hb_comment(hb_c_no, userid, nickname, hb_comment, b_no) 
+						values(hb_comment_sq.nextval, #{userid}, #{nickname}, #{hb_comment}, #{b_no})
+	</insert>
+	
+	
+
+</mapper>

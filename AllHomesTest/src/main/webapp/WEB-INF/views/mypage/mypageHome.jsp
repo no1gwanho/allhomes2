@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<style>
+	#myShopping{
+		text-align:center;
+	}
+	#myShopping>div{
+		float:left;
+		text-align:center;
+		border:1px solid lightblue;
+		width:16%;
+		margin:5px;
+	}
+	#myShopping hr{
+		width:70%;
+	}
+</style>
 <div class="container">
 	<div class="row">
 		
@@ -8,7 +22,7 @@
 			<div class="card border-light mb-3 text-center"><!-- card시작 -->
 				<div class="my-2"></div>
 				<div style="float:right">
-					<a href="" style="float:right">설정&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					<a href="/myapp/mypageEdit" class="btn btn-user alert-clean shadow-sm" style="float:right;color:#bbbbbb">설정</a>
 				</div>
 				<!-- card body 시작 -->
 				<div class="card-body my-auto">
@@ -42,21 +56,7 @@
 				<div class="card-body"><!-- card-body 시작 -->
 				
 				
-				<style>
-					#myShopping{
-						text-align:center;
-					}
-					#myShopping>div{
-						float:left;
-						text-align:center;
-						border:1px solid lightblue;
-						width:16%;
-						margin:5px;
-					}
-					#myShopping hr{
-						width:70%;
-					}
-				</style>
+				
 				
 					<div class="col-lg-12" id="myShopping" class="center-block">
 						<div><br/>입금 대기<hr>0건<br/><br/></div>
