@@ -5,8 +5,10 @@ import java.util.List;
 import com.allhomes.myapp.review.ReviewVO;
 
 public interface ProductDaoImp {
-	//제품전체보기
+	//제품전체보기(스토어홈)
 	public List<ProductVO> productAllList(PagingVO vo);
+	// 제품전체보기(메인페이지)
+	public List<ProductVO >productMainList();
 	// 등록된 상품 수
 	public int getAllProductCount(PagingVO pVo);
 	//제품선택(제품번호로)

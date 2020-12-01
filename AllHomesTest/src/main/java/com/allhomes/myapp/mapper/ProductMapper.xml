@@ -13,6 +13,9 @@
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
   	</select>
+  	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc
+  	</select>
   	
   	<!-- 등록된 상품 수 조회 -->
   	<select id="getAllProductCount" parameterType="com.allhomes.myapp.product.PagingVO" resultType="int">
