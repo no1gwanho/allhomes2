@@ -34,7 +34,7 @@ public class HomeboardCommentController {
 		System.out.println(b_no);
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
 		List<HomeboardCommentVO> list = commentDao.commentAllSelect(b_no);
-		System.out.println(list.size());
+		
 		return list;
 	}
 	

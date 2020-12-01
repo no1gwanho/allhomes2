@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -30,6 +32,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class CkeditorFileUploadController {
 	
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+    Date today = new Date();
+    String dateForFile = format1.format(today);
+	
 	 
 	@RequestMapping(value="/editor/imageUpload.do", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request,
@@ -44,7 +50,7 @@ public class CkeditorFileUploadController {
         //인코딩
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        
+
         try{
             
             //파일 이름 가져오기
@@ -52,9 +58,10 @@ public class CkeditorFileUploadController {
             byte[] bytes = upload.getBytes();
             
             //이미지 경로 생성
-            String path = ses.getServletContext().getRealPath("/homeboardUpload");  System.out.println("path="+path);
+            String path = ses.getServletContext().getRealPath("/")+"homeboardUpload\\"+dateForFile+"\\"; 
             String ckUploadPath = path + uid + "_" + fileName;
             
+            System.out.println(path);
             File folder = new File(path);
             
             //해당 디렉토리 확인
@@ -107,7 +114,7 @@ public class CkeditorFileUploadController {
  throws ServletException, IOException{
     	HttpSession ses = request.getSession();
         //서버에 저장된 이미지 경로
-        String path = ses.getServletContext().getRealPath("/homeboardUpload"); 
+    	String path = ses.getServletContext().getRealPath("/")+"homeboardUpload\\"+dateForFile+"\\"; 
         String sDirPath = path + uid + "_" + fileName;
     
         File imgFile = new File(sDirPath);
