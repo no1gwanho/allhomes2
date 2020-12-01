@@ -12,7 +12,14 @@ public class ProductVO {
 	private String sub_c;		// 서브카테고리
 	private String pd_img;      // 제품 설명사진(여러개 가능)
 	private String pd_exp;      // 짧은 제품설명
+	private int shipping_c;		// 배송비
 	
+	public int getShipping_c() {
+		return shipping_c;
+	}
+	public void setShipping_c(int shipping_c) {
+		this.shipping_c = shipping_c;
+	}	
 	public String getPd_exp() {
 		return pd_exp;
 	}

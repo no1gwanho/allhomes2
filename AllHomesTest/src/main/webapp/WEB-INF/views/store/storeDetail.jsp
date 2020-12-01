@@ -26,9 +26,6 @@
 	.nav nav-tabs, .nav-item{
 		list-style-type:none;
 	}
-	.nav-item{
-		float:left;
-	}
 </style>
 <div class="container">
 	<div class="row">
@@ -53,11 +50,13 @@
 							<a class="review-link" href="#review"><span style="color:#ee8374">8,154</span>&nbsp;&nbsp;리뷰</a>
 						</div>
 						<c:if test="${vo.discount != 0}">
-							<span style="font-size:1.4em;">원가:<del class="product-old-price">${vo.price}</del></span><br/>
-							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}</span><br/>
+							<span style="font-size:1.4em;">원가:<del>${vo.price}원</del></span><br/>
+							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}원</span><br/>
+							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
 						<c:if test="${vo.discount == 0 }">
-							<span style="font-size:1.4em;">원가:${vo.price}</span><br/>
+							<span style="font-size:1.4em;">원가:${vo.price}원</span><br/>
+							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
 						<span class="product-available">재고:${vo.stock}</span>
 						<p>${vo.pd_exp }</p>
@@ -76,8 +75,8 @@
 						</div>
 					</div>
 					<div class="add-to-cart">
-						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart" class="btn" value="장바구니"/>
-						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn">바로구매</button>
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
 					</div>
 				</form>
 			</div>	
@@ -340,7 +339,7 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<b>4.6</b>
+								<b>${(list.price + list.design + list.delivery + list.duability)4}</b>
 							</h2>
 						</div>
 						<div class="col-6">
@@ -482,7 +481,7 @@
 						<div class="add-to-cart">
 							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart_f" class="btn" value="장바구니"/>
 							<br/>
-							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy_f" class="btn">바로구매</button>
+							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy_f" class="btn" value="바로구매">
 						</div>
 				</form>
 			</div>
