@@ -53,7 +53,7 @@
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
 		});
-	});
+	});	
 </script>
 <div class="container">
 	<ul id="bxslider">
@@ -79,7 +79,7 @@
 		<div class="col-3" style="text-align:center;">
 			<label style="font-size:0.8em;">
 				정렬방법
-				<select id="sortPd">
+				<select name="sortPd">
 					<option value="1">최신순</option>
 					<option value="2">좋아요순</option>
 					<option value="3">판매순</option>
@@ -96,10 +96,10 @@
 					<img src="${vo.main_img}"/><br/>
 					[${vo.s_no}] ${vo.pd_name }<br/>
 					<c:if test="${vo.discount != 0}">
-						${vo.price - (vo.price*vo.discount/100)} <del>${vo.price }</del><br/> 
+						${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
 					</c:if>
 					<c:if test="${vo.discount == 0 }">
-						${vo.price }<br/>
+						${vo.price }원<br/>
 					</c:if>
 					<h6>${(rv.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;
 					<c:if test="${vo.status!=null }">

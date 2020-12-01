@@ -199,10 +199,10 @@
 					<img src="${v.main_img }"/><br/>
 					[${v.s_no }] / ${v.pd_name }<br/>
 					<c:if test="${v.discount != 0}">
-						${v.price - (v.price*v.discount/100)} <del>${v.price }</del><br/> 
+						${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
 					</c:if>
 					<c:if test="${v.discount == 0 }">
-						${v.price }<br/>
+						${v.price }원<br/>
 					</c:if>
 					<h6>${(rev.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;</h6>
 					<c:if test="${v.status!=null }">

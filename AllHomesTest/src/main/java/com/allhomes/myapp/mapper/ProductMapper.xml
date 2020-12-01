@@ -13,10 +13,10 @@
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
   	</select>
+  	<!-- 메인페이지 제품리스트 -->
   	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, shipping_c from product order by pd_no desc
   	</select>
-  	
   	<!-- 등록된 상품 수 조회 -->
   	<select id="getAllProductCount" parameterType="com.allhomes.myapp.product.PagingVO" resultType="int">
   		select count(pd_no) from product
@@ -29,19 +29,19 @@
   	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img pd_exp from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img pd_exp, shipping_c from product where pd_no=#{pd_no}
   	</select>
   	
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp)
-  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status}, #{sub_c}, #{pd_img}, #{pd_exp})
+  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c)
+  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status}, #{sub_c}, #{pd_img}, #{pd_exp}, #{shipping_c})
   	</insert>
   	
   	<!-- 제품 수정 테스트-->
   	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_exp=#{pd_exp} where pd_no=#{pd_no}
+  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c} where pd_no=#{pd_no}
   	</update>
   	
   	<!--제품수정
