@@ -33,4 +33,21 @@
  		select count(*) from register
  	</select>
  	
+ 	
+	<!-- 검색: 아이디로 검색 -->
+	<select id="searchMemberUserid" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 		 where userid=#{userid}
+ 	</select>
+	<!-- 검색: 이름으로 검색 -->
+	<select id="searchMemberUsername" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 		 where username=#{username}
+ 	</select>
+	<!-- 검색: 회원번호로 검색 -->
+	<select id="searchMemberNo" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 		 where m_no=#{param1}
+ 	</select>
+ 	
 </mapper>

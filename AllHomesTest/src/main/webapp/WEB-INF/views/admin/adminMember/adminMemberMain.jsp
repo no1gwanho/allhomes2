@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <style>
 td {
 	height: 50px;
@@ -224,4 +223,3 @@ td {
 		<!-- col끝 -->
 	</div>
 </div>
-<%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

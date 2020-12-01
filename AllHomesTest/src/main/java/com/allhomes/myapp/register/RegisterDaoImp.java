@@ -21,7 +21,13 @@ public interface RegisterDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
-	
+	//회원 검색
+	//id로 검색
+	public List<RegisterVO> searchMemberUserid(String userid);
+	//이름으로 검색
+	public List<RegisterVO> searchMemberUsername(String username);
+	//회원번호로 검색
+	public List<RegisterVO> searchMemberNo(int m_no);
 	
 	
 	
