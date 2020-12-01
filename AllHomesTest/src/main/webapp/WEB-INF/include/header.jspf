@@ -91,12 +91,21 @@
       <li class="nav-item">
         <a class="nav-link" href="/myapp/cartList"><i class="fas fa-shopping-cart" style="color: #E98374"></i></a>
       </li>
+      <c:if test="${logStatus==null || logStatus!='Y' }">
       <li class="nav-item" style="margin:0px">
        <h6><a  class="nav-link"href="/myapp/login">로그인</a></h6>
       </li>
       <li class="nav-item" style="margin:0px">
       <h6><a class="nav-link" href="/myapp/register" style="margin-right:20px;">회원가입</a></h6> 
       </li>
+      </c:if>
+      <c:if test="${logStatus=='Y' }">
+      <li calss="nav-item" style="margin:0px">
+      <h6><a class="nav-link" href="/myapp/mypageHome">${username}님</a></h6>
+      </li>
+      <li class="nav-item" style="margin:0px">
+      <h6><a class="nav-link" href="/myapp/logout" style="margin-right:20px;">로그아웃</a></h6>
+      </c:if>
 
       <li class="nav-item dropdown">
         <a class="nav-link writeBtn btn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">

@@ -24,7 +24,8 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 	//숨길 버튼
 	config.removeButtons = 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,Format,Maximize,ShowBlocks,About,Subscript,Superscript,Blockquote,Checkbox,Radio,Styles';
-	
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.fillEmptyBlocks = false;
 
 };
 

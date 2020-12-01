@@ -31,6 +31,10 @@ public interface RegisterDaoImp {
 	//연락처로 검색
 	public List<RegisterVO> searchMemberTel(String tel);
 	
+	//회원가입
+	public int registerMember(RegisterVO vo);
 	
+	//아이디 중복검사
+	public RegisterVO dupFilter(RegisterVO vo);
 
 }

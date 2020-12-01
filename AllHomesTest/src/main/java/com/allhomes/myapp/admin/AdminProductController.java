@@ -134,8 +134,8 @@ public class AdminProductController {
 		}
 		
 		//옵션 시퀀스 초기화
-		oDao.dropOptionSq();
-		oDao.createOptionSq();
+//		oDao.dropOptionSq();
+//		oDao.createOptionSq();
 		
 		
 	}
