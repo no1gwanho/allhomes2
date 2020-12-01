@@ -5,6 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.review.ReviewDaoImp;
+import com.allhomes.myapp.review.ReviewVO;
 
 @Controller
 public class HomeController {
@@ -24,9 +29,19 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public ModelAndView home() {
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
+		ReviewDaoImp review = sqlSession.getMapper(ReviewDaoImp.class);
+
+		ReviewVO rev = new ReviewVO();
+		int pd_no = rev.getPd_no();
 		
-		return "home";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", dao.productMainList());		
+		mav.addObject("rev", review.selectOneReview(pd_no));
+		mav.setViewName("home");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/application")

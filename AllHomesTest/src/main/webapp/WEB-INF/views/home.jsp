@@ -13,8 +13,8 @@
 	}
 	.col-3 img {
 		left: 100px;
-		width: 180px;
-		height: 230px;
+		width: 315px;
+		height: 280px;
 }
 </style>
 <script>
@@ -193,134 +193,24 @@
 		<hr/>
 	</div>
 	<div class="row">
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span>
-    		</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd02.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">최저가</span>
-   			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd03.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd04.png"/><br/>
-				[빈티지리빙] / 빙하의 잔 유리 풍경<br/>
-				0% / 21800<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd05.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-	    <div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd06.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">히트상품</span>
-			</a>
-		</div>
-    	<div class="col-3">
-			<a href="">
-    			<img src="${pageContext.request.contextPath}/resources/img/pd/pd07.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span>
-		    </a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd08.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-				<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd09.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">2차 입고</span>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd10.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd11.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd12.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd13.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd14.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd15.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd16.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				별 / 리뷰&nbsp;&nbsp;
-			</a>
-		</div>
+		<c:forEach var="v" items="${list }">
+			<div class="col-3">
+				<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
+					<img src="${v.main_img }"/><br/>
+					[${v.s_no }] / ${v.pd_name }<br/>
+					<c:if test="${v.discount != 0}">
+						${v.price - (v.price*v.discount/100)} <del>${v.price }</del><br/> 
+					</c:if>
+					<c:if test="${v.discount == 0 }">
+						${v.price }<br/>
+					</c:if>
+					<h6>${(rev.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;</h6>
+					<c:if test="${v.status!=null }">
+						<h6><span class="badge badge-secondary">${v.status }</span></h6>
+					</c:if>					
+				</a>
+			</div>
+		</c:forEach>
 	</div>	
 </div>
 <br/>

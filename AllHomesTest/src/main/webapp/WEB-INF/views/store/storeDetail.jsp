@@ -1,51 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<br/>
-<style>
-   ul, li {
-      margin:0px;
-      padding:0px;
-      list-style-type:none;
-   }
-   li{
-      float:left;
-      width:8%;
-   }
-   
-   <!-- 썸네일 이미지 -->
-   
-   .thumbs {
-      width:100px; 
-      float:left;
-      margint-left:15px;
-   }
-   .thumbs img {
-       border:1px solid #ccc;
-       padding:5px;
-       margin-bottom:3px;
-       width:90px;
-       height:80px;
-   }
-   .thumbs img:hover {
-       border-color:tomato;
-   }
-    
-   #mainImg {
-       border:solid 1px #ccc;
-       width:430px;
-       height:300px;
-       padding:5px;
-       margin-left:20px;
-   }
-   #mainImg>img{
-      width:420px;
-      height:290px;
-   }
-   .thumbs img{
-   	width:90%
-   }
-</style>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
    $(function(){
        	$(".thumbs>a").click(function(){            //클릭 시
@@ -68,7 +22,15 @@
     	});
    });
 </script>
-<div class="container" onscroll="btnMove()">
+<style>
+	.nav nav-tabs, .nav-item{
+		list-style-type:none;
+	}
+	.nav-item{
+		float:left;
+	}
+</style>
+<div class="container">
 	<div class="row">
 		<div class="col-md-4">
 			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
@@ -114,8 +76,8 @@
 						</div>
 					</div>
 					<div class="add-to-cart">
-						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
-						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn">바로구매</button>
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn">바로구매</button>
 					</div>
 				</form>
 			</div>	
@@ -518,9 +480,9 @@
 						</div>
 						<br/>
 						<div class="add-to-cart">
-							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart_f" class="btn" value="장바구니"/>
 							<br/>
-							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><button id="buy" class="btn">바로구매</button>
+							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy_f" class="btn">바로구매</button>
 						</div>
 				</form>
 			</div>
