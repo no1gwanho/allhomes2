@@ -15,7 +15,11 @@ public interface RegisterDaoImp {
 	//회원번호로 회원 조회
 	public RegisterVO memberSelect(int m_no);
 	//오늘 가입한 회원 수
-	public int countRegister();
+	public int countRegisterToday();
+	//이번달에 가입한 회원 수
+	public int countRegisterMonth();
+	//총 회원 수
+	public int countRegisterTotal();
 	
 	
 	

@@ -24,16 +24,24 @@ public class AdminMemberController {
 	}
 	
 	
-	//회원관리 페이지로 이동
+	//회원관리 페이지로 이동(메인)
 	@RequestMapping("/adminMemberMain")
 	public ModelAndView adminMember() {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		List<RegisterVO> list = dao.memberAllSelect();
 		
+		//count register
+		int month = dao.countRegisterMonth();
+		int total = dao.countRegisterTotal();
+		int today = dao.countRegisterToday();
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", list);
+		mav.addObject("month", month);
+		mav.addObject("total", total);
+		mav.addObject("today", today);
+		
 		mav.setViewName("admin/adminMember/adminMemberMain");
 		return mav;
 	}

@@ -19,4 +19,18 @@
  	<select id="memberSelect" resultType="com.allhomes.myapp.register.RegisterVO">
  		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register where m_no=#{m_no}
  	</select>
+ 	
+ 	<!-- 오늘 가입한 회원 수 -->
+ 	<select id="countRegisterToday" resultType="int">
+ 		select count(*) from register where to_char(regdate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+ 	</select>
+ 	<!-- 이번달에 가입한 회원 수 -->
+ 	<select id="countRegisterMonth" resultType="int">
+ 		select count(*) from register where to_char(regdate, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM')
+ 	</select>
+ 	<!-- 총회원수 -->
+ 	<select id="countRegisterTotal" resultType="int">
+ 		select count(*) from register
+ 	</select>
+ 	
 </mapper>
