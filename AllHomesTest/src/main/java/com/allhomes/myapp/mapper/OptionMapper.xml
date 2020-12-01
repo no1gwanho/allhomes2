@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.product.OptionDaoImp">
+	<insert id="optionInsert" parameterType="com.allhomes.myapp.product.OptionVO">
+		insert into option_table(pd_no, o_no, o_value) values(#{pd_no},op_sq.nextval,#{o_value})
+	</insert>
+	
+	<!-- 시퀀스 삭제 -->
+	<select id="dropOptionSq">
+		drop sequence OP_SQ
+	</select>
+	<!-- 시퀀스 생성 -->
+	<update id="createOptionSq">
+		create sequence op_sq start with 1 increment by 1
+	</update>
+	
+</mapper>

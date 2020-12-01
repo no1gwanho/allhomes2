@@ -14,9 +14,10 @@ public interface RegisterDaoImp {
 	public List<RegisterVO> memberAllSelectOrder(String val);
 	//회원번호로 회원 조회
 	public RegisterVO memberSelect(int m_no);
+	//오늘 가입한 회원 수
+	public int countRegister();
 	
 	
-	//회원가입
 	
 	
 	
