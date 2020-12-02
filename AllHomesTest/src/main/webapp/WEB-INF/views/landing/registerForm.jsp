@@ -39,42 +39,98 @@
 </style>
 <script>
 	$(function(){
-		//회원가입폼의 데이터 유효성검사
 		$("#regFrm").submit(function(){
+							
 			//아이디 검사
 			if($("#userid").val()==""){
 				alert("아이디는 필수입력사항입니다.");
 				return false;
 			}
+				
+			
+			
+			//비밀번호 검사
 			if($("#userpwd").val()=="" || $("#userpwdChk").val()==""){
 				alert("비밀번호는 필수입력사항입니다.");
 				return false;
 			}
-			if($("#userpwd").val()!=$("#userpwdChk").val()){
-				alert("비밀번호가 일치하지 않습니다.")
+			if($("#userpwd").val()!= $("#userpwdChk").val()){
+				alert("비밀번호가 일치하지 않습니다.");
 				return false;
 			}
-			if($("#username").val()==""){
+			var pwdPattern = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{6,15}$/;
+			var pwdTestResult = pwdPattern.test($("#userpwd").val());
+			
+			if(pwdTestResult!=true){
+				alert("비밀번호는 영문,숫자,특수문자 조합 6~15자로 입력해주세요.");
+				return false;
+			}
+					
+			
+						
+			//이름 검사
+			if($("#username").val()==""){``
 				alert("이름은 필수입력 사항입니다.");
 				return false;
 			}
+			var	namePattern = /^[ㄱ-ㅎㅏ-ㅣ가-힣]{2,6}$/;
+			var nameTestResult = namePattern.test($("#username").val());
+			
+			if(nameTestResult!=true){
+				alert("이름은 한글 2~6자 사이로 입력해주세요.");
+				return false;
+			}
+			
+			
+			//연락처 검사
+			if($("#tel").val()==""){
+				alert("연락처는 필수 입력사항입니다..");
+				return false;
+			}
+			var telPattern = /^[0-9]{11}$/;
+			var telTestResult = telPattern.test($("#tel").val());
+			
+			if(telTestResult!=true){
+				alert("연락처는 '-'생략하고 입력해주세요.")
+				return false;
+			}
+						
+			
+			
+			//이메일 검사
 			if($("#emailText").val()==""){
-				alert("이메일은 필수 입력사항입니다..")
-				
+				alert("이메일은 필수 입력사항입니다..");
+				return false;
 			}
-			if(($("#userpwd").val()).equals("#userpwdChk")){
-				alert("비밀번호가 일치하지 않습니다.");
-				
+			var emailPattern = /^[A-Za-z0-9]{4,8}$/;
+			var emailTestResult = email.Pattern.test($("#email2").val());
+			
+			if(emailTestResult!=true){
+				alert("이메일 주소는 4~13글자 내로 적어주세요")
+				return false;
 			}
+						
 			
 			
+			
+			
+			
+			//닉네임 검사
+			var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
+			var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
+			if(nicknameTestResult!=true){
+				alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
+				return false;
+			}
+									
 			return true;
 		});
 		
 		
 		
 		
-	$(function(){
+		
+	$(function(){		//프로필 업로드 버튼을 눌렀을때 vo에 입력해주기위한 함수
 		$("#photoBtn").click(function(){
 			var url = "/myapp/photoBtn";
 			
@@ -82,11 +138,11 @@
 				url:url,
 				data:data,
 				success:function(result){
+					alert("프로필사진 vo 저장 성공");	//////////////////////나중에 경고 메시지 삭제////////////////
 					
 					
-					
-				},error:function(){
-					
+				},error:function(){		//////////////////////나중에 경고 메시지 삭제/////////////////////////
+					alert("프로필사진 vo 저장 에러발생");
 				}
 							
 			});
@@ -116,7 +172,7 @@
 				alert("아이디를 입력해주세요.");
 			
 			}else if(pattResult!=true){
-				alert("아이디 형식이 맞지않습니다.")
+				alert("아이디는 영문 숫자 조합 5~13자로 입력해주세요.")
 			}else{
 				$.ajax({
 					url:url,
@@ -125,6 +181,8 @@
 						$("#dupResult").css("display","block");
 										
 						$("#dupResult").html(result);
+																		
+						
 					},error:function(){
 						console.log("정보받기 에러 발생");
 						
@@ -169,7 +227,7 @@
  		<input type="password" name="userpwd" id="userpwd" class="form-control" placeholder="영문,숫자,특수문자조합 6~15글자" />			<!-- 비밀번호 input 영역 -->
  		
  		<label for="userpwd">*비밀번호 확인</label>
- 		<input type="password"  id="userpwdChk" class="form-control" placeholder="비밀번호 확인" />					<!-- 비밀번호 확인 input 영역 -->
+ 		<input type="password" id="userpwdChk" class="form-control" placeholder="비밀번호 확인" />					<!-- 비밀번호 확인 input 영역 -->
  		
  		<label for="username">*이름</label> 
  		<input type="text" name="username" id="username" placeholder="본명으로 입력해주세요" class="form-control"/>	<!-- 이름 input 영역 -->
