@@ -109,7 +109,12 @@
 			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
 		</jsp-property-group>
 		
-			
+		<jsp-property-group>
+			<url-pattern>/WEB-INF/views/admin/adminSearch/*</url-pattern>
+			<include-prelude>/WEB-INF/adminInc/adminSideBar.jspf</include-prelude>
+			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
+		</jsp-property-group>
+		
 	</jsp-config>
 	<!-- 원하는 페이지에 include -->
 

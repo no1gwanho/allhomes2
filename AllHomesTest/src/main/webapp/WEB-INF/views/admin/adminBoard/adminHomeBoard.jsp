@@ -6,19 +6,9 @@ td{
 	line-height: 40px;
 }
 </style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
- <script src="//code.jquery.com/jquery-1.12.4.js"></script>
- <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 	$(function(){
-		//select-기간 선택하면 input box 바꾸기
-		$("#searchSelect").change(function(){
-			if($("#searchSelect option:selected").val()=="writedate"){
-				$("#searchKey").css("display", "none");
-			}
-			
-			
-		});
+		
 		
 		//검색하기
 		$("#searchBtn").click(function(){
@@ -35,6 +25,7 @@ td{
 		});
 		
 		//상세조회 검색 누르기
+		
 		$("#searchDetailBtn").click(function(event){
 			if($("#searchDiv").css("display","none")){
 				$("#searchDiv").show("fast");
@@ -113,7 +104,7 @@ td{
 						placeholder="Search for..." aria-label="Search"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
-					<button class="btn btn-dark" type="button">
+					<button class="btn btn-dark" type="button" id="searchBtn">
 						<i class="fas fa-search fa-sm"></i>
 					</button>
 				</div>
