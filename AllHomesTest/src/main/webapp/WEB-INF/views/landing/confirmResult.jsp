@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:if test="${vo.confirm=='Y' }">
-	<script>
+	<script>	
 	location.href="/myapp/mypageShopping";
 	</script>
 </c:if>

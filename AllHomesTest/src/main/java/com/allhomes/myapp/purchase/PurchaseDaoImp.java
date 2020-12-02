@@ -3,7 +3,9 @@ package com.allhomes.myapp.purchase;
 import java.util.List;
 
 public interface PurchaseDaoImp {
-	public List<PurchaseVO>allPurchaseList();
+	public List<PurchaseVO> allPurchaseList();
+	
+	public List<PurchaseVO> joinPurchaseReview();
 	
 	public PurchaseVO selectOnePurchaseList(String userid);
 	

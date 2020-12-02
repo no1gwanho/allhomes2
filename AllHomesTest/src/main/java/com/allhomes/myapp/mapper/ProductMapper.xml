@@ -64,5 +64,8 @@
   	<select id="selectOptionProductNo" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
   		SELECT pd_no FROM(SELECT  *  FROM product ORDER BY ROWNUM DESC) WHERE ROWNUM = 1
   	</select>
-  	
+  	<!-- prodcut + option -->
+  	<select id="joinProductOption" resultType="com.allhomes.myapp.product.ProductVO">
+  		select p.pd_no, p.s_no, p.pd_name, p.price, p.discount, p.main_img, p.stock, p.status, p.sub_c, p.pd_img, p.pd_exp, p.shipping_c, o.o_no, o.o_value from product p, option_table o where p.pd_no=o.pd_no
+  	</select>
   </mapper>

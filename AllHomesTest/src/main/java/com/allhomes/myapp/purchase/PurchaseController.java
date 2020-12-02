@@ -14,9 +14,10 @@ public class PurchaseController {
 	@RequestMapping("/setInPurchase")
 	public ModelAndView purchaseUpdate(PurchaseVO vo) {
 		vo.setConfirm("Y");
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
+		mav.addObject("vo", dao.editConfirmCheck(vo));
 		mav.setViewName("landing/confirmResult");
 		
 		System.out.println("confirm의 값===============================> "+vo);

@@ -30,15 +30,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<img src="${vo.main_img}" alt="image" style="width:400px;height:380px;" />
+			<img src="<%=request.getContextPath() %>${po.main_img}" alt="image" style="width:400px;height:380px;" />
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-8" style="left:350px;">
 			<div class="product-details">
 				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
 					<div class="product-details">
-						Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
-						<h2 class="product-name">${vo.pd_name}</h2>
+						Category : <a href="#">메인카테고리</a> > <a href="#">${po.sub_c}</a><br/>
+						<h2 class="product-name">${po.pd_name}</h2>
 						<div>
 							<div class="product-ration">
 								<i class="fa fa-star"></i>
@@ -49,25 +49,25 @@
 							</div>
 							<a class="review-link" href="#review"><span style="color:#ee8374">8,154</span>&nbsp;&nbsp;리뷰</a>
 						</div>
-						<c:if test="${vo.discount != 0}">
-							<span style="font-size:1.4em;">원가:<del>${vo.price}원</del></span><br/>
-							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100)}원</span><br/>
-							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
+						<c:if test="${po.discount != 0}">
+							<span style="font-size:1.4em;">원가:<del>${po.price}원</del></span><br/>
+							<span style="font-size:1.4em;">할인가:${po.price-(po.price*po.discount/100)}원</span><br/>
+							<span style="font-size:1.4em;">배송비:${po.shipping_c }원</span><br/>
 						</c:if>
-						<c:if test="${vo.discount == 0 }">
-							<span style="font-size:1.4em;">원가:${vo.price}원</span><br/>
-							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
+						<c:if test="${po.discount == 0 }">
+							<span style="font-size:1.4em;">원가:${po.price}원</span><br/>
+							<span style="font-size:1.4em;">배송비:${po.shipping_c }원</span><br/>
 						</c:if>
-						<span class="product-available">재고:${vo.stock}</span>
-						<p>${vo.pd_exp }</p>
+						<span class="product-available">재고:${po.stock}</span>
+						<p>${po.pd_exp }</p>
 						<div class="product-options">
 							<label>
 								옵션 : 
-								<select class="input-select">
-									<option value="1">옵션1</option>
-									<option value="2">옵션2</option>
-									<option value="3">옵션3</option>	
-								</select>
+								<c:forEach var="op" items="option">
+									<select class="input-select">
+										<option value="${po.o_value}">${po.o_value }</option>	
+									</select>
+								</c:forEach>
 							</label>
 						</div>
 						<div class="qty-label">
@@ -339,7 +339,7 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<b>${(list.price + list.design + list.delivery + list.duability)4}</b>
+								<b>3.87</b>
 							</h2>
 						</div>
 						<div class="col-6">
@@ -396,7 +396,7 @@
 							<a href="#"><img src="<%=request.getContextPath()%>/resources/img/admin/user_basic.png" style="width:65%;"/></a>
 						</div>
 						<div class="col-11" style="text-align:left;">
-							회원닉네임
+							${pr.userid }
 						</div>
 					</div>
 					<div class="row" style="background-color:#eee;margin-top:15px;margin-bottom:25px;">
@@ -409,7 +409,7 @@
 							<i class="fa fa-star"></i>
 						</div>
 						<div class="col-3">
-							내구성 :
+							내구성 : ${list.avg(rating_duability)}
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -417,7 +417,7 @@
 							<i class="fa fa-star"></i>	
 						</div>
 						<div class="col-3">
-							가격 :
+							가격 : ${list.avg(rating_price)}
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -425,7 +425,7 @@
 							<i class="fa fa-star"></i>
 						</div>
 						<div class="col-3">
-							디자인 :
+							디자인 : ${list.avg(rating_design)}
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -433,7 +433,7 @@
 							<i class="fa fa-star"></i>
 						</div>
 						<div class="col-3">
-							배송 :
+							배송 : ${list.avg(rating_delivery)}
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -443,11 +443,11 @@
 					</div>
 					<div class="row">
 						<div class="col-12">
-							제품명 / 옵션 / 구매일
+							상품명 : ${po.pd_name } / 옵션 : ${po.o_value } / 구매일 :${pr.pc_date } 
 						</div>
 						<div class="col-12" style="margin-bottom:25px;">
-							리뷰내용 <br/>
-							이미지 첨부시 리뷰내용 아래 세팅
+							${pr.content } <br/>
+							${pr.img }
 						</div>
 						<div class="col-3">
 							<button class="btn btn" style="background-color:#ee8374;color:#fff;">도움이 되요</button>
@@ -467,11 +467,11 @@
 					<div class="product-options">
 						<label>
 							옵션 : 
-								<select class="input-select">
-									<option value="1">옵션1</option>
-									<option value="2">옵션2</option>
-									<option value="3">옵션3</option>	
-								</select>
+								<c:forEach var="op" items="option">
+									<select class="input-select">
+										<option value="${po.o_value}">${po.o_value }</option>	
+									</select>
+								</c:forEach>
 							</label>
 						</div>
 						<div class="qty-label">
