@@ -70,6 +70,7 @@ td{
 
 <script>
 $(function(){
+	//bxslider
 	$('.sec3_list').bxSlider({
 		auto : false,
 		pager : false,
@@ -85,6 +86,18 @@ $(function(){
 		nextText : ""
 	});
 
+	if(${sList}==""){
+		$("#storeBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
+	}
+	
+	/* if(${mList}==""){
+		$("#memberBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
+	}
+	
+	if(${pList}==""){
+		$("#productBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
+	} */
+	
 });
 </script>
 <div class="container-fluid">
@@ -98,8 +111,8 @@ $(function(){
 						style="float: left">Member</h6>
 
 				</div>
-				<div class="card-body" style="overflow:hidden;height:320px">
-					<div id="banner_list">
+				<div class="card-body" style="overflow:hidden;height:320px" >
+					<div id="memberBody">
 						<ul class="sec3_list">
 							<c:forEach var="mVo" items="${mList}">
 								<li><a href="/myapp/adminMemberDetail?m_no=${mVo.m_no}"><span><img
@@ -152,6 +165,41 @@ $(function(){
 				</div>
 				</div><!-- card body 끝 -->
 			
+			<!-- product -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
+						style="float: left">Store</h6>
+				</div>
+				<div class="card-body" style="text-align: center" >
+					<table style="cursor:pointer;" class="table table-hover" id="productBody">
+						<thead>
+							<tr>
+								<th>제품 번호</th>
+								<th>제품명</th>
+								<th>카테고리</th>
+								<th>재고</th>
+								<th>상태</th>
+								<th>판매량</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="pVo" items="${pList}">
+								<tr onclick="location.href='/myapp/productEdit?pd_no=${pVo.pd_no}'">
+									<td>${pVo.pd_no}</td>
+									<td>${pVo.pd_name}</td>
+									<td>${pVo.sub_c}</td>
+									<td>${pVo.stock}</td>
+									<td>${pVo.status}</td>
+									<td>521</td>
+								</tr>
+							</c:forEach>
+						</tbody>	
+					</table>
+				</div>
+			</div>
+			
+			
 			
 			<!-- store -->
 			<div class="card shadow mb-4">
@@ -160,7 +208,7 @@ $(function(){
 						style="float: left">Store</h6>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<table style="cursor:pointer;" class="table table-hover">
+					<table style="cursor:pointer;" class="table table-hover"  id="storeBody">
 					<thead>
 					<tr>
 						<th>번호</th>
@@ -200,7 +248,7 @@ $(function(){
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary" style="float:left">HomeBoard</h6>
 				</div>
-				<div class="card-body" style="text-align: center">
+				<div class="card-body" style="text-align: center" id="HBBody">
 					<table style="cursor: pointer;" class="table table-hover">
 						<thead>
 							<tr>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.store.StoreVO;
 
@@ -33,11 +34,13 @@ public class AdminSearchController {
 		List<RegisterVO> mList = dao.adminIntegSearchMember(key); //회원 검색
 		List<HomeboardVO> hList = dao.adminIntegSearchHB(key); //homeboard 검색
 		List<StoreVO> sList = dao.adminIntegSearchStore(key); //Store 검색 
+		List<ProductVO> pList = dao.adminIntegSearchProduct(key); //product 검색
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mList", mList);
 		mav.addObject("hList", hList);
 		mav.addObject("sList", sList);
+		mav.addObject("pList", pList);
 		mav.setViewName("admin/adminSearch/adminSearchMain");
 		return mav;
 	}
