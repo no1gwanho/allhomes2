@@ -47,14 +47,14 @@
 						<c:forEach var="vo" items="${list}">
 						<form method="post" action="/myapp/homeBoardThemeEdit">
 						<tr>
-							<input type="hidden" name="no" value="${vo.no}"/>
+							<input type="hidden" name="no" value="${vo.hb_theme_no}"/>
 							<td>
 								<input type="text" class="form-control" id="theme" name="theme" value="${vo.theme}"/>
 							</td>
 							<td>
 								<div style="float:right">
 									<button class="btn alert-secondary editTheme">수정</button>
-									<a href="/myapp/homeBoardThemeDel?no=${vo.no}" class="btn alert-danger">삭제</a>
+									<a href="/myapp/homeBoardThemeDel?no=${vo.hb_theme_no}" class="btn alert-danger">삭제</a>
 								</div>
 							</td>
 						</tr>

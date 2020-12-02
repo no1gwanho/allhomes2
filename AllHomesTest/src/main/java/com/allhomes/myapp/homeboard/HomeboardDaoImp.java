@@ -16,4 +16,7 @@ public interface HomeboardDaoImp {
 	//집들이 글번호 꺼내기 
 	public int getHomeboardNumber();
 	
+	//집들이 테마별 리스트
+	public List<HomeboardVO> homeboardThemeList(int no);
+	
 }

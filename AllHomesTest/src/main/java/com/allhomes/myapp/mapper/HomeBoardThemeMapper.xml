@@ -5,16 +5,16 @@
   <!-- 집들이 게시판 카테고리(테마) mapper -->
   <mapper namespace="com.allhomes.myapp.admin.HomeBoardThemeDaoImp">
   	<select id="HomeBoardThemeAll" resultType="com.allhomes.myapp.admin.HomeBoardThemeVO">
-  		select theme,no from hb_theme
+  		select theme,hb_theme_no from hb_theme
   	</select>
   	<insert id="HomeBoardThemeAdd">
-  		insert into hb_theme(theme,no) values(#{theme}, hb_theme_sq.nextval)
+  		insert into hb_theme(theme,hb_theme_no) values(#{theme}, hb_theme_sq.nextval)
   	</insert>
   	<update id="HomeBoardThemeEdit" parameterType="com.allhomes.myapp.admin.HomeBoardThemeVO">
-  		update hb_theme set theme=#{theme} where no=#{no}
+  		update hb_theme set theme=#{theme} where hb_theme_no=#{hb_theme_no}
   	</update>
   	<delete id="HomeBoardThemeDel">
-  		delete from hb_theme where no=#{no}
+  		delete from hb_theme where hb_theme_no=#{hb_theme_no}
   	</delete>
   </mapper>
 

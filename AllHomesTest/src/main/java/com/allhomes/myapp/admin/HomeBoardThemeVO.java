@@ -2,7 +2,7 @@ package com.allhomes.myapp.admin;
 
 public class HomeBoardThemeVO {
 	private String theme;
-	private int no;
+	private int hb_theme_no;
 	
 	public String getTheme() {
 		return theme;
@@ -10,11 +10,12 @@ public class HomeBoardThemeVO {
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
-	public int getNo() {
-		return no;
+	public int getHb_theme_no() {
+		return hb_theme_no;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setHb_theme_no(int hb_theme_no) {
+		this.hb_theme_no = hb_theme_no;
 	}
+	
 	
 }

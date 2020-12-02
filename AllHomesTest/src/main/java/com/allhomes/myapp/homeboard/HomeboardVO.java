@@ -15,10 +15,18 @@ public class HomeboardVO {
 	private String ip;
 	private String writedate;
 	
+	//조인을 위해 추가한 테마번호
+	private int hb_theme_no;
 	
 	
 	
-	
+
+	public int getHb_theme_no() {
+		return hb_theme_no;
+	}
+	public void setHb_theme_no(int hb_theme_no) {
+		this.hb_theme_no = hb_theme_no;
+	}
 	public int getB_no() {
 		return b_no;
 	}
@@ -55,11 +63,7 @@ public class HomeboardVO {
 	}
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
-		
-		
-		
 	}
-	
 	public String getUserid() {
 		return userid;
 	}
@@ -84,14 +88,12 @@ public class HomeboardVO {
 	public void setScrap(int scrap) {
 		this.scrap = scrap;
 	}
-	
 	public String getIp() {
 		return ip;
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
 	public String getWritedate() {
 		return writedate;
 	}
@@ -99,7 +101,5 @@ public class HomeboardVO {
 		this.writedate = writedate;
 	}
 	
-	
-
 	
 }
