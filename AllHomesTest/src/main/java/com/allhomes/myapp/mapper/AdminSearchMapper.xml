@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminSearchDaoImp">
+	<!-- 회원 관련 결과 -->
+	<select id="adminIntegSearchMember" resultType="com.allhomes.myapp.register.RegisterVO">
+		select m_no, userid, username, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate from register
+		 where userid LIKE '%'||#{param1}||'%' or username LIKE '%'||#{param1}||'%' or
+		 nickname LIKE '%'||#{param1}||'%' or tel LIKE '%'||#{param1}||'%' or email LIKE '%'||#{param1}||'%'
+	</select>
+	
+	<!-- homeboard 결과 -->
+	<select id="adminIntegSearchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, thumbnail, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+		where userid LIKE '%'||#{param1}||'%' or title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+	</select>
+</mapper>

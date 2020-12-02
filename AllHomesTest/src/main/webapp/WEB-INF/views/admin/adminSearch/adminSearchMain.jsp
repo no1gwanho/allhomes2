@@ -97,14 +97,17 @@ $(function(){
 				<div class="card-body" style="overflow:hidden;height:320px">
 					<div id="banner_list">
 						<ul class="sec3_list">
-							<li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li>
+							<c:forEach var="mVo" items="${memberVO}">
+								<li><span><img
+										src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+									<dl>
+										<dt>${mVo.userid}</dt>
+										<dd>
+											${mVo.username}<br>${mVo.regdate}
+										</dd>
+										<input type="hidden" value="${mVo.m_no}"/>
+									</dl></li>
+							</c:forEach>
 							<li><span><img
 									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
