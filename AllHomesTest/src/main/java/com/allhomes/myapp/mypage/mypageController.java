@@ -4,9 +4,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.store.StoreDaoImp;
+import com.allhomes.myapp.store.StoreVO;
 
 @Controller
 public class mypageController {
@@ -31,7 +34,7 @@ public class mypageController {
 	public ModelAndView purchaseList() {
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class); 
 		ModelAndView mav = new ModelAndView();
-		
+				
 		mav.addObject("vo", dao.allPurchaseList());
 		mav.setViewName("mypage/mypageShopping");
 		
