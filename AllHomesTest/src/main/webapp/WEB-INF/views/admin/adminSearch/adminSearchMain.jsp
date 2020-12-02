@@ -2,21 +2,86 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
+<style>
+.sec3_list li {
+	transition: 0.5s all;
+	text-align:center;
+}
+
+.sec3_list li span {
+	margin-top:25px;
+	display: block;
+	position: relative;
+	height: 100px;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.sec3_list li span img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 100px;
+	height: 100px;
+}
+
+.sec3_list li dl {
+	height: 130px;
+	padding: 25px;
+	background: #fff;
+	transition: 0.5s all;
+}
+
+.sec3_list li dl dt {
+	font-size: 20px;
+	color: #444;
+	line-height: 1;
+	font-weight: bold;
+}
+
+.sec3_list li dl dt:after {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: red;
+	margin-top: 10px;
+}
+
+.sec3_list li dl dd {
+	font-size: 14px;
+	color: #444;
+	margin-top: 10px;
+}
+
+.sec3_list li:hover {
+	transform: translateY(-20px);
+}
+
+.sec3_list li:hover dl {
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+}
+</style>
+
 <script>
-	$(function(){
-		$('.bxslider').bxSlider({
-			auto:true,
-			pager: false,
-			controls: true,
-			autoControls: false,
-			minSlides: 1,
-			moveSlides: 1,
-			slideMargin: 0,
-			autoHover:true,
-			prevText:"",
-			nextText:""			
-		});
+$(function(){
+	$('.sec3_list').bxSlider({
+		auto : false,
+		pager : false,
+		controls : true,
+		autoControls : false,
+		minSlides : 1,
+		maxSlides : 20,
+		moveSlides : 3,
+		slideWidth : 302,
+		slideMargin : 20,
+		autoHover : true,
+		prevText : "",
+		nextText : ""
 	});
+
+});
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -29,95 +94,61 @@
 						style="float: left">Member</h6>
 
 				</div>
-				<div class="card-body" style="overflow:hidden;height:300px">
-					<div class="bxslider">
-						<ul>
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color: lightblue; float: left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color:lightblue;float:left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color: lightblue; float: left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
-							
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color: lightblue; float: left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
-							
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color: lightblue; float: left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
-							
-							<li>
-								<div class="col-lg-3 mr-3"
-									style="background-color: lightblue; float: left;">
-									<img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 80%" /><br />
-									<p>
-										<span>seran11</span>
-									</p>
-									<p>
-										<span>권세란</span>
-									</p>
-								</div>
-							</li>
+				<div class="card-body" style="overflow:hidden;height:320px">
+					<div id="banner_list">
+						<ul class="sec3_list">
+							<c:forEach var="mVo" items="${memberVO}">
+								<li><span><img
+										src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+									<dl>
+										<dt>${mVo.userid}</dt>
+										<dd>
+											${mVo.username}<br>${mVo.regdate}
+										</dd>
+										<input type="hidden" value="${mVo.m_no}"/>
+									</dl></li>
+							</c:forEach>
+							<li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+								<dl>
+									<dt>testID</dt>
+									<dd>
+										권세란<br>2020-10-31
+									</dd>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+								<dl>
+									<dt>testID</dt>
+									<dd>
+										권세란<br>2020-10-31
+									</dd>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+								<dl>
+									<dt>testID</dt>
+									<dd>
+										권세란<br>2020-10-31
+									</dd>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+								<dl>
+									<dt>testID</dt>
+									<dd>
+										권세란<br>2020-10-31
+									</dd>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+								<dl>
+									<dt>testID</dt>
+									<dd>
+										권세란<br>2020-10-31
+									</dd>
+								</dl></li>
 						</ul>
 					</div>
-
+				</div>
 				</div><!-- card body 끝 -->
-			</div>
+			
 			
 			<!-- store -->
 			<div class="card shadow mb-4">
