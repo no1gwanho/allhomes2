@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 <style>
+td{
+	height:40px;
+	line-height:40px;
+}
 .sec3_list li {
 	transition: 0.5s all;
 	text-align:center;
@@ -97,16 +101,15 @@ $(function(){
 				<div class="card-body" style="overflow:hidden;height:320px">
 					<div id="banner_list">
 						<ul class="sec3_list">
-							<c:forEach var="mVo" items="${memberVO}">
-								<li><span><img
+							<c:forEach var="mVo" items="${mList}">
+								<li><a href="/myapp/adminMemberDetail?m_no=${mVo.m_no}"><span><img
 										src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 									<dl>
 										<dt>${mVo.userid}</dt>
 										<dd>
 											${mVo.username}<br>${mVo.regdate}
 										</dd>
-										<input type="hidden" value="${mVo.m_no}"/>
-									</dl></li>
+									</dl></a></li>
 							</c:forEach>
 							<li><span><img
 									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
@@ -155,10 +158,39 @@ $(function(){
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
 						style="float: left">Store</h6>
-
 				</div>
 				<div class="card-body" style="text-align: center">
+					<table style="cursor:pointer;" class="table table-hover">
+					<thead>
+					<tr>
+						<th>번호</th>
+						<th>스토어명</th>
+						<th>사업자등록번호</th>
+						<th>프로필</th>
+						<th>ID</th>
+						<th>담당자 Tel</th>
+						<th>입점일</th>
+					</tr>
+					</thead>
+					<tbody>
 					
+					<c:forEach var="vo" items="${sList}">
+					<tr onClick="location.href='/myapp/adminStoreDetail?s_no=${vo.s_no}'">
+						
+						<td>${vo.s_no}</td>
+						<td>${vo.s_name}</td>
+						<td>${vo.s_num}</td>
+						<td>
+							<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:50px;height:50px; border-radius:70%;"/>
+						</td>
+						<td>${vo.s_id}</td>
+						<td>${vo.staff_t}</td>
+						<td>${vo.openingdate}</td>
+					</tr>
+					</c:forEach>
+					
+					</tbody>	
+				</table>
 
 				</div>
 			</div>

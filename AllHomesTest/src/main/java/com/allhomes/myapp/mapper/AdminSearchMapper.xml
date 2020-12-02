@@ -15,4 +15,18 @@
 		select b_no, title, theme, userid, thumbnail, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
 		where userid LIKE '%'||#{param1}||'%' or title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
 	</select>
+	
+	<!-- store 결과 -->
+	<select id="adminIntegSearchStore" resultType="com.allhomes.myapp.store.StoreVO">
+		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
+		where s_name LIKE '%'||#{param1}||'%' or s_id LIKE '%'||#{param1}||'%' or staff_n LIKE '%'||#{param1}||'%' or staff_t LIKE '%'||#{param1}||'%'
+		 or staff_e LIKE '%'||#{param1}||'%' or s_homepage LIKE '%'||#{param1}||'%'
+	</select>
+	
+	<!-- product 결과 -->
+	<select id="adminIntegSearchProduct" resultType="com.allhomes.myapp.product.ProductVO">
+		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c from product
+		where pd_name LIKE '%'||#{param1}||'%' or status LIKE '%'||#{param1}||'%' or
+		sub_c LIKE '%'||#{param1}||'%' or pd_exp LIKE '%'||#{param1}||'%'
+	</select>
 </mapper>

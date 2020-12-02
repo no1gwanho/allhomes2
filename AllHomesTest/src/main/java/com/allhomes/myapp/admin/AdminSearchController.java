@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.store.StoreVO;
 
 @Controller
 public class AdminSearchController {
@@ -29,12 +30,14 @@ public class AdminSearchController {
 	@RequestMapping("/adminSearchMain")
 	public ModelAndView adminSearchMain(@RequestParam("key") String key) {
 		AdminSearchDaoImp dao = sqlSession.getMapper(AdminSearchDaoImp.class);
-		List<RegisterVO> memberVO = dao.adminIntegSearchMember(key); //회원 관련 결과
-		List<HomeboardVO> hList = dao.adminIntegSearchHB(key); //homeboard 관련
+		List<RegisterVO> mList = dao.adminIntegSearchMember(key); //회원 검색
+		List<HomeboardVO> hList = dao.adminIntegSearchHB(key); //homeboard 검색
+		List<StoreVO> sList = dao.adminIntegSearchStore(key); //Store 검색 
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberVO", memberVO);
+		mav.addObject("mList", mList);
 		mav.addObject("hList", hList);
+		mav.addObject("sList", sList);
 		mav.setViewName("admin/adminSearch/adminSearchMain");
 		return mav;
 	}
