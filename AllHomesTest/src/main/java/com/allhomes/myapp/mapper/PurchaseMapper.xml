@@ -16,6 +16,9 @@
 	<update id="editPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
 	
 	</update>
+	<update id="editConfirmCheck" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
+		update purchase set confirm=#{confirm} where pc_no=#{pc_no}  
+	</update>
 	<delete id="delPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
 	
 	</delete>

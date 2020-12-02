@@ -11,5 +11,7 @@ public interface PurchaseDaoImp {
 	
 	public int editPurchaseList(PurchaseVO vo);
 	
+	public int editConfirmCheck(PurchaseVO vo);
+	
 	public int delPurchaseList(PurchaseVO vo);
 }

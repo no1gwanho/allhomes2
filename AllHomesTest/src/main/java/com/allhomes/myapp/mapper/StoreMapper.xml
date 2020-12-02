@@ -10,7 +10,7 @@
  	<select id="storeAll" resultType="com.allhomes.myapp.store.StoreVO">
  		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
  	</select>
- 	<select id="storeSelect" resultType="com.allhomes.myapp.store.StoreVO">
+ 	<select id="storeSelect" parameterType="int" resultType="com.allhomes.myapp.store.StoreVO">
  		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
  		 where s_no=#{s_no}
  	</select>
