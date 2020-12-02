@@ -47,10 +47,33 @@ public class HomeboardController {
 		return "/homeboard/homeboardTop";
 	}
 
-	@RequestMapping("/homeboardTheme")
-	public String homeboardTheme() {
-		return "/homeboard/homeboardTheme";
+	
+	@RequestMapping("/homeboardTheme?hb_them_no")
+	public ModelAndView homeboardTheme(int hb_theme_no) {
+		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll();
+		
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("themeList", themeList);
+		//mav.setViewName("/homeboard/homeboardTheme");
+		return mav;
+
 	}
+	
+	@RequestMapping("/homeboardTheme")
+	public ModelAndView homeboardTheme() {
+		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("themeList", themeList);
+		mav.setViewName("/homeboard/homeboardTheme");
+		return mav;
+
+	}
+	
+	
+	
 
 	@RequestMapping("/homeboardWrite")
 	public ModelAndView homeboardWrite() {
@@ -60,6 +83,7 @@ public class HomeboardController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("themeList", themeList);
 		mav.setViewName("/homeboard/homeboardWrite");
+	
 
 		return mav;
 	}

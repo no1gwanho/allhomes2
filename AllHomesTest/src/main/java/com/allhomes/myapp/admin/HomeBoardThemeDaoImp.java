@@ -12,5 +12,5 @@ public interface HomeBoardThemeDaoImp {
 	//테마 수정
 	public int HomeBoardThemeEdit(HomeBoardThemeVO vo);
 	//테마 삭제
-	public int HomeBoardThemeDel(int no);
+	public int HomeBoardThemeDel(int hb_theme_no);
 }

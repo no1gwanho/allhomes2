@@ -66,38 +66,35 @@
 	margin: 20px;
 }
 </style>
+<script>
+	$(function(){
+		if
+		
+		
+	});
+
+
+</script>
 
 <div class="container">
-	<h3 id="homeboardTitle">테마별 인기글</h3>
-
+	<h3 id="homeboardTitle">테마별 집들이</h3>
 
 	<!-- 탭메뉴  -->
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<li class="nav-item"><a class="nav-link active" id="home-tab"
-			data-toggle="tab" href="#home" role="tab" aria-controls="home"
-			aria-selected="true">테마1</a></li>
-		<li class="nav-item"><a class="nav-link" id="profile-tab"
-			data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-			aria-selected="false">테마2</a></li>
-		<li class="nav-item"><a class="nav-link" id="contact-tab"
-			data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-			aria-selected="false">테마3</a></li>
-		<li class="nav-item"><a class="nav-link" id="contact-tab"
-			data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-			aria-selected="false">테마4</a></li>
+		<c:forEach var="vo" items="${themeList }">
+		<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="/myapp/homeboardTheme?hb_theme_no=0" role="tab" aria-controls="home" aria-selected="true">${vo.theme }</a></li>
+		</c:forEach>
+	
 	</ul>
 
 
-	<!-- 테마1 본문-->
+	<!--탭 본문-->
 	<div class="tab-content" id="myTabContent">
-
-
-		<div class="tab-pane fade show active" id="home" role="tabpanel"
-			aria-labelledby="home-tab">
-
+		
+		<!-- 테마1시작 -->
+		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 			<!-- 내용시작 -->
 			<div class="row text-center">
-
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-img-top">
@@ -107,158 +104,21 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="/myapp/homeboardView?b_no=13">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
+								<a href="/myapp/homeboardView?b_no=13">테마1테스트</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
 							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
 			</div>
-			<div class="row text-center">
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- 테마1 내용끝 -->
-
-
 		</div>
 		<!-- 테마1 끝 -->
 
-
-
-
-		<div class="tab-pane fade" id="profile" role="tabpanel"
-			aria-labelledby="profile-tab">
+		
+		<!-- 테마2 시작 -->
+		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 			<div class="row text-center">
-
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-img-top">
@@ -268,78 +128,19 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
+								<a href="#">테마2테스트</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
 							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
 			</div>
-			<!-- 테마2 내용끝 -->
-		</div>
+		</div><!-- 테마2끝 -->
 
 		<!-- 테마3시작 -->
-		<div class="tab-pane fade" id="contact" role="tabpanel"
-			aria-labelledby="contact-tab">
+		<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 			<div class="row text-center">
-
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-img-top">
@@ -349,80 +150,20 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
+								<a href="#">테마3 테스트</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
 							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
 			</div>
-			<!-- 테마3 내용끝 -->
-		</div>
-		<!-- 테마3끝 -->
-
+		</div><!-- 테마3끝 -->
+		
 
 		<!-- 테마4시작 -->
-		<div class="tab-pane fade" id="contact" role="tabpanel"
-			aria-labelledby="contact-tab">
+		<div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
 			<div class="row text-center">
-
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-img-top">
@@ -432,78 +173,17 @@
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
+								<a href="#">테마4테스트</a>
 							</div>
 							<a href="#" class="card-text">써니웨이</a>
 							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
 						</div>
 					</div>
 				</div>
+			</div> 
+		</div><!-- 테마4끝 -->
 
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-									변신할머니와 함께 살던 집의 변신</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- 테마4 내용끝 -->
-		</div>
-		<!-- 테마4끝 -->
-
-
-
-	</div>
-	<!-- tap content 끝 -->
+	</div><!-- 탭본문 끝 -->
 	
 
 	<!-- pagination ===========================================================-->
@@ -525,4 +205,5 @@
 
 
 
+</div>
 </div>
