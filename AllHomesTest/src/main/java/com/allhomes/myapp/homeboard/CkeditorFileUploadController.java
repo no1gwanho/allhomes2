@@ -19,13 +19,15 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.google.gson.JsonObject;
 
 
 
@@ -58,7 +60,7 @@ public class CkeditorFileUploadController {
             byte[] bytes = upload.getBytes();
             
             //이미지 경로 생성
-            String path = ses.getServletContext().getRealPath("/")+"homeboardUpload\\"+dateForFile+"\\"; 
+            String path = ses.getServletContext().getRealPath("/")+"resources\\homeboard\\img\\"+dateForFile+"\\"; 
             String ckUploadPath = path + uid + "_" + fileName;
             
             System.out.println(path);
@@ -77,9 +79,9 @@ public class CkeditorFileUploadController {
             out.write(bytes);
             out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
             
-            String callback = request.getParameter("CKEditorFuncNum");
+            //String callback = request.getParameter("content");
             printWriter = response.getWriter();
-            String fileUrl = "/myapp/editor/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName;  // 작성화면
+            String fileUrl = "/resources/homeboard/img/" + dateForFile+ "/" + uid + "_" + fileName;  // 블로그 화면에 뿌려줄때 
             
         // 업로드시 메시지 출력
           printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
@@ -96,62 +98,6 @@ public class CkeditorFileUploadController {
         
         return;
     }
-    
-    /**
-     * cKeditor 서버로 전송된 이미지 뿌려주기
-     * @param uid
-     * @param fileName
-     * @param request
-     * @return
-     * @throws ServletException
-     * @throws IOException
-     */
-    //
-    @RequestMapping(value="/editor/ckImgSubmit.do")
-    public void ckSubmit(@RequestParam(value="uid") String uid
-                            , @RequestParam(value="fileName") String fileName
-                            , HttpServletRequest request, HttpServletResponse response)
- throws ServletException, IOException{
-    	HttpSession ses = request.getSession();
-        //서버에 저장된 이미지 경로
-    	String path = ses.getServletContext().getRealPath("/")+"homeboardUpload\\"+dateForFile+"\\"; 
-        String sDirPath = path + uid + "_" + fileName;
-    
-        File imgFile = new File(sDirPath);
-        
-        //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
-        if(imgFile.isFile()){
-            byte[] buf = new byte[1024];
-            int readByte = 0;
-            int length = 0;
-            byte[] imgBuf = null;
-            
-            FileInputStream fileInputStream = null;
-            ByteArrayOutputStream outputStream = null;
-            ServletOutputStream out = null;
-            
-            try{
-                fileInputStream = new FileInputStream(imgFile);
-                outputStream = new ByteArrayOutputStream();
-                out = response.getOutputStream();
-                
-                while((readByte = fileInputStream.read(buf)) != -1){
-                    outputStream.write(buf, 0, readByte);
-                }
-                
-                imgBuf = outputStream.toByteArray();
-                length = imgBuf.length;
-                out.write(imgBuf, 0, length);
-                out.flush();
-                
-            }catch(IOException e){
-                e.getStackTrace();
-            }finally {
-                outputStream.close();
-                fileInputStream.close();
-                out.close();
-            }
-        }
-    }
+
 
 }

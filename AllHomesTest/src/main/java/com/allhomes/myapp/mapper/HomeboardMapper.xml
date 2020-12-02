@@ -3,7 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
-  	<!-- 글 작성하기 -->
+  	<!-- 집들이 전체리스트 -->
+ 	<select id="homeboardAllList"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		select b_no, thumbnail, title, userid, theme, hit, scrap from homeboard order by b_no desc
+ 	</select>
+  	
+  	<!-- 집들이 글작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
   	  	insert into homeboard
   	  	(b_no, title, thumbnail, content, theme, hashtag, userid, nickname, hit, scrap, writedate, ip) values
@@ -11,14 +16,13 @@
   	</insert>
   	
 
-  	<!-- 글내용보기 -->
+  	<!-- 집들이 글내용보기 -->
   	<select id="homeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
   		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
   		from homeboard where b_no=#{param1}
   	</select>
   	
-  	<!-- 글번호꺼내기 -->
-
+  	<!-- 집들이 글번호꺼내기 -->
      <select id="getHomeboardNumber" resultType="int">
         select nvl(max(b_no), 1) from homeboard
      </select>
