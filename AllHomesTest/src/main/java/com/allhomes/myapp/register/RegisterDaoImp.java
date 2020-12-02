@@ -37,4 +37,8 @@ public interface RegisterDaoImp {
 	//아이디 중복검사
 	public RegisterVO dupFilter(RegisterVO vo);
 
+	//프로필 이미지 업로드
+	public int photoBtn(RegisterVO vo);
+	
+	
 }
