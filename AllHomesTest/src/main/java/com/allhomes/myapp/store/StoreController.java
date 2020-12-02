@@ -38,7 +38,6 @@ public class StoreController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", dao.productAllList(pvo));		
 		mav.addObject("pageVO", pageVO);		
-		mav.addObject("rv", review.selectOneReview(pd_no));
 		mav.setViewName("store/storeHome");
 		
 		return mav;
@@ -64,12 +63,10 @@ public class StoreController {
 
 		ReviewDaoImp dAo = sqlSession.getMapper(ReviewDaoImp.class);
 		List<ReviewVO> list = dAo.productReviewList(pd_no);
-		int result = dAo.countReview(pd_no);
 
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("vo", vo);
 		mav.addObject("list", list);
-		mav.addObject("result", result);
 		mav.setViewName("store/storeDetail");
 		
 		return mav;
