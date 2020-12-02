@@ -17,9 +17,14 @@
 	
 	</update>
 	<update id="editConfirmCheck" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
-		update purchase set confirm=#{confirm} where pc_no=#{pc_no}  
+		update purchase set pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm='Y', memo, o_no where pd_no={pd_no}
 	</update>
 	<delete id="delPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
 	
 	</delete>
+	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
+  		select p.pc_no, p.pd_no, p.s_no, p.userid, p.num, p.price, p.shipping_c, p.total_p, p.a_code, p.pc_date, p.payment, p.status, p.confirm, p.memo, p.o_no,
+  		r.rating_price, r.rating_delivery, r.rating_design, r.rating_durability, r.img, r.content, r.writedate 
+  		from purchase p, review r where p.userid=r.userid and p.pd_no=r.pd_no and p.s_no=r.s_no
+  	</select>
 </mapper>

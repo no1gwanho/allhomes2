@@ -15,7 +15,7 @@
 .col-3 img {
 	left: 100px;
 	width: 315px;
-	height: 280px;
+	height: 300px;
 }
 .title {
 	font-height: bold;
@@ -93,7 +93,7 @@
 		<c:forEach var="vo" items="${list}">
 			<div class="col-3">
 				<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
-					<img src="${vo.main_img}"/><br/>
+					<img src="<%=request.getContextPath() %>${vo.main_img}"/><br/>
 					[${vo.s_no}] ${vo.pd_name }<br/>
 					<c:if test="${vo.discount != 0}">
 						${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 

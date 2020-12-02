@@ -15,5 +15,7 @@
 	<update id="createOptionSq">
 		create sequence op_sq start with 1 increment by 1
 	</update>
-	
+	<select id="optionList" resultType="com.allhomes.myapp.product.OptionVO">
+		select pd_no, o_no, o_value from option_table
+	</select>
 </mapper>

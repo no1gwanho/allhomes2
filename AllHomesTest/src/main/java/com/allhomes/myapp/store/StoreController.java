@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
 import com.allhomes.myapp.review.ReviewVO;
 
@@ -58,15 +60,16 @@ public class StoreController {
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
 		
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class); 
-		ProductVO vo = dao.selectProduct(pd_no);
-
-		ReviewDaoImp dAo = sqlSession.getMapper(ReviewDaoImp.class);
-		List<ReviewVO> list = dAo.productReviewList(pd_no);
-
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		PurchaseDaoImp dAo = sqlSession.getMapper(PurchaseDaoImp.class);
+		
 		ModelAndView mav = new ModelAndView(); 
-		mav.addObject("vo", vo);
-		mav.addObject("list", list);
+		
+		List<ProductVO> po = dao.joinProductOption();
+		List<PurchaseVO> pr = dAo.joinPurchaseReview();
+
+		mav.addObject("po", po);
+		mav.addObject("pr", pr);
 		mav.setViewName("store/storeDetail");
 		
 		return mav;
