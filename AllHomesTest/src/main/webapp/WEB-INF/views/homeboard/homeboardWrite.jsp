@@ -7,14 +7,14 @@
 
 <!-- 글쓰기폼을 위한 CKEDITOR -->
 <script>
+
 	$(function() {
+		
 		CKEDITOR.replace('content', {
 			filebrowserUploadUrl:'/myapp/editor/imageUpload.do',
 			height:500,
 			extraPlugins : 'confighelper',
 		});
-		
-		
 		
 		console.log(CKEDITOR.instances.content.getData().length);
 		$("#homeboardForm").submit(()=>{

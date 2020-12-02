@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
-<script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 
 <style>
 
@@ -42,11 +42,11 @@
 }
 
 .card-text {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .card-detail {
-	font-size: 8px;
+	font-size: 12px;
 }
 
 #bxslider img {
@@ -110,78 +110,26 @@
 
 	<!-- Page Features -->
 	<div class="row text-center">
+	
+	<c:forEach var="vo" items="${list }">
 
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="/myapp/homeboardView?b_no=13"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
+					<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath() %>${vo.thumbnail }"/></a>
 				</div>
 				<div class="card-body">
 					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=13">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
+						<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
+					<a href="#" class="card-text">${vo.userid }</a>
+					<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
 				</div>
 			</div>
 		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="/myapp/homeboardView"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=10">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="/myapp/homeboardView"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=11">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=12">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
+		
+		
+	</c:forEach>
 
 	</div>
 	<!-- /.row -->
@@ -198,9 +146,7 @@
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
+					<a href="#"><img src="<%=request.getContextPath() %>${vo.thumbnail }"/></a>
 				</div>
 				<div class="card-body">
 					<div class="card-title">

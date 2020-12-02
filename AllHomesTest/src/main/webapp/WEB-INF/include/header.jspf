@@ -14,10 +14,12 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/allhomes_header.css" type="">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+
 <style>
 	body{
 		font-family: 'Noto Sans KR', sans-serif;
