@@ -5,6 +5,7 @@
 <style>
 .sec3_list li {
 	transition: 0.5s all;
+	text-align:center;
 }
 
 .sec3_list li span {
@@ -23,7 +24,6 @@
 	transform: translate(-50%, -50%);
 	width: 100px;
 	height: 100px;
-	background-color: cadetblue;
 }
 
 .sec3_list li dl {
@@ -98,52 +98,47 @@ $(function(){
 					<div id="banner_list">
 						<ul class="sec3_list">
 							<li><span><img
-									src="/myapp/resources/img/Sweet Morning.jpg" alt=""></span>
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 1</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
 								</dl></li>
 							<li><span><img
-									src="/myapp/resources/img/Sweet Morning.jpg" alt=""></span>
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 2</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
-								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/Sweet Morning.jpg" alt=""></span>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 3</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
-								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/Sweet Morning.jpg" alt=""></span>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 4</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
-								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/Sweet Morning.jpg" alt=""></span>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 5</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
-								</dl></li>
-							<li><span><img
-									src="/http://localhost:9090/myapp/sliderTestmyapp/resources/img/Sweet Morning.jpg"
-									alt=""></span>
+								</dl></li><li><span><img
+									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 6</dt>
+									<dt>testID</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										권세란<br>2020-10-31
 									</dd>
 								</dl></li>
 						</ul>
