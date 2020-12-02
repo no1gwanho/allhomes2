@@ -39,10 +39,9 @@ td{
 }
 
 .sec3_list li dl dt {
-	font-size: 20px;
+	font-size: 17px;
 	color: #444;
 	line-height: 1;
-	font-weight: bold;
 }
 
 .sec3_list li dl dt:after {
@@ -55,8 +54,14 @@ td{
 }
 
 .sec3_list li dl dd {
-	font-size: 14px;
+	font-size: 16px;
 	color: #444;
+	margin-top: 10px;
+}
+
+.sec3_list li dl dd span{
+	font-size: 13px;
+	color: #bbbbbb;
 	margin-top: 10px;
 }
 
@@ -68,6 +73,7 @@ td{
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
 }
 
+.wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 </style>
 <script>
 	$(function(){
@@ -158,57 +164,50 @@ td{
 				<div class="card-body" style="height:440px">
 					<div id="banner_list">
 						<ul class="sec3_list">
-							<li><span><img
+							<c:forEach var="vo" items="${hList}">
+							<li onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'"><span><img
 									src="/myapp/resources/img/admin/06.jpg" alt=""></span>
 								<dl>
-									<dt>빈티지한 인테리어 소품 어쩌구 저쩌구</dt>
+									<dt class="wordCut">${vo.title}</dt>
 									<dd>
-										seran11<br/>
-										2020-11-02
+										${vo.userid}<br/>
+										${vo.writedate}<br/>
+										<span>조회수:${vo.hit}  스크랩:${vo.scrap}</span>
 									</dd>
 								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/admin/05.png" alt=""></span>
+							</c:forEach>
+							
+							<li onClick="location.href='#'"><span><img
+									src="/myapp/resources/img/admin/Vice City.jpg" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 2</dt>
+									<dt class="wordCut">집들이 게시판 테스트 페이지1</dt>
 									<dd>
-										seran11<br/>
-										2020-11-02
+										testID<br/>
+										2020-12-02<br/>
+										<span>조회수:0  스크랩:0</span>
 									</dd>
 								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/admin/04.jpg" alt=""></span>
+							<li onClick="location.href='#'"><span><img
+									src="/myapp/resources/img/admin/Cocoaa Ice.jpg" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 3</dt>
+									<dt class="wordCut">집들이 게시판 테스트 페이지2</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										testID<br/>
+										2020-12-02<br/>
+										<span>조회수:0  스크랩:0</span>
 									</dd>
 								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/admin/03.jpg" alt=""></span>
+							<li onClick="location.href='#'"><span><img
+									src="/myapp/resources/img/admin/Nelson.jpg" alt=""></span>
 								<dl>
-									<dt>배너슬라이드 4</dt>
+									<dt class="wordCut">집들이 게시판 테스트 페이지3</dt>
 									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
+										testID<br/>
+										2020-12-02<br/>
+										<span>조회수:0  스크랩:0</span>
 									</dd>
 								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/admin/02.jpg" alt=""></span>
-								<dl>
-									<dt>배너슬라이드 5</dt>
-									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
-									</dd>
-								</dl></li>
-							<li><span><img
-									src="/myapp/resources/img/admin/01.jpg"
-									alt=""></span>
-								<dl>
-									<dt>배너슬라이드 6</dt>
-									<dd>
-										배너슬라이드입니다.<br>설명 및 내용 텍스트.
-									</dd>
-								</dl></li>
+								
 						</ul>
 					</div>
 				<!-- card-body끝 -->
