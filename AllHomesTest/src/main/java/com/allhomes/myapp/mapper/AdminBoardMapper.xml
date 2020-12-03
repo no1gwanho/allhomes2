@@ -63,4 +63,29 @@
 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
 		where to_char(writedate, 'YYYY-MM-DD') between #{param1} and #{param2}
 	</select>
+	
+	
+	<!-- homeboard 선택 검색 -->
+	<select id="adminHBSearch" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+ 	
+ 		<where>
+	 		<choose>
+	 			<when test="value == 'userid'">
+	 				userid LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 'title'">
+	 				title LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 'content'">
+	 				 content LIKE '%'||#{key}||'%'
+	 			</when>
+	 			
+	 		</choose>
+ 		</where>
+ 		 
+ 	</select>
+	
+	
+	
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.store.StoreVO;
 
 @Controller
 public class AdminHomeBoardController {
@@ -147,6 +148,21 @@ public class AdminHomeBoardController {
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
 		return mav;
 	}
+	
+	
+	//선택검색
+		@RequestMapping("/adminHBSearch")
+		public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			List<HomeboardVO> hList = dao.adminHBSearch(key, value);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("hList", hList);
+
+			mav.setViewName("admin/adminBoard/adminHomeBoard");
+			return mav;
+		}
+		
 		
 		
 }
