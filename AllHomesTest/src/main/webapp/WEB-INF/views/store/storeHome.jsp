@@ -55,6 +55,21 @@
 		});
 	});	
 </script>
+<script>
+	var count = 0;
+	//스크롤 바닥 감지
+	window.onscroll = function(e) {
+    	//추가되는 임시 콘텐츠
+    	//window height + window scrollY 값이 document height보다 클 경우,
+    	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    		//실행할 로직 (콘텐츠 추가)
+        	count++;
+        	var addContent = '<div class="block"><p>'+ count +'</p></div>';
+        	//article에 추가되는 콘텐츠를 append
+        	$('article').append(addContent);
+    	}
+	};
+</script>
 <div class="container">
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
@@ -88,189 +103,33 @@
 			</label>			
 		</div>
 	</div>
-	<hr/>
-	<div class="row">
-		<c:forEach var="vo" items="${list}">
-			<div class="col-3">
-				<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
-					<img src="<%=request.getContextPath() %>${vo.main_img}"/><br/>
-					[${vo.s_no}] ${vo.pd_name }<br/>
-					<c:if test="${vo.discount != 0}">
-						${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
-					</c:if>
-					<c:if test="${vo.discount == 0 }">
-						${vo.price }원<br/>
-					</c:if>
-					<h6>${(rVo.rating_price+rVo.rating_duability+rVo.rating_design+rVo.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;
-					<c:if test="${vo.status!=null }">
-						<span class="badge badge-secondary">${vo.status }</span>
-					</c:if>
-					</h6>
-				</a>
-			</div>
-		</c:forEach>
-	</div>				
-
-<%--  	<div class="row">
-		<div class="col-3">
-			<a href="/myapp/storeDetail">				
-				<img src="${pageContext.request.contextPath}/resources/img/pd/tb01.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-    		</a>
+	<article>
+    	<div class="block">
+			<hr/>
+			<div class="row">
+				<c:forEach var="vo" items="${list}">
+					<div class="col-3">
+						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
+							<img src="<%=request.getContextPath() %>${vo.main_img}"/><br/>
+							[${vo.s_no}] ${vo.pd_name }<br/>
+							<c:if test="${vo.discount != 0}">
+								${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
+							</c:if>
+							<c:if test="${vo.discount == 0 }">
+								${vo.price }원<br/>
+							</c:if>
+							<h6>평점 / 리뷰&nbsp;&nbsp;
+							<c:if test="${vo.status!=null }">
+								<span class="badge badge-secondary">${vo.status }</span>
+							</c:if>
+							</h6>
+						</a>
+					</div>
+				</c:forEach>
+			</div>	
 		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd02.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;</h6>
-   			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd03.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;</h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd04.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">MD추천</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd05.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;</h6>
-			</a>
-		</div>
-	    <div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd06.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">2차입고</span></h6>
-			</a>
-		</div>
-    	<div class="col-3">
-			<a href="">
-    			<img src="${pageContext.request.contextPath}/resources/img/pd/pd07.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;</h6>
-		    </a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd08.png"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">MD추천</span></h6>
-			</a>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd09.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd10.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="#">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd11.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd12.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd13.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd14.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd15.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-		<div class="col-3">
-			<a href="">
-				<img src="${pageContext.request.contextPath}/resources/img/pd/pd16.jpg"/><br/>
-				[스토어명] / 상품명<br/>
-				할인율 / 가격<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">신상품</span></h6>
-			</a>
-		</div>
-	</div> --%>
-	<br/>
-	<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 페이징 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
- 	<div id="paging">
-		<ul class="pagination justify-content-center">
-			<li class="page-item">
-				<c:if test="${pageVO.nowPage>1}">
-					<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${pageVO.nowPage-1}">&laquo;</a>
-				</c:if>
-				<c:if test="${pageVO.nowPage==1}">
-					<a style="color:pink;background-color:#fff;" class="page-link">&laquo;</a>
-				</c:if>
-			</li>
-			<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageRecord-1}">
-				<c:if test="${p<=pageVO.totalPage}">	
-					<li class="page-item">
-						<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${p}">${p}</a>
-					</li>
-				</c:if>
-			</c:forEach>
-			<li class="page-item">
-				<c:if test="${pageVO.nowPage<pageVO.totalPage}">
-					<a style="color:pink;background-color:#fff;" class="page-link" href="/myapp/storeHome?nowPage=${pageVO.nowPage+1}">&raquo;</a>
-				</c:if>
-			</li>
-		</ul>
-	</div>
+	</article>
 </div>
-
 
 
 	
