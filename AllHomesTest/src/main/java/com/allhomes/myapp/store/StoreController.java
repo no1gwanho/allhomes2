@@ -27,22 +27,16 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome(PagingVO pvo) {
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-		ReviewDaoImp review = sqlSession.getMapper(ReviewDaoImp.class);
-		
-		PagingVO pageVO = new PagingVO();
-		pageVO.setTotalRecord(dao.getAllProductCount(pageVO));
-				
-		ReviewVO rVo = review.allReviewList();
-		
+	public ModelAndView storeHome() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", dao.productAllList(pvo));		
-		mav.addObject("pageVO", pageVO);
-		mav.addObject("rList", rVo);
-		mav.setViewName("store/storeHome");
 		
-		return mav;
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
+		
+		mav.addObject("list", dao.productAllList());		
+		mav.setViewName("store/storeHome");		
+
+		
+		return mav;	
 	 }
 
 	@RequestMapping("/storeCategory")
@@ -69,7 +63,7 @@ public class StoreController {
 		
 		List<ReviewVO> rList = rDao.selectReview(pd_no);
 		int result = rDao.countReview(pd_no);
-		List<PurchaseVO> pList = pDao.selectPurchaseListPdno(pd_no);
+		PurchaseVO pVo = pDao.selectOnePurchaseListPdno(pd_no);
 				
 		ModelAndView mav = new ModelAndView(); 
 		
@@ -77,7 +71,7 @@ public class StoreController {
 		
 		mav.addObject("rList", rList);
 		mav.addObject("result", result);
-		mav.addObject("pVo", pList);
+		mav.addObject("pVo", pVo);
 		
 		mav.setViewName("store/storeDetail");		
 				

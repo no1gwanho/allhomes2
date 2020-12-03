@@ -16,7 +16,7 @@
 		$(window).scroll(function(event){
 			if(jQuery(window).scrollTop() > jQuery("#banner").offset().top) {
     			jQuery("#chase").css("position", "fixed");
-    		}else if((jQuery(window).scrollTop() < jQuery(".banner").offset().top)) {
+    		}else if((jQuery(window).scrollTop() < jQuery("#banner").offset().top)) {
     			jQuery("#chase").css("position", "static");
     		}
     	});
@@ -30,10 +30,10 @@
     	width: 85px;
 	} 
 </style>
-<div class="container">
+<div class="container" style="margin-top:15px;">
 	<div class="row">
 		<div class="col-md-4">
-			<img src="<%=request.getContextPath() %>${vo.main_img}" alt="image" style="width:400px;height:380px;" />
+			<img src="<%=request.getContextPath() %>${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-8" style="left:350px;">
@@ -61,8 +61,9 @@
 							<span style="font-size:1.4em;">원가:${vo.price }원</span><br/>
 							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
-						<span class="product-available">재고:${vo.stock }</span>
-						<p></p>
+						<div style="height:450px;">
+							${vo.pd_exp } / 간단한 설명
+						</div>
 						<div class="product-options">
 							<label>
 								옵션 : 
@@ -74,7 +75,7 @@
 							</label>
 						</div>
 						<div class="qty-label">
-							수량 : <input type="number" value="1"/>
+							수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)
 						</div>
 					</div>
 					<div class="add-to-cart">
@@ -333,8 +334,9 @@
        				<p></p>
            		</div>
            		<div class="tab-pane fade" id="review">
-					<h5>리뷰 <span style="color:#ee8374"></span></h5><br/>
+					<h5>리뷰 <span style="color:#ee8374">${result }</span></h5><br/>
 					<div class="row">
+						<c:forEach var="r" items="rList">
 						<div class="col-6">
 							<h2 style="position:absolute;top:50%;margin-top:-50px;height:200px;">
 								<i class="fa fa-star"></i>
@@ -342,7 +344,7 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<b>3.87</b>
+								<b>평균 : </b>
 							</h2>
 						</div>
 						<div class="col-6">
@@ -367,6 +369,7 @@
   								<div class="progress-bar" role="progressbar" style="width:7%;background-color:#ee8374" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>
+						</c:forEach>
 					</div>	
 					<br/>
 					<hr/>
@@ -465,7 +468,7 @@
          	<br/>
 		</div>
 		<div class="col-4" id="banner">
-			<div id="chase" style="top:700px;">
+			<div id="chase" style="top:780px;">
 				<form>
 					<div class="product-options">
 						<label>
