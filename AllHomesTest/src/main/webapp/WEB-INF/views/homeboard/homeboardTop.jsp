@@ -65,12 +65,16 @@
 </style>
 <script>
 	$(function(){
-		
+			
+			var refreshOption = $('#order').val();
+
 			$('#order').change(function(){
-				var selectedOrder = $("#order option:selected").val();
+					var selectedOrder = $("#order option:selected").val();
 					location.href="/myapp/homeboardTop?order="+selectedOrder;
-					
+
 			});
+			
+			
 		
 	});
 
@@ -88,12 +92,16 @@
 		<div class="col-lg-3"></div>
 	</div>
 	<div class="row">
-				<select class="selectpicker" id="order" name="">
-					
-					<option value="recentBest">최근인기순</option> <!-- 현재는 최근 4개 글만 나오도록 설정함 나중에 개수 조정하기 -->
-					<option value="best">역대인기순</option>
-					<option value="recent">최신순</option>
-					<option value="scrap">스크랩순</option>
+				
+				<select class="selectpicker show-tick" id="order" name="order">
+					<option value="recentBest" 
+						<c:if test="${order == 'recentBest'} ">selected</c:if>>최근인기순</option> <!-- 현재는 최근 4개 글만 나오도록 설정함 나중에 개수 조정하기 -->
+					<option value="best" 
+						<c:if test="${order == 'best' }">selected</c:if>>역대인기순</option>
+					<option value="recent" 
+						<c:if test="${order == 'recent' }">selected</c:if>>최신순</option>
+					<option value="scrap" 
+						<c:if test="${order == 'scrap'}">selected</c:if>>스크랩순</option>
 				</select>
 	</div>
 	<br/><br/>
