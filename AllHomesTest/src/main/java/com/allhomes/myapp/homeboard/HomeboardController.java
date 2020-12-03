@@ -48,18 +48,10 @@ public class HomeboardController {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
+		List<HomeboardVO> bestList = dao.homeboardBestList(order);
 		
-		if(order.equals("recentBest")){
-			List<HomeboardVO> bestRecentList = dao.homeboardBestRecentList();
-			mav.addObject("bestRecentList", bestRecentList);
-			mav.setViewName("/homeboard/homeboardTop");
-			
-		}else {
-		
-			mav.addObject("bestRecentList", dao.homeboardBestRecentList());
-			mav.setViewName("/homeboard/homeboardTop");
-		}
-	
+		mav.addObject("bestList", bestList);
+		mav.setViewName("/homeboard/homeboardTop");
 	
 		return mav;
 	}

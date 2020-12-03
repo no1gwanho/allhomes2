@@ -15,18 +15,10 @@ public class HomeboardVO {
 	private String ip;
 	private String writedate;
 	
-	//검색순서를 위한 항목
-	private String order;
 	
 	//조인을 위해 추가한 테마번호
 	private int hb_theme_no;
 	
-	public String getOrder() {
-		return order;
-	}
-	public void setOrder(String order) {
-		this.order = order;
-	}
 	public int getHb_theme_no() {
 		return hb_theme_no;
 	}
