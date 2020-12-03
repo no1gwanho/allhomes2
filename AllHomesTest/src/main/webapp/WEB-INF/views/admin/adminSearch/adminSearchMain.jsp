@@ -92,7 +92,7 @@ $(function(){
 	var pCount =  ${pCount} //상품 결과 개수
 	
 	if(mCount==0){
-		$("#memberDiv").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:120px'>검색 결과가 존재하지 않습니다</h5></div>");
+		$("#memberDiv").replaceWith("<div class='col-lg-12' style='text-align:center;'><h5 style='padding-top:120px'>검색 결과가 존재하지 않습니다</h5></div>");
 	}
 	if(pCount==0){
 		$("#productTable").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:60px'>검색 결과가 존재하지 않습니다</h5></div>");

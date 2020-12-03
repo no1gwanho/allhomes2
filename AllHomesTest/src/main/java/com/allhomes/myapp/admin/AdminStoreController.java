@@ -251,4 +251,30 @@ public class AdminStoreController {
 		return result;
 
 	}
+	
+	//=======================스토어 검색===================================
+	//스토어명으로 검색
+	//@RequestMapping("/adminStoreSearchS_name")
+	/*public ModelAndView storeSearchS_name(@RequestParam("key") String key) {
+		
+	}*/
+	
+	/*
+	 * //판매자 id로 검색
+	 * 
+	 * @RequestMapping("/adminStoreSearchS_id") public ModelAndView
+	 * storeSearchS_id(@RequestParam("key") String key) {
+	 * 
+	 * } //담당자 연락처로 검색
+	 * 
+	 * @RequestMapping("/adminStoreSearchStaff_t") public ModelAndView
+	 * storeSearchStaff_t(@RequestParam("key") String key) {
+	 * 
+	 * } //담당자 이메일로 검색
+	 * 
+	 * @RequestMapping("/adminStoreSearchStaff_e") public ModelAndView
+	 * storeSearchStaff_e(@RequestParam("key") String key) {
+	 * 
+	 * }
+	 */
 }
