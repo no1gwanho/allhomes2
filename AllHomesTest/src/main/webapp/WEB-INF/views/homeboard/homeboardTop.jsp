@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <style>
 	
 	.card-title{
@@ -66,9 +68,27 @@
 
 
 
+
 <div class="container">
 
-<h3 id="homeboardTitle">베스트글 </h3>
+	<div class="row">
+		<div class="col-lg-9">
+			<h3 id="homeboardTitle">베스트 집들이</h3>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
+	<div class="row">
+	
+				<select class="" name="order" id="order">
+					<option value="recentBest">최근인기순</option>
+					<option value="best">역대인기순</option>
+					<option value="recent">최신순</option>
+					<option value="scrap">스크랩순</option>
+				</select>
+	</div>
+	<br/><br/>
+
+
 <!-- Page Features -->
 	<div class="row text-center">
 

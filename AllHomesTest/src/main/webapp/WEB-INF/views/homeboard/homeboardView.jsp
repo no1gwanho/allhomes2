@@ -41,7 +41,6 @@
 		
 		//댓글리스트 구하기
 		function commentListSelect(){
-			console.log("commetlist실행??")
 			var url = "/myapp/commentList";
 			var data = "b_no=${vo.b_no}";
 			$.ajax({
