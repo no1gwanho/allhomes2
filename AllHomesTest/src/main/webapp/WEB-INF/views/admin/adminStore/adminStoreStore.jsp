@@ -14,12 +14,14 @@ td {
 			var col = $("#searchSelect option:selected").val();
 			var keyword = $("#searchKeyword").val();
 			
-			if(col=="userid"){ //아이디로 검색
-				location.href = "/myapp/adminHomeboardSearchUserid?key="+keyword;
-			}else if(col=="title"){ //제목으로 검색
-				location.href = "/myapp/adminHomeboardSearchTitle?key="+keyword;
-			}else if(col=="content"){ //글내용으로 검색
-				location.href = "/myapp/adminHomeboardSearchContent?key="+keyword;
+			if(col=="s_name"){ //스토어이름으로 검색 
+				location.href = "/myapp/adminStoreSearchS_name?key="+keyword;
+			}else if(col=="s_id"){ //판매자 이름으로 검색
+				location.href = "/myapp/adminStoreSearchS_id?key="+keyword;
+			}else if(col=="staff_t"){ //담당자 연락처로 검색
+				location.href = "/myapp/adminStoreSearchStaff_t?key="+keyword;
+			}else if(col=="staff_e"){ //담당자 이메일로 검색
+				location.href = "/myapp/adminStoreSearchStaff_e?key="+keyword;
 			}
 		});
 		
