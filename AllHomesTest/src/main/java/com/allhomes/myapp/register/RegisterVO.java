@@ -12,9 +12,9 @@ public class RegisterVO {
 	private String regdate;
 	private String regcode;
 	
+	//이메일 조합변수
 	private String email1;
 	private String email2;
-	
 	
 	
 	
@@ -74,7 +74,7 @@ public class RegisterVO {
 		this.tel = tel;
 	}
 	public String getEmail() {
-		return email=email1+email2;
+		return email=email1+"@"+email2;
 	}
 	public void setEmail(String email) {
 		this.email = email;
