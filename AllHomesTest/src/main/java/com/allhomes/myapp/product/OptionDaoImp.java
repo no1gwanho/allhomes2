@@ -14,4 +14,7 @@ public interface OptionDaoImp {
 	public List<OptionVO> optionList();
 	
 	public OptionVO optionSelectOne();
+	
+	//옵션 가지고 오기
+	public List<OptionVO> selectOption(int pd_no);
 }

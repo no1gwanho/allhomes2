@@ -87,7 +87,7 @@
 		</div><!-- col-lg-12 끝 -->
 	</div>
 	<br/>
-	<form method="post" action="/myapp/setInPurchase">
+	<form method="post" action="/myapp/setInPurchase&m_no=${m_no }">
 	<c:forEach var="vo" items="${vo}">
 		<div id="list1">
 			<div class="row">

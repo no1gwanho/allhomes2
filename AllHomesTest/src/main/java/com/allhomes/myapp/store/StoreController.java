@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.OptionDaoImp;
+import com.allhomes.myapp.product.OptionVO;
 import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
@@ -34,12 +36,12 @@ public class StoreController {
 		PagingVO pageVO = new PagingVO();
 		pageVO.setTotalRecord(dao.getAllProductCount(pageVO));
 				
-		ReviewVO rv = new ReviewVO();
-		int pd_no = rv.getPd_no();
+		ReviewVO rVo = review.allReviewList();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", dao.productAllList(pvo));		
-		mav.addObject("pageVO", pageVO);		
+		mav.addObject("pageVO", pageVO);
+		mav.addObject("rList", rVo);
 		mav.setViewName("store/storeHome");
 		
 		return mav;
@@ -61,17 +63,26 @@ public class StoreController {
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		PurchaseDaoImp dAo = sqlSession.getMapper(PurchaseDaoImp.class);
+		OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
+		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+		PurchaseDaoImp pDao = sqlSession.getMapper(PurchaseDaoImp.class);		
 		
+		ProductVO vo = dao.selectProduct(pd_no);
+		List<OptionVO> oList = oDao.selectOption(pd_no);
+		List<ReviewVO> rList = rDao.selectReview(pd_no);
+		int result = rDao.countReview(pd_no);
+		List<PurchaseVO> pList = pDao.selectPurchaseListPdno(pd_no);
+				
 		ModelAndView mav = new ModelAndView(); 
 		
-		List<ProductVO> po = dao.joinProductOption();
-		List<PurchaseVO> pr = dAo.joinPurchaseReview();
-
-		mav.addObject("po", po);
-		mav.addObject("pr", pr);
-		mav.setViewName("store/storeDetail");
+		mav.addObject("vo", vo);
+		mav.addObject("oList", oList);
+		mav.addObject("rList", rList);
+		mav.addObject("result", result);
+		mav.addObject("pVo", pList);
 		
+		mav.setViewName("store/storeDetail");		
+				
 		return mav;
 	}
 }

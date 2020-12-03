@@ -101,7 +101,7 @@
 					<c:if test="${vo.discount == 0 }">
 						${vo.price }원<br/>
 					</c:if>
-					<h6>${(rv.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;
+					<h6>${(rVo.rating_price+rVo.rating_duability+rVo.rating_design+rVo.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;
 					<c:if test="${vo.status!=null }">
 						<span class="badge badge-secondary">${vo.status }</span>
 					</c:if>

@@ -7,8 +7,6 @@ public interface ProductDaoImp {
 	public List<ProductVO> productAllList(PagingVO vo);
 	// 제품전체보기(메인페이지)
 	public List<ProductVO >productMainList();
-	// 제품 + 옵션 조인
-	public List<ProductVO> joinProductOption();
 	// 등록된 상품 수
 	public int getAllProductCount(PagingVO pVo);
 	//제품선택(제품번호로)

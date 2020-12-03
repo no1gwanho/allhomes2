@@ -9,6 +9,8 @@ public interface PurchaseDaoImp {
 	
 	public PurchaseVO selectOnePurchaseList(String userid);
 	
+	public List<PurchaseVO> selectPurchaseListPdno(int pd_no);
+	
 	public int insertPurchaseList(PurchaseVO vo);
 	
 	public int editPurchaseList(PurchaseVO vo);

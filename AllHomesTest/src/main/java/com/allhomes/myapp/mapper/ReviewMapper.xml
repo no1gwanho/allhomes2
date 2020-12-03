@@ -4,7 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.allhomes.myapp.review.ReviewDaoImp">
-<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
+<select id="selectReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
+	select userid, pd_no, rating_price, rating_delivery, rating_design, rating_durability, img, content, writedate, s_no from review order by writedate desc
+</select>
+<select id="allReviewList" resultType="com.allhomes.myapp.review.ReviewVO">
+	select userid, pd_no, rating_price, rating_delivery, rating_design, rating_durability, img, content, writedate, s_no from review order by writedate desc
+</select>
+<select id="reviewList" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating_price, rating_delivery, rating_design, rating_durability, img, content, writedate, s_no from review order by writedate desc
 </select>
 <select id="countReview" parameterType="int" resultType="int">
