@@ -25,13 +25,6 @@ public interface AdminBoardDaoImp {
 	public HomeboardVO adminHomeboardSelect(int b_no);
 
 	
-	//homeboard에서 검색 (Userid)
-	public List<HomeboardVO> homeBoardSearchUserid(String key);
-	//homeboard에서 검색(글제목)
-	public List<HomeboardVO> homeBoardSearchTitle(String key);
-	//homeboard에서 검색(글내용)
-	public List<HomeboardVO> homeBoardSearchContent(String key);
-	
 	//homeboard 선택검색
 	public List<HomeboardVO> adminHBSearch(@Param("key") String key, @Param("value") String value);
 	
