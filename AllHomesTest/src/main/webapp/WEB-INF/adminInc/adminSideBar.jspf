@@ -138,6 +138,7 @@
                         <h6 class="collapse-header">Store Manage</h6>
                         <a class="collapse-item" href="/myapp/adminStoreOrder">Order</a>
                         <a class="collapse-item" href="/myapp/adminStore">Store</a>
+                        <a class="collapse-item" href="/myapp/storeAdd">Store 추가</a>
                         <a class="collapse-item" href="/myapp/adminCategory">Category</a>
                        
                     </div>
