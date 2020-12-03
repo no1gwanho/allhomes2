@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.admin.HomeBoardThemeDaoImp;
@@ -43,31 +44,41 @@ public class HomeboardController {
 	}
 
 	@RequestMapping("/homeboardTop")
-	public String homeboardTop() {
-		return "/homeboard/homeboardTop";
-	}
-
-	
-	@RequestMapping("/homeboardTheme?hb_them_no")
-	public ModelAndView homeboardTheme(int hb_theme_no) {
-		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll();
-		
+	public ModelAndView homeboardTop(@RequestParam("order") String order) {
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("themeList", themeList);
-		//mav.setViewName("/homeboard/homeboardTheme");
+		
+		
+		if(order.equals("recentBest")){
+			List<HomeboardVO> bestRecentList = dao.homeboardBestRecentList();
+			mav.addObject("bestRecentList", bestRecentList);
+			mav.setViewName("/homeboard/homeboardTop");
+			
+		}else {
+		
+			mav.addObject("bestRecentList", dao.homeboardBestRecentList());
+			mav.setViewName("/homeboard/homeboardTop");
+		}
+	
+	
 		return mav;
-
 	}
+
 	
 	@RequestMapping("/homeboardTheme")
 	public ModelAndView homeboardTheme() {
+		
 		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll();
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); 
+		
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		List<HomeboardVO> list = dao.homeboardAllList();
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
 		mav.addObject("themeList", themeList);
 		mav.setViewName("/homeboard/homeboardTheme");
+		
 		return mav;
 
 	}

@@ -81,7 +81,7 @@ public class CkeditorFileUploadController {
             
             //String callback = request.getParameter("content");
             printWriter = response.getWriter();
-            String fileUrl = "/resources/homeboard/img/" + dateForFile+ "/" + uid + "_" + fileName;  // 블로그 화면에 뿌려줄때 
+            String fileUrl = "/myapp/resources/homeboard/img/" + dateForFile+ "/" + uid + "_" + fileName;  // 블로그 화면에 뿌려줄때 
             
         // 업로드시 메시지 출력
           printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
