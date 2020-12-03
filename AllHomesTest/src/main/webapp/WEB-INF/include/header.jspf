@@ -26,8 +26,24 @@
 	}
 
 </style>
-
 </head>
+<script>
+$(function(){
+	/* $("#searchKey").keydown(function(key){
+		if(key.keyCode == 13) {
+			var key = $("#searchKey").val();
+			alert(key);
+			location.href="/myapp/search?key="+key;
+		}
+	}); */
+	
+	$("#searchBtn").click(function(){
+		var key = $("#searchKey").val();
+		alert(key);
+		location.href="/myapp/search?key="+key;
+	});
+});
+</script>
 <body>
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -80,12 +96,11 @@
     
     <form class="form-inline">
 					<div class="input-group" style="margin-right:20px;" >
-						<div class="input-group-prepend">
+						<div class="input-group-prepend" id="searchBtn">
 							<span class="input-group-text" id="basic-addon1"><i class="fas fa-search" style="color:white"></i></span>
-
 						</div>
-						<input type="text" class="form-control" placeholder="Search"
-							aria-label="Search" aria-describedby="basic-addon1">
+						<input type="text" class="form-control" placeholder="Search" id="searchKey"
+							aria-label="Search" aria-describedby="basic-addon1" >
 					</div>
 	</form>
 
