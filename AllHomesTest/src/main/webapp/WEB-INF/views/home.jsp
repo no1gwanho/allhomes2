@@ -204,7 +204,6 @@
 					<c:if test="${v.discount == 0 }">
 						${v.price }원<br/>
 					</c:if>
-					<h6>${(rev.rating_price+rv.rating_duability+rv.rating_design+rv.rating_delivery)/4 } / 리뷰&nbsp;&nbsp;</h6>
 					<c:if test="${v.status!=null }">
 						<h6><span class="badge badge-secondary">${v.status }</span></h6>
 					</c:if>					

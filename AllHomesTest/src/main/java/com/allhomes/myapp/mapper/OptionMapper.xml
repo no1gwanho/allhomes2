@@ -7,6 +7,9 @@
 		insert into option_table(pd_no, o_no, o_value) values(#{pd_no},op_sq.nextval,#{o_value})
 	</insert>
 	
+	<select id="selectOption" resultType="com.allhomes.myapp.product.OptionVO">
+		select o_no, o_value from option_table where pd_no = #{pd_no}
+	</select>
 	<!-- 시퀀스 삭제 -->
 	<select id="dropOptionSq">
 		drop sequence OP_SQ

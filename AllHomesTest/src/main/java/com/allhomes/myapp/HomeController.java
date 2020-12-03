@@ -32,12 +32,10 @@ public class HomeController {
 	public ModelAndView home() {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
 		ReviewDaoImp review = sqlSession.getMapper(ReviewDaoImp.class);
-
-		ReviewVO rev = new ReviewVO();
-		int pd_no = rev.getPd_no();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", dao.productMainList());		
+		mav.addObject("list", dao.productMainList());
+		mav.addObject("rList", review.reviewList());
 		mav.setViewName("home");
 		
 		return mav;
