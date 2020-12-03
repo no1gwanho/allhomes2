@@ -121,7 +121,7 @@
 									alt="글번호" /></a>
 							</div>
 							<div class="card-body">
-								<a href="#" class="card-text">스토어명</a><br /> <a href="#"
+								<a href="#" class="card-text">${pVo.s_name}</a><br /> <a href="#"
 									class="card-text">${pVo.pd_name}</a><br /> <a href="#"
 									class="card-title">${pVo.price}</a>
 							</div>

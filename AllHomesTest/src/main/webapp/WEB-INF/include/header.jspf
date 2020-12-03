@@ -39,7 +39,6 @@ $(function(){
 	
 	$("#searchBtn").click(function(){
 		var key = $("#searchKey").val();
-		alert(key);
 		location.href="/myapp/search?key="+key;
 	});
 });
