@@ -51,6 +51,7 @@ public class HomeboardController {
 		List<HomeboardVO> bestList = dao.homeboardBestList(order);
 		
 		mav.addObject("bestList", bestList);
+		mav.addObject("order", order);
 		mav.setViewName("/homeboard/homeboardTop");
 	
 		return mav;
