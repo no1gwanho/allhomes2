@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ProductDaoImp {
 	//제품전체보기(스토어홈)
-	public List<ProductVO> productAllList(PagingVO vo);
+	public List<ProductVO> productAllList();
 	// 제품전체보기(메인페이지)
 	public List<ProductVO >productMainList();
 	// 등록된 상품 수
-	public int getAllProductCount(PagingVO pVo);
+	public int getAllProductCount();
 	//제품선택(제품번호로)
 	public ProductVO selectProduct(int pd_no);
 	//제품추가

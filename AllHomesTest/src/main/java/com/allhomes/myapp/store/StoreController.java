@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.product.OptionDaoImp;
 import com.allhomes.myapp.product.OptionVO;
-import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -29,16 +28,12 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome(PagingVO pvo) {
+	public ModelAndView storeHome() {
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
 		
-		PagingVO pageVO = new PagingVO();
-		pageVO.setTotalRecord(dao.getAllProductCount(pageVO));
-		
-		mav.addObject("list", dao.productAllList(pvo));		
-		mav.addObject("pageVO", pageVO);
+		mav.addObject("list", dao.productAllList());		
 		mav.setViewName("store/storeHome");		
 
 		
