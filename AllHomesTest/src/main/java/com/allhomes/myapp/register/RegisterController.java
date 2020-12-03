@@ -1,5 +1,8 @@
 package com.allhomes.myapp.register;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -75,28 +78,80 @@ public class RegisterController {
 		
 	//회원가입
 	@RequestMapping(value="/registerOk")
-	public ModelAndView registerOkPage(RegisterVO vo,HttpSession ses) {
+	public ModelAndView registerOkPage(RegisterVO vo,HttpSession ses,String[] profileSet) {
 		
+	
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-			
-		String regAlert="회원가입에 실패했습니다.";
-			
-		int resultVO = dao.registerMember(vo);
+		
+		int resultVO = dao.registerMember(vo);	//프로필이미지 DB작업 한번에 처리해주자
 		
 		ModelAndView mav = new ModelAndView();
-						
+			
+		
+		
+		/*
+		String path = profileSet[0];
+		String originFileName = profileSet[1];
+		
+		//파일 업로드
+		try {
+			mf.transferTo(new File(path, originFileName));
+		
+		} catch(IOException ie) {
+			ie.getStackTrace();
+		}
+				
+		//db 변동사항없으면 파일 지우기
+		if(resultVO<=0) {
+			File proImg = new File(path, originFileName);
+			proImg.delete();
+		}
+		*/			
+		
+		
+		
 		mav.setViewName("register/registerResult");
 		ses.setAttribute("resultVO",resultVO);
 		
 		return mav;
 	}
-
+	
+	
+	
+		
+	//프로필 사진 저장
+	@RequestMapping(value="/photoBtn",method=RequestMethod.POST)
+	@ResponseBody
+	public String[] photoBtn(RegisterVO vo,HttpServletRequest req,String m_pic,HttpSession ses,@RequestParam(value="photoBtn") MultipartFile mf) {
+		
+		String path = ses.getServletContext().getRealPath("/resources/img/register");
+		String originFileName = mf.getOriginalFilename();
+		
+		String profileSet[] = {};
+			profileSet[0]=path;
+			profileSet[1]=originFileName;
+				
+		String alert = "";
+		//이미 vo에 이름이 있다면 똑같을 걸 눌렀을때도 중복으로 이름이 들어가지 않도록 세팅해줘야함 굳이 알려줄 필요가 있는가?
+		if(vo.getM_pic()!=null || (vo.getM_pic()).equals(originFileName)!=true){	//기존 파일명이 있거나 기존에 있는거랑 이름을 비교했을때 다를때
+			vo.setM_pic(null);										//저장소 한번 털어주고
+			vo.setM_pic(originFileName);							//새로운 파일이름으로 세팅
+			
+		}else {
+			vo.setM_pic(originFileName);//vo에 이미지 세팅
+			
+		}
+		
+		return profileSet;
+	}		
+	
+	
 	
 	
 	
 	
 	//아이디 중복검사
-	@RequestMapping(value="/dupFilter")	
+	@RequestMapping(value="/dupFilter",produces="application/text;charset=UTF-8")	
 	@ResponseBody	
 	public String dupFilter(RegisterVO vo,String userid) {
 	
@@ -118,23 +173,7 @@ public class RegisterController {
 		
 		
 
-	//프로필 사진 업로드
-	@RequestMapping(value="/photoBtn",method=RequestMethod.POST)
-	@ResponseBody
-	public void photoBtn(RegisterVO vo,HttpServletRequest req,String m_pic,HttpSession ses,@RequestParam(value="photoBtn") MultipartFile mf) {
-		
-		String path = ses.getServletContext().getRealPath("/resources/img/register");
-		String originFileName = mf.getOriginalFilename();
-		
-		
-		//이미 vo에 이름이 있다면 똑같을 걸 눌렀을때도 중복으로 이름이 들어가지 않도록 세팅해줘야함
-		if(vo.getM_pic()!=null) {
-			//alert?으로 경고
-		}else {
-			vo.setM_pic(originFileName);//vo에 이미지 세팅
-		}
-	}		
-	
+
 
 }
 

@@ -11,4 +11,6 @@ public interface ReviewDaoImp {
 	public int editReview(ReviewVO vo);
 	
 	public int delReview(ReviewVO vo);
+
+	public Object selectOneReview(int pd_no);
 }
