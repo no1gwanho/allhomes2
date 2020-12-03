@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 <style>
+td{
+	height:40px;
+	line-height:40px;
+}
 .sec3_list li {
 	transition: 0.5s all;
 	text-align:center;
@@ -66,6 +70,7 @@
 
 <script>
 $(function(){
+	//bxslider
 	$('.sec3_list').bxSlider({
 		auto : false,
 		pager : false,
@@ -81,6 +86,13 @@ $(function(){
 		nextText : ""
 	});
 
+	//var s =${sList};
+	//var p = ${pList};
+	//var m = ${mList};
+	//var h = ${hList};
+	
+	
+	
 });
 </script>
 <div class="container-fluid">
@@ -94,60 +106,58 @@ $(function(){
 						style="float: left">Member</h6>
 
 				</div>
-				<div class="card-body" style="overflow:hidden;height:320px">
-					<div id="banner_list">
+				<div class="card-body" style="overflow:hidden;height:320px" >
+					<div id="memberBody">
 						<ul class="sec3_list">
-							<c:forEach var="mVo" items="${memberVO}">
-								<li><span><img
+							<c:forEach var="mVo" items="${mList}">
+								<li><a href="/myapp/adminMemberDetail?m_no=${mVo.m_no}"><span><img
 										src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
 									<dl>
 										<dt>${mVo.userid}</dt>
 										<dd>
 											${mVo.username}<br>${mVo.regdate}
 										</dd>
-										<input type="hidden" value="${mVo.m_no}"/>
-									</dl></li>
+									</dl></a></li>
 							</c:forEach>
-							<li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li>
 						</ul>
 					</div>
 				</div>
 				</div><!-- card body 끝 -->
+			
+			<!-- product -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
+						style="float: left">Product</h6>
+				</div>
+				<div class="card-body" style="text-align: center" >
+					<table style="cursor:pointer;" class="table table-hover" id="productBody">
+						<thead>
+							<tr>
+								<th>제품 번호</th>
+								<th>제품명</th>
+								<th>카테고리</th>
+								<th>재고</th>
+								<th>상태</th>
+								<th>판매량</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="pVo" items="${pList}">
+								<tr onclick="location.href='/myapp/productEdit?pd_no=${pVo.pd_no}'">
+									<td>${pVo.pd_no}</td>
+									<td>${pVo.pd_name}</td>
+									<td>${pVo.sub_c}</td>
+									<td>${pVo.stock}</td>
+									<td>${pVo.status}</td>
+									<td>521</td>
+								</tr>
+							</c:forEach>
+						</tbody>	
+					</table>
+				</div>
+			</div>
+			
 			
 			
 			<!-- store -->
@@ -155,10 +165,39 @@ $(function(){
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
 						style="float: left">Store</h6>
-
 				</div>
 				<div class="card-body" style="text-align: center">
+					<table style="cursor:pointer;" class="table table-hover" id="storeBody">
+					<thead>
+					<tr>
+						<th>번호</th>
+						<th>스토어명</th>
+						<th>사업자등록번호</th>
+						<th>프로필</th>
+						<th>ID</th>
+						<th>담당자 Tel</th>
+						<th>입점일</th>
+					</tr>
+					</thead>
+					<tbody>
 					
+					<c:forEach var="vo" items="${sList}">
+					<tr onClick="location.href='/myapp/adminStoreDetail?s_no=${vo.s_no}'">
+						
+						<td>${vo.s_no}</td>
+						<td>${vo.s_name}</td>
+						<td>${vo.s_num}</td>
+						<td>
+							<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:50px;height:50px; border-radius:70%;"/>
+						</td>
+						<td>${vo.s_id}</td>
+						<td>${vo.staff_t}</td>
+						<td>${vo.openingdate}</td>
+					</tr>
+					</c:forEach>
+					
+					</tbody>	
+				</table>
 
 				</div>
 			</div>
@@ -168,7 +207,7 @@ $(function(){
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary" style="float:left">HomeBoard</h6>
 				</div>
-				<div class="card-body" style="text-align: center">
+				<div class="card-body" style="text-align: center" id="HBBody">
 					<table style="cursor: pointer;" class="table table-hover">
 						<thead>
 							<tr>

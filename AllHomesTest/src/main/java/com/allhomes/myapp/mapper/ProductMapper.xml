@@ -29,7 +29,7 @@
   	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img pd_exp, shipping_c from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c from product where pd_no=#{pd_no}
   	</select>
   	
   	<!-- 제품 추가 -->
