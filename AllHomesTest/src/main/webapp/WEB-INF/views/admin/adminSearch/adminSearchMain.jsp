@@ -86,13 +86,23 @@ $(function(){
 		nextText : ""
 	});
 
-	//var s =${sList};
-	//var p = ${pList};
-	//var m = ${mList};
-	//var h = ${hList};
+	var mCount = ${mCount} //회원 조회 결과 개수 
+	var hCount = ${hCount} //집들이 게시판 조회 결과 개수 
+	var sCount =  ${sCount} //스토어 조회 결과 개수 
+	var pCount =  ${pCount} //상품 결과 개수
 	
-	
-	
+	if(mCount==0){
+		$("#memberDiv").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:120px'>검색 결과가 존재하지 않습니다</h5></div>");
+	}
+	if(pCount==0){
+		$("#productTable").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:60px'>검색 결과가 존재하지 않습니다</h5></div>");
+	}
+	if(sCount==0){
+		$("#storeTable").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:60px'>검색 결과가 존재하지 않습니다</h5></div>");
+	}
+	if(hCount==0){
+		$("#HBTable").replaceWith("<div style='text-align:center;height:150px;'><h5 style='padding-top:60px'>검색 결과가 존재하지 않습니다</h5></div>");
+	}
 });
 </script>
 <div class="container-fluid">
@@ -107,7 +117,7 @@ $(function(){
 
 				</div>
 				<div class="card-body" style="overflow:hidden;height:320px" >
-					<div id="memberBody">
+					<div id="memberDiv">
 						<ul class="sec3_list">
 							<c:forEach var="mVo" items="${mList}">
 								<li><a href="/myapp/adminMemberDetail?m_no=${mVo.m_no}"><span><img
@@ -131,7 +141,7 @@ $(function(){
 						style="float: left">Product</h6>
 				</div>
 				<div class="card-body" style="text-align: center" >
-					<table style="cursor:pointer;" class="table table-hover" id="productBody">
+					<table style="cursor:pointer;" class="table table-hover" id="productTable">
 						<thead>
 							<tr>
 								<th>제품 번호</th>
@@ -167,7 +177,7 @@ $(function(){
 						style="float: left">Store</h6>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<table style="cursor:pointer;" class="table table-hover" id="storeBody">
+					<table style="cursor:pointer;" class="table table-hover" id="storeTable">
 					<thead>
 					<tr>
 						<th>번호</th>
@@ -207,8 +217,8 @@ $(function(){
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary" style="float:left">HomeBoard</h6>
 				</div>
-				<div class="card-body" style="text-align: center" id="HBBody">
-					<table style="cursor: pointer;" class="table table-hover">
+				<div class="card-body" style="text-align: center" >
+					<table style="cursor: pointer;" class="table table-hover" id="HBTable">
 						<thead>
 							<tr>
 								<th>번호</th>
@@ -239,21 +249,7 @@ $(function(){
 						</tbody>
 					</table>
 
-					<!-- pagination -->
-					<div style="display: inline-block">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</div>
-					<!-- pagination 끝 -->
-
-
+					
 				</div>
 				<!-- card-body끝 -->
 			</div>
