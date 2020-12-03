@@ -9,22 +9,16 @@ td {
 </style>
 <script>
 	$(function(){
-		//검색하기
+		//선택 검색하기
 		$("#searchBtn").click(function(){
-			var col = $("#searchSelect option:selected").val();
-			var keyword = $("#searchKeyword").val();
+			var value = $("#searchSelect option:selected").val();
+			var key = $("#searchKeyword").val();
 			
-			if(col=="userid"){ //아이디로 검색
-				location.href = "/myapp/adminHomeboardSearchUserid?key="+keyword;
-			}else if(col=="title"){ //제목으로 검색
-				location.href = "/myapp/adminHomeboardSearchTitle?key="+keyword;
-			}else if(col=="content"){ //글내용으로 검색
-				location.href = "/myapp/adminHomeboardSearchContent?key="+keyword;
-			}
+			location.href = "/myapp/adminStoreSearch?key="+key+"&value="+value;
 		});
 		
-		//상세조회 검색 누르기
 		
+		//상세조회 검색 누르기
 		$("#searchDetailBtn").click(function(event){
 			if($("#searchDiv").css("display","none")){
 				$("#searchDiv").show("fast");
@@ -35,48 +29,6 @@ td {
 		});
 		
 		
-		
-		//상세검색하기
-		$("#searchDetailOkBtn").click(function(){
-			var col = $("#searchDetailSelect option:selected").val();
-			var keyword = $("#searchDetailKeyword").val();
-			var date = $("#date").val();
-			var date2 = $("#date2").val();
-			
-			
-			if(date=="" || date2==""){
-				alert("날짜를 선택해주십시오.");
-				return false;
-			}
-			
-			if(col=="userid"){ //아이디로 검색
-				if(keyword==""){
-					alert("아이디를 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchUserid?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="title"){ //제목으로 검색
-				if(keyword==""){
-					alert("제목을 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchTitle?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="content"){ //글내용으로 검색
-				if(keyword==""){
-					alert("글 내용을 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchContent?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="no"){ //선택안함
-				location.href = "/myapp/HBDetailSearch?date="+date+"&date2="+date2;
-			}
-		});
-		
-		//datepicker
-		$("#date,#date2").datepicker({
-			dateFormat: 'yy-mm-dd'
-			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
-		});
 		
 	});
 </script>
@@ -91,6 +43,7 @@ td {
 					<optgroup label="검색 필터">
 						<option value="s_name">스토어명으로 검색</option>
 						<option value="s_id">판매자 ID로 검색</option>
+						<option value="staff_n">담당자 이름으로 검색</option>
 						<option value="staff_t">담당자 연락처로 검색</option>
 						<option value="staff_e">담당자 이메일로 검색</option>
 					</optgroup>
@@ -125,33 +78,35 @@ td {
 					<h6 class="m-0  font-weight-bold text-primary" style="float: left">상세조회</h6>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<p>
-						<span class="col-lg-5" style="float: left"> <select
-							class="selectpicker" id="searchDetailSelect">
-								<optgroup label="검색 필터">
-									<option value="userid">회원 ID로 검색</option>
-									<option value="title">제목으로 검색</option>
-									<option value="content">글 내용으로 검색</option>
-									<option value="no">선택 안함</option>
-								</optgroup>
-						</select></span> <input type="text" class="form-control col-lg-4"
-							id="searchDetailKeyword" />
-					</p>
-
-					<p>
-						<span class="col-lg-5" style="float: left">등록일</span> <input
-							type="text" id="date" class="form-control col-lg-2"
-							style="float: left;" /> <span style="float: left">&nbsp;&nbsp;&nbsp;
-							- &nbsp;&nbsp;&nbsp;</span> <input type="text" id="date2"
-							class="form-control col-lg-2" style="float: left" /><br />
-						<br />
-					</p>
-
-					<button class="btn btn-primary btn-icon-split"
-						id="searchDetailOkBtn">
-						<span class="icon text-white-50"> <i class="fas fa-search"></i>
-						</span> <span class="text">조회</span>
-					</button>
+					<form method="post" action="/myapp/adminStoreDetailSearch">
+						<p>
+							<span class="col-lg-5" style="float: left">스토어명</span>
+							<input type="text" class="form-control col-lg-4" id="s_name" name="s_name" />
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">판매자 ID</span>
+							<input type="text" class="form-control col-lg-4" id="s_id" name="s_id"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">담당자 이름</span>
+							<input type="text" class="form-control col-lg-4" id="staff_n" name="staff_n"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">담당자 연락처</span>
+							<input type="text" class="form-control col-lg-4" id="staff_t" name="staff_t"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">담당자 email</span>
+							<input type="text" class="form-control col-lg-4" id="staff_e" name="staff_e"/>
+						</p>
+			
+	
+						<button class="btn btn-primary btn-icon-split"
+							id="searchDetailOkBtn">
+							<span class="icon text-white-50"> <i class="fas fa-search"></i>
+							</span> <span class="text">조회</span>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
