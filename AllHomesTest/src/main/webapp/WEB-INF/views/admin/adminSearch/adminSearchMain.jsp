@@ -86,17 +86,12 @@ $(function(){
 		nextText : ""
 	});
 
-	if(${sList}==""){
-		$("#storeBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
-	}
+	//var s =${sList};
+	//var p = ${pList};
+	//var m = ${mList};
+	//var h = ${hList};
 	
-	/* if(${mList}==""){
-		$("#memberBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
-	}
 	
-	if(${pList}==""){
-		$("#productBody").replaceWith('<h6>검색 결과가 존재하지 않습니다</h6>');
-	} */
 	
 });
 </script>
@@ -124,42 +119,6 @@ $(function(){
 										</dd>
 									</dl></a></li>
 							</c:forEach>
-							<li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li><li><span><img
-									src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
-								<dl>
-									<dt>testID</dt>
-									<dd>
-										권세란<br>2020-10-31
-									</dd>
-								</dl></li>
 						</ul>
 					</div>
 				</div>
@@ -169,7 +128,7 @@ $(function(){
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary"
-						style="float: left">Store</h6>
+						style="float: left">Product</h6>
 				</div>
 				<div class="card-body" style="text-align: center" >
 					<table style="cursor:pointer;" class="table table-hover" id="productBody">
@@ -208,7 +167,7 @@ $(function(){
 						style="float: left">Store</h6>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<table style="cursor:pointer;" class="table table-hover"  id="storeBody">
+					<table style="cursor:pointer;" class="table table-hover" id="storeBody">
 					<thead>
 					<tr>
 						<th>번호</th>
