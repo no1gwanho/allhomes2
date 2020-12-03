@@ -17,25 +17,19 @@ public class HomeController {
 	
 
 	public SqlSession getSqlSession() {
-
 		return sqlSession;
 	}
-
 	@Autowired
-
 	public void setSqlSession(SqlSession sqlSession) {
-
 		this.sqlSession = sqlSession;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-		ReviewDaoImp review = sqlSession.getMapper(ReviewDaoImp.class);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", dao.productMainList());
-		mav.addObject("rList", review.reviewList());
 		mav.setViewName("home");
 		
 		return mav;
