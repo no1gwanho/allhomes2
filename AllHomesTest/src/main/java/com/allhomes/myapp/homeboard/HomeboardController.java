@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.admin.HomeBoardThemeDaoImp;
@@ -31,10 +32,23 @@ public class HomeboardController {
 		this.sqlSession = sqlSession;
 	}
 
+	//메인페이지용 집들이 8개만
+	@RequestMapping("/homeboardListForMain")
+	@ResponseBody
+	public List<HomeboardVO> homeboardListForMain() {
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		List<HomeboardVO> list = dao.homeboardListForMain();
+		
+		return list;
+		
+	}
+	
+	
+	
 	@RequestMapping("/homeboardHome")
 	public ModelAndView homeboardHome() {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardAllList();
+		List<HomeboardVO> list = dao.homeboardAllList(); //집들이 전체 리스트 - 시간 순수대로 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -42,6 +56,11 @@ public class HomeboardController {
 
 		return mav;
 	}
+	
+	
+	
+	
+	
 
 	@RequestMapping("/homeboardTop")
 	public ModelAndView homeboardTop(@RequestParam("order") String order) {
@@ -59,22 +78,22 @@ public class HomeboardController {
 
 	
 	@RequestMapping("/homeboardTheme")
-	public ModelAndView homeboardTheme() {
-		
-		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
-		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); 
+	public ModelAndView homeboardTheme(@RequestParam("hb_theme_no") int hb_theme_no) {
 		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardAllList();
-		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		
+		List<HomeboardVO> themeList = dao.homeboardThemeList(hb_theme_no);
+		
 		mav.addObject("themeList", themeList);
+		mav.addObject("hb_theme_no", hb_theme_no);
 		mav.setViewName("/homeboard/homeboardTheme");
 		
 		return mav;
 
 	}
+	
+	
 	
 	
 	
@@ -95,8 +114,9 @@ public class HomeboardController {
 	@RequestMapping(value = "/homeboardWriteOk", method = RequestMethod.POST)
 	public ModelAndView homeboardWriteOk(HomeboardVO vo, HttpServletRequest r, HttpSession s) {
 		vo.setIp(r.getRemoteAddr());
-		vo.setUserid("hong1234"); // 임시 아이디
-		vo.setNickname("길동이"); // 임시 닉네임
+		vo.setUserid((String)s.getAttribute("userid"));
+		vo.setNickname((String)s.getAttribute("nickname"));
+
 
 		// 썸네일찾기 ====================
 		String hbContent = vo.getContent();

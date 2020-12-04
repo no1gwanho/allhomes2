@@ -117,12 +117,7 @@ public class AdminStoreController {
 		return dao.storeMainCategoryDel(main_c);
 	}
 
-	// 스토어-주문내역 페이지로 이동
-	@RequestMapping("/adminStoreOrder")
-	public String StoreOrder() {
-		return "admin/adminStore/adminStoreOrder";
-	}
-
+	
 	// 스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")
 	public ModelAndView adminStore() {

@@ -111,7 +111,7 @@ td{
 							<input type="text" class="form-control col-lg-4" name="content" id="content"/>
 						</p>
 						<p>
-							<span class="col-lg-5" style="float: left">해시태스</span>
+							<span class="col-lg-5" style="float: left">해시태그</span>
 							<input type="text" class="form-control col-lg-4" name="hashtag" id="hashtag"/>
 						</p>
 						<p>

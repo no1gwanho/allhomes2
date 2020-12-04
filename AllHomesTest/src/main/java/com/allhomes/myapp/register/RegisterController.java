@@ -1,12 +1,18 @@
 package com.allhomes.myapp.register;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
+import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +26,10 @@ public class RegisterController {
 	
 	SqlSession sqlSession;
 
+	@Inject
+	JavaMailSenderImpl mailSender;
+	
+	
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
@@ -42,13 +52,16 @@ public class RegisterController {
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
-		//濡쒓렇�씤�뿬遺� : resultVO媛� null�씠硫� �떎�뙣
+		
 		
 		if(resultVO == null){
 			mav.setViewName("redirect:login");
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
+			System.out.println(resultVO.getUsername());
+			ses.setAttribute("nickname", resultVO.getNickname());
+			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			mav.setViewName("landing/loginResult");
 		}
@@ -76,7 +89,7 @@ public class RegisterController {
 		
 	//회원가입
 	@RequestMapping(value="/registerOk")
-	public ModelAndView registerOkPage(RegisterVO vo,HttpSession ses,String[] profileSet) {
+	public ModelAndView registerOkPage(String userid,RegisterVO vo,HttpSession session,String[] profileSet) {
 		
 	
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
@@ -105,11 +118,41 @@ public class RegisterController {
 			proImg.delete();
 		}
 		*/			
+			
+		UUID random = UUID.randomUUID();
+		String uuid = random.toString();
+		String subject = "[Allhomes]회원가입을 환영합니다!!";
+		String content = "<div style='background:lightgray;border:1px solid gray;"
+						 + "border-radius:5px 5px 5px 5px;margin:30px;padding:30px;width:80%'>"
+						 
+						 + "<p>\r\n"
+						 + "  		안녕하세요?<br/><br/>\r\n"
+						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
+						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
+						 + "		아래 링크를 누르시면 회원가입이 완료되며 로그인 페이지로 이동합니다.<br/>\r\n"
+						 + "		<a href=\"http://localhost:9090/myapp/login\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
+						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
+						 + "		감사합니다."		
+						 + "  		</p>"
+						 + "</div>";
 		
-		
-		
-		mav.setViewName("register/registerResult");
-		ses.setAttribute("resultVO",resultVO);
+		try {
+			MimeMessage message= mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setFrom("parkghgame@naver.com");
+			messageHelper.setTo(vo.getEmail());  
+			messageHelper.setSubject(subject);	
+			messageHelper.setText("text/html;charset=UTF-8",content);
+			mailSender.send(message);
+			session.setAttribute("emailUUID",uuid);
+				
+		}catch(Exception e) {
+			
+			System.out.println(e.getMessage());
+		}
+			
+		mav.setViewName("landing/registerOkPage");
+		session.setAttribute("resultVO",resultVO);
 		
 		return mav;
 	}
@@ -120,27 +163,42 @@ public class RegisterController {
 	//프로필 사진 저장
 	@RequestMapping(value="/photoBtn",method=RequestMethod.POST)
 	@ResponseBody
-	public String[] photoBtn(RegisterVO vo,HttpServletRequest req,String m_pic,HttpSession ses,@RequestParam(value="photoBtn") MultipartFile mf) {
+	public String photoBtn(@RequestParam("photoBtn") MultipartFile photoBtn ,HttpServletRequest req,String m_pic,HttpSession ses,@RequestParam(value="photoBtn") MultipartFile mf) {
 		
-		String path = ses.getServletContext().getRealPath("/resources/img/register");
-		String originFileName = mf.getOriginalFilename();
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		
-		String profileSet[] = {};
-			profileSet[0]=path;
-			profileSet[1]=originFileName;
+		RegisterVO vo = new RegisterVO();
 				
-		String alert = "";
-		//이미 vo에 이름이 있다면 똑같을 걸 눌렀을때도 중복으로 이름이 들어가지 않도록 세팅해줘야함 굳이 알려줄 필요가 있는가?
-		if(vo.getM_pic()!=null || (vo.getM_pic()).equals(originFileName)!=true){	//기존 파일명이 있거나 기존에 있는거랑 이름을 비교했을때 다를때
-			vo.setM_pic(null);										//저장소 한번 털어주고
-			vo.setM_pic(originFileName);							//새로운 파일이름으로 세팅
+		String path = ses.getServletContext().getRealPath("/resources/img/register");
+		String fileName = photoBtn.getName();
+		String oriFileName = photoBtn.getOriginalFilename();
+		
+		try {
+			if(oriFileName != null) {
+				photoBtn.transferTo(new File(path,oriFileName));
+			}
 			
-		}else {
-			vo.setM_pic(originFileName);//vo에 이미지 세팅
-			
+		}catch(IOException ie) {
+			ie.printStackTrace();
 		}
 		
-		return profileSet;
+		vo.setM_pic(oriFileName);
+			
+		
+		//db 작업 실행
+		int result = dao.photoBtn(oriFileName);
+		
+		if(result>0) {//db에 넣기 성공했을때
+			
+		}else{//db넣기 실패했을때 파일 삭제
+			if(oriFileName != null) {
+				File f = new File(path,oriFileName);
+				f.delete();
+			}
+		}
+			
+		
+		return "";
 	}		
 	
 		
