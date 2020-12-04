@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.product.OptionDaoImp;
-import com.allhomes.myapp.product.OptionVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -54,25 +52,22 @@ public class StoreController {
 	
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
-		
+				
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
 		PurchaseDaoImp pDao = sqlSession.getMapper(PurchaseDaoImp.class);		
 		
 		ProductVO vo = dao.selectProduct(pd_no);
-		List<OptionVO> oList = oDao.selectOption(pd_no);
-		List<ReviewVO> rList = rDao.selectReview(pd_no);
 		int result = rDao.countReview(pd_no);
-		PurchaseVO pVo = pDao.selectOnePurchaseListPdno(pd_no);
-				
+		List<ReviewVO> rList = rDao.selectReview(pd_no);
+		PurchaseVO pvo = pDao.selectPurchaseListInt(pd_no);
+		
 		ModelAndView mav = new ModelAndView(); 
 		
 		mav.addObject("vo", vo);
-		mav.addObject("oList", oList);
-		mav.addObject("rList", rList);
 		mav.addObject("result", result);
-		mav.addObject("pVo", pVo);
+		mav.addObject("rList", rList);
+		mav.addObject("pvo", pvo);
 		
 		mav.setViewName("store/storeDetail");		
 				

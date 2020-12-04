@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.product.OptionDaoImp;
-import com.allhomes.myapp.product.OptionVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 
@@ -117,20 +115,19 @@ public class AdminProductController {
 	public void optionAdd(String o_value) {
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class);
-		OptionVO opVo = new OptionVO(); //옵션 VO
-	
-		ProductVO optionPd_no = dao.selectOptionProductNo();
-		int pd_no = optionPd_no.getPd_no(); //가장 최근 insert된 제품의 제품번호값 가져옴
-		
-		opVo.setPd_no(pd_no);
-		
-		//옵션 처리(,으로 잘라서 배열 => 옵션 있는만큼 insert실행)
-		String[] oList = o_value.split(",");
-		for(int i=0; i<oList.length; i++) {
-			opVo.setO_value(oList[i]);
-			oDao.optionInsert(opVo);
-		}
+		/*
+		 * OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class); OptionVO opVo =
+		 * new OptionVO(); //옵션 VO
+		 * 
+		 * ProductVO optionPd_no = dao.selectOptionProductNo(); int pd_no =
+		 * optionPd_no.getPd_no(); //가장 최근 insert된 제품의 제품번호값 가져옴
+		 * 
+		 * opVo.setPd_no(pd_no);
+		 * 
+		 * //옵션 처리(,으로 잘라서 배열 => 옵션 있는만큼 insert실행) String[] oList = o_value.split(",");
+		 * for(int i=0; i<oList.length; i++) { opVo.setO_value(oList[i]);
+		 * oDao.optionInsert(opVo); }
+		 */
 		
 		//옵션 시퀀스 초기화
 //		oDao.dropOptionSq();
