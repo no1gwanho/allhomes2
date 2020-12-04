@@ -22,9 +22,6 @@ import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.store.StoreDaoImp;
 import com.allhomes.myapp.store.StoreDetailSearchVO;
 import com.allhomes.myapp.store.StoreVO;
-
-import jdk.nashorn.internal.runtime.Context;
-
 @Controller
 public class AdminStoreController {
 
@@ -120,12 +117,7 @@ public class AdminStoreController {
 		return dao.storeMainCategoryDel(main_c);
 	}
 
-	// 스토어-주문내역 페이지로 이동
-	@RequestMapping("/adminStoreOrder")
-	public String StoreOrder() {
-		return "admin/adminStore/adminStoreOrder";
-	}
-
+	
 	// 스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")
 	public ModelAndView adminStore() {

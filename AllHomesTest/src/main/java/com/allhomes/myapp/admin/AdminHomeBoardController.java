@@ -6,9 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.store.StoreVO;
 
@@ -41,7 +43,7 @@ public class AdminHomeBoardController {
 	}
 
 
-	// Homeboard 보기
+	//Homeboard 보기
 	@RequestMapping("/adminHomeBoardView")
 	public ModelAndView homeboardView(@RequestParam("b_no") int b_no) {
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
@@ -56,72 +58,33 @@ public class AdminHomeBoardController {
 	}
 	
 	
-	//Homeboard 상세 검색-userid
-	@RequestMapping("/HBDetailSearchUserid")
-	public ModelAndView hbDetailSearchUserid(@RequestParam("key") String userid
-											,@RequestParam("date") String date
-											,@RequestParam("date2") String date2) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.HBDetailSearchUserid(userid, date, date2);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-	
-	//Homeboard 상세 검색-title
-	@RequestMapping("/HBDetailSearchTitle")
-	public ModelAndView hbDetailSearchTitle(@RequestParam("key") String title, @RequestParam("date") String date,
-			@RequestParam("date2") String date2) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.HBDetailSearchTitle(title, date, date2);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-	
-	//Homeboard 상세 검색-content
-	@RequestMapping("/HBDetailSearchContent")
-	public ModelAndView hbDetailSearchContent(@RequestParam("key") String content, @RequestParam("date") String date,
-			@RequestParam("date2") String date2) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.HBDetailSearchContent(content, date, date2);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-	
-	// Homeboard 상세 검색-기간만
-	@RequestMapping("/HBDetailSearch")
-	public ModelAndView hbDetailSearch(@RequestParam("date") String date, @RequestParam("date2") String date2) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.HBDetailSearch(date, date2);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-	
-	
 	//선택검색
-		@RequestMapping("/adminHBSearch")
-		public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
-			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-			List<HomeboardVO> hList = dao.adminHBSearch(key, value);
-			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("hList", hList);
+	@RequestMapping("/adminHBSearch")
+	public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		List<HomeboardVO> hList = dao.adminHBSearch(key, value);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("hList", hList);
 
-			mav.setViewName("admin/adminBoard/adminHomeBoard");
-			return mav;
-		}
+		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		return mav;
+	}
 		
 		
+	//상세검색
+	@RequestMapping(value="/adminHBSearchDetail", method = RequestMethod.POST)
+	public ModelAndView adminHBSearchDetail(HomeBoardDetailSearchVO vo) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		List<HomeboardVO> hList = dao.adminHBSearchDetail(vo);
 		
+		System.out.println(vo.getContent()+vo.getDate()+vo.getDate2()+vo.getHashtag()+vo.getNickname()+vo.getTitle()+vo.getUserid());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("hList", hList);
+		
+		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		return mav;
+	 }
+	
 }

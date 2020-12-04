@@ -100,7 +100,7 @@
 									<span class="col-lg-4" style="float:left">옵션1</span>
 									<span id="optionDel" class="btn alert-clean shadow-sm" style="float:right;margin-right:80px">-</span>
 									<span id="optionAdd" class="btn alert-clean shadow-sm" style="float:right;margin-right:20px">+</span>
-			       					<input type="text" name="o_value" class="col-lg-6 form-control"/>
+			       					<input type="text" name="o_value" id="o_value" class="col-lg-6 form-control"/>
 			       				</p>
 								
 			       			</div>	

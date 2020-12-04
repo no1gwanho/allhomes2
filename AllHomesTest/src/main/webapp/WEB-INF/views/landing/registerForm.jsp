@@ -51,8 +51,7 @@
 				return false;
 			}
 			
-						
-			
+	
 			//비밀번호 검사
 			if($("#userpwd").val()=="" || $("#userpwdChk").val()==""){
 				alert("비밀번호는 필수입력사항입니다.");
@@ -69,9 +68,7 @@
 				alert("비밀번호는 영문,숫자,특수문자 조합 6~15자로 입력해주세요.");
 				return false;
 			}
-					
-			
-						
+									
 			//이름 검사
 			if($("#username").val()==""){
 				alert("이름은 필수입력 사항입니다.");
@@ -84,10 +81,7 @@
 				alert("이름은 한글 2~6자 사이로 입력해주세요.");
 				return false;
 			}
-			
-			
-			
-			
+					
 			//닉네임 검사
 			if($("#nickname").val()==""){
 								
@@ -99,11 +93,7 @@
 					return false;
 				}
 			}
-			
-			
-			
 						
-			
 			//연락처 검사
 			if($("#tel").val()==""){
 				alert("연락처는 필수 입력사항입니다..");
@@ -117,8 +107,6 @@
 				return false;
 			}
 						
-			
-			
 			//이메일 검사
 			if($("#emailText").val()==""){
 				alert("이메일은 필수 입력사항입니다..");
@@ -131,9 +119,7 @@
 				alert("이메일 주소는 4~13글자 내로 적어주세요")
 				return false;
 			}
-			
-			
-											
+									
 			return true;
 		});
 		
@@ -162,14 +148,20 @@
 	
 	
 	
+	//각 칸을 클릭햇을때 중복검사 안했으면 안했다고 띄우고 
+	//했어도 아이디를 바꾸면 
+	
+	
 	//중복검사 의무화 	
 	$(function(){
 		$("#userid").blur(function(){
 							
 			if($("#idStatus").val()=="N"){
 				alert("아이디 중복검사를 해주세요.");				
-				return false;
+				
 			}
+			
+		
 			var url="/myapp/mustCheck";
 			$.ajax({
 				url:url,
@@ -186,7 +178,14 @@
 					
 		});
 		
-	});	
+	});
+		
+	
+	
+	
+	
+	
+	
 		
 		
 	
@@ -234,20 +233,21 @@
 	
 	
 	
-	//이메일 dropdown버튼 클릭 시
+	//이메일 dropdown버튼 클릭 시 다시 생성??
 	$(function(){
-		$("#splitbtn3").click(function(){
-			console.log("테스트중");
-			$("#email2").innerHtml("dddd");
-					
+		$(".dropdown-item").click(function(){
 			
+			$("#email2").val($(this).val()); //div 박스에는 html text로 가능 inputbox는 val로 입력 => 이벤트가 발생하는 곳의 값을 넣어라
+			$("#splitbtn3").css("display","none");
+						
 			});
+				
 		});
-	
-	
-	
 		
 	});
+	
+		
+	
 </script>
 </head>
 <body>
@@ -312,11 +312,11 @@
 			    	
 			    	
 			    	<div id=splitbtn class="btn-group">  	<!-- dropdown 버튼 세팅 -->
-				 		<button class="btn dropdown-toggle" data-toggle="dropdown"></button>
+				 		<button id=splibtn2 class="btn dropdown-toggle" data-toggle="dropdown"></button>
 							<div id="splitbtn3" class="dropdown-menu">
-								<div id="naver.com" class="dropdown-item" name="naver.com" value="naver.com">naver.com</div>
-								<div class="dropdown-item">nate.com</div>
-								<div class="dropdown-item">gmail.com</div>
+								<input type="button" id="naver.com" class="dropdown-item" value="naver.com"/>
+								<input type="button" id="nate.com" class="dropdown-item" value="nate.com"/>
+								<input type="button" id="gmail.com" class="dropdown-item" value="gmail.com"/>
 							</div>
 					</div>
 			    </div>

@@ -58,16 +58,22 @@
 	
 
  	
- 	<!-- 회원정보 입력 -->
+ 	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체-->	
  	<insert id="registerMember" parameterType="com.allhomes.myapp.register.RegisterVO">
  		insert into ah_register(m_no, userid,userpwd,username,nickname,tel,email,regdate,regcode)
- 		values(a_sq.nextval,#{userid},#{userpwd},#{username},#{nickname},#{tel},#{email},sysdate,'')
+ 		values(reg_sq.nextval,#{userid},#{userpwd},#{username},#{nickname},#{tel},#{email},sysdate,'')
  	</insert>
  	
- 	<!-- 아이디 중복검사 -->
+ 	<!-- 아이디 중복검사  테이블명 교체-->
  	<select id="dupFilter" resultType="String">
  		select userid from ah_register where userid=#{userid}
  	</select>
+ 	
+ 	<!-- 프로필 사진 입력  테이블명 교체-->
+ 	<insert id="photoBtn" parameterType="String">
+ 		insert into ah_register(m_pic) values(#{m_pic})
+ 	</insert>
+ 	
  	
  	
  	

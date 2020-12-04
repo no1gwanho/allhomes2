@@ -4,9 +4,11 @@ import java.util.List;
 
 public interface ReviewDaoImp {
 	// 제품 리뷰 조회
-	public ReviewVO allReviewList();
+	public List<ReviewVO> allReviewList();
 	
 	public List<ReviewVO> selectReview(int pd_no);
+	
+	public ReviewVO selectOneReview();
 	
 	public int countReview(int pd_no);
 		

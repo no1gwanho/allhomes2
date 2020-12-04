@@ -13,7 +13,21 @@ public class ProductVO {
 	private String pd_img;      // 제품 설명사진(여러개 가능)
 	private String pd_exp;      // 짧은 제품설명
 	private int shipping_c;		// 배송비
-
+	private String o_value;		//옵션
+	private String s_name;
+	
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name=s_name;
+	}
+	public String getO_value() {
+		return o_value;
+	}
+	public void setO_value(String o_value) {
+		this.o_value = o_value;
+	}
 	public int getShipping_c() {
 		return shipping_c;
 	}

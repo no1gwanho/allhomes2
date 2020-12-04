@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
 import com.allhomes.myapp.homeboard.HomeboardVO;
 
 public interface AdminBoardDaoImp {
@@ -24,17 +25,9 @@ public interface AdminBoardDaoImp {
 	//homeboard 선택
 	public HomeboardVO adminHomeboardSelect(int b_no);
 
-	
 	//homeboard 선택검색
 	public List<HomeboardVO> adminHBSearch(@Param("key") String key, @Param("value") String value);
 	
-	
-	//homeboard 상세 검색(userid)
-	public List<HomeboardVO> HBDetailSearchUserid(String userid, String date, String date2);
-	//homeboard 상세 검색(title)
-	public List<HomeboardVO> HBDetailSearchTitle(String title, String date, String date2);
-	//homeboard 상세 검색(content)
-	public List<HomeboardVO> HBDetailSearchContent(String content, String date, String date2);
-	//homeboard 상세 검색(기간만)
-	public List<HomeboardVO> HBDetailSearch(String date, String date2);
+	//homeboard 상세 검색
+	public List<HomeboardVO> adminHBSearchDetail(HomeBoardDetailSearchVO vo);
 }

@@ -52,25 +52,22 @@ public class StoreController {
 	
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
-		
+				
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
 		PurchaseDaoImp pDao = sqlSession.getMapper(PurchaseDaoImp.class);		
 		
 		ProductVO vo = dao.selectProduct(pd_no);
-		
-		List<ReviewVO> rList = rDao.selectReview(pd_no);
 		int result = rDao.countReview(pd_no);
-		PurchaseVO pVo = pDao.selectOnePurchaseListPdno(pd_no);
-				
+		List<ReviewVO> rList = rDao.selectReview(pd_no);
+		PurchaseVO pvo = pDao.selectPurchaseListInt(pd_no);
+		
 		ModelAndView mav = new ModelAndView(); 
 		
 		mav.addObject("vo", vo);
-		
-		mav.addObject("rList", rList);
 		mav.addObject("result", result);
-		mav.addObject("pVo", pVo);
+		mav.addObject("rList", rList);
+		mav.addObject("pvo", pvo);
 		
 		mav.setViewName("store/storeDetail");		
 				
