@@ -38,7 +38,7 @@ public interface RegisterDaoImp {
 	public String dupFilter(String userid);
 
 	//프로필 이미지 업로드
-	public int photoBtn(RegisterVO vo);
+	public int photoBtn(String m_pic);
 	
 	
 }
