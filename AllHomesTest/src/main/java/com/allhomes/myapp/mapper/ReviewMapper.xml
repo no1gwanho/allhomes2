@@ -13,6 +13,9 @@
 <select id="countReview" parameterType="int" resultType="int">
 	select count(pd_no) from review where pd_no=#{pd_no}
 </select>
+<select id="selectOneReview" resultType="com.allhomes.myapp.review.ReviewVO">
+	select userid, pd_no, rating, img, content, writedate, s_no from review
+</select>
 <insert id="insertReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	insert into review(userid, pd_no, rating, img, content, writedate, s_no) values(userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no})
 </insert>

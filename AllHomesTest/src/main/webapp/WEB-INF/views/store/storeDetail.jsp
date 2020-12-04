@@ -349,30 +349,29 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<b>평균 : </b>
+								<b></b>
 							</h2>
 						</div>
 						<div class="col-6">
 							5점 : 
 							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:30%;background-color:#ee8374" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							4점 :
 							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:32%;background-color:#ee8374" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							3점 :
 							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:18%;background-color:#ee8374" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
+  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							2점 :
 							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:13%;background-color:#ee8374" aria-valuenow="13" aria-valuemin="0" aria-valuemax="100"></div>
+  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							1점 :
 							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:7%;background-color:#ee8374" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
+  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>
 
