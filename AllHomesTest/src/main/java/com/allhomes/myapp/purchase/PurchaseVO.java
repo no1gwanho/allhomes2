@@ -15,8 +15,14 @@ public class PurchaseVO {
 	private String status;
 	private String confirm;
 	private String memo;
-	private int o_no;
+	private String o_value;
 	
+	public String getO_value() {
+		return o_value;
+	}
+	public void setO_value(String o_value) {
+		this.o_value = o_value;
+	}
 	public int getPc_no() {
 		return pc_no;
 	}
@@ -101,15 +107,10 @@ public class PurchaseVO {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public int getO_no() {
-		return o_no;
-	}
-	public void setO_no(int o_no) {
-		this.o_no = o_no;
-	}
-	@Override
-	public String toString() {
-		return "PurchaseVO [pc_no=" + pc_no + ", pd_no=" + pd_no + ", s_no=" + s_no + ", num=" + num + ", total_p="
-				+ total_p + ", status=" + status + ", o_no=" + o_no + "]";
-	}	
+	
+	/*
+	 * @Override public String toString() { return "PurchaseVO [pc_no=" + pc_no +
+	 * ", pd_no=" + pd_no + ", s_no=" + s_no + ", num=" + num + ", total_p=" +
+	 * total_p + ", status=" + status + ", o_no=" + o_no + "]"; }
+	 */
 }
