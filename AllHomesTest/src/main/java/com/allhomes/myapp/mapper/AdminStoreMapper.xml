@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminStoreDaoImp">
+ 	<!--=============== store 검색===================== -->
+ 
+ 	
+ 	<!-- 상세검색 -->
+ 	<select id="adminStoreDetailSearch" parameterType="com.allhomes.myapp.store.StoreDetailSearchVO" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
+ 		<trim prefix="where" prefixOverrides="and">
+	 		<if test="s_name != null">and s_name = #{s_name} </if>
+	 		<if test="s_id != null">and s_id LIKE '%'||#{s_id}||'%' </if>
+	 		<if test="staff_n != null">and staff_n LIKE '%'||#{staff_n}||'%' </if>
+	 		<if test="staff_t != null">and staff_t LIKE '%'||#{staff_t}||'%' </if>
+	 		<if test="staff_e != null">and staff_e LIKE '%'||#{staff_e}||'%' </if>
+ 		</trim>
+ 	</select>
+ 	
+ 	<!-- 선택검색 -->
+ 	<select id="adminStoreSearch" parameterType="String" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
+ 	
+ 		<where>
+	 		<choose>
+	 			<when test="value == 's_name'">
+	 				s_name LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 's_id'">
+	 				 s_id LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 'staff_n'">
+	 				 staff_n LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 'staff_t'">
+	 				staff_t LIKE '%'||#{key}||'%'
+	 			</when>
+	 			<when test="value == 'staff_e'">
+	 				staff_e LIKE '%'||#{key}||'%'
+	 			</when>
+	 		</choose>
+ 		</where>
+ 		 
+ 	</select>
+</mapper>
+
+

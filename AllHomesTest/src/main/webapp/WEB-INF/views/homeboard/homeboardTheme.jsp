@@ -67,23 +67,23 @@
 }
 </style>
 <script>
-	$(function(){
-		if
-		
-		
-	});
+
 
 
 </script>
 
+
 <div class="container">
 	<h3 id="homeboardTitle">테마별 집들이</h3>
 
-	<!-- 탭메뉴  -->
+<!-- 탭메뉴  -->
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<c:forEach var="vo" items="${themeList }">
-		<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="/myapp/homeboardTheme?hb_theme_no=0" role="tab" aria-controls="home" aria-selected="true">${vo.theme }</a></li>
-		</c:forEach>
+		
+		<li class="nav-item"><a class="nav-link" id="1-tab" data-toggle="tab" href="#1" role="tab" aria-controls="1" aria-selected="true">코지/내추럴</a></li>
+		<li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#2" role="tab" aria-controls="2" aria-selected="true">러블리/로맨틱</a></li>
+		<li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#3" role="tab" aria-controls="3" aria-selected="true">모던</a></li>
+		<li class="nav-item"><a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">빈티지/레트로</a></li>
+		<li class="nav-item"><a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab" aria-controls="5" aria-selected="true">한국/아시아</a></li>
 	
 	</ul>
 
@@ -92,96 +92,28 @@
 	<div class="tab-content" id="myTabContent">
 		
 		<!-- 테마1시작 -->
-		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		<div class="tab-pane fade show active" id="1" role="tabpanel" aria-labelledby="1-tab">
 			<!-- 내용시작 -->
 			<div class="row text-center">
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-img-top">
 							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
+								src="<%=request.getContextPath()%>/resources/img/allhomes3.png"/></a>
 						</div>
 						<div class="card-body">
 							<div class="card-title">
-								<a href="/myapp/homeboardView?b_no=13">테마1테스트</a>
+								<a href="/myapp/homeboardView?b_no=103">글제목</a>
 							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
+							<a href="#" class="card-text">${vo.nickname}</a>
+							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 테마1 끝 -->
-
 		
-		<!-- 테마2 시작 -->
-		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-			<div class="row text-center">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">테마2테스트</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- 테마2끝 -->
-
-		<!-- 테마3시작 -->
-		<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-			<div class="row text-center">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">테마3 테스트</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- 테마3끝 -->
-		
-
-		<!-- 테마4시작 -->
-		<div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
-			<div class="row text-center">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="#"><img
-								src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-								alt="글번호" /></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="#">테마4테스트</a>
-							</div>
-							<a href="#" class="card-text">써니웨이</a>
-							<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-						</div>
-					</div>
-				</div>
-			</div> 
-		</div><!-- 테마4끝 -->
 
 	</div><!-- 탭본문 끝 -->
 	
@@ -203,7 +135,4 @@
 		</ul>
 	</nav>
 
-
-
-</div>
 </div>

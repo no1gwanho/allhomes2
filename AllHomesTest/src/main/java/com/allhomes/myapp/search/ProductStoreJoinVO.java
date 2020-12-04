@@ -1,0 +1,99 @@
+package com.allhomes.myapp.search;
+
+public class ProductStoreJoinVO {
+	
+	
+	private int pd_no;			// 제품번호
+	private int s_no;			// 스토어번호
+	private String pd_name;		// 제품명
+	private int price;			// 가격
+	private int discount;		// 할인가격
+	private String main_img;	// 썸네일대표이미지
+	private int stock;			// 재고
+	private String status;		// 상태(품절임박, 입고예정 등)
+	private String sub_c;		// 서브카테고리
+	private String pd_img;      // 제품 설명사진(여러개 가능)
+	private String pd_exp;      // 짧은 제품설명
+	private int shipping_c;		// 배송비
+	private String s_name;      //스토어명
+	
+	
+	public int getPd_no() {
+		return pd_no;
+	}
+	public void setPd_no(int pd_no) {
+		this.pd_no = pd_no;
+	}
+	public int getS_no() {
+		return s_no;
+	}
+	public void setS_no(int s_no) {
+		this.s_no = s_no;
+	}
+	public String getPd_name() {
+		return pd_name;
+	}
+	public void setPd_name(String pd_name) {
+		this.pd_name = pd_name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public String getMain_img() {
+		return main_img;
+	}
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getSub_c() {
+		return sub_c;
+	}
+	public void setSub_c(String sub_c) {
+		this.sub_c = sub_c;
+	}
+	public String getPd_img() {
+		return pd_img;
+	}
+	public void setPd_img(String pd_img) {
+		this.pd_img = pd_img;
+	}
+	public String getPd_exp() {
+		return pd_exp;
+	}
+	public void setPd_exp(String pd_exp) {
+		this.pd_exp = pd_exp;
+	}
+	public int getShipping_c() {
+		return shipping_c;
+	}
+	public void setShipping_c(int shipping_c) {
+		this.shipping_c = shipping_c;
+	}
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+}

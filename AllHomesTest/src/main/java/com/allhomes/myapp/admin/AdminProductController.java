@@ -95,7 +95,7 @@ public class AdminProductController {
 		vo.setPd_img(voImgName); // vo에 이미지명 세팅
 
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		int result = dao.insertProduct(vo); //제품 추가 처리
+		int result = dao.insertProduct(vo);
 		
 		//옵션 처리 메소드 호출
 		optionAdd(o_value);
@@ -114,10 +114,17 @@ public class AdminProductController {
 	//옵션추가
 	public void optionAdd(String o_value) {
 		
+
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		/*
 		 * OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class); OptionVO opVo =
 		 * new OptionVO(); //옵션 VO
+
+		/*
+		 * ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class); OptionDaoImp
+		 * oDao = sqlSession.getMapper(OptionDaoImp.class); OptionVO opVo = new
+		 * OptionVO(); //옵션 VO
+
 		 * 
 		 * ProductVO optionPd_no = dao.selectOptionProductNo(); int pd_no =
 		 * optionPd_no.getPd_no(); //가장 최근 insert된 제품의 제품번호값 가져옴
@@ -128,10 +135,12 @@ public class AdminProductController {
 		 * for(int i=0; i<oList.length; i++) { opVo.setO_value(oList[i]);
 		 * oDao.optionInsert(opVo); }
 		 */
+
 		
 		//옵션 시퀀스 초기화
 //		oDao.dropOptionSq();
 //		oDao.createOptionSq();
+
 		
 		
 	}

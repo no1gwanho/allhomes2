@@ -1,7 +1,6 @@
 package com.allhomes.myapp.register;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -145,35 +144,38 @@ public class RegisterController {
 		return profileSet;
 	}		
 	
+		
 	
-	
-	
-	
-	
-	//아이디 중복검사
-	@RequestMapping(value="/dupFilter",produces="application/text;charset=UTF-8")	
+	//아이디 중복검사(버튼을 클릭할대 검사)
+	@RequestMapping(value="/dupFilter")	
 	@ResponseBody	
-	public String dupFilter(RegisterVO vo,String userid) {
-	
+	public String dupFilter(String userid) {	
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		
-				
-		RegisterVO resultVO = dao.dupFilter(vo);
-	
-		
-		String alert="";
-		if(resultVO!=null){
-			alert=userid+"는 사용할 수 없는 아이디 입니다.";
-		}else {
-			alert=userid+"는 사용가능한 아이디 입니다.";
-		}
-				
-		return alert;
+			
+		return  dao.dupFilter(userid);
 	}
+	
+	
+	
+	//아이디 중복검사 의무화(커서 박스밖으로 나갈때 검사)
+	@RequestMapping(value="/mustCheck")
+	@ResponseBody
+	public Boolean mustCheck(String userid,RegisterVO vo) {
+		//RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		
+		boolean checker = false;
+		if(userid==vo.getUserid()){
+			checker = true;
+		}else {
+			checker = false;
+		}
+		return checker;	
 		
-
-
-
+	}
+	
+	
+	
+	
+	
 }
 
