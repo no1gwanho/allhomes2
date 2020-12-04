@@ -27,7 +27,7 @@ public class PurchaseVO {
 	}
 	public void setO_value(String o_value) {
 		this.o_value = o_value;
-
+	}
 	public int getRating() {
 		return rating;
 	}
