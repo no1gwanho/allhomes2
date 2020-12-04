@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 
@@ -113,10 +114,17 @@ public class AdminProductController {
 	//옵션추가
 	public void optionAdd(String o_value) {
 		
+
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		/*
+		 * OptionDaoImp oDao = sqlSession.getMapper(OptionDaoImp.class); OptionVO opVo =
+		 * new OptionVO(); //옵션 VO
+
 		/*
 		 * ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class); OptionDaoImp
 		 * oDao = sqlSession.getMapper(OptionDaoImp.class); OptionVO opVo = new
 		 * OptionVO(); //옵션 VO
+
 		 * 
 		 * ProductVO optionPd_no = dao.selectOptionProductNo(); int pd_no =
 		 * optionPd_no.getPd_no(); //가장 최근 insert된 제품의 제품번호값 가져옴
@@ -127,6 +135,12 @@ public class AdminProductController {
 		 * for(int i=0; i<oList.length; i++) { opVo.setO_value(oList[i]);
 		 * oDao.optionInsert(opVo); }
 		 */
+
+		
+		//옵션 시퀀스 초기화
+//		oDao.dropOptionSq();
+//		oDao.createOptionSq();
+
 		
 		
 	}

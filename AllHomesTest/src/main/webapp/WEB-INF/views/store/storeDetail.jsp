@@ -52,12 +52,12 @@
 							</div>
 							<a class="review-link" href="#review"><span style="color:#ee8374">${result }개</span>&nbsp;&nbsp;리뷰</a>
 						</div>
-						<c:if test="">
-							<span style="font-size:1.4em;">원가:${vo.price }<del>원</del></span><br/>
+						<c:if test="${vo.discount!=0 }">
+							<span style="font-size:1.4em;">원가:<del>${vo.price }원</del></span><br/>
 							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100) }원</span><br/>
 							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
-						<c:if test="">
+						<c:if test="${vo.discount==0 }">
 							<span style="font-size:1.4em;">원가:${vo.price }원</span><br/>
 							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
@@ -68,9 +68,10 @@
 							<label>
 								옵션 : 
 									<select class="input-select">
-										<c:forEach var="oVo" items="${oList}">
+										<%-- <c:forEach var="oVo" items="${oList}">
 											<option value="${oVo.o_value}">${oVo.o_value}</option>
-										</c:forEach>	
+										</c:forEach>	 --%>
+										<option value="${vo.o_value}">${vo.o_value}</option>
 									</select>
 							</label>
 						</div>
@@ -333,10 +334,15 @@
        				</div>
        				<p></p>
            		</div>
+           		<c:if test="${result==0 }">
            		<div class="tab-pane fade" id="review">
-					<h5>리뷰 <span style="color:#ee8374">${result }</span></h5><br/>
-					<div class="row">
-						<c:forEach var="r" items="rList">
+					<h5>리뷰 <span style="color:#ee8374">${result}</span></h5><br/>
+				</div>
+				</c:if>
+				<c:if test="${result!=0 }">
+           		<div class="tab-pane fade" id="review">
+					<h5>리뷰 <span style="color:#ee8374">${result}</span></h5><br/>
+           			<div class="row">
 						<div class="col-6">
 							<h2 style="position:absolute;top:50%;margin-top:-50px;height:200px;">
 								<i class="fa fa-star"></i>
@@ -369,7 +375,7 @@
   								<div class="progress-bar" role="progressbar" style="width:7%;background-color:#ee8374" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>
-						</c:forEach>
+
 					</div>	
 					<br/>
 					<hr/>
@@ -387,83 +393,71 @@
 							<label>
 								별점 : 
 								<select>
-									<option value="num5">5점</option>
-									<option value="num5">4점</option>
-									<option value="num5">3점</option>
-									<option value="num5">2점</option>
-									<option value="num5">1점</option>
+									<option value="5">5점</option>
+									<option value="4">4점</option>
+									<option value="3">3점</option>
+									<option value="2">2점</option>
+									<option value="1">1점</option>
 								</select>
 							</label>
 						</div>
 					</div>					
 					<hr/>
-					<div class="row" style="text-align:center;">
-						<div class="col-1">
-							<a href="#"><img src="<%=request.getContextPath()%>" style="width:65%;"/></a>
-						</div>
-						<div class="col-11" style="text-align:left;">
-							
-						</div>
-					</div>
-					<div class="row" style="background-color:#eee;margin-top:15px;margin-bottom:25px;">
-						<div class="col-12" style="text-align:center;margin-bottom:25px;">
-							총점 :<br/>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</div>
-						<div class="col-3" style="text-align:center">
-							내구성 :<br/>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>	
-						</div>
-						<div class="col-3" style="text-align:center">
-							가격 : <br/>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</div>
-						<div class="col-3" style="text-align:center">
-							디자인 : <br/>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</div>
-						<div class="col-3" style="text-align:center">
-							배송 : <br/>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>							
-						</div>
-					</div>
+					<c:forEach var="r" items="${rList}">
 					<div class="row">
 						<div class="col-12">
-							상품명 : / 옵션 : / 구매일 :
+							<a href="#"><img src="<%=request.getContextPath()%>${r.img}" style="width:65%;"/></a>
 						</div>
-						<div class="col-12" style="margin-bottom:25px;">
-							<br/>
-							
+						<div class="col-12">
+							작성자 : ${r.userid}
 						</div>
-						<div class="col-3">
-							<button class="btn btn" style="background-color:#ee8374;color:#fff;">도움이 되요</button>
+						<div class="col-12">
+							별점 :
+							<c:if test="${r.rating==1 }">
+								<i class="fa fa-star"></i>
+							</c:if>
+							<c:if test="${r.rating==2 }">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</c:if>
+							<c:if test="${r.rating==3 }">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>								
+							</c:if>
+							<c:if test="${r.rating==4 }">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>								
+								<i class="fa fa-star"></i>								
+							</c:if>
+							<c:if test="${r.rating==5 }">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>								
+								<i class="fa fa-star"></i>	
+								<i class="fa fa-star"></i>								
+							</c:if>							
 						</div>
-						<div class="col-9">
-							<span style="font-size:0.85em;outline:1px;">230명에게 도움이 되었습니다.</span>
+					</div>
+						<div class="row">
+							<div class="col-12">
+								상품명 : ${vo.pd_name} <br/>
+								옵션 : ${vo.o_value} 
+							</div>
+							<div class="col-12" style="margin-bottom:25px;">
+								구매일 : ${pvo.pc_date}<br/>
+								${r.content}
+							</div>
+							<div class="col-12" style="margin-bottom:15px;text-align:right">
+								<button class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/>
+								<span style="margin-bottom:35px;font-size:0.85em;outline:1px;">230명에게 도움이 되었습니다.</span>
+							</div>
 						</div>
-						<hr/>
-					</div>				
+						<hr/>	
+					</c:forEach>		
 				</div>
+				</c:if>
            	</div>
          	<br/>
 		</div>
@@ -475,9 +469,10 @@
 							옵션 : 
 								<c:forEach var="op" items="option">
 									<select class="input-select">
-										<c:forEach var="oVo" items="${oList}">
+<%-- 										<c:forEach var="oVo" items="${oList}">
 											<option value="${oVo.o_value}">${oVo.o_value}</option>
-										</c:forEach>	
+										</c:forEach> --%>	
+										<option value="${vo.o_value}">${vo.o_value}</option>
 									</select>
 								</c:forEach>
 							</label>
