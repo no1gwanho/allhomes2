@@ -16,12 +16,40 @@ public class PurchaseVO {
 	private String confirm;
 	private String memo;
 	private String o_value;
-	
-	public String getO_value() {
+	private int rating;
+	private String img;
+	private String content;
+	private String writedate;
+  
+  public String getO_value() {
 		return o_value;
 	}
-	public void setO_value(String o_value) {
+  public void setO_value(String o_value) {
 		this.o_value = o_value;
+    
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
 	}
 	public int getPc_no() {
 		return pc_no;
@@ -113,4 +141,11 @@ public class PurchaseVO {
 	 * ", pd_no=" + pd_no + ", s_no=" + s_no + ", num=" + num + ", total_p=" +
 	 * total_p + ", status=" + status + ", o_no=" + o_no + "]"; }
 	 */
+
+	@Override
+	public String toString() {
+		return "PurchaseVO [pc_no=" + pc_no + ", pd_no=" + pd_no + ", s_no=" + s_no + ", userid=" + userid
+				+ ", pc_date=" + pc_date + ", rating=" + rating + ", img=" + img + ", content=" + content
+				+ ", writedate=" + writedate + "]";
+	}
 }

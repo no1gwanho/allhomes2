@@ -1,5 +1,7 @@
 package com.allhomes.myapp.mypage;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.store.StoreDaoImp;
 import com.allhomes.myapp.store.StoreVO;
 
@@ -33,10 +36,30 @@ public class mypageController {
 	@RequestMapping("/mypageShopping")
 	public ModelAndView purchaseList() {
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class); 
+	
 		ModelAndView mav = new ModelAndView();
 				
 		mav.addObject("vo", dao.allPurchaseList());
 		mav.setViewName("mypage/mypageShopping");
+		
+		return mav;
+	}
+	
+	// 나의 쇼핑 페이지에서 구매확정 버튼 눌렀을 때 
+	@RequestMapping("/setInPurchase")
+	public ModelAndView purchaseUpdate(@RequestParam("pc_no") int pc_no, HttpSession ses) {
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		int result = dao.editConfirmCheck(pc_no);
+		
+		ModelAndView mav = new ModelAndView();
+				
+		if(result > 0) {			
+			ses.setAttribute("confirm", "Y");
+			mav.setViewName("mypage/mypageShopping");
+		}else {
+			mav.addObject("msg", "구매확정에 실패했습니다");
+			mav.setViewName("landing/resultPage");
+		}		
 		
 		return mav;
 	}
