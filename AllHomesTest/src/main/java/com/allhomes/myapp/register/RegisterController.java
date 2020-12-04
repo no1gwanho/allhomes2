@@ -53,13 +53,16 @@ public class RegisterController {
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
-		//濡쒓렇�씤�뿬遺� : resultVO媛� null�씠硫� �떎�뙣
+		
 		
 		if(resultVO == null){
 			mav.setViewName("redirect:login");
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
+			System.out.println(resultVO.getUsername());
+			ses.setAttribute("nickname", resultVO.getNickname());
+			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			mav.setViewName("landing/loginResult");
 		}
