@@ -44,8 +44,8 @@
 	<div id="snslogtitle">sns계정으로 로그인</div>
 	<br/>
 	<div class="login_logo">
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_google.jfif"></a>
-		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_naver.jfif" ></a>
+		<a href="https://accounts.google.com/ServiceLogin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&osid=1&service=mail&ss=1&ltmpl=default&rm=false&flowName=GlifWebSignIn&flowEntry=AddSession"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_google.jfif"></a>
+		<a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_naver.jfif" ></a>
 		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_cacao.jfif" ></a>
 	</div>
 	<hr/>
