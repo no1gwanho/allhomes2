@@ -77,7 +77,9 @@ public class AdminHomeBoardController {
 	public ModelAndView adminHBSearchDetail(HomeBoardDetailSearchVO vo) {
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		List<HomeboardVO> hList = dao.adminHBSearchDetail(vo);
-		 
+		
+		System.out.println(vo.getContent()+vo.getDate()+vo.getDate2()+vo.getHashtag()+vo.getNickname()+vo.getTitle()+vo.getUserid());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("hList", hList);
 		

@@ -147,22 +147,29 @@ Modal -->
 							<th>배송지</th>
 							<th>주문자ID</th>
 							<th>구매일</th>
+							<th>수량</th>
+							<th>옵션</th>
+							<th>결제액</th>
 							<th>상태</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr onClick="location.href=''">
-							<td>1425123</td>
-							<td>35234</td>
-							<td>체크무늬 빈티지 커튼</td>
-							<td>자연가구</td>
-							<td>52491</td>
-							<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
-							<td>seran22</td>
-							<td>2020-11-13</td>
-							<td>구매확정</td>
-						</tr>
-						
+						<c:forEach var="vo" items="${list }">
+							<tr onClick="location.href='#'">
+								<td>${vo.pc_no}</td>
+								<td>${vo.pd_no}</td>
+								<td>${vo.pd_name}</td>
+								<td>${vo.s_name}</td>
+								<td>${vo.zipcode}</td>
+								<td class="wordCut">${vo.addr}${vo.addrdetail}</td>
+								<td>${vo.userid}</td>
+								<td>${vo.pc_date}</td>
+								<td>${vo.num}</td>
+								<td>${vo.o_value}</td>
+								<td>${vo.total_p}</td>
+								<td>${vo.status}</td>
+							</tr>
+						</c:forEach>
 						</tbody>	
 					</table>
 					
