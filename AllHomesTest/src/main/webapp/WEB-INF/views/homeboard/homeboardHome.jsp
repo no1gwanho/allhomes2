@@ -6,7 +6,7 @@
 <style>
 
 .card-body {
-	height: 200px;
+	height: 110px;
 	padding: 10px;
 	flex: none;
 	overflow: hidden;
@@ -18,6 +18,7 @@
 	height: 207px;
 	overflow: hidden;
 	border:0.2px solid #f2f2f2;
+	background-color:#E98374;
 }
 
 .card-img-top>a>img {

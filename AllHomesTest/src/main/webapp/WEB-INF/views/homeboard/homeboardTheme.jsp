@@ -67,7 +67,7 @@
 
 .btn-outline-homes {
   color: #343a40;
-  border-color: #343a40;
+  border:0.3px solid gray;
 }
 
 
@@ -91,12 +91,10 @@
 		
 		if(hb_theme_no == 0){
 			$('#theme0').addClass("btn-homes");
-			
 		}else if(hb_theme_no==1){
 			$('#theme1').addClass("btn-homes");
 		}else if(hb_theme_no==2){
 			$('#theme2').addClass("btn-homes");
-			
 		}else if(hb_theme_no==3){
 			$('#theme3').addClass("btn-homes");
 		}else if(hb_theme_no==4){
@@ -109,7 +107,6 @@
 		$('#theme0').click(function(){
 			location.href="/myapp/homeboardTheme?hb_theme_no=0";	
 		});
-		
 		$('#theme1').click(function(){
 			location.href="/myapp/homeboardTheme?hb_theme_no=1";	
 		});
