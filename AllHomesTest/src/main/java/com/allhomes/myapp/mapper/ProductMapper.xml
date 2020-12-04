@@ -34,8 +34,8 @@
   	
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c)
-  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status}, #{sub_c}, #{pd_img}, #{pd_exp}, #{shipping_c})
+  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value)
+  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status}, #{sub_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
   	</insert>
   	
   	<!-- 제품 수정 테스트-->

@@ -13,7 +13,6 @@ td{
 <script>
 	$(function(){
 		
-		
 		//검색하기
 		$("#searchBtn").click(function(){
 			var value = $("#searchSelect option:selected").val();
@@ -23,8 +22,7 @@ td{
 			
 		});
 		
-		//상세조회 검색 누르기
-		
+		//상세조회 나타나기
 		$("#searchDetailBtn").click(function(event){
 			if($("#searchDiv").css("display","none")){
 				$("#searchDiv").show("fast");
@@ -34,43 +32,15 @@ td{
 					
 		});
 		
-		
-		
-		//상세검색하기
-		$("#searchDetailOkBtn").click(function(){
-			var col = $("#searchDetailSelect option:selected").val();
-			var keyword = $("#searchDetailKeyword").val();
-			var date = $("#date").val();
-			var date2 = $("#date2").val();
-			
-			
-			if(date=="" || date2==""){
-				alert("날짜를 선택해주십시오.");
+		//상세검색
+		 $("#HBDetailSearch").submit(function(){
+			if($("#userid").val()=="" && $("#nickname").val()=="" && $("#title").val()=="" && $("#hashtag").val()==""
+				&& $("#content").val()=="" && $("#date").val()=="" && $("#date2").val()==""){
+				alert("검색값을 한 개 이상 작성해주십시오");
 				return false;
 			}
-			
-			if(col=="userid"){ //아이디로 검색
-				if(keyword==""){
-					alert("아이디를 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchUserid?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="title"){ //제목으로 검색
-				if(keyword==""){
-					alert("제목을 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchTitle?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="content"){ //글내용으로 검색
-				if(keyword==""){
-					alert("글 내용을 입력해주십시오.");
-					return false;
-				}
-				location.href = "/myapp/HBDetailSearchContent?key="+keyword+"&date="+date+"&date2="+date2;
-			}else if(col=="no"){ //선택안함
-				location.href = "/myapp/HBDetailSearch?date="+date+"&date2="+date2;
-			}
-		});
+		}); 
+		
 		
 		//datepicker
 		$("#date,#date2").datepicker({
@@ -123,32 +93,41 @@ td{
 					<h6 class="m-0  font-weight-bold text-primary" style="float: left">상세조회</h6>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<p>
-						<span class="col-lg-5" style="float: left">
-							<select class="selectpicker" id="searchDetailSelect">
-								<optgroup label="검색 필터">
-									<option value="userid">회원 ID로 검색</option>
-									<option value="title">제목으로 검색</option>
-									<option value="content">글 내용으로 검색</option>
-									<option value="no">선택 안함</option>
-								</optgroup>
-						</select></span>
-						<input type="text" class="form-control col-lg-4" id="searchDetailKeyword"/>
-					</p>
-
-					<p>
-						<span class="col-lg-5" style="float: left">등록일</span> 
-						<input type="text" id="date" class="form-control col-lg-2" style="float:left;"/>
-						<span style="float:left">&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;</span> 
-						<input type="text" id="date2" class="form-control col-lg-2" style="float:left"/><br/><br/>
-					</p>
-					
-					<button class="btn btn-primary btn-icon-split" id="searchDetailOkBtn">
-						<span class="icon text-white-50"> 
-							<i class="fas fa-search"></i>
-						</span> 
-						<span class="text">조회</span>
-					</button>
+					<form method="post" action="/myapp/adminHBSearchDetail" id="HBDetailSearch">
+						<p>
+							<span class="col-lg-5" style="float: left">작성자 ID</span>
+							<input type="text" class="form-control col-lg-4" name="userid" id="userid"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">닉네임</span>
+							<input type="text" class="form-control col-lg-4" name="nickname" id="nickname"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">제목</span>
+							<input type="text" class="form-control col-lg-4" name="title" id="title"/> 
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">글 내용</span>
+							<input type="text" class="form-control col-lg-4" name="content" id="content"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">해시태스</span>
+							<input type="text" class="form-control col-lg-4" name="hashtag" id="hashtag"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">등록일</span> 
+							<input type="text" id="date" name="date" class="form-control col-lg-2" style="float:left;"/>
+							<span style="float:left">&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;</span> 
+							<input type="text" id="date2" name="date2" class="form-control col-lg-2" style="float:left"/><br/><br/>
+						</p>
+						
+						<button class="btn btn-primary btn-icon-split" id="searchDetailOkBtn">
+							<span class="icon text-white-50"> 
+								<i class="fas fa-search"></i>
+							</span> 
+							<span class="text">조회</span>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
