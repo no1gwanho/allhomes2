@@ -103,7 +103,7 @@
 	</ul>
 
 	<div>
-		<h3>인기글</h3>
+		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;새로 올라온 집들이</h3>
 	</div>
 	<div style="text-align: right;">
 		<a href="/myapp/homeboardTop">더보기</a>
@@ -124,8 +124,9 @@
 						<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 					</div>
 					<a href="#" class="card-text">${vo.userid }</a>
-					<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
-				</div>
+					<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+					</p>
+				</div> 
 			</div>
 		</div>
 		
@@ -134,91 +135,11 @@
 
 	</div>
 	<!-- /.row -->
-	<div>
-		<h3>테마별</h3>
-	</div>
-	<div style="text-align: right;">
-		<a href="/myapp/homeboardTheme">더보기</a>
-	</div>
-
-	<!-- Page Features -->
-	<div class="row text-center">
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="#"><img src="<%=request.getContextPath() %>${vo.thumbnail }"/></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/main/ah02.jpg"
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="#">할머니와 함께 살던 집의 변신할머니와 함께 살던 집의 변신할머니와 함께 살던 집의
-							변신할머니와 함께 살던 집의 변신</a>
-					</div>
-					<a href="#" class="card-text">써니웨이</a>
-					<p class="card-detail">스크랩: 43건 | 조회: 1000건</p>
-				</div>
-			</div>
-		</div>
-
-	</div>
+	
 
 
 	<div>
-		<h3>인기 해시태그</h3>
+		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;올홈즈 해시태그</h3>
 	</div>
 	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
 	<div style="text-align: right;">
