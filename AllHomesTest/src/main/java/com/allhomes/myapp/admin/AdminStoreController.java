@@ -254,7 +254,6 @@ public class AdminStoreController {
 	}
 	
 	//=======================스토어 검색===================================
-	
 	//선택검색
 	@RequestMapping("/adminStoreSearch")
 	public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
@@ -277,6 +276,9 @@ public class AdminStoreController {
 		
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 		List<StoreVO> list = dao.adminStoreDetailSearch(vo);
+		
+		System.out.println("아이디="+vo.getS_id()+"s_name="+vo.getS_name()+"staff_e="+vo.getStaff_e()+"staff_n"+vo.getStaff_n()+"staff_t"+vo.getStaff_t());
+		
 		
 		mav.addObject("list", list);
 		mav.setViewName("admin/adminStore/adminStoreStore");
