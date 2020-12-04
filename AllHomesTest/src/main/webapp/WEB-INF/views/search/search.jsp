@@ -87,174 +87,87 @@
 #repbox{border:1px solid #E98374;}
 </style>
 <script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>
+<script>
+	$(function(){
+		var pNum = ${pCount};
+		var hNum = ${hCount};
+		
+		if(pNum==0){
+			$("#storeDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+		} 
+		if(hNum==0){
+			$("#HBDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+		}
+	});
+
+</script>
 
 
-
-<div class=container><!-- ==============container오류 방지 div============== -->
+<div class="container"><!-- ==============container오류 방지 div============== -->
   	
   	<div id="inner">
-  		<h7>'커튼'에 대한 통합검색 결과 <span class="keyword">2341개</span></h7>
+  		<h7>'${key}'에 대한 통합검색 결과 <span class="keyword">1421412개</span></h7>
   		<hr>
-  		<h7>스토어 <span class="keyword">142</span></h7><a href="#" class=txtbtn>더보기</a>
+  		<h7>스토어 <span class="keyword">${pCount}</span></h7><a href="#" class=txtbtn>더보기</a>
   	</div>
-  	
-  <div class="row">
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-text">스토어명</a><br/>
-					<a href="#" class="card-text">제품이름</a><br/>
-					<a href="#" class="card-title">가격</a>
-				</div>
-			</div>
+	<div id="storeDiv">
+		<div class="row">
+				<c:forEach var="pVo" items="${pList}" end="3">
+					<div class="col-lg-3 col-md-6 mb-4">
+						<div class="card h-100">
+							<div class="card-img-top text-center">
+								<a href="#"><img
+									src="<c:url value='/productMainImg/${pVo.s_no}/${pVo.main_img}'/>"
+									alt="글번호" /></a>
+							</div>
+							<div class="card-body">
+								<a href="#" class="card-text">${pVo.s_name}</a><br /> <a href="#"
+									class="card-text">${pVo.pd_name}</a><br /> <a href="#"
+									class="card-title">${pVo.price}</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 		</div>
-		
-		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-text">스토어명</a><br/>
-					<a href="#" class="card-text">제품이름</a><br/>
-					<a href="#" class="card-title">가격</a>
-				</div>
-			</div>
-		</div>
-		
-		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-text">스토어명</a><br/>
-					<a href="#" class="card-text">제품이름</a><br/>
-					<a href="#" class="card-title">가격</a>
-				</div>
-			</div>
-		</div>
-	
-  		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<a href="#" class="card-text">스토어명</a><br/>
-					<a href="#" class="card-text">제품이름</a><br/>
-					<a href="#" class="card-title">가격</a>
-				</div>
-			</div>
-		</div>
-  	</div>
-  	<hr/>
-  	
-  	
-  	
-  <!-- ==============================================================집들이================================================================== -->
+	</div>
+	<hr />
+
+
+
+	<!-- ==============================================================집들이================================================================== -->
   		
   		
   		
   		
   		
   <div id="inner">
-  	<h7>집들이 <span class="keyword">1892</span></h7><a href="#" class=txtbtn>더보기</a>
+  	<h7>집들이 <span class="keyword">${hCount}</span></h7><a href="#" class=txtbtn>더보기</a>
   	</div>
-  
-  <div class="row">
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title-post text-center">
-					<a href="#" style="color:black;">제목</a><br/>
+
+	<div id="HBDiv">
+		<div class="row">
+			<c:forEach var="vo" items="${hList}" end="3">
+				<div class="col-lg-3 col-md-6 mb-4">
+					<div class="card h-100">
+						<div class="card-img-top">
+							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img
+								src="<%=request.getContextPath() %>${vo.thumbnail }" /></a>
+						</div>
+						<div class="card-body">
+							<div class="card-title">
+								<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+							</div>
+							<a href="#" class="card-text">${vo.userid }</a>
+							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
+						</div>
 					</div>
-					<a href="#" class="card-text-profile"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;닉네임</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" class="card-text">스크랩 32/</a>&nbsp;&nbsp;
-					<a href="#" class="card-text">조회수 320/</a>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
-		
-		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title-post text-center">
-					<a href="#" style="color:black;">제목</a><br/>
-					</div>
-					<a href="#" class="card-text-profile"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;닉네임</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" class="card-text">스크랩 32/</a>&nbsp;&nbsp;
-					<a href="#" class="card-text">조회수 320/</a>
-				</div>
-			</div>
-		</div>
-		
-		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title-post text-center">
-					<a href="#" style="color:black;">제목</a><br/>
-					</div>
-					<a href="#" class="card-text-profile"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;닉네임</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" class="card-text">스크랩 32/</a>&nbsp;&nbsp;
-					<a href="#" class="card-text">조회수 320/</a>
-				</div>
-			</div>
-		</div>
-	
-  		
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-100">
-				<div class="card-img-top text-center">
-					<a href="#"><img
-						src="<%=request.getContextPath()%>/resources/img/search/product1.jfif""
-						alt="글번호" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title-post text-center">
-					<a href="#" style="color:black;">제목</a><br/>
-					</div>
-					<a href="#" class="card-text-profile"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;닉네임</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" class="card-text">스크랩 32/</a>&nbsp;&nbsp;
-					<a href="#" class="card-text">조회수 320/</a>
-				</div>
-			</div>
-		</div>
-  	</div>
-  	<hr/>
-      
-    <div id="inner">
+	</div>
+	<hr />
+
+	<div id="inner">
   	<h7>질문과 답변 <span class="keyword">1244</span></h7><a href="#" class=txtbtn>더보기</a>
   	</div>
   	

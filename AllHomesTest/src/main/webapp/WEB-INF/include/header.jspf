@@ -15,9 +15,12 @@
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/allhomes_header.css" type="">
 <link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
 
 <style>
@@ -26,8 +29,23 @@
 	}
 
 </style>
-
 </head>
+<script>
+$(function(){
+	/* $("#searchKey").keydown(function(key){
+		if(key.keyCode == 13) {
+			var key = $("#searchKey").val();
+			alert(key);
+			location.href="/myapp/search?key="+key;
+		}
+	}); */
+	
+	$("#searchBtn").click(function(){
+		var key = $("#searchKey").val();
+		location.href="/myapp/search?key="+key;
+	});
+});
+</script>
 <body>
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,7 +65,7 @@
         </a></h4>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/myapp/homeboardHome">집들이홈</a>
-          <a class="dropdown-item" href="/myapp/homeboardTop">베스트</a>
+          <a class="dropdown-item" href="/myapp/homeboardTop?order=recentBest">베스트</a>
           <a class="dropdown-item" href="/myapp/homeboardTheme">테마별</a>
         </div>
       </li>
@@ -80,12 +98,11 @@
     
     <form class="form-inline">
 					<div class="input-group" style="margin-right:20px;" >
-						<div class="input-group-prepend">
+						<div class="input-group-prepend" id="searchBtn">
 							<span class="input-group-text" id="basic-addon1"><i class="fas fa-search" style="color:white"></i></span>
-
 						</div>
-						<input type="text" class="form-control" placeholder="Search"
-							aria-label="Search" aria-describedby="basic-addon1">
+						<input type="text" class="form-control" placeholder="Search" id="searchKey"
+							aria-label="Search" aria-describedby="basic-addon1" >
 					</div>
 	</form>
 

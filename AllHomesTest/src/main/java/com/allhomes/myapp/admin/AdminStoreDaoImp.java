@@ -2,6 +2,11 @@ package com.allhomes.myapp.admin;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.allhomes.myapp.store.StoreDetailSearchVO;
+import com.allhomes.myapp.store.StoreVO;
+
 public interface AdminStoreDaoImp {
 	
 	//스토어--스토어 카테고리
@@ -25,4 +30,12 @@ public interface AdminStoreDaoImp {
 	
 	//category--메인카테고리 삭제
 	public int storeMainCategoryDel(String main_c);
+	
+	//===========스토어 검색======================
+	
+	//선택 검색
+	public List<StoreVO> adminStoreSearch(@Param("key") String key, @Param("value") String value);
+	
+	//상세검색
+	public List<StoreVO> adminStoreDetailSearch(StoreDetailSearchVO vo);
 }

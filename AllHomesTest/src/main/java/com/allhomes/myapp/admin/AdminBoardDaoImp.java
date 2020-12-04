@@ -2,6 +2,8 @@ package com.allhomes.myapp.admin;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.allhomes.myapp.homeboard.HomeboardVO;
 
 public interface AdminBoardDaoImp {
@@ -19,14 +21,13 @@ public interface AdminBoardDaoImp {
 	
 	//모든 q&a 가져오기
 	
-	//homeboard에서 검색 (Userid)
-	public List<HomeboardVO> homeBoardSearchUserid(String key);
-	//homeboard에서 검색(글제목)
-	public List<HomeboardVO> homeBoardSearchTitle(String key);
-	//homeboard에서 검색(글내용)
-	public List<HomeboardVO> homeBoardSearchContent(String key);
 	//homeboard 선택
 	public HomeboardVO adminHomeboardSelect(int b_no);
+
+	
+	//homeboard 선택검색
+	public List<HomeboardVO> adminHBSearch(@Param("key") String key, @Param("value") String value);
+	
 	
 	//homeboard 상세 검색(userid)
 	public List<HomeboardVO> HBDetailSearchUserid(String userid, String date, String date2);

@@ -17,6 +17,7 @@
 	width: 320px;
 	height: 207px;
 	overflow: hidden;
+	border:0.2px solid #f2f2f2;
 }
 
 .card-img-top>a>img {

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.store.StoreDaoImp;
+import com.allhomes.myapp.store.StoreDetailSearchVO;
 import com.allhomes.myapp.store.StoreVO;
 
 import jdk.nashorn.internal.runtime.Context;
@@ -251,4 +252,39 @@ public class AdminStoreController {
 		return result;
 
 	}
+	
+	//=======================스토어 검색===================================
+	//선택검색
+	@RequestMapping("/adminStoreSearch")
+	public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		System.out.println("a;lskdjfa;"+key+value);
+		List<StoreVO> list = dao.adminStoreSearch(key, value);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminStore/adminStoreStore");
+		
+		return mav;
+	}
+	
+	//상세검색
+	@RequestMapping(value="/adminStoreDetailSearch", method = RequestMethod.POST)
+	public ModelAndView adminStoreDetailSearch(StoreDetailSearchVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		List<StoreVO> list = dao.adminStoreDetailSearch(vo);
+		
+		System.out.println("아이디="+vo.getS_id()+"s_name="+vo.getS_name()+"staff_e="+vo.getStaff_e()+"staff_n"+vo.getStaff_n()+"staff_t"+vo.getStaff_t());
+		
+		
+		mav.addObject("list", list);
+		mav.setViewName("admin/adminStore/adminStoreStore");
+		
+		return mav;
+		
+	}
+	 
 }

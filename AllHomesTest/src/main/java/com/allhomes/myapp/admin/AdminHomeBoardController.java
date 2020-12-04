@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.store.StoreVO;
 
 @Controller
 public class AdminHomeBoardController {
@@ -39,47 +40,6 @@ public class AdminHomeBoardController {
 		return mav;
 	}
 
-	// Homeboard 검색(Userid)
-	@RequestMapping("/adminHomeboardSearchUserid")
-	public ModelAndView homeBoardSearch(@RequestParam("key") String key) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchUserid(key);
-
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-
-	// Homeboard 검색(글제목)
-	@RequestMapping("/adminHomeboardSearchTitle")
-	public ModelAndView homeBoardSearchTitle(@RequestParam("key") String title) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchTitle(title);
-
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
-
-	// Homeboard 검색(글내용)
-	@RequestMapping("/adminHomeboardSearchContent")
-	public ModelAndView homeBoardSearchContent(@RequestParam("key") String content) {
-		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
-		List<HomeboardVO> hList = dao.homeBoardSearchContent(content);
-
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("hList", hList);
-
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
-		return mav;
-	}
 
 	// Homeboard 보기
 	@RequestMapping("/adminHomeBoardView")
@@ -147,6 +107,21 @@ public class AdminHomeBoardController {
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
 		return mav;
 	}
+	
+	
+	//선택검색
+		@RequestMapping("/adminHBSearch")
+		public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			List<HomeboardVO> hList = dao.adminHBSearch(key, value);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("hList", hList);
+
+			mav.setViewName("admin/adminBoard/adminHomeBoard");
+			return mav;
+		}
+		
 		
 		
 }

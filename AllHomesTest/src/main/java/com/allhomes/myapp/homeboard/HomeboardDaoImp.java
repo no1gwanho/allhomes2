@@ -17,6 +17,10 @@ public interface HomeboardDaoImp {
 	public int getHomeboardNumber();
 	
 	//집들이 테마별 리스트
-	public List<HomeboardVO> homeboardThemeList(int no);
+	public List<HomeboardVO> homeboardThemeList(int bh_theme_no);
+	
+	//집들이 q베스트 리스트
+	public List<HomeboardVO> homeboardBestList(String order);
+	
 	
 }

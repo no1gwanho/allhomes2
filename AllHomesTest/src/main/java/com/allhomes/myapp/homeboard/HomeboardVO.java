@@ -15,12 +15,10 @@ public class HomeboardVO {
 	private String ip;
 	private String writedate;
 	
+	
 	//조인을 위해 추가한 테마번호
 	private int hb_theme_no;
 	
-	
-	
-
 	public int getHb_theme_no() {
 		return hb_theme_no;
 	}
