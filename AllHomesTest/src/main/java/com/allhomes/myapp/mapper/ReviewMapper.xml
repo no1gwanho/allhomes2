@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.allhomes.myapp.review.ReviewDaoImp">
-<select id="selectReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select userid, pd_no, rating, img, content, writedate, s_no from review order by writedate desc
+<select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
+	select userid, pd_no, img, content, writedate, s_no, rating, (select avg(rating) from review group by pd_no) as avg_rate from review where pd_no=#{pd_no} order by writedate desc
 </select>
 <select id="allReviewList" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating, img, content, writedate, s_no from review order by writedate desc
@@ -17,12 +17,12 @@
 	insert into review(userid, pd_no, rating, img, content, writedate, s_no) values(userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no})
 </insert>
 <update id="editReview" parameterType="com.allhomes.myapp.review.ReviewVO">
-	update review set userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no} where userid=#{userid}
+	update review set userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no} where userid=#{userid} and pd_no=#{pd_no}
 </update>
 <delete id="delReviwUserid" parameterType="String">
 	delete from review where userid=#{userid}
 </delete>
-<delete id="delReviwPd_no" parameterType="String">
+<delete id="delReviwPd_no" parameterType="int">
 	delete from review where pd_no=#{pd_no}
 </delete>
 </mapper>

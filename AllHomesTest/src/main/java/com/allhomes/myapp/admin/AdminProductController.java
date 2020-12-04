@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 
@@ -107,7 +108,7 @@ public class AdminProductController {
 		}
 		return mav;
 	}
-	
+
 	
 	//제품 수정 페이지로 이동
 	@RequestMapping("/productEdit")

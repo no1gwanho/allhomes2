@@ -86,10 +86,9 @@
 		</div>
 		</div><!-- col-lg-12 끝 -->
 	</div>
-	<br/>
-	<form method="post" action="/myapp/setInPurchase&m_no=${m_no }">
+	<br/>	
 	<c:forEach var="vo" items="${vo}">
-		<div id="list1">
+		<form method="post" action="/myapp/setInPurchase?pc_no=${vo.pc_no }">
 			<div class="row">
 				<div class="col-lg-3">		
 					주문번호 : ${vo.pc_no }
@@ -106,32 +105,38 @@
 					<b>결제금액 : ${vo.total_p }</b>
 				</div>
 				<div class="col-md-2">
-					옵션 : ${vo.o_no} /  수량 : ${vo.num }
+					옵션 :  /  수량 : ${vo.num }
 				</div>
-				<c:if test="${vo.confirm!=Y }">
+			<c:if test="${vo.confirm!=Y }">
+				<div class="col-md-2">
+					<a href="#">업체명 : ${vo.s_no }</a><br/>
+					<a href="#">문의하기</a>
+				</div>
+				<div class="col-md-2">
+					<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
+					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
+					<input type="submit" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;" value="구매확정"/>
+				</div>
+			</c:if>
+			</div>
+		</form>
+	</c:forEach>
+	<form>
+		<c:forEach var="v" items="${vo}">
+			<div class="row">
+				<c:if test="${v.confirm==Y}">
 					<div class="col-md-2">
-						<a href="#">업체명 : ${vo.s_no }</a><br/>
-						<a href="#">문의하기</a>
+						<a href="#">업체명 : ${v.s_no }</a><br/>
 					</div>
 					<div class="col-md-2">
-						<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
-						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
-						<input type="submit" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;" value="구매확정"/>
-					</div>
-				</c:if>
-				<c:if test="${vo.confirm==Y}">
-					<div class="col-md-2">
-						<a href="#">업체명 : ${vo.s_no }</a><br/>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
+						<button type="submit" class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
 						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
 					</div>
 				</c:if>
 			</div>
-		</div>		
-	</c:forEach>
-	</form><%--  
+		</c:forEach>
+	</form>
+<%--  
 	<div id="list1">
 		<div class="row">
 			<div class="col-lg-3">
@@ -220,37 +225,7 @@
         	</div>
         	<div>
         		<label>
-		        	가격
-        			<select>
-        				<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-        			</select>
-        		</label>
-        		<label>
-        			배송
-        			<select>
-        				<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-        			</select>
-        		</label>
-        		<label>
-        			디자인
-        			<select>
-        				<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-        			</select>
-        		</label>	        			        			        			        			        		
-        		<label>
-        			내구성
+		        	평점
         			<select>
         				<option>5</option>
 						<option>4</option>
