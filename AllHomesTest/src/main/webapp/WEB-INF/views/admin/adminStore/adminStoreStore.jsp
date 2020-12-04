@@ -136,7 +136,7 @@ td {
 									<td>${vo.s_no}</td>
 									<td>${vo.s_name}</td>
 									<td>${vo.s_num}</td>
-									<td><img src="<c:url value='/storeImg/${vo.s_pic}'/>"
+									<td><img src="<%=request.getContextPath()%>/resources/upload/storeImg/${vo.s_pic}"
 										style="width: 50px; height: 50px; border-radius: 70%;" /></td>
 									<td>${vo.s_id}</td>
 									<td>${vo.staff_t}</td>
