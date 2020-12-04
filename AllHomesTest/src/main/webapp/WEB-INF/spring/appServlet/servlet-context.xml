@@ -10,6 +10,7 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/img/pd/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img\pd"/>
 	<resources mapping="/resources/upload/storeImg/**" location="/resources/upload/storeImg/"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>

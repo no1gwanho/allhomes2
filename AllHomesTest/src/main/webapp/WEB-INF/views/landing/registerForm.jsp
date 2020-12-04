@@ -267,7 +267,7 @@
 			
 				
 			<div class="col-auto">
-				<div id=dupFilter type="button" class="input-group-text">중복검사</div>
+				<button id=dupFilter class="input-group-text">중복검사</button>
 			</div>
 			
 		</div>
