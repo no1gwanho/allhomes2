@@ -14,7 +14,7 @@
 		select pc_no, pd_no, userid, pc_date from purchase where pd_no=#{pd_no}
 	</select>
 	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
-		select p.pc_no, p.pd_no, p.userid, p.pc_date, r.img, r.content, r.writedate, r.rating from purchase p, review r where p.pd_no=r.pd_no and p.userid=r.userid
+		select p.pc_no, p.userid, p.pc_date, p.o_value, r.img, r.content, r.writedate, r.rating from purchase p, review r where p.userid=r.userid(+) and r.userid(+)=#{userid}
 	</select>
 	<insert id="insertPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
 		insert into purchase(pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo) values(pc_sq.nextval, pd_no=#{pd_no}, s_no=#{s_no}, userid=#{userid}, num=#{num}, price=#{price}, shipping_c=#{shipping_c}, total_p=#{total_p}, a_code=#{a_code}, pc_date=#{pc_date}, payment=#{payment}, status=#{status}, confirm=#{confirm}, memo=#{memo})

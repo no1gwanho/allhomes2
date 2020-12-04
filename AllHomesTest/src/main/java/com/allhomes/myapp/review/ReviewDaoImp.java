@@ -8,6 +8,8 @@ public interface ReviewDaoImp {
 	
 	public List<ReviewVO> selectReview(int pd_no);
 	
+	public ReviewVO selectOneReview();
+	
 	public int countReview(int pd_no);
 		
 	public int insertReview(ReviewVO vo);
