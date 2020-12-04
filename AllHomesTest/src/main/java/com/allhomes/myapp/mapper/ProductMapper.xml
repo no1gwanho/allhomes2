@@ -19,18 +19,19 @@
   	<!-- 등록된 상품 수 조회 -->
   	<select id="getAllProductCount" resultType="int">
   		select count(pd_no) from product
-	</select>
-  	
+	</select>  	
   	<!-- 스토어번호로 제품 검색 -->
   	<select id="selectStoreProduct" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, o_value from product where s_no=#{s_no}
-  	</select>
-  	
+  	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
-  	
+  	<!-- 제품+스토어 조인 -->
+  	<select id="joinProductStore" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+  		select p.pd_no, p.pd_name, p.main_img, s.s_no, s.s_name from product p, store s where p.s_no=s.s_no and userid=#{userid}
+  	</select>
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value)

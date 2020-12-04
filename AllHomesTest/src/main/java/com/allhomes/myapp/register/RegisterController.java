@@ -48,18 +48,20 @@ public class RegisterController {
 	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
 		
 		
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);		
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
-		//濡쒓렇�씤�뿬遺� : resultVO媛� null�씠硫� �떎�뙣
+		
 		
 		if(resultVO == null){
 			mav.setViewName("redirect:login");
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
+			System.out.println(resultVO.getUsername());
+			ses.setAttribute("nickname", resultVO.getNickname());
+			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			mav.setViewName("landing/loginResult");
 		}
@@ -128,7 +130,7 @@ public class RegisterController {
 						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
 						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
 						 + "		아래 링크를 누르시면 회원가입이 완료되며 로그인 페이지로 이동합니다.<br/>\r\n"
-						 + "		<a href=\"http://localhost:9090/myapp/login\"><u>Go to the link</u></a><br/><br/>\r\n"
+						 + "		<a href=\"http://localhost:9090/myapp/login\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
 						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
 						 + "		감사합니다."		
 						 + "  		</p>"

@@ -20,13 +20,14 @@ public class PurchaseVO {
 	private String img;
 	private String content;
 	private String writedate;
-  
-	public String getO_value() {
+
+
+  public String getO_value() {
 		return o_value;
 	}
 	public void setO_value(String o_value) {
 		this.o_value = o_value;
-	}
+
 	public int getRating() {
 		return rating;
 	}

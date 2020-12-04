@@ -33,10 +33,21 @@
 		$("#searchFrm").click(function(){
 			$("#searchDetail").css("display","block");
 		});
+		$("#reviewBtn").click(function(){
+			var pc_date = $(this).data('${vo.pc_date}');
+			var s_name = $(this).data('${pvo.s_name}');
+			var pd_name = $(this).data('${pvo.pd_name}');
+			var o_value = $(this).data('${vo.o_value}');
+			var num = $(this).data('${vo.num}');
+			
+			$(".modal-body>#pc_date").append("구매일 : "+pc_date +"");
+			$(".modal-body>#s_name").append("업체명 : "+s_name +"");
+			$(".modal-body>#pd_name").append("상품명 : "+pd_name+"");
+			$(".modal-body>#o_value").append("옵션 : "+o_value+"");
+			$(".modal-body>#num").append("수량 : "+num+"");
+		});
 	});
-	
 </script>
-
 
 <div class="container">
 	<div class="row">
@@ -87,29 +98,29 @@
 		</div><!-- col-lg-12 끝 -->
 	</div>
 	<br/>	
-	<c:forEach var="vo" items="${vo}">
-		<form method="post" action="/myapp/setInPurchase?pc_no=${vo.pc_no }">
+	<c:forEach var="p" items="${pList}">
+		<form method="post" action="/myapp/setInPurchase?pc_no=${p.pc_no }">
 			<div class="row">
 				<div class="col-lg-3">		
-					주문번호 : ${vo.pc_no }
+					주문번호 : ${p.pc_no }
 				</div>
 				<div class="col-lg-9">
-					주문일자: ${vo.pc_date }
+					주문일자: ${p.pc_date }
 				</div>
 			</div>
 			<br/>
 			<div class="row">
-				<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></div>
+				<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>$"/></div>
 				<div class="col-md-4">
-					<b style="font-size:1.5em;">${vo.pd_no }</b><br/>
-					<b>결제금액 : ${vo.total_p }</b>
+					<b style="font-size:1.5em;">${p.pd_no }</b><br/>
+					<b>결제금액 : ${p.total_p }</b>
 				</div>
 				<div class="col-md-2">
-					옵션 :  /  수량 : ${vo.num }
+					옵션 : ${p.o_value } /  수량 : ${p.num }
 				</div>
-			<c:if test="${vo.confirm!=Y }">
+			<c:if test="${confirm!=Y }">
 				<div class="col-md-2">
-					<a href="#">업체명 : ${vo.s_no }</a><br/>
+					<a href="#">업체명 : ${p.s_no }</a><br/>
 					<a href="#">문의하기</a>
 				</div>
 				<div class="col-md-2">
@@ -120,22 +131,19 @@
 			</c:if>
 			</div>
 		</form>
+		<div class="row">
+			<c:if test="${confirm!=null && confirm==Y }">
+				<div class="col-md-2">
+					<a href="#">업체명 : ${pvo.s_name}</a><br/>
+				</div>
+				<div class="col-md-2">
+					<button id="reviewBtn" class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
+					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
+				</div>
+			</c:if>
+		</div>
 	</c:forEach>
-	<form>
-		<c:forEach var="v" items="${vo}">
-			<div class="row">
-				<c:if test="${v.confirm==Y}">
-					<div class="col-md-2">
-						<a href="#">업체명 : ${v.s_no }</a><br/>
-					</div>
-					<div class="col-md-2">
-						<button type="submit" class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
-						<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
-					</div>
-				</c:if>
-			</div>
-		</c:forEach>
-	</form>
+
 <%--  
 	<div id="list1">
 		<div class="row">
@@ -198,7 +206,7 @@
 	</div> --%>
 </div>
 <!-- 리뷰 내용 -->
-<form>
+<form method="post" action="/myapp/reviewWriteOk">
 	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content contentSize">
@@ -209,14 +217,19 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg" style="width:30%"/>
-        	</div>
-        	<div>
+        	<div id="pc_date">
         		구매일 : 2020-10-10<br/>
+        	</div>
+        	<div id="s_name">
         		회사명 : All Homes Corea<br/>
+        	</div>
+        	<div id="pd_name">
         		제품명 : 미니 홈바 테이블<br/>
+        	</div>
+        	<div id="o_value">
         		옵션명 : Basic(기본옵션)<br/>
+        	</div>
+        	<div id="num">
         		수량 : 1개
         	</div>
         	<br/>

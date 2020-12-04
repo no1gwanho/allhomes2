@@ -6,11 +6,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.register.RegisterDaoImp;
+import com.allhomes.myapp.review.ReviewDaoImp;
 import com.allhomes.myapp.store.StoreDaoImp;
 import com.allhomes.myapp.store.StoreVO;
 
@@ -34,19 +37,21 @@ public class mypageController {
 	
 	//mypage 나의 쇼핑으로 이동
 	@RequestMapping("/mypageShopping")
-	public ModelAndView purchaseList() {
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class); 
-	
+	public ModelAndView purchaseList(HttpSession ses) {
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+
+		String userid = (String)ses.getAttribute("userid");
 		ModelAndView mav = new ModelAndView();
 				
-		mav.addObject("vo", dao.allPurchaseList());
+		mav.addObject("pList", dao.allPurchaseList());
+
 		mav.setViewName("mypage/mypageShopping");
 		
 		return mav;
 	}
 	
 	// 나의 쇼핑 페이지에서 구매확정 버튼 눌렀을 때 
-	@RequestMapping("/setInPurchase")
+	@RequestMapping(value="/setInPurchase", method=RequestMethod.POST)
 	public ModelAndView purchaseUpdate(@RequestParam("pc_no") int pc_no, HttpSession ses) {
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 		int result = dao.editConfirmCheck(pc_no);
@@ -63,7 +68,7 @@ public class mypageController {
 		
 		return mav;
 	}
-	
+
 	//mypage 위시리스트로 이동
 	@RequestMapping("/mypageWishlist")
 	public String mypageWishlist() {

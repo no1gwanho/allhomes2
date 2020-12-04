@@ -66,7 +66,7 @@ $(function(){
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/myapp/homeboardHome">집들이홈</a>
           <a class="dropdown-item" href="/myapp/homeboardTop?order=recentBest">베스트</a>
-          <a class="dropdown-item" href="/myapp/homeboardTheme">테마별</a>
+          <a class="dropdown-item" href="/myapp/homeboardTheme?hb_theme_no=0">테마별</a>
         </div>
       </li>
       <li class="nav-item dropdown">
