@@ -46,14 +46,14 @@ public class AdminStoreController {
 			@RequestParam(value = "file") MultipartFile mf, HttpSession ses) {
 
 		// file upload
-		String path = ses.getServletContext().getRealPath("upload/storeCategory");// 파일 저장할 위치
+		String path = ses.getServletContext().getRealPath("/")+"resources\\upload\\storeMainCategoryImg\\";// 파일 저장할 위치
 		String originFileName = mf.getOriginalFilename(); // 파일 이름
 
 		vo.setImg(originFileName); // 경로+이름 => img컬럼에 세팅
 
 		// 파일 업로드
 		try {
-			mf.transferTo(new File(path, originFileName));
+			mf.transferTo(new File(path+"/"+originFileName));
 		} catch (IOException ie) {
 			ie.getStackTrace();
 		}
@@ -190,16 +190,10 @@ public class AdminStoreController {
 			
 			mf.transferTo(new File(path+"/"+filename));
 			
-			
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 		
-		
-    
-        
-		
-
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		int result = dao.storeAdd(vo);
 		ModelAndView mav = new ModelAndView();

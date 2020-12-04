@@ -59,9 +59,9 @@ public class AdminProductController {
 		vo.setS_no(s_no);
 
 		// 메인이미지 path
-		String mainPath = ses.getServletContext().getRealPath("upload/productMainImg/" + vo.getS_no() + "/");
+		String mainPath = ses.getServletContext().getRealPath("/")+"resources\\upload\\productMainImg\\"+vo.getS_no()+"\\"+vo.getPd_name()+"\\";
 		// 이미지 파일 path
-		String imgPath = ses.getServletContext().getRealPath("upload/productImg/" + vo.getS_no() + "/");
+		String imgPath = ses.getServletContext().getRealPath("/")+"resources\\upload\\productImg\\"+vo.getS_no()+"\\"+vo.getPd_name()+"\\";
 
 		// 메인이미지 업로드
 		String mainFileName = mainMf.getOriginalFilename();

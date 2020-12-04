@@ -196,7 +196,7 @@
                 	
                 	<c:forEach var="vo" items="${list}" varStatus="status">
 	                	<div class="card shadow col-lg-5" id="category">
-	                		<img src="<c:url value='/storeMainCategoryImg/${vo.img}'/>" />
+	                		<img src="<%=request.getContextPath()%>/resources/upload/storeMainCategoryImg/${vo.img}"/>
 	                		<div class="my-2"></div>
 	                		<hr/>
 	                		<form class="col-lg-10" style="text-align:center">
