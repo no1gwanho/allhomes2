@@ -16,8 +16,6 @@ public interface HomeboardDaoImp {
 	//집들이 베스트 리스트
 	public List<HomeboardVO> homeboardBestList(String order);
 	
-
-	
 	//레코드 추가 - 글쓰기 
 	public int homeboardInsert(HomeboardVO vo);
 	
@@ -26,6 +24,9 @@ public interface HomeboardDaoImp {
 	
 	//집들이 글보기 
 	public HomeboardVO homeboardSelect(int b_no);
+	
+	//집들이 글 클릭할때마다 조회수 증가
+	public void homeboardHit(int b_no);
 	
 	//집들이 글 수정 내용보기
 	public HomeboardVO homeboardEditSelect(int b_no);

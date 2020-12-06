@@ -10,7 +10,7 @@
 }
 
 .qna-thumnail{
-	width: 150px;
+	width: 200px;
 	height: 150px;
 }
 
@@ -49,130 +49,41 @@
 		<div class="col-lg-11"></div>
 		<div class="col-lg-1"><button type="button" class="btn" style="background-color:#E98374;color:white;width:100px"><a href="/myapp/qnaWrite">질문하기</a></button></div>
 	</div>
+	
+	
 	<!-- 게시판 글 시작 -->
 	<hr>
+	<c:forEach var="vo" items="${list }">
 		<div class="row">
-			
-			<div class="col-lg-9">
+		
+			<div class="col-lg-9" >
 				<!-- 제목 -->
 				<h4>
-					<strong><a href="/myapp/qnaView">집이랑 사무실에서 쓸 가습기 추천해주세요</a></strong>
+					<strong><a href="/myapp/qnaView?q_no=${vo.q_no }">${vo.title }</a></strong>
 				</h4>
 				<!-- 본문내용 -->
 				<p>
-				<a href="/myapp/qnaView">날이 너무 건조해서 ...</a>
+				<a href="/myapp/qnaView">${vo.content }</a>
 				</p>
 				<br /> <br /> 
 				<p>
-					<i class="fas fa-user-circle"></i> <a href="#">뚝딱이네집</a>
-					&nbsp;&nbsp; 6분전
-					&nbsp;&nbsp; 답글 : 3개
-					&nbsp;&nbsp; 조회 : 14개 
+					<i class="fas fa-user-circle"></i> <a href="#">${vo.userid }</a>
+					&nbsp;&nbsp; ${vo.writedate }
+					&nbsp;&nbsp; 답글 : ${vo.answer}개
+					&nbsp;&nbsp; 조회 : ${vo.hit }회
 					&nbsp;&nbsp; 
-			
-				</p>
 
+				</p>
 			</div>
 			<div class="col-lg-3">
-				<a href="#"> <img class="qna-thumnail"
-					src="<%=request.getContextPath() %>/resources/img/main/ah05.jpg" alt="">
+				<a href="#"> <img class="qna-thumnail" src="<%=request.getContextPath() %>${vo.thumbnail }">
 				</a>
 			</div>
-		</div>
-		
-		<!-- 두번쨰 -->
-		<!-- 게시판 글 시작 -->
-	<hr>
-		<div class="row">
 			
-			<div class="col-lg-9">
-				<!-- 제목 -->
-				<h4>
-					<strong><a href="#">집이랑 사무실에서 쓸 가습기 추천해주세요</a></strong>
-				</h4>
-				<!-- 본문내용 -->
-				<p>
-				<a href="#">날이 너무 건조해서 ...</a>
-				</p>
-				<br /> <br /> 
-				<p>
-					<i class="fas fa-user-circle"></i> <a href="#">뚝딱이네집</a>
-					&nbsp;&nbsp; 6분전
-					&nbsp;&nbsp; 댓글 : 0개
-					&nbsp;&nbsp; 조회 : 0개 
-					&nbsp;&nbsp; 
-					
-				</p>
-
-			</div>
-			<div class="col-lg-3">
-				<a href="#"> <img class="qna-thumnail"
-					src="<%=request.getContextPath() %>/resources/img/main/ah05.jpg" alt="">
-				</a>
-			</div>
 		</div>
-		
-		<!-- 게시판 글 시작 -->
-	<hr>
-		<div class="row">
-			
-			<div class="col-lg-9">
-				<!-- 제목 -->
-				<h4>
-					<strong><a href="#">집이랑 사무실에서 쓸 가습기 추천해주세요</a></strong>
-				</h4>
-				<!-- 본문내용 -->
-				<p>
-				<a href="#">날이 너무 건조해서 ...</a>
-				</p>
-				<br /> <br /> 
-				<p>
-					<i class="fas fa-user-circle"></i> <a href="#">뚝딱이네집</a>
-					&nbsp;&nbsp; 6분전
-					&nbsp;&nbsp; 댓글 : 0개
-					&nbsp;&nbsp; 조회 : 0개 
-					&nbsp;&nbsp; 
-				</p>
+		<hr>
+		</c:forEach>
 
-			</div>
-			<div class="col-lg-3">
-				<a href="#"> <img class="qna-thumnail"
-					src="<%=request.getContextPath() %>/resources/img/main/ah05.jpg" alt="">
-				</a>
-			</div>
-		</div>
-		
-		<!-- 게시판 글 시작 -->
-	<hr>
-		<div class="row">
-			
-			<div class="col-lg-9">
-				<!-- 제목 -->
-				<h4>
-					<strong><a href="#">집이랑 사무실에서 쓸 가습기 추천해주세요</a></strong>
-				</h4>
-				<!-- 본문내용 -->
-				<p>
-				<a href="#">날이 너무 건조해서 ...</a>
-				</p>
-				<br /> <br /> 
-				<p>
-					<i class="fas fa-user-circle"></i> <a href="#">뚝딱이네집</a>
-					&nbsp;&nbsp; 6분전
-					&nbsp;&nbsp; 댓글 : 0개
-					&nbsp;&nbsp; 조회 : 0개 
-					&nbsp;&nbsp; 
-				</p>
-
-			</div>
-			<div class="col-lg-3">
-				<a href="#"> <img class="qna-thumnail"
-					src="<%=request.getContextPath() %>/resources/img/main/ah05.jpg" alt="">
-				</a>
-			</div>
-		</div>
-		
-		
 		<!-- pagination ===========================================================-->
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">

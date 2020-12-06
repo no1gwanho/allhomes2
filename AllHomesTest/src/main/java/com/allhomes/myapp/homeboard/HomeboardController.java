@@ -217,7 +217,6 @@ public class HomeboardController {
 		
 
 		try {
-
 			if (jpg1 > -1) {
 				String thumbnailUrl = hbContent.substring(idx, jpg1 + 3);
 				System.out.println(thumbnailUrl);
@@ -264,19 +263,13 @@ public class HomeboardController {
 	}
 	
 
-	
-	
-	
-	
-	
-	
-	
-
 	@RequestMapping("/homeboardView")
 	public ModelAndView homeboardView(int b_no, HttpSession ses) {
 
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		dao.homeboardHit(b_no);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
+		
 		String loginId = (String)ses.getAttribute("userid");
 		String loginNickname = (String)ses.getAttribute("nickname");
 
