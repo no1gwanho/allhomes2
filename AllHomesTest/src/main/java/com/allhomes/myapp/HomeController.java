@@ -46,4 +46,10 @@ public class HomeController {
 		
 		return "landing/applyForm";
 	}
+	
+	@RequestMapping("/test")
+	public String test() {
+		
+		return "headerTest/home2";
+	}
 }

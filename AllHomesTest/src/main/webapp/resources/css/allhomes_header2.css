@@ -1,0 +1,101 @@
+h4{
+	font-size:25px;
+}
+
+
+/* Make the image fully responsive */
+.container {
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+ }
+
+/* Style The Dropdown Button */
+/* .dropbtn{
+	background-color:transparent;
+	color: gray;
+	padding: 15px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+ */}
+.nav-link{
+	color:#000000;
+	font-color:#000000;
+}
+
+.nav-item{
+	margin: 0px;
+	
+}
+
+.dropdown-item{
+	color:#000000;
+}
+
+.dropdown-item a:hover{
+	color:#EE484D;
+	
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+	background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+	background-color: white;
+}
+
+.writeBtn{
+	background-color: #EE484D;
+	color:white;
+	border-radius:10px;
+	font-size: 23px;
+	border: none;
+	cursor: pointer;
+}
+
+
+.input-group{
+	margin: 0 80px 0 40px;
+	
+}
+
+.navbar{
+	min-height:90px;
+	
+}
+
