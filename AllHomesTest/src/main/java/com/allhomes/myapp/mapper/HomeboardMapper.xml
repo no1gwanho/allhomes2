@@ -22,10 +22,17 @@
   		from homeboard where b_no=#{param1}
   	</select>
   	
+  	<!-- 집들이 볼때마다 조회수 증가 -->
+  	<update id="homeboardHit" parameterType="int">
+  		update homeboard set hit=hit+1 where b_no=#{param1}
+  	</update>
+  	
   	<!-- 집들이 수정 내용보기 -->
   	<select id="homeboardEditSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
   		select b_no, title, content, hashtag, theme, userid from homeboard where b_no=#{param1}
   	</select>
+  	
+  	
   	
   	<!-- 집들이 글번호꺼내기 -->
      <select id="getHomeboardNumber" resultType="int">
