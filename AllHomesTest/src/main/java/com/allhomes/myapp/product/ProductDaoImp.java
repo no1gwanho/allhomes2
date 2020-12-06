@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ProductDaoImp {
 	//제품전체보기(스토어홈)
-	public List<ProductVO> productAllList();
+	public List<ProductVO> productAllList(String sortPd);
 	// 제품전체보기(메인페이지)
 	public List<ProductVO >productMainList();
 	// 등록된 상품 수

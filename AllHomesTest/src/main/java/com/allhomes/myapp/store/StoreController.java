@@ -29,12 +29,13 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome() {
+	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-		
-		mav.addObject("list", dao.productAllList());		
+				
+		mav.addObject("list", dao.productAllList(sortPd));	
+		mav.addObject("sortPd", sortPd);
 		mav.setViewName("store/storeHome");		
 
 		
