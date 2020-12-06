@@ -95,10 +95,9 @@
 			<label style="font-size:0.8em;">
 				정렬방법
 				<select name="sortPd">
-					<option value="1">최신순</option>
-					<option value="2">좋아요순</option>
-					<option value="3">판매순</option>
-					<option value="4">최저가순</option>
+					<option value="">최신순</option>
+					<option value="">판매순</option>
+					<option value="rowPrice">최저가순</option>
 				</select>
 			</label>			
 		</div>
