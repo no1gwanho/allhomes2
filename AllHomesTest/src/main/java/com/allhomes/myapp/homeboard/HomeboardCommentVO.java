@@ -11,9 +11,16 @@ public class HomeboardCommentVO {
 	private int b_no;
 	private int step;
 	private int lvl;
+	private int comment_no;
 	
 	
 	
+	public int getComment_no() {
+		return comment_no;
+	}
+	public void setComment_no(int comment_no) {
+		this.comment_no = comment_no;
+	}
 	public String getHb_comment() {
 		return hb_comment;
 	}

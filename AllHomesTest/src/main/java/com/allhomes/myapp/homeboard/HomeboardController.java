@@ -44,7 +44,6 @@ public class HomeboardController {
 	}
 	
 	
-	
 	@RequestMapping("/homeboardHome")
 	public ModelAndView homeboardHome() {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
@@ -57,11 +56,6 @@ public class HomeboardController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-
 	@RequestMapping("/homeboardTop")
 	public ModelAndView homeboardTop(@RequestParam("order") String order) {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
@@ -93,7 +87,100 @@ public class HomeboardController {
 
 	}
 	
+	//글쓰기 수정페이지로 이동
+	@RequestMapping("/homeboardEdit")
+	public ModelAndView homeboardEdit(@RequestParam("b_no") int b_no) {
+		HomeBoardThemeDaoImp themeDao = sqlSession.getMapper(HomeBoardThemeDaoImp.class);
+		List<HomeBoardThemeVO> themeList = themeDao.HomeBoardThemeAll(); //테마 리스트 불러오기 
+		
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		HomeboardVO vo = dao.homeboardEditSelect(b_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("themeList", themeList);
+		mav.addObject("vo", vo);
+		mav.setViewName("homeboard/homeboardEdit");
+		
+		return mav;
+	}
 	
+	@RequestMapping(value="/homeboardEditOk", method=RequestMethod.POST)
+	public ModelAndView homeboardEditOk(HomeboardVO vo, HttpSession s) {
+		
+		
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		
+		
+		
+
+		// 썸네일찾기 ====================
+		String hbContent = vo.getContent();
+
+		int idx = hbContent.indexOf("/resources/");
+		int jpg1 = hbContent.indexOf("JPG");
+		int jpg2 = hbContent.indexOf("jpg");
+		int gif = hbContent.indexOf("gif");
+		int png = hbContent.indexOf("png");
+		System.out.println(jpg1 + ", " + jpg2 + ", " + gif + ", " + png);
+				
+
+		try {
+			if (jpg1 > -1) {
+				String thumbnailUrl = hbContent.substring(idx, jpg1 + 3);
+				System.out.println(thumbnailUrl);
+				vo.setThumbnail(thumbnailUrl); //썸네일
+			}else if (jpg2 > -1) {
+				String thumbnailUrl = hbContent.substring(idx, jpg2 + 3);
+				System.out.println(thumbnailUrl);
+				vo.setThumbnail(thumbnailUrl); //썸네일
+			}else if (gif > -1) {
+				String thumbnailUrl = hbContent.substring(idx, gif+3);
+				System.out.println(thumbnailUrl);
+				vo.setThumbnail(thumbnailUrl); //썸네일
+			}else if (png > -1) {
+				String thumbnailUrl = hbContent.substring(idx, png+3);
+				System.out.println(thumbnailUrl);
+				vo.setThumbnail(thumbnailUrl); // 썸네일
+			}else { //사진없는 글일때 준비된 파일 넣어주기
+				vo.setThumbnail("/resources/img/allhomes3.png");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+		int result = dao.homeboardEdit(vo);	
+		int b_no = vo.getB_no();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.addObject("b_no", b_no);
+		
+
+		if (result > 0) {
+			
+			mav.setViewName("redirect:/homeboardView");
+
+		} else {
+			mav.setViewName("/homeboard/result");
+		}
+		return mav;		
+	}
+	
+	
+	@RequestMapping("/homeboardDelete")
+	public ModelAndView homeboardDelete(@RequestParam("b_no") int b_no) {
+		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
+		
+		int result = dao.homeboardDelete(b_no);
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:homeboardHome");
+		}else {
+			mav.setViewName("/homeboard/result");
+			
+		}
+		return mav;
+	}
 	
 	
 	
@@ -175,12 +262,23 @@ public class HomeboardController {
 		}
 		return mav;
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/homeboardView")
-	public ModelAndView homeboardView(int b_no) {
+	public ModelAndView homeboardView(int b_no, HttpSession ses) {
 
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardSelect(b_no);
+		String loginId = (String)ses.getAttribute("userid");
+		String loginNickname = (String)ses.getAttribute("nickname");
 
 		// 해시태그 가져오기 
 		ModelAndView mav = new ModelAndView();
@@ -195,7 +293,12 @@ public class HomeboardController {
 		}
 
 		mav.addObject("vo", vo);
+		mav.addObject("loginId", loginId);
+		mav.addObject("loginNickname", loginNickname);
+		System.out.println("댓글쓰는 사람 로그인아이디: " + loginId);
+		System.out.println("댓글쓰는 사람 닉네임 : " + loginNickname);
 		mav.setViewName("homeboard/homeboardView");
+		
 
 		return mav;
 	}

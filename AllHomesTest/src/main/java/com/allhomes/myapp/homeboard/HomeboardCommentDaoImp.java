@@ -10,4 +10,9 @@ public interface HomeboardCommentDaoImp {
 	//댓글 입력
 	public int commentInsert(HomeboardCommentVO vo);
 	
+	//댓글 수정
+	public HomeboardCommentVO commentEdit(int hb_c_no);
+	
+	//댓글 삭제
+	public int commentDelete(int hb_c_no);
 }
