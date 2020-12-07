@@ -71,7 +71,6 @@ h4{
 }
 
 .writeBtn{
-	background-color: #E98374;
 	padding: 10px;
 	font-size: 16px;
 	border: none;
@@ -82,7 +81,7 @@ h4{
 
 /*검색창 돋보기*/
 .input-group-text{
-	background-color: #E98374
+	background-color:#EE8374;
 }
 
 .input-group{

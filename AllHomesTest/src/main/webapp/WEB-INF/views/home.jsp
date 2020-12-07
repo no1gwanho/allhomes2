@@ -4,9 +4,17 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 <style>
 	#bxslider img{
-		width:1400px;
-		height:500px;
+		width:1700px;
+		height:600px;
+		border-radius:30px;
 	}
+	.bx-wrapper {
+       -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        padding:0;
+        margin:0;
+   }
 	.col-3 {
 		text-align:center;
 		margin-bottom:10px;
@@ -16,7 +24,7 @@
 		width: 315px;
 		height: 300px;	
 	}
-	
+   
 	.card-body {
 	height: 200px;
 	padding: 10px;
@@ -75,11 +83,11 @@
 		$("#bxslider").bxSlider({
 			mode : 'horizontal'//'horizontal'(기본), 'vertical', 'fade'
 			,
-			slideWidth : 1400,
-			slideHeight : 500,
-			speed : 2000 //변환속도
+			slideWidth : 1700,
+			slideHeight : 600,
+			speed : 1000 //변환속도
 			,
-			auto : false //자동시작(true,false)
+			auto : true //자동시작(true,false)
 			,
 			randomStart : true,
 			captions : true//true, falase/ title값을 설명으로 표시 
@@ -121,14 +129,16 @@
 	}); //Jquery 
 </script>
 <!-- 메인 홈페이지 배너 -->
-<div class="container" style="margin-top:15px;">
-	<ul id="bxslider">
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
-	</ul>
+<div class="container-fluid">
+	<div class="col-lg-12" style="text-align:center">
+		<ul id="bxslider" style="display:inline-block">
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
+		</ul>
+	</div>
 </div>
 
 <!-- 집들이 리스트 Ajax -->

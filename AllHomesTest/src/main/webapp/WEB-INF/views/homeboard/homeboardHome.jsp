@@ -83,7 +83,7 @@
 <!-- Page Content -->
 
 
-<div class="container">
+<div class="container" style="width:1400px">
 	<ul id="bxslider">
 		<li><a href="#"><img
 				src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"
