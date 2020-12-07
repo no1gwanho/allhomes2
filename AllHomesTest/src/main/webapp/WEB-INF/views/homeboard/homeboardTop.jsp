@@ -2,67 +2,78 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 	
-	.card-title{
+.col-3 {
+			text-align:center;
+			margin-bottom:10px;
+		}
 	
-	}
-	.card-body{
-		height:200px;
-		padding:10px;
-		flex:none;
-		overflow:hidden;
-	}
-	
-	.card-img-top{
-		border-radius: 5%;
-		width: 320px;
-		height: 205px;
-		overflow: hidden;
-		border:0.2px solid #f2f2f2;
-	}
-	
-	.card-img-top>a>img{
-		width:325px;
-		text-align:center;
-		
-	}
-	
-	.card-top {
-	
-	width: 320px;
-	height: 207px;
-	
-	}
-	
-	
-	.card{
-		border:none;
-	}
-	.card-title {
-		
-		font-size:20px;font-weight:bold;
-		white-space: nowrap;
-		overflow:hidden;
-		text-overflow: ellipsis;
-	}
-	
-	.card-title>a:link, .card-title>a:visited, .card-title>a:hover, .card-title>a:active{
-		text-decoration:none;
-	}
-	
-	.card-text{
-		font-size:16px;
-	}
-	.card-detail{
-		font-size:12px;
-	}
-	
-	#homeboardTitle{margin-top:50px;margin-bottom:50px;margin-left:20px;}
-	
-	.card-body{
+	.card-body {
+		padding-top:10px;
 		height:150px;
+		flex: none;
+		overflow: hidden;
+		}
+	
+	.thumbnail{
+		padding:0px;
+		margin:0px;
+		width:320px;
+		height: 207px;
+		overflow: hidden;
+		border-radius: 5%;
+		}
+		
+	.thumbnail img {
+		width:100%;
+		text-align: center;
+		overflow: hidden;
+		}
+
+	.card-title {
+			padding:0px;
+			font-size: 17px;
+			font-weight: bold;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	
+	.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
+		.card-title>a:active {
+		text-decoration: none;
 	}
 	
+	.card-text {
+		font-size: 14px;
+	}
+	
+	.card-detail {
+		font-size: 11px;
+	}
+	
+	.container{
+			max-width:1400px;
+			margin: 0 auto;
+			font-family: 'SCDream3';
+	}
+
+	
+	#homeboardTitle {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 20px;
+	font-family:'SCDream5'
+	}
+	
+	#orderSelect{
+		margin-left:15px;
+	}
+	
+	.orderName{
+		color:#242424;
+	}
 </style>
+
 <script>
 	$(function(){
 			
@@ -71,13 +82,8 @@
 			$('#order').change(function(){
 					var selectedOrder = $("#order option:selected").val();
 					location.href="/myapp/homeboardTop?order="+selectedOrder;
-
 			});
-			
-			
-		
 	});
-
 
 </script>
 
@@ -91,16 +97,16 @@
 		</div>
 		<div class="col-lg-3"></div>
 	</div>
-	<div class="row">
+	<div class="row" id="orderSelect">
 				
 				<select class="selectpicker show-tick" id="order" name="order">
-					<option value="recentBest" 
+					<option class="orderName" value="recentBest" 
 						<c:if test="${order == 'recentBest'} ">selected</c:if>>최근인기순</option> <!-- 현재는 최근 4개 글만 나오도록 설정함 나중에 개수 조정하기 -->
-					<option value="best" 
+					<option class="orderName" value="best" 
 						<c:if test="${order == 'best' }">selected</c:if>>역대인기순</option>
-					<option value="recent" 
+					<option class="orderName" value="recent" 
 						<c:if test="${order == 'recent' }">selected</c:if>>최신순</option>
-					<option value="scrap" 
+					<option class="orderName" value="scrap" 
 						<c:if test="${order == 'scrap'}">selected</c:if>>스크랩순</option>
 				</select>
 	</div>
@@ -109,28 +115,22 @@
 
 <!-- Page Features -->
 	<div class="row text-center">
-	
-	<c:forEach var="vo" items="${bestList }">
-	
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card h-80">
-				<div class="card-img-top">
-					<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img
-						src="<%=request.getContextPath()%>${vo.thumbnail }"
-						alt="${vo.b_no }" /></a>
-				</div>
-				<div class="card-body">
-					<div class="card-title">
-						<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
-					</div>
-					<a href="#" class="card-text">${vo.userid }</a>
-					<p class="card-detail">조회: ${vo.hit }  |  스크랩: ${vo.scrap } | ${vo.writedate }(test)</p>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-	
-	</div>
+		<c:forEach var="vo" items="${bestList }">
 
+		<div class="col-3">
+			<div class="thumbnail">
+				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
+			</div>
+			<div class="card-body">
+				<div class="card-title">
+					<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+				</div>
+				<a href="#" class="card-text">${vo.userid }</a>
+				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+				</p>
+				</div> 
+			</div>
+		</c:forEach>
+	</div>
 
 </div>

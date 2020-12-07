@@ -8,82 +8,80 @@
 	margin-top: 50px;
 	margin-bottom: 50px;
 	margin-left: 20px;
+	font-family:'SCDream5'
 }
 
-.card-body {
-	height: 200px;
-	padding: 10px;
-	flex: none;
-	overflow: hidden;
-}
-
-.card-top {
-	width: 320px;
-	height: 207px;
-}
-
-.card-img-top {
-	border-radius: 5%;
-	width: 320px;
-	height: 205px;
-	overflow: hidden;
-	border:0.2px solid #f2f2f2;
-}
-
-.card-img-top>a>img {
-	width: 325px;
-	text-align: center;
-}
-
-.card {
-	border: none;
+	.col-3 {
+			text-align:center;
+			margin-bottom:10px;
+		}
 	
-}
-
-.card-title {
-	font-family:SCDream3;
-	font-size:14px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
-	.card-title>a:active {
-	text-decoration: none;
-}
-
-.card-text {
-	font-size: 16px;
-}
-
-.card-detail {
-	font-size: 12px;
-}
-
-.card-body{
+	.card-body {
+		padding-top:10px;
 		height:150px;
+		flex: none;
+		overflow: hidden;
+		}
+	
+	.thumbnail{
+		padding:0px;
+		margin:0px;
+		width:320px;
+		height: 207px;
+		overflow: hidden;
+		border-radius: 5%;
+		}
+		
+	.thumbnail img {
+		width:100%;
+		text-align: center;
+		overflow: hidden;
+		}
+
+	.card-title {
+			padding:0px;
+			font-size: 17px;
+			font-weight: bold;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	
+	.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
+		.card-title>a:active {
+		text-decoration: none;
+	}
+	
+	.card-text {
+		font-size: 14px;
+	}
+	
+	.card-detail {
+		font-size: 11px;
+	}
+	
+	.container{
+			max-width:1400px;
+			margin: 0 auto;
+			font-family: 'SCDream3';
 	}
 
-.nav {
-	margin: 20px;
-}
 
-.btn-homes-nonselect {
-  color: white;;
-  background-color:#8f8d8d;
-}
-
-
-.btn-homes-nonselect:hover {
-  color: white;
-  background-color: #E98374;
-}
-
-.btn-homes{
-	color: white;
-	background-color: #E98374;
-}
+	.btn-homes-nonselect {
+	  color: white;;
+	  background-color:#8f8d8d;
+	}
+	
+	
+	.btn-homes-nonselect:hover {
+	  color: white;
+	  background-color: #E98374;
+	}
+	
+	.btn-homes{
+		color: white;
+		background-color: #E98374;
+	}
 
 </style>
 
@@ -133,7 +131,7 @@
 </script>
 
 <div class="container" style="font-family:'SCDream3';">
-	<h3 id="homeboardTitle" style="font-family:'SCDream5'">테마별 집들이</h3>
+	<h3 id="homeboardTitle">테마별 집들이</h3>
 
 
 <!-- 탭메뉴  -->
@@ -153,22 +151,23 @@
 	
 			<!-- 내용시작 -->
 			<div class="row text-center">
-			<c:forEach var="vo" items="${themeList}">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
-						</div>
-						<div class="card-body">
-							<div class="card-title">
-								<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
-							</div>
-							<a href="#" class="card-text">${vo.userid}</a>
-							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
-						</div>
-					</div>
+				<c:forEach var="vo" items="${themeList}">
+
+		<div class="col-3">
+			<div class="thumbnail">
+				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
+			</div>
+			<div class="card-body">
+				<div class="card-title">
+					<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 				</div>
-				</c:forEach>
+				<a href="#" class="card-text">${vo.userid }</a>
+				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+				</p>
+				</div> 
+		</div>
+		
+	</c:forEach>
 			</div>
 		
 
