@@ -52,7 +52,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 		
-	<!-- 원하는 페이지에 include -->
+	<!-- 원하는 페이지에 header -->
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/home.jsp</url-pattern>
@@ -66,7 +66,7 @@
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/cart/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-prelude>/WEB-INF/include/heade2r.jspf</include-prelude>
 			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		
@@ -78,24 +78,24 @@
 		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/order/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/qna/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/search/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/store/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		
 		<jsp-property-group>
