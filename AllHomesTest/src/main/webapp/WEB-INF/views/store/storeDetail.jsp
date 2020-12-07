@@ -13,13 +13,24 @@
        	$("#buy").click(function(){
 			location.href="/myapp/order" 
        	});
-		$(window).scroll(function(event){
+/* 		$(window).scroll(function(event){
 			if(jQuery(window).scrollTop() > jQuery("#banner").offset().top) {
     			jQuery("#chase").css("position", "fixed");
     		}else if((jQuery(window).scrollTop() < jQuery("#banner").offset().top)) {
     			jQuery("#chase").css("position", "static");
     		}
-    	});
+    	}); */
+       	$( document ).ready( function() {
+       	  var offSet = $( '#chase' ).offset();
+       	  $( window ).scroll( function() {
+       	    if ( $( document ).scrollTop() > offSet.top ) {
+       	      $( '#chase' ).addClass( 'active' );
+       	    }
+       	    else {
+       	      $( '#chase' ).removeClass( 'active' );
+       	    }
+       	  });
+       	});
    });
 </script>
 <style>
@@ -65,28 +76,17 @@
 							${vo.pd_exp } 
 						</div>
 					</div>
-					<div id="bar"></div>
-					<div id="banner">
-						<div id="chase">
-						<div class="product-options">
-							<label>
-								옵션 : 
-									<select class="input-select">
-										<%-- <c:forEach var="oVo" items="${oList}">
-											<option value="${oVo.o_value}">${oVo.o_value}</option>
-										</c:forEach>	 --%>
-										<option value="${vo.o_value}">${vo.o_value}</option>
-									</select>
-							</label>
-						</div>
-						<div class="qty-label">
-							수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)
-						</div>
-						<div class="add-to-cart">
-							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
-							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
-						</div>
-						</div>
+					<div id="banner" class="sticky-top">
+						옵션 : 
+							<select class="input-select" style="margin-bottom:8px;">
+								<%-- <c:forEach var="oVo" items="${oList}">
+									<option value="${oVo.o_value}">${oVo.o_value}</option>
+								</c:forEach>	 --%>
+								<option value="${vo.o_value}">${vo.o_value}</option>
+							</select><br/>
+						수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)<br/>
+						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
 					</div>
 				</form>
 			</div>	

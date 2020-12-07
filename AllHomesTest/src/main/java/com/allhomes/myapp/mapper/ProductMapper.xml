@@ -40,8 +40,8 @@
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
-  	<select id="joinProductStore" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  		select p.pd_no, p.pd_name, p.main_img, s.s_no, s.s_name from product p, store s where p.s_no=s.s_no and userid=#{userid}
+  	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">
+  		select p.pd_no, p.pd_name, p.main_img, p.discount, p.price, s.s_no, s.s_name from product p, store s where p.s_no=s.s_no
   	</select>
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">

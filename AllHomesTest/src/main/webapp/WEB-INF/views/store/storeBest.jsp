@@ -7,8 +7,9 @@
 	}
 	.col-3 img {
 		left: 100px;
-		width: 180px;
-		height: 230px;
+		border-radius: 5%;
+		width: 320px;
+		height: 215px;
 	}
 </style>
 <div class="container">

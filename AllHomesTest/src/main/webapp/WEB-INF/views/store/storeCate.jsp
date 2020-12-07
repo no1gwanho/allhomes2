@@ -6,9 +6,9 @@
 	margin-bottom:10px;
 }
 .col-3 img {
-	left: 100px;
-	width: 240px;
-	height: 210px;
+	border-radius: 5%;
+	width: 250px;
+	height: 165px;
 }
 .dropdown-toggle::after {
     display: none;
@@ -89,134 +89,25 @@
 		<!-- 상품리스트 -->
 		<div class="col-sm-9">
 			<div class="row">
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>		
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>	
-				<div class="col-3">
-					<a href="#">
-						<img src="${pageContext.request.contextPath}/resources/img/pd/pd01.jpg"/><br/>
-						[스토어명] / 상품명<br/>
-						할인율 / 가격<br/>
-						<h6>별 / 리뷰&nbsp;&nbsp;<span class="badge badge-secondary">품절임박</span></h6>
-	    			</a>
-				</div>																																											
+				<c:forEach var="vo" items="${list}">
+					<div class="col-3">
+						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
+							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
+							[${vo.s_name}] ${vo.pd_name }<br/>
+							<c:if test="${vo.discount != 0}">
+								${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
+							</c:if>
+							<c:if test="${vo.discount == 0 }">
+								${vo.price }원<br/>
+							</c:if>
+							<h6>평점 / 리뷰&nbsp;&nbsp;
+							<c:if test="${vo.status!=null }">
+								<span class="badge badge-secondary">${vo.status }</span>
+							</c:if>
+							</h6>
+						</a>
+					</div>
+				</c:forEach>																				
 			</div>
 		</div>
 	</div>
