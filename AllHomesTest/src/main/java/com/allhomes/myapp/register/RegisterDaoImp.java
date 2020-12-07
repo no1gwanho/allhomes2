@@ -36,6 +36,9 @@ public interface RegisterDaoImp {
 	
 	//아이디 중복검사
 	public String dupFilter(String userid);
-
+	
+	//회원가입 메일인증
+	public int regFinal(RegisterVO vo);
+	
 
 }

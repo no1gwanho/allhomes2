@@ -71,10 +71,21 @@
  		select userid from register where userid=#{userid}
  	</select>
  	
- 	<!-- 프로필 사진 입력  테이블명 교체-->
+ 	  	 
+ 	<!-- 프로필 사진 입력  테이블명 교체
  	<insert id="photoBtn" parameterType="String">
- 		insert into register(m_pic) values(#{m_pic})
+ 		insert into ah_register(m_pic) values(#{m_pic})
  	</insert>
+ 	 	-->
+ 	
+ 	<!-- 이메일 인증코드 	테이블명 교체   원하는 레코드만 집어서 reg코드를 바꿀거 -->
+ 	<update id="regFinal" parameterType="com.allhomes.myapp.register.RegisterVO">
+ 		update register set regcode=1
+ 	</update> 
+ 	
+ 	
+ 	
+ 	
  	
  	
  	
