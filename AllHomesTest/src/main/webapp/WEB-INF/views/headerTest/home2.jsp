@@ -12,7 +12,7 @@
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
         padding:0;
-        height:800px;
+        height:700px;
         overflow:hidden;
   		
 	}
@@ -26,7 +26,7 @@
    
 	#bxslider img{
 		width:100%;
-		height:800px;
+		height:700px;
 		
 	}
 	.col-3 {
@@ -144,7 +144,8 @@
 	
 </script>
 <!-- 메인 홈페이지 배너 -->
-<div class="container-fluid">
+
+	<div class="col-lg-12">
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner11.svg"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" style="width:100%"/></a></li>
@@ -152,13 +153,13 @@
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner6.jpg"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner7.jpg"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner9.png"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner10.jpg"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner12.jpg"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner13.jpg"/></a></li>
 	</ul>
-</div>
+	</div>
+
 
 <!-- 집들이 리스트 Ajax -->
 	<div class="container" style="margin-top:45px;">
@@ -212,5 +213,7 @@
 			</div>
 		</c:forEach>
 	</div>	
+</div>
+</div>
 </div>
 <br/>

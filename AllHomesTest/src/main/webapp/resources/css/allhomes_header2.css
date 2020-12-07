@@ -2,10 +2,15 @@ h4{
 	font-size:25px;
 }
 
-
-/* Make the image fully responsive */
-.container {
+.navbar{
+	margin:0;
+	padding:0;
 }
+/* Make the image fully responsive */
+.container-fluid {
+	margin:0px;
+	padding:0px;
+}	
 
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -30,15 +35,20 @@ h4{
 	margin: 0px;
 	
 }
-
+.dropdown a{
+	color:black;
+}
 .dropdown-item{
 	color:#000000;
 }
-
-.dropdown-item a:hover{
-	color:#EE484D;
-	
+.dropdown-menu a{
+	color:#000000;
+	font-size:20px;
 }
+.dropdown-menu a:hover{
+	color:#EE484D;
+}
+
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
@@ -81,7 +91,6 @@ h4{
 
 .writeBtn{
 	background-color: #EE484D;
-	color:white;
 	border-radius:10px;
 	font-size: 23px;
 	border: none;
@@ -91,11 +100,15 @@ h4{
 
 .input-group{
 	margin: 0 80px 0 40px;
-	
+}
+
+#basic-addon1 a:hover{
+	background-color:white;
+	color:#EE484D;
 }
 
 .navbar{
-	min-height:90px;
+	min-height:70px;
 	
 }
 
