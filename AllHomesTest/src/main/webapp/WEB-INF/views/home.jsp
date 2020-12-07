@@ -13,8 +13,9 @@
 	}
 	.col-3 img {
 		left: 100px;
-		width: 315px;
-		height: 300px;	
+		border-radius: 5%;
+		width: 320px;
+		height: 215px;
 	}
 	
 	.card-body {
