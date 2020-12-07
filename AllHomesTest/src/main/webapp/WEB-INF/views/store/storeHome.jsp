@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<spring:uri value='/resources/img/pd/pd01.jpg'/>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
@@ -112,7 +113,7 @@
 				<c:forEach var="vo" items="${list}">
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
-							<img src="<%=request.getContextPath() %>${vo.main_img}"/><br/>
+							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 							[${vo.s_no}] ${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
 								${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
@@ -132,6 +133,3 @@
 		</div>
 	</article>
 </div>
-
-
-	

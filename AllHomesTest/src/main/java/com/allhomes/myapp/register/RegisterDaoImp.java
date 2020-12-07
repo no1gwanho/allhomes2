@@ -37,8 +37,5 @@ public interface RegisterDaoImp {
 	//아이디 중복검사
 	public String dupFilter(String userid);
 
-	//프로필 이미지 업로드
-	public int photoBtn(String m_pic);
-	
-	
+
 }

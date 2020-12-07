@@ -83,8 +83,12 @@
 		$("#bxslider").bxSlider({
 			mode : 'horizontal'//'horizontal'(기본), 'vertical', 'fade'
 			,
+
 			slideWidth : 1700,
 			slideHeight : 600,
+
+			slideWidth : 1400,
+			slideHeight : 450,
 			speed : 1000 //변환속도
 			,
 			auto : true //자동시작(true,false)
@@ -129,6 +133,7 @@
 	}); //Jquery 
 </script>
 <!-- 메인 홈페이지 배너 -->
+
 <div class="container-fluid">
 	<div class="col-lg-12" style="text-align:center">
 		<ul id="bxslider" style="display:inline-block">
@@ -137,8 +142,13 @@
 			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
 			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
-		</ul>
-	</div>
+		  <li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_01.jpg"/></a></li>
+		  <li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_02.jpg"/></a></li>
+		  <li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_03.jpg"/></a></li>
+		  <li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_04.jpg"/></a></li>
+		  <li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_05.jpg"/></a></li>
+	</ul>
+
 </div>
 
 <!-- 집들이 리스트 Ajax -->
@@ -167,10 +177,8 @@
 			<c:forEach var="v" items="${list }">
 				<div class="col-3">
 					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-						<img src="<%=request.getContextPath() %>${v.main_img }"/><br/>
-						<c:forEach var="s" items="${store }">
+						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/><br/>
 							[${v.s_no}] / ${v.pd_name }<br/>
-						</c:forEach>
 						<c:if test="${v.discount != 0}">
 							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
 						</c:if>

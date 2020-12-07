@@ -84,7 +84,8 @@
 					
 			//닉네임 검사
 			if($("#nickname").val()==""){
-								
+				$("#nickname").val("사용자");
+										
 			}else{
 				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
 				var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
@@ -119,76 +120,25 @@
 				alert("이메일 주소는 4~13글자 내로 적어주세요")
 				return false;
 			}
-									
+								
+					
 			return true;
-		});
-		
-		
-		
-		
-		
-	$(function(){		//프로필 업로드 버튼을 눌렀을때 vo에 입력해주기위한 함수
-		$("#photoBtn").click(function(){
-			var url = "/myapp/photoBtn";
-			
-			$.ajax({
-				url:url,
-				data:data,
-				success:function(result){
-					alert("프로필사진 vo 저장 성공");	//////////////////////나중에 경고 메시지 삭제////////////////
 					
-					
-				},error:function(){		//////////////////////나중에 경고 메시지 삭제/////////////////////////
-					alert("프로필사진 vo 저장 에러발생");
-				}
-							
-			});
 		});
-	});	
 	
-	
-	
-	//각 칸을 클릭햇을때 중복검사 안했으면 안했다고 띄우고 
-	//했어도 아이디를 바꾸면 
-	
+
 	
 	//중복검사 의무화 	
 	$(function(){
-		$("#userid").blur(function(){
+		$("#userid").on("change",function(){
 							
-			if($("#idStatus").val()=="N"){
-				alert("아이디 중복검사를 해주세요.");				
-				
-			}
-			
-		
-			var url="/myapp/mustCheck";
-			$.ajax({
-				url:url,
-				data:"userid="+document.getElementById("userid").value
-				,success:function(result){
-					if(result==true){
-											
-					}else{alert("아이디가 변경되어 중복검사를 다시해주세요.");}				
-								
-				},error:function(){
-					console.log("정보받기 에러 발생");
-				}
-			});
-					
+			$("#idStatus").val("N");		
+						
 		});
 		
 	});
 		
-	
-	
-	
-	
-	
-	
-		
-		
-	
+
 	//중복검사 버튼 클릭 시
 	$(function(){
 		$("#dupFilter").click(function(){
@@ -257,7 +207,7 @@
 	<div id="logo">
 	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
 	</div>
-	<form class="form-signin" method="post" id="regFrm" action="/myapp/registerOk">
+	<form class="form-signin" method="post" id="regFrm" action="/myapp/registerOk" enctype="multipart/form-data">
 	<h2 class="form-signin-heading">회원가입</h2>
 				
  		
@@ -267,7 +217,7 @@
 			
 				
 			<div class="col-auto">
-				<div id=dupFilter type="button" class="input-group-text">중복검사</div>
+				<button id=dupFilter class="input-group-text">중복검사</button>
 			</div>
 			
 		</div>
@@ -290,7 +240,7 @@
 	
 	
 		<label for="photoBtn">프로필 사진</label>
-		<input id=photoBtn type="file" name="photoBtn" class="form-control"></input>												<!-- 프로필사진 업로드 -->
+		<input id="photoBtn" type="file" name="photoBtn" class="form-control"></input>												<!-- 프로필사진 업로드 -->
 			
 		
 		<label for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->

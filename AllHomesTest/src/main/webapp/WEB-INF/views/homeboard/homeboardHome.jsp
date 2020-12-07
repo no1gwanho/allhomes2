@@ -15,14 +15,16 @@
 .card-img-top {
 	border-radius: 5%;
 	width: 320px;
-	height: 207px;
+	height: 215px;
 	overflow: hidden;
 	border:0.2px solid #f2f2f2;
 	background-color:#E98374;
 }
 
+
+
 .card-img-top>a>img {
-	width: 325px;
+	width: 100%;
 	text-align: center;
 }
 
