@@ -32,16 +32,6 @@ public class HomeboardController {
 		this.sqlSession = sqlSession;
 	}
 
-	//메인페이지용 집들이 8개만
-	@RequestMapping("/homeboardListForMain")
-	@ResponseBody
-	public List<HomeboardVO> homeboardListForMain() {
-		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardListForMain();
-		
-		return list;
-		
-	}
 	
 	
 	@RequestMapping("/homeboardHome")
