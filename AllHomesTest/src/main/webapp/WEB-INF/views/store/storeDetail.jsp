@@ -33,7 +33,7 @@
 <div class="container" style="margin-top:15px;">
 	<div class="row">
 		<div class="col-md-5">
-			<img src="<%=request.getContextPath() %>${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
+			<img src="<%=request.getContextPath() %>/resources/img/pd/${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-7" style="left:350px;">
@@ -65,6 +65,7 @@
 							${vo.pd_exp } 
 						</div>
 					</div>
+					<div id="bar"></div>
 					<div id="banner">
 						<div id="chase">
 						<div class="product-options">

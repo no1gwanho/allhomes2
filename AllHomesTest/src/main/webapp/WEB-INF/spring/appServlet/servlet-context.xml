@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	
-
-
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
@@ -21,8 +18,7 @@
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
 	<resources mapping="/resources/img/**" location="file:\\\D:\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>
-
-		
+			
 	<!--스토어 메인 카테고리 이미지 저장 경로
 	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
 	제품 상세설명 이미지
@@ -63,7 +59,6 @@
 		<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
-
 
 	<!-- 메일설정 -->
 	<context:component-scan base-package="kr.co.lty"/>
