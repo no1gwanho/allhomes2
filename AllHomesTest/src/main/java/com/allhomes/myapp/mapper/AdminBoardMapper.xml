@@ -7,7 +7,7 @@
 		select count(*) from homeboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
 	</select>
 	<select id="countQAToday" resultType="int">
-		select count(*) from qaboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+		select count(*) from qnaboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
 	</select>
 	<select id="countReviewToday" resultType="int">
 		select count(*) from review where to_char(writedate, 'YYYY-MM-DD')= to_char(sysdate, 'YYYY-MM-DD')
@@ -18,7 +18,12 @@
 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
 	</select>
 	
-	<!-- 글내용보기 -->
+	<!-- 질문게시판 전체 리스트 -->
+	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
+	 	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
+	</select>
+  
+	<!-- homeboard 글내용보기 -->
   	<select id="adminHomeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
   		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
   		from homeboard where b_no=#{param1}
@@ -57,4 +62,10 @@
 		</where>
 	</select>
 	
+	<!-- 모든 리뷰 가져오기 -->
+	<select id="selectAllReview" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
+		from store, review, product
+		where review.pd_no = product.pd_no and store.s_no = review.s_no
+	</select>
 </mapper>
