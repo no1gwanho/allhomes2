@@ -59,7 +59,7 @@
             <!-- Sidebar - Brand -->
             <a href="/myapp/adminMain" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon">
-                    <img src="/myapp/resources/img/admin/logo.png"  class="animated bounce infinite" style="width:50px; heght:50px">
+                    <img src="/myapp/resources/img/admin/logo.png" style="width:50px; heght:50px">
                 </div>
                 <div class="sidebar-brand-text mx-3" style="color:white">ALL HOMES </div>
             </a>

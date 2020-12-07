@@ -1,47 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-	a{
-		text-decoration:none;
-		color:gray;
-	}
-	a:link, a:hover{
-		text-decoration:none;
-		color:gray;
-	}
-	@font-face{
-	font-family:"SCDream3";
-	src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
-	font-style:normal;
-	font-weight:normal;
+a {
+	text-decoration: none;
+	color: gray;
 }
-footer{
+
+a:link, a:hover {
+	text-decoration: none;
+	color: gray;
+}
+
+@font-face {
+	font-family: "SCDream3";
+	src: url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+footer {
 	font-family: 'SCDream3';
-	font-size:16px;
+	font-size: 16px;
 }
-	
+
+.row div {
+	padding: 15px;
+	color: #bbbbbb;
+}
+
+span {
+	font-family: 'lot';
+	font-size: 40px;
+	color: gray;
+}
 </style>
+	<footer class="sticky-footer bg-gradient-dark">
+		<div class="row">
+		<div class="col-2">
+			<span>homes</span>
+		</div>
+		<div class="col-4">
+			<a href="/myapp/ourStory">올홈즈스토리</a> <br /> 대표자: 비트캠프 4조 | 주소:서울시
+			서대문구 |<br /> 대표전화: 02-222-1111 <br />
+		</div>
+		<div class="col-2">
+			<a href="/myapp/application">스토어 입점 신청서</a>
 
-<footer class="sticky-footer bg-gradient-dark">
+		</div>
+		<div class="col-2">
+			<a href=""><i class="fab fa-facebook-square fa-2x"
+				style="color: #E98374"></i></a>&nbsp; <a href=""><i
+				class="fab fa-instagram fa-2x" style="color: #E98374"></i></a>&nbsp; <a
+				href=""><img
+				src="<%=request.getContextPath()%>/resources/img/kakaotalk.png"
+				style="width: 30px; margin-bottom: 15px;" /></a>
 
-	<div class="col-2">All Homes</div>
-	<div class="col-5">
-		<a href="/myapp/ourStory">올홈즈스토리</a> <br /> 대표자: 비트캠프 4조 | 주소:서울시 서대문구
-		|<br /> 대표전화: 02-222-1111 <br />
-	</div>
-	<div class="col-2" style="padding: 10px;">
-		<a href="/myapp/application">스토어 입점 신청서</a>
-
-	</div>
-	<div class="col-2" style="padding: 10px;">
-		<a href=""><i class="fab fa-facebook-square fa-2x"
-			style="color: #E98374"></i></a>&nbsp; <a href=""><i
-			class="fab fa-instagram fa-2x" style="color: #E98374"></i></a>&nbsp; <a
-			href=""><img
-			src="<%=request.getContextPath() %>/resources/img/kakaotalk.png"
-			style="width: 30px; margin-bottom: 15px;" /></a>
-
-	</div>
-</footer>
+		</div>
+		</div>
+	</footer>
 </body>
 </html>
