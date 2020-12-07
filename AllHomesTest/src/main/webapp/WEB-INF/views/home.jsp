@@ -76,8 +76,8 @@
 			mode : 'horizontal'//'horizontal'(기본), 'vertical', 'fade'
 			,
 			slideWidth : 1400,
-			slideHeight : 500,
-			speed : 2000 //변환속도
+			slideHeight : 450,
+			speed : 1000 //변환속도
 			,
 			auto : false //자동시작(true,false)
 			,
@@ -123,11 +123,11 @@
 <!-- 메인 홈페이지 배너 -->
 <div class="container" style="margin-top:15px;">
 	<ul id="bxslider">
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
+		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_01.jpg"/></a></li>
+		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_02.jpg"/></a></li>
+		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_03.jpg"/></a></li>
+		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_04.jpg"/></a></li>
+		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_05.jpg"/></a></li>
 	</ul>
 </div>
 
