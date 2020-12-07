@@ -21,42 +21,62 @@ a:link, a:hover {
 footer {
 	font-family: 'SCDream3';
 	font-size: 16px;
+	line-height:30px;
+	overflow:hidden;
+	z-index:100;
 }
 
 .row div {
 	padding: 15px;
-	color: #bbbbbb;
+	color: gray;
 }
 
-span {
+#homes {
 	font-family: 'lot';
 	font-size: 40px;
 	color: gray;
 }
+span{
+	color:#aaaaaa;
+}
+.col-3 .col-4 .col-2{
+	height:200px;
+	margin:0 auto;
+	padding:20px;
+}
 </style>
-	<footer class="sticky-footer bg-gradient-dark">
+<div class="container-fluid">
+	<footer class="sticky-footer bg-dark bg-gradient-dark">
 		<div class="row">
-		<div class="col-2">
-			<span>homes</span>
-		</div>
-		<div class="col-4">
-			<a href="/myapp/ourStory">올홈즈스토리</a> <br /> 대표자: 비트캠프 4조 | 주소:서울시
-			서대문구 |<br /> 대표전화: 02-222-1111 <br />
-		</div>
-		<div class="col-2">
-			<a href="/myapp/application">스토어 입점 신청서</a>
-
-		</div>
-		<div class="col-2">
-			<a href=""><i class="fab fa-facebook-square fa-2x"
-				style="color: #E98374"></i></a>&nbsp; <a href=""><i
-				class="fab fa-instagram fa-2x" style="color: #E98374"></i></a>&nbsp; <a
-				href=""><img
-				src="<%=request.getContextPath()%>/resources/img/kakaotalk.png"
-				style="width: 30px; margin-bottom: 15px;" /></a>
-
-		</div>
+			<div class="col-3">
+				<a href="/myapp/home" id="homes">h<span>o</span>m<span>es</span></a>
+			</div>
+			<div class="col-2">
+				<a href="/myapp/ourStory">올홈즈스토리</a>
+			</div>
+			<div class="col-3">
+				대표자: 비트캠프 4조 | 주소:서울시 서대문구 | <br/>
+				대표전화: 02-222-1111
+			</div>
+			<div class="col-2">
+				<a href="/myapp/application">스토어 입점 신청서</a>
+	
+			</div>
+			<div class="col-2">
+				<a href=""><i class="fab fa-facebook-square fa-2x"
+					style="color:#808080;"></i>
+				</a>&nbsp; 
+				<a href=""><i
+					class="fab fa-instagram fa-2x" style="color:#808080;"></i>
+				</a>&nbsp;
+				<a href="">
+				 	<img src="<%=request.getContextPath()%>/resources/img/kakaoTalk.png"
+					style="width:30px;height:30px; margin-bottom: 15px;"/>
+				</a>
+	
+			</div>
 		</div>
 	</footer>
+</div>	
 </body>
 </html>

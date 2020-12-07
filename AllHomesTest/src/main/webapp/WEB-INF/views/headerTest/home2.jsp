@@ -9,9 +9,10 @@
 	}
 	
 	#bxslider{
-		width:100%;
+		width:2000px;
 		margin:0;
   		border: 0;
+  		border-radius:5%;
   		 -moz-box-shadow: none !important;
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
@@ -26,13 +27,12 @@
         box-shadow: none !important;
         padding:0;
         margin:0;
-
    }
    
 	#bxslider img{
-		width:100%;
-		height:750px;
-		
+		width:2000px;
+		height:600px;
+		border-radius:5%;
 	}
 	.col-3 {
 		text-align:center;
@@ -103,7 +103,7 @@
 	$(function() {
 		$("#bxslider").bxSlider({
 			mode : 'horizontal',//'horizontal'(기본), 'vertical', 'fade'	
-			slideHeight : 700,
+			slideHeight : 600,
 			speed : 900, //변환속도
 			auto : true, //자동시작(true,false)
 			randomStart : true,
@@ -149,22 +149,22 @@
 	
 </script>
 <!-- 메인 홈페이지 배너 -->
-
+<div class="container">
 	<div class="col-lg-12">
-	<ul id="bxslider">
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner11.svg"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" style="width:100%"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner6.jpg"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner9.png"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner10.jpg"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner12.jpg"/></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner13.jpg"/></a></li>
-	</ul>
+		<ul id="bxslider">
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner11.svg"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" style="width:100%"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner6.jpg"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner3.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner9.png"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner10.jpg"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner12.jpg"/></a></li>
+			<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner13.jpg"/></a></li>
+		</ul>
 	</div>
-
+</div>
 
 <!-- 집들이 리스트 Ajax -->
 	<div class="container" style="margin-top:45px;">
@@ -219,6 +219,3 @@
 		</c:forEach>
 	</div>	
 </div>
-</div>
-</div>
-<br/>
