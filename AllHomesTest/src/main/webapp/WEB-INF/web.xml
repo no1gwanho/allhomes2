@@ -78,24 +78,24 @@
 		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/order/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/qna/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/search/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/store/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer.jspf</include-coda>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		
 		<jsp-property-group>
