@@ -46,7 +46,7 @@
 
 @font-face{
 	font-family:"SCDream";
-	src:url("/myapp/resources/css/font/SCDream4.otf") format("truetype");
+	src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
 	font-style:normal;
 	font-weight:normal;
 }
@@ -54,6 +54,8 @@
 body{
 	font-family: 'SCDream';
 	font-size:25px;
+	height:70px;
+	line-height:70px;
 	
 }
 #home{
@@ -68,9 +70,11 @@ body{
 </style>
 <body>
 	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
 		<nav class="navbar navbar-expand-lg navbar-light bg-white">
-			<div id="home" style="padding-left:30px;padding-right:50px;">
-				<a href="#">
+			<div id="home" style="padding-left:100px;padding-right:50px;">
+				<a href="/myapp/home">
 					<span style="color:#EE484D;">h</span><span style="color:#000000">o</span><span style="color:#EE484D">m</span><span style="color:#000000">es</span>
 				</a>
 			</div>
@@ -85,9 +89,8 @@ body{
 				<ul class="navbar-nav mr-auto">
 					
 					<li class="nav-item dropdown">
-						
 							<a class="nav-link" href="/myapp/homeboardHome"
-								id="navbarDropdown" role="button" data-hover="dropdown"
+								id="navbarDropdown" role="button" data-hover="dropdown" style="color:black;"
 								aria-haspopup="true" aria-expanded="false"> 집들이 </a>
 						
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -100,7 +103,7 @@ body{
 					<li class="nav-item dropdown">
 						
 							<a class="nav-link" href="/myapp/storeHome" id="navbarDropdown"
-								role="button" data-hover="dropdown" aria-haspopup="true"
+								role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;"
 								aria-expanded="false"> 스토어 </a>
 						
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -111,13 +114,13 @@ body{
 					</li>
 					<li class="nav-item">
 						
-							<a class="nav-link" href="/myapp/qnaMain">질문과답변</a>
+							<a class="nav-link" href="/myapp/qnaMain" style="color:black;" hover="color:#EE484D;">질문과답변</a>
 						
 					</li>
 					<li class="nav-item dropdown">
 						
 							<a class="nav-link" href="/myapp/mypageHome" id="navbarDropdown"
-								role="button" data-hover="dropdown" aria-haspopup="true"
+								role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;"
 								aria-expanded="false"> 마이페이지 </a>
 						
 
@@ -132,10 +135,11 @@ body{
 
 				<form class="form-inline">
 					<div class="input-group" style="margin-right: 20px;">
-						<div class="input-group-prepend" id="searchBtn" style="border-radius:30px;background-color:#EE484D;">
-							<span class="input-group-text" id="basic-addon1"><i
-								class="fas fa-search" style="color:#ffffff;border-radius:30px;background-color: #EE484D;"></i></span>
-						</div>
+						
+							<a href="#" class="btn" id="basic-addon1" style="border-radius:30px;background-color:#EE484D;color:white;border:none;margin-right:10px;">
+								<i class="fas fa-search"></i>
+							</a>
+						
 						<input type="text" class="form-control" placeholder="Search"
 							id="searchKey" aria-label="Search"
 							aria-describedby="basic-addon1" style="width:300px;border-radius:30px;">
@@ -152,7 +156,7 @@ body{
 								<a class="nav-link" href="/myapp/login" style="margin-right:20px;font-size:20px;color:black;">로그인</a>
 						</li>
 						<li>
-							<span style="margin-right:20px;color:black;font-size:20px;">|</span>
+							<span style="margin-top:20px;margin-right:20px;color:black;font-size:20px;">|</span>
 						</li>
 						<li class="nav-item" style="margin: 0px">
 							
@@ -162,7 +166,7 @@ body{
 						</li>
 					</c:if>
 					<c:if test="${logStatus=='Y' }">
-						<li calss="nav-item" style="margin: 0px">
+						<li class="nav-item" style="margin: 0px">
 							<h6>
 								<a class="nav-link" href="/myapp/mypageHome">${username}님</a>
 							</h6>
@@ -177,7 +181,7 @@ body{
 					<li class="nav-item dropdown">
 						<a class="nav-link writeBtn btn"
 						href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" style="color:white;height:80px;width:100px;"
+						aria-haspopup="true" aria-expanded="false" style="color:white;margin-top:20px;height:50px;width:100px;"
 						> 글쓰기</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="/myapp/homeboardWrite">집들이</a> <a
@@ -190,4 +194,5 @@ body{
 
 			</div>
 		</nav>
+			
 	</div>
