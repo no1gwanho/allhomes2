@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface QnaDaoImp {
 	
-	//질문게시판 레코드 전체 
+		//질문게시판 레코드 전체 
 		public List<QnaVO> qnaAllList();
 		
 		//질문게시판 추가 

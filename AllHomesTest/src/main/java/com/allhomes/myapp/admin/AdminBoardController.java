@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.qna.QnaVO;
 
 @Controller
 public class AdminBoardController {
@@ -29,6 +30,7 @@ public class AdminBoardController {
 	public ModelAndView adminBoardMain() {
 		
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		
 		int countHb = dao.countHomeBoardToday(); //오늘 올라온 게시글 수 
 		int countReview = dao.countReviewToday(); 
 		int countQa = dao.countQAToday();
@@ -39,8 +41,12 @@ public class AdminBoardController {
 		mav.addObject("countReview",countReview);
 		
 		List<HomeboardVO> hList = dao.selectAllHomeBoard(); //homeboard 모든 게시물 가져오기
+		List<AdminReviewJoinVO> rList = dao.selectAllReview();//review 모든 게시물 가져오기
+		List<QnaVO> qList = dao.qnaAllList();//qna 글 가져오기
 		
 		mav.addObject("hList", hList);
+		mav.addObject("rList", rList);
+		mav.addObject("qList", qList);
 		
 		mav.setViewName("admin/adminBoard/adminBoardMain");
 		return mav;

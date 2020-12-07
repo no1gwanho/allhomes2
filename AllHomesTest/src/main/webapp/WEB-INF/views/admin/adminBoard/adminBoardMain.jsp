@@ -74,6 +74,7 @@ td{
 }
 
 .wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
 </style>
 <script>
 	$(function(){
@@ -227,27 +228,29 @@ td{
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
+								<th>글내용</th>
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>조회수</th>
-								<th>삭제</th>
+								<th>답변</th>
+								<!-- <th>삭제</th> -->
 							</tr>
 						</thead>
 						<tbody>
-							<%-- <c:forEach var="" items="">
+							 <c:forEach var="qVo" items="${qList}">
 								<tr onClick="location.href=''">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><a href="#" class="btn btn-danger btn-circle"> <i
+									<td>${qVo.q_no}</td>
+									<td>${qVo.title}</td>
+									<td class="wordCut">${qVo.content}</td>
+									<td>${qVo.userid}</td>
+									<td>${qVo.writedate}</td>
+									<td>${qVo.hit}</td>
+									<td>${qVo.answer}</td>
+									<!-- <td><a href="#" class="btn btn-danger btn-circle"> <i
 											class="fas fa-trash"></i>
-									</a></td>
+									</a></td> -->
 								</tr>
-							</c:forEach> --%>
+							</c:forEach> 
 						</tbody>
 					</table>
 
@@ -289,16 +292,32 @@ td{
 							</tr>
 						</thead>
 						<tbody>
-							<%-- <c:forEach var="" items="">
-								<tr onClick="location.href=''">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+							 <c:forEach var="rVo" items="${rList}">
+								<tr onClick="location.href='#'">
+									<td>${rVo.s_no}</td>
+									<td>${rVo.s_name}</td>
+									<td>${rVo.pd_no}</td>
+									<td>${rVo.pd_name}</td>
+									<c:choose>
+										<c:when test="${rVo.rating=='1'}">
+											<td>★</td>
+										</c:when>
+										<c:when test="${rVo.rating=='2'}">
+											<td>★★</td>
+										</c:when>
+										<c:when test="${rVo.rating=='3'}">
+											<td>★★★</td>
+										</c:when>
+										<c:when test="${rVo.rating=='4'}">
+											<td>★★★★</td>
+										</c:when>
+										<c:when test="${rVo.rating=='5'}">
+											<td>★★★★★</td>
+										</c:when>
+									</c:choose>
+									<td>${rVo.writedate}</td>
 								</tr>
-							</c:forEach> --%>
+							</c:forEach>
 						</tbody>
 					</table>
 
