@@ -1,7 +1,7 @@
 package com.allhomes.myapp.register;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -74,10 +75,7 @@ public class RegisterController {
 		return "home";
 		
 	}
-	
-	
-	
-	
+		
 	
 	//회원가입페이지 이동 매핑
 	@RequestMapping(value="/register")
@@ -89,36 +87,13 @@ public class RegisterController {
 		
 	//회원가입
 	@RequestMapping(value="/registerOk")
-	public ModelAndView registerOkPage(String userid,RegisterVO vo,HttpSession session,String[] profileSet) {
-		
+	public ModelAndView registerOkPage(String userid,RegisterVO vo,HttpSession session,String[] profileSet,	@RequestParam("photoBtn") MultipartFile photoBtn,String m_pic,HttpServletRequest req) {
+			
 	
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		
-		int resultVO = dao.registerMember(vo);	//프로필이미지 DB작업 한번에 처리해주자
-		
+			
 		ModelAndView mav = new ModelAndView();
-			
-		
-		
-		/*
-		String path = profileSet[0];
-		String originFileName = profileSet[1];
-		
-		//파일 업로드
-		try {
-			mf.transferTo(new File(path, originFileName));
-		
-		} catch(IOException ie) {
-			ie.getStackTrace();
-		}
-				
-		//db 변동사항없으면 파일 지우기
-		if(resultVO<=0) {
-			File proImg = new File(path, originFileName);
-			proImg.delete();
-		}
-		*/			
-			
+					
 		UUID random = UUID.randomUUID();
 		String uuid = random.toString();
 		String subject = "[Allhomes]회원가입을 환영합니다!!";
@@ -151,57 +126,110 @@ public class RegisterController {
 			System.out.println(e.getMessage());
 		}
 			
-		mav.setViewName("landing/registerOkPage");
-		session.setAttribute("resultVO",resultVO);
+		///////////////////이미지 업로드 //////////////////////////// 방법2 => 이미지 파일만 올라가도록 만들기
 		
-		return mav;
-	}
-	
-	
-	
+		String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
+		System.out.println("에러잡기1");
 		
-	//프로필 사진 저장
-	@RequestMapping(value="/photoBtn",method=RequestMethod.POST)
-	@ResponseBody
-	public String photoBtn(@RequestParam("photoBtn") MultipartFile photoBtn ,HttpServletRequest req,String m_pic,HttpSession ses,@RequestParam(value="photoBtn") MultipartFile mf) {
+		System.out.println("에러잡기2");
+		String fileNames = "";
+		System.out.println("에러잡기3");
 		
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		
-		RegisterVO vo = new RegisterVO();
+			String fName = photoBtn.getOriginalFilename();
+			
+			if(fName!=null && !fName.equals("")) {
+				//앞쪽 이름구하기
+				String originFileName = fName.substring(0,fName.lastIndexOf("."));
+				//확장자구하기
+				String originLast = fName.substring(fName.lastIndexOf(".")+1);
 				
-		String path = ses.getServletContext().getRealPath("/resources/img/register");
-		String fileName = photoBtn.getName();
-		String oriFileName = photoBtn.getOriginalFilename();
+				//파일 이름바꾸기
+				File f=new File(path,fName);
+				if(f.exists()) {		//기존에 동일한게 올라가 있다면 실행시키는 영역
+					for(int renameNum=1;;renameNum++) {
+						String renameFile = originFileName+renameNum+"."+originLast;	//변경된파일명
+						f = new File(path,renameFile);
+						
+						//파일이 위치에 있나없나 확인
+						if(!f.exists()) {
+							fName = renameFile;
+							break;
+							
+						}
+					}
+				}
+				System.out.println("에러잡기4");
+				try {
+					photoBtn.transferTo(f);
+				}catch(Exception e) {e.printStackTrace();}
+					
+			
+							
+				fileNames = fName;
+			}
+		
+		System.out.println("에러잡기5");
+	
+		System.out.println(fileNames);
+	
+		vo.setM_pic(fileNames);
+		System.out.println("에러잡기6");
+		int resultVO = dao.registerMember(vo);
+		System.out.println("에러잡기7");
+		if(resultVO<=0) {
+			if(fileNames!=null) {
+				File ff = new File(path,fileNames);
+					ff.delete();
+						
+				}
+			}
+		System.out.println("에러잡기8");			
+		
+		/*
+		////////////////////////////이미지 업로드////////////////////////	방법1
+				
+		String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
+		System.out.println("path="+path);
+		
+		
+		String originFileName = photoBtn.getOriginalFilename();	//업로드 파일
+		String basicFileName = "test.png";	//기본 이미지
 		
 		try {
-			if(oriFileName != null) {
-				photoBtn.transferTo(new File(path,oriFileName));
+			if(originFileName != null) {
+				photoBtn.transferTo(new File(path,originFileName));	//업로드 파일
+				vo.setM_pic(originFileName);
+			}else{
+				photoBtn.transferTo(new File(path,basicFileName));	//기본이미지 세팅중
+				vo.setM_pic(basicFileName);
 			}
 			
-		}catch(IOException ie) {
-			ie.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
 		}
-		
-		vo.setM_pic(oriFileName);
 			
+		System.out.println("에러잡기1");	
 		
-		//db 작업 실행
-		int result = dao.photoBtn(oriFileName);
 		
-		if(result>0) {//db에 넣기 성공했을때
-			
-		}else{//db넣기 실패했을때 파일 삭제
-			if(oriFileName != null) {
-				File f = new File(path,oriFileName);
+		int resultVO = dao.registerMember(vo);	
+		System.out.println("에러잡기2");
+		
+		if(resultVO<0){
+			if(originFileName != null) {
+				File f = new File(path, originFileName);
 				f.delete();
 			}
-		}
-			
-		
-		return "";
-	}		
+					
+		}*/
+				
+		mav.setViewName("landing/registerOkPage");
+		session.setAttribute("resultVO",resultVO);
 	
 		
+		return mav;
+	
+	}		
 	
 	//아이디 중복검사(버튼을 클릭할대 검사)
 	@RequestMapping(value="/dupFilter")	
@@ -211,28 +239,6 @@ public class RegisterController {
 			
 		return  dao.dupFilter(userid);
 	}
-	
-	
-	
-	//아이디 중복검사 의무화(커서 박스밖으로 나갈때 검사)
-	@RequestMapping(value="/mustCheck")
-	@ResponseBody
-	public Boolean mustCheck(String userid,RegisterVO vo) {
-		//RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		
-		boolean checker = false;
-		if(userid==vo.getUserid()){
-			checker = true;
-		}else {
-			checker = false;
-		}
-		return checker;	
-		
-	}
-	
-	
-	
-	
 	
 }
 
