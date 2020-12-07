@@ -4,6 +4,10 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 
 <style>
+	body{
+		font-family:'SCDream3';
+	}
+	
 	#bxslider{
 		width:100%;
 		margin:0;
@@ -12,7 +16,7 @@
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
         padding:0;
-        height:700px;
+        height:750px;
         overflow:hidden;
   		
 	}
@@ -21,12 +25,13 @@
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
         padding:0;
+        margin:0;
 
    }
    
 	#bxslider img{
 		width:100%;
-		height:700px;
+		height:750px;
 		
 	}
 	.col-3 {
