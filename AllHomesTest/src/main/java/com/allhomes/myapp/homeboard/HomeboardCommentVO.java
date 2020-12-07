@@ -4,7 +4,6 @@ public class HomeboardCommentVO {
 	
 	private int hb_c_no;
 	private String userid;
-	private String nickname;
 	private String hb_comment;
 	private String writedate;
 	private String editdate;
@@ -38,12 +37,6 @@ public class HomeboardCommentVO {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public String getWritedate() {

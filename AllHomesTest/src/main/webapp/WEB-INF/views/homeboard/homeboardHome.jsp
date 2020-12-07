@@ -15,7 +15,7 @@
 .card-img-top {
 	border-radius: 5%;
 	width: 320px;
-	height: 215px;
+	height: 205px;
 	overflow: hidden;
 	border:0.2px solid #f2f2f2;
 	background-color:#E98374;
@@ -109,7 +109,7 @@
 		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;새로 올라온 집들이</h3>
 	</div>
 	<div style="text-align: right;">
-		<a href="/myapp/homeboardTop">더보기</a>
+		<a href="/myapp/homeboardTop?order=0">더보기</a>
 	</div>
 
 	<!-- Page Features -->
@@ -146,7 +146,6 @@
 	</div>
 	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
 	<div style="text-align: right;">
-		<a href="#">더보기</a>
 	</div>
 	<div class="alert alert-info" role="alert">
 		<a href="#">#아기방</a><a href="#">#자취팁</a><a href="#">#셀프인테리어</a><a

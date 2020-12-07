@@ -56,36 +56,42 @@
 				url : url,
 				data : data,
 				success : function(result){
-					console.log("commetlist실행22")
+					
+					var commentNum = $result.length-1;
+					$("#commentNum").html(commentNum);
+					
 					var $result = $(result);
 					var tag = "";
-					var commentNum = $result.length;
 					var loginId = $('#loginId').val();
+					$("#commentList").html(tag);
 					
-					
-					$("#commentNum").html(commentNum);
 					$result.each(function(i,v){	
-						console.log("로그인아이디: "+loginId);
-						console.log("댓글쓴사람 아이디: "+v.userid)
-							
+						console.log("11111로그인아이디: "+loginId);
+						console.log("댓글쓴사람 아이디: "+v.userid);
 							tag += '<div class="input-group" style="margin-bottom:20px;">';
 							tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
 							tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid+'</a></span>';
 							tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
 							tag += '<span style="margin-left: 150px">'+v.writedate+'</span>&nbsp;&nbsp;';
-						if(v.userid==loginId){
-							tag += '<a href="#">수정</a>&nbsp;&nbsp;';
-							tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
-							tag += '<a href="#" style="color: gray; font-size: 9px;" >신고</a></div><hr/>';
-						}else{
-							tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a></div><hr/>';
-						}
+								if(v.userid== loginId){
+									tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
+									tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
+								}
+							tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
+							tag += '</div><hr/>';
+						
 					});		
-					$("#commentList").html(tag);
+					
 					
 				}, error: function(){
 					console.log("댓글 전체리스트 불러오기 에러 발생..");
 				}
+				
+				
+				
+				
+				
+				
 				
 			});
 		}
@@ -120,7 +126,11 @@
 			
 		});
 		
-		//댓글 수정하기
+		//댓글 수정 링크 클릭하면 수정폼 보여주기 
+		$(document).on('click', '.edit', function(){
+			$(this).parent().css("display", "none");
+			$(this).parent().next().css("display", "block");
+		});
 		
 		
 		//댓글 삭제하기 
@@ -212,10 +222,9 @@
 			<form method="post" id="commentWriteForm">
 				<div class="input-group">
 					<i class="fas fa-user-circle fa-2x"></i> 
-					<input type="hidden" name="b_no" value="${vo.b_no }"/> <!-- b_no보내기 -->
-					<input type="hidden" name="userid" value="${loginId }" id="loginId"/>
-					<input type="hidden" name="nickname" value="${loginNickname}"/>
-					<span style="margin: 2px 10px 0 10px"><a href="#">${loginId }</a></span> 
+					<span style="margin: 2px 10px 0 10px"><a href="#">${loginId}</a></span> 
+					<input type="hidden" name="userid" id="loginId" value="${loginId}"/>
+					<input type="hidden" name="b_no" value="${b_no }"/>
 					<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100"></textarea>
 					<div class="input-group-append">
 					<input type="submit" style="background-color: #E98374" class="btn" value="등록"/>

@@ -14,10 +14,10 @@
 	
 	.card-img-top{
 		border-radius: 5%;
-		
-		width:320px;
-		height:207px;
-		overflow:hidden;
+		width: 320px;
+		height: 205px;
+		overflow: hidden;
+		border:0.2px solid #f2f2f2;
 	}
 	
 	.card-img-top>a>img{
@@ -131,28 +131,6 @@
 	</c:forEach>
 	
 	</div>
-
-
-
-	<!-- pagination ===========================================================-->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
-					class="sr-only">Previous</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-					class="sr-only">Next</span>
-			</a></li>
-		</ul>
-	</nav>
-
-
-
 
 
 </div>

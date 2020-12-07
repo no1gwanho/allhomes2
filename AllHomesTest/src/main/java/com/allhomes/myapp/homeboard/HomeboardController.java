@@ -288,8 +288,7 @@ public class HomeboardController {
 		mav.addObject("vo", vo);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginNickname", loginNickname);
-		System.out.println("댓글쓰는 사람 로그인아이디: " + loginId);
-		System.out.println("댓글쓰는 사람 닉네임 : " + loginNickname);
+		System.out.println("홈보드 뷰  -> 로그인아이디: " + loginId);
 		mav.setViewName("homeboard/homeboardView");
 		
 

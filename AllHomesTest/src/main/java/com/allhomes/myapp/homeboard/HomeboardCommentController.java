@@ -39,7 +39,7 @@ public class HomeboardCommentController {
 		return list;
 	}
 	
-	@RequestMapping(value="/commentWrite", method= RequestMethod.POST)
+	@RequestMapping(value="/commentWrite", method= RequestMethod.GET)
 	@ResponseBody
 	public int commentInsert(HomeboardCommentVO vo, HttpSession ses) {
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
