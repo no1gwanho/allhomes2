@@ -33,7 +33,7 @@
 <div class="container" style="margin-top:15px;">
 	<div class="row">
 		<div class="col-md-5">
-			<img src="<%=request.getContextPath() %>/resources/img/pd/${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
+			<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-7" style="left:350px;">
@@ -108,7 +108,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<img src="<%=request.getContextPath() %>${vo.pd_img }"/>					
+					<img src="<%=request.getContextPath()%>/resources/upload/productImg/${vo.s_no}/${vo.main_img}"/>			
            		</div>
            		<div class="tab-pane fade" id="info">
        				<div class="row">

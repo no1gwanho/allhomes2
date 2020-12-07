@@ -7,13 +7,24 @@
 }
 .col-3 img {
 	left: 100px;
-	width: 180px;
-	height: 230px;
+	width: 240px;
+	height: 210px;
 }
 .dropdown-toggle::after {
     display: none;
 }
 </style>
+<script>
+	$(function(){
+		$('.pageSub>ul>li>a').hide();
+		$('.pageSub').click(function(){
+			$(this).next().slideToggle(300);
+		 	$('.pageSub').not(this).next().slideUp(300);
+			return false;
+		});
+		$('.pageSub').eq(0).trigger("click");
+	});
+</script>
 <br/>
 <div class="container">
 	<div class="row">
@@ -23,41 +34,53 @@
 				<h5>All Homes</h5>
 				<ul class="list-unstyled components mb-5">
 					<li>
-						<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가구</button></a>
+						<a class="pageSub" href="#pageSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가구</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu1">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">거실가구</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">소파/거실가구</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">학생/서재가구</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">침실가구</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">주방가구</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">테이블/의자/스툴</button></a></li>
 						</ul>
 					</li>
 					<li>
-						<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">홈데코</button></a>
+						<a class="pageSub" href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">홈데코</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu2">
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">조명</button></a></li>
 							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">장식소품</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">월데코/장식</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">홈갤러리</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">플라워/식물</button></a></li>
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가전</button></a>
+			        	<a class="pageSub" href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가전</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu3">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리3</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">주방가전</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">청소가전</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">생활가전</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">계절가전</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">영상음향가전</button></a></li>
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">수납</button></a>
+			        	<a class="pageSub" href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">수납</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu4">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리3</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">수납장/서랍장</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">리빙박스/수납함/바구니</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">행거/옷걸이</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">선반</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">현관/신발정리</button></a></li>
 						</ul>
 					</li>
 					<li>
-			        	<a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">DIY/공구</button></a>
+			        	<a class="pageSub" href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">DIY/공구</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu5">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리1</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리2</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">서브카테고리3</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">벽지/시트지</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">타일/파벽돌</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">페인트/부자재</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">손잡이/방문/유리</button></a></li>
+							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">공구/접착제/보수용품</button></a></li>
 						</ul>
 					</li>
 				</ul>
