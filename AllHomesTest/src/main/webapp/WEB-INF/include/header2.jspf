@@ -22,7 +22,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </head>
 <style>
-.navbar{width:100%;}
+
+
+.navbar{width:100%; height:100px;}
 @font-face{
 	font-family:"gilbert";
 	src:url("/myapp/resources/css/font/Gilbert-Bold Preview5.otf") format("truetype");
@@ -57,15 +59,13 @@
 	font-style:normal;
 	font-weight:normal;
 }
-body{
-	height:70px;
-	line-height:70px;
-	
-}
+
+
 
 .navbar{
 	font-family: 'SCDream5';
 	font-size:20px;
+	max-height:80px;
 	
 }
 #home{
@@ -92,10 +92,10 @@ body{
 </script>
 <body>
 	<div class="container-fluid">
-			<div style="width:1400px;margin:0 auto;">
+			<div style="width:1400px;height:70px;line-height:70px;margin:0 auto;">
 			<nav class="navbar navbar-expand-lg navbar-light bg-white">
 				<div id="home" style="padding-left:10px;padding-right:50px;">
-					<a href="/myapp/home" id="title">
+					<a href="/myapp/" id="title">
 						<span  style="color:#EE8374">h</span><span style="color:#000000">o</span><span style="color:#EE8374">m</span><span style="color:#000000">es</span>
 					</a>
 				</div>
@@ -211,11 +211,8 @@ body{
 								<a class="dropdown-item" href="/myapp/homeboardWrite">집들이</a> <a
 									class="dropdown-item" href="/myapp/qnaWrite">질문과답변</a> <a
 									class="dropdown-item" href="/myapp/mypageShopping">리뷰작성</a>
-	
-	
 							</div></li>
 					</ul>
-
 			</div>
 		</nav>
 	</div>

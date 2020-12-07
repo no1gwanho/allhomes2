@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
+
+
 #homeboardTitle {
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -35,11 +37,12 @@
 
 .card {
 	border: none;
+	
 }
 
 .card-title {
-	font-size: 20px;
-	font-weight: bold;
+	font-family:SCDream3;
+	font-size:14px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -129,8 +132,9 @@
 
 </script>
 
-<div class="container">
-	<h3 id="homeboardTitle">테마별 집들이</h3>
+<div class="container" style="font-family:'SCDream3';">
+	<h3 id="homeboardTitle" style="font-family:'SCDream5'">테마별 집들이</h3>
+
 
 <!-- 탭메뉴  -->
 	<div id="themeMenuBtn">
