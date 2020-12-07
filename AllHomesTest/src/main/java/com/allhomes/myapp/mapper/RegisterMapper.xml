@@ -58,10 +58,12 @@
 	
 
  	
- 	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체-->	
+ 	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체 reg_sq-->	
  	<insert id="registerMember" parameterType="com.allhomes.myapp.register.RegisterVO">
- 		insert into register(m_no, userid,userpwd,username,nickname,tel,email,regdate,regcode)
- 		values(reg_sq.nextval,#{userid},#{userpwd},#{username},#{nickname},#{tel},#{email},sysdate,'')
+
+ 		insert into register(m_no, userid,userpwd,username,nickname,tel,m_pic,email,regdate,regcode)
+ 		values(reg_sq.nextval,#{userid},#{userpwd},#{username},#{nickname},#{tel},#{m_pic},#{email},sysdate,'')
+
  	</insert>
  	
  	<!-- 아이디 중복검사  테이블명 교체-->
