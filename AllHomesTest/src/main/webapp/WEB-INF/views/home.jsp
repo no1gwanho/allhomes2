@@ -6,7 +6,7 @@
 <style>
 	#bxslider img{
 		width:1400px;
-		height:600px;
+		height:450px;
 		border-radius:30px;
 	}
 	.bx-wrapper {
@@ -52,13 +52,11 @@
 		width:100%;
 		text-align: center;
 		overflow: hidden;
-
 	}
-	
 	
 	.card-title {
 		padding:0px;
-		font-size: 20px;
+		font-size: 17px;
 		font-weight: bold;
 		white-space: nowrap;
 		overflow: hidden;
@@ -71,20 +69,25 @@
 	}
 	
 	.card-text {
-		font-size: 16px;
+		font-size: 14px;
 	}
 	
 	.card-detail {
-		font-size: 12px;
+		font-size: 11px;
 	}
-	
-
 	
 	.container{
 		max-width:1700px;
 		margin: 0 auto;
 	}
 	
+	.homeboard-container{
+		font-family: 'SCDream3';
+	}
+	
+	.store-list-container{
+		font-family: 'SCDream3';
+	}
 </style>
 
 
@@ -131,7 +134,7 @@
 
 
 <!-- 집들이 리스트 -->
-<div class="container" style="margin-top:45px;">
+<div class="container homeboard-container" style="margin-top:45px;">
 	<div class="row">
 		<div class="col-10">
 			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;인기집들이</h3>
@@ -165,7 +168,7 @@
 	</div>
 </div>
 <!-- 상품리스트 -->
-	<div class="container" style="margin-top:45px;">
+	<div class="container store-list-container" style="margin-top:45px;">
 		<div class="row">
 			<div class="col-10">
 				<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;스토어</h3>
