@@ -38,6 +38,8 @@
 	
 </style>
 <script>
+
+
 	$(function(){
 		$("#regFrm").submit(function(){
 							
@@ -120,8 +122,8 @@
 				alert("이메일 주소는 4~13글자 내로 적어주세요")
 				return false;
 			}
-								
-					
+			
+		
 			return true;
 					
 		});
@@ -131,7 +133,6 @@
 	//중복검사 의무화 	
 	$(function(){
 		$("#userid").on("change",function(){
-							
 			$("#idStatus").val("N");		
 						
 		});
@@ -165,7 +166,9 @@
 							$("#dupResult").css("color","#ee8374");
 							
 							$("#dupResult").html($("#userid").val()+"는 사용가능한 아이디 입니다.");
-																	
+							
+							idcheckR = $("#userid").val();
+							
 						}else{
 							$("#dupResult").css("display","block");
 							$("#dupResult").css("color","blue");
@@ -217,7 +220,7 @@
 			
 				
 			<div class="col-auto">
-				<button id=dupFilter class="input-group-text">중복검사</button>
+				<button type="button" id=dupFilter class="input-group-text">중복검사</button>
 			</div>
 			
 		</div>

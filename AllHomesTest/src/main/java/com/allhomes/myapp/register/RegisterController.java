@@ -1,12 +1,14 @@
 package com.allhomes.myapp.register;
 
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,10 +41,35 @@ public class RegisterController {
 		this.sqlSession = sqlSession;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/login")	//로그인 컨트롤러 역할수행중
 	public String login() {
 		return "landing/loginForm";
 	}
+	
+	
+	
+	//이메일 인증
+	@RequestMapping("/regConf")
+	public ModelAndView regConf(RegisterVO vo) {
+		
+		
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+				
+		int resultVO = dao.regFinal(vo);
+		
+		
+		ModelAndView md = new ModelAndView();
+	
+		
+		if(resultVO>0) {
+			md.setViewName("landing/loginForm");
+		}
+				
+		return md;
+	}
+	
+	
+	
 	
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
@@ -105,7 +131,7 @@ public class RegisterController {
 						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
 						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
 						 + "		아래 링크를 누르시면 회원가입이 완료되며 로그인 페이지로 이동합니다.<br/>\r\n"
-						 + "		<a href=\"http://localhost:9090/myapp/login\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
+						 + "		<a href=\"http://localhost:9090/myapp/regConf\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
 						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
 						 + "		감사합니다."		
 						 + "  		</p>"
@@ -131,13 +157,9 @@ public class RegisterController {
 		///////////////////이미지 업로드 //////////////////////////// 방법2 => 이미지 파일만 올라가도록 만들기
 		
 		String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
-		System.out.println("에러잡기1");
 		
-		System.out.println("에러잡기2");
 		String fileNames = "";
-		System.out.println("에러잡기3");
-		
-		
+				
 			String fName = photoBtn.getOriginalFilename();
 			
 			if(fName!=null && !fName.equals("")) {
@@ -161,31 +183,39 @@ public class RegisterController {
 						}
 					}
 				}
-				System.out.println("에러잡기4");
-				try {
-					photoBtn.transferTo(f);
-				}catch(Exception e) {e.printStackTrace();}
-									
+				
 				fileNames = fName;
-			}
-		
-		System.out.println("에러잡기5");
-	
-		System.out.println(fileNames);
-	
-		vo.setM_pic(fileNames);
-		System.out.println("에러잡기6");
-		int resultVO = dao.registerMember(vo);
-		System.out.println("에러잡기7");
-		if(resultVO<=0) {
-			if(fileNames!=null) {
-				File ff = new File(path,fileNames);
-					ff.delete();
+								
+				try {
+					if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
+						photoBtn.transferTo(f);	//확장자명이 맞을때만 업로드
+					
+					
+						vo.setM_pic(fileNames);
+					
+						int resultVO = dao.registerMember(vo);
 						
-				}
+						if(resultVO<=0) {
+							if(fileNames!=null) {
+								File ff = new File(path,fileNames);
+									ff.delete();
+										
+								}
+							}
+					
+						mav.setViewName("landing/registerOkPage");
+						session.setAttribute("resultVO",resultVO);	
+					
+					}else {
+						//아닐때 경고문구 날려주기
+						mav.setViewName("landing/registerUnSuitImg");				
+					}
+								
+				}catch(Exception e) {e.printStackTrace();}
+									 
+				
 			}
-		System.out.println("에러잡기8");			
-		
+			
 		/*
 		////////////////////////////이미지 업로드////////////////////////	방법1
 				
@@ -222,16 +252,12 @@ public class RegisterController {
 			}
 					
 		}*/
-				
-		mav.setViewName("landing/registerOkPage");
-		session.setAttribute("resultVO",resultVO);
-	
 		
 		return mav;
 	
 	}		
 	
-	//아이디 중복검사(버튼을 클릭할대 검사)
+	//아이디 중복검사(버튼을 클릭할때 검사)
 	@RequestMapping(value="/dupFilter")	
 	@ResponseBody	
 	public String dupFilter(String userid) {	
