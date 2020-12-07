@@ -69,7 +69,7 @@
     	select b_no, thumbnail, title, userid, hit, scrap, to_char(writedate, 'YY-MM-DD') writedate from homeboard 
    		<choose>
    			<when test="order!=null and order.equals('recentBest')">
-   				where b_no in (select b_no from (select b_no from homeboard order by b_no desc) where rownum  <![CDATA[<]]>  5 ) order by hit desc
+   				where b_no in (select b_no from (select b_no from homeboard order by b_no desc) where rownum  <![CDATA[<]]>  13 ) order by hit desc
    			</when>
    			<when test="order!=null and order.equals('best')">
    				order by hit desc
@@ -86,7 +86,7 @@
     
     <!-- 메인페이지용 집들이 최근인기글 8개 -->
     <select id="homeboardListForMain" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select b_no, thumbnail, title, userid, hit, scrap from homeboard where b_no in (select b_no from (select b_no from homeboard order by b_no desc) where rownum  <![CDATA[<]]>  9 ) order by hit desc
+    	select b_no, thumbnail, title, userid, hit, scrap from homeboard where b_no in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) order by b_no asc
     </select>
 
 </mapper>

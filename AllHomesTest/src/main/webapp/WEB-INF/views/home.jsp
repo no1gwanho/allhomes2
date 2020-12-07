@@ -134,10 +134,10 @@
 <!-- 집들이 리스트 Ajax -->
 	<div class="container" style="margin-top:45px;">
 		<div>
-			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;집들이</h3>
+			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;인기집들이</h3>
 		</div>
 		<div style="text-align: right;">
-			<a href="/myapp/homeboardTop">더보기</a>
+			<a href="/myapp/homeboardTop?order=recentBest">더보기</a>
 		</div>
 		<br/>
 		<!-- 집들이 리스트 나오는 곳  -->

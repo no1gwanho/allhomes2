@@ -23,8 +23,9 @@
 .card-img-top {
 	border-radius: 5%;
 	width: 320px;
-	height: 207px;
+	height: 205px;
 	overflow: hidden;
+	border:0.2px solid #f2f2f2;
 }
 
 .card-img-top>a>img {
@@ -65,15 +66,14 @@
 	margin: 20px;
 }
 
-.btn-outline-homes {
-  color: #343a40;
-  border:0.3px solid gray;
+.btn-homes-nonselect {
+  color: white;;
+  background-color:#8f8d8d;
 }
 
 
-.btn-outline-homes:hover {
+.btn-homes-nonselect:hover {
   color: white;
-  border-color: #E98374;
   background-color: #E98374;
 }
 
@@ -135,12 +135,12 @@
 <!-- 탭메뉴  -->
 	<div id="themeMenuBtn">
 		<input type="hidden" id="hb_theme_no" value="${hb_theme_no }">
-		<button type="button" class="btn btn-outline-homes" id="theme0">전체</button>
-		<button type="button" class="btn btn-outline-homes" id="theme1">코지/내추럴</button>
-		<button type="button" class="btn btn-outline-homes" id="theme2">러블리/로맨틱 </button>
-		<button type="button" class="btn btn-outline-homes" id="theme3">모던</button>
-		<button type="button" class="btn btn-outline-homes" id="theme4">빈티지/레트로</button>
-		<button type="button" class="btn btn-outline-homes" id="theme5">한국/아시아</button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme0">전체</button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme1">코지/내추럴</button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme2">러블리/로맨틱 </button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme3">모던</button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme4">빈티지/레트로</button>
+		<button type="button" class="btn btn-homes-nonselect" id="theme5">한국/아시아</button>
 	
 	</div>
 
@@ -167,25 +167,5 @@
 				</c:forEach>
 			</div>
 		
-	
-	
-	
-
-	<!-- pagination ===========================================================-->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
-					class="sr-only">Previous</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-					class="sr-only">Next</span>
-			</a></li>
-		</ul>
-	</nav>
 
 </div>

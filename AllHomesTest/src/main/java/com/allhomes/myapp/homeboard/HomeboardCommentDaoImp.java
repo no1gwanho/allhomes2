@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface HomeboardCommentDaoImp {
 	
-	//댓글 전체선택
+	//댓글 전체선택                                          원글번호
 	public List<HomeboardCommentVO> commentAllSelect(int b_no);
 	
 	//댓글 입력
