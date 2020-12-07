@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardDaoImp;
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.product.CategoryDaoImp;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -33,8 +34,10 @@ public class StoreController {
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
+		CategoryDaoImp cate = sqlSession.getMapper(CategoryDaoImp.class);
 				
 		mav.addObject("list", dao.productAllList(sortPd));	
+		mav.addObject("cate", cate.categoriList());
 		mav.addObject("sortPd", sortPd);
 		mav.setViewName("store/storeHome");		
 
@@ -43,9 +46,13 @@ public class StoreController {
 	 }
 
 	@RequestMapping("/storeCategory")
-	public String storeCate() {
-			
-		return "store/storeCate";
+	public ModelAndView storeCate() {
+		ModelAndView mav = new ModelAndView();
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		
+		mav.addObject("list", dao.joinProductStore());
+		mav.setViewName("store/storeCate");
+		return mav;	
 	}
 	
 	@RequestMapping("/storeBest")
