@@ -4,8 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.register.RegisterDaoImp">
  	<select id="login" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select userid, username, nickname from register where userid=#{userid} and userpwd=#{userpwd}
+ 		select userid, username, nickname, regcode from register where userid=#{userid} and userpwd=#{userpwd}
  	</select>
+ 	<!-- 테이블 수정 !! -->
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	
  	<!-- 회원 전체 조회 -->
  	<select id="memberAllSelect" resultType="com.allhomes.myapp.register.RegisterVO">
@@ -80,7 +87,7 @@
  	
  	<!-- 이메일 인증코드 	테이블명 교체   원하는 레코드만 집어서 reg코드를 바꿀거 -->
  	<update id="regFinal" parameterType="com.allhomes.myapp.register.RegisterVO">
- 		update register set regcode=1
+ 		update register set regcode=1 where userid=#{userid}
  	</update> 
  	
  	

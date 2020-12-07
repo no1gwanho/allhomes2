@@ -41,13 +41,7 @@ public class RegisterController {
 		this.sqlSession = sqlSession;
 	}
 	
-	@RequestMapping("/login")	//로그인 컨트롤러 역할수행중
-	public String login() {
-		return "landing/loginForm";
-	}
-	
-	
-	
+		
 	//이메일 인증
 	@RequestMapping("/regConf")
 	public ModelAndView regConf(RegisterVO vo) {
@@ -70,7 +64,13 @@ public class RegisterController {
 	
 	
 	
+	@RequestMapping("/login")	//로그인 이동
+	public String login() {
+		return "landing/loginForm";
+	}
 	
+	
+	//로그인 
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
 		
@@ -82,7 +82,11 @@ public class RegisterController {
 		
 		
 		if(resultVO == null){
-			mav.setViewName("redirect:login");
+			
+			ses.setAttribute("logStatus","N");
+			mav.setViewName("landing/loginResult");
+			
+			
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
@@ -90,7 +94,12 @@ public class RegisterController {
 			ses.setAttribute("nickname", resultVO.getNickname());
 			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
+			
+			ses.setAttribute("regcode", resultVO.getRegcode());
+			
 			mav.setViewName("landing/loginResult");
+			
+			
 		}
 		return mav;
 	}
