@@ -108,7 +108,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<img src="<%=request.getContextPath()%>/resources/upload/productImg/${vo.s_no}/${vo.main_img}"/>			
+						<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }"/>		
            		</div>
            		<div class="tab-pane fade" id="info">
        				<div class="row">

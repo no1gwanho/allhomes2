@@ -157,10 +157,8 @@
 			<c:forEach var="v" items="${list }">
 				<div class="col-3">
 					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-						<img src="<%=request.getContextPath() %>${v.main_img }"/><br/>
-						<c:forEach var="s" items="${store }">
+						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/><br/>
 							[${v.s_no}] / ${v.pd_name }<br/>
-						</c:forEach>
 						<c:if test="${v.discount != 0}">
 							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
 						</c:if>
