@@ -2,9 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
-
 <style>
-
 	#bxslider img{
 		width:1400px;
 		height:500px;
@@ -71,8 +69,6 @@
 	.card-body{
 			height:150px;
 		}
-	
-	
 </style>
 <script>
 	$(function() {
@@ -93,10 +89,9 @@
 			//easing
 			,
 			useCSS : false
-		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
+		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함 
 		});
-		
-		
+				
 		//집들이 리스트 구하기 
 		function homeboardListSelect(){
 			var url = "/myapp/homeboardListForMain";
@@ -118,17 +113,12 @@
 					tag += '</div>';
 					$("#homeboardListForMain").html(tag);
 				}
-				
-			});
-			
-			
+			});			
 		}
 		
 		//페이지 시작할때 집들이 리스트 보여주기 
 		homeboardListSelect();
-
 	}); //Jquery 
-	
 </script>
 <!-- 메인 홈페이지 배너 -->
 <div class="container" style="margin-top:15px;">
@@ -155,43 +145,34 @@
 		
 		
 	</div>
-
-
-
-
-<!-- 스토어 리스트 -->
-<div class="container" style="margin-top:45px;">
-
-	<div class="title">
-			<div class="row">
-				<div class="col-sm-9">
-					<h6>스토어</h6>
-				</div>
-				<div class="col-sm-3" style="text-align:right;">
-					<h6><a href="/myapp/homeboardHome">더보기</a></h6>
-				</div>
+<!-- 상품리스트 -->
+	<div class="container" style="margin-top:45px;">
+		<div class="row">
+			<div class="col-10">
+				<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;스토어</h3>
 			</div>
-			<hr/>
+			<div class="col-2" style="text-align:right;">
+				<a href="/myapp/storeHome">더보기</a>
+			</div>
+			<c:forEach var="v" items="${list }">
+				<div class="col-3">
+					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
+						<img src="<%=request.getContextPath() %>${v.main_img }"/><br/>
+						<c:forEach var="s" items="${store }">
+							[${v.s_no}] / ${v.pd_name }<br/>
+						</c:forEach>
+						<c:if test="${v.discount != 0}">
+							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
+						</c:if>
+						<c:if test="${v.discount == 0 }">
+							${v.price }원<br/>
+						</c:if>
+						<c:if test="${v.status!=null }">
+							<h6><span class="badge badge-secondary">${v.status }</span></h6>
+						</c:if>					
+					</a>
+				</div>
+			</c:forEach>
 		</div>
-	
-	<div class="row">
-		<c:forEach var="v" items="${list }">
-			<div class="col-3">
-				<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-					<img src="<%=request.getContextPath() %>${v.main_img }"/><br/>
-					[${v.s_no }] / ${v.pd_name }<br/>
-					<c:if test="${v.discount != 0}">
-						${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
-					</c:if>
-					<c:if test="${v.discount == 0 }">
-						${v.price }원<br/>
-					</c:if>
-					<c:if test="${v.status!=null }">
-						<h6><span class="badge badge-secondary">${v.status }</span></h6>
-					</c:if>					
-				</a>
-			</div>
-		</c:forEach>
-	</div>	
-</div>
+	</div>
 <br/>

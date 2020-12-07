@@ -16,6 +16,13 @@
 		
 		
 		
+		$('#cancelBtn').click(function(){
+			window.history.back();
+		});
+			
+		
+		
+		
 		console.log(CKEDITOR.instances.content.getData().length);
 		$("#homeboardForm").submit(()=>{
 			var ckContent = CKEDITOR.instances.content.getData(); //ckeditor글내용
@@ -52,7 +59,9 @@
 		});
 		
 		return true;
-			
+		
+		
+		
 	
 	
 	});//jquery
@@ -84,9 +93,9 @@
 
 <div class="container">
 
-	<h3 id="homeboardWriteTitle">집들이 글쓰기</h3>
+	<h3 id="homeboardWriteTitle">집들이 글수정</h3>
 
-	<form id="homeboardForm" method="post" action="/myapp/homeboardWriteOk" >
+	<form id="homeboardForm" method="post" action="/myapp/homeboardEditOk" >
 	
 	<!-- 테마선택 메뉴 -->
 	<div class="row">
@@ -112,20 +121,25 @@
 			
 		</div>
 		<div class="col-9"><!-- 태그는 엔터나 쉼표를 입력하면 확인됨 -->
-			<input  type="text" data-role="tagsinput" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
+			<!-- 기존글에서 아이디와 글번호 저장  -->
+			<input type="hidden" name="b_no" id="b_no" value="${vo.b_no }">
+			<input type="hidden" name="userid" value="${vo.userid }" />
+			
+			<input  type="text" data-role="tagsinput" value="${vo.hashtag }" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
 			<span style="color:gray;font-size:11px;">해시태그는 최대 8개까지, 최대 10글자까지 입력 가능합니다.</span>
 		</div>
 	</div> <!-- row -->
 
 	
 		<div class="form-group">
-			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" />
+			<input id="title" type="text" class="form-control" name="title" value="${vo.title }" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" />
 			<br/>
 			<textarea id="content" name="content" class="form-control rounded-0" placeholder="글을 입력하세요(최소 10글자 이상 입력해주세요)">
+				${vo.content }
 			</textarea>
 			<br/>
 			<br/> 
-				<input type="submit" id="submitBtn" class="btn btn-primary" value="글작성" style="background-color:#E98374;border:1px solid #E98374;text-align:center;"/> 
+				<input type="submit" id="submitBtn" class="btn btn-primary" value="글수정" style="background-color:#E98374;border:1px solid #E98374;text-align:center;"/> 
 				<input type="button" id="cancelBtn" class="btn btn-secondary" value="취소" style="text-align:center;"/>
 		</div>
 	</form>

@@ -32,11 +32,11 @@
 </style>
 <div class="container" style="margin-top:15px;">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<img src="<%=request.getContextPath() %>${vo.main_img}" alt="image" style="width:720px;height:680px;"/>
 		</div>
 		<!-- 상품명/재고/설명/옵션 -->
-		<div class="col-md-8" style="left:350px;">
+		<div class="col-md-7" style="left:350px;">
 			<div class="product-details">
 				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
 					<div class="product-details">
@@ -61,9 +61,12 @@
 							<span style="font-size:1.4em;">원가:${vo.price }원</span><br/>
 							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
-						<div style="height:450px;">
-							${vo.pd_exp } / 간단한 설명
+						<div style="height:450px;margin-top:15px; ">
+							${vo.pd_exp } 
 						</div>
+					</div>
+					<div id="banner">
+						<div id="chase">
 						<div class="product-options">
 							<label>
 								옵션 : 
@@ -78,10 +81,11 @@
 						<div class="qty-label">
 							수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)
 						</div>
-					</div>
-					<div class="add-to-cart">
-						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
-						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
+						<div class="add-to-cart">
+							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
+							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
+						</div>
+						</div>
 					</div>
 				</form>
 			</div>	
@@ -103,186 +107,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
-					  					<p>상품정보 영역 Lorem ipsum dolor 
-					sit amet, consectetur adipiscing
-					 elit. Nunc id ornare libero. Vivamus iaculis,
-					  justo vel mattis pharetra, nisi ligula varius n
-					  isl, sit amet mollis tortor ligula vitae nisi
-					  .</p>
+					<img src="<%=request.getContextPath() %>${vo.pd_img }"/>					
            		</div>
            		<div class="tab-pane fade" id="info">
        				<div class="row">
@@ -459,33 +284,6 @@
 				</c:if>
            	</div>
          	<br/>
-		</div>
-		<div class="col-4" id="banner">
-			<div id="chase" style="top:780px;">
-				<form>
-					<div class="product-options">
-						<label>
-							옵션 : 
-								<c:forEach var="op" items="option">
-									<select class="input-select">
-<%-- 										<c:forEach var="oVo" items="${oList}">
-											<option value="${oVo.o_value}">${oVo.o_value}</option>
-										</c:forEach> --%>	
-										<option value="${vo.o_value}">${vo.o_value}</option>
-									</select>
-								</c:forEach>
-							</label>
-						</div>
-						<div class="qty-label">
-							수량 : <input type="number" value="1"/>
-						</div>
-						<br/>
-						<div class="add-to-cart">
-							<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="button" id="cart_f" class="btn" value="장바구니"/>
-							<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy_f" class="btn" value="바로구매">
-						</div>
-				</form>
-			</div>
 		</div>
 	</div>
 </div>

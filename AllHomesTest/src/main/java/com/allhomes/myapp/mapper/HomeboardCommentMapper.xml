@@ -5,11 +5,11 @@
 <!-- 집들이 코멘트 Mapper -->
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardCommentDaoImp">
 	<!-- 댓글리스트 불러오기 -->
-	<select id="commentAllSelect" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
-		select hb_c_no, userid, nickname, hb_comment, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate, b_no
-		from hb_comment
-		where b_no=#{b_no}
-		order by hb_c_no asc
+	<select id="commentAllSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
+		select hb_c_no, userid, nickname, b_no, hb_comment, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
+		from hb_comment 
+		where b_no=#{param1} 
+		order by writedate asc
 	</select>
 	
 	
@@ -20,5 +20,11 @@
 	</insert>
 	
 	
-
+	<!-- 댓글 수정하기 -->
+	
+	<!-- 댓글 삭제하기 -->
+	<delete id="commentDelete" parameterType="int">
+		delete from hb_comment where hb_c_no=#{param1}
+	</delete>
+	
 </mapper>

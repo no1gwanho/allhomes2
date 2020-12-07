@@ -22,16 +22,12 @@ public class PurchaseVO {
 	private String writedate;
 
 
-  public String getO_value() {
+	public String getO_value() {
 		return o_value;
 	}
 	public void setO_value(String o_value) {
 		this.o_value = o_value;
-<<<<<<< HEAD
-  }
-=======
-
->>>>>>> c155e07de298d832bf49ae9cfcaf65d3d0af6207
+	}
 	public int getRating() {
 		return rating;
 	}

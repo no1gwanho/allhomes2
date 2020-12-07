@@ -54,6 +54,12 @@
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
 		});
+		var selectOption = $('#sortPd').val();
+		
+		$('#sortPd').change(function(){
+			var selectedPd = $('#sortPd option:selected').val();
+			location.href="/myapp/storeHome?sortPd="+selectedPd;
+		});
 	});	
 </script>
 <script>
@@ -93,15 +99,11 @@
 			<h6>상품 리스트</h6>
 		</div>
 		<div class="col-3" style="text-align:center;">
-			<label style="font-size:0.8em;">
-				정렬방법
-				<select name="sortPd">
-					<option value="1">최신순</option>
-					<option value="2">좋아요순</option>
-					<option value="3">판매순</option>
-					<option value="4">최저가순</option>
-				</select>
-			</label>			
+			<select class="selectpicker" name="sortPd" id="sortPd">
+				<option value="recent" <c:if test="${sortPd == 'recent' }">selected</c:if>>최신순</option>
+				<option value="saled" <c:if test="${sortPd == 'saled' }">selected</c:if>>판매순</option>
+				<option value="rowPrice" <c:if test="${sortPd == 'rowPrice' }">selected</c:if>>최저가순</option>
+			</select>
 		</div>
 	</div>
 	<article>

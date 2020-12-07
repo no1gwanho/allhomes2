@@ -5,8 +5,19 @@
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
   	<!-- 모든 제품 조회 -->
-  	<select id="productAllList" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product order by pd_no desc
+  	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+  	    select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product
+  	    <choose>
+  	    	<when test="sortPd!=null and sortPd.equals('recent')">
+  	    		order by pd_no desc
+  	    	</when>
+  	    	<when test="sortPd!=null and sortPd.equals('saled')">
+  	    		where pd_no in (select pd_no from (select p.pd_no, c.pc_no, c.pc_date from product p, purchase c where p.pd_no=c.pd_no order by c.pc_date desc))
+  	    	</when>
+  	    	<when test="sortPd!=null and sortPd.equals('rowPrice')">
+  	    		order by price
+  	    	</when>
+  	    </choose>
   	</select>
   	<!-- 제품 리뷰 조회 -->
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
@@ -14,7 +25,7 @@
   	</select>
   	<!-- 메인페이지 제품리스트 -->
   	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product order by pd_no desc
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product where pd_no in (select pd_no from (select pd_no from product order by pd_no desc) where rownum <![CDATA[<]]> 9)
   	</select>
   	<!-- 등록된 상품 수 조회 -->
   	<select id="getAllProductCount" resultType="int">
@@ -26,7 +37,7 @@
   	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
   	<select id="joinProductStore" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">

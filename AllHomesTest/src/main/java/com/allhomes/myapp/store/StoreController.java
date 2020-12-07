@@ -8,8 +8,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -24,14 +27,15 @@ public class StoreController {
 	 
 	@Autowired 
 	DataSourceTransactionManager transactionManager;
-	
+		
 	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome() {
+	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-		
-		mav.addObject("list", dao.productAllList());		
+				
+		mav.addObject("list", dao.productAllList(sortPd));	
+		mav.addObject("sortPd", sortPd);
 		mav.setViewName("store/storeHome");		
 
 		

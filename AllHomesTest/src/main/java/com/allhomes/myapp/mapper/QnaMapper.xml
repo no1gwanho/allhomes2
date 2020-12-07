@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace = "com.allhomes.myapp.qna.QnaDaoImp">
+  
+  <!-- 질문게시판 전체 리스트 -->
+  <select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
+  	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
+  </select>
+  
+  <!-- 질문게시판 글작성하기 -->
+  <insert id="qnaInsert" parameterType="com.allhomes.myapp.qna.QnaVO">
+  	insert into qnaboard (q_no, title, content, userid, nickname, hit, answer, writedate)
+  					values(qna_sq.nextval, #{title}, #{content}, #{nickname}, #{hit}, #{answer}, sysdate)
+  </insert>
+  
+  
+	<!-- 집들이 글내용보기 -->
+	<select id="qnaSelect" parameterType="int" resultType="com.allhomes.myapp.qna.QnaVO">
+		select q_no, title, content, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard where q_no=#{param1}
+	</select>
+  
+ </mapper>

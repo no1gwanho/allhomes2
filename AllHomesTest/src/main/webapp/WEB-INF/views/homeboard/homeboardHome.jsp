@@ -6,7 +6,7 @@
 <style>
 
 .card-body {
-	height: 200px;
+	height: 110px;
 	padding: 10px;
 	flex: none;
 	overflow: hidden;
@@ -18,6 +18,7 @@
 	height: 207px;
 	overflow: hidden;
 	border:0.2px solid #f2f2f2;
+	background-color:#E98374;
 }
 
 .card-img-top>a>img {
@@ -117,7 +118,7 @@
 		<div class="col-lg-3 col-md-6 mb-4">
 			<div class="card h-100">
 				<div class="card-img-top">
-					<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath() %>${vo.thumbnail }"/></a>
+					<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
 				</div>
 				<div class="card-body">
 					<div class="card-title">
