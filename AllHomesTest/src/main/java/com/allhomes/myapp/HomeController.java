@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
@@ -32,14 +34,21 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
-		List<ProductVO> list = pDao.productMainList();		
+		List<ProductVO> list = pDao.productMainList();	
+		
+		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		List<HomeboardVO> hbList = hbDao.homeboardListForMain();
 		
 		ModelAndView mav = new ModelAndView();			
+		mav.addObject("hbList", hbList);
 		mav.addObject("list", list);
+		
+		
 		mav.setViewName("home");
 				
 		return mav;
 	}
+
 	
 	@RequestMapping("/application")
 	public String applyStore() {

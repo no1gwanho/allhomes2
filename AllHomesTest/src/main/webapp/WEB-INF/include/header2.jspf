@@ -72,7 +72,7 @@
 	font-family:'lot';
 	height:70px;
 }
-#title span{
+#homesLogo span{
 	font-size:50px;
 }
 
@@ -95,7 +95,7 @@
 			<div style="width:1400px;height:70px;line-height:70px;margin:0 auto;">
 			<nav class="navbar navbar-expand-lg navbar-light bg-white">
 				<div id="home" style="padding-left:10px;padding-right:50px;">
-					<a href="/myapp/" id="title">
+					<a href="/myapp/" id="homesLogo">
 						<span  style="color:#EE8374">h</span><span style="color:#000000">o</span><span style="color:#EE8374">m</span><span style="color:#000000">es</span>
 					</a>
 				</div>

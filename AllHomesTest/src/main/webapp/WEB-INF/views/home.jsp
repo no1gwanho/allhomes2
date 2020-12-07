@@ -20,41 +20,44 @@
 		text-align:center;
 		margin-bottom:10px;
 	}
-	.col-3 img {
-		left: 100px;
-		border-radius: 5%;
-		width: 320px;
-		height: 215px;
-	}
    
 	.card-body {
-	height: 200px;
-	padding: 10px;
+	padding-top:10px;
+	height:150px;
 	flex: none;
 	overflow: hidden;
 	}
-	.card-top {
-		width: 320px;
+	
+
+	
+	.storeThumbnail img{
+		width:320px;
 		height: 207px;
+		border-radius: 5%;
+		text-align: center;
+	
 	}
 	
-	.card-img-top {
-		border-radius: 5%;
-		width: 320px;
+	.thumbnail{
+		padding:0px;
+		margin:0px;
+		width:320px;
 		height: 207px;
 		overflow: hidden;
+		border-radius: 5%;
+		
 	}
 	
-	.card-img-top>a>img {
-		width: 325px;
+	.thumbnail img {
+		width:100%;
 		text-align: center;
+		overflow: hidden;
+
 	}
 	
-	.card {
-		border: none;
-	}
 	
 	.card-title {
+		padding:0px;
 		font-size: 20px;
 		font-weight: bold;
 		white-space: nowrap;
@@ -75,9 +78,7 @@
 		font-size: 12px;
 	}
 	
-	.card-body{
-			height:150px;
-		}
+
 	
 	.container{
 		max-width:1700px;
@@ -111,32 +112,7 @@
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함 
 		});
 				
-		//집들이 리스트 구하기 
-		function homeboardListSelect(){
-			var url = "/myapp/homeboardListForMain";
-			$.ajax({
-				url : url,
-				success : function(result){
-					var $result = $(result);
-					var tag = '<div class="row text-center">';
-					$result.each(function(i,v){
-						tag += '<div class="col-lg-3">';
-						tag += '<div class="card h-100">';
-						tag += '<div class="card-img-top">';
-						tag += '<a href="/myapp/homeboardView?b_no='+v.b_no+'"><img src="<%=request.getContextPath()%>'+v.thumbnail+'"/></a></div>';
-						tag += '<div class="card-body"><div class="card-title">';
-						tag += '<a href="/myapp/homeboardView?b_no='+v.b_no+'">'+v.title+'</a></div>';
-						tag += '<a href="#" class="card-text">'+v.userid+'</a><p class="card-detail">스크랩: '+v.scrap+' | 조회: '+v.hit+'</p>';
-						tag += '</div></div></div>';
-					});
-					tag += '</div>';
-					$("#homeboardListForMain").html(tag);
-				}
-			});			
-		}
 		
-		//페이지 시작할때 집들이 리스트 보여주기 
-		homeboardListSelect();
 	}); //Jquery 
 </script>
 <!-- 메인 홈페이지 배너 -->
@@ -154,7 +130,7 @@
 
 
 
-<!-- 집들이 리스트 Ajax -->
+<!-- 집들이 리스트 -->
 <div class="container" style="margin-top:45px;">
 	<div class="row">
 		<div class="col-10">
@@ -165,7 +141,27 @@
 		</div>
 		<br/>
 		<!-- 집들이 리스트 나오는 곳  -->
-		<div id="homeboardListForMain"> </div>
+		<c:forEach var="vo" items="${hbList }">
+
+		<div class="col-3">
+				<div class="thumbnail">
+					<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
+				</div>
+				<div class="card-body">
+					<div class="card-title">
+						<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+					</div>
+					<a href="#" class="card-text">${vo.userid }</a>
+					<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+					</p>
+				</div> 
+			
+		</div>
+		
+		
+	</c:forEach>
+		
+		
 	</div>
 </div>
 <!-- 상품리스트 -->
@@ -177,11 +173,15 @@
 			<div class="col-2" style="text-align:right;">
 				<a href="/myapp/storeHome">더보기</a>
 			</div>
+			
 			<c:forEach var="v" items="${list }">
-				<div class="col-3">
+				<div class="col-3 storeThumbnail">
 					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/><br/>
-							[${v.s_no}] / ${v.pd_name }<br/>
+						
+						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/>
+							<br/>
+							[${v.s_no}] / ${v.pd_name }
+							<br/>
 						<c:if test="${v.discount != 0}">
 							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
 						</c:if>
@@ -190,10 +190,13 @@
 						</c:if>
 						<c:if test="${v.status!=null }">
 							<h6><span class="badge badge-secondary">${v.status }</span></h6>
-						</c:if>					
+						</c:if>		
+								
 					</a>
+					
 				</div>
 			</c:forEach>
+			
 		</div>
 	</div>
 </div>
