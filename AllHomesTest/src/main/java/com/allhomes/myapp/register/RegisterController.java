@@ -126,6 +126,8 @@ public class RegisterController {
 			System.out.println(e.getMessage());
 		}
 			
+		
+		
 		///////////////////이미지 업로드 //////////////////////////// 방법2 => 이미지 파일만 올라가도록 만들기
 		
 		String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
@@ -163,9 +165,7 @@ public class RegisterController {
 				try {
 					photoBtn.transferTo(f);
 				}catch(Exception e) {e.printStackTrace();}
-					
-			
-							
+									
 				fileNames = fName;
 			}
 		
