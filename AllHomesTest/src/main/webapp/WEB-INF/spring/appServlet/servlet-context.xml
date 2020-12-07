@@ -11,21 +11,17 @@
 
 
 	<annotation-driven />
-	
-	
-
-	
-	
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/upload/storeImg/**" location="/resources/upload/storeImg/"/>
 	<resources mapping="/resources/upload/storeImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\storeImg"/>
 	<resources mapping="/resources/upload/storeMainCategory/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\storeMainCategoryImg"/>
 	<resources mapping="/resources/upload/productImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productImg"/>
 	<resources mapping="/resources/upload/productMainImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productMainImg"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
-	<resources mapping="/resources/img/pd/**" location="file:\\\C:\been\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img\pd"/>
-	<resources mapping="/resources/img/**" location="file:\\\C:\been\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>
+	<resources mapping="/resources/img/**" location="file:\\\D:\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>
+
 		
 	<!--스토어 메인 카테고리 이미지 저장 경로
 	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
@@ -35,10 +31,6 @@
 	<resources mapping="/productMainImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\productMainImg\"/>
 	회원 프로필 이미지
 	<resources mapping="/memberProfile/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\memberProfile\"/> -->
-	
-
-	
-	
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
