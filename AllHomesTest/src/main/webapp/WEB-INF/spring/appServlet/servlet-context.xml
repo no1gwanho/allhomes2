@@ -10,15 +10,21 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/upload/storeImg/**" location="/resources/upload/storeImg/"/>
 	<resources mapping="/resources/upload/storeImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\storeImg"/>
 	<resources mapping="/resources/upload/storeMainCategory/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\storeMainCategoryImg"/>
 	<resources mapping="/resources/upload/productImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productImg"/>
 	<resources mapping="/resources/upload/productMainImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productMainImg"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
 	<resources mapping="/resources/homeboard/img/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
+
 	<resources mapping="/resources/upload/register/**" location="file:\\\D:\GitWorkspace\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\upload\register"/>
 						
 	
+
+	<resources mapping="/resources/img/**" location="file:\\\D:\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>
+			
+
 	<!--스토어 메인 카테고리 이미지 저장 경로
 	<resources mapping="/storeMainCategoryImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\upload\storeCategory/"/>
 	제품 상세설명 이미지
@@ -34,8 +40,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.allhomes.myapp" />
-	
-	
+
 	<!-- 오라클 서버 위치와 계정, 비밀번호 등을 이용하여 DataSource객체 생성 -->
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
@@ -60,7 +65,6 @@
 		<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
-
 
 	<!-- 메일설정 -->
 	<context:component-scan base-package="kr.co.lty"/>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<spring:uri value='/resources/img/pd/pd01.jpg'/>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
@@ -53,6 +54,12 @@
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
 		});
+		var selectOption = $('#sortPd').val();
+		
+		$('#sortPd').change(function(){
+			var selectedPd = $('#sortPd option:selected').val();
+			location.href="/myapp/storeHome?sortPd="+selectedPd;
+		});
 	});	
 </script>
 <script>
@@ -92,15 +99,11 @@
 			<h6>상품 리스트</h6>
 		</div>
 		<div class="col-3" style="text-align:center;">
-			<label style="font-size:0.8em;">
-				정렬방법
-				<select name="sortPd">
-					<option value="1">최신순</option>
-					<option value="2">좋아요순</option>
-					<option value="3">판매순</option>
-					<option value="4">최저가순</option>
-				</select>
-			</label>			
+			<select class="selectpicker" name="sortPd" id="sortPd">
+				<option value="recent" <c:if test="${sortPd == 'recent' }">selected</c:if>>최신순</option>
+				<option value="saled" <c:if test="${sortPd == 'saled' }">selected</c:if>>판매순</option>
+				<option value="rowPrice" <c:if test="${sortPd == 'rowPrice' }">selected</c:if>>최저가순</option>
+			</select>
 		</div>
 	</div>
 	<article>
@@ -110,7 +113,7 @@
 				<c:forEach var="vo" items="${list}">
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
-							<img src="<%=request.getContextPath() %>${vo.main_img}"/><br/>
+							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 							[${vo.s_no}] ${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
 								${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
@@ -130,6 +133,3 @@
 		</div>
 	</article>
 </div>
-
-
-	

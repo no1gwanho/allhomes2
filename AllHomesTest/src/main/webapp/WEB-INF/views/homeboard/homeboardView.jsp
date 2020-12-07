@@ -23,6 +23,13 @@
 	max-width: 90%;
 	max-height: 90%;
 }
+
+#commentNoLogin{
+	text-align:center;
+	text-color:#666666;
+	text-size:12px;
+}
+
 </style>
 
 <script>
@@ -37,12 +44,14 @@
 		    if (remain <= 0 && e.which !== 0 && e.charCode !== 0) {
 		        $('textarea').val((tval).substring(0, tlength - 1))
 		    }
-		})
+		});
+		
 		
 		//댓글리스트 구하기
 		function commentListSelect(){
 			var url = "/myapp/commentList";
 			var data = "b_no=${vo.b_no}";
+			
 			$.ajax({
 				url : url,
 				data : data,
@@ -51,16 +60,26 @@
 					var $result = $(result);
 					var tag = "";
 					var commentNum = $result.length;
+					var loginId = $('#loginId').val();
+					
+					
 					$("#commentNum").html(commentNum);
 					$result.each(function(i,v){	
-						tag += '<div class="input-group" style="margin-bottom:20px;">';
-						tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
-						tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid+'</a></span>';
-						tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
-						tag += '<span style="margin-left: 150px">'+v.writedate+'</span>&nbsp;&nbsp;';
-						tag += '<a href="#">수정</a>&nbsp;&nbsp;';
-						tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
-						tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a></div>';
+						console.log("로그인아이디: "+loginId);
+						console.log("댓글쓴사람 아이디: "+v.userid)
+							
+							tag += '<div class="input-group" style="margin-bottom:20px;">';
+							tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
+							tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid+'</a></span>';
+							tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
+							tag += '<span style="margin-left: 150px">'+v.writedate+'</span>&nbsp;&nbsp;';
+						if(v.userid==loginId){
+							tag += '<a href="#">수정</a>&nbsp;&nbsp;';
+							tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
+							tag += '<a href="#" style="color: gray; font-size: 9px;" >신고</a></div><hr/>';
+						}else{
+							tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a></div><hr/>';
+						}
 					});		
 					$("#commentList").html(tag);
 					
@@ -70,6 +89,9 @@
 				
 			});
 		}
+		
+		
+		
 		
 		//새 댓글쓰기
 		$("#commentWriteForm").submit(function(){
@@ -97,14 +119,35 @@
 			return false;
 			
 		});
-
+		
+		//댓글 수정하기
+		
+		
+		//댓글 삭제하기 
 	
 		//글내용 보여줄때 댓글 내용도 보여주기
 		commentListSelect();
+		
+		
+		
+		function homeboardDelCheck(b_no){
+			if(confirm('정말로 삭제하시겠습니까?')){
+				location.href="/myapp/homeboardDelete?b_no="+b_no;
+			}
+		}
+		
+		
 
 		
 	}); //jquery
 
+	
+	
+	
+
+		
+	
+	
 
 </script>
 
@@ -119,16 +162,21 @@
 
 		<div class="col-lg-11 col-md-auto" style="border: 0.2px solid #f5f5f5">
 			<h6 style="color: gray">
-				테마 > <a href="#">${vo.theme}</a>
+				테마 > <a href="/myapp/homeboard/homeboardTheme?bh_theme_no=0">${vo.theme}</a>
 			</h6>
 			<h3>${vo.title}</h3>
 			<div class="row">
+				
 				<div class="col-md-auto" style="font-size: 13px;">
 					<i class="fas fa-user-circle fa-2x"></i>&nbsp; 
 					<a href="#">${vo.userid }</a>
-					· ${vo.writedate} · 
-					<a href="#">수정</a>&nbsp;
-					<a href="#">삭제</a>
+					· ${vo.writedate} &nbsp; 
+					
+					<c:if test="${loginId == vo.userid}">
+					<a href="/myapp/homeboardEdit?b_no=${vo.b_no }">수정</a>&nbsp;
+					<a href="javascript:homeboardDelCheck(${vo.b_no })">삭제</a>
+					</c:if>
+					
 				</div>
 				<div class="col"></div>
 				<div class="col-lg-2 col-md-auto">
@@ -143,8 +191,7 @@
 			<br />
 			<div class="contentDiv">${vo.content}</div>
 
-			<h6 style="font-size: 13px; color: gray;">조회수 ${vo.hit} · 스크랩
-				${vo.scrap}회 · 댓글 3</h6>
+			<h6 style="font-size: 13px; color: gray;">조회수 ${vo.hit} · 스크랩 ${vo.scrap}회</h6>
 			<div id="hashtag">
 				<c:forEach var="i" items="${hashtagList}">
 					<a href="#" class="badge badge-light"><span>#</span>${i}</a>
@@ -159,27 +206,39 @@
 				<span style="font-size: 15px; color: gray;">댓글&nbsp;&nbsp;</span><span id="commentNum" style="font-size: 15px; color: #E98374;font-weight:bold">3</span>
 			</div>
 			
-			
+			<c:if test="${logStatus == 'Y'}">
 			<!-- 댓글입력창 -->
 			<div id="comment">
 			<form method="post" id="commentWriteForm">
 				<div class="input-group">
 					<i class="fas fa-user-circle fa-2x"></i> 
-					<input type="hidden" name="userid" value="${vo.userid }"/> <!-- userid보내기 -->
 					<input type="hidden" name="b_no" value="${vo.b_no }"/> <!-- b_no보내기 -->
-					<span style="margin: 2px 10px 0 10px"><a href="#">${vo.userid }</a></span> 
+					<input type="hidden" name="userid" value="${loginId }" id="loginId"/>
+					<input type="hidden" name="nickname" value="${loginNickname}"/>
+					<span style="margin: 2px 10px 0 10px"><a href="#">${loginId }</a></span> 
 					<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100"></textarea>
 					<div class="input-group-append">
 					<input type="submit" style="background-color: #E98374" class="btn" value="등록"/>
 					</div>
+					<div>
+					<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">100</span><span style="color:gray;font-size:12px;">/100 글자</span>
+					</div>
 					
 				</div>
 			</form>
+			</div>
+			</c:if>
+			<c:if test="${logStatus == null || logStatus !='Y'}">
+			<div id="commentNoLogin">
+				<p>댓글은 로그인 이후에 작성 가능합니다. <a href="/myapp/login" style="color:blue;">로그인</a></p>
 			
 			</div>
-			<div>
-				<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">100</span><span style="color:gray;font-size:12px;">/100 글자</span>
-			</div>
+			
+			</c:if>
+			
+			
+			
+			
 			<br /><br/>
 			<!-- 댓글 리스트 -->
 			<div id="commentList">

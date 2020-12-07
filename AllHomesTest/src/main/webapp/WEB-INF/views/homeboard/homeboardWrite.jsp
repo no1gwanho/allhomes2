@@ -16,6 +16,10 @@
 			extraPlugins : 'confighelper',
 		});
 		
+		$('#cancelBtn').click(function(){
+			window.history.back();
+		});
+		
 		console.log(CKEDITOR.instances.content.getData().length);
 		$("#homeboardForm").submit(()=>{
 			var ckContent = CKEDITOR.instances.content.getData(); //ckeditor글내용

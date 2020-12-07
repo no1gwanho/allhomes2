@@ -7,6 +7,8 @@ public interface StoreDaoImp {
 	public int storeAdd(StoreVO vo);
 	//전체 스토어 목록 불러오기
 	public List<StoreVO> storeAll();
+	// 스토어 목록
+	public StoreVO selectStore();
 	//스토어 선택
 	public StoreVO storeSelect(int s_no);
 	//스토어 삭제

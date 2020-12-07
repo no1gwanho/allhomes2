@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,22 +32,24 @@ public class HomeboardCommentController {
 	@RequestMapping("/commentList")
 	@ResponseBody
 	public List<HomeboardCommentVO> commentAllSelect(int b_no) {
-		System.out.println(b_no);
+		System.out.println("댓글 원글번호: "+b_no);
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
 		List<HomeboardCommentVO> list = commentDao.commentAllSelect(b_no);
 		
 		return list;
 	}
 	
-	@RequestMapping(value="/commentWrite", method= RequestMethod.GET)
+	@RequestMapping(value="/commentWrite", method= RequestMethod.POST)
 	@ResponseBody
 	public int commentInsert(HomeboardCommentVO vo, HttpSession ses) {
-		vo.setNickname("GILDONG");
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
 		int result = commentDao.commentInsert(vo);
 		
 		return result;
 		
 	}
+	
+	
+	
 
 }
