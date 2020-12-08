@@ -15,8 +15,9 @@
 }
 
 .input-group {
-	width: 90%;
+	width: 100%;
 	font-size: 13px;
+	margin:0px;
 }
 
 .reply {
@@ -57,84 +58,82 @@
 	padding : 20px;
 }
 
+.profile_pic{
+		width:25px;
+		border-radius: 45%;
+	
+	}
+ #commentList{
+ 	padding:0px;
+ 	margin:0px;
+ }
+ 
+
 
 
 
 </style>
 
 <script>
+
+	function homeboardDelCheck(b_no) {
+		if (confirm('정말로 삭제하시겠습니까?')) {
+			location.href = "/myapp/homeboardDelete?b_no="+b_no;
+		}
+	}
+
 	$(function() {
-
-		$('textarea')
-				.keypress(
-						function(e) {
-							var tval = $('textarea').val(), tlength = tval.length, set = 100, remain = parseInt(set
-									- tlength);
-							$('#textLength').text(remain);
-							if (remain <= 0 && e.which !== 0
-									&& e.charCode !== 0) {
-								$('textarea').val(
-										(tval).substring(0, tlength - 1))
-							}
-						});
-
+		//----------------------------------여기서부터 댓글-------------------------------------------//
 		//댓글리스트 구하기
 		function commentListSelect() {
 			var url = "/myapp/commentList";
 			var data = "b_no=${vo.b_no}";
-
+		
+			
 			$.ajax({
-						url : url,
-						data : data,
-						success : function(result) {
-
-							var commentNum = $result.length - 1;
-							$("#commentNum").html(commentNum);
-
-							var $result = $(result);
-							var tag = "";
-							var loginId = $('#loginId').val();
+				url : url,
+				data : data,
+				success : function(result) {
+					
+					var $result = $(result);
+					var commentNum = $result.length;
+					$("#commentNum").html(commentNum);
+					var tag = "";
+							$result.each(function(i, v) {
+								console.log(v.m_pic);
+								tag += '<div class="input-group" style="margin-bottom:20px;">';
+								tag += '<img class="profile_pic" src="/myapp/resources/upload/register/'+ v.m_pic + '"/>';
+								tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid +'</a></span>';
+								tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
+								tag += '<span style="margin-left: 150px">'+ v.writedate+ '</span>&nbsp;&nbsp;';
+								
+								if (v.userid == '${userid}') {
+									tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
+									tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
+								}
+								tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
+								tag += '</div><hr/>'; 
+							});
 							$("#commentList").html(tag);
-
-							$result
-									.each(function(i, v) {
-										console.log("11111로그인아이디: " + loginId);
-										console.log("댓글쓴사람 아이디: " + v.userid);
-										tag += '<div class="input-group" style="margin-bottom:20px;">';
-										tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
-										tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'
-												+ v.userid + '</a></span>';
-										tag += '<span style="width: 80%">'
-												+ v.hb_comment
-												+ '</span> <br />';
-										tag += '<span style="margin-left: 150px">'
-												+ v.writedate
-												+ '</span>&nbsp;&nbsp;';
-										if (v.userid == loginId) {
-											tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
-											tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
-										}
-										tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
-										tag += '</div><hr/>';
-
-									});
 
 						},
 						error : function() {
 							console.log("댓글 전체리스트 불러오기 에러 발생..");
 						}
-
+						
 					});
-		}
+				}
+		
+		
+		
+		
+		
+		
 
 		//새 댓글쓰기
 		$("#commentWriteForm").submit(function() {
 			if ($("#hb_comment").val() == "") {
 				alert("댓글을 입력해주세요");
-				return false;
-			}
-			if ($("#hb_comment").val().length > 100) {
-				alert("댓글은 최대 100글자까지만 가능합니다");
 				return false;
 			}
 			var url = "/myapp/commentWrite";
@@ -163,16 +162,29 @@
 
 		//댓글 삭제하기 
 
+		
+		
+		//남은 글 개수 구하기 
+		$('textarea').keypress(function(e) {
+			var tval = $('textarea').val(), tlength = tval.length, set = 100, remain = parseInt(set-tlength);
+				$('#textLength').text(remain);
+					if (remain <= 0 && e.which !== 0 && e.charCode !== 0) {
+				$('textarea').val(
+				(tval).substring(0, tlength - 1))
+				}
+		});
+		
 		//글내용 보여줄때 댓글 내용도 보여주기
 		commentListSelect();
-
-		function homeboardDelCheck(b_no) {
-			if (confirm('정말로 삭제하시겠습니까?')) {
-				location.href = "/myapp/homeboardDelete?b_no=" + b_no;
-			}
-		}
+		
+		
+		
 
 	}); //jquery
+	
+	
+	
+
 </script>
 
 
@@ -192,7 +204,7 @@
 			<div class="row">
 
 				<div class="col-md-auto hb-view-content" style="font-size: 13px;">
-					<i class="fas fa-user-circle fa-2x"></i>&nbsp; <a href="#">${vo.userid }</a>
+					<img class="profile_pic" src="<%=request.getContextPath() %>/resources/upload/register/${vo.m_pic }">&nbsp; <a href="#">${vo.userid }</a>
 					· ${vo.writedate} &nbsp;
 
 					<c:if test="${loginId == vo.userid}">
@@ -231,33 +243,37 @@
 					id="commentNum"
 					style="font-size: 15px; color: #E98374; font-weight: bold">3</span>
 			</div>
-
+			
+			
+			
+			<!-- =================댓글입력창 ======================== -->
 			<c:if test="${logStatus == 'Y'}">
-				<!-- 댓글입력창 -->
 				<div id="comment">
 					<form method="post" id="commentWriteForm">
-						<div class="input-group">
-							<i class="fas fa-user-circle fa-2x"></i> <span
-								style="margin: 2px 10px 0 10px"><a href="#">${loginId}</a></span>
-							<input type="hidden" name="userid" id="loginId"
-								value="${loginId}" /> <input type="hidden" name="b_no"
-								value="${b_no }" />
-							<textarea name="hb_comment" id="hb_comment" class="form-control"
-								placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100" style="width: 80%; max-width: 80%;"></textarea>
-							<div class="input-group-append">
-								<input type="submit" style="background-color: #E98374"
-									class="btn" value="등록" />
-							</div>
-							<div>
-								<span id="textLength"
-									style="margin-left: 150px; color: gray; font-size: 12px;">100</span><span
-									style="color: gray; font-size: 12px;">/100 글자</span>
-							</div>
-
+					
+					<div class="row" style="padding-left:20px;">
+						<div class="co-1"  >
+							<img class="profile_pic" src="<%=request.getContextPath() %>/resources/upload/register/${vo.m_pic }"><span style="margin: 2px 10px 0 10px"><a href="#">${userid}</a></span>
 						</div>
+						<div class="col-9">
+							<input type="hidden" name="b_no" value="${vo.b_no }"> <!-- 원글번호 저장 --> 
+							<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100" style="width: 100%; max-width: 100%;"></textarea>
+					
+						</div>
+					
+						<div class="col-1" style="margin:0;text-align:left;">
+								<input type="submit" style="background-color: #E98374" class="btn" value="등록" />
+						</div>
+					</div>
+							<!-- 글자개수 -->
+							<div>
+								<span id="textLength" style="margin-left: 150px; color: gray; font-size: 12px;">100
+								</span><span style="color: gray; font-size: 12px;">/100 글자</span>
+							</div>
 					</form>
 				</div>
 			</c:if>
+			
 			<c:if test="${logStatus == null || logStatus !='Y'}">
 				<div id="commentNoLogin">
 					<p>
@@ -265,14 +281,10 @@
 					</p>
 
 				</div>
-
 			</c:if>
-
-
-
-
-			<br />
-			<br />
+			
+			<br/>
+			<br/>
 			<!-- 댓글 리스트 -->
 			<div id="commentList">
 				<!-- 댓글리스트 나오는 곳 -->

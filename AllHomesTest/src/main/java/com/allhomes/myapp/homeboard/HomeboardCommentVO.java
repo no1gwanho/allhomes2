@@ -11,9 +11,18 @@ public class HomeboardCommentVO {
 	private int step;
 	private int lvl;
 	private int comment_no;
+	private String m_pic;
 	
 	
 	
+	
+	
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
 	public int getComment_no() {
 		return comment_no;
 	}

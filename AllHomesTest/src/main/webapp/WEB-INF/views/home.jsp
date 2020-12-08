@@ -92,6 +92,12 @@
 	.store-list-container{
 		font-family: 'SCDream3';
 	}
+	
+	.profile_pic{
+		width:25px;
+		border-radius: 45%;
+	
+	}
 </style>
 
 
@@ -158,6 +164,7 @@
 					<div class="card-title">
 						<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 					</div>
+					<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
 					<a href="#" class="card-text">${vo.userid }</a>
 					<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
 					</p>
