@@ -166,8 +166,10 @@ td{
 					<div id="banner_list">
 						<ul class="sec3_list">
 							<c:forEach var="vo" items="${hList}">
-							<li onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'"><span><img
-									src="/myapp/resources/img/admin/06.jpg" alt=""></span>
+							<li onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
+								<span>
+									<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail}"/>
+								</span>
 								<dl>
 									<dt class="wordCut">${vo.title}</dt>
 									<dd>

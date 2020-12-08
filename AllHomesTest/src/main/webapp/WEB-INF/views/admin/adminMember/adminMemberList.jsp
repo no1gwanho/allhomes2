@@ -184,7 +184,7 @@ td{
 									onClick="location.href='/myapp/adminMemberDetail?m_no=${list.m_no}'">
 									<td>${list.m_no}</td>
 									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${list.m_pic}"
-										style="width: 50px; height: 50px" /></td>
+										style="width: 50px; height: 50px;border-radius:70%"/></td>
 									<td>${list.userid}</td>
 									<td>${list.username}</td>
 									<td>${list.email1}@${list.email2}</td>
@@ -198,26 +198,37 @@ td{
 
 					<!-- pagination -->
 					<div style="display: inline-block">
-						<c:if test="${paging.startPage != 1 }">
-							<a
-								href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-						</c:if>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-							var="p">
-							<c:choose>
-								<c:when test="${p == paging.nowPage }">
-									<b>${p }</b>
-								</c:when>
-								<c:when test="${p != paging.nowPage }">
-									<a
-										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${paging.endPage != paging.lastPage}">
-							<a
-								href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-						</c:if>
+						
+						<ul class="pagination">
+							<c:if test="${paging.startPage != 1 }">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+								var="p">
+								<c:choose>
+									<c:when test="${p == paging.nowPage }">
+										<li class="page-item disabled">
+											<a class="page-link">${p }</a>
+										</li>
+									</c:when>
+									<c:when test="${p != paging.nowPage }">
+										<li class="page-item">
+										<a class="page-link"
+											href="<%=request.getContextPath()%>/adminMemberList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+										</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								</li>
+							</c:if>
+						</ul>
 					</div>
 					<!-- pagination 끝 -->
 				</div>

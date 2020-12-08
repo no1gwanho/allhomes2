@@ -22,7 +22,7 @@
                   </div>
                   	<div class="card-body">
                   		<div class="">
-                            <img src="/myapp/resources/img/mypage/user_basic.png" style="width:100px;height:100px"/>
+                            <img src="<%=request.getContextPath()%>/resources/upload/register/${mVo.m_pic}" style="width:100px;height:100px;border-radius:70%"/>
                             <br/><br/><hr/><br/>
                         	
 			                <p><label class="col-4">ID</label>${mVo.userid}<p>
