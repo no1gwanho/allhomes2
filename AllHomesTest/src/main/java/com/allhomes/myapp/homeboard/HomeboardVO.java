@@ -15,7 +15,16 @@ public class HomeboardVO {
 	private String ip;
 	private String writedate;
 	
+	//조인을 위한 프로필 사진
+	private String m_pic;
 	
+	
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
 	//조인을 위해 추가한 테마번호
 	private int hb_theme_no;
 	

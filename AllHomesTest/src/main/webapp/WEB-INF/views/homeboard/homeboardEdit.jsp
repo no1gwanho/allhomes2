@@ -105,9 +105,8 @@
 		
 		<div class="col-2">
 			<select id="theme" name="theme" class="browser-default custom-select">
-					<option value=""></option>
-				<c:forEach var="vo" items="${themeList }"> 
-					<option value="${vo.theme }">${vo.theme }</option>
+					<c:forEach var="vo" items="${themeList }"> 
+					<option value="${vo.hb_theme_no}" <c:if test="${vo.hb_theme_no == oriThemeNo }"> selected</c:if>>${vo.theme }</option>
 				</c:forEach>
 			</select>
 		</div>

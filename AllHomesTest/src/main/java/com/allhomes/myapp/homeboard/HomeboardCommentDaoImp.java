@@ -15,4 +15,6 @@ public interface HomeboardCommentDaoImp {
 	
 	//댓글 삭제
 	public int commentDelete(int hb_c_no);
+	
+	
 }

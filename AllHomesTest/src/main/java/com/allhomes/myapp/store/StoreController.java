@@ -47,7 +47,7 @@ public class StoreController {
 		
 		String sql = sqlSession.getConfiguration().getMappedStatement("productAllList").getBoundSql(sortPd).getSql();
 		System.out.println("sql->"+sql);
-		
+	
 		return mav;	
 	 }
 

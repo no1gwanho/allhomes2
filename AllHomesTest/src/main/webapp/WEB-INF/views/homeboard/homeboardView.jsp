@@ -3,190 +3,203 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
+
+
+.col-3{
+		text-align:center;
+		margin-bottom:10px;
+	}
+		
 .card-inner {
 	margin-left: 4rem;
 }
+
 .input-group {
 	width: 90%;
 	font-size: 13px;
 }
+
 .reply {
 	font-size: 13px;
 }
+
 .homeboardImages {
 	max-width: 900px;
 }
+
 .homeboardImages>img {
 	width: 90%
 }
+
+
 .contentDiv>p>img {
 	max-width: 90%;
 	max-height: 90%;
 }
 
-#commentNoLogin{
-	text-align:center;
-	text-color:#666666;
-	text-size:12px;
+.contentDiv{
+	font-family: "gilbert";
 }
+
+#commentNoLogin {
+	text-align: center;
+	text-color: #666666;
+	text-size: 12px;
+}
+
+.container{
+	max-width:1100px;
+	font-family: 'SCDream3';
+}
+
+.hb-view-border{
+	border: 0.2px solid #f5f5f5;
+	padding : 20px;
+}
+
+
+
 
 </style>
 
 <script>
-	$(function(){
-		
-		$('textarea').keypress(function(e) {
-		    var tval = $('textarea').val(),
-		        tlength = tval.length,
-		        set = 100,
-		        remain = parseInt(set - tlength);
-		    $('#textLength').text(remain);
-		    if (remain <= 0 && e.which !== 0 && e.charCode !== 0) {
-		        $('textarea').val((tval).substring(0, tlength - 1))
-		    }
-		});
-		
-		
+	$(function() {
+
+		$('textarea')
+				.keypress(
+						function(e) {
+							var tval = $('textarea').val(), tlength = tval.length, set = 100, remain = parseInt(set
+									- tlength);
+							$('#textLength').text(remain);
+							if (remain <= 0 && e.which !== 0
+									&& e.charCode !== 0) {
+								$('textarea').val(
+										(tval).substring(0, tlength - 1))
+							}
+						});
+
 		//댓글리스트 구하기
-		function commentListSelect(){
+		function commentListSelect() {
 			var url = "/myapp/commentList";
 			var data = "b_no=${vo.b_no}";
-			
+
 			$.ajax({
-				url : url,
-				data : data,
-				success : function(result){
-					
-					var commentNum = $result.length-1;
-					$("#commentNum").html(commentNum);
-					
-					var $result = $(result);
-					var tag = "";
-					var loginId = $('#loginId').val();
-					$("#commentList").html(tag);
-					
-					$result.each(function(i,v){	
-						console.log("11111로그인아이디: "+loginId);
-						console.log("댓글쓴사람 아이디: "+v.userid);
-							tag += '<div class="input-group" style="margin-bottom:20px;">';
-							tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
-							tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid+'</a></span>';
-							tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
-							tag += '<span style="margin-left: 150px">'+v.writedate+'</span>&nbsp;&nbsp;';
-								if(v.userid== loginId){
-									tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
-									tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
-								}
-							tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
-							tag += '</div><hr/>';
-						
-					});		
-					
-					
-				}, error: function(){
-					console.log("댓글 전체리스트 불러오기 에러 발생..");
-				}
-				
-				
-				
-				
-				
-				
-				
-			});
+						url : url,
+						data : data,
+						success : function(result) {
+
+							var commentNum = $result.length - 1;
+							$("#commentNum").html(commentNum);
+
+							var $result = $(result);
+							var tag = "";
+							var loginId = $('#loginId').val();
+							$("#commentList").html(tag);
+
+							$result
+									.each(function(i, v) {
+										console.log("11111로그인아이디: " + loginId);
+										console.log("댓글쓴사람 아이디: " + v.userid);
+										tag += '<div class="input-group" style="margin-bottom:20px;">';
+										tag += '<i class="fas fa-user-circle fa-2x" style="width: 30px;"></i>';
+										tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'
+												+ v.userid + '</a></span>';
+										tag += '<span style="width: 80%">'
+												+ v.hb_comment
+												+ '</span> <br />';
+										tag += '<span style="margin-left: 150px">'
+												+ v.writedate
+												+ '</span>&nbsp;&nbsp;';
+										if (v.userid == loginId) {
+											tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
+											tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
+										}
+										tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
+										tag += '</div><hr/>';
+
+									});
+
+						},
+						error : function() {
+							console.log("댓글 전체리스트 불러오기 에러 발생..");
+						}
+
+					});
 		}
-		
-		
-		
-		
+
 		//새 댓글쓰기
-		$("#commentWriteForm").submit(function(){
-			if($("#hb_comment").val()==""){
+		$("#commentWriteForm").submit(function() {
+			if ($("#hb_comment").val() == "") {
 				alert("댓글을 입력해주세요");
 				return false;
 			}
-			if($("#hb_comment").val().length>100){
+			if ($("#hb_comment").val().length > 100) {
 				alert("댓글은 최대 100글자까지만 가능합니다");
 				return false;
 			}
 			var url = "/myapp/commentWrite";
 			var params = $("#commentWriteForm").serialize();
 			$.ajax({
-				url:url,
+				url : url,
 				data : params,
-				success : function(result){
+				success : function(result) {
 					commentListSelect();
 					$("#hb_comment").val("");
-				},error:function(){
+				},
+				error : function() {
 					console.log("댓글 등록시 에러 발생..");
 				}
-				
+
 			});
 			return false;
-			
+
 		});
-		
+
 		//댓글 수정 링크 클릭하면 수정폼 보여주기 
-		$(document).on('click', '.edit', function(){
+		$(document).on('click', '.edit', function() {
 			$(this).parent().css("display", "none");
 			$(this).parent().next().css("display", "block");
 		});
-		
-		
+
 		//댓글 삭제하기 
-	
+
 		//글내용 보여줄때 댓글 내용도 보여주기
 		commentListSelect();
-		
-		
-		
-		function homeboardDelCheck(b_no){
-			if(confirm('정말로 삭제하시겠습니까?')){
-				location.href="/myapp/homeboardDelete?b_no="+b_no;
+
+		function homeboardDelCheck(b_no) {
+			if (confirm('정말로 삭제하시겠습니까?')) {
+				location.href = "/myapp/homeboardDelete?b_no=" + b_no;
 			}
 		}
-		
-		
 
-		
 	}); //jquery
-
-	
-	
-	
-
-		
-	
-	
-
 </script>
 
 
 <div class="container">
 
 
-	<br /> <br />
+	<br /><br />
 
-	<div class="row justify-content-md-center">
-		<div class="col col-lg-2"></div>
+	<div class="row justify-content-md-center hb-view-border">
+		<div class="col-lg-2"></div>
 
-		<div class="col-lg-11 col-md-auto" style="border: 0.2px solid #f5f5f5">
+		<div class="col-lg-12 col-md-auto">
 			<h6 style="color: gray">
-				테마 > <a href="/myapp/homeboard/homeboardTheme?bh_theme_no=0">${vo.theme}</a>
+				테마 > <a href="/myapp/homeboardTheme?hb_theme_no=${vo.hb_theme_no }">${vo.theme}</a>
 			</h6>
 			<h3>${vo.title}</h3>
 			<div class="row">
-				
-				<div class="col-md-auto" style="font-size: 13px;">
-					<i class="fas fa-user-circle fa-2x"></i>&nbsp; 
-					<a href="#">${vo.userid }</a>
-					· ${vo.writedate} &nbsp; 
-					
+
+				<div class="col-md-auto hb-view-content" style="font-size: 13px;">
+					<i class="fas fa-user-circle fa-2x"></i>&nbsp; <a href="#">${vo.userid }</a>
+					· ${vo.writedate} &nbsp;
+
 					<c:if test="${loginId == vo.userid}">
-					<a href="/myapp/homeboardEdit?b_no=${vo.b_no }">수정</a>&nbsp;
+						<a href="/myapp/homeboardEdit?b_no=${vo.b_no }">수정</a>&nbsp;
 					<a href="javascript:homeboardDelCheck(${vo.b_no })">삭제</a>
 					</c:if>
-					
+
 				</div>
 				<div class="col"></div>
 				<div class="col-lg-2 col-md-auto">
@@ -200,8 +213,9 @@
 			<hr />
 			<br />
 			<div class="contentDiv">${vo.content}</div>
-
+			<br/>
 			<h6 style="font-size: 13px; color: gray;">조회수 ${vo.hit} · 스크랩 ${vo.scrap}회</h6>
+			<br/>
 			<div id="hashtag">
 				<c:forEach var="i" items="${hashtagList}">
 					<a href="#" class="badge badge-light"><span>#</span>${i}</a>
@@ -213,47 +227,57 @@
 
 			<!-- 댓글개수 표시창 -->
 			<div style="margin: 20px;">
-				<span style="font-size: 15px; color: gray;">댓글&nbsp;&nbsp;</span><span id="commentNum" style="font-size: 15px; color: #E98374;font-weight:bold">3</span>
+				<span style="font-size: 15px; color: gray;">댓글&nbsp;&nbsp;</span><span
+					id="commentNum"
+					style="font-size: 15px; color: #E98374; font-weight: bold">3</span>
 			</div>
-			
+
 			<c:if test="${logStatus == 'Y'}">
-			<!-- 댓글입력창 -->
-			<div id="comment">
-			<form method="post" id="commentWriteForm">
-				<div class="input-group">
-					<i class="fas fa-user-circle fa-2x"></i> 
-					<span style="margin: 2px 10px 0 10px"><a href="#">${loginId}</a></span> 
-					<input type="hidden" name="userid" id="loginId" value="${loginId}"/>
-					<input type="hidden" name="b_no" value="${b_no }"/>
-					<textarea name="hb_comment" id="hb_comment" class="form-control" placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100"></textarea>
-					<div class="input-group-append">
-					<input type="submit" style="background-color: #E98374" class="btn" value="등록"/>
-					</div>
-					<div>
-					<span id="textLength" style="margin-left:150px;color:gray;font-size:12px;">100</span><span style="color:gray;font-size:12px;">/100 글자</span>
-					</div>
-					
+				<!-- 댓글입력창 -->
+				<div id="comment">
+					<form method="post" id="commentWriteForm">
+						<div class="input-group">
+							<i class="fas fa-user-circle fa-2x"></i> <span
+								style="margin: 2px 10px 0 10px"><a href="#">${loginId}</a></span>
+							<input type="hidden" name="userid" id="loginId"
+								value="${loginId}" /> <input type="hidden" name="b_no"
+								value="${b_no }" />
+							<textarea name="hb_comment" id="hb_comment" class="form-control"
+								placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100" style="width: 80%; max-width: 80%;"></textarea>
+							<div class="input-group-append">
+								<input type="submit" style="background-color: #E98374"
+									class="btn" value="등록" />
+							</div>
+							<div>
+								<span id="textLength"
+									style="margin-left: 150px; color: gray; font-size: 12px;">100</span><span
+									style="color: gray; font-size: 12px;">/100 글자</span>
+							</div>
+
+						</div>
+					</form>
 				</div>
-			</form>
-			</div>
 			</c:if>
 			<c:if test="${logStatus == null || logStatus !='Y'}">
-			<div id="commentNoLogin">
-				<p>댓글은 로그인 이후에 작성 가능합니다. <a href="/myapp/login" style="color:blue;">로그인</a></p>
-			
-			</div>
-			
+				<div id="commentNoLogin">
+					<p>
+						댓글은 로그인 이후에 작성 가능합니다. <a href="/myapp/login" style="color: blue;">로그인</a>
+					</p>
+
+				</div>
+
 			</c:if>
-			
-			
-			
-			
-			<br /><br/>
+
+
+
+
+			<br />
+			<br />
 			<!-- 댓글 리스트 -->
 			<div id="commentList">
 				<!-- 댓글리스트 나오는 곳 -->
 			</div>
-			
+
 			<div class="col col-lg-2"></div>
 
 		</div>

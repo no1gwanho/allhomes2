@@ -43,7 +43,10 @@ span{
 	height:200px;
 	margin:0 auto;
 	padding:20px;
+	
 }
+
+
 </style>
 <div class="container-fluid">
 	<footer class="sticky-footer bg-dark bg-gradient-dark">

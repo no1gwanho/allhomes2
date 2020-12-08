@@ -5,7 +5,13 @@
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
   	<!-- 집들이 전체리스트 -->
  	<select id="homeboardAllList"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
- 		select a.b_no, a.thumbnail, a.title, a.userid, b.hb_theme_no, a.hit, a.scrap, a.writedate from homeboard a join hb_theme b on a.theme = b.theme order by b_no desc
+ 		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, a.writedate  
+    	from homeboard a 
+		join hb_theme b 
+   		on a.theme = b.theme 
+		join register c
+    	on a.userid = c.userid
+		order by b_no desc
  	</select>
   	
   	<!-- 집들이 글작성하기 -->
@@ -14,12 +20,11 @@
   	  	(b_no, title, thumbnail, content, theme, hashtag, userid, nickname,  hit, scrap, writedate, ip) values
   	  	(homeboard_sq.nextval, #{title}, #{thumbnail}, #{content}, #{theme}, #{hashtag}, #{userid}, #{nickname}, 0, 0, sysdate, #{ip})
   	</insert>
-  	
 
   	<!-- 집들이 글내용보기 -->
   	<select id="homeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-  		select b_no, userid, title, content, nickname, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
-  		from homeboard where b_no=#{param1}
+  		select a.b_no, a.userid, a.title, a.content, a.nickname, a.theme, b.hb_theme_no, a.hashtag, a.hit, a.scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
+  		from homeboard a join hb_theme b on a.theme=b.theme where b_no=#{param1}
   	</select>
   	
   	<!-- 집들이 볼때마다 조회수 증가 -->
@@ -33,12 +38,20 @@
   	</select>
   	
   	
-  	
   	<!-- 집들이 글번호꺼내기 -->
      <select id="getHomeboardNumber" resultType="int">
         select nvl(max(b_no), 1) from homeboard
      </select>
      
+     <!-- 집들이 글쓴이 꺼내기 -->
+     <select id="getHomeboardWriter" resultType="String">
+     	select userid from homeboard where b_no=#{param1}
+     </select>
+     
+     <!-- 집들이 선택한 테마 찾기 -->
+     <select id="getOriginalTheme" resultType="int">
+     	select b.hb_theme_no, a.theme from homeboard a join hb_theme b on a.theme = b.theme where b_no=#{param1}
+     </select>
      
     <!-- 집들이 글 수정하기 --> 
     <update id="homeboardEdit" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
@@ -88,5 +101,7 @@
     <select id="homeboardListForMain" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
     	select b_no, thumbnail, title, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard where b_no in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) order by b_no asc
     </select>
+    
+    
 
 </mapper>

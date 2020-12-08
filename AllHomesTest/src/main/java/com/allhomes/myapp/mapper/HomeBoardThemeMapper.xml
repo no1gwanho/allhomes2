@@ -5,7 +5,7 @@
   <!-- 집들이 게시판 카테고리(테마) mapper -->
   <mapper namespace="com.allhomes.myapp.admin.HomeBoardThemeDaoImp">
   	<select id="HomeBoardThemeAll" resultType="com.allhomes.myapp.admin.HomeBoardThemeVO">
-  		select theme,hb_theme_no from hb_theme order by hb_theme_no asc
+  		select theme, hb_theme_no from hb_theme order by hb_theme_no asc
   	</select>
   	<insert id="HomeBoardThemeAdd">
   		insert into hb_theme(theme,hb_theme_no) values(#{theme}, hb_theme_sq.nextval)
