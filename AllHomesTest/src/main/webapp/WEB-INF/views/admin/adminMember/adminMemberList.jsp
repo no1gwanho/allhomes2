@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 td{
 	height:40px;
@@ -39,6 +42,12 @@ td{
 			var selectedOrder = $("#order option:selected").val();
 			alert(selectedOrder);
 			location.href="/myapp/adminMemberOrder?order="+selectedOrder;
+		});
+		
+		//datepicker
+		$("#date,#date2").datepicker({
+			dateFormat: 'yy-mm-dd'
+			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
 		});
 		
 	});
@@ -96,12 +105,17 @@ td{
 						<h6 class="m-0  font-weight-bold text-primary" style="float: left">상세조회</h6>
 					</div>
 					<div class="card-body" style="text-align: center">
-						<form method="post" action="/myapp/adminHBSearchDetail"
-							id="HBDetailSearch">
+						<form method="post" action="<%=request.getContextPath()%>/MemberDetailSearch" id="memberDetailSearchForm">
+							
 							<p>
-								<span class="col-lg-5" style="float: left">작성자 ID</span> <input
+								<span class="col-lg-5" style="float: left">ID</span> <input
 									type="text" class="form-control col-lg-4" name="userid"
 									id="userid" />
+							</p>
+							<p>
+								<span class="col-lg-5" style="float: left">이름</span> <input
+									type="text" class="form-control col-lg-4" name="username"
+									id="username" />
 							</p>
 							<p>
 								<span class="col-lg-5" style="float: left">닉네임</span> <input
@@ -109,26 +123,24 @@ td{
 									id="nickname" />
 							</p>
 							<p>
-								<span class="col-lg-5" style="float: left">제목</span> <input
-									type="text" class="form-control col-lg-4" name="title"
-									id="title" />
+								<span class="col-lg-5" style="float: left">tel</span> <input
+									type="text" class="form-control col-lg-4" name="tel"
+									id="tel" />
 							</p>
 							<p>
-								<span class="col-lg-5" style="float: left">글 내용</span> <input
-									type="text" class="form-control col-lg-4" name="content"
-									id="content" />
+								<span class="col-lg-5" style="float: left">Email</span> <input
+									type="text" class="form-control col-lg-4" name="email"
+									id="email" />
 							</p>
 							<p>
-								<span class="col-lg-5" style="float: left">해시태그</span> <input
-									type="text" class="form-control col-lg-4" name="hashtag"
-									id="hashtag" />
-							</p>
-							<p>
-								<span class="col-lg-5" style="float: left">등록일</span> <input
+								<span class="col-lg-5" style="float: left">가입일</span> 
+									<input
 									type="text" id="date" name="date" class="form-control col-lg-2"
-									style="float: left;" /> <span style="float: left">&nbsp;&nbsp;&nbsp;
-									- &nbsp;&nbsp;&nbsp;</span> <input type="text" id="date2" name="date2"
-									class="form-control col-lg-2" style="float: left" /><br />
+									style="float: left;" /> 
+									<span style="float: left">&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;</span>
+									<input type="text" id="date2" name="date2"
+									class="form-control col-lg-2" style="float: left" />
+									<br />
 								<br />
 							</p>
 
@@ -171,7 +183,7 @@ td{
 								<tr
 									onClick="location.href='/myapp/adminMemberDetail?m_no=${list.m_no}'">
 									<td>${list.m_no}</td>
-									<td><img src="/myapp/resources/img/mypage/user_basic.png"
+									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${list.m_pic}"
 										style="width: 50px; height: 50px" /></td>
 									<td>${list.userid}</td>
 									<td>${list.username}</td>

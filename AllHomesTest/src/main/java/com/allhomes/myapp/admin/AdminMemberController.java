@@ -165,5 +165,46 @@ public class AdminMemberController {
 		return mav;
 		
 	}
-
+	
+	//회원 상세 검색 
+	@RequestMapping("/MemberDetailSearch")
+	public ModelAndView memberDeatilSearch(RegisterDetailSearchVO regVo
+									,AdminPagingVO vo
+									, @RequestParam(value="nowPage", required=false)String nowPage
+									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		//paging//
+		int total = dao.countRegisterTotal(); //총회원수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		System.out.println("a;ldskfadsf"+regVo.getDate()+regVo.getDate2()+regVo.getUsername());
+		
+		ModelAndView mav = new ModelAndView();
+		//paging
+		mav.addObject("paging", vo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userid", regVo.getUserid() );
+		map.put("nickname", regVo.getNickname());
+		map.put("tel", regVo.getTel());
+		map.put("email", regVo.getEmail());
+		map.put("date", regVo.getDate());
+		map.put("date2", regVo.getDate2());
+		
+		map.put("start", vo.getStart());
+		map.put("end", vo.getEnd());
+		mav.addObject("viewAll", dao.memberSearchDetail(map));
+		
+		mav.setViewName("admin/adminMember/adminMemberList");
+		return mav;
+		
+	}
+	
 }

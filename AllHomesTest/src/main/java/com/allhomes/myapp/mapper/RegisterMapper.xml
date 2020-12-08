@@ -10,6 +10,7 @@
  	
 
  	
+ 	<!-- =============여기부터 관리자============================================ -->
  	<!--  메인-회원 (10개) -->
  	<select id="memberSelectMain" resultType="com.allhomes.myapp.register.RegisterVO">
  		<![CDATA[
@@ -89,7 +90,29 @@
  									)A
  							)
 		where RN between #{start} and #{end}
+ 	</select>
  	
+ 	<!-- 회원 상세 검색 -->
+ 	<select id="memberSearchDetail" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 	select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 	from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<where>
+								 		<trim prefixOverrides="and">
+									 		<if test="userid != null">and userid LIKE '%'||#{userid}||'%' </if>
+									 		<if test="username != null">and username LIKE '%'||#{username}||'%' </if>
+									 		<if test="nickname != null">and nickname LIKE '%'||#{nickname}||'%' </if>
+									 		<if test="email != null">and email LIKE '%'||#{email}||'%' </if>
+									 		<if test="tel != null">and tel LIKE '%'||#{tel}||'%' </if>
+									 		<if test="date != null">and to_date(regdate, 'YY/MM/DD')  between to_date(#{date}, 'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')</if>
+								 		</trim>
+							 		</where>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
  	</select>
  	
  	<!-- 회원번호로 조회 -->
@@ -109,7 +132,9 @@
  	<select id="countRegisterTotal" resultType="int">
  		select count(*) from register
  	</select>
- 	
+ 	<!-- =============여기까지 관리자============================================ -->
+
+
 
  	
  	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체 reg_sq-->	
