@@ -106,15 +106,15 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 	
-				<div class="collapse navbar-collapse" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
-					<ul class="nav navbar-nav mr-auto">
+				<div class="collapse navbar-collapse" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft" style="height:70px;">
+					<ul class="nav navbar-nav mr-auto" style="height:70px;">
 						
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown" style="height:70px;line-height:70px;">
 								<a class="nav-link" href="/myapp/homeboardHome"
-									id="navbarDropdown" role="button" data-hover="dropdown" style="color:black;"
-									aria-haspopup="true" aria-expanded="false"> 집들이 </a>
+									id="navbarDropdown" role="button" data-hover="dropdown" style="color:black;height:70px;padding:0;margin-right:20px;"
+									aria-haspopup="true" aria-expanded="false" > 집들이 </a>
 							
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="top:60px;">
 								<a class="dropdown-item" href="/myapp/homeboardHome">집들이홈</a> <a
 									class="dropdown-item"
 									href="/myapp/homeboardTop?order=recentBest">베스트</a> <a
@@ -124,28 +124,28 @@
 						<li class="nav-item dropdown">
 							
 								<a class="nav-link" href="/myapp/storeHome" id="navbarDropdown"
-									role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;"
+									role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;height:70px;padding:0;margin-right:20px;"
 									aria-expanded="false"> 스토어 </a>
 							
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/myapp/storeHome?sortPd=recent&">스토어홈</a> <a
+								<a class="dropdown-item" href="/myapp/storeHome?sortPd=recent">스토어홈</a> <a
 									class="dropdown-item" href="/myapp/storeCategory?pdCate=sofa_f">카테고리</a> <a
 									class="dropdown-item" href="/myapp/storeBest">베스트</a>
 							</div>
 						</li>
 						<li class="nav-item">
 							
-								<a class="nav-link" href="/myapp/qnaMain" style="color:black;" hover="color:#EE8374;">질문과답변</a>
+								<a class="nav-link" href="/myapp/qnaMain" style="color:black;height:70px;padding:0;margin-right:20px;" >질문과답변</a>
 							
 						</li>
 						<li class="nav-item dropdown">
 							
 								<a class="nav-link" href="/myapp/mypageHome" id="navbarDropdown"
-									role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;"
+									role="button" data-hover="dropdown" aria-haspopup="true" style="color:black;height:70px;padding:0;margin-right:20px;"
 									aria-expanded="false"> 마이페이지 </a>
 							
 	
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="top:60px;">
 								<a class="dropdown-item" href="/myapp/mypageHome">마이페이지홈</a> <a
 									class="dropdown-item" href="/myapp/mypageShopping">나의쇼핑</a> <a
 									class="dropdown-item" href="/myapp/mypageWishlist">위시리스트</a> <a
@@ -207,7 +207,7 @@
 								<span style="color:white;">글쓰기</span>
 								<i class="fas fa-pen" style="color:white;"></i>
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="top:70px;">
 								<a class="dropdown-item" href="/myapp/homeboardWrite">집들이</a> <a
 									class="dropdown-item" href="/myapp/qnaWrite">질문과답변</a> <a
 									class="dropdown-item" href="/myapp/mypageShopping">리뷰작성</a>

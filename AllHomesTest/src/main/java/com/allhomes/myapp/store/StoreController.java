@@ -33,8 +33,8 @@ public class StoreController {
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-		
-		mav.addObject("list", dao.productAllList(sortPd));
+	
+    mav.addObject("list", dao.productAllList(sortPd));
 		mav.addObject("sortPd", sortPd);			
 		mav.setViewName("store/storeHome");
 				
