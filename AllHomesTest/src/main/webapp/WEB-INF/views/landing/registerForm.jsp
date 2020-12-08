@@ -111,17 +111,49 @@
 			}
 						
 			//이메일 검사
-			if($("#emailText").val()==""){
+			if($("#emailText").val()=="" || $("#email2").val()==""){
 				alert("이메일은 필수 입력사항입니다..");
 				return false;
 			}
 			var emailPattern = /^[A-Za-z0-9]{4,8}$/;
 			var emailTestResult = email.Pattern.test($("#email2").val());
+			var emailTestResult2 = email.Pattern.test($("#email1").val());
 			
 			if(emailTestResult!=true){
-				alert("이메일 주소는 4~13글자 내로 적어주세요")
+				alert("이메일 주소는 4~13글자 내로 적어주세요");
 				return false;
 			}
+			if(emailTestResult2!=true){
+				alert("이메일 주소는 4~13글자 내로 적어주세요");
+				return false;
+			}
+			
+			if($("#emailText").val()!="" && $("#email2").val()!=""){
+				var tfcheck = false;
+				var url = "/myapp/mailFilter";
+				var data = "email1="+document.getElementById("emailText").value+"$email2="+document.getElementById("email2").value;
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						console.log("test에러잡기 3");
+						if(result>=0){
+							alert("이미 등록된 이메일 주소입니다.");
+							return false;
+						}
+										
+					},error:function(error){
+						
+					}
+					
+					console.log("test에러잡기 4");
+					
+				});
+				//중복검사 햇는데 에러면 false 리턴
+				
+				console.log("test에러잡기 5");
+			}
+				
 			
 		
 			return true;
