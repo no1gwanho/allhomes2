@@ -35,7 +35,7 @@ public class StoreController {
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
 		CategoryDaoImp cate = sqlSession.getMapper(CategoryDaoImp.class);
-				
+		
 		mav.addObject("list", dao.productAllList(sortPd));	
 		mav.addObject("cate", cate.categoriList());
 		mav.addObject("sortPd", sortPd);
