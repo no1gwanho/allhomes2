@@ -19,6 +19,87 @@
   	    	</when>
   	    </choose>
   	</select>
+  	<!-- 카테고리별 제품 조회 -->
+  	<select id="productListCate" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+  		select p.pd_name, p.price, discount, sub_c from product
+  		<choose>
+  			<when test="pdCate!=null and pdCate.equals('sofa_f')">
+  				where sub_c='소파/거실가구'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('stud_f')">
+  				where sub_c='학생/서재가구'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('bed_f')">
+  				where sub_c='침실가구'  			
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('kitchen_f')">
+  				where sub_c='주방가구'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('tbl')">
+  				where sub_c='테이블/의자/스툴'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('light')">
+  				where sub_c='조명'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('deco')">
+  				where sub_c='장식소품'
+  			</when> 
+  			<when test="pdCate!=null and pdCate.equals('walldeco')">
+  				where sub_c='월데코/장식'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('homgall')">
+  				where sub_c='홈갤러리'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('flower')">
+  				where sub_c='플라워/식물'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('kitchen_a')">
+  				where sub_c='주방가전'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('clean')">
+  				where sub_c='청소가전'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('life')">
+  				where sub_c='생활가전'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('season')">
+  				where sub_c='계절가전'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('tv')">
+  				where sub_c='영상음향가전'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('cabinet')">
+  				where sub_c='수납장/서랍장'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('box')">
+  				where sub_c='리빙박스/수납함/바구니'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('hanger')">
+  				where sub_c='행거/옷걸이'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('shelf')">
+  				where sub_c='선반/거치대'
+  			</when>
+			<when test="pdCate!=null and pdCate.equals('shoe')">
+  				where sub_c='현관/신발정리'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('paper')">
+  				where sub_c='벽지/시트지'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('tile')">
+  				where sub_c='타일/파벽돌'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('paint')">
+  				where sub_c='페인트/부자재'
+  			</when>
+  			<when test="pdCate!=null and pdCate.equals('handle')">
+  				where sub_c='손잡이/방문/유리'
+  			</when>
+			<when test="pdCate!=null and pdCate.equals('tool')">
+  				where sub_c='공구/접착제/보수용품'
+  			</when>  			
+  		</choose>
+  	</select>
   	<!-- 제품 리뷰 조회 -->
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
