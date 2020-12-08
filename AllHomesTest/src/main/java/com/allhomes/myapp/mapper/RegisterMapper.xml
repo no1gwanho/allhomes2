@@ -85,13 +85,15 @@
  	</insert>
  	 	-->
  	
- 	<!-- 이메일 인증코드 	테이블명 교체   원하는 레코드만 집어서 reg코드를 바꿀거 -->
+ 	<!-- 이메일 인증코드 	테이블명 변경   원하는 레코드만 집어서 reg코드를 바꿀거 -->
  	<update id="regFinal" parameterType="com.allhomes.myapp.register.RegisterVO">
- 		update register set regcode=1 where userid=#{userid}
+ 		update register set regcode=1
  	</update> 
  	
- 	
- 	
+ 	<!-- 이메일 중복검사 테이블명 변경-->
+ 	<select id="mailFilter" resultType="int">
+ 		select email from register where email=#{email}
+ 	</select>
  	
  	
  	
