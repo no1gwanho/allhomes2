@@ -32,8 +32,9 @@ public class StoreController {
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
-		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
+<<<<<<< HEAD
+=======
 		CategoryDaoImp cate = sqlSession.getMapper(CategoryDaoImp.class);
 		
 		mav.addObject("list", dao.productAllList(sortPd));	
@@ -41,17 +42,24 @@ public class StoreController {
 		mav.addObject("sortPd", sortPd);
 		mav.setViewName("store/storeHome");		
 
+>>>>>>> 442ee7ff1b975e0e05ee52933d45af69f25b6a8b
 		
+		mav.addObject("list", dao.productAllList(sortPd));
+		mav.addObject("sortPd", sortPd);			
+		mav.setViewName("store/storeHome");
+				
 		return mav;	
 	 }
 
 	@RequestMapping("/storeCategory")
-	public ModelAndView storeCate() {
+	public ModelAndView storeCate(@RequestParam(value="pdCate", required=false) String pdCate) {
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+			
+		mav.addObject("list", dao.productMainList());
+		mav.addObject("pdCate", pdCate);
+		mav.setViewName("store/storeCate");			
 		
-		mav.addObject("list", dao.joinProductStore());
-		mav.setViewName("store/storeCate");
 		return mav;	
 	}
 	

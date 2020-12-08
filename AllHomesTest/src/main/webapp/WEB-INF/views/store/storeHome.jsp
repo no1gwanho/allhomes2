@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<spring:uri value='/resources/img/pd/pd01.jpg'/>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
@@ -14,9 +13,8 @@
 	margin-bottom:10px;
 }
 .col-3 img {
-	left: 100px;
 	border-radius: 5%;
-	width: 320px;
+	width: 255px;
 	height: 215px;
 }
 .title {
@@ -117,14 +115,14 @@
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
-							[${vo.s_no}] ${vo.pd_name }<br/>
+							[${vo.s_no}]${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
-								${vo.price - (vo.price*vo.discount/100)}원 <del>${vo.price }원</del><br/> 
+								${vo.price - (vo.price*vo.discount/100)}원 
 							</c:if>
 							<c:if test="${vo.discount == 0 }">
 								${vo.price }원<br/>
 							</c:if>
-							<h6>평점 / 리뷰&nbsp;&nbsp;
+							<h6>
 							<c:if test="${vo.status!=null }">
 								<span class="badge badge-secondary">${vo.status }</span>
 							</c:if>
