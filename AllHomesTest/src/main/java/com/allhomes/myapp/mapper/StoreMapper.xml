@@ -8,11 +8,13 @@
  		 values(store_sq.nextval, #{s_num},#{s_name},#{s_pic},sysdate,#{s_id},#{staff_n},#{staff_t},#{staff_e},#{s_homepage},'Y')
  	</insert>
  	<select id="storeAll" resultType="com.allhomes.myapp.store.StoreVO">
- 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
+ 		select s_no, s_num, s_name, s_pic, to_char(openingdate, 'YYYY-MM-DD') openingdate, s_id, staff_n, staff_t, staff_e, s_homepage from store
  	</select>
  	<select id="storeSelect" parameterType="int" resultType="com.allhomes.myapp.store.StoreVO">
- 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
- 		 where s_no=#{s_no}
+ 		select s_no, s_num, s_name, s_pic, to_char(openingdate, 'YYYY-MM-DD') openingdate, s_id, staff_n, staff_t, staff_e, s_homepage from store where s_no=#{s_no}
+ 	</select>
+ 	<select id="selectStoreJoin" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s.s_no, s.s_name from store s, product p where s.s_no=p.s_no
  	</select>
  	<delete id="storeDel">
  		delete from store where s_no=#{s_no}

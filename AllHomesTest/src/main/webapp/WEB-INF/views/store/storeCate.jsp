@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-.col-3 {
+.col-4 {
 	text-align:center;
 	margin-bottom:10px;
 }
-.col-3 img {
+.col-4 img {
 	border-radius: 5%;
-	width: 180px;
-	height: 145px;
+	width: 345px;
+	height: 285px;
 }
 .dropdown-toggle::after {
     display: none;
@@ -25,10 +25,48 @@
 		$('.pageSub').eq(0).trigger("click");
 	});
 </script>
+<script>
+	$(function(){
+		
+		
+		$('#all').click(function(){
+			location.href="/myapp/storeCategory?pdCate=all";
+		});
+		
+		$('#sofa_f').click(function(){
+			location.href="/myapp/storeCategory?pdCate=sofa_f";
+			console.log("소파?")
+		});
+		
+		
+		$('#stud_f').click(function(){
+			location.href="/myapp/storeCategory?pdCate=stud_f";
+		});
+		$('#bed_f').click(function(){
+			location.href="/myapp/storeCategory?pdCate=bed_f";
+		});
+		$('#kitchen_f').click(function(){
+			location.href="/myapp/storeCategory?pdCate=kitchen_f";
+		});
+		$('#tbl').click(function(){
+			location.href="/myapp/storeCategory?pdCate=tbl";
+		});		
+	});
+</script>
 <br/>
 <div class="container">
-	<div class="row">
-		<!-- 사이드 메뉴 -->
+<!-- 탭메뉴  -->
+	<div id="subCateBtn" style="margin-bottom:15px;">
+		<input type="hidden" id="pdCate" value="${pdCate }">
+		<button type="button" class="btn btn-homes-nonselect" id="all">전체</button>
+		<button type="button" class="btn btn-homes-nonselect" id="sofa_f">소파/거실가구</button>
+		<button type="button" class="btn btn-homes-nonselect" id="stud_f">학생/서재가구</button>
+		<button type="button" class="btn btn-homes-nonselect" id="bed_f">침실가구</button>
+		<button type="button" class="btn btn-homes-nonselect" id="kitchen_f">주방가구</button>
+		<button type="button" class="btn btn-homes-nonselect" id="tbl">테이블/의자/스툴</button>	
+	</div>
+	<!-- <div class="row">
+		사이드 메뉴
 		<div class="col-3">
 			<nav id="sidebar">
 				<h5>All Homes</h5>
@@ -36,11 +74,11 @@
 					<li>
 						<a class="pageSub" href="#pageSubmenu1" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><button class="btn-block" style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff">가구</button></a>
 						<ul class="collapse list-unstyled" id="pageSubmenu1">
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">소파/거실가구</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">학생/서재가구</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">침실가구</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">주방가구</button></a></li>
-							<li><a href="#"><button class="btn btn" style="color:#ee8374;margin-bottom:3px;">테이블/의자/스툴</button></a></li>
+							<li><button class="btn btn" id="sofa_f" style="color:#ee8374;margin-bottom:3px;">소파/거실가구</button></li>
+							<li><button class="btn btn" id="stud_f" style="color:#ee8374;margin-bottom:3px;">학생/서재가구</button></li>
+							<li><button class="btn btn" id="bed_f" style="color:#ee8374;margin-bottom:3px;">침실가구</button></li>
+							<li><button class="btn btn" id="kitchen_f" style="color:#ee8374;margin-bottom:3px;">주방가구</button></li>
+							<li><button class="btn btn" id="tbl" style="color:#ee8374;margin-bottom:3px;">테이블/의자/스툴</button></li>
 						</ul>
 					</li>
 					<li>
@@ -85,41 +123,38 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
+		</div> -->
 		<!-- 상품리스트 -->
-		<div class="col-sm-9">
-			<div class="row">
-				<c:forEach var="vo" items="${list}">
-					<div class="col-3">
-						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
-							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
-							[${vo.s_no}] ${vo.pd_name }<br/>
-							<c:if test="${vo.discount != 0}">
-								${vo.price - (vo.price*vo.discount/100)}원 
-							</c:if>
-							<c:if test="${vo.discount == 0 }">
-								${vo.price }원<br/>
-							</c:if>
-							<h6>
-							<c:if test="${vo.status!=null }">
-								<span class="badge badge-secondary">${vo.status }</span>
-							</c:if>
-							</h6>
-						</a>
-					</div>
-				</c:forEach>																				
-			</div>
+		<div class="row">
+			<c:forEach var="c" items="${cList}">
+				<div class="col-4">
+					<a href="/myapp/storeDetail?pd_no=${c.pd_no}">
+						<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${c.s_no}/${c.main_img}"/>
+						<span style="font-size:0.8em;">${c.pd_name }</span><br/>
+						<c:if test="${vo.discount != 0}">
+							${c.dc_price}원 
+						</c:if>
+						<c:if test="${vo.discount == 0 }">
+							${c.price }원<br/>
+						</c:if>
+						<c:if test="${c.status!=null }">
+							<span class="badge badge-secondary">${c.status }</span>
+						</c:if>
+					</a>
+				</div>
+			</c:forEach>																			
 		</div>
 	</div>
 	<br/>
 	<!-- 페이징 -->
-	<ul class="pagination justify-content-center">
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-		<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-	</ul>
-</div>
+	<div>
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+			<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+		</ul>
+	</div>

@@ -81,12 +81,9 @@ public class RegisterController {
 		ModelAndView mav = new ModelAndView();
 		
 		
-		if(resultVO == null){
-			
+		if(resultVO == null){			
 			ses.setAttribute("logStatus","N");
-			mav.setViewName("landing/loginResult");
-			
-			
+			mav.setViewName("landing/loginResult");			
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
