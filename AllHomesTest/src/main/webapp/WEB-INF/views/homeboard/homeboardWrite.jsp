@@ -67,6 +67,11 @@
 
 <style>
 
+	.col-3{
+			text-align:center;
+			margin-bottom:10px;
+	}
+
 	.label{background-color:#E98374;}
 	#homeboardWriteTitle {
 		margin: 20px 0 50px 20px;
@@ -79,6 +84,10 @@
 		font-size:15px;
 	}
 	.label-info{background-color:#E98374;color:white;}
+	
+	.container{
+		font-family: 'SCDream3';
+	}
 
 </style>
 

@@ -32,16 +32,20 @@ public class HomeboardCommentController {
 	@RequestMapping("/commentList")
 	@ResponseBody
 	public List<HomeboardCommentVO> commentAllSelect(int b_no) {
-		System.out.println("댓글 원글번호: "+b_no);
+		System.out.println("댓글 컨트롤러 - 댓글 원글번호 : "+b_no);
+		
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
 		List<HomeboardCommentVO> list = commentDao.commentAllSelect(b_no);
 		
 		return list;
 	}
 	
+
+	
 	@RequestMapping(value="/commentWrite", method= RequestMethod.GET)
 	@ResponseBody
 	public int commentInsert(HomeboardCommentVO vo, HttpSession ses) {
+		vo.setUserid((String)ses.getAttribute("userid")); //현재 로그인한 사람의 아이디를 Comment-UserID로 넣음
 		HomeboardCommentDaoImp commentDao = sqlSession.getMapper(HomeboardCommentDaoImp.class);
 		int result = commentDao.commentInsert(vo);
 		

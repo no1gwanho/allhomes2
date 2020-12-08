@@ -6,17 +6,19 @@
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardCommentDaoImp">
 	<!-- 댓글리스트 불러오기 -->
 	<select id="commentAllSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
-		select hb_c_no, userid, b_no, hb_comment, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
-		from hb_comment 
+		select a.hb_c_no, a.userid, b.m_pic, a.b_no, a.hb_comment, to_char(a.writedate, 'YYYY-MM-DD') writedate
+		from hb_comment a
+		join register b
+		on a.userid=b.userid
 		where b_no=#{param1} 
-		order by writedate asc
+		order by a.hb_c_no asc
 	</select>
 	
 	
 	<!-- 댓글쓰기 -->
 	<insert id="commentInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
 		insert into hb_comment(hb_c_no, userid, hb_comment, b_no) 
-						values(hb_comment_sq.nextval, #{userid}, #{hb_comment}, #{b_no})
+		values(hb_comment_sq.nextval, #{userid}, #{hb_comment}, #{b_no})
 	</insert>
 	
 	
