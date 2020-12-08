@@ -9,6 +9,10 @@
 		height:450px;
 		border-radius:30px;
 	}
+	#bxslider{
+		border-radius:30px;
+	}
+	
 	.bx-wrapper {
        -moz-box-shadow: none !important;
         -webkit-box-shadow: none !important;

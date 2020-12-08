@@ -29,6 +29,8 @@ h4{
 .nav-link{
 	color:#000000;
 	font-color:#000000;
+	height:70px;
+	padding:0
 }
 
 .nav-item{
