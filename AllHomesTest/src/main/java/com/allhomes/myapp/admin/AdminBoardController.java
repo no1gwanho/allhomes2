@@ -40,9 +40,9 @@ public class AdminBoardController {
 		mav.addObject("countQa",countQa);
 		mav.addObject("countReview",countReview);
 		
-		List<HomeboardVO> hList = dao.selectAllHomeBoard(); //homeboard 모든 게시물 가져오기
-		List<AdminReviewJoinVO> rList = dao.selectAllReview();//review 모든 게시물 가져오기
-		List<QnaVO> qList = dao.qnaAllList();//qna 글 가져오기
+		List<HomeboardVO> hList = dao.selectHomeboardTen(); //homeboard 
+		List<AdminReviewJoinVO> rList = dao.selectReviewTen();//review 
+		List<QnaVO> qList = dao.selectQnaTen();//qna 
 		
 		mav.addObject("hList", hList);
 		mav.addObject("rList", rList);

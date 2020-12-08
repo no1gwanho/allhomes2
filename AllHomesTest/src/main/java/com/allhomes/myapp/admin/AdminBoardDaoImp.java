@@ -1,5 +1,6 @@
 package com.allhomes.myapp.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -17,10 +18,20 @@ public interface AdminBoardDaoImp {
 	public int countQAToday();
 	//오늘 올라온 review 개수
 	public int countReviewToday();
+	//총 homeboard 글 수
+	public int countHomeBoardTotal();
+	
+	//메인-homeboard 10개만 가져오기
+	public List<HomeboardVO> selectHomeboardTen();
+	//qna 10개만
+	public List<QnaVO> selectQnaTen();
+	//revuew 10개만
+	public List<AdminReviewJoinVO> selectReviewTen();
+	
 	//모든 homeboard 글 가져오기
-	public List<HomeboardVO> selectAllHomeBoard();
-	//모든 homeboard 글 가져오기
-	public List<HomeboardVO> selectAllHomeBoardOrder(String order);
+	public List<HomeboardVO> selectAllHomeBoard(AdminPagingVO vo);
+	//모든 homeboard 글 가져오기(정렬)
+	public List<HomeboardVO> selectAllHomeBoardOrder(HashMap<String, Object> map);
 	//모든 review 가져오기
 	public List<AdminReviewJoinVO> selectAllReview();
 	//review 점수별로 가져오기(개수)
@@ -36,7 +47,7 @@ public interface AdminBoardDaoImp {
 	public HomeboardVO adminHomeboardSelect(int b_no);
 
 	//homeboard 선택검색
-	public List<HomeboardVO> adminHBSearch(@Param("key") String key, @Param("value") String value);
+	public List<HomeboardVO> adminHBSearch(HashMap<String, Object> map);
 	
 	//homeboard 상세 검색
 	public List<HomeboardVO> adminHBSearchDetail(HomeBoardDetailSearchVO vo);

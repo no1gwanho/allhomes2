@@ -18,7 +18,11 @@ td{
 			var value = $("#searchSelect option:selected").val();
 			var key = $("#searchKeyword").val();
 			
-			location.href= "/myapp/adminHBSearch?key="+key+"&value="+value;
+			if(key==""){
+				alert("값을 입력해주십시오.");
+				return false;
+			}
+			location.href= "/myapp/adminHBSearch?value="+value+"&key="+key;
 			
 		});
 		
@@ -54,6 +58,15 @@ td{
 			var selectedOrder = $("#order option:selected").val();
 			alert(selectedOrder);
 			location.href="/myapp/adminHomeBoardOrder?order="+selectedOrder;
+		});
+		
+		//집들이 게시글 삭제
+		$("#HBDelBtn").click(function(){
+			var result = confirm("게시글을 삭제하시겠습니까?");
+			if(result){
+				location.href="";
+			}
+			
 		});
 	});
 </script>
@@ -173,17 +186,17 @@ td{
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="vo" items="${hList}">
+							<c:forEach var="list" items="${viewAll}">
 								<tr onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
-									<td>${vo.b_no}</td>
-									<td>${vo.title}</td>
-									<td>${vo.theme}</td>
-									<td>${vo.userid}</td>
-									<td>${vo.writedate}</td>
-									<td>${vo.hit}</td>
-									<td>${vo.scrap}</td>
-									<td><a href="#" class="btn alert-secondary btn-circle"> <i
-											class="fas fa-trash"></i>
+									<td>${list.b_no}</td>
+									<td>${list.title}</td>
+									<td>${list.theme}</td>
+									<td>${list.userid}</td>
+									<td>${list.writedate}</td>
+									<td>${list.hit}</td>
+									<td>${list.scrap}</td>
+									<td><a href="<%=request.getContextPath()%>/adminHomeboardDelete?b_no=${vo.b_no}" class="btn alert-secondary btn-circle"> <i
+											class="fas fa-trash" id="HBDelBtn"></i>
 									</a></td>
 								</tr>
 							</c:forEach>
@@ -192,14 +205,36 @@ td{
 
 					<!-- pagination -->
 					<div style="display: inline-block">
+						
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							<c:if test="${paging.startPage != 1 }">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+								var="p">
+								<c:choose>
+									<c:when test="${p == paging.nowPage }">
+										<li class="page-item disabled">
+											<a class="page-link">${p }</a>
+										</li>
+									</c:when>
+									<c:when test="${p != paging.nowPage }">
+										<li class="page-item">
+										<a class="page-link"
+											href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+										</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								</li>
+							</c:if>
 						</ul>
 					</div>
 					<!-- pagination 끝 -->
