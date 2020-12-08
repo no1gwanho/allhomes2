@@ -155,7 +155,7 @@
 
 		<div class="col-3">
 			<div class="thumbnail">
-				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
+				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
 			</div>
 			<div class="card-body">
 				<div class="card-title">

@@ -19,10 +19,12 @@
 	        margin:0;
 	}
 	
-	.col-3 {
+	.col-3, .col-lg-3, .col-xs-6{
 			text-align:center;
 			margin-bottom:10px;
-		}
+	}
+		
+
 	
 	.card-body {
 		padding-top:10px;
@@ -72,6 +74,12 @@
 			max-width:1700px;
 			margin: 0 auto;
 			font-family: 'SCDream3';
+	}
+	
+	.profile_pic{
+		width:25px;
+		border-radius: 45%;
+	
 	}
 
 
@@ -128,14 +136,15 @@
 	<!-- 리스트 나오는 곳 -->
 	<c:forEach var="vo" items="${list }">
 
-		<div class="col-3">
+		<div class="col-lg-3">
 			<div class="thumbnail">
-				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>${vo.thumbnail }"/></a>
+				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
 			</div>
 			<div class="card-body">
 				<div class="card-title">
 					<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 				</div>
+				<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
 				<a href="#" class="card-text">${vo.userid }</a>
 				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
 				</p>

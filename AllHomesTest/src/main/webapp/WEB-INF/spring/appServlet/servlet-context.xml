@@ -16,8 +16,8 @@
 	<resources mapping="/resources/upload/productImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productImg"/>
 	<resources mapping="/resources/upload/productMainImg/**" location="file:\\\D:\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\productMainImg"/>
 
-	<resources mapping="/resources/homeboard/img/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
-	<resources mapping="/resources/homeboard/img/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\homeboard\img"/>
+	<resources mapping="/resources/upload/homeboardImg/**" location="file:\\\E:\gitHub\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\AllHomesTest\resources\upload\homeboardImg"/>
+	<resources mapping="/resources/upload/homeboardImg/**" location="file:\\\D:\GIT\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\upload\homeboardImg"/>
 	
 	<resources mapping="/resources/img/pd/**" location="file:\\\C:\been\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img\pd"/>
 	<resources mapping="/resources/img/**" location="file:\\\C:\been\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>

@@ -22,6 +22,12 @@ public interface HomeboardDaoImp {
 	//집들이 글번호 꺼내기 (글쓰기 후 바로 해당페이지보이게)
 	public int getHomeboardNumber();
 	
+	//집들이 쓴 글쓴이 찾기 
+	public String getHomeboardWriter(int b_no);
+	
+	//집들이 기존에 선택한 테마 찾기 
+	public int getOriginalTheme(int b_no);
+	
 	//집들이 글보기 
 	public HomeboardVO homeboardSelect(int b_no);
 	
@@ -36,6 +42,8 @@ public interface HomeboardDaoImp {
 	
 	//집들이 글 삭제하기
 	public int homeboardDelete(int b_no);
+	
+	
 
 	
 }

@@ -18,7 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			String logStatus = (String)ses.getAttribute("logStatus");
 			//로그인이 안된 경우, 로그인폼으로 이동하고 현재 진행을 중단시킴
-			if(logStatus == null || logStatus!="Y") {
+			if(logStatus==null || !logStatus.equals("Y")) {
 				response.sendRedirect(request.getContextPath()+"/login");
 				return false;
 			}

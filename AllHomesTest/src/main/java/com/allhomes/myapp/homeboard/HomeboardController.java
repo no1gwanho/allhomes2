@@ -86,8 +86,13 @@ public class HomeboardController {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		HomeboardVO vo = dao.homeboardEditSelect(b_no);
 		
+		int selectedHbThemeNo = dao.getOriginalTheme(b_no);
+		
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("themeList", themeList);
+		mav.addObject("oriThemeNo", selectedHbThemeNo);
 		mav.addObject("vo", vo);
 		mav.setViewName("homeboard/homeboardEdit");
 		
@@ -106,7 +111,8 @@ public class HomeboardController {
 		// 썸네일찾기 ====================
 		String hbContent = vo.getContent();
 
-		int idx = hbContent.indexOf("/resources/");
+		int idx = hbContent.indexOf("/homeboardImg/");
+		System.out.println("썸네일 구할때 인덱스번호=" +idx);
 		int jpg1 = hbContent.indexOf("JPG");
 		int jpg2 = hbContent.indexOf("jpg");
 		int gif = hbContent.indexOf("gif");
@@ -116,23 +122,23 @@ public class HomeboardController {
 
 		try {
 			if (jpg1 > -1) {
-				String thumbnailUrl = hbContent.substring(idx, jpg1 + 3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx +14 , jpg1 + 3);
+				System.out.println("수정할때: jpg일때주소" + thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); //썸네일
 			}else if (jpg2 > -1) {
-				String thumbnailUrl = hbContent.substring(idx, jpg2 + 3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14 , jpg2 + 3);
+				System.out.println("수정할때: JPG일때주소"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); //썸네일
 			}else if (gif > -1) {
-				String thumbnailUrl = hbContent.substring(idx, gif+3);
+				String thumbnailUrl = hbContent.substring(idx+14, gif+3);
 				System.out.println(thumbnailUrl);
-				vo.setThumbnail(thumbnailUrl); //썸네일
+				vo.setThumbnail("수정할때: GIF일때주소+"+thumbnailUrl); //썸네일
 			}else if (png > -1) {
-				String thumbnailUrl = hbContent.substring(idx, png+3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14, png+3);
+				System.out.println("수정할때 png일때주소"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); // 썸네일
 			}else { //사진없는 글일때 준비된 파일 넣어주기
-				vo.setThumbnail("/resources/img/allhomes3.png");
+				vo.setThumbnail("allhomes3.png");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -198,7 +204,7 @@ public class HomeboardController {
 		// 썸네일찾기 ====================
 		String hbContent = vo.getContent();
 
-		int idx = hbContent.indexOf("/resources/");
+		int idx = hbContent.indexOf("/homeboardImg/");
 		int jpg1 = hbContent.indexOf("JPG");
 		int jpg2 = hbContent.indexOf("jpg");
 		int gif = hbContent.indexOf("gif");
@@ -208,20 +214,20 @@ public class HomeboardController {
 
 		try {
 			if (jpg1 > -1) {
-				String thumbnailUrl = hbContent.substring(idx, jpg1 + 3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14, jpg1 + 3);
+				System.out.println("글수정할때 썸네일 jpg:"+ thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); //썸네일
 			}else if (jpg2 > -1) {
-				String thumbnailUrl = hbContent.substring(idx, jpg2 + 3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14, jpg2 + 3);
+				System.out.println("글수정할때 썸네일 JPG:"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); //썸네일
 			}else if (gif > -1) {
-				String thumbnailUrl = hbContent.substring(idx, gif+3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14, gif+3);
+				System.out.println("글수정할때 썸네일 gif:"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); //썸네일
 			}else if (png > -1) {
-				String thumbnailUrl = hbContent.substring(idx, png+3);
-				System.out.println(thumbnailUrl);
+				String thumbnailUrl = hbContent.substring(idx+14, png+3);
+				System.out.println("글수정할때 썸네일 png:"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); // 썸네일
 			}else { //사진없는 글일때 준비된 파일 넣어주기
 				vo.setThumbnail("/resources/img/allhomes3.png");
@@ -257,11 +263,21 @@ public class HomeboardController {
 	public ModelAndView homeboardView(int b_no, HttpSession ses) {
 
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		dao.homeboardHit(b_no);
+		
+		String loginNickname = (String)ses.getAttribute("nickname");
+		String loginId = (String)ses.getAttribute("userid");
+		String writer = dao.getHomeboardWriter(b_no);
+		
+		System.out.println("홈보드 뷰  -> 로그인아이디: " + loginId);
+		System.out.println("홈보드 뷰  -> 글쓴사람: " + writer);
+		
+		if(loginId==null || !loginId.equals(writer)) {
+			dao.homeboardHit(b_no); //로그인아이디와 글쓴이가 같지 않으면 조회수 1증가 
+		}
+	
+		
 		HomeboardVO vo = dao.homeboardSelect(b_no);
 		
-		String loginId = (String)ses.getAttribute("userid");
-		String loginNickname = (String)ses.getAttribute("nickname");
 
 		// 해시태그 가져오기 
 		ModelAndView mav = new ModelAndView();
@@ -271,16 +287,13 @@ public class HomeboardController {
 			String hashtagStr[] = hashtag.split(",");
 			List<String> hashtagList = new ArrayList<String>();
 			hashtagList = Arrays.asList(hashtagStr);
-			mav.addObject("hashtagList", hashtagList);
-
+			mav.addObject("hashtagList", hashtagList); //해시태그는 잘라서 뷰 페이지에 넘기기
 		}
 
 		mav.addObject("vo", vo);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginNickname", loginNickname);
-		System.out.println("홈보드 뷰  -> 로그인아이디: " + loginId);
 		mav.setViewName("homeboard/homeboardView");
-		
 
 		return mav;
 	}
