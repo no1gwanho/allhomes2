@@ -41,6 +41,21 @@ public class AdminHomeBoardController {
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
 		return mav;
 	}
+	
+	//Homeboard 정렬
+	@RequestMapping("/adminHomeBoardOrder")
+	public ModelAndView adminHomeBoardOrder(@RequestParam("order") String order) {
+
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		List<HomeboardVO> hList = dao.selectAllHomeBoardOrder(order); // homeboard 모든 게시물 가져오기
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("hList", hList);
+
+		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		return mav;
+	}
 
 
 	//Homeboard 보기

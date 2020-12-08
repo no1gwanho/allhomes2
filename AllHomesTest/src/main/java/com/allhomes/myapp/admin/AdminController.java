@@ -1,6 +1,8 @@
 package com.allhomes.myapp.admin;
 
 
+import java.text.DecimalFormat;
+
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +31,44 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping("/adminHome")
-	public String adminHome() {
-		return "admin/adminHome";
-	}
 	
-	//대시보드페이지(메인)으로 이동
+	//메인으로 이동
 	@RequestMapping("/adminMain")
-	public String adminMain() {
-		return "admin/adminHome";	
+	public ModelAndView adminMain() {
+		AdminHomeDaoImp dao = sqlSession.getMapper(AdminHomeDaoImp.class);
+		int memberCnt = dao.countAllMember();
+		int boardCnt = dao.countAllQna() + dao.countAllReview() + dao.countAllHomeboard();
+		int storeCnt = dao.countAllStore();
+		int saleSum = dao.sumAllSale();
+		
+		//별점 비율
+		AdminBoardDaoImp bDao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		
+
+		float ratingOne = Math.round((float)bDao.selectReviewOne() / dao.countAllReview()*100);
+		float ratingTwo = Math.round((float)bDao.selectReviewTwo() / dao.countAllReview()*100);
+		float ratingThree = Math.round((float)bDao.selectReviewThree() / dao.countAllReview()*100);
+		float ratingFour = Math.round((float)bDao.selectReviewFour() / dao.countAllReview()*100);
+		float ratingFive = Math.round((float)bDao.selectReviewFive() / dao.countAllReview()*100);
+		
+		System.out.println("a;sldf"+ratingThree);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/adminHome");
+		
+		mav.addObject("memberCnt",memberCnt); //총회원수
+		mav.addObject("boardCnt",boardCnt); //총 게시판 수
+		mav.addObject("storeCnt",storeCnt); //총 스토어 수
+		mav.addObject("saleSum",saleSum); //총 매출 수
+		mav.addObject("one", ratingOne);
+		mav.addObject("two", ratingTwo);
+		mav.addObject("three", ratingThree);
+		mav.addObject("four", ratingFour);
+		mav.addObject("five", ratingFive);
+		
+		//rating 별점 비율
+		
+		return mav;	
 	}
 	
 	
