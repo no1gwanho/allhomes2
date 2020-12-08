@@ -64,6 +64,17 @@ public class RegisterController {
 	
 	
 	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpSession ses) {
+		
+		ModelAndView mav = new ModelAndView();
+		ses.invalidate();
+		mav.setViewName("redirect:/");
+		
+		return mav;
+		
+	}
+	
 	@RequestMapping("/login")	//로그인 이동
 	public String login() {
 		return "landing/loginForm";
@@ -91,9 +102,12 @@ public class RegisterController {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			System.out.println(resultVO.getUsername());
+			
 			ses.setAttribute("nickname", resultVO.getNickname());
+			
 			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
+			
 			
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			
@@ -101,16 +115,13 @@ public class RegisterController {
 			
 			
 		}
+		
+		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); //LogStatus값 확인하기 
+		
 		return mav;
 	}
 	
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession ses) {
-		ses.invalidate();
-		return "home";
-		
-	}
-		
+	
 	
 	//회원가입페이지 이동 매핑
 	@RequestMapping(value="/register")

@@ -19,6 +19,9 @@
 	 		<mvc:mapping path="/homeboardWrite"/>
 	 		<mvc:mapping path="/homeboardWriteOk"/>
 	 		<mvc:mapping path="/qnaWrite"/>
+	 		<mvc:mapping path="/homeboardEdit"/>
+	 		<mvc:mapping path="/homeboardEditOk"/>
+	 		
 	 		<bean class="com.allhomes.myapp.interceptor.LoginInterceptor"/>
 	 	</mvc:interceptor>
 	 </mvc:interceptors>
