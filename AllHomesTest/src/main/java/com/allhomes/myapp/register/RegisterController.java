@@ -1,14 +1,11 @@
 package com.allhomes.myapp.register;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -44,13 +41,16 @@ public class RegisterController {
 		
 	//이메일 인증
 	@RequestMapping("/regConf")
-	public ModelAndView regConf(RegisterVO vo) {
+	public ModelAndView regConf(RegisterVO vo,String userid) {
 		
+		System.out.println(userid);
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-				
-		int resultVO = dao.regFinal(vo);
 		
+		vo.setUserid(userid);//가입할때 아이디
+		
+		int resultVO = dao.regFinal(vo);
+		System.out.println(userid);
 		
 		ModelAndView md = new ModelAndView();
 	
@@ -58,7 +58,7 @@ public class RegisterController {
 		if(resultVO>0) {
 			md.setViewName("landing/loginForm");
 		}
-				
+		
 		return md;
 	}
 	
@@ -128,7 +128,7 @@ public class RegisterController {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 			
 		ModelAndView mav = new ModelAndView();
-					
+		vo.setUserid(userid);			
 		UUID random = UUID.randomUUID();
 		String uuid = random.toString();
 		String subject = "[Allhomes]회원가입을 환영합니다!!";
@@ -140,7 +140,7 @@ public class RegisterController {
 						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
 						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
 						 + "		아래 링크를 누르시면 회원가입이 완료되며 로그인 페이지로 이동합니다.<br/>\r\n"
-						 + "		<a href=\"http://localhost:9090/myapp/regConf\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
+						 + "		<a href=\"http://localhost:9090/myapp/regConf?"+userid+"\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
 						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
 						 + "		감사합니다."		
 						 + "  		</p>"
@@ -188,13 +188,10 @@ public class RegisterController {
 						if(!f.exists()) {
 							fName = renameFile;
 							break;
-							
 						}
 					}
 				}
-				
 				fileNames = fName;
-								
 				try {
 					if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
 						photoBtn.transferTo(f);	//확장자명이 맞을때만 업로드
@@ -223,44 +220,16 @@ public class RegisterController {
 				}catch(Exception e) {e.printStackTrace();}
 									 
 				
-			}
-			
-		/*
-		////////////////////////////이미지 업로드////////////////////////	방법1
+			}else {	//파일이름이 없거나 공백이면
+				fileNames = "basicprofile.png";
+				vo.setM_pic(fileNames);
+
+				int resultVO = dao.registerMember(vo);
 				
-		String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
-		System.out.println("path="+path);
-		
-		
-		String originFileName = photoBtn.getOriginalFilename();	//업로드 파일
-		String basicFileName = "test.png";	//기본 이미지
-		
-		try {
-			if(originFileName != null) {
-				photoBtn.transferTo(new File(path,originFileName));	//업로드 파일
-				vo.setM_pic(originFileName);
-			}else{
-				photoBtn.transferTo(new File(path,basicFileName));	//기본이미지 세팅중
-				vo.setM_pic(basicFileName);
+				mav.setViewName("landing/registerOkPage");
+				session.setAttribute("resultVO",resultVO);		
+						
 			}
-			
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-			
-		System.out.println("에러잡기1");	
-		
-		
-		int resultVO = dao.registerMember(vo);	
-		System.out.println("에러잡기2");
-		
-		if(resultVO<0){
-			if(originFileName != null) {
-				File f = new File(path, originFileName);
-				f.delete();
-			}
-					
-		}*/
 		
 		return mav;
 	
@@ -275,5 +244,17 @@ public class RegisterController {
 		return  dao.dupFilter(userid);
 	}
 	
+	
+	
+	
+	//이메일 중복검사
+	@RequestMapping(value="/mailFilter")
+	@ResponseBody
+	public int mailFilter(RegisterVO vo,String email1,String email2) {
+		System.out.println("에러잡기1");	
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		System.out.println("에러잡기2");
+		return dao.mailFilter(vo);
+	}	
 }
 
