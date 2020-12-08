@@ -4,9 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
+	<!-- 제품 + 리뷰 + 스토어 -->
+	<select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+		select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as dc_price, p.status as status, 
+    	r.pd_no as pd_no, r.userid as userid, r.img as img, r.content as content, r.writedate as writedate, r.rating as rating 
+    	from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
+	</select>
   	<!-- 모든 제품 조회 -->
   	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img from product
+  	    select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img from product
   	    <choose>
   	    	<when test="sortPd!=null and sortPd.equals('recent')">
   	    		order by pd_no desc
@@ -15,19 +21,24 @@
   	    		where pd_no in (select pd_no from (select p.pd_no, c.pc_no, c.pc_date from product p, purchase c where p.pd_no=c.pd_no order by c.pc_date desc))
   	    	</when>
   	    	<when test="sortPd!=null and sortPd.equals('rowPrice')">
-  	    		order by price
+  	    		order by (price-(price*discount/100))
   	    	</when>
   	    </choose>
   	</select>
   	<!-- 카테고리별 제품 조회 -->
-  	<select id="productListCate" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  		select p.pd_name, p.price, discount, sub_c from product
-  		<choose>
-  			<when test="pdCate!=null and pdCate.equals('sofa_f')">
-  				where sub_c='소파/거실가구'
+	<select id="productCateList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+  		select s_no, pd_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, sub_c from product
+  			<if test="pdCate.equals(all)">
+  				order by pd_no desc
+  			</if>
+  			<if test="!pdCate.equals(all)">
+  				where sub_c=#{param1} order by pd_no desc
+  			</if>
+  			<!-- <when test="pdCate.equals('sofa_f')">
+  				where sub_c=#{param1}
   			</when>
   			<when test="pdCate!=null and pdCate.equals('stud_f')">
-  				where sub_c='학생/서재가구'
+  				where sub_c=#{param1}
   			</when>
   			<when test="pdCate!=null and pdCate.equals('bed_f')">
   				where sub_c='침실가구'  			
@@ -97,16 +108,16 @@
   			</when>
 			<when test="pdCate!=null and pdCate.equals('tool')">
   				where sub_c='공구/접착제/보수용품'
-  			</when>  			
-  		</choose>
-  	</select>
+  			</when>  	
+  		</choose> -->		
+  	</select> 
   	<!-- 제품 리뷰 조회 -->
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
   	</select>
   	<!-- 메인페이지 제품리스트 -->
   	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c from product where pd_no in (select pd_no from (select pd_no from product order by pd_no desc) where rownum <![CDATA[<]]> 9)
+  		select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c from product where pd_no in (select pd_no from (select pd_no from product order by pd_no desc) where rownum <![CDATA[<]]> 9)
   	</select>
   	<!-- 등록된 상품 수 조회 -->
   	<select id="getAllProductCount" resultType="int">

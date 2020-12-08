@@ -8,12 +8,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.homeboard.HomeboardDaoImp;
-import com.allhomes.myapp.homeboard.HomeboardVO;
-import com.allhomes.myapp.product.CategoryDaoImp;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -32,27 +28,44 @@ public class StoreController {
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);		
-
-		CategoryDaoImp cate = sqlSession.getMapper(CategoryDaoImp.class);
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		List<ProductVO> list = dao.productAllList(sortPd);
 		
-		mav.addObject("list", dao.productAllList(sortPd));	
-		mav.addObject("cate", cate.categoriList());
-		mav.addObject("sortPd", sortPd);
-		mav.setViewName("store/storeHome");		
-				
+		StoreDaoImp sdao = sqlSession.getMapper(StoreDaoImp.class);
+		List<StoreVO> lst = sdao.selectStoreJoin();
+		
+		for(int i=0; i<lst.size(); i++) {
+			StoreVO vo = lst.get(i);
+			String s_name = vo.getS_name();
+			
+			mav.addObject("list", list);
+			mav.addObject("lst", lst);
+			mav.addObject("s_name", s_name);
+			mav.addObject("sortPd", sortPd);
+			mav.setViewName("store/storeHome");	
+		}
+		
+		String sql = sqlSession.getConfiguration().getMappedStatement("productAllList").getBoundSql(sortPd).getSql();
+		System.out.println("sql->"+sql);
+	
 		return mav;	
 	 }
 
 	@RequestMapping("/storeCategory")
 	public ModelAndView storeCate(@RequestParam(value="pdCate", required=false) String pdCate) {
+		
+		System.out.println("스토어 카테고리 넘어가?");
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-			
-		mav.addObject("list", dao.productMainList());
+		List<ProductVO> cList = dao.productCateList(pdCate);
+		
+		StoreDaoImp sdao = sqlSession.getMapper(StoreDaoImp.class);
+		List<StoreVO> lst = sdao.selectStoreJoin();
+		
+		mav.addObject("cList", cList);
 		mav.addObject("pdCate", pdCate);
 		mav.setViewName("store/storeCate");			
-		
+
 		return mav;	
 	}
 	

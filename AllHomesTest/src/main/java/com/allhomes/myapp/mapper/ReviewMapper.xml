@@ -5,7 +5,7 @@
 
 <mapper namespace="com.allhomes.myapp.review.ReviewDaoImp">
 <select id="reviewList" resultType="com.allhomes.myapp.review.ReviewVO">
-	select pd_no, avg(rating) from review group by pd_no
+	select pd_no, avg(rating) as rating from review group by pd_no
 </select>
 <select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, img, content, writedate, s_no, rating, (select avg(rating) from review group by pd_no) as avg_rate from review where pd_no=#{pd_no} order by writedate desc

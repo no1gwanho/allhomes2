@@ -14,38 +14,18 @@ public class ProductVO {
 	private String pd_exp;      // 짧은 제품설명
 	private int shipping_c;		// 배송비
 	private String o_value;		//옵션
+	private String o_value1;
+	private String o_value2;
+	private String o_value3;
 	private String s_name;
+	private String userid;
+	private String img;
+	private String content;
+	private String writedate;
+	private int rating;
+	private int dc_price;
+	private int count;
 	
-	public String getS_name() {
-		return s_name;
-	}
-	public void setS_name(String s_name) {
-		this.s_name=s_name;
-	}
-	public String getO_value() {
-		return o_value;
-	}
-	public void setO_value(String o_value) {
-		this.o_value = o_value;
-	}
-	public int getShipping_c() {
-		return shipping_c;
-	}
-	public void setShipping_c(int shipping_c) {
-		this.shipping_c = shipping_c;
-	}	
-	public String getPd_exp() {
-		return pd_exp;
-	}
-	public void setPd_exp(String pd_exp) {
-		this.pd_exp = pd_exp;
-	}
-	public String getPd_img() {
-		return pd_img;
-	}
-	public void setPd_img(String pd_img) {
-		this.pd_img = pd_img;
-	}
 	public int getPd_no() {
 		return pd_no;
 	}
@@ -99,5 +79,96 @@ public class ProductVO {
 	}
 	public void setSub_c(String sub_c) {
 		this.sub_c = sub_c;
-	}	
+	}
+	public String getPd_img() {
+		return pd_img;
+	}
+	public void setPd_img(String pd_img) {
+		this.pd_img = pd_img;
+	}
+	public String getPd_exp() {
+		return pd_exp;
+	}
+	public void setPd_exp(String pd_exp) {
+		this.pd_exp = pd_exp;
+	}
+	public int getShipping_c() {
+		return shipping_c;
+	}
+	public void setShipping_c(int shipping_c) {
+		this.shipping_c = shipping_c;
+	}
+	public String getO_value() {
+		o_value = o_value1 + "," + o_value2 + "," + o_value3;
+		return o_value;
+	}
+	public void setO_value(String o_value) {
+		this.o_value = o_value;
+		
+		String o_valSplit[] = o_value.split(",");
+		o_value1 = o_valSplit[0];
+		o_value2 = o_valSplit[1];
+		o_value3 = o_valSplit[2];
+	}
+	
+	public String getO_value1() {
+		return o_value1;
+	}
+	public void setO_value1(String o_value1) {
+		this.o_value1 = o_value1;
+	}
+	public String getO_value2() {
+		return o_value2;
+	}
+	public void setO_value2(String o_value2) {
+		this.o_value2 = o_value2;
+	}
+	public String getO_value3() {
+		return o_value3;
+	}
+	public void setO_value3(String o_value3) {
+		this.o_value3 = o_value3;
+	}
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	public int getDc_price() {
+		return dc_price;
+	}
+	public void setDc_price(int dc_price) {
+		this.dc_price = dc_price;
+	}
 }

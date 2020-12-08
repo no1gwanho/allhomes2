@@ -4,33 +4,33 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
 <style>
-#bxslider img{
-	width:1400px;
-	height:500px;
-}
-.col-3 {
-	text-align:center;
-	margin-bottom:10px;
-}
-.col-3 img {
-	border-radius: 5%;
-	width: 255px;
-	height: 215px;
-}
-.title {
-	font-height: bold;
-	font-size: 1.2em;
-}
-#list>ul, #list li{
-	list-style-type:none;
-	margin:0px;
-	padding:0px;
-}
-#list li{
-	float:left;
-	width:25%;
-	text-align:center;
-}
+	#bxslider img{
+		width:1400px;
+		height:500px;
+	}
+	.col-3 {
+		text-align:center;
+		margin-bottom:10px;
+	}
+	.col-3 img {
+		border-radius: 5%;
+		width: 255px;
+		height: 215px;
+	}
+	.title {
+		font-height: bold;
+		font-size: 1.2em;
+	}
+	#list>ul, #list li{
+		list-style-type:none;
+		margin:0px;
+		padding:0px;
+	}
+	#list li{
+		float:left;
+		width:25%;
+		text-align:center;
+	}
 </style>
 <script>
 	$(function() {
@@ -70,7 +70,21 @@
     	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     		//실행할 로직 (콘텐츠 추가)
         	count++;
-        	var addContent = '<div class="block"><p>'+ count +'</p></div>';
+<%--     		var tag = '<div class="block">';
+        	tag += '<hr/><div class="row">';
+        	tag += '<c:forEach var="vo" items="${list}">';
+        	tag += '<div class="col-3">';
+        	tag += '<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">';
+        	tag += '<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>';
+        	tag += '[${vo.s_no}]${vo.pd_name }<br/>';
+        	tag += '<c:if test="${vo.discount != 0}">';
+        	tag += '${vo.price - (vo.price*vo.discount/100)}원 </c:if>';
+        	tag += '<c:if test="${vo.discount == 0 }">';
+        	tag += '${vo.price }원<br/></c:if>';
+        	tag += '<h6><c:if test="${vo.status!=null }">';
+        	tag += '<span class="badge badge-secondary">${vo.status }</span>';
+        	tag += '</c:if></h6></a></div></c:forEach></div>'; --%>    		
+        	var addContent = '<div class="block"><p>'+ count +'</p></div></div>';
         	//article에 추가되는 콘텐츠를 append
         	$('article').append(addContent);
     	}
@@ -108,25 +122,23 @@
 		</div>
 	</div>
 	<article>
-    	<div class="block">
+	<div class="block">
 			<hr/>
 			<div class="row">
 				<c:forEach var="vo" items="${list}">
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
-							[${vo.s_no}]${vo.pd_name }<br/>
+							<span style="font-size:0.8em;">[${s_name}]</span>${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
-								${vo.price - (vo.price*vo.discount/100)}원 
+								${vo.dc_price}원 
 							</c:if>
 							<c:if test="${vo.discount == 0 }">
 								${vo.price }원<br/>
 							</c:if>
-							<h6>
 							<c:if test="${vo.status!=null }">
 								<span class="badge badge-secondary">${vo.status }</span>
 							</c:if>
-							</h6>
 						</a>
 					</div>
 				</c:forEach>
