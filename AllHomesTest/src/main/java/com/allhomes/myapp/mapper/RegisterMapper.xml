@@ -8,20 +8,90 @@
  	</select>
  	<!-- 테이블 수정 !! -->
  	
+
  	
+ 	<!--  메인-회원 (10개) -->
+ 	<select id="memberSelectMain" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		<![CDATA[
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode 
+ 		from register
+ 		where rownum <= 10
+ 		order by regdate desc
+ 		]]>
+ 	</select> 
  	
- 	
- 	
- 	
- 	
- 	<!-- 회원 전체 조회 -->
+ 	<!-- 회원 전체 조회(페이징) -->
  	<select id="memberAllSelect" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode 
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									)A
+ 							)
+		where RN between #{start} and #{end}	 		
+ 			
  	</select>
+ 	
  	<!-- 회원 전체 조회(정렬) -->
- 	<select id="memberAllSelectOrder" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register order by #{val}
+ 	<select id="memberAllSelectOrder" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<choose>
+										<when test="order!=null and order.equals('userid')">
+							   				order by userid
+							   			</when>
+							   			<when test="order!=null and order.equals('email')">
+							   				order by email
+							   			</when>
+							   			<when test="order!=null and order.equals('username')">
+							   				order by username
+							   			</when>
+							   			<when test="order!=null and order.equals('regdate')">
+							   				order by regdate desc
+							   			</when>
+									</choose>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 		
  	</select>
+ 	
+ 	<!-- 회원 선택 검색 -->
+ 	<select id="memberSearch" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<where>
+								 		<choose>
+								 			<when test="value == 'userid'">
+								 				userid LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'username'">
+								 				username LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'email'">
+								 				 email LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'tel'">
+								 				 tel LIKE '%'||#{key}||'%'
+								 			</when>
+								 		</choose>
+							 		</where>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 	
+ 	</select>
+ 	
  	<!-- 회원번호로 조회 -->
  	<select id="memberSelect" resultType="com.allhomes.myapp.register.RegisterVO">
  		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register where m_no=#{m_no}
@@ -40,29 +110,6 @@
  		select count(*) from register
  	</select>
  	
- 	
-	<!-- 검색: 아이디로 검색 -->
-	<select id="searchMemberUserid" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
- 		 where userid=#{userid}
- 	</select>
-	<!-- 검색: 이름으로 검색 -->
-	<select id="searchMemberUsername" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
- 		 where username=#{username}
- 	</select>
- 	<!-- 검색: 이메일로 검색 -->
-	<select id="searchMemberEmail" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
- 		 where email LIKE '%'||#{email}||'%' 
-
- 	</select>
- 	<!-- 검색: 연락처로 검색 -->
-	<select id="searchMemberTel" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register
- 		 where tel LIKE '%'||#{tel}||'%'
- 	</select>
-	
 
  	
  	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체 reg_sq-->	

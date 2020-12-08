@@ -48,7 +48,7 @@ td{
 			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
 		});
 		
-		//정렬
+		//정렬하기
 		var orderOption = $('#order').val();
 		$('#order').change(function(){
 			var selectedOrder = $("#order option:selected").val();
