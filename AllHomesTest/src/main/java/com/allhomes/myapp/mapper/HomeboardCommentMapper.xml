@@ -6,7 +6,7 @@
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardCommentDaoImp">
 	<!-- 댓글리스트 불러오기 -->
 	<select id="commentAllSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
-		select a.hb_c_no, a.userid, b.m_pic, a.b_no, a.hb_comment, to_char(a.writedate, 'YYYY-MM-DD') writedate
+		select a.hb_c_no, a.userid, b.m_pic, a.b_no, a.hb_comment, to_char(a.writedate, 'YYYY-MM-DD HH24:MI') writedate
 		from hb_comment a
 		join register b
 		on a.userid=b.userid

@@ -68,7 +68,37 @@
  	margin:0px;
  }
  
-
+ .editBtn, .delBtn{
+ 	background-color:white;
+ 	color:gray;
+ 	border:none;
+ }
+ 
+ .editBtn:active,
+ .delBtn:active,
+ .editBtn:focus,
+ .delBtn:focus{
+ 	border:none;
+ 	outline:none;
+ 
+ }
+ 
+ .modal, .custum, .modal-dialog{
+ 	width:20%;
+    position:fixed;
+    bottom:0;
+    right:0;
+    margin:0;
+ }
+ 
+ .btn-allhomes{
+ 	background-color: #E98374; 
+ 	color: white;
+ }
+ 
+ .btn-allhomes:focus, .btn-allhomes:active, .btn-allhomes:hover{
+ 	color:gray;
+ }
 
 
 
@@ -83,6 +113,12 @@
 	}
 
 	$(function() {
+		
+		$('#move-to-scrap').click(function(){
+			location.href="/myapp/mypageHome";
+		});
+		
+		
 		//----------------------------------여기서부터 댓글-------------------------------------------//
 		//댓글리스트 구하기
 		function commentListSelect() {
@@ -104,14 +140,14 @@
 								tag += '<div class="input-group" style="margin-bottom:20px;">';
 								tag += '<img class="profile_pic" src="/myapp/resources/upload/register/'+ v.m_pic + '"/>';
 								tag += '<span style="margin: 2px 10px 0 10px; width: 100px;"><a href="#">'+v.userid +'</a></span>';
-								tag += '<span style="width: 80%">'+v.hb_comment+'</span> <br />';
+								tag += '<span style="width: 80%;color:black">'+v.hb_comment+'</span> <br />';
 								tag += '<span style="margin-left: 150px">'+ v.writedate+ '</span>&nbsp;&nbsp;';
 								
 								if (v.userid == '${userid}') {
-									tag += '<a href="#" class="edit">수정</a>&nbsp;&nbsp;';
-									tag += '<a href="#">삭제</a>&nbsp;&nbsp;';
+									tag += '<button class="editBtn">수정</span>&nbsp;&nbsp;';
+									tag += '<button class="delBtn">삭제</span>&nbsp;&nbsp;';
 								}
-								tag += '<a href="#" style="color: gray; font-size: 9px;">신고</a>';
+			
 								tag += '</div><hr/>'; 
 							});
 							$("#commentList").html(tag);
@@ -215,12 +251,36 @@
 				</div>
 				<div class="col"></div>
 				<div class="col-lg-2 col-md-auto">
-					<button class="btn"
-						style="background-color: #E98374; font-size: 13px; color: white;">
-						<i class="fas fa-file">&nbsp;</i>스크랩하기
+					<button type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
+						<i class="fas fa-heart">&nbsp;</i>스크랩하기
 					</button>
 				</div>
 			</div>
+			
+			
+			<!-- ==================================스크랩하기 모달창 부분=============================================== -->
+			<!-- Modal -->
+				<div class="modal fade custom" id="scapButton" tabindex="-1" role="dialog" aria-labelledby="scarpBtnModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="scarpBtnModalLabel">올홈즈 스크랩</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        선택하신 글이 스크랩에 담겼습니다 :) 
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <button type="button" class="btn btn-allhomes" id="move-to-scrap">스크랩북 보기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			<!-- ====================================모달창 끝!==============================================================-- -->
+			
 
 			<hr />
 			<br />
@@ -262,7 +322,7 @@
 						</div>
 					
 						<div class="col-1" style="margin:0;text-align:left;">
-								<input type="submit" style="background-color: #E98374" class="btn" value="등록" />
+								<input type="submit" style="background-color: #E98374;color:white;" class="btn" value="등록" />
 						</div>
 					</div>
 							<!-- 글자개수 -->
