@@ -77,6 +77,8 @@ public class RegisterController {
 	
 	@RequestMapping("/login")	//로그인 이동
 	public String login() {
+		
+		
 		return "landing/loginForm";
 	}
 	
@@ -90,6 +92,8 @@ public class RegisterController {
 		
 		RegisterVO resultVO = dao.login(vo);
 		ModelAndView mav = new ModelAndView();
+		
+		
 		
 		
 		if(resultVO == null){
@@ -111,11 +115,13 @@ public class RegisterController {
 			
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			
-			mav.setViewName("landing/loginResult");
-			
-			
+			Object dest = ses.getAttribute("dest");
+			if(dest==null) {
+				mav.setViewName("redirect:/");
+			}else {
+				mav.setViewName("redirect:/"+dest.toString());
+			}
 		}
-		
 		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); //LogStatus값 확인하기 
 		
 		return mav;

@@ -72,6 +72,11 @@
 	.orderName{
 		color:#242424;
 	}
+	
+	.filter-option-inner{
+		font-size:18px;
+		font-family: 'SCDream5';
+	}
 </style>
 
 <script>
