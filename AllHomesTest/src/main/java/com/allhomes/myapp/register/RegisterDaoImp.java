@@ -1,6 +1,9 @@
 package com.allhomes.myapp.register;
 
+import java.util.HashMap;
 import java.util.List;
+
+import com.allhomes.myapp.admin.AdminPagingVO;
 
 public interface RegisterDaoImp {
 	
@@ -8,10 +11,16 @@ public interface RegisterDaoImp {
 	public RegisterVO login(RegisterVO vo);
 	public int customerInsert(RegisterVO vo);
 	
-	//전체 회원 조회
-	public List<RegisterVO> memberAllSelect();
+	//전체 회원 조회(페이징)
+	public List<RegisterVO> memberAllSelect(AdminPagingVO vo);
 	//전체 회원 정렬
-	public List<RegisterVO> memberAllSelectOrder(String val);
+	public List<RegisterVO> memberAllSelectOrder(HashMap<String, Object> map);
+	//회원 선택 검색
+	public List<RegisterVO> memberSearch(HashMap<String, Object> map);
+	//회원 상세 검색
+	public List<RegisterVO> memberSearchDetail(HashMap<String, Object> map);
+	//관리자 회원 상위 10개
+	public List<RegisterVO> memberSelectMain();
 	//회원번호로 회원 조회
 	public RegisterVO memberSelect(int m_no);
 	//오늘 가입한 회원 수
@@ -21,15 +30,7 @@ public interface RegisterDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
-	//회원 검색
-	//id로 검색
-	public List<RegisterVO> searchMemberUserid(String userid);
-	//이름으로 검색
-	public List<RegisterVO> searchMemberUsername(String username);
-	//이메일로 검색
-	public List<RegisterVO> searchMemberEmail(String email);
-	//연락처로 검색
-	public List<RegisterVO> searchMemberTel(String tel);
+	
 	
 	//회원가입
 	public int registerMember(RegisterVO vo);

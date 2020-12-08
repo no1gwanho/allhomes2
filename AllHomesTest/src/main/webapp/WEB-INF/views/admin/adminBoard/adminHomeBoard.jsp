@@ -48,6 +48,13 @@ td{
 			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
 		});
 		
+		//정렬하기
+		var orderOption = $('#order').val();
+		$('#order').change(function(){
+			var selectedOrder = $("#order option:selected").val();
+			alert(selectedOrder);
+			location.href="/myapp/adminHomeBoardOrder?order="+selectedOrder;
+		});
 	});
 </script>
 <div class="container-fluid">
@@ -68,17 +75,28 @@ td{
 				</div>
 
 				<!-- search 검색 -->
-				<div class="input-group col-lg-4" id="searchKey" style="float:left">
+				<div class="input-group col-lg-3" id="searchKey" style="float:left">
 					<input type="text" id="searchKeyword" class="form-control bg-light border-0 small"
 						placeholder="Search for..." aria-label="Search"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
-					<button class="btn btn-dark" type="button" id="searchBtn">
-						<i class="fas fa-search fa-sm"></i>
-					</button>
+						<button class="btn btn-dark" type="button" id="searchBtn">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
+					</div>
+					
 				</div>
+				
+				<div class="col-lg-1" style="float:left">
+					<select class="form-control" id="order" name="order">
+						<option class="orderName" value="title">제목 순</option>
+						<option class="orderName" value="writedate">작성일 순</option>
+						<option class="orderName" value="hit">조회 순</option>
+						<option class="orderName" value="scrap">스크랩 순</option>
+					</select>
 				</div>
 				<!-- search 검색 끝 -->
+				
 				
 				<div style="float:right">
 					<button class="btn btn-user alert-clean shadow-sm mb-4" id="searchDetailBtn">상세조회</button>

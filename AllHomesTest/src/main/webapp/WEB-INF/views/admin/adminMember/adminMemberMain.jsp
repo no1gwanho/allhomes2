@@ -20,9 +20,6 @@ td {
 }
 </style>
 <script src="/myapp/resources/js/demo/chart-memberChart.js"></script>
-<script>
-	
-</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xl-6 col-md-6 mb-4">
@@ -88,7 +85,7 @@ td {
 								<div
 									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
 									Total</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">+${total}</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">+${allCnt}</div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-users fa-2x text-gray-300"></i>
@@ -164,19 +161,6 @@ td {
 						</tbody>
 					</table>
 
-					<!-- pagination -->
-					<div style="display: inline-block">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</div>
-					<!-- pagination 끝 -->
 				</div>
 			</div>
 			<!-- card 끝 -->

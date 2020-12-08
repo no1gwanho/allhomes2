@@ -44,34 +44,7 @@
 						<span style="font-size: 15px; color: gray;">댓글 3개</span>
 					</div>
 
-
-					<!-- 댓글입력창 -->
-					<div id="comment">
-						<form method="post" id="commentWriteForm">
-							<div class="input-group">
-								<i class="fas fa-user-circle fa-2x"></i> <input type="hidden"
-									name="userid" value="${vo.userid }" />
-								<!-- userid보내기 -->
-								<input type="hidden" name="b_no" value="${vo.b_no }" />
-								<!-- b_no보내기 -->
-								<span style="margin: 2px 10px 0 10px"><a href="#">${vo.userid }</a></span>
-								<textarea name="hb_comment" id="hb_comment" class="form-control"
-									placeholder="댓글을 등록해보세요(최대 100글자)" maxlength="100"></textarea>
-								<div class="input-group-append">
-									<input type="submit" style="background-color: #E98374"
-										class="btn" value="등록" />
-								</div>
-
-							</div>
-						</form>
-
-					</div>
-					<div>
-						<span id="textLength"
-							style="margin-left: 150px; color: gray; font-size: 12px;">0</span><span
-							style="color: gray; font-size: 12px;">/100 글자</span>
-					</div>
-					<br /> <br />
+					<br/>
 					<!-- 댓글 리스트 -->
 					<div id="commentList">
 						<!-- 댓글리스트 나오는 곳 -->

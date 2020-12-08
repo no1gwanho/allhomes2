@@ -28,7 +28,11 @@ td {
 					
 		});
 		
-		
+		//datepicker
+		$("#date,#date2").datepicker({
+			dateFormat: 'yy-mm-dd'
+			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
+		});
 		
 	});
 </script>

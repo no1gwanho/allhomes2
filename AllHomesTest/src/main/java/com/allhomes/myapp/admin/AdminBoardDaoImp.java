@@ -19,8 +19,17 @@ public interface AdminBoardDaoImp {
 	public int countReviewToday();
 	//모든 homeboard 글 가져오기
 	public List<HomeboardVO> selectAllHomeBoard();
+	//모든 homeboard 글 가져오기
+	public List<HomeboardVO> selectAllHomeBoardOrder(String order);
 	//모든 review 가져오기
 	public List<AdminReviewJoinVO> selectAllReview();
+	//review 점수별로 가져오기(개수)
+	public int selectReviewOne();
+	public int selectReviewTwo();
+	public int selectReviewThree();
+	public int selectReviewFour();
+	public int selectReviewFive();
+	
 	//모든 q&a 가져오기
 	public List<QnaVO> qnaAllList();
 	//homeboard 선택

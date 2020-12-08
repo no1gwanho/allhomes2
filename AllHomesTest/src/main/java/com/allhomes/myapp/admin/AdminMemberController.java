@@ -1,5 +1,6 @@
 package com.allhomes.myapp.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,38 +29,27 @@ public class AdminMemberController {
 	@RequestMapping("/adminMemberMain")
 	public ModelAndView adminMember() {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.memberAllSelect();
+		List<RegisterVO> list = dao.memberSelectMain();
+		
 		
 		//count register
 		int month = dao.countRegisterMonth();
-		int total = dao.countRegisterTotal();
+		int allCnt = dao.countRegisterTotal();
 		int today = dao.countRegisterToday();
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("list", list);
+
 		mav.addObject("month", month);
-		mav.addObject("total", total);
+		mav.addObject("allCnt", allCnt);
 		mav.addObject("today", today);
-		
-		mav.setViewName("admin/adminMember/adminMemberMain");
-		return mav;
-	}
-		
-	//회원관리 페이지 정렬하기
-	@RequestMapping("/adminMemberMainOrder")
-	public ModelAndView adminMemberMainOrder(@RequestParam("val") String val) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.memberAllSelectOrder(val);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("val============="+val);
-		
 		mav.addObject("list", list);
+		
 		mav.setViewName("admin/adminMember/adminMemberMain");
 		return mav;
 	}
+		
+	
 	
 	//회원관리 회원정보 상세 페이지로 이동
 	@RequestMapping("/adminMemberDetail")
@@ -75,64 +65,146 @@ public class AdminMemberController {
 	
 	//멤버리스트 페이지로 이동
 	@RequestMapping("/adminMemberList")
-	public ModelAndView memberList() {
+	public ModelAndView memberList(AdminPagingVO vo
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.memberAllSelect();
+		
+		
+		//paging//
+		int total = dao.countRegisterTotal(); //총회원수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		//paging//
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		
+		//paging
+		mav.addObject("paging", vo);
+		mav.addObject("viewAll", dao.memberAllSelect(vo));
+		
 		mav.setViewName("admin/adminMember/adminMemberList");
 		return mav;
 	}
 	
-	//회원리스트 -> 아이디로 검색
-	@RequestMapping("/adminMemberSearchUserid")
-	public ModelAndView searchMemberUserid(@RequestParam("key") String userid) {
+	//멤버리스트 페이지로 이동 (정렬)
+		@RequestMapping("/adminMemberOrder")
+		public ModelAndView memberOrder(@RequestParam("order") String order,
+										AdminPagingVO vo
+										, @RequestParam(value="nowPage", required=false)String nowPage
+										, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			
+			RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+			//paging//
+			int total = dao.countRegisterTotal(); //총회원수
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "15";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "15";
+			}
+			vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			
+	
+			ModelAndView mav = new ModelAndView();
+			//paging
+			mav.addObject("paging", vo);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("order", order);
+			map.put("start", vo.getStart());
+			map.put("end", vo.getEnd());
+			mav.addObject("viewAll", dao.memberAllSelectOrder(map));
+			
+			mav.setViewName("admin/adminMember/adminMemberList");
+			return mav;
+			
+		}
+		
+	//회원 검색(선택검색)
+	@RequestMapping("/adminMemberSearch")
+	public ModelAndView memberSearch(@RequestParam("value") String value
+									,@RequestParam("key") String key
+									,AdminPagingVO vo
+									, @RequestParam(value="nowPage", required=false)String nowPage
+									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.searchMemberUserid(userid);
+		//paging//
+		int total = dao.countRegisterTotal(); //총회원수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("admin/adminMember/adminMemberList");
-		return mav;
+		//paging
+		mav.addObject("paging", vo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("value", value);
+		map.put("key", key);
+		map.put("start", vo.getStart());
+		map.put("end", vo.getEnd());
+		mav.addObject("viewAll", dao.memberSearch(map));
 		
-	}
-	//회원리스트 -> 이름으로 검색
-	@RequestMapping("/adminMemberSearchUsername")
-	public ModelAndView searchMemberUsername(@RequestParam("key") String username) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.searchMemberUsername(username);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
 		mav.setViewName("admin/adminMember/adminMemberList");
 		return mav;
 		
 	}
 	
-	//회원리스트 -> 이메일로 검색
-	@RequestMapping("/adminMemberSearchEmail")
-	public ModelAndView searchMemberEmail(@RequestParam("key") String email) {
+	//회원 상세 검색 
+	@RequestMapping("/MemberDetailSearch")
+	public ModelAndView memberDeatilSearch(RegisterDetailSearchVO regVo
+									,AdminPagingVO vo
+									, @RequestParam(value="nowPage", required=false)String nowPage
+									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.searchMemberEmail(email);
+		//paging//
+		int total = dao.countRegisterTotal(); //총회원수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		System.out.println("a;ldskfadsf"+regVo.getDate()+regVo.getDate2()+regVo.getUsername());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		//paging
+		mav.addObject("paging", vo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userid", regVo.getUserid() );
+		map.put("nickname", regVo.getNickname());
+		map.put("tel", regVo.getTel());
+		map.put("email", regVo.getEmail());
+		map.put("date", regVo.getDate());
+		map.put("date2", regVo.getDate2());
+		
+		map.put("start", vo.getStart());
+		map.put("end", vo.getEnd());
+		mav.addObject("viewAll", dao.memberSearchDetail(map));
+		
 		mav.setViewName("admin/adminMember/adminMemberList");
 		return mav;
 		
 	}
-	//회원리스트 -> 연락처로 검색
-	@RequestMapping("/adminMemberSearchTel")
-	public ModelAndView searchMemberTel(@RequestParam("key") String tel) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		List<RegisterVO> list = dao.searchMemberTel(tel);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("admin/adminMember/adminMemberList");
-		return mav;
-		
-	}
+	
 }

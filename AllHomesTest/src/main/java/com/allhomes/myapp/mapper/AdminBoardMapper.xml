@@ -13,9 +13,28 @@
 		select count(*) from review where to_char(writedate, 'YYYY-MM-DD')= to_char(sysdate, 'YYYY-MM-DD')
 	</select>
 	
-	<!-- 모든 homeboard 글 가져오기 -->
-	<select id="selectAllHomeBoard" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+	<!-- Homeboard 모든 글-->
+	<select id="selectAllHomeBoard" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+	</select>
+	
+	<!-- 모든 homeboard 글 가져오기(정렬)-->
+	<select id="selectAllHomeBoardOrder" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+		<choose>
+			<when test="order!=null and order.equals('title')">
+   				order by title
+   			</when>
+   			<when test="order!=null and order.equals('writedate')">
+   				order by writedate desc
+   			</when>
+   			<when test="order!=null and order.equals('hit')">
+   				order by hit desc
+   			</when>
+   			<when test="order!=null and order.equals('scrap')">
+   				order by scrap desc
+   			</when>
+		</choose>
 	</select>
 	
 	<!-- 질문게시판 전체 리스트 -->
@@ -67,5 +86,22 @@
 		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
 		from store, review, product
 		where review.pd_no = product.pd_no and store.s_no = review.s_no
+	</select>
+	
+	<!-- 리뷰 별점별로 가져오기  -->
+	<select id="selectReviewOne" resultType="int">
+		select count(*) from review where rating=1
+	</select>
+	<select id="selectReviewTwo" resultType="int">
+		select count(*) from review where rating=2
+	</select>
+	<select id="selectReviewThree" resultType="int">
+		select count(*) from review where rating=3
+	</select>
+	<select id="selectReviewFour" resultType="int">
+		select count(*) from review where rating=4
+	</select>
+	<select id="selectReviewFive" resultType="int">
+		select count(*) from review where rating=5
 	</select>
 </mapper>
