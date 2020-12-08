@@ -24,5 +24,5 @@ public interface ProductDaoImp {
 	//방금 insert한 제품의 제품번호
 	public ProductVO selectOptionProductNo(); 
 	
-	public List<ProductVO> joinProductStore();
+	public ProductVO joinProductStore();
 }

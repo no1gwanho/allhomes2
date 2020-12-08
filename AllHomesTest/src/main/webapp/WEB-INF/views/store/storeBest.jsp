@@ -6,12 +6,14 @@
 		margin-bottom:10px;
 	}
 	.col-3 img {
-		left: 100px;
 		border-radius: 5%;
-		width: 320px;
+		width: 255px;
 		height: 215px;
 	}
 </style>
+<script>
+
+</script>
 <div class="container">
 <!-- Collapse buttons -->
 	<br/>
