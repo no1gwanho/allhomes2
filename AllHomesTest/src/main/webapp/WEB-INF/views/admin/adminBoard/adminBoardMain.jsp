@@ -223,7 +223,7 @@ td{
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary" style="float:left">Q&A Board</h6>
-					<a href="#" style="float:right;height:10px">더보기</a>
+					<a href="<%=request.getContextPath()%>/adminQnaBoard" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">

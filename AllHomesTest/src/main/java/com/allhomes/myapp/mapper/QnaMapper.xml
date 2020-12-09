@@ -22,4 +22,6 @@
 		select q_no, title, content, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard where q_no=#{param1}
 	</select>
   
+  
+ 	
  </mapper>
