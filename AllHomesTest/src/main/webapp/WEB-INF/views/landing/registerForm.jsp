@@ -41,7 +41,7 @@
 
 
 	$(function(){
-		$("#regFrm").submit(function(){
+		$("#button").click(function(){
 							
 			//아이디 검사
 			if($("#userid").val()==""){
@@ -115,52 +115,49 @@
 				alert("이메일은 필수 입력사항입니다..");
 				return false;
 			}
-			var emailPattern = /^[A-Za-z0-9]{4,8}$/;
-			var emailTestResult = email.Pattern.test($("#email2").val());
-			var emailTestResult2 = email.Pattern.test($("#email1").val());
 			
-			if(emailTestResult!=true){
-				alert("이메일 주소는 4~13글자 내로 적어주세요");
+			var emailPattern = /^[A-Za-z0-9]{4,20}$/;
+			var emailPattern2 = /^[A-Za-z0-9]{4,20}$/;
+			
+			var emailTestResult = emailPattern.test($("#emailText").val());
+			var emailTestResult2 = emailPattern.test($("#email2").val());
+			
+			
+			
+			if(emailTestResult != true){
+				alert("이메일 주소는 4~20글자 내로 적어주세요");
 				return false;
 			}
-			if(emailTestResult2!=true){
-				alert("이메일 주소는 4~13글자 내로 적어주세요");
-				return false;
-			}
+			//if(emailTestResult2 != true){
+		//		alert("@이하 주소는 4~15글자 내로 적어주세요");
+			//	return false;
+		//	}
+					
 			
 			if($("#emailText").val()!="" && $("#email2").val()!=""){
-				var tfcheck = false;
+				
 				var url = "/myapp/mailFilter";
-				var data = "email1="+document.getElementById("emailText").value+"$email2="+document.getElementById("email2").value;
+				var data = "email1="+document.getElementById("emailText").value+"&email2="+document.getElementById("email2").value;
+				
 				$.ajax({
 					url:url,
 					data:data,
 					success:function(result){
-						console.log("test에러잡기 3");
-						if(result>=0){
-							alert("이미 등록된 이메일 주소입니다.");
-							return false;
-						}
-										
-					},error:function(error){
 						
+						if(result==""){
+							
+							$("#regFrm").submit();
+						}else{
+							alert("이미 등록된 이메일 주소입니다.");
+							
+						}									
+					},error:function(error){
+						console.log("test에러잡기 5"+ error.responseText);
 					}
-					
-					console.log("test에러잡기 4");
-					
-				});
-				//중복검사 햇는데 에러면 false 리턴
-				
-				console.log("test에러잡기 5");
-			}
-				
-			
-		
-			return true;
-					
+				});				
+			}						
+							
 		});
-	
-
 	
 	//중복검사 의무화 	
 	$(function(){
@@ -308,7 +305,7 @@
 			</div>
 		</div>
 		
-		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="회원가입" />
+		<input id="button" class="btn btn-lg btn-primary btn-block" type="button" value="회원가입" />	<!-- 보통 type은 submit이 아닌 button으로 해놓는다 click을 많이씀 -->
  		
  		</form>
  		<div id="signup">

@@ -22,6 +22,10 @@
 	.login_logo{text-align:center;}
 	.login_logo img{width:50px;height:50px;}
 	
+	.loginMenu{color:#ee8374;text-decoration:none;}
+	a:hover{text-decoration:none;color:#ee8374}
+	a:visited{text-decoration:none;}
+	
 </style>
 </head>
 <body>
@@ -36,9 +40,9 @@
 		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="로그인"/><br/>
 	</form>
 	<div id="idpw">
-		<a href="/myapp/">홈으로</a>
-		<a href="/myapp/find">아이디/비밀번호찾기</a> &nbsp;&nbsp;
-		<a href="/myapp/register">회원가입</a>
+		<a href="/myapp/" class="loginMenu">홈으로</a>
+		<a href="/myapp/find" class="loginMenu">아이디/비밀번호찾기</a> &nbsp;&nbsp;
+		<a href="/myapp/register" class="loginMenu">회원가입</a>
 	</div>
 	<br/>
 	<div id="snslogtitle">sns계정으로 로그인</div>
