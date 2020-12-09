@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminSalesDaoImp">
+	<!-- 스토어별 매출,구매확정 건수 (오늘) -->
+	<select id="storeSalesToday" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') = to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<!-- 스토어별 매출,구매확정 건수 (한 달) -->
+	<select id="storeSalesMonth" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') between to_date(add_months(sysdate,-1),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<!-- 스토어별 매출,구매확정 건수 (세 달) -->
+	<select id="storeSalesThree" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') between to_date(add_months(sysdate,-3),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<!--  스토어별 매출,구매확정 건수(총) -->
+	<select id="storeSalesTotal" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		where s_no= #{s_no}
+	</select>
+	
+	<!-- 스토어 별 주문 건수(오늘) -->
+	<select id="countStoreOrderToday" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt from purchase 
+		where s_no= #{s_no} and to_date(pc_date, 'YY/MM/DD') = to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<!-- 스토어 별 주문 건수(한달) -->
+	<select id="countStoreOrderMonth" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt from purchase 
+		where s_no= #{s_no} and to_date(pc_date, 'YY/MM/DD') between to_date(add_months(sysdate,-1),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
+	</select>
+	
+	<!-- 스토어 별 주문 건수(세달) -->
+	<select id="countStoreOrderThree" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
+		select count(*) as confirmCnt from purchase
+		where s_no= #{s_no} and to_date(pc_date, 'YY/MM/DD') between to_date(add_months(sysdate,-3),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
+	</select>
+</mapper>

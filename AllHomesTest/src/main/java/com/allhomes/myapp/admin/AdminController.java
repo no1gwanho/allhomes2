@@ -44,7 +44,6 @@ public class AdminController {
 		//별점 비율
 		AdminBoardDaoImp bDao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		
-
 		float ratingOne = Math.round((float)bDao.selectReviewOne() / dao.countAllReview()*100);
 		float ratingTwo = Math.round((float)bDao.selectReviewTwo() / dao.countAllReview()*100);
 		float ratingThree = Math.round((float)bDao.selectReviewThree() / dao.countAllReview()*100);

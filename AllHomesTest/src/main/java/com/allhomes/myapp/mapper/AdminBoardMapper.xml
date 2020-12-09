@@ -193,5 +193,25 @@
 	<select id="selectReviewFive" resultType="int">
 		select count(*) from review where rating=5
 	</select>
+	
+	<!-- store 별로 리뷰 별점 개수 가져오기 -->
+	<select id="selectStoreReviewOne" resultType="int">
+		select count(*) from review where rating=1 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewTwo" resultType="int">
+		select count(*) from review where rating=2 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewThree" resultType="int">
+		select count(*) from review where rating=3 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewFour" resultType="int">
+		select count(*) from review where rating=4 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewFive" resultType="int">
+		select count(*) from review where rating=5 and s_no = #{s_no}
+	</select>
+	<select id="storeReviewCount" resultType="int">
+		select count(*) from review where s_no = #{s_no}
+	</select>
 	<!-- ====================================Review 끝=================================== -->
 </mapper>
