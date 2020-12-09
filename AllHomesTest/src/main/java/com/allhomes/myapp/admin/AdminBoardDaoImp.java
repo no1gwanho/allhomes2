@@ -25,13 +25,21 @@ public interface AdminBoardDaoImp {
 	public List<HomeboardVO> selectHomeboardTen();
 	//qna 10개만
 	public List<QnaVO> selectQnaTen();
-	//revuew 10개만
+	//review 10개만
 	public List<AdminReviewJoinVO> selectReviewTen();
 	
 	//모든 homeboard 글 가져오기
 	public List<HomeboardVO> selectAllHomeBoard(AdminPagingVO vo);
 	//모든 homeboard 글 가져오기(정렬)
 	public List<HomeboardVO> selectAllHomeBoardOrder(HashMap<String, Object> map);
+	//homeboard 선택
+	public HomeboardVO adminHomeboardSelect(int b_no);
+	//homeboard 선택검색
+	public List<HomeboardVO> adminHBSearch(HashMap<String, Object> map);
+	//homeboard 상세 검색
+	public List<HomeboardVO> adminHBSearchDetail(HomeBoardDetailSearchVO vo);
+	
+	
 	//모든 review 가져오기
 	public List<AdminReviewJoinVO> selectAllReview();
 	//review 점수별로 가져오기(개수)
@@ -41,14 +49,7 @@ public interface AdminBoardDaoImp {
 	public int selectReviewFour();
 	public int selectReviewFive();
 	
-	//모든 q&a 가져오기
-	public List<QnaVO> qnaAllList();
-	//homeboard 선택
-	public HomeboardVO adminHomeboardSelect(int b_no);
-
-	//homeboard 선택검색
-	public List<HomeboardVO> adminHBSearch(HashMap<String, Object> map);
 	
-	//homeboard 상세 검색
-	public List<HomeboardVO> adminHBSearchDetail(HomeBoardDetailSearchVO vo);
+	//모든 q&a 가져오기
+	public List<QnaVO> qnaAllList(AdminPagingVO vo);
 }
