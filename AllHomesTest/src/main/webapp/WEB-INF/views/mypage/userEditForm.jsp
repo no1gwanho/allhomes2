@@ -5,47 +5,73 @@
 		text-align:center;
 
 	}
-	.col-5{
+	.col-3{
 		text-align:right;
 		margin-bottom:5px;
+		
 	}
-	.col-7{
+	.col-9{
 		text-align:left;
 		margin-bottom:5px;
+		
 	}
+	.inputbox{height:80%;}
+
+	#addr1,#addr2{margin:0;height:40%;}
+	#notice{line-height:80%;margin-top:20px;}
+	
+	.wBlank{margin-left:200px;}
+	.hBlank{margin-top:50px;}
+	.hBlank2{margin-top:30px;}
+	
 </style>
 <br/>    
 <div class="container">
 	<h2 style="text-align:center;">회원정보수정</h2>
-	<br/>
+	<div class="hBlank"></div>
+	
+	
+	<div id="notice">
+		  <div class=wBlank>* 비밀번호 변경은 <b style="color:#ee8374">아이디/비밀번호 찾기</b>를 통해 변경해주세요.</div><br/><br/>
+		  <div class=wBlank>* 배송혼선을 막기위해 주소가 정확히 입력됐는지 다시 한번 확인해주세요.</div>
+	</div>
+	
+	
+	<!-- 폼테그 시작 -->
 	<form>
 		<div class="row">
-			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5>기본정보</h5></div>
+			<div class="hBlank2"></div>
+			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">기본정보</h5></div>
 		</div>		
     	<div class="row">
-    		<div class="col-5">아이디</div>
-	        <div class="col-7"><input type="text" name="userid" value="been1223" disabled/></div>
-	       	<div class="col-5">비밀번호</div> 
-	      	<div class="col-7"><input type="text" name="userpwd" value="abcd" disabled/></div> 
-	      	<div class="col-5">이메일</div>
-	      	<div class="col-7"><input type="text" name="email" value="abcd@naver.com"/></div> 
-	      	<div class="col-5">닉네임</div> 
-	      	<div class="col-7"><input type="text" name="nickname" value="올홈즈화이팅"/></div> 
+    		<div class="col-3">아이디</div>
+	        <div class="col-9"><input class="inputbox" type="text" name="userid" value=<%=session.getAttribute("userid")%> size=80 disabled/></div>
+	       	<div class="col-3">비밀번호</div> 
+	      	<div class="col-9"><input class="inputbox" type="text" name="userpwd" value="비밀번호 변경은 " size=80 disabled/></div> 
+	      	<div class="col-3">이메일</div>
+	      	<div class="col-9"><input class="inputbox" type="text" name="email" size=80 value="abcd@naver.com"/></div> 
+	      	<div class="col-3">닉네임</div> 
+	      	<div class="col-9"><input class="inputbox" type="text" name="nickname" size=80 value="올홈즈화이팅"/></div> 
+	      	<div class="col-3">프로필 이미지</div> 
+	      	<div class="col-9"><input class="inputbox" type="text" name="nickname" size=80 value="프로필 이미지 박스"/></div> 
+	      	
+	      	
 		</div>
 		<br/>
 		<div class="row">
-			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5>배송지정보</h5></div>
+			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">배송지정보</h5></div>
 		</div>
 		<div class="row">
-			<div class="col-5">배송지명</div> 
-			<div class="col-7"><input type="text" name="" value="우리집"/></div>       		
-      		<div class="col-5">받는분</div> 
-      		<div class="col-7"><input type="text" name="username" value="최은빈"/></div> 
-      		<div class="col-5">우편번호</div> 
-      		<div class="col-7"><input type="text" name="a_code" value="10254"/></div> 
-      		<div class="col-5">주소</div> 
-      		<div class="col-7"><input style="margin-bottom:5px;" type="text" name="addr" size="60" value="경기도 고양시 일산동구 지영로229번길"/><br/>
-      		<input type="text" name="addrdetail" size="60" value="7-16 고개 아래 우측 첫집"/></div>
+			<div class="col-3">배송지명</div> 
+			<div class="col-9"><input class="inputbox" type="text" name="" size=80 value="우리집"/></div>       		
+      		<div class="col-3">받는분</div> 
+      		<div class="col-9"><input class="inputbox" type="text" name="username" size=80 value="최은빈"/></div> 
+      		<div class="col-3">우편번호</div> 
+      		<div class="col-9"><input class="inputbox" type="text" name="a_code" size=80 value="10254"/></div> 
+      		<div class="col-3">주소</div> 
+      		<div class="col-9"><input id="addr1" class="inputbox" style="margin-bottom:5px;" type="text" name="addr" size=80 value="경기도 고양시 일산동구 지영로229번길"/>
+      						   <input id="addr2" class="inputbox" type="text" name="addrdetail" size=80 value="7-16 고개 아래 우측 첫집"/></div>
+		
 		</div>
 	</form>
 	<br/>
@@ -53,6 +79,20 @@
 		<div class="col-6" style="text-align:right;"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button></div>
 		<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button></div>
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 회원탈퇴 Modal -->
 	<div class="modal fade" id="secessionModal" tabindex="-1" role="dialog" aria-labelledby="secessionModalTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">

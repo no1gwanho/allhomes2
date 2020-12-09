@@ -38,7 +38,7 @@ public class RegisterController {
 		this.sqlSession = sqlSession;
 	}
 	
-		
+	
 	//이메일 인증
 	@RequestMapping("/regConf")
 	public ModelAndView regConf(RegisterVO vo,String userid) {
@@ -250,11 +250,16 @@ public class RegisterController {
 	//이메일 중복검사
 	@RequestMapping(value="/mailFilter")
 	@ResponseBody
-	public int mailFilter(RegisterVO vo,String email1,String email2) {
-		System.out.println("에러잡기1");	
+	public String mailFilter(RegisterVO vo,String email1,String email2) {
+		
+		vo.setEmail1(email1);
+		vo.setEmail2(email2);
+					
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		System.out.println("에러잡기2");
-		return dao.mailFilter(vo);
+		
+		String resultVO = dao.mailFilter(vo);
+		
+		return resultVO;
 	}	
 }
 
