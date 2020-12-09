@@ -5,6 +5,9 @@ public class QnaVO {
 	private int q_no;
 	private String title;
 	private String content;
+	
+
+	
 	private String userid;
 	private int hit;
 	private int answer;
@@ -13,7 +16,19 @@ public class QnaVO {
 	
 	private String m_pic;
 	
+	
+	
+	
+	
+	
 
+	public int getQ_no() {
+		return q_no;
+	}
+	public void setQ_no(int q_no) {
+		this.q_no = q_no;
+	}
+	
 	public String getM_pic() {
 		return m_pic;
 	}
@@ -26,12 +41,10 @@ public class QnaVO {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public int getQ_no() {
-		return q_no;
-	}
-	public void setQ_no(int q_no) {
-		this.q_no = q_no;
-	}
+	
+	
+	
+	
 	public String getTitle() {
 		return title;
 	}

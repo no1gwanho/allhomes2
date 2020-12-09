@@ -42,8 +42,15 @@
 		select userid from qnaboard where q_no=#{param1}
 	</select>
 	
+	<!-- 질문게시판 수정완료-->
+	<update id="qnaEdit" parameterType="com.allhomes.myapp.qna.QnaVO">
+		update qnaboard set title=#{title}, content=#{content} where q_no=#{q_no}
+	</update>
 	
-  
+	<!-- 질문게시판 삭제 -->
+  	<delete id="qnaDelete" parameterType="int">
+  		delete qnaboard where q_no=#{q_no}
+  	</delete>
   
  	
  </mapper>

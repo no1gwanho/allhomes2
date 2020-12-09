@@ -87,6 +87,10 @@
 			location.href="/myapp/qnaWrite";
 		});
 		
+		
+		
+		
+		
 	});
 
 
@@ -139,8 +143,8 @@
 				</div>
 				
 				<!-- 본문내용 -->
-				<div class="qna-content">
-				<a style="color:gray;font-size:15px;" href="/myapp/qnaView?q_no=${vo.q_no }">${vo.content }</a>
+				<div class="qna-content" style="display:none;">
+				${vo.content }
 				</div>
 				
 			</div>
