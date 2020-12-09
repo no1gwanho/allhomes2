@@ -42,6 +42,8 @@ public interface AdminBoardDaoImp {
 	
 	//모든 review 가져오기
 	public List<AdminReviewJoinVO> selectAllReview();
+	//스토어별로 리뷰 가져오기
+	public List<AdminReviewJoinVO> selectStoreReview(int s_no);
 	//review 점수별로 가져오기(개수)
 	public int selectReviewOne();
 	public int selectReviewTwo();

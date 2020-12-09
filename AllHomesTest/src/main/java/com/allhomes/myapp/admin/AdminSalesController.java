@@ -93,13 +93,40 @@ public class AdminSalesController {
 		mav.addObject("threeVO", threeVO);
 		mav.addObject("totalVO", totalVO);
 		
-		//store 별점 정보
-		mav.addObject("one", Math.round((float)bDao.selectReviewOne() / bDao.storeReviewCount(s_no)*100));
-		mav.addObject("two", Math.round((float)bDao.selectReviewTwo() / bDao.storeReviewCount(s_no)*100));
-		mav.addObject("three", Math.round((float)bDao.selectReviewThree() / bDao.storeReviewCount(s_no)*100));
-		mav.addObject("four", Math.round((float)bDao.selectReviewFour() / bDao.storeReviewCount(s_no)*100));
-		mav.addObject("five", Math.round((float)bDao.selectReviewFive() / bDao.storeReviewCount(s_no)*100));
-		mav.addObject("avgRating", (float)dao.sumStoreReviewRating(s_no)/bDao.storeReviewCount(s_no)); //리뷰 평균 평점
+		
+		//nullPointException 예외처리
+		try {
+			if(bDao.selectStoreReview(s_no) != null) {
+				mav.addObject("avgRating", (float)dao.sumStoreReviewRating(s_no)/bDao.storeReviewCount(s_no)); //리뷰 평균 평점
+				
+				//store 별점 정보
+				mav.addObject("one", Math.round((float)bDao.selectStoreReviewOne(s_no) / bDao.storeReviewCount(s_no)*100));
+				mav.addObject("two", Math.round((float)bDao.selectStoreReviewTwo(s_no) / bDao.storeReviewCount(s_no)*100));
+				mav.addObject("three", Math.round((float)bDao.selectStoreReviewThree(s_no) / bDao.storeReviewCount(s_no)*100));
+				mav.addObject("four", Math.round((float)bDao.selectStoreReviewFour(s_no) / bDao.storeReviewCount(s_no)*100));
+				mav.addObject("five", Math.round((float)bDao.selectStoreReviewFive(s_no) / bDao.storeReviewCount(s_no)*100));
+				
+				System.out.println("1점짜리 개수="+bDao.selectReviewOne());
+				System.out.println("1점짜리 퍼센트"+ Math.round((float)bDao.selectReviewOne() / bDao.storeReviewCount(s_no)*100));
+				System.out.println("3점짜리 개수="+bDao.selectReviewThree());
+				System.out.println("4점짜리 개수="+bDao.selectReviewFour());
+				System.out.println("5점짜리 개수="+bDao.selectReviewFive());
+				System.out.println("3점짜리 퍼센트"+ Math.round((float)bDao.selectReviewThree() / bDao.storeReviewCount(s_no)*100));
+				System.out.println("4점짜리 퍼센트"+ Math.round((float)bDao.selectReviewFour() / bDao.storeReviewCount(s_no)*100));
+				System.out.println("5점짜리 퍼센트"+ Math.round((float)bDao.selectReviewFive() / bDao.storeReviewCount(s_no)*100));
+
+			}else if(bDao.selectStoreReview(s_no) == null) {
+				mav.addObject("avgRating", 0); //리뷰 평균 평점
+				mav.addObject("one", 0);
+				mav.addObject("two", 0);
+				mav.addObject("three", 0);
+				mav.addObject("four", 0);
+				mav.addObject("five",0 );
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
 		mav.addObject("countReview", bDao.storeReviewCount(s_no)); //리뷰 총 개수
 		//store 제품 개수
 		mav.addObject("cntPd", pDao.countProduct(s_no));

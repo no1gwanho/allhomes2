@@ -176,6 +176,12 @@
  		]]>
 	</select>
 	
+	<!-- 스토어별로 리뷰 가져오기 -->
+	<select id="selectStoreReview" parameterType="int" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
+		from store, review, product
+		where review.pd_no = product.pd_no and store.s_no = review.s_no and review.s_no = #{s_no}
+	</select>
 	
 	<!-- 리뷰 별점별로 가져오기  -->
 	<select id="selectReviewOne" resultType="int">
