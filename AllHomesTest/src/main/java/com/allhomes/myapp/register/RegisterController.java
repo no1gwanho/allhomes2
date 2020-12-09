@@ -94,8 +94,6 @@ public class RegisterController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(resultVO == null){
-			
-
 			ses.setAttribute("logStatus","N");
 			mav.setViewName("landing/loginResult");			
 		}else {
@@ -104,6 +102,9 @@ public class RegisterController {
 			System.out.println(resultVO.getUsername());
 			
 			ses.setAttribute("nickname", resultVO.getNickname());
+			ses.setAttribute("m_pic", resultVO.getM_pic());
+			
+			System.out.println("프로필사진주소 =" +resultVO.getM_pic());
 			
 			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");

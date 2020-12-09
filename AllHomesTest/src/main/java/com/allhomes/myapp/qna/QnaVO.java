@@ -6,15 +6,20 @@ public class QnaVO {
 	private String title;
 	private String content;
 	private String userid;
-	private String nickname;
 	private int hit;
 	private int answer;
 	private String writedate;
 	private String thumbnail;
 	
+	private String m_pic;
 	
-	
-	
+
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -44,12 +49,6 @@ public class QnaVO {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 	public int getHit() {
 		return hit;

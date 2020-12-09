@@ -12,15 +12,37 @@
   
   <!-- 질문게시판 글작성하기 -->
   <insert id="qnaInsert" parameterType="com.allhomes.myapp.qna.QnaVO">
-  	insert into qnaboard (q_no, title, content, userid, nickname, hit, answer, writedate)
-  					values(qna_sq.nextval, #{title}, #{content}, #{nickname}, #{hit}, #{answer}, sysdate)
+  	insert into qnaboard 
+  	(q_no, title, content, userid, thumbnail, hit, answer, writedate)
+  	values(qna_sq.nextval, #{title}, #{content}, #{userid}, #{thumbnail}, 0, 0, sysdate)
   </insert>
   
+  <!-- 질문게시판 글번호 꺼내기 -->
+  <select id="getQnaNumber" resultType="int">
+  	select nvl(max(q_no), 1) from qnaboard
+  </select>
   
-	<!-- 집들이 글내용보기 -->
+	<!-- 질문게시판 글내용보기 -->
 	<select id="qnaSelect" parameterType="int" resultType="com.allhomes.myapp.qna.QnaVO">
-		select q_no, title, content, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard where q_no=#{param1}
+		select a.q_no, a.title, a.content, a.userid, a.hit, a.answer, to_char(a.writedate, 'YYYY-MM-DD') writedate,  
+		b.m_pic
+		from qnaboard a
+		join register b
+		on a.userid = b.userid
+		where q_no=#{param1}
 	</select>
+	
+	<!-- 질문게시판 조회수 증가 -->
+	<update id="qnaHit" parameterType="int">
+		update qnaboard set hit=hit+1 where q_no=#{param1}
+	</update>
+	
+	<!-- 질문게시판 작성자 구하기 -->
+	<select id="getQnaWriter" resultType="String">
+		select userid from qnaboard where q_no=#{param1}
+	</select>
+	
+	
   
   
  	

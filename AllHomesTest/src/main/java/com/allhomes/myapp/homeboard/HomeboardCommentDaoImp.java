@@ -11,10 +11,13 @@ public interface HomeboardCommentDaoImp {
 	public int commentInsert(HomeboardCommentVO vo);
 	
 	//댓글 수정
-	public HomeboardCommentVO commentEdit(int hb_c_no);
+	public int commentEdit(HomeboardCommentVO vo);
 	
 	//댓글 삭제
 	public int commentDelete(int hb_c_no);
+	
+	//댓글 개수 가져오기 
+	public int getCommentCount(HomeboardCommentVO vo);
 	
 	
 }
