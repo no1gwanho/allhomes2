@@ -1,6 +1,6 @@
 package com.allhomes.myapp.product;
 
-public class ProductVO {
+public class ProductJoinVO {
 	private int pd_no;			// 제품번호
 	private int s_no;			// 스토어번호
 	private String pd_name;		// 제품명
@@ -15,6 +15,13 @@ public class ProductVO {
 	private int shipping_c;		// 배송비
 	private String o_value;		//옵션
 
+	private String s_name;
+	private String userid;
+	private String img;
+	private String content;
+	private String writedate;
+	private int rating;
+	private int dc_price;
 	
 	public int getPd_no() {
 		return pd_no;
@@ -93,5 +100,47 @@ public class ProductVO {
 	}
 	public void setO_value(String o_value) {
 		this.o_value = o_value;
+	}
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	public int getDc_price() {
+		return dc_price;
+	}
+	public void setDc_price(int dc_price) {
+		this.dc_price = dc_price;
 	}
 }

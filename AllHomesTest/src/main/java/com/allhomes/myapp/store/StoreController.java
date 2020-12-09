@@ -87,6 +87,8 @@ public class StoreController {
 		List<ReviewVO> rList = rDao.selectReview(pd_no);
 		PurchaseVO pvo = pDao.selectPurchaseListInt(pd_no);
 		
+		String ovSplit[] = vo.getO_value().split(",");
+				
 		ModelAndView mav = new ModelAndView(); 
 		
 		mav.addObject("vo", vo);

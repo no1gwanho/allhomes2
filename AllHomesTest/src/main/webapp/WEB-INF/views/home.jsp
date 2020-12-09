@@ -194,8 +194,9 @@
 						
 						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/>
 							<br/>
-							[${v.s_no}] / ${v.pd_name }
+							<span style="font-size:0.5em;">[${s_name}] </span><span style="font-size:0.8em">${v.pd_name }</span>
 							<br/>
+						<span style="font-size:0.8em">	
 						<c:if test="${v.discount != 0}">
 							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
 						</c:if>
@@ -205,9 +206,8 @@
 						<c:if test="${v.status!=null }">
 							<h6><span class="badge badge-secondary">${v.status }</span></h6>
 						</c:if>		
-								
-					</a>
-					
+						</span>		
+					</a>					
 				</div>
 			</c:forEach>
 			
