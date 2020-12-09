@@ -96,7 +96,7 @@ public class AdminSalesController {
 		
 		//nullPointException 예외처리
 		try {
-			if(bDao.selectStoreReview(s_no) != null) {
+			if(bDao.selectStoreReview(s_no) != null) { //이미 작성된 리뷰가 있을 때만 계산하기
 				mav.addObject("avgRating", (float)dao.sumStoreReviewRating(s_no)/bDao.storeReviewCount(s_no)); //리뷰 평균 평점
 				
 				//store 별점 정보
@@ -105,17 +105,8 @@ public class AdminSalesController {
 				mav.addObject("three", Math.round((float)bDao.selectStoreReviewThree(s_no) / bDao.storeReviewCount(s_no)*100));
 				mav.addObject("four", Math.round((float)bDao.selectStoreReviewFour(s_no) / bDao.storeReviewCount(s_no)*100));
 				mav.addObject("five", Math.round((float)bDao.selectStoreReviewFive(s_no) / bDao.storeReviewCount(s_no)*100));
-				
-				System.out.println("1점짜리 개수="+bDao.selectReviewOne());
-				System.out.println("1점짜리 퍼센트"+ Math.round((float)bDao.selectReviewOne() / bDao.storeReviewCount(s_no)*100));
-				System.out.println("3점짜리 개수="+bDao.selectReviewThree());
-				System.out.println("4점짜리 개수="+bDao.selectReviewFour());
-				System.out.println("5점짜리 개수="+bDao.selectReviewFive());
-				System.out.println("3점짜리 퍼센트"+ Math.round((float)bDao.selectReviewThree() / bDao.storeReviewCount(s_no)*100));
-				System.out.println("4점짜리 퍼센트"+ Math.round((float)bDao.selectReviewFour() / bDao.storeReviewCount(s_no)*100));
-				System.out.println("5점짜리 퍼센트"+ Math.round((float)bDao.selectReviewFive() / bDao.storeReviewCount(s_no)*100));
-
-			}else if(bDao.selectStoreReview(s_no) == null) {
+			
+			}else if(bDao.selectStoreReview(s_no) == null) { //리뷰가 없을 때는 모두 0
 				mav.addObject("avgRating", 0); //리뷰 평균 평점
 				mav.addObject("one", 0);
 				mav.addObject("two", 0);

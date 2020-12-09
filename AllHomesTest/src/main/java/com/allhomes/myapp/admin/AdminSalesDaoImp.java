@@ -1,8 +1,5 @@
 package com.allhomes.myapp.admin;
 
-import java.util.List;
-
-import com.allhomes.myapp.store.StoreVO;
 
 public interface AdminSalesDaoImp {
 	//스토어 별 매출 현황 가져오기(당일)
@@ -23,5 +20,8 @@ public interface AdminSalesDaoImp {
 	
 	//스토어 별 리뷰 총점(다 더한거)
 	public Integer sumStoreReviewRating(int s_no);
+	
+	//매출 조회
+	
 	
 }

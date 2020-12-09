@@ -1,9 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
-
+td{
+	text-align:right;
+}
 </style>
+<script>
+	$(function(){
+		//datepicker
+		$("#date,#date2").datepicker({
+			dateFormat: 'yy-mm-dd'
+			,numberOfMonths:1 
+		});
+	});
+	
+</script>
 <div class="container-fluid">
 	<div class="row">
 
@@ -140,30 +155,30 @@
 								<tr>
 									<th rowspan="3">${storeVO.s_no}</th>
 									<th rowspan="3">${storeVO.s_name}</th>
-									<td>오늘</td>
+									<th>오늘</th>
 									<td>${cntToday}건</td>
 									<td>${todayVO.confirmCnt}건</td>
 									<td>${todayVO.sales}원</td>
 								</tr>
 								<tr>
-									<td>최근 1개월</td>
+									<th>최근 1개월</th>
 									<td>${cntMonth}건</td>
 									<td>${monthVO.confirmCnt}건</td>
 									<td>${monthVO.sales}원</td>
 								</tr>
 								<tr>
-									<td>최근 3개월</td>
+									<th>최근 3개월</th>
 									<td>${cntThree}건</td>
 									<td>${threeVO.confirmCnt}건</td>
 									<td>${threeVO.sales}원</td>
 								</tr>
 								<tr>
 									<th colspan="3">총 확정 주문 건수</th>
-									<th colspan="3">${totalVO.confirmCnt}건</th>
+									<th colspan="3" style="text-align:right;color:#EE8374">${totalVO.confirmCnt}건</th>
 								</tr>
 								<tr>
 									<th colspan="3">총 매출액</th>
-									<th colspan="3">${totalVO.sales}원</th>
+									<th colspan="3" style="text-align:right;color:#EE8374">${totalVO.sales}원</th>
 								</tr>
 
 							</tbody>
@@ -176,6 +191,33 @@
 			<!-- card 끝 -->
 		</div>
 		<!-- col-lg-12 끝 -->
+		
+		<div class="col-lg-12">
+			<div class="card shadow mt-3">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">매출 조회</h6>
+				</div>
+
+				<!-- card body -->
+				<div class="card-body">
+					<div class="col-lg-12">
+						<div class="col-lg-8" style="margin:0 auto;">							
+							<div class="row">
+								<span class="col-lg-2" >기간</span> 
+								<input type="text" id="date" name="date" class="form-control col-lg-3" style="float:left;"/>
+								<span class="col-lg-1" style="text-align:center"> - </span> 
+								<input type="text" id="date2" name="date2" class="form-control col-lg-3" style="float:left"/>
+								<a href="#" class="col-lg-1 ml-4 btn alert-clean shadow-sm">조회</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- card body 끝  -->
+			</div>
+			<!-- card 끝 -->
+		</div>
+		<!-- col-lg-12 끝 -->
+		
 	</div>
 	</div>
 <%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>
