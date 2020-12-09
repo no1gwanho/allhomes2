@@ -322,8 +322,8 @@
 					<img class="profile_pic" src="<%=request.getContextPath() %>/resources/upload/register/${vo.m_pic }">&nbsp; <a href="#">${vo.userid }</a>
 					· ${vo.writedate} &nbsp;
 					<c:if test="${loginId == vo.userid}">
-						<a href="/myapp/homeboardEdit?q_no=${vo.q_no }">수정</a>&nbsp;
-					<a href="javascript:homeboardDelCheck(${vo.q_no })">삭제</a>
+						<a href="/myapp/qnaEdit?q_no=${vo.q_no }">수정</a>&nbsp;
+					<a href="javascript:qnaDelCheck(${vo.q_no })">삭제</a>
 					</c:if>
 				</div>
 			</div>

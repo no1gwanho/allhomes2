@@ -78,7 +78,7 @@ public class QnaController {
 						System.out.println("글수정할때 썸네일 png:"+thumbnailUrl);
 						vo.setThumbnail(thumbnailUrl); // 썸네일
 					}else { //사진없는 글일때 준비된 파일 넣어주기
-						vo.setThumbnail("/resources/img/allhomes3.png");
+						vo.setThumbnail("");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -132,4 +132,12 @@ public class QnaController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

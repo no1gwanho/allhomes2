@@ -3,11 +3,7 @@
 <style>
 
 
-@media (min-width: 200px) and (max-width: 400px) { 
-   .qna-thumnail{
-       display: none;
-   }
-}
+
 
 .col-3, .col-lg-3, .col-xs-6{
 			text-align:center;
@@ -22,9 +18,13 @@
 	text-align: center;
 }
 
-.qna-thumnail{
+.qna-thumbnail{
 	width: 200px;
 	height: 150px;
+}
+
+.qna-thumbnail>img{
+	width:150px;
 }
 
 .input-group{
@@ -37,7 +37,7 @@
 }
 
 .container{
-			max-width:1200px;
+			max-width:1100px;
 			margin: 0 auto;
 			font-family: 'SCDream3';
 	}
@@ -46,32 +46,45 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 20px;
+	
+}
+
+.qna-title>a:link{
+	font-size:20px;
+	color:black;
 }
 
 .qna-content{
-	height:100px;
+	height:45px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .qna-main-row{
-	max-height:200px;
-	height:200px;
+	max-height:130px;
+	height:130px;
 }
 
+.qna-info{
+	margin-left:10px;
+	font-size:12px;
+}
 
+#qna-border{
+	border: 0.2px solid #f5f5f5;
+	margin-top:20px;
+	padding : 20px;
+}
 
 </style>
 
 <script>
 	$(function(){
+		
 		$('#qnaWriteBtn').click(function(){
 			location.href="/myapp/qnaWrite";
-			
-			
-			
-			
 		});
 		
 	});
@@ -80,6 +93,8 @@
 </script>
 
 <div class="container">
+
+	
 
 	<div id="qnaTitle">
 		<h1><i class="fas fa-question-circle"></i>질문과 답변</h1>
@@ -105,52 +120,45 @@
 		<div class="col-lg-1"><input type="button" class="btn" style="background-color:#E98374;color:white;width:100px" value="질문하기" id="qnaWriteBtn"></div>
 	</div>
 	
-	
+	<div id="qna-border">
 	<!-- 게시판 글 시작 -->
 	<hr>
 	<c:forEach var="vo" items="${list }">
-		<div class="row qna-main-row">
+		<div class="row qna-main-row" style="cursor:pointer;" onclick="window.location='/myapp/qnaView?q_no=${vo.q_no}'">
 		
 			<div class="col-9">
 				
 				
 				<!-- 제목 -->
 				<div class="qna-title">
-				<h4>
-					<strong><a href="/myapp/qnaView?q_no=${vo.q_no }">${vo.title }</a></strong>
-				</h4>
+				${vo.title }
 				</div>
 				
-				
+				<div class="qna-info"> <!-- 아이디 정보  -->
+				<i class="fas fa-user-circle"></i> <a href="#">${vo.userid }</a> ${vo.writedate } 답글 : ${vo.answer}개 조회 : ${vo.hit }회
+				</div>
 				
 				<!-- 본문내용 -->
 				<div class="qna-content">
-				<a href="/myapp/qnaView?q_no=${vo.q_no }">${vo.content }</a>
+				<a style="color:gray;font-size:15px;" href="/myapp/qnaView?q_no=${vo.q_no }">${vo.content }</a>
 				</div>
 				
-				
-				<br /> <br /> 
-				<div>
-				<p><i class="fas fa-user-circle"></i> <a href="#">${vo.userid }</a> ${vo.writedate } 답글 : ${vo.answer}개 조회 : ${vo.hit }회</p>
-				</div>
 			</div>
+	
 			
 			
 			
-			
-			<div class="col-3">
-				<a href="#"> <img class="qna-thumnail" src="<%=request.getContextPath() %>${vo.thumbnail }">
-				</a>
+			<!--  
+			<div class="col-3 qna-thumbnail">
+				<img title="${vo.thumbnail }" src="<%=request.getContextPath() %>${vo.thumbnail }">
 			</div>
-			
-			
-			
-			
-			
+			-->
+
 			
 		</div>
 		<hr>
 		</c:forEach>
+		</div>
 
 
 
