@@ -44,4 +44,10 @@
 		select count(*) as confirmCnt from purchase
 		where s_no= #{s_no} and to_date(pc_date, 'YY/MM/DD') between to_date(add_months(sysdate,-3),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
 	</select>
+	
+	<!-- 스토어 별 리뷰 총점 -->
+	<select id="sumStoreReviewRating" parameterType="int" resultType="int">
+		select sum(rating) from review
+		where s_no = #{s_no}
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.store.StoreVO;
 
 @Controller
@@ -66,6 +67,7 @@ public class AdminSalesController {
 		AdminSalesDaoImp dao = sqlSession.getMapper(AdminSalesDaoImp.class);
 		AdminStoreDaoImp sDao = sqlSession.getMapper(AdminStoreDaoImp.class);
 		AdminBoardDaoImp bDao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
 		
 		StoreVO storeVO = sDao.storeSelect(s_no); //스토어 정보
 		AdminSalesStoreVO todayVO = dao.storeSalesToday(s_no); //오늘 매출,확정 건수
@@ -97,8 +99,16 @@ public class AdminSalesController {
 		mav.addObject("three", Math.round((float)bDao.selectReviewThree() / bDao.storeReviewCount(s_no)*100));
 		mav.addObject("four", Math.round((float)bDao.selectReviewFour() / bDao.storeReviewCount(s_no)*100));
 		mav.addObject("five", Math.round((float)bDao.selectReviewFive() / bDao.storeReviewCount(s_no)*100));
+		mav.addObject("avgRating", (float)dao.sumStoreReviewRating(s_no)/bDao.storeReviewCount(s_no)); //리뷰 평균 평점
+		mav.addObject("countReview", bDao.storeReviewCount(s_no)); //리뷰 총 개수
+		//store 제품 개수
+		mav.addObject("cntPd", pDao.countProduct(s_no));
 		
-		
+		/*
+		 * System.out.println("제품 개수="+bDao.storeReviewCount(s_no));
+		 * System.out.println("총 별점 평균="+dao.sumStoreReviewRating(s_no)/bDao.
+		 * storeReviewCount(s_no));
+		 */
 		mav.setViewName("admin/adminSales/adminSalesStoreDetail");
 		return mav;
 	}

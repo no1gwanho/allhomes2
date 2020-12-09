@@ -35,11 +35,29 @@
 							</div>
 							<div class="row mb-4">
 								<div class="col-lg-5">제품 수</div>
-								<div class="col-lg-7"></div>
+								<div class="col-lg-7">${cntPd}</div>
 							</div>
 							<div class="row mb-1">
 								<div class="col-lg-5">평균 별점</div>
-								<div class="col-lg-7"></div>
+								<div class="col-lg-7">
+									<span style="color:#EE8374">
+										<c:if test="${avgRating <= 1 }">
+										★
+										</c:if>
+										<c:if test="${avgRating <= 2 and avgRating>1}">
+										★★
+										</c:if>
+										<c:if test="${avgRating <= 3 and avgRating>2}">
+										★★★
+										</c:if>
+										<c:if test="${avgRating <= 4 and avgRating>3}">
+										★★★★
+										</c:if>
+										<c:if test="${avgRating <= 5 and avgRating>4}">
+										★★★★★
+										</c:if>
+									</span>
+								(${countReview})</div>
 							</div>
 						</div>
 					</div>
@@ -96,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+		
 		
 		<div class="col-lg-12">
 			<div class="card shadow">
@@ -159,5 +177,5 @@
 		</div>
 		<!-- col-lg-12 끝 -->
 	</div>
-</div>
+	</div>
 <%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

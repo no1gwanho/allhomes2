@@ -20,4 +20,8 @@ public interface AdminSalesDaoImp {
 	public AdminSalesStoreVO countStoreOrderMonth(int s_no);
 	//스토어 별 세달 주문건수
 	public AdminSalesStoreVO countStoreOrderThree(int s_no);
+	
+	//스토어 별 리뷰 총점(다 더한거)
+	public int sumStoreReviewRating(int s_no);
+	
 }
