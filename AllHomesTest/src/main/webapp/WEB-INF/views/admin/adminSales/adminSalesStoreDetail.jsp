@@ -16,6 +16,43 @@ td{
 			dateFormat: 'yy-mm-dd'
 			,numberOfMonths:1 
 		});
+		
+		//매출 조회 클릭
+		$("#salesSearchBtn").click(function(){
+			var date = $("#date").val();
+			var date2 = $("#date2").val();
+			
+			if(date==null || date2 == null){
+				alert("기간을 선택해주십시오.");
+				return false;
+			}
+			
+			var url = "/myapp/storeSalesSearch?date="+date+"&date2="+date2;
+			
+			$.ajax({
+				url:url,
+				success:function(result){
+					var tag = "<table class='table'><thead><tr><th>주문번호</th><th>상품번호</th><th>상품명</th><th>주문자 ID</th><th>확정일</th><th>수량</th><th>판매액</th></tr></thead><tbody>";
+								
+					var $result = $(result);
+						$result.each(function(i, v){
+							
+							tag += "<tr><td>"+v.pc_no+"</td>";
+							tag += "<td>"+v.pd_no+"</td>";
+							tag += "<td>"+v.pd_name+"</td>";
+							tag += "<td>"+v.userid+"</td>";
+							tag += "<td>"+v.pc_date+"</td>";
+							tag += "<td>"+v.num+"</td>";
+							tag += "<td>"+v.total_p+"</td></tr>";
+						});
+						
+						tag += "</tbody><table>";
+						$("#searchTB").html(tag);
+				},error: function(){
+					console.log("매출,주문 조회 에러");
+				}
+			});
+		});
 	});
 	
 </script>
@@ -207,8 +244,11 @@ td{
 								<input type="text" id="date" name="date" class="form-control col-lg-3" style="float:left;"/>
 								<span class="col-lg-1" style="text-align:center"> - </span> 
 								<input type="text" id="date2" name="date2" class="form-control col-lg-3" style="float:left"/>
-								<a href="#" class="col-lg-1 ml-4 btn alert-clean shadow-sm">조회</a>
+								<button id="salesSearchBtn" class="col-lg-1 ml-4 btn alert-clean shadow-sm">조회</button>
 							</div>
+						</div>
+						<div class="col-lg-12" id="searchTB">
+						
 						</div>
 					</div>
 				</div>

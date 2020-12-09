@@ -1,5 +1,7 @@
 package com.allhomes.myapp.admin;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -131,6 +133,15 @@ public class AdminSalesController {
 		return mav;
 	}
 		
+	
+	//스토어 매출 조회(기간)
+	@RequestMapping("/storeSalesSearch")
+	public List<AdminOrderVO> storeSalesSearch(@RequestParam("date")String date,@RequestParam("date2") String date2){
 		
+		AdminSalesDaoImp dao = sqlSession.getMapper(AdminSalesDaoImp.class);
+		return  dao.storeSalesSearch(date, date2);
+		
+	
+	}
 		
 }

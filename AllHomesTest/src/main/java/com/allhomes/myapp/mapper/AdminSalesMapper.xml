@@ -50,4 +50,15 @@
 		select sum(rating) from review
 		where s_no = #{s_no}
 	</select>
+	
+	<!-- 스토어 매출 조회(기간) -->
+	<select id="storeSalesSearch" parameterType="String" resultType="com.allhomes.myapp.admin.AdminOrderVO">
+		select purchase.pc_no, purchase.pd_no, product.pd_name, store.s_name, address.zipcode,
+		address.addr, address.addrdetail, purchase.userid, to_char(purchase.pc_date, 'YYYY-MM-DD'), purchase.status,
+		purchase.num, purchase.total_p,purchase.o_value
+		from purchase, product, store,address
+		where purchase.s_no = store.s_no and purchase.pd_no = product.pd_no and address.a_code = purchase.a_code
+		and to_date(pc_date, 'YY/MM/DD') between to_date(#{date},'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')
+		order by pc_date desc
+	</select>
 </mapper>
