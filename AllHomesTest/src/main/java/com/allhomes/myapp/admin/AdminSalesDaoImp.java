@@ -1,5 +1,6 @@
 package com.allhomes.myapp.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface AdminSalesDaoImp {
@@ -23,7 +24,7 @@ public interface AdminSalesDaoImp {
 	public Integer sumStoreReviewRating(int s_no);
 	
 	//매출 조회(기간)
-	public List<AdminOrderVO> storeSalesSearch(String date, String date2);
+	public List<AdminSalesStoreSearchDetailVO> storeSalesSearch(HashMap<String, Object> map);
 	
 	
 }

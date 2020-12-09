@@ -21,33 +21,42 @@ td{
 		$("#salesSearchBtn").click(function(){
 			var date = $("#date").val();
 			var date2 = $("#date2").val();
+			var s_no = ${storeVO.s_no};
 			
 			if(date==null || date2 == null){
 				alert("기간을 선택해주십시오.");
 				return false;
 			}
 			
-			var url = "/myapp/storeSalesSearch?date="+date+"&date2="+date2;
+			var url = "/myapp/storeSalesSearch";
+			var data = { "date": date, "date2": date2, "s_no" : s_no };
+			
 			
 			$.ajax({
 				url:url,
+				data: data,
+				dataType:"json",
 				success:function(result){
-					var tag = "<table class='table'><thead><tr><th>주문번호</th><th>상품번호</th><th>상품명</th><th>주문자 ID</th><th>확정일</th><th>수량</th><th>판매액</th></tr></thead><tbody>";
-								
-					var $result = $(result);
-						$result.each(function(i, v){
-							
-							tag += "<tr><td>"+v.pc_no+"</td>";
+					/* var tag = "<table class='table'><thead><tr><th>주문번호</th><th>상품번호</th><th>상품명</th><th>주문자 ID</th><th>확정일</th><th>수량</th><th>판매액</th></tr></thead><tbody>";
+					 */
+					
+					var tag = "";
+						$.each(result,function(i, v) {
+							tag += "sdfsdf"; 
+					
+							/* tag += "<tr><td>"+v.pc_no+"</td>";
 							tag += "<td>"+v.pd_no+"</td>";
 							tag += "<td>"+v.pd_name+"</td>";
 							tag += "<td>"+v.userid+"</td>";
 							tag += "<td>"+v.pc_date+"</td>";
 							tag += "<td>"+v.num+"</td>";
-							tag += "<td>"+v.total_p+"</td></tr>";
+							tag += "<td>"+v.total_p+"</td></tr>"; */
+							tag += v.pd_name + v.total_p + v.o_value + v.pc_date;
+							
 						});
 						
-						tag += "</tbody><table>";
-						$("#searchTB").html(tag);
+						
+						$("#searchTB").append(tag);
 				},error: function(){
 					console.log("매출,주문 조회 에러");
 				}
