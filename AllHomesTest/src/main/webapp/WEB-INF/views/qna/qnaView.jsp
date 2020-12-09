@@ -118,14 +118,13 @@
 
 <script>
 
-	function homeboardDelCheck(q_no) {
+	function qnaDelCheck(q_no) {
 		if (confirm('정말로 삭제하시겠습니까?')) {
 			location.href = "/myapp/qnaDelete?q_no="+q_no;
 		}
 	}
 
 	$(function() {
-		
 		
 		//댓글 수정버튼 클릭시  - 수정폼 보여주기 
 		$(document).on('click', '.editBtn', function(){

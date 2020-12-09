@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -30,6 +31,8 @@ public class QnaController {
 	public ModelAndView qnaMain() {
 		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
 		List<QnaVO> list = dao.qnaAllList();
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -132,6 +135,74 @@ public class QnaController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/qnaEdit")
+	public ModelAndView qnaEdit(@RequestParam("q_no") int q_no) {
+		QnaDaoImp qnaDao = sqlSession.getMapper(QnaDaoImp.class);
+		QnaVO qnaVo = qnaDao.qnaSelect(q_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnaVo", qnaVo);
+		mav.setViewName("qna/qnaEdit");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/qnaEditOk", method=RequestMethod.POST)
+	public ModelAndView qnaEditOk(QnaVO vo, HttpSession ses) {
+		
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		
+		int result = dao.qnaEdit(vo);
+		int q_no = vo.getQ_no();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.addObject("q_no", q_no);
+		
+		if(result>0) {
+			mav.setViewName("redirect:/qnaView");
+			
+		}else {
+			mav.setViewName("/qna/result");
+			
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/qnaDelete")
+	public ModelAndView qnaDelete(@RequestParam("q_no") int q_no) {
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		
+		int result = dao.qnaDelete(q_no);
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:/qnaMain");
+		}else {
+			mav.setViewName("/qna/result");
+		}
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
