@@ -35,6 +35,15 @@ public class HomeController {
 	public ModelAndView home() {
 		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
 		List<ProductVO> list = pDao.productMainList();	
+		StoreDaoImp sDao = sqlSession.getMapper(StoreDaoImp.class);
+		List<StoreVO> sList = sDao.storeAll();
+		
+		String s_name="";
+		
+		for(int i=0; i<sList.size(); i++) {
+			StoreVO vo = sList.get(i);
+			s_name=vo.getS_name();
+		}
 		
 		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
 		List<HomeboardVO> hbList = hbDao.homeboardListForMain();
@@ -42,8 +51,8 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();			
 		mav.addObject("hbList", hbList);
 		mav.addObject("list", list);
-		
-		
+		mav.addObject("s_name", s_name);
+				
 		mav.setViewName("home");
 				
 		return mav;

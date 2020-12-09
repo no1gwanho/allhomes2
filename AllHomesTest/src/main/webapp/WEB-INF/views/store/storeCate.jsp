@@ -28,17 +28,16 @@
 <script>
 	$(function(){
 		
+		var pdCate = ${pdCate};
 		
 		$('#all').click(function(){
 			location.href="/myapp/storeCategory?pdCate=all";
+			console.log('sofa_f');
 		});
-		
 		$('#sofa_f').click(function(){
 			location.href="/myapp/storeCategory?pdCate=sofa_f";
 			console.log("소파?")
 		});
-		
-		
 		$('#stud_f').click(function(){
 			location.href="/myapp/storeCategory?pdCate=stud_f";
 		});
@@ -50,7 +49,9 @@
 		});
 		$('#tbl').click(function(){
 			location.href="/myapp/storeCategory?pdCate=tbl";
-		});		
+		});
+		
+
 	});
 </script>
 <br/>
@@ -147,7 +148,7 @@
 	</div>
 	<br/>
 	<!-- 페이징 -->
-	<div>
+<!-- 	<div>
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
 			<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
@@ -157,4 +158,4 @@
 			<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
 			<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
 		</ul>
-	</div>
+	</div> -->

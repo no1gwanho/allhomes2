@@ -83,9 +83,7 @@
 									<option value="${oVo.o_value}">${oVo.o_value}</option>
 								</c:forEach>	 --%>
 								<c:if test="${vo.o_value!=null }">
-									<option value="${vo.o_value1}">${vo.o_value1}</option>
-									<option value="${vo.o_value2}">${vo.o_value2}</option>
-									<option value="${vo.o_value3}">${vo.o_value3}</option>
+									<option value="${vo.o_value}">${vo.o_value}</option>
 								</c:if>
 							</select><br/>
 						수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)<br/>
