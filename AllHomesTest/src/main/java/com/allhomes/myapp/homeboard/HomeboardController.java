@@ -104,10 +104,6 @@ public class HomeboardController {
 		
 		
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		
-		
-		
-
 		// 썸네일찾기 ====================
 		String hbContent = vo.getContent();
 
@@ -230,7 +226,7 @@ public class HomeboardController {
 				System.out.println("글수정할때 썸네일 png:"+thumbnailUrl);
 				vo.setThumbnail(thumbnailUrl); // 썸네일
 			}else { //사진없는 글일때 준비된 파일 넣어주기
-				vo.setThumbnail("/resources/img/allhomes3.png");
+				vo.setThumbnail("allhomes3.png");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -268,6 +264,8 @@ public class HomeboardController {
 		String loginId = (String)ses.getAttribute("userid");
 		String writer = dao.getHomeboardWriter(b_no);
 		
+		
+		
 		System.out.println("홈보드 뷰  -> 로그인아이디: " + loginId);
 		System.out.println("홈보드 뷰  -> 글쓴사람: " + writer);
 		
@@ -293,6 +291,7 @@ public class HomeboardController {
 		mav.addObject("vo", vo);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginNickname", loginNickname);
+		mav.addObject("writer", writer);
 		mav.setViewName("homeboard/homeboardView");
 
 		return mav;
@@ -303,5 +302,11 @@ public class HomeboardController {
 		return "/homeboard/homeboardSearch";
 
 	}
-
+	
+	@RequestMapping("/replyLogin")
+	public String replyLoginPage(@RequestParam("b_no") int b_no) {
+		
+		return "redirect:homeboardView?b_no="+b_no;
+	}
+	
 }

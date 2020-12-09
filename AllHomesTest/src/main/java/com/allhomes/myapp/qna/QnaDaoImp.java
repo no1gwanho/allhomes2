@@ -10,8 +10,11 @@ public interface QnaDaoImp {
 		//질문게시판 추가 
 		public int qnaInsert(QnaVO vo);
 		
-		//질문게시판 글번호꺼내기 
+		//질문게시판 글번호꺼내기 (글쓰기 후 해당 페이지로 이동)
 		public int getQnaNumber();
+		
+		//질문게시판 작성자 구하기 
+		public String getQnaWriter(int q_no);
 		
 		//질문게시판 글보기 
 		public QnaVO qnaSelect(int q_no);
@@ -29,6 +32,8 @@ public interface QnaDaoImp {
 		
 		//질문게시판 글 삭제하기 
 		public int qnaDelete(int q_no);
+		
+		
 		
 	
 	
