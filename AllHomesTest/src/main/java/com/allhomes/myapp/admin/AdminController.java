@@ -93,19 +93,6 @@ public class AdminController {
 	
 	
 	
-	//매출관리 메인 페이지로 이동-sales
-	@RequestMapping("/adminSalesMain")
-	public String adminSalesMain() {
-		return "admin/adminSales/adminSalesMain";
-	}
-	
-	//매출-스토어매출로 이동
-	@RequestMapping("/adminSalesStore")
-	public String adminSalesStore() {
-		return "admin/adminSales/adminSalesStore";
-	}
-	
-	
 	
 	//======================register=====================================================
 	

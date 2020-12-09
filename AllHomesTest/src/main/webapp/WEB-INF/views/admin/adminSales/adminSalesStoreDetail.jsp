@@ -30,58 +30,38 @@
 					<div class="col-lg-12">
 						<table class="table table-bordered">
 							<thead>
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">스토어명</th>
-								<th scope="col">기간</th>
-								<th scope="col">신규주문</th>
-								<th scope="col">구매확정</th>
-								<th scope="col">총 매출액</th>
-							</tr>
+								<tr>
+									<th scope="col">번호</th>
+									<th scope="col">스토어명</th>
+									<th scope="col">기간</th>
+									<th scope="col">주문 건수</th>
+									<th scope="col">구매확정</th>
+									<th scope="col">총 매출액</th>
+								</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<th rowspan="3">1454623</th>
-								<th rowspan="3">자연가구</th>
-								<th>오늘</th>
-								<th>5건</th>
-								<th>19건</th>
-								<th>515,432</th>
-							</tr>
-							<tr>
-								<th>최근 일주일</th>
-								<th>75건</th>
-								<th>106건</th>
-								<th>1,345,432</th>
-							</tr>
-							<tr>
-								<th>최근 한달</th>
-								<th>147건</th>
-								<th>321건</th>
-								<th>5,325,339</th>
-							</tr>
-							
-							<tr>
-								<th rowspan="3">324123</th>
-								<th rowspan="3">리빙빈티지</th>
-								<th>오늘</th>
-								<th>12건</th>
-								<th>52건</th>
-								<th>715,410</th>
-							</tr>
-							<tr>
-								<th>최근 일주일</th>
-								<th>112건</th>
-								<th>146건</th>
-								<th>2,52,499</th>
-							</tr>
-							<tr>
-								<th>최근 한달</th>
-								<th>521건</th>
-								<th>231건</th>
-								<th>7,3221,3007</th>
-							</tr>
-							
+								<tr>
+									<th rowspan="3">${storeVO.s_no}</th>
+									<th rowspan="3">${storeVO.s_name}</th>
+									<td>오늘</td>
+									<td>${cntToday}</td>
+									<td>${todayVO.confirmCnt}건</td>
+									<td>${todayVO.sales}원</td>
+								</tr>
+								<tr>
+									<td>최근 1개월</td>
+									<td>${cntMonth}</td>
+									<td>${monthVO.confirmCnt}건</td>
+									<td>${monthVO.sales}원</td>
+								</tr>
+								<tr>
+									<td>최근 3개월</td>
+									<td>${cntThree}</td>
+									<td>${threeVO.confirmCnt}건</td>
+									<td>${threeVO.sales}원</td>
+								</tr>
+								
+								
 							</tbody>	
 						</table>
 					

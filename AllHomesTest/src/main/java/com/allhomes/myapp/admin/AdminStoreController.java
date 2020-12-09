@@ -122,14 +122,31 @@ public class AdminStoreController {
 	
 	// 스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")
-	public ModelAndView adminStore() {
+	public ModelAndView adminStore(AdminPagingVO vo
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 
-		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
-		List<StoreVO> list = dao.storeAll(); // 스토어 전체 리스트 가져오기
-
+		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+		
+		//paging//
+		int total = dao.storeCount(); //총 스토어 수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		//paging//
+		
+		
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("list", list);
+		
+		//paging
+		mav.addObject("paging", vo);
+		mav.addObject("viewAll", dao.storeAll(vo));
 		mav.setViewName("admin/adminStore/adminStoreStore");
 
 		return mav;

@@ -133,18 +133,18 @@ td {
 						</thead>
 						<tbody>
 
-							<c:forEach var="vo" items="${list}">
+							<c:forEach var="list" items="${viewAll}">
 								<tr
-									onClick="location.href='/myapp/adminStoreDetail?s_no=${vo.s_no}'">
+									onClick="location.href='/myapp/adminStoreDetail?s_no=${list.s_no}'">
 
-									<td>${vo.s_no}</td>
-									<td>${vo.s_name}</td>
-									<td>${vo.s_num}</td>
-									<td><img src="<%=request.getContextPath()%>/resources/upload/storeImg/${vo.s_pic}"
+									<td>${list.s_no}</td>
+									<td>${list.s_name}</td>
+									<td>${list.s_num}</td>
+									<td><img src="<%=request.getContextPath()%>/resources/upload/storeImg/${list.s_pic}"
 										style="width: 50px; height: 50px; border-radius: 70%;" /></td>
-									<td>${vo.s_id}</td>
-									<td>${vo.staff_t}</td>
-									<td>${vo.openingdate}</td>
+									<td>${list.s_id}</td>
+									<td>${list.staff_t}</td>
+									<td>${list.openingdate}</td>
 								</tr>
 							</c:forEach>
 
@@ -153,14 +153,36 @@ td {
 
 					<!-- pagination -->
 					<div style="display: inline-block">
+						
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							<c:if test="${paging.startPage != 1 }">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+								var="p">
+								<c:choose>
+									<c:when test="${p == paging.nowPage }">
+										<li class="page-item disabled">
+											<a class="page-link">${p }</a>
+										</li>
+									</c:when>
+									<c:when test="${p != paging.nowPage }">
+										<li class="page-item">
+										<a class="page-link"
+											href="<%=request.getContextPath()%>/adminMemberList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+										</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								</li>
+							</c:if>
 						</ul>
 					</div>
 					<!-- pagination 끝 -->
