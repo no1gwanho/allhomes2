@@ -1,21 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-	.row{
-		text-align:center;
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	}
-	.col-3{
-		text-align:right;
-		margin-bottom:5px;
-		
-	}
-	.col-9{
-		text-align:left;
-		margin-bottom:5px;
-		
-	}
-	.inputbox{height:80%;}
+<c:if test="${logStatus == '' || logStatus == 'N'}">
+	<script>
+		alert{"로그인 후 이동이 가능합니다."};
+		location.href="/myapp/";
+	</script>
+</c:if>
+
+
+<style>
+	.row{text-align:center;}
+	
+	
+	
+	.inputbox{height:100%;}
 
 	#addr1,#addr2{margin:0;height:40%;}
 	#notice{line-height:80%;margin-top:20px;}
@@ -24,9 +23,19 @@
 	.hBlank{margin-top:50px;}
 	.hBlank2{margin-top:30px;}
 	
+	
+	.mb-3{width:65%;margin-left:170px;}
+	.labelTag{text-align:right;}
+	
+	.wBlank2{margin-left:51px;}	/*7자*/
+	.wBlank3{margin-left:35px;}	/*4자*/
+	.wBlank4{margin-left:67px;}	/*4자*/
+	
+
 </style>
 <br/>    
 <div class="container">
+<br/><br/>
 	<h2 style="text-align:center;">회원정보수정</h2>
 	<div class="hBlank"></div>
 	
@@ -35,45 +44,109 @@
 		  <div class=wBlank>* 비밀번호 변경은 <b style="color:#ee8374">아이디/비밀번호 찾기</b>를 통해 변경해주세요.</div><br/><br/>
 		  <div class=wBlank>* 배송혼선을 막기위해 주소가 정확히 입력됐는지 다시 한번 확인해주세요.</div>
 	</div>
-	
+	<br/><br/>
 	
 	<!-- 폼테그 시작 -->
 	<form>
 		<div class="row">
 			<div class="hBlank2"></div>
+			
 			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">기본정보</h5></div>
-		</div>		
-    	<div class="row">
-    		<div class="col-3">아이디</div>
-	        <div class="col-9"><input class="inputbox" type="text" name="userid" value=<%=session.getAttribute("userid")%> size=80 disabled/></div>
-	       	<div class="col-3">비밀번호</div> 
-	      	<div class="col-9"><input class="inputbox" type="text" name="userpwd" value="비밀번호 변경은 " size=80 disabled/></div> 
-	      	<div class="col-3">이메일</div>
-	      	<div class="col-9"><input class="inputbox" type="text" name="email" size=80 value="abcd@naver.com"/></div> 
-	      	<div class="col-3">닉네임</div> 
-	      	<div class="col-9"><input class="inputbox" type="text" name="nickname" size=80 value="올홈즈화이팅"/></div> 
-	      	<div class="col-3">프로필 이미지</div> 
-	      	<div class="col-9"><input class="inputbox" type="text" name="nickname" size=80 value="프로필 이미지 박스"/></div> 
-	      	
-	      	
-		</div>
+		</div>	
 		<br/>
+	
+		<!-- 기본정보 -->
+		 <div class="mb-3 row">
+		    <label class="labelTag" for="staticId" class="col-sm-2 col-form-label">아이디</label>
+		   		<div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		        <input id="staticEmail" type="text" readonly class="form-control-plaintext" value=<%=session.getAttribute("userid")%>>
+		    </div>
+		  </div>
+		  
+		  <div class="mb-3 row">
+		    <label class="labelTag" for="email" class="col-sm-2 col-form-label">이메일</label>
+		    	<div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="email">
+		    </div>
+		  </div>
+		   <div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">닉네임</label>
+		    	 <div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
+		   <div class="mb-3 row">
+		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="m_pic">
+		    </div>
+		  </div>
+		<!-- 박스종료 -->
+		<br/>
+		
+		 <!-- 배송정보 -->
 		<div class="row">
 			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">배송지정보</h5></div>
 		</div>
-		<div class="row">
-			<div class="col-3">배송지명</div> 
-			<div class="col-9"><input class="inputbox" type="text" name="" size=80 value="우리집"/></div>       		
-      		<div class="col-3">받는분</div> 
-      		<div class="col-9"><input class="inputbox" type="text" name="username" size=80 value="최은빈"/></div> 
-      		<div class="col-3">우편번호</div> 
-      		<div class="col-9"><input class="inputbox" type="text" name="a_code" size=80 value="10254"/></div> 
-      		<div class="col-3">주소</div> 
-      		<div class="col-9"><input id="addr1" class="inputbox" style="margin-bottom:5px;" type="text" name="addr" size=80 value="경기도 고양시 일산동구 지영로229번길"/>
-      						   <input id="addr2" class="inputbox" type="text" name="addrdetail" size=80 value="7-16 고개 아래 우측 첫집"/></div>
+		 <br/>
+		 
+		 <!--  	 
+		<div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">배송지명</label>
+		    	 <div class="wBlank3"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>-->
+		  
+		   <div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">받는분</label>
+		    	 <div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
+		  
+		  <div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">연락처</label>
+		    	 <div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
+			
+		 <div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">우편번호</label>
+		    	<div class="wBlank3"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
+		  
+		  
+		<div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">주소</label>
+		    	 <div class="wBlank4"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
 		
-		</div>
-	</form>
+		<div class="mb-3 row">
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">상세주소</label>
+		    	 <div class="wBlank3"></div>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="nickname" name="nickname">
+		    </div>
+		  </div>
+		
+		</form>
+	</div>
+
+	
 	<br/>
 	<div class="row">
 		<div class="col-6" style="text-align:right;"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button></div>

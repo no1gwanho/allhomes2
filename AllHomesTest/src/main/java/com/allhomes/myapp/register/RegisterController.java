@@ -108,6 +108,7 @@ public class RegisterController {
 			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			
+			ses.setAttribute("m_no", resultVO.getM_no());
 			
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			

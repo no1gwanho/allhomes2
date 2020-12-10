@@ -15,9 +15,7 @@ public class RegisterVO {
 	//이메일 조합변수
 	private String email1;
 	private String email2;
-	
-	
-	
+		
 	
 	public String getEmail1() {
 		return email1;
