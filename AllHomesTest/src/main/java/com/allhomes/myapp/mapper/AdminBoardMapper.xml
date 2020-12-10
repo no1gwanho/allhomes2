@@ -164,9 +164,21 @@
 	<!-- ====================================Review=================================== -->
 	<!-- 모든 리뷰 가져오기 -->
 	<select id="selectAllReview" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
-		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
-		from store, review, product
-		where review.pd_no = product.pd_no and store.s_no = review.s_no
+		select * from(
+        	select ROWNUM RN, A.*
+                    	from(
+                            	select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
+                            	from store, review, product,register
+                            	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.m_no = review.m_no
+                            	)A
+                        )
+		where RN between #{start} and #{end}
+		
+	</select>
+	
+	<!-- 리뷰 개수  -->
+	<select id="countAllReview" resultType="int">
+		select count(*) from review
 	</select>
 	
 	<!-- review 10개 가져오기 -->

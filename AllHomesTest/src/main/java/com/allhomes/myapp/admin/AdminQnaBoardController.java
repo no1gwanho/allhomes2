@@ -1,6 +1,5 @@
 package com.allhomes.myapp.admin;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 

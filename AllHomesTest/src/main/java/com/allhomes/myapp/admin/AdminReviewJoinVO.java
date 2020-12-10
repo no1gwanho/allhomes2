@@ -8,7 +8,29 @@ public class AdminReviewJoinVO {
 	private String content; //내용
 	private int rating; //별점
 	private String writedate; //작성일
+	private int m_no; //회원번호
+	private String userid; //회원 아이디
+	private String m_pic; //프로필사진
 	
+	
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
 	public int getS_no() {
 		return s_no;
 	}
