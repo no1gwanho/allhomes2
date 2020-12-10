@@ -51,9 +51,10 @@ public class AdminHomeBoardController {
 		//paging//
 				
 		ModelAndView mav = new ModelAndView();
-		
-		//paging
 		mav.addObject("paging", vo);
+		//paging
+		
+		
 		mav.addObject("viewAll", dao.selectAllHomeBoard(vo));
 
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
@@ -121,8 +122,12 @@ public class AdminHomeBoardController {
 		
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		
+		HashMap<String, Object> countMap = new HashMap<String, Object>();
+		countMap.put("value", value);
+		countMap.put("key", key);
+		
 		//paging//
-		int total = dao.countHomeBoardTotal();
+		int total = dao.adminHBSearchCount(countMap); //검색한 거의 총 개수
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "15";
@@ -131,6 +136,8 @@ public class AdminHomeBoardController {
 		} else if (cntPerPage == null) { 
 			cntPerPage = "15";
 		}
+		
+		
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		//paging
 				

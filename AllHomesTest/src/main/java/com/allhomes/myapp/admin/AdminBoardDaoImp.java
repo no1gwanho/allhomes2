@@ -36,6 +36,8 @@ public interface AdminBoardDaoImp {
 	public HomeboardVO adminHomeboardSelect(int b_no);
 	//homeboard 선택검색
 	public List<HomeboardVO> adminHBSearch(HashMap<String, Object> map);
+	//homeboard 선택검색 count
+	public int adminHBSearchCount(HashMap<String, Object> countMap);
 	//homeboard 상세 검색
 	public List<HomeboardVO> adminHBSearchDetail(HomeBoardDetailSearchVO vo);
 	

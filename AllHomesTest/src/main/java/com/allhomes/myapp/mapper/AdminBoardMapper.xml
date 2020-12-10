@@ -83,7 +83,7 @@
   
 	<!-- homeboard 선택 검색 -->
 	<select id="adminHBSearch" parameterType="HashMap" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
- 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate 
+ 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate
  		from(
  			select ROWNUM RN, A.*
  							from(
@@ -107,17 +107,37 @@
 		where RN between #{start} and #{end}
  	</select>
 	
+	<!-- homeboard 선택 검색 Count-->
+	<select id="adminHBSearchCount" parameterType="HashMap" resultType="int">
+		select count(*) from homeboard
+							 		<where>
+								 		<choose>
+								 			<when test="value == 'userid'">
+								 				userid LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'title'">
+								 				title LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'content'">
+								 				 content LIKE '%'||#{key}||'%'
+								 			</when>
+								 		</choose>
+							 		</where>
+							 		
+	</select>
+	
+	
 	<!-- homeboard 상세 검색 -->
 	<select id="adminHBSearchDetail" parameterType="com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
 		<where>
 			<trim prefixOverrides="and">
-		 		<if test="title != null">and title LIKE '%'||#{title}||'%' </if>
-		 		<if test="content != null">and content LIKE '%'||#{content}||'%' </if>
-		 		<if test="hashtag != null">and hashtag LIKE '%'||#{hashtag}||'%' </if>
-		 		<if test="userid != null">and userid LIKE '%'||#{userid}||'%' </if>
-		 		<if test="nickname != null">and nickname LIKE '%'||#{nickname}||'%' </if>
-		 		<if test="date != null and date2 != null">and to_date(writedate, 'YY/MM/DD')  between to_date(#{date}, 'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')</if>
+		 		<if test="title != null or title != ''">and title LIKE '%'||#{title}||'%' </if>
+		 		<if test="content != null or content != ''">and content LIKE '%'||#{content}||'%' </if>
+		 		<if test="hashtag != null or hashtag != ''">and hashtag LIKE '%'||#{hashtag}||'%' </if>
+		 		<if test="userid != null or userid != ''">and userid LIKE '%'||#{userid}||'%' </if>
+		 		<if test="nickname != null or nickname != ''">and nickname LIKE '%'||#{nickname}||'%' </if>
+		 		<if test="date != null or date != ''">and to_date(writedate, 'YY/MM/DD')  between to_date(#{date}, 'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')</if>
 	 		</trim>
 		</where>
 	</select>
@@ -132,7 +152,8 @@
 	
 	<!-- 모든 qna 가져오기 -->
 	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
-	 	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+		<![CDATA[
+	 	select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
 	 	from(
  			select ROWNUM RN, A.*
  							from(
@@ -140,13 +161,14 @@
  									from qnaboard
  									)A
  							)
-		where RN between #{start} and #{end}	 		
+		where RN between #{start} and #{end}	
+		]]> 		
 	</select>
 	
 	<!-- qna 10개만 가져오기 -->
 	<select id="selectQnaTen" resultType="com.allhomes.myapp.qna.QnaVO">
 		<![CDATA[
- 		select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate
+ 		select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate
  		from qnaboard
  		where rownum <= 10
  		order by writedate desc
