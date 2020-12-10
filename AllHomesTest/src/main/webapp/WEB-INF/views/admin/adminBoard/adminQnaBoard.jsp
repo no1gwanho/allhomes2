@@ -31,7 +31,7 @@
 					
 				</div>
 				
-				<div class="col-lg-1" style="float:left">
+				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
 						<option class="orderName" value="title">제목 순</option>
 						<option class="orderName" value="writedate">작성일 순</option>
@@ -51,15 +51,12 @@
 				<div class="card shadow mb-4">
 					<div class="card-body" style="text-align: center">
 						<div class="row">
-							<div class="col-lg-8">
+							<div class="col-lg-8 ml-4">
 								<!-- 제목 -->
 								<h4 style="padding-top: 25px;">
-									<strong><a href="/myapp/qnaView?q_no=${list.q_no }">${list.title }</a></strong>
+									<strong><a href="/myapp/adminQnaView?q_no=${list.q_no }">${list.title }</a></strong>
 								</h4>
-								<!-- 본문내용 -->
-								<p>
-									<a href="/myapp/qnaView">${list.content }</a>
-								</p>
+							
 								<br /> <br />
 								<p>
 									<i class="fas fa-user-circle"
@@ -70,10 +67,9 @@
 								</p>
 							</div>
 							<div class="col-lg-3">
-								<a href="#"> <img class="qna-thumnail"
-									style="width: 300px; height: 200px;"
-									src="<%=request.getContextPath() %>${list.thumbnail }">
-								</a>
+								<c:if test="${list.thumbnail ne null }">
+									<img style="width: 300px; height: 200px;" src="<%=request.getContextPath() %>/resources/upload/qnaboardImg/${list.thumbnail }">
+								</c:if>
 							</div>
 						</div>
 						<!-- row끝 -->
@@ -82,38 +78,41 @@
 				</div>
 			</c:forEach>
 
-			<!-- pagination -->
-			
 
-				<ul class="pagination">
-					<c:if test="${paging.startPage != 1 }">
-						<li class="page-item"><a class="page-link"
-							href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-						</li>
-					</c:if>
-					<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-						var="p">
-						<c:choose>
-							<c:when test="${p == paging.nowPage }">
-								<li class="page-item disabled"><a class="page-link">${p }</a>
-								</li>
-							</c:when>
-							<c:when test="${p != paging.nowPage }">
-								<li class="page-item"><a class="page-link"
-									href="<%=request.getContextPath()%>/adminMemberList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-								</li>
-							</c:when>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${paging.endPage != paging.lastPage}">
-						<li class="page-item"><a class="page-link"
-							href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-						</li>
-					</c:if>
-				</ul>
-			<!-- pagination 끝 -->
+			<div class="col-lg-12" style="text-align:center">
+				<div style="display:inline-block">
+					<!-- pagination -->
+					<ul class="pagination">
+						<c:if test="${paging.startPage != 1 }">
+							<li class="page-item"><a class="page-link"
+								href="<%=request.getContextPath()%>/adminQnaBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+							var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<li class="page-item disabled"><a class="page-link">${p }</a>
+									</li>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<li class="page-item"><a class="page-link"
+										href="<%=request.getContextPath()%>/adminQnaBoard?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+									</li>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<li class="page-item"><a class="page-link"
+								href="<%=request.getContextPath()%>/adminQnaBoard?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+							</li>
+						</c:if>
+					</ul>
+					<!-- pagination 끝 -->
+					
+				</div>
+			</div>
 		</div>
 	</div>
 
 	</div>
-</div>

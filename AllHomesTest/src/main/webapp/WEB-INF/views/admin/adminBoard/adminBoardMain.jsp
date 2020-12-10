@@ -243,8 +243,8 @@ td{
 							 <c:forEach var="qVo" items="${qList}">
 								<tr onClick="location.href=''">
 									<td>${qVo.q_no}</td>
-									<td>${qVo.title}</td>
-									<td class="wordCut">${qVo.content}</td>
+									<td class="wordCut" style="width:20%">${qVo.title}</td>
+									<td class="wordCut" style="width:20%;height:30px;">${qVo.content}</td>
 									<td>${qVo.userid}</td>
 									<td>${qVo.writedate}</td>
 									<td>${qVo.hit}</td>

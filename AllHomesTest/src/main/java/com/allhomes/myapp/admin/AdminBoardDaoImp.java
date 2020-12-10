@@ -61,4 +61,6 @@ public interface AdminBoardDaoImp {
 	
 	//모든 q&a 가져오기
 	public List<QnaVO> qnaAllList(AdminPagingVO vo);
+	//qna 개수 
+	public int countQnaAll();
 }

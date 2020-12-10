@@ -2,6 +2,8 @@ package com.allhomes.myapp.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.qna.QnaDaoImp;
 import com.allhomes.myapp.qna.QnaVO;
 
 @Controller
@@ -32,15 +35,18 @@ public class AdminQnaBoardController {
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		
 		//paging//
-		int total = dao.countHomeBoardTotal(); //총 집들이게시판 수
+		int total = dao.countQnaAll();//총 qna 개수 
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "15";
+			cntPerPage = "10";
 		} else if (nowPage == null) {
 			nowPage = "1";
 		} else if (cntPerPage == null) { 
-			cntPerPage = "15";
+			cntPerPage = "10";
 		}
+		System.out.println("cntperpage"+cntPerPage);
+		System.out.println("nowpage"+nowPage);
+		
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		//paging//
 				
@@ -51,6 +57,29 @@ public class AdminQnaBoardController {
 		mav.addObject("viewAll", dao.qnaAllList(vo));
 		
 		mav.setViewName("admin/adminBoard/adminQnaBoard");
+		return mav;
+	}
+	
+	//qna 글 보기
+	@RequestMapping("/adminQnaView")
+	public ModelAndView qnaView(int q_no, HttpSession ses) {
+		
+		
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		String loginId = (String)ses.getAttribute("userid");
+		String writer = dao.getQnaWriter(q_no);
+
+		ModelAndView mav = new ModelAndView();
+
+		
+		
+		QnaVO vo = dao.qnaSelect(q_no);
+		
+		mav.addObject("vo", vo);
+		mav.addObject("loginId", loginId);
+		
+		mav.setViewName("admin/adminBoard/adminQnaBoardView");
+		
 		return mav;
 	}
 }
