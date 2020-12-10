@@ -38,11 +38,11 @@ public class QnaController {
 		int total = dao.countQnaTotal(); //총 질문게시판 게시글 수 
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "10";
+			cntPerPage = "6";
 		}else if(nowPage == null) {
 			nowPage = "1";
 		}else if (cntPerPage == null) {
-			cntPerPage = "10";
+			cntPerPage = "6";
 		}
 		
 		vo = new QnaPagingVO (total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
