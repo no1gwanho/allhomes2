@@ -104,7 +104,7 @@ public class RegisterController {
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("nickname", resultVO.getNickname());
 			ses.setAttribute("email", resultVO.getEmail());
-			ses.setAttribute("m_pic", resultVO.getM_pic();
+			ses.setAttribute("m_pic", resultVO.getM_pic());
   		ses.setAttribute("m_no", resultVO.getM_no());
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			
