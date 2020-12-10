@@ -7,7 +7,7 @@
   
   <!-- 질문게시판 전체 리스트 -->
   <select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
-  	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
+  	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard order by q_no desc
   </select>
   
   <!-- 질문게시판 글작성하기 -->
