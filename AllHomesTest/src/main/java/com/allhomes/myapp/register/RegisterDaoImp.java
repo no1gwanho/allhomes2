@@ -40,6 +40,4 @@ public interface RegisterDaoImp {
 	public int mailFilter(RegisterVO vo);
 	//회원가입 메일인증
 	public int regFinal(RegisterVO vo);
-	
-
 }

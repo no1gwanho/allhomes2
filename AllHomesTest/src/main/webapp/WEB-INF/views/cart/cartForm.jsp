@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<br/>
 <div class="container">
 <h2>장바구니</h2>
 	<div class="row">
@@ -18,8 +19,6 @@
 		  			옵션 : 
 					<select class="input-select">
 						<option value="0">옵션1</option>
-						<option value="0">옵션2</option>
-						<option value="0">옵션3</option>
 					</select>
 				</label>
 				<br/>수량 : <input type="number" size="2" style="margin-bottom:5px;"/>

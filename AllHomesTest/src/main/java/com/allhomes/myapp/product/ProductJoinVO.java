@@ -14,15 +14,34 @@ public class ProductJoinVO {
 	private String pd_exp;      // 짧은 제품설명
 	private int shipping_c;		// 배송비
 	private String o_value;		//옵션
-
+	private int dc_price;
+	
 	private String s_name;
 	private String userid;
 	private String img;
 	private String content;
 	private String writedate;
 	private int rating;
-	private int dc_price;
+	private int avg_rating;
 	
+	private int pc_no;
+	private String pc_date;
+	
+	private String main_c;
+	private int c_code;
+	
+	public int getC_code() {
+		return c_code;
+	}
+	public void setC_code(int c_code) {
+		this.c_code = c_code;
+	}	
+	public String getMain_c() {
+		return main_c;
+	}
+	public void setMain_c(String main_c) {
+		this.main_c = main_c;
+	}	
 	public int getPd_no() {
 		return pd_no;
 	}
@@ -101,6 +120,12 @@ public class ProductJoinVO {
 	public void setO_value(String o_value) {
 		this.o_value = o_value;
 	}
+	public int getDc_price() {
+		return dc_price;
+	}
+	public void setDc_price(int dc_price) {
+		this.dc_price = dc_price;
+	}
 	public String getS_name() {
 		return s_name;
 	}
@@ -137,10 +162,22 @@ public class ProductJoinVO {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getDc_price() {
-		return dc_price;
+	public int getAvg_rating() {
+		return avg_rating;
 	}
-	public void setDc_price(int dc_price) {
-		this.dc_price = dc_price;
+	public void setAvg_rating(int avg_rating) {
+		this.avg_rating = avg_rating;
+	}
+	public int getPc_no() {
+		return pc_no;
+	}
+	public void setPc_no(int pc_no) {
+		this.pc_no = pc_no;
+	}
+	public String getPc_date() {
+		return pc_date;
+	}
+	public void setPc_date(String pc_date) {
+		this.pc_date = pc_date;
 	}
 }

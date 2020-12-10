@@ -5,7 +5,6 @@ public class CartVO {
 	private int pd_no;		// 제품번호
 	private int num;		// 개수
 	private int price;		// 가격
-	private int o_no;		// 옵션번호
 	
 	public int getM_no() {
 		return m_no;
@@ -31,12 +30,4 @@ public class CartVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getO_no() {
-		return o_no;
-	}
-	public void setO_no(int o_no) {
-		this.o_no = o_no;
-	}
-	
-	
 }

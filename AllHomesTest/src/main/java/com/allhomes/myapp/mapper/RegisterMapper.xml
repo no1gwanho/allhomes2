@@ -166,10 +166,5 @@
  	<select id="mailFilter" resultType="int">
  		select email from register where email=#{email}
  	</select>
- 	
- 	
- 	
- 	
- 	
 </mapper> 
 
