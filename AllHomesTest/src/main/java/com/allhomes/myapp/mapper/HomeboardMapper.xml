@@ -5,7 +5,7 @@
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
   	<!-- 집들이 전체리스트 -->
  	<select id="homeboardAllList"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
- 		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, a.writedate  
+ 		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
     	from homeboard a 
 		join hb_theme b 
    		on a.theme = b.theme 
@@ -13,7 +13,7 @@
     	on a.userid = c.userid
 		order by b_no desc
  	</select>
-  	
+  	  	
   	<!-- 집들이 글작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
   	  	insert into homeboard
@@ -23,8 +23,13 @@
 
   	<!-- 집들이 글내용보기 -->
   	<select id="homeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-  		select a.b_no, a.userid, a.title, a.content, a.nickname, a.theme, b.hb_theme_no, a.hashtag, a.hit, a.scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
-  		from homeboard a join hb_theme b on a.theme=b.theme where b_no=#{param1}
+  		select a.b_no, a.userid, c.m_pic, a.title, a.content, a.nickname, a.theme, b.hb_theme_no, a.hashtag, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate 
+  		from homeboard a 
+		join hb_theme b 
+		on a.theme=b.theme 
+		join register c
+		on a.userid = c.userid
+		where b_no=#{param1}
   	</select>
   	
   	<!-- 집들이 볼때마다 조회수 증가 -->
@@ -66,8 +71,12 @@
      
     <!-- 집들이 테마별로 리스트 -->
     <select id="homeboardThemeList" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select a.b_no, a.thumbnail, a.title, a.userid, b.hb_theme_no, a.hit, a.scrap from homeboard a join hb_theme b on a.theme = b.theme
-    	
+    	select a.b_no, a.thumbnail, a.title, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD HH24:MI') writedate, c.m_pic
+    	from homeboard a 
+    	join hb_theme b 
+    	on a.theme = b.theme
+    	join register c
+    	on a.userid = c.userid
     		<if test="hb_theme_no==0">
     		order by a.b_no desc
     		</if>
@@ -79,19 +88,22 @@
     
     <!-- 집들이 베스트 리스트  -->
     <select id="homeboardBestList" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select b_no, thumbnail, title, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
+    	select a.b_no, a.thumbnail, a.title, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic 
+    	from homeboard a 
+    	join register b
+    	on a.userid= b.userid
    		<choose>
    			<when test="order!=null and order.equals('recentBest')">
-   				where b_no in (select b_no from (select b_no from homeboard order by b_no desc) where rownum  <![CDATA[<]]>  13 ) order by hit desc
+   				where a.b_no in (select b_no from (select b_no from homeboard order by b_no desc) where rownum  <![CDATA[<]]>  13 ) order by a.hit desc
    			</when>
    			<when test="order!=null and order.equals('best')">
-   				order by hit desc
+   				order by a.hit desc
    			</when>
    			<when test="order!=null and order.equals('recent')">
-   				order by b_no desc
+   				order by a.b_no desc
    			</when>
    			<when test="order!=null and order.equals('scrap')">
-   				order by scrap desc
+   				order by a.scrap desc
    			</when>
    		</choose>
    
@@ -99,7 +111,13 @@
     
     <!-- 메인페이지용 집들이 최근인기글 8개 -->
     <select id="homeboardListForMain" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select b_no, thumbnail, title, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard where b_no in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) order by b_no asc
+    	select a.b_no, a.thumbnail, a.title, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
+    	from homeboard a
+    	join register b
+    	on a.userid=b.userid
+    	where a.b_no 
+    	in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) 
+    	order by a.b_no asc
     </select>
     
     

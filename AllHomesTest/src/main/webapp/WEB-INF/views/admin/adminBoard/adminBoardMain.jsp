@@ -160,13 +160,13 @@ td{
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 col-lg-6 font-weight-bold text-primary" style="float:left">HomeBoard</h6>
-					<a href="/myapp/adminHomeBoard" style="float:right;height:10px">더보기</a>
+					<a href="<%=request.getContextPath()%>/adminHomeBoard" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="height:440px">
 					<div id="banner_list">
 						<ul class="sec3_list">
 							<c:forEach var="vo" items="${hList}">
-							<li onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
+							<li onClick="location.href='<%=request.getContextPath()%>/adminHomeBoardView?b_no=${vo.b_no}'">
 								<span>
 									<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail}"/>
 								</span>
@@ -181,7 +181,7 @@ td{
 							</c:forEach>
 							
 							<li onClick="location.href='#'"><span><img
-									src="/myapp/resources/img/admin/Vice City.jpg" alt=""></span>
+									src="<%=request.getContextPath()%>/resources/img/admin/Vice City.jpg" alt=""></span>
 								<dl>
 									<dt class="wordCut">집들이 게시판 테스트 페이지1</dt>
 									<dd>
@@ -191,7 +191,7 @@ td{
 									</dd>
 								</dl></li>
 							<li onClick="location.href='#'"><span><img
-									src="/myapp/resources/img/admin/Cocoaa Ice.jpg" alt=""></span>
+									src="<%=request.getContextPath()%>/resources/img/admin/Cocoaa Ice.jpg" alt=""></span>
 								<dl>
 									<dt class="wordCut">집들이 게시판 테스트 페이지2</dt>
 									<dd>
@@ -201,7 +201,7 @@ td{
 									</dd>
 								</dl></li>
 							<li onClick="location.href='#'"><span><img
-									src="/myapp/resources/img/admin/Nelson.jpg" alt=""></span>
+									src="<%=request.getContextPath()%>/resources/img/admin/Nelson.jpg" alt=""></span>
 								<dl>
 									<dt class="wordCut">집들이 게시판 테스트 페이지3</dt>
 									<dd>
@@ -222,7 +222,8 @@ td{
 			<div class="my-2"></div>
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Q&A Board</h6>
+					<h6 class="m-0 font-weight-bold text-primary" style="float:left">Q&A Board</h6>
+					<a href="<%=request.getContextPath()%>/adminQnaBoard" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">
@@ -256,19 +257,7 @@ td{
 						</tbody>
 					</table>
 
-					<!-- pagination -->
-					<div style="display: inline-block">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</div>
-					<!-- pagination 끝 -->
+					
 
 
 				</div>
@@ -279,7 +268,8 @@ td{
 			<div class="my-2"></div>
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Review</h6>
+					<h6 class="m-0 font-weight-bold text-primary" style="float:left">Review</h6>
+					<a href="#" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">
@@ -323,21 +313,7 @@ td{
 						</tbody>
 					</table>
 
-					<!-- pagination -->
-					<div style="display: inline-block">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</div>
-					<!-- pagination 끝 -->
-
-
+					
 				</div>
 				<!-- card-body끝 -->
 			</div>

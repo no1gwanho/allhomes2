@@ -189,13 +189,13 @@
 						<c:if test="${logStatus=='Y' }">
 							<li class="nav-item" style="margin: 0px">
 								<h6>
-									<a class="nav-link" href="/myapp/mypageHome">${username}님</a>
+									<a class="nav-link" href="/myapp/mypageHome" style="padding:32px 0 0 30px;">${username}님   |  </a>
 								</h6>
 							</li>
-							<li class="nav-item" style="margin: 0px">
+							<li class="nav-item" style="margin: 0px;">
 								<h6>
 									<a class="nav-link" href="/myapp/logout"
-										style="margin-right: 20px;">로그아웃</a>
+										style="margin-right: 20px;padding:321px 0 0 10px;">로그아웃</a>
 								</h6>
 						</c:if>
 	

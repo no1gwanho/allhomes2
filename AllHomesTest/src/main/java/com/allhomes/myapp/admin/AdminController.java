@@ -44,7 +44,6 @@ public class AdminController {
 		//별점 비율
 		AdminBoardDaoImp bDao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		
-
 		float ratingOne = Math.round((float)bDao.selectReviewOne() / dao.countAllReview()*100);
 		float ratingTwo = Math.round((float)bDao.selectReviewTwo() / dao.countAllReview()*100);
 		float ratingThree = Math.round((float)bDao.selectReviewThree() / dao.countAllReview()*100);
@@ -91,19 +90,6 @@ public class AdminController {
 		return "admin/adminRegister/adminForgotPassword";
 	}
 	
-	
-	
-	//매출관리 메인 페이지로 이동-sales
-	@RequestMapping("/adminSalesMain")
-	public String adminSalesMain() {
-		return "admin/adminSales/adminSalesMain";
-	}
-	
-	//매출-스토어매출로 이동
-	@RequestMapping("/adminSalesStore")
-	public String adminSalesStore() {
-		return "admin/adminSales/adminSalesStore";
-	}
 	
 	
 	

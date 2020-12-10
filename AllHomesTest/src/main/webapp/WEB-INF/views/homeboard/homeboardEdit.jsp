@@ -72,6 +72,16 @@
 
 <style>
 
+	.container{
+		width:1200px;
+		font-family: 'SCDream3';
+	}
+
+	.col-3{
+		text-align:center;
+		margin-bottom:10px;
+	}
+
 	.label{background-color:#E98374;}
 	#homeboardWriteTitle {
 		margin: 20px 0 50px 20px;
@@ -84,6 +94,7 @@
 		font-size:15px;
 	}
 	.label-info{background-color:#E98374;color:white;}
+	
 
 </style>
 
@@ -106,7 +117,7 @@
 		<div class="col-2">
 			<select id="theme" name="theme" class="browser-default custom-select">
 					<c:forEach var="vo" items="${themeList }"> 
-					<option value="${vo.hb_theme_no}" <c:if test="${vo.hb_theme_no == oriThemeNo }"> selected</c:if>>${vo.theme }</option>
+					<option value="${vo.theme}" <c:if test="${vo.hb_theme_no == oriThemeNo }">selected</c:if>>${vo.theme}</option>
 				</c:forEach>
 			</select>
 		</div>

@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.admin.AdminBoardDaoImp">
+
+	<!-- ====================================Count=================================== -->
 	<select id="countHomeBoardToday" resultType="int">
 		select count(*) from homeboard where to_char(writedate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
 	</select>
@@ -12,58 +14,97 @@
 	<select id="countReviewToday" resultType="int">
 		select count(*) from review where to_char(writedate, 'YYYY-MM-DD')= to_char(sysdate, 'YYYY-MM-DD')
 	</select>
-	
-	<!-- Homeboard 모든 글-->
-	<select id="selectAllHomeBoard" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+	<!-- count homeboard Total -->
+	<select id="countHomeBoardTotal" resultType="int">
+		select count(*) from homeboard
 	</select>
+	<!-- ====================================Count=================================== -->
+	
+	
+	
+	<!-- ====================================HomeBoard=================================== -->
+	<!-- Homeboard 모든 글-->
+	<select id="selectAllHomeBoard" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate
+		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from homeboard
+ 									)A
+ 							)
+		where RN between #{start} and #{end}	
+	</select>
+	
+	<!-- homeboard 10개만 가져오기 -->
+	<select id="selectHomeboardTen" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		<![CDATA[
+ 		select  b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate  
+ 		from homeboard
+ 		where rownum <= 10
+ 		order by writedate desc
+ 		]]>
+	</select>
+	
 	
 	<!-- 모든 homeboard 글 가져오기(정렬)-->
 	<select id="selectAllHomeBoardOrder" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
-		<choose>
-			<when test="order!=null and order.equals('title')">
-   				order by title
-   			</when>
-   			<when test="order!=null and order.equals('writedate')">
-   				order by writedate desc
-   			</when>
-   			<when test="order!=null and order.equals('hit')">
-   				order by hit desc
-   			</when>
-   			<when test="order!=null and order.equals('scrap')">
-   				order by scrap desc
-   			</when>
-		</choose>
-	</select>
-	
-	<!-- 질문게시판 전체 리스트 -->
-	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
-	 	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
-	</select>
-  
-	<!-- homeboard 글내용보기 -->
+		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate 
+		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from homeboard
+ 									<choose>
+										<when test="order!=null and order.equals('title')">
+							   				order by title
+							   			</when>
+							   			<when test="order!=null and order.equals('writedate')">
+							   				order by writedate desc
+							   			</when>
+							   			<when test="order!=null and order.equals('hit')">
+							   				order by hit desc
+							   			</when>
+							   			<when test="order!=null and order.equals('scrap')">
+							   				order by scrap desc
+							   			</when>
+									</choose>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 		
+ 	</select>
+ 	
+ 	<!-- homeboard 글내용보기 -->
   	<select id="adminHomeboardSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
   		select b_no, userid, title, content, theme, hashtag, hit, scrap, to_char(writedate, 'YYYY-MM-DD HH24:MI') writedate
   		from homeboard where b_no=#{param1}
   	</select>
   
 	<!-- homeboard 선택 검색 -->
-	<select id="adminHBSearch" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
- 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard 
- 		<where>
-	 		<choose>
-	 			<when test="value == 'userid'">
-	 				userid LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 'title'">
-	 				title LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 'content'">
-	 				 content LIKE '%'||#{key}||'%'
-	 			</when>
-	 		</choose>
- 		</where>
+	<select id="adminHBSearch" parameterType="HashMap" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		select b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate 
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from homeboard
+							 		<where>
+								 		<choose>
+								 			<when test="value == 'userid'">
+								 				userid LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'title'">
+								 				title LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'content'">
+								 				 content LIKE '%'||#{key}||'%'
+								 			</when>
+								 		</choose>
+							 		</where>
+							 		)A
+ 							)
+		where RN between #{start} and #{end}
  	</select>
 	
 	<!-- homeboard 상세 검색 -->
@@ -81,11 +122,65 @@
 		</where>
 	</select>
 	
+ 	<!-- ====================================HomeBoard 끝=================================== -->
+	
+	
+	
+	
+	
+	<!-- ====================================QnaBoard=================================== -->
+	
+	<!-- 모든 qna 가져오기 -->
+	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
+	 	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+	 	from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from qnaboard
+ 									)A
+ 							)
+		where RN between #{start} and #{end}	 		
+	</select>
+	
+	<!-- qna 10개만 가져오기 -->
+	<select id="selectQnaTen" resultType="com.allhomes.myapp.qna.QnaVO">
+		<![CDATA[
+ 		select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate
+ 		from qnaboard
+ 		where rownum <= 10
+ 		order by writedate desc
+ 		]]>
+	</select>
+	
+  	<!-- ====================================QnaBoard 끝=================================== -->
+  	
+  	
+  	
+	
+	<!-- ====================================Review=================================== -->
 	<!-- 모든 리뷰 가져오기 -->
 	<select id="selectAllReview" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
 		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
 		from store, review, product
 		where review.pd_no = product.pd_no and store.s_no = review.s_no
+	</select>
+	
+	<!-- review 10개 가져오기 -->
+	<select id="selectReviewTen" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+		<![CDATA[
+ 		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
+		from store, review, product
+ 		where rownum <= 10 and review.pd_no = product.pd_no and store.s_no = review.s_no
+ 		order by review.writedate desc
+ 		]]>
+	</select>
+	
+	<!-- 스토어별로 리뷰 가져오기 -->
+	<select id="selectStoreReview" parameterType="int" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+		select store.s_no, store.s_name, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate 
+		from store, review, product
+		where review.pd_no = product.pd_no and store.s_no = review.s_no and review.s_no = #{s_no}
 	</select>
 	
 	<!-- 리뷰 별점별로 가져오기  -->
@@ -104,4 +199,25 @@
 	<select id="selectReviewFive" resultType="int">
 		select count(*) from review where rating=5
 	</select>
+	
+	<!-- store 별로 리뷰 별점 개수 가져오기 -->
+	<select id="selectStoreReviewOne" resultType="int">
+		select count(*) from review where rating=1 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewTwo" resultType="int">
+		select count(*) from review where rating=2 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewThree" resultType="int">
+		select count(*) from review where rating=3 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewFour" resultType="int">
+		select count(*) from review where rating=4 and s_no = #{s_no}
+	</select>
+	<select id="selectStoreReviewFive" resultType="int">
+		select count(*) from review where rating=5 and s_no = #{s_no}
+	</select>
+	<select id="storeReviewCount" resultType="int">
+		select count(*) from review where s_no = #{s_no}
+	</select>
+	<!-- ====================================Review 끝=================================== -->
 </mapper>

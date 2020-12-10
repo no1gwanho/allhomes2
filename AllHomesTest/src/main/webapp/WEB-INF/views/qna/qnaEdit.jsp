@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
 <!-- 해시태그를 위한 css/js파일 -->
-<script src="<%=request.getContextPath() %>/resources/js/bootstrap-tagsinput.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap-tagsinput.css">
+
 
 <!-- 글쓰기폼을 위한 CKEDITOR -->
 <script>
@@ -57,8 +56,8 @@
 
 <style>
 	.col-3{
-			text-align:center;
-			margin-bottom:10px;
+		text-align:center;
+		margin-bottom:10px;
 	}
 
 	.label{background-color:#E98374;}
@@ -77,17 +76,19 @@
 
 <div class="container">
 
-	<h3 id="qnaboardWriteTitle">질문하기</h3>
-	<form id="qnaForm" method="post" action="/myapp/qnaWriteOk" >
+	<h3 id="qnaboardWriteTitle">질문 수정하기</h3>
+	<form id="qnaForm" method="post" action="/myapp/qnaEditOk" >
 	
 		<div class="form-group">
-			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" maxlength="100"/>
+			<input type="hidden" name="q_no" id="q_no" value="${qnaVo.q_no }">
+			<input value="${qnaVo.title }" id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" maxlength="100"/>
 			<br/>
 			<textarea id="content" name="content" class="form-control rounded-0" placeholder="글을 입력하세요(최소 10글자 이상 입력해주세요)">
+				${qnaVo.content }
 			</textarea>
 			<br/>
 			<br/> 
-				<input type="submit" id="submitBtn" class="btn btn-primary" value="질문하기" style="background-color:#E98374;border:1px solid #E98374;text-align:center;"/> 
+				<input type="submit" id="submitBtn" class="btn btn-primary" value="질문수정" style="background-color:#E98374;border:1px solid #E98374;text-align:center;"/> 
 				<input type="button" id="cancelBtn" class="btn btn-secondary" value="취소" style="text-align:center;"/>
 		</div>
 	</form>

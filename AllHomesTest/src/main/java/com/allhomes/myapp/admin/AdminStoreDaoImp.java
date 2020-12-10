@@ -9,6 +9,21 @@ import com.allhomes.myapp.store.StoreVO;
 
 public interface AdminStoreDaoImp {
 	
+	//스토어 추가
+	public int storeAdd(StoreVO vo);
+	//전체 스토어 목록 불러오기
+	public List<StoreVO> storeAll(AdminPagingVO vo);
+	// 스토어 목록
+	public List<StoreVO> selectStoreJoin();
+	//스토어 선택
+	public StoreVO storeSelect(int s_no);
+	//스토어 삭제
+	public int storeDel(int s_no);
+	//스토어 수정
+	public int storeEdit(StoreVO vo);
+	//스토어 개수
+	public int storeCount();
+	
 	//스토어--스토어 카테고리
 	//category--메인카테고리 insert
 	public int storeCategoryInsert(AdminStoreCategoryVO vo);

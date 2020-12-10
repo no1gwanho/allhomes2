@@ -5,28 +5,46 @@ public class QnaVO {
 	private int q_no;
 	private String title;
 	private String content;
+	
+
+	
 	private String userid;
-	private String nickname;
 	private int hit;
 	private int answer;
 	private String writedate;
 	private String thumbnail;
 	
+	private String m_pic;
 	
 	
 	
-	public String getThumbnail() {
-		return thumbnail;
-	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
+	
+	
+	
+
 	public int getQ_no() {
 		return q_no;
 	}
 	public void setQ_no(int q_no) {
 		this.q_no = q_no;
 	}
+	
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+	
+	
+	
 	public String getTitle() {
 		return title;
 	}
@@ -44,12 +62,6 @@ public class QnaVO {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 	public int getHit() {
 		return hit;

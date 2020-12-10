@@ -38,7 +38,7 @@ public class RegisterController {
 		this.sqlSession = sqlSession;
 	}
 	
-		
+	
 	//이메일 인증
 	@RequestMapping("/regConf")
 	public ModelAndView regConf(RegisterVO vo,String userid) {
@@ -94,8 +94,6 @@ public class RegisterController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(resultVO == null){
-			
-
 			ses.setAttribute("logStatus","N");
 			mav.setViewName("landing/loginResult");			
 		}else {
@@ -104,10 +102,14 @@ public class RegisterController {
 			System.out.println(resultVO.getUsername());
 			
 			ses.setAttribute("nickname", resultVO.getNickname());
+			ses.setAttribute("m_pic", resultVO.getM_pic());
+			
+			System.out.println("프로필사진주소 =" +resultVO.getM_pic());
 			
 			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			
+			ses.setAttribute("m_no", resultVO.getM_no());
 			
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			
@@ -263,11 +265,16 @@ public class RegisterController {
 	//이메일 중복검사
 	@RequestMapping(value="/mailFilter")
 	@ResponseBody
-	public int mailFilter(RegisterVO vo,String email1,String email2) {
-		System.out.println("에러잡기1");	
+	public String mailFilter(RegisterVO vo,String email1,String email2) {
+		
+		vo.setEmail1(email1);
+		vo.setEmail2(email2);
+					
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		System.out.println("에러잡기2");
-		return dao.mailFilter(vo);
+		
+		String resultVO = dao.mailFilter(vo);
+		
+		return resultVO;
 	}	
 }
 

@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
-<!-- È¸¿ø°¡ÀÔ ½ÇÆÐÇßÀ»¶§ -->
+<!-- íšŒì›ê°€ìž… ì‹¤íŒ¨í–ˆì„ë•Œ -->
 <c:if test="${resultVO<=0}">
 	<script>
-		alert("È¸¿ø°¡ÀÔ ½ÇÆÐÇß½À´Ï´Ù.");
+		alert("íšŒì›ê°€ìž… ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		history.go(-1);
 	</script>
 </c:if>
@@ -37,11 +36,11 @@
 	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt="" style="width:150px;"/>
 	</a>
 	</div>
-    <h1 class="display-5">°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.</h1>
-    <p class="lead">°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù! µî·ÏÇÏ½Å ÀÌ¸ÞÀÏ·Î ÀÎÁõ ¸ÞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù. ÀÎÁõ ÈÄ Á¤»óÀûÀ¸·Î Á¢¼ÓÀÌ °¡´ÉÇÕ´Ï´Ù.</p>
+    <h1 class="display-5">ê°€ìž…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.</h1>
+    <p class="lead">ê°€ìž…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤! ë“±ë¡í•˜ì‹  ì´ë©”ì¼ë¡œ ì¸ì¦ ë©”ì¼ì´ ë°œì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì¸ì¦ í›„ ì •ìƒì ìœ¼ë¡œ ì ‘ì†ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</p>
     
-    <a href="/myapp/login"><button class="ah-btn btn">·Î±×ÀÎÇÏ±â</button></a>
-    <a href="/myapp/"><button class="btn btn-secondary">È¨À¸·Î</button></a> 
+    <a href="/myapp/login"><button class="ah-btn btn">ë¡œê·¸ì¸í•˜ê¸°</button></a>
+    <a href="/myapp/"><button class="btn btn-secondary">í™ˆìœ¼ë¡œ</button></a> 
   </div>
 	
 </body>

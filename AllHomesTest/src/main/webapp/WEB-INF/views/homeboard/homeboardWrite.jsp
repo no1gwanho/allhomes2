@@ -14,6 +14,7 @@
 			filebrowserUploadUrl:'/myapp/editor/imageUpload.do',
 			height:500,
 			extraPlugins : 'confighelper',
+			
 		});
 		
 		$('#cancelBtn').click(function(){
@@ -67,6 +68,11 @@
 
 <style>
 
+	.col-3{
+			text-align:center;
+			margin-bottom:10px;
+	}
+
 	.label{background-color:#E98374;}
 	#homeboardWriteTitle {
 		margin: 20px 0 50px 20px;
@@ -79,6 +85,10 @@
 		font-size:15px;
 	}
 	.label-info{background-color:#E98374;color:white;}
+	
+	.container{
+		font-family: 'SCDream3';
+	}
 
 </style>
 
@@ -116,14 +126,14 @@
 			
 		</div>
 		<div class="col-9"><!-- 태그는 엔터나 쉼표를 입력하면 확인됨 -->
-			<input  type="text" data-role="tagsinput" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
+			<input  type="text" data-role="tagsinput" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px" /><br/>
 			<span style="color:gray;font-size:11px;">해시태그는 최대 8개까지, 최대 10글자까지 입력 가능합니다.</span>
 		</div>
 	</div> <!-- row -->
 
 	
 		<div class="form-group">
-			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" />
+			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)"  maxlength="100"/>
 			<br/>
 			<textarea id="content" name="content" class="form-control rounded-0" placeholder="글을 입력하세요(최소 10글자 이상 입력해주세요)">
 			</textarea>
