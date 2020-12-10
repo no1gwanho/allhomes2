@@ -1,5 +1,6 @@
 package com.allhomes.myapp.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.product.ProductDaoImp;
@@ -136,10 +138,24 @@ public class AdminSalesController {
 	
 	//스토어 매출 조회(기간)
 	@RequestMapping("/storeSalesSearch")
-	public List<AdminOrderVO> storeSalesSearch(@RequestParam("date")String date,@RequestParam("date2") String date2){
+	@ResponseBody
+	public List<AdminSalesStoreSearchDetailVO> storeSalesSearch(@RequestParam("date")String date,
+			@RequestParam("date2") String date2,
+			@RequestParam("s_no") int s_no){
+		
+		
+		/*
+		 * System.out.println(s_no); System.out.println(date);
+		 * System.out.println(date2);
+		 */
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("s_no", s_no);
+		map.put("date", date);
+		map.put("date2", date2);
 		
 		AdminSalesDaoImp dao = sqlSession.getMapper(AdminSalesDaoImp.class);
-		return  dao.storeSalesSearch(date, date2);
+		return  dao.storeSalesSearch(map);
 		
 	
 	}

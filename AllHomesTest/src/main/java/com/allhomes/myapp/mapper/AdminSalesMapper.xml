@@ -5,25 +5,25 @@
 <mapper namespace="com.allhomes.myapp.admin.AdminSalesDaoImp">
 	<!-- 스토어별 매출,구매확정 건수 (오늘) -->
 	<select id="storeSalesToday" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
-		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		select count(*) as confirmCnt,sum(price) as sales,sum(shipping_c) as totalShippingC from purchase_confirm 
 		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') = to_date(sysdate, 'YY/MM/DD')
 	</select>
 	
 	<!-- 스토어별 매출,구매확정 건수 (한 달) -->
 	<select id="storeSalesMonth" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
-		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		select count(*) as confirmCnt,sum(price) as sales,sum(shipping_c) as totalShippingC from purchase_confirm 
 		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') between to_date(add_months(sysdate,-1),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
 	</select>
 	
 	<!-- 스토어별 매출,구매확정 건수 (세 달) -->
 	<select id="storeSalesThree" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
-		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		select count(*) as confirmCnt,sum(price) as sales,sum(shipping_c) as totalShippingC from purchase_confirm 
 		where s_no= #{s_no} and to_date(confirm_date, 'YY/MM/DD') between to_date(add_months(sysdate,-3),'YY/MM/DD') and to_date(sysdate, 'YY/MM/DD')
 	</select>
 	
 	<!--  스토어별 매출,구매확정 건수(총) -->
 	<select id="storeSalesTotal" parameterType="int" resultType="com.allhomes.myapp.admin.AdminSalesStoreVO">
-		select count(*) as confirmCnt,sum(price) as sales from purchase_confirm 
+		select count(*) as confirmCnt,sum(price) as sales ,sum(shipping_c) as totalShippingC from purchase_confirm 
 		where s_no= #{s_no}
 	</select>
 	
@@ -52,13 +52,12 @@
 	</select>
 	
 	<!-- 스토어 매출 조회(기간) -->
-	<select id="storeSalesSearch" parameterType="String" resultType="com.allhomes.myapp.admin.AdminOrderVO">
-		select purchase.pc_no, purchase.pd_no, product.pd_name, store.s_name, address.zipcode,
-		address.addr, address.addrdetail, purchase.userid, to_char(purchase.pc_date, 'YYYY-MM-DD'), purchase.status,
-		purchase.num, purchase.total_p,purchase.o_value
-		from purchase, product, store,address
-		where purchase.s_no = store.s_no and purchase.pd_no = product.pd_no and address.a_code = purchase.a_code
-		and to_date(pc_date, 'YY/MM/DD') between to_date(#{date},'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')
-		order by pc_date desc
+	<select id="storeSalesSearch" parameterType="hashmap" resultType="com.allhomes.myapp.admin.AdminSalesStoreSearchDetailVO">
+		select  purchase_confirm.pc_no, purchase_confirm.pd_no, product.pd_name,purchase_confirm.userid,
+		purchase_confirm.num, purchase_confirm.total_p, purchase_confirm.o_value, purchase_confirm.shipping_c,(purchase_confirm.total_p - purchase_confirm.shipping_c) as sales, to_char(purchase_confirm.pc_date, 'YYYY-MM-DD') pc_date
+		from purchase_confirm, product
+		where purchase_confirm.s_no = #{s_no} and purchase_confirm.pd_no = product.pd_no 
+		and to_date(purchase_confirm.pc_date, 'YY/MM/DD') between to_date(#{date},'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')
+		order by purchase_confirm.pc_date desc
 	</select>
 </mapper>
