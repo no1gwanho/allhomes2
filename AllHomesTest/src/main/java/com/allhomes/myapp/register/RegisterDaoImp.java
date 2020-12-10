@@ -1,20 +1,11 @@
 package com.allhomes.myapp.register;
 
-import java.util.HashMap;
-import java.util.List;
-
-import com.allhomes.myapp.admin.AdminPagingVO;
 
 public interface RegisterDaoImp {
 	
 	//로그인
 	public RegisterVO login(RegisterVO vo);
 	public int customerInsert(RegisterVO vo);
-	
-	
-	
-	
-	
 	//회원가입
 	public int registerMember(RegisterVO vo);
 	//회원가입 아이디 중복검사

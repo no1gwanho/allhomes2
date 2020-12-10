@@ -52,14 +52,26 @@ public class AdminMemberController {
 		
 	
 	
-	//회원관리 회원정보 상세 페이지로 이동
+	//회원정보 상세 페이지로 이동
 	@RequestMapping("/adminMemberDetail")
 	public ModelAndView MemberDetail(@RequestParam("m_no") int m_no) {
 		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
-		RegisterVO mVo = dao.memberSelect(m_no);
+		RegisterVO mVo = dao.memberSelect(m_no); //회원 정보
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mVo", mVo);
+		
+		
+		AdminMemberInfoCountVO infoVO = new AdminMemberInfoCountVO();
+		infoVO.setBoardCnt(dao.memberHBCnt(mVo.getUserid())+dao.memberQnaCnt(mVo.getUserid())+ dao.memberReviewCnt(m_no));
+		infoVO.setOrderCnt(dao.memberOrderCnt(mVo.getUserid()));
+		infoVO.setScrapCnt(dao.memberScrapCnt(m_no));
+		infoVO.setWishCnt(dao.memberWishCnt(m_no));
+		
+		List<AdminOrderVO> oList = dao.memberPurchase(mVo.getUserid()); //주문내역
+		
+		mav.addObject("infoVO", infoVO);
+		mav.addObject("oList", oList);
 		mav.setViewName("admin/adminMember/adminMemberDetail");
 		return mav;
 	}

@@ -125,8 +125,44 @@
  	<select id="countRegisterTotal" resultType="int">
  		select count(*) from register
  	</select>
- 	<!-- ==========================여기까지 관리자============================================ -->
-
-
+ 	
+ 	<!-- 회원 정보 count -->
+ 	<select id="memberHBCnt" resultType="int">
+ 		select count(*)	from homeboard where userid=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberQnaCnt" resultType="int">
+ 		select count(*)	from qnaboard where userid=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberReviewCnt" resultType="int">
+ 		select count(*)	from review where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberWishCnt" resultType="int">
+ 		select count(*)	from wishlist where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberScrapCnt" resultType="int">
+ 		select count(*)	from scrap where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberOrderCnt" resultType="int">
+ 		select count(*)	from purchase where userid=#{param1}
+ 	</select>
+ 	
+ 	
+ 	<!-- 회원 주문 가져오기 -->
+ 	<select id="memberPurchase" resultType="com.allhomes.myapp.admin.AdminOrderVO">
+		select purchase.pc_no, purchase.pd_no, product.pd_name, store.s_name, address.zipcode,
+		address.addr, address.addrdetail, purchase.userid, to_char(purchase.pc_date, 'YYYY-MM-DD') pc_date, purchase.status,
+		purchase.num, purchase.total_p, purchase.o_value
+		from purchase, product, store,address
+		where purchase.s_no = store.s_no and purchase.pd_no = product.pd_no and address.a_code = purchase.a_code and purchase.userid = #{param1}
+		order by pc_date desc
+	</select>
+ 	
+ 
+ 	
 </mapper> 
 

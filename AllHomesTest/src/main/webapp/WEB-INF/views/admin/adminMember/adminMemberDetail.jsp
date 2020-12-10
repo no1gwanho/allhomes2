@@ -21,9 +21,11 @@
                       <h6 class="m-0 font-weight-bold text-primary">Member</h6>
                   </div>
                   	<div class="card-body">
-                  		<div class="">
-                            <img src="<%=request.getContextPath()%>/resources/upload/register/${mVo.m_pic}" style="width:100px;height:100px;border-radius:70%"/>
+                  		<div class="col-lg-12 mt-4" style="text-align:center">
+                            <img src="<%=request.getContextPath()%>/resources/upload/register/${mVo.m_pic}" 
+                            style="width:150px;height:150px;border-radius:70%;display:inline-block"/>
                             <br/><br/><hr/><br/>
+		            	</div>        
                         	
 			                <p><label class="col-4">ID</label>${mVo.userid}<p>
 			               	<p><label class="col-4">이름</label>${mVo.username}<p>
@@ -34,11 +36,10 @@
 		                    
 							<hr/><br/>
 							
-							<p><label class="col-7">작성글</label><span style="color:#EE8374">132</span><p>
-			               	<p><label class="col-7">주문내역</label><span style="color:#EE8374">22</span><p>
-			               	<p><label class="col-7">스크랩</label><span style="color:#EE8374">111</span><p>
-			               	<p><label class="col-7">위시리스트</label><span style="color:#EE8374">444</span><p>
-		            	</div>        
+							<p><label class="col-7">작성글</label><span style="color:#EE8374">${infoVO.boardCnt}</span><p>
+			               	<p><label class="col-7">주문내역</label><span style="color:#EE8374">${infoVO.orderCnt}</span><p>
+			               	<p><label class="col-7">스크랩</label><span style="color:#EE8374">${infoVO.scrapCnt}</span><p>
+			               	<p><label class="col-7">위시리스트</label><span style="color:#EE8374">${infoVO.wishCnt}</span><p>
                   	</div>
             </div>                     
        </div><!-- col-lg-4 끝 -->
@@ -66,13 +67,7 @@
                 </a>
         		
         		
-        		<!-- 버튼 -->     
-                <a href="#" class="btn btn-danger btn-icon-split" style="float:right">
-                <span class="icon text-white-50">
-                <i class="fas fa-trash"></i>
-                </span>                 
-                <span class="text">삭제</span>
-                </a>
+        		
                  
        		</div><!-- 검색옵션 끝 -->
        		
@@ -176,30 +171,16 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach var="vo" items="${oList}">
 							<tr>
-								<td>12341</td>
-								<td>32423</td>
-								<td>원목 의자</td>
-								<td>자연가구</td>
-								<td>2020-11-02</td>
-								<td>구매확정</td>
+								<td>${vo.pc_no}</td>
+								<td>${vo.pd_no}</td>
+								<td>${vo.pd_name}</td>
+								<td>${vo.s_name}</td>
+								<td>${vo.pc_date}</td>
+								<td>${vo.status}</td>
 							</tr>
-							<tr>
-								<td>12341</td>
-								<td>32423</td>
-								<td>원목 의자</td>
-								<td>자연가구</td>
-								<td>2020-11-02</td>
-								<td>구매확정</td>
-							</tr>
-							<tr>
-								<td>12341</td>
-								<td>32423</td>
-								<td>원목 의자</td>
-								<td>자연가구</td>
-								<td>2020-11-02</td>
-								<td>구매확정</td>
-							</tr>
+							</c:forEach>
 						</tbody>	
 					</table>
 					<!-- table 끝 -->
