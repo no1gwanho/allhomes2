@@ -9,7 +9,7 @@
 	p.pd_name as pd_name, p.s_no as s_no, p.main_img as main_img from cart c, product p where c.pd_no=p.pd_no) where userid=#{userid}
 </select>
 <insert id="addCartList" parameterType="com.allhomes.myapp.cart.CartVO">
-	insert into cart(userid, pd_no, num, price, discount, shipping_c, o_value) 
-	values(#{userid}, #{pd_no}, #{num}, #{price}, #{discount}, #{shipping_c}, #{o_value})
+	insert into cart(c_no, userid, pd_no, num, price, discount, shipping_c, o_value) 
+	values(c_sq.nextval, #{userid}, #{pd_no}, #{num}, #{price}, #{discount}, #{shipping_c}, #{o_value})
 </insert>
 </mapper>
