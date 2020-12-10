@@ -106,8 +106,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Member Manage</h6>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberMain">Member Main</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberList">Member List</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberMain">회원 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberList">회원보기</a>
                     </div>
                 </div>
                 
@@ -125,11 +125,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Board Manage</h6>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardMain">Board Main</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminHomeBoard">Home Board</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminQnaBoard">Q&A Board</a>
-                        <a class="collapse-item" href="#">Review</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardCategory">Board Category</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardMain">게시판 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminHomeBoard">집들이 게시판</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminQnaBoard">Q&A 게시판</a>
+                        <a class="collapse-item" href="#">리뷰</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardCategory">집들이 게시판 카테고리</a>
                     </div>
                 </div>
                 
@@ -148,10 +148,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Store Manage</h6>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStoreOrder">Order</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStore">Store</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/storeAdd">Store 추가</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminCategory">Category</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStoreOrder">주문 보기</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStore">스토어 보기</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/storeAdd">스토어 추가</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminCategory">스토어 카테고리</a>
                        
                     </div>
                 </div>
@@ -169,8 +169,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Manage</h6>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesMain">Sales Main</a>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesStore">Store Sales</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesMain">매출관리 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesStore">스토어 매출</a>
                     </div>
                 </div>
                 
