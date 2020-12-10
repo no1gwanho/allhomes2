@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.allhomes.myapp.cart.CartDaoImp">
+<select id="joinCart" parameterType="String" resultType="com.allhomes.myapp.cart.CartJoinVO">
+	select * from (select c.pd_no as pd_no, c.userid as userid, c.price as price, c.discount as discount, c.shipping_c as shipping_c, c.num as num, c.o_value as o_value, 
+	p.pd_name as pd_name, p.s_no as s_no, p.main_img as main_img from cart c, product p where c.pd_no=p.pd_no) where userid=#{userid}
+</select>
+<insert id="addCartList" parameterType="com.allhomes.myapp.cart.CartVO">
+	insert into cart(userid, pd_no, num, price, discount, shipping_c, o_value) 
+	values(#{userid}, #{pd_no}, #{num}, #{price}, #{discount}, #{shipping_c}, #{o_value})
+</insert>
+</mapper>
