@@ -5,7 +5,7 @@
  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
-td{
+#summaryTB td{
 	text-align:right;
 }
 </style>
@@ -31,30 +31,40 @@ td{
 			var url = "/myapp/storeSalesSearch";
 			var data = { "date": date, "date2": date2, "s_no" : s_no };
 			
+			var totalShippingC = 0; //총 운송비용
+			var totalSales = 0; //총 판매액
+			
 			
 			$.ajax({
 				url:url,
 				data: data,
 				dataType:"json",
 				success:function(result){
-					/* var tag = "<table class='table'><thead><tr><th>주문번호</th><th>상품번호</th><th>상품명</th><th>주문자 ID</th><th>확정일</th><th>수량</th><th>판매액</th></tr></thead><tbody>";
-					 */
-					
-					var tag = "";
+					var tag = "<table class='table table-bordered'><thead><tr><th>주문번호</th><th>상품번호</th><th>상품명</th><th>주문자 ID</th><th>확정일</th><th>수량</th><th>운송비용</th><th>판매액</th></tr></thead><tbody>";
+					 
 						$.each(result,function(i, v) {
-							tag += "sdfsdf"; 
-					
-							/* tag += "<tr><td>"+v.pc_no+"</td>";
+							
+							tag += "<tr><td>"+v.pc_no+"</td>";
 							tag += "<td>"+v.pd_no+"</td>";
 							tag += "<td>"+v.pd_name+"</td>";
 							tag += "<td>"+v.userid+"</td>";
 							tag += "<td>"+v.pc_date+"</td>";
 							tag += "<td>"+v.num+"</td>";
-							tag += "<td>"+v.total_p+"</td></tr>"; */
-							tag += v.pd_name + v.total_p + v.o_value + v.pc_date;
+							tag += "<td style='text-align:right'>"+v.shipping_c+"원</td>";
+							tag += "<td style='text-align:right'>"+v.total_p+"원</td></tr>"; 
+							
+							totalShippingC += v.shipping_c;
+							totalSales += v.total_p;
 							
 						});
 						
+						tag += "<tr><th colspan='4'>총 판매액</th>";
+						tag += "<th colspan='4' style='text-align:right;color:#EE8374'>"+totalSales+"원</th></tr>";
+						tag += "<tr><th colspan='4'>(-)총 운송비용</th>";
+						tag += "<td colspan='4' style='text-align:right;'>(-)"+totalShippingC+"원</td></tr>";
+						tag += "<tr><th colspan='4'>총 판매이익</th>";
+						tag += "<th colspan='4' style='text-align:right;color:#EE8374'>"+(totalSales - totalShippingC)+"원</th></tr>";
+						tag += "</tbody><table>";
 						
 						$("#searchTB").append(tag);
 				},error: function(){
@@ -186,7 +196,7 @@ td{
 				<!-- card body -->
 				<div class="card-body">
 					<div class="col-lg-12">
-						<table class="table table-bordered">
+						<table class="table table-bordered" id="summaryTB">
 							<thead>
 								<tr>
 									<th scope="col">번호</th>
@@ -194,7 +204,9 @@ td{
 									<th scope="col">기간</th>
 									<th scope="col">주문 건수</th>
 									<th scope="col">구매확정</th>
-									<th scope="col">총 매출액</th>
+									<th scope="col">매출액</th>
+									<th scope="col">(-)운송비용</th>
+									<th scope="col">매출이익</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -205,26 +217,40 @@ td{
 									<td>${cntToday}건</td>
 									<td>${todayVO.confirmCnt}건</td>
 									<td>${todayVO.sales}원</td>
+									<td>(-)${todayVO.totalShippingC}원</td>
+									<td>${todayVO.sales - todayVO.totalShippingC}원</td>
 								</tr>
 								<tr>
 									<th>최근 1개월</th>
 									<td>${cntMonth}건</td>
 									<td>${monthVO.confirmCnt}건</td>
 									<td>${monthVO.sales}원</td>
+									<td>(-)${monthVO.totalShippingC}원</td>
+									<td>${monthVO.sales - monthVO.totalShippingC}원</td>
 								</tr>
 								<tr>
 									<th>최근 3개월</th>
 									<td>${cntThree}건</td>
 									<td>${threeVO.confirmCnt}건</td>
 									<td>${threeVO.sales}원</td>
+									<td>(-)${threeVO.totalShippingC}원</td>
+									<td>${threeVO.sales - threeVO.totalShippingC}원</td>
 								</tr>
 								<tr>
-									<th colspan="3">총 확정 주문 건수</th>
-									<th colspan="3" style="text-align:right;color:#EE8374">${totalVO.confirmCnt}건</th>
+									<th colspan="4">총 확정 주문 건수</th>
+									<th colspan="4" style="text-align:right;color:#EE8374">${totalVO.confirmCnt}건</th>
 								</tr>
 								<tr>
-									<th colspan="3">총 매출액</th>
-									<th colspan="3" style="text-align:right;color:#EE8374">${totalVO.sales}원</th>
+									<th colspan="4">총 매출액</th>
+									<th colspan="4" style="text-align:right;color:#EE8374">${totalVO.sales}원</th>
+								</tr>
+								<tr>
+									<th colspan="4">(-)총 운송비용</th>
+									<td colspan="4" style="text-align:right;">(-)${totalVO.totalShippingC}원</td>
+								</tr>
+								<tr>
+									<th colspan="4">총 매출이익</th>
+									<th colspan="4" style="text-align:right;color:#EE8374">${totalVO.sales - totalVO.totalShippingC}원</th>
 								</tr>
 
 							</tbody>
@@ -256,7 +282,7 @@ td{
 								<button id="salesSearchBtn" class="col-lg-1 ml-4 btn alert-clean shadow-sm">조회</button>
 							</div>
 						</div>
-						<div class="col-lg-12" id="searchTB">
+						<div class="col-lg-12 mt-4 mb-4" id="searchTB">
 						
 						</div>
 					</div>
