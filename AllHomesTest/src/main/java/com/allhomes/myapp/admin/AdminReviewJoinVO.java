@@ -11,8 +11,14 @@ public class AdminReviewJoinVO {
 	private int m_no; //회원번호
 	private String userid; //회원 아이디
 	private String m_pic; //프로필사진
+	private String img; //리뷰사진
 	
-	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public int getM_no() {
 		return m_no;
 	}
