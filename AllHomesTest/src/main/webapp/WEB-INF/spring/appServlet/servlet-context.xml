@@ -61,6 +61,9 @@
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
 
+	<!-- vo beans 설정 -->
+	<beans:bean name="pList" class="com.allhomes.myapp.product.ProductVO"></beans:bean>
+	<beans:bean name="cList" class="com.allhomes.myapp.cart.CartVO"></beans:bean>
 	<!-- 메일설정 -->
 	<context:component-scan base-package="kr.co.lty"/>
 	<beans:bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
