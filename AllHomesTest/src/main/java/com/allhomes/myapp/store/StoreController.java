@@ -63,6 +63,7 @@ public class StoreController {
 	public ModelAndView storeCate(@RequestParam(value="c_code", required=false) int c_code) {
 		
 		System.out.println("스토어 카테고리 넘어가?");
+		System.out.println("카테고리값: "+c_code);
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		List<ProductJoinVO> cList = dao.productCateList(c_code);

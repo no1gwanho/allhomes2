@@ -9,11 +9,17 @@
 	<!-- 질문게시판 전체 리스트 -->
   	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
   	<![CDATA[
-  		select a.q_no, a.title, regexp_replace(a.content, '<.*??>') content, a.thumbnail, a.userid, a.hit, a.answer, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
-  		from qnaboard a
-  		join register b
-  		on a.userid=b.userid
-  		order by q_no desc
+  		select * from(
+		  	select ROWNUM RN, A.*	
+			  	from(	
+			  			select a.q_no, a.title, regexp_replace(a.content, '<.*??>') content, a.thumbnail, a.userid, a.hit, a.answer, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
+			  			from qnaboard a
+			  			join register b
+			  			on a.userid=b.userid
+			  			order by q_no desc ) A
+			  	)
+			  where RN between #{start} and #{end}
+	  	
   	]]>
   	</select>
   	
