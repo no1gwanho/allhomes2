@@ -17,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductJoinVO;
 import com.allhomes.myapp.product.ProductVO;
-import com.allhomes.myapp.product.Sub_cDaoImp;
-import com.allhomes.myapp.product.Sub_cVO;
+
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
@@ -90,11 +89,11 @@ public class StoreController {
 		
 		RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		Sub_cDaoImp cate = sqlSession.getMapper(Sub_cDaoImp.class);
+		
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
 		
 		mav.addObject("vo", dao.selectProduct(pd_no));
-		mav.addObject("cate", cate.selectSubC(pd_no));
+
 		mav.addObject("result", rDao.countReview(pd_no));	
 
 		mav.setViewName("store/storeDetail");	

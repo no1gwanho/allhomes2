@@ -55,7 +55,7 @@ public class QnaController {
 		// 썸네일찾기 ====================
 				String hbContent = vo.getContent();
 
-				int idx = hbContent.indexOf("/homeboardImg/");
+				int idx = hbContent.indexOf("/qnaboardImg/");
 				int jpg1 = hbContent.indexOf("JPG");
 				int jpg2 = hbContent.indexOf("jpg");
 				int gif = hbContent.indexOf("gif");
@@ -65,19 +65,19 @@ public class QnaController {
 
 				try {
 					if (jpg1 > -1) {
-						String thumbnailUrl = hbContent.substring(idx+14, jpg1 + 3);
+						String thumbnailUrl = hbContent.substring(idx+13, jpg1 + 3);
 						System.out.println("글수정할때 썸네일 jpg:"+ thumbnailUrl);
 						vo.setThumbnail(thumbnailUrl); //썸네일
 					}else if (jpg2 > -1) {
-						String thumbnailUrl = hbContent.substring(idx+14, jpg2 + 3);
+						String thumbnailUrl = hbContent.substring(idx+13, jpg2 + 3);
 						System.out.println("글수정할때 썸네일 JPG:"+thumbnailUrl);
 						vo.setThumbnail(thumbnailUrl); //썸네일
 					}else if (gif > -1) {
-						String thumbnailUrl = hbContent.substring(idx+14, gif+3);
+						String thumbnailUrl = hbContent.substring(idx+13, gif+3);
 						System.out.println("글수정할때 썸네일 gif:"+thumbnailUrl);
 						vo.setThumbnail(thumbnailUrl); //썸네일
 					}else if (png > -1) {
-						String thumbnailUrl = hbContent.substring(idx+14, png+3);
+						String thumbnailUrl = hbContent.substring(idx+13, png+3);
 						System.out.println("글수정할때 썸네일 png:"+thumbnailUrl);
 						vo.setThumbnail(thumbnailUrl); // 썸네일
 					}else { //사진없는 글일때 준비된 파일 넣어주기

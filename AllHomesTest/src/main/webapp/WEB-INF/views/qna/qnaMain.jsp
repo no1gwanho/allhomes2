@@ -19,12 +19,15 @@
 }
 
 .qna-thumbnail{
-	width: 200px;
-	height: 150px;
+	width: 150px;
+	height: 120px;
+	overflow:hidden;
+	
 }
 
 .qna-thumbnail>img{
 	width:150px;
+	border-radius: 5%;
 }
 
 .input-group{
@@ -54,6 +57,9 @@
 	font-size:20px;
 	color:black;
 }
+
+
+
 
 .qna-content{
 	height:45px;
@@ -150,13 +156,11 @@
 			</div>
 	
 			
-			
-			
-			<!--  
 			<div class="col-3 qna-thumbnail">
-				<img title="${vo.thumbnail }" src="<%=request.getContextPath() %>${vo.thumbnail }">
+			<c:if test="${vo.thumbnail ne null }">
+				<img src="<%=request.getContextPath() %>/resources/upload/qnaboardImg/${vo.thumbnail }">
+			</c:if>
 			</div>
-			-->
 
 			
 		</div>
