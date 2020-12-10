@@ -9,12 +9,10 @@
 <script>
 
 	$(function() {
-		
 		CKEDITOR.replace('content', {
 			filebrowserUploadUrl:'/myapp/editor/qnaImageUpload.do',
 			height:500,
 			extraPlugins : 'confighelper',
-			
 		});
 		
 		$('#cancelBtn').click(function(){
@@ -61,13 +59,16 @@
 			margin-bottom:10px;
 	}
 
-	.label{background-color:#E98374;}
+	.label{
+		background-color:#E98374;
+	}
 	#qnaboardWriteTitle{
 		margin: 50px 0 20px 20px;
 	}
-	
-	.label-info{background-color:#E98374;color:white;}
-	
+	.label-info{
+		background-color:#E98374;
+		color:white;
+	}
 	.container{
 		font-family: 'SCDream3';
 	}

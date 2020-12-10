@@ -50,7 +50,6 @@ public class HomeBoardDetailSearchVO {
 	}
 	public void setDate2(String date2) {
 		this.date2 = date2;
-	}
-	
+	}	
 	
 }

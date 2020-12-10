@@ -30,13 +30,15 @@ public class QnaController {
 	@RequestMapping("/qnaMain")
 	public ModelAndView qnaMain() {
 		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		
 		List<QnaVO> list = dao.qnaAllList();
-		
-		
-		
+		List<QnaVO> answerList = dao.qnaAnwerList();
 		ModelAndView mav = new ModelAndView();
+		
 		mav.addObject("list", list);
+		mav.addObject("answerList", answerList);
 		mav.setViewName("/qna/qnaMain");
+		
 		
 		return mav;
 	}
@@ -53,60 +55,53 @@ public class QnaController {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
 		// 썸네일찾기 ====================
-				String hbContent = vo.getContent();
+		String hbContent = vo.getContent();
 
-				int idx = hbContent.indexOf("/qnaboardImg/");
-				int jpg1 = hbContent.indexOf("JPG");
-				int jpg2 = hbContent.indexOf("jpg");
-				int gif = hbContent.indexOf("gif");
-				int png = hbContent.indexOf("png");
-				System.out.println(jpg1 + ", " + jpg2 + ", " + gif + ", " + png);
-				
+		int idx = hbContent.indexOf("/qnaboardImg/");
+		int jpg1 = hbContent.indexOf("JPG");
+		int jpg2 = hbContent.indexOf("jpg");
+		int gif = hbContent.indexOf("gif");
+		int png = hbContent.indexOf("png");
 
-				try {
-					if (jpg1 > -1) {
-						String thumbnailUrl = hbContent.substring(idx+13, jpg1 + 3);
-						System.out.println("글수정할때 썸네일 jpg:"+ thumbnailUrl);
-						vo.setThumbnail(thumbnailUrl); //썸네일
-					}else if (jpg2 > -1) {
-						String thumbnailUrl = hbContent.substring(idx+13, jpg2 + 3);
-						System.out.println("글수정할때 썸네일 JPG:"+thumbnailUrl);
-						vo.setThumbnail(thumbnailUrl); //썸네일
-					}else if (gif > -1) {
-						String thumbnailUrl = hbContent.substring(idx+13, gif+3);
-						System.out.println("글수정할때 썸네일 gif:"+thumbnailUrl);
-						vo.setThumbnail(thumbnailUrl); //썸네일
-					}else if (png > -1) {
-						String thumbnailUrl = hbContent.substring(idx+13, png+3);
-						System.out.println("글수정할때 썸네일 png:"+thumbnailUrl);
-						vo.setThumbnail(thumbnailUrl); // 썸네일
-					}else { //사진없는 글일때 준비된 파일 넣어주기
-						vo.setThumbnail("");
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
+			try {
+				if (jpg1 > -1) {
+					String thumbnailUrl = hbContent.substring(idx+13, jpg1 + 3);
+					vo.setThumbnail(thumbnailUrl); //썸네일
+				}else if (jpg2 > -1) {
+					String thumbnailUrl = hbContent.substring(idx+13, jpg2 + 3);
+					vo.setThumbnail(thumbnailUrl); //썸네일
+				}else if (gif > -1) {
+					String thumbnailUrl = hbContent.substring(idx+13, gif+3);
+					vo.setThumbnail(thumbnailUrl); //썸네일
+				}else if (png > -1) {
+					String thumbnailUrl = hbContent.substring(idx+13, png+3);
+					vo.setThumbnail(thumbnailUrl); // 썸네일
+				}else { //사진없는 글일때 준비된 파일 넣어주기
+					vo.setThumbnail("");
 				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 				
-				//글 입력 성공하면 바로 해당 글View로 이동 
-				int q_no = 0;
+			//글 입력 성공하면 바로 해당 글View로 이동 
+			int q_no = 0;
 				
-				QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
-				int result = dao.qnaInsert(vo);
+			QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+			int result = dao.qnaInsert(vo);
 				
-				ModelAndView mav = new ModelAndView();
-				mav.addObject("vo", vo);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("vo", vo);
 				
-				if(result>0) {
-					q_no = dao.getQnaNumber();
-					vo.setQ_no(q_no);
+			if(result>0) {
+				q_no = dao.getQnaNumber();
+				vo.setQ_no(q_no);
 					
-					mav.addObject("q_no", q_no);
-					mav.setViewName("redirect:/qnaView");
-				}else {
-					mav.setViewName("qna/result");
-				}
+				mav.addObject("q_no", q_no);
+				mav.setViewName("redirect:/qnaView");
+			}else {
+				mav.setViewName("qna/result");
+			}
 				return mav;
-	
 	}
 	
 	
@@ -117,11 +112,11 @@ public class QnaController {
 		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
 		String loginId = (String)ses.getAttribute("userid");
 		String writer = dao.getQnaWriter(q_no);
+		int answerNum = dao.getAnswerNum(q_no);
 
 		ModelAndView mav = new ModelAndView();
 
-		//--> 조회수 증가 넣을 곳 
-		
+		//글쓴 본인이 아니거나 로그인하지 않았으면 조회수 증가
 		if(loginId == null || !loginId.equals(writer)) {
 			dao.qnaHit(q_no);
 		}
@@ -130,7 +125,8 @@ public class QnaController {
 		
 		mav.addObject("vo", vo);
 		mav.addObject("loginId", loginId);
-		
+		mav.addObject("writer", writer);
+		mav.addObject("answerNum", answerNum);
 		mav.setViewName("/qna/qnaView");
 		
 		return mav;
@@ -162,10 +158,8 @@ public class QnaController {
 		
 		if(result>0) {
 			mav.setViewName("redirect:/qnaView");
-			
 		}else {
 			mav.setViewName("/qna/result");
-			
 		}
 		return mav;
 	}
@@ -184,31 +178,10 @@ public class QnaController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("/qnaReplyLogin")
+	public String replyLoginPage(@RequestParam("q_no") int q_no) {
+		
+		return "redirect:qnaView?q_no="+q_no;
+	}
+
 }
