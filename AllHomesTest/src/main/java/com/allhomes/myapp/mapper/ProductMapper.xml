@@ -5,14 +5,14 @@
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
 	<!-- 제품 + 리뷰 + 스토어 -->
-	<select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+	<select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
 		select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as dc_price, p.status as status, 
     	r.pd_no as pd_no, r.userid as userid, r.img as img, r.content as content, r.writedate as writedate, r.rating as rating 
     	from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
 	</select>
   	<!-- 모든 제품 조회 -->
   	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img from product
+  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img from product
   	    <choose>
   	    	<when test="sortPd!=null and sortPd.equals('recent')">
   	    		order by pd_no desc
@@ -26,97 +26,23 @@
   	    </choose>
   	</select>
   	<!-- 카테고리별 제품 조회 -->
-	<select id="productCateList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  		select s_no, pd_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, sub_c from product
-  			<if test="pdCate.equals(all)">
-  				order by pd_no desc
-  			</if>
-  			<if test="!pdCate.equals(all)">
-  				where sub_c=#{param1} order by pd_no desc
-  			</if>
-  			<!-- <when test="pdCate.equals('sofa_f')">
-  				where sub_c=#{param1}
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('stud_f')">
-  				where sub_c=#{param1}
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('bed_f')">
-  				where sub_c='침실가구'  			
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('kitchen_f')">
-  				where sub_c='주방가구'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('tbl')">
-  				where sub_c='테이블/의자/스툴'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('light')">
-  				where sub_c='조명'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('deco')">
-  				where sub_c='장식소품'
-  			</when> 
-  			<when test="pdCate!=null and pdCate.equals('walldeco')">
-  				where sub_c='월데코/장식'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('homgall')">
-  				where sub_c='홈갤러리'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('flower')">
-  				where sub_c='플라워/식물'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('kitchen_a')">
-  				where sub_c='주방가전'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('clean')">
-  				where sub_c='청소가전'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('life')">
-  				where sub_c='생활가전'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('season')">
-  				where sub_c='계절가전'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('tv')">
-  				where sub_c='영상음향가전'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('cabinet')">
-  				where sub_c='수납장/서랍장'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('box')">
-  				where sub_c='리빙박스/수납함/바구니'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('hanger')">
-  				where sub_c='행거/옷걸이'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('shelf')">
-  				where sub_c='선반/거치대'
-  			</when>
-			<when test="pdCate!=null and pdCate.equals('shoe')">
-  				where sub_c='현관/신발정리'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('paper')">
-  				where sub_c='벽지/시트지'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('tile')">
-  				where sub_c='타일/파벽돌'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('paint')">
-  				where sub_c='페인트/부자재'
-  			</when>
-  			<when test="pdCate!=null and pdCate.equals('handle')">
-  				where sub_c='손잡이/방문/유리'
-  			</when>
-			<when test="pdCate!=null and pdCate.equals('tool')">
-  				where sub_c='공구/접착제/보수용품'
-  			</when>  	
-  		</choose> -->		
-  	</select> 
+	<select id="productCateList" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
+		select * from (select s.main_c as main_c, s.c_code as c_code, p.s_no as s_no, p.pd_no as pd_no, p.pd_name as pd_name, p.price as price, p.discount as discount, round(p.price-(p.price*p.discount/100), -1) as dc_price, 
+		p.main_img as main_img, p.sub_c as sub_c from product p, sub_c s where p.sub_c=s.sub_c)
+		<if test="c_code==0">
+			order by pd_no desc
+		</if>
+		<if test="c_code>=1">
+			where c_code=#{c_code} orde by pd_no desc
+		</if>
+  	</select>
+  	 
   	<!-- 제품 리뷰 조회 -->
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
   	</select>
   	<!-- 메인페이지 제품리스트 -->
-  	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductVO">
+  	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductJoinVO">
   		select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c from product where pd_no in (select pd_no from (select pd_no from product order by pd_no desc) where rownum <![CDATA[<]]> 9)
   	</select>
   	<!-- 등록된 상품 수 조회 -->
@@ -129,7 +55,7 @@
   	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
   	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">

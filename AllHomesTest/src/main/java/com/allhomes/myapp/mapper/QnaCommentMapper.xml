@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!--====== 질문게시판 댓글 MAPPER ========-->
+ <mapper namespace="com.allhomes.myapp.qna.QnaCommentDaoImp">
+  
+	<!-- 댓글리스트 불러오기 -->
+	<select id="commentAllSelect" parameterType="int" resultType="com.allhomes.myapp.qna.QnaCommentVO">
+		select a.q_c_no, a.userid, a.q_no, a.q_comment, b.m_pic,
+		to_char(a.writedate, 'YYYY-MM-DD HH24:MI') writedate, 
+		to_char(a.editdate, 'YYYY-MM-DD HH24:MI') editdate 
+		from qna_comment a
+		join register b
+		on a.userid=b.userid
+		where q_no=#{q_no} 
+		order by a.q_c_no
+	</select>
+
+	<!-- 댓글쓰기 -->
+	<insert id="commentInsert" parameterType="com.allhomes.myapp.qna.QnaCommentVO">
+		insert into qna_comment(q_c_no, userid, q_comment, q_no) 
+		values(qna_comment_sq.nextval, #{userid}, #{q_comment}, #{q_no})
+	</insert>
+	
+	
+	<!-- 댓글 수정하기 -->
+	<update id="commentEdit" parameterType="com.allhomes.myapp.qna.QnaCommentVO">
+		update qna_comment set q_comment=#{q_comment}, editdate=sysdate where q_c_no=#{q_c_no}
+	</update>
+	
+	
+	<!-- 댓글 삭제하기 -->
+	<delete id="commentDelete" parameterType="int">
+		delete from qna_comment where q_c_no=#{param1}
+	</delete>
+
+</mapper>	

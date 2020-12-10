@@ -6,26 +6,41 @@ public class QnaVO {
 	private String title;
 	private String content;
 	private String userid;
-	private String nickname;
 	private int hit;
 	private int answer;
 	private String writedate;
 	private String thumbnail;
+	private String writer;
 	
+	////////조인을 위한 프로필사진 /////
+	private String m_pic;
 	
-	
-	
-	public String getThumbnail() {
-		return thumbnail;
+	public String getM_pic() {
+		return m_pic;
 	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
+	//////======================
+	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public int getQ_no() {
 		return q_no;
 	}
 	public void setQ_no(int q_no) {
 		this.q_no = q_no;
+	}
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	public String getTitle() {
 		return title;
@@ -45,12 +60,6 @@ public class QnaVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 	public int getHit() {
 		return hit;
 	}
@@ -69,8 +78,4 @@ public class QnaVO {
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
-	
-	
-	
-
 }

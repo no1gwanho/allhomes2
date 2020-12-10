@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<style>
-	
-.col-3 {
-			text-align:center;
-			margin-bottom:10px;
+
+	<style>
+	.col-3 {
+		text-align:center;
+		margin-bottom:10px;
 		}
 	
 	.card-body {
@@ -30,16 +30,16 @@
 		}
 
 	.card-title {
-			padding:0px;
-			font-size: 17px;
-			font-weight: bold;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
+		padding:0px;
+		font-size: 17px;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	
-	.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
-		.card-title>a:active {
+	.card-title>a:link, .card-title>a:visited, .card-title>a:hover, 
+	.card-title>a:active {
 		text-decoration: none;
 	}
 	
@@ -52,17 +52,16 @@
 	}
 	
 	.container{
-			max-width:1400px;
-			margin: 0 auto;
-			font-family: 'SCDream3';
+		max-width:1400px;
+		margin: 0 auto;
+		font-family: 'SCDream3';
 	}
 
-	
 	#homeboardTitle {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-left: 20px;
-	font-family:'SCDream5'
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 20px;
+		font-family:'SCDream5'
 	}
 	
 	#orderSelect{
@@ -91,8 +90,8 @@
 			var refreshOption = $('#order').val();
 
 			$('#order').change(function(){
-					var selectedOrder = $("#order option:selected").val();
-					location.href="/myapp/homeboardTop?order="+selectedOrder;
+				var selectedOrder = $("#order option:selected").val();
+				location.href="/myapp/homeboardTop?order="+selectedOrder;
 			});
 	});
 

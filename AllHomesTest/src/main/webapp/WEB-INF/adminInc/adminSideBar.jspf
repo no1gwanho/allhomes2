@@ -35,11 +35,22 @@
 	<!-- jquery js -->
 	<script src="/myapp/resources/vendor/jquery/jquery.min.js"></script>
  	
- 	
- 	
     <title>Admin Home</title>
 </head>
+<style>
+@font-face{
+	font-family:"lot";
+	src:url("/myapp/resources/css/font/Lot-Regular.otf") format("truetype");
+	font-style:normal;
+	font-weight:normal;
+}
 
+#homesLogo span{
+	font-family:'lot';
+	font-size:50px;
+}
+#homesLogo span:hover { text-decoration: none; } 
+</style>
 <script>
 	$(function(){
 		$("#IntegSearchBtn").click(function(){
@@ -57,21 +68,22 @@
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a href="/myapp/adminMain" class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon">
-                    <img src="/myapp/resources/img/admin/logo.png" style="width:50px; heght:50px">
-                </div>
-                <div class="sidebar-brand-text mx-3" style="color:white">ALL HOMES </div>
-            </a>
+           
+            <div class="sidebar-brand-text mx-3" style="color:white">
+              	<a href="<%=request.getContextPath()%>/" id="homesLogo">
+					<span  style="color:#EE8374">h</span><span style="color:#aaaaaa">o</span><span style="color:#EE8374">m</span><span style="color:#aaaaaa">es</span>
+				</a>
+            </div>
+           
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/myapp/adminMain">
+                <a class="nav-link" href="<%=request.getContextPath()%>/adminMain">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>HOME</span></a>
+                    <span>ADMIN MAIN</span></a>
             </li>
 
             <!-- Divider -->
@@ -94,8 +106,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Member Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminMemberMain">Member Main</a>
-                        <a class="collapse-item" href="/myapp/adminMemberList">Member List</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberMain">회원 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminMemberList">회원보기</a>
                     </div>
                 </div>
                 
@@ -113,11 +125,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Board Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminBoardMain">Board Main</a>
-                        <a class="collapse-item" href="/myapp/adminHomeBoard">Home Board</a>
-                        <a class="collapse-item" href="#">Q&A Board</a>
-                        <a class="collapse-item" href="#">Review</a>
-                        <a class="collapse-item" href="/myapp/adminBoardCategory">Board Category</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardMain">게시판 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminHomeBoard">집들이 게시판</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminQnaBoard">Q&A 게시판</a>
+                        <a class="collapse-item" href="#">리뷰</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardCategory">집들이 게시판 카테고리</a>
                     </div>
                 </div>
                 
@@ -136,10 +148,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Store Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminStoreOrder">Order</a>
-                        <a class="collapse-item" href="/myapp/adminStore">Store</a>
-                        <a class="collapse-item" href="/myapp/storeAdd">Store 추가</a>
-                        <a class="collapse-item" href="/myapp/adminCategory">Category</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStoreOrder">주문 보기</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStore">스토어 보기</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/storeAdd">스토어 추가</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminCategory">스토어 카테고리</a>
                        
                     </div>
                 </div>
@@ -157,8 +169,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Manage</h6>
-                        <a class="collapse-item" href="/myapp/adminSalesMain">Sales Main</a>
-                        <a class="collapse-item" href="/myapp/adminSalesStore">Store Sales</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesMain">매출관리 메인</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminSalesStore">스토어 매출</a>
                     </div>
                 </div>
                 
@@ -185,8 +197,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminLogin">Login</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminJoin">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>

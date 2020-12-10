@@ -3,7 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.admin.AdminStoreDaoImp">
- 	<!--=============== store 검색===================== -->
+	<!-- 스토어 추가 -->
+ 	<insert id="storeAdd" parameterType="com.allhomes.myapp.store.StoreVO">
+ 		insert into store(s_no,s_num,s_name,s_pic,openingdate,s_id,staff_n,staff_t,staff_e,s_homepage,status)
+ 		 values(store_sq.nextval, #{s_num},#{s_name},#{s_pic},sysdate,#{s_id},#{staff_n},#{staff_t},#{staff_e},#{s_homepage},'Y')
+ 	</insert>
+ 	
+ 	<!-- 스토어 모든 리스트 -->
+ 	<select id="storeAll" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s_no, s_num, s_name, s_pic, to_char(openingdate, 'YYYY-MM-DD') openingdate, s_id, staff_n, staff_t, staff_e, s_homepage 
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from store
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 	</select>
+ 	
+ 	<!-- 스토어 개수 -->
+ 	<select id="storeCount" resultType="int">
+ 		select count(*) from store
+ 	</select>
+ 	
+ 	<!-- 스토어 선택 -->
+ 	<select id="storeSelect" parameterType="int" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s_no, s_num, s_name, s_pic, to_char(openingdate, 'YYYY-MM-DD') openingdate, s_id, staff_n, staff_t, staff_e, s_homepage from store where s_no=#{s_no}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectStoreJoin" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s.s_no, s.s_name from store s, product p where s.s_no=p.s_no
+ 	</select>
+ 	
+ 	<!-- 스토어 삭제 -->
+ 	<delete id="storeDel">
+ 		delete from store where s_no=#{s_no}
+ 	</delete>
+ 	
+ 	<!--스토어 수정 -->
+ 	<update id="storeEdit" parameterType="com.allhomes.myapp.store.StoreVO">
+ 		update store set s_num=#{s_num}, s_name=#{s_name}, s_id=#{s_id}, staff_n=#{staff_n}, staff_e=#{staff_e}, staff_t=#{staff_t}, s_homepage=#{s_homepage} where s_no=#{s_no} 
+ 	</update>
+ 	
  	<!-- 상세검색 -->
  	<select id="adminStoreDetailSearch" parameterType="com.allhomes.myapp.store.StoreDetailSearchVO" resultType="com.allhomes.myapp.store.StoreVO">
  		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store

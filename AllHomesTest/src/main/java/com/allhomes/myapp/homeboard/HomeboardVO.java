@@ -108,5 +108,4 @@ public class HomeboardVO {
 		this.writedate = writedate;
 	}
 	
-	
 }

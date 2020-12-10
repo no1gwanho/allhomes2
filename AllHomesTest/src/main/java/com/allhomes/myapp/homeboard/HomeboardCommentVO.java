@@ -13,10 +13,6 @@ public class HomeboardCommentVO {
 	private int comment_no;
 	private String m_pic;
 	
-	
-	
-	
-	
 	public String getM_pic() {
 		return m_pic;
 	}
@@ -47,7 +43,6 @@ public class HomeboardCommentVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-
 	public String getWritedate() {
 		return writedate;
 	}
@@ -78,8 +73,5 @@ public class HomeboardCommentVO {
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
 	}
-	
-	
-	
 
 }

@@ -20,7 +20,6 @@
 			window.history.back();
 		});
 		
-		console.log(CKEDITOR.instances.content.getData().length);
 		$("#homeboardForm").submit(()=>{
 			var ckContent = CKEDITOR.instances.content.getData(); //ckeditor글내용
 			var ckContentLength = CKEDITOR.instances.content.getData().length; //ckeditor에 쓴 글자수
@@ -29,8 +28,6 @@
 				alert("테마를 선택해주세요"); 
 				$('#theme').focus();
 				return false;
-			
-				
 			}
 			if($('#title').val()==''){ //제목이 입력되지 않았을때
 				alert("제목을 입력해주세요"); 
@@ -50,15 +47,12 @@
 			if(ckContentLength < 18){
 				alert("열글자 이상 입력해주세요");
 				CKEDITOR.instances.content.focus();
-				return false;
 				
+				return false;
 			}
 		});
-		
 		return true;
-			
-	
-	
+
 	});//jquery
 </script>
 
@@ -68,8 +62,8 @@
 <style>
 
 	.col-3{
-			text-align:center;
-			margin-bottom:10px;
+		text-align:center;
+		margin-bottom:10px;
 	}
 
 	.label{background-color:#E98374;}
@@ -83,16 +77,16 @@
 	.homeboardWriteSub{
 		font-size:15px;
 	}
-	.label-info{background-color:#E98374;color:white;}
+	.label-info{
+		background-color:#E98374;
+		color:white;
+	}
 	
 	.container{
 		font-family: 'SCDream3';
 	}
 
 </style>
-
-
-
 
 
 <div class="container">
@@ -125,14 +119,14 @@
 			
 		</div>
 		<div class="col-9"><!-- 태그는 엔터나 쉼표를 입력하면 확인됨 -->
-			<input  type="text" data-role="tagsinput" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px"/><br/>
+			<input  type="text" data-role="tagsinput" id="tags" name="hashtag" placeholder="태그를 입력하세요 :)" style="width:300px" /><br/>
 			<span style="color:gray;font-size:11px;">해시태그는 최대 8개까지, 최대 10글자까지 입력 가능합니다.</span>
 		</div>
 	</div> <!-- row -->
 
 	
 		<div class="form-group">
-			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)" />
+			<input id="title" type="text" class="form-control" name="title" placeholder="제목을 입력하세요(최소 5글자 이상 입력해주세요)"  maxlength="100"/>
 			<br/>
 			<textarea id="content" name="content" class="form-control rounded-0" placeholder="글을 입력하세요(최소 10글자 이상 입력해주세요)">
 			</textarea>

@@ -49,10 +49,10 @@
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-7" style="left:350px;">
 			<div class="product-details">
-				<form method="post" action="/myapp/cartList"> <!-- 액션 넣어주세요 -->
+				<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no }"> <!-- 액션 넣어주세요 -->
 					<div class="product-details">
-						Category : <a href="#">메인카테고리</a> > <a href="#">${vo.sub_c }</a><br/>
-						<h2 class="product-name"></h2>
+						Category : <a href="#">${cate.main_c }</a> > <a href="#">${cate.sub_c }</a><br/>
+						<h2 class="product-name">${vo.pd_name }</h2>
 						<div>
 							<div class="product-ration">
 								<i class="fa fa-star"></i>
@@ -65,7 +65,7 @@
 						</div>
 						<c:if test="${vo.discount!=0 }">
 							<span style="font-size:1.4em;">원가:<del>${vo.price }원</del></span><br/>
-							<span style="font-size:1.4em;">할인가:${vo.price-(vo.price*vo.discount/100) }원</span><br/>
+							<span style="font-size:1.4em;">할인가:${vo.discount}원</span><br/>
 							<span style="font-size:1.4em;">배송비:${vo.shipping_c }원</span><br/>
 						</c:if>
 						<c:if test="${vo.discount==0 }">
@@ -83,9 +83,7 @@
 									<option value="${oVo.o_value}">${oVo.o_value}</option>
 								</c:forEach>	 --%>
 								<c:if test="${vo.o_value!=null }">
-									<option value="${vo.o_value1}">${vo.o_value1}</option>
-									<option value="${vo.o_value2}">${vo.o_value2}</option>
-									<option value="${vo.o_value3}">${vo.o_value3}</option>
+									<option value="${o_value}">${o_value}</option>
 								</c:if>
 							</select><br/>
 						수량 : <input type="number" value="1"/> (<span style="font-size:0.8em;">재고: ${vo.stock } 개</span>)<br/>

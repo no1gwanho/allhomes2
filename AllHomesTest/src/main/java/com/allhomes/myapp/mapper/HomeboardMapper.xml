@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ==========집들이 글 MAPPER============ -->
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
+
   	<!-- 집들이 전체리스트 -->
  	<select id="homeboardAllList"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
  		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
@@ -67,7 +70,6 @@
     <delete id="homeboardDelete" parameterType="int">
     	delete from homeboard where b_no=#{param1}
     </delete>
-    
      
     <!-- 집들이 테마별로 리스트 -->
     <select id="homeboardThemeList" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
@@ -84,7 +86,6 @@
     		where hb_theme_no=#{hb_theme_no} order by a.b_no desc
     		</if>
     </select>
-    
     
     <!-- 집들이 베스트 리스트  -->
     <select id="homeboardBestList" parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
@@ -119,7 +120,5 @@
     	in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) 
     	order by a.b_no asc
     </select>
-    
-    
 
 </mapper>

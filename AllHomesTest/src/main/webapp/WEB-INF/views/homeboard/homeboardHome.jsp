@@ -10,7 +10,6 @@
 			height:450px;
 			border-radius:30px;
 		}
-	
 	.bx-wrapper {
 	       -moz-box-shadow: none !important;
 	        -webkit-box-shadow: none !important;
@@ -18,14 +17,10 @@
 	        padding:0;
 	        margin:0;
 	}
-	
 	.col-3, .col-lg-3, .col-xs-6{
 			text-align:center;
 			margin-bottom:10px;
 	}
-		
-
-	
 	.card-body {
 		padding-top:10px;
 		height:150px;
@@ -47,7 +42,6 @@
 		text-align: center;
 		overflow: hidden;
 		}
-		
 	.card-title {
 			padding:0px;
 			font-size: 17px;
@@ -56,34 +50,28 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-	
 	.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
 		.card-title>a:active {
 		text-decoration: none;
 	}
-	
 	.card-text {
 		font-size: 14px;
 	}
-	
 	.card-detail {
 		font-size: 11px;
 	}
-	
 	.container{
 			max-width:1700px;
 			margin: 0 auto;
 			font-family: 'SCDream3';
 	}
-	
 	.profile_pic{
 		width:25px;
 		border-radius: 45%;
-	
 	}
 
-
 </style>
+
 <script>
 	$(function() {
 		$("#bxslider").bxSlider({
@@ -106,21 +94,17 @@
 			,
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
-
 		});
 	});
 </script>
+
 <!-- Page Content -->
-
-
 <div class="container" style="width:1400px">
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" title="room01" /></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" title="room02" /></a></li>
 
 	</ul>
-
-
 
 <div class="container" style="margin-top:45px;">
 	<div class="row">
@@ -149,14 +133,12 @@
 				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
 				</p>
 				</div> 
-			
 		</div>
 		
 	</c:forEach>
 	</div>
 
-	<!-- 해시태그 리스트 -->
-	
+	<!-- 해시태그 리스트 (이 기능 없앨지 말지 고민중)--> 
 	<div>
 		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;올홈즈 해시태그</h3>
 	</div>
@@ -175,8 +157,5 @@
 	</div>
 	<br /> <br /> <br /> <br /> <br /> <br /> <br />
 	</div>
-	
-	
-
 
 </div>

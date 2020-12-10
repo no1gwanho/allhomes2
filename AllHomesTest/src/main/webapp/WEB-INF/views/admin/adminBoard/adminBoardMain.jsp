@@ -223,7 +223,7 @@ td{
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary" style="float:left">Q&A Board</h6>
-					<a href="#" style="float:right;height:10px">더보기</a>
+					<a href="<%=request.getContextPath()%>/adminQnaBoard" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
 					<table style="cursor: pointer;" class="table table-hover">
@@ -243,8 +243,8 @@ td{
 							 <c:forEach var="qVo" items="${qList}">
 								<tr onClick="location.href=''">
 									<td>${qVo.q_no}</td>
-									<td>${qVo.title}</td>
-									<td class="wordCut">${qVo.content}</td>
+									<td class="wordCut" style="width:20%">${qVo.title}</td>
+									<td class="wordCut" style="width:20%;height:30px;">${qVo.content}</td>
 									<td>${qVo.userid}</td>
 									<td>${qVo.writedate}</td>
 									<td>${qVo.hit}</td>

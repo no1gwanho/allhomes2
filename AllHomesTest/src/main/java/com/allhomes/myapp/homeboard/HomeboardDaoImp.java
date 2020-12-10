@@ -43,7 +43,4 @@ public interface HomeboardDaoImp {
 	//집들이 글 삭제하기
 	public int homeboardDelete(int b_no);
 	
-	
-
-	
 }
