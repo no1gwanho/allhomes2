@@ -34,13 +34,13 @@ public interface RegisterDaoImp {
 	
 	//회원가입
 	public int registerMember(RegisterVO vo);
-	//아이디 중복검사
+	//회원가입 아이디 중복검사
 	public String dupFilter(String userid);
-	//이메일 중복검사
+	//회원가입 이메일 중복검사
 	public String mailFilter(RegisterVO vo);
-	
 	//회원가입 메일인증
 	public int regFinal(RegisterVO vo);
 	
-
+	
+	
 }

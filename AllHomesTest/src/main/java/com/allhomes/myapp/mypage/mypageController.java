@@ -30,7 +30,32 @@ public class mypageController {
 	
 	//mypage 회원정보수정으로이동
 	@RequestMapping("/userEdit")
-	public String userEdit() {
+	public String userEdit(HttpSession session) {
+				
+		
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
+		
+		session.getAttribute("m_no");
+		
+		
+		//로그인 성공해서 들어오는 경우 ->데이터 셀렉트작업[세션 아이디 값이랑 같은정보 db추출]
+		
+		
+		
+		
+		//1차 기본정보 쿼리(userEdit)
+		//RegisterVO resultVO = dao.
+		
+		//2차 배송지정보 쿼리(addrEdit)
+		
+		
+		
+//		if(session.getAttribute("logStatus") == "N" || session.getAttribute("logStatus") == null) {
+//			session.setAttribute("logStatus","N");
+//		}
+		
+	
 		return "mypage/userEditForm";
 	}
 	
