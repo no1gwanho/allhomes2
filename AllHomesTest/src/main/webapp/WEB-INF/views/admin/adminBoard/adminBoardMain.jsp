@@ -241,7 +241,7 @@ td{
 						</thead>
 						<tbody>
 							 <c:forEach var="qVo" items="${qList}">
-								<tr onClick="location.href=''">
+								<tr onClick="location.href='<%=request.getContextPath() %>/adminQnaView?q_no=${qVo.q_no}'">
 									<td>${qVo.q_no}</td>
 									<td class="wordCut" style="width:20%">${qVo.title}</td>
 									<td class="wordCut" style="width:20%;height:30px;">${qVo.content}</td>
@@ -269,10 +269,10 @@ td{
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary" style="float:left">Review</h6>
-					<a href="#" style="float:right;height:10px">더보기</a>
+					<a href="<%=request.getContextPath()%>/adminReview" style="float:right;height:10px">더보기</a>
 				</div>
 				<div class="card-body" style="text-align: center">
-					<table style="cursor: pointer;" class="table table-hover">
+					<table class="table">
 						<thead>
 							<tr>
 								<th>스토어번호</th>
@@ -285,7 +285,7 @@ td{
 						</thead>
 						<tbody>
 							 <c:forEach var="rVo" items="${rList}">
-								<tr onClick="location.href='#'">
+								<tr>
 									<td>${rVo.s_no}</td>
 									<td>${rVo.s_name}</td>
 									<td>${rVo.pd_no}</td>

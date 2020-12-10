@@ -152,7 +152,8 @@
 	
 	<!-- 모든 qna 가져오기 -->
 	<select id="qnaAllList" resultType="com.allhomes.myapp.qna.QnaVO">
-	 	select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+		<![CDATA[
+	 	select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
 	 	from(
  			select ROWNUM RN, A.*
  							from(
@@ -160,13 +161,14 @@
  									from qnaboard
  									)A
  							)
-		where RN between #{start} and #{end}	 		
+		where RN between #{start} and #{end}	
+		]]> 		
 	</select>
 	
 	<!-- qna 10개만 가져오기 -->
 	<select id="selectQnaTen" resultType="com.allhomes.myapp.qna.QnaVO">
 		<![CDATA[
- 		select q_no, title, content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate
+ 		select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate
  		from qnaboard
  		where rownum <= 10
  		order by writedate desc
