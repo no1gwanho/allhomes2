@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface QnaDaoImp {
 	
-		//질문게시판 레코드 전체 
-		public List<QnaVO> qnaAllList();
+		//질문게시판 레코드 전체(리스트)
+		public List<QnaVO> qnaAllList(QnaPagingVO vo);
 		
-		//질문게시판 답변개수 구하기 (리스트)
-		public List<QnaVO > qnaAnwerList();
+		//질문게시판 전체 개수 
+		public int countQnaTotal();
 		
 		//질문게시판 한 게시판의 답변 개수 구하기 
 		public int getAnswerNum(int q_no);
@@ -36,5 +36,11 @@ public interface QnaDaoImp {
 		
 		//질문게시판 글 삭제하기 
 		public int qnaDelete(int q_no);
+		
+		//질문게시판 댓글 추가
+		public void addAnswer(int q_no);
+		
+		//질문게시판 댓글 삭제 
+		public void minusAnswer(int q_no); 
 		
 }
