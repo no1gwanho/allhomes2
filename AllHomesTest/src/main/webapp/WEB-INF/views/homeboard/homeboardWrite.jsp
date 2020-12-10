@@ -14,14 +14,12 @@
 			filebrowserUploadUrl:'/myapp/editor/imageUpload.do',
 			height:500,
 			extraPlugins : 'confighelper',
-			
 		});
 		
 		$('#cancelBtn').click(function(){
 			window.history.back();
 		});
 		
-		console.log(CKEDITOR.instances.content.getData().length);
 		$("#homeboardForm").submit(()=>{
 			var ckContent = CKEDITOR.instances.content.getData(); //ckeditor글내용
 			var ckContentLength = CKEDITOR.instances.content.getData().length; //ckeditor에 쓴 글자수
@@ -30,8 +28,6 @@
 				alert("테마를 선택해주세요"); 
 				$('#theme').focus();
 				return false;
-			
-				
 			}
 			if($('#title').val()==''){ //제목이 입력되지 않았을때
 				alert("제목을 입력해주세요"); 
@@ -51,15 +47,12 @@
 			if(ckContentLength < 18){
 				alert("열글자 이상 입력해주세요");
 				CKEDITOR.instances.content.focus();
-				return false;
 				
+				return false;
 			}
 		});
-		
 		return true;
-			
-	
-	
+
 	});//jquery
 </script>
 
@@ -69,8 +62,8 @@
 <style>
 
 	.col-3{
-			text-align:center;
-			margin-bottom:10px;
+		text-align:center;
+		margin-bottom:10px;
 	}
 
 	.label{background-color:#E98374;}
@@ -84,16 +77,16 @@
 	.homeboardWriteSub{
 		font-size:15px;
 	}
-	.label-info{background-color:#E98374;color:white;}
+	.label-info{
+		background-color:#E98374;
+		color:white;
+	}
 	
 	.container{
 		font-family: 'SCDream3';
 	}
 
 </style>
-
-
-
 
 
 <div class="container">

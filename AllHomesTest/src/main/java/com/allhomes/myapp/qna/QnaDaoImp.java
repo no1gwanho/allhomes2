@@ -7,6 +7,12 @@ public interface QnaDaoImp {
 		//질문게시판 레코드 전체 
 		public List<QnaVO> qnaAllList();
 		
+		//질문게시판 답변개수 구하기 (리스트)
+		public List<QnaVO > qnaAnwerList();
+		
+		//질문게시판 한 게시판의 답변 개수 구하기 
+		public int getAnswerNum(int q_no);
+		
 		//질문게시판 추가 
 		public int qnaInsert(QnaVO vo);
 		
@@ -18,8 +24,6 @@ public interface QnaDaoImp {
 		
 		//질문게시판 글보기 
 		public QnaVO qnaSelect(int q_no);
-		
-		//질문게시판 답변 구하기 
 		
 		//질문게시판 조회수 증가 
 		public void qnaHit(int q_no);
@@ -33,9 +37,4 @@ public interface QnaDaoImp {
 		//질문게시판 글 삭제하기 
 		public int qnaDelete(int q_no);
 		
-		
-		
-	
-	
-
 }

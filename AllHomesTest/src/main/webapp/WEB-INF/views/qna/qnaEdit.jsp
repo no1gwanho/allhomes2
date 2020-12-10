@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
-<!-- 해시태그를 위한 css/js파일 -->
-
 
 <!-- 글쓰기폼을 위한 CKEDITOR -->
 <script>
 
 	$(function() {
-		
 		CKEDITOR.replace('content', {
 			filebrowserUploadUrl:'/myapp/editor/qnaImageUpload.do',
 			height:500,
@@ -51,28 +48,27 @@
 	});//jquery
 </script>
 
-
-
-
 <style>
 	.col-3{
 		text-align:center;
 		margin-bottom:10px;
 	}
 
-	.label{background-color:#E98374;}
+	.label{
+		background-color:#E98374;
+	}
 	#qnaboardWriteTitle{
 		margin: 50px 0 20px 20px;
 	}
-	
-	.label-info{background-color:#E98374;color:white;}
-	
+	.label-info{
+		background-color:#E98374;
+		color:white;
+	}
 	.container{
 		font-family: 'SCDream3';
 	}
 
 </style>
-
 
 <div class="container">
 

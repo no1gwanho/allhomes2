@@ -23,6 +23,7 @@
 	 		<mvc:mapping path="/homeboardEditOk"/>
 	 		<mvc:mapping path="/cartList"/>
 	 		<mvc:mapping path="/replyLogin"/>
+	 		<mvc:mapping path="/qnaReplyLogin"/>
 	 		<bean class="com.allhomes.myapp.interceptor.LoginInterceptor"/>
 	 	</mvc:interceptor>
 	 </mvc:interceptors>

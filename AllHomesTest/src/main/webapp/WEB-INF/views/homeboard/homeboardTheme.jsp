@@ -3,13 +3,12 @@
 
 <style>
 
-
-#homeboardTitle {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-left: 20px;
-	font-family:'SCDream5'
-}
+	#homeboardTitle {
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 20px;
+		font-family:'SCDream5'
+	}
 
 	.col-3 {
 			text-align:center;
@@ -129,16 +128,13 @@
 		$('#theme5').click(function(){
 			location.href="/myapp/homeboardTheme?hb_theme_no=5";	
 		});
-		
-		
-		
+
 	});
 
 </script>
 
 <div class="container" style="font-family:'SCDream3';">
 	<h3 id="homeboardTitle">테마별 집들이</h3>
-
 
 <!-- 탭메뉴  -->
 	<div id="themeMenuBtn">
@@ -154,10 +150,9 @@
 
 	<br/>
 	<br/>
-	
-			<!-- 내용시작 -->
-			<div class="row text-center">
-				<c:forEach var="vo" items="${themeList}">
+	<!-- 내용시작 -->
+	<div class="row text-center">
+		<c:forEach var="vo" items="${themeList}">
 
 		<div class="col-3">
 			<div class="thumbnail">
@@ -175,7 +170,7 @@
 		</div>
 		
 	</c:forEach>
-			</div>
+	</div>
 		
 
 </div>

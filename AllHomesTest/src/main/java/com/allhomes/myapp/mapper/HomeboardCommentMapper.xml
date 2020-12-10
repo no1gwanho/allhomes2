@@ -2,8 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 집들이 코멘트 Mapper -->
+
+<!--=================== 집들이 코멘트 Mapper=============== -->
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardCommentDaoImp">
+	
 	<!-- 댓글리스트 불러오기 -->
 	<select id="commentAllSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardCommentVO">
 		select a.hb_c_no, a.userid, b.m_pic, a.b_no, a.hb_comment, 

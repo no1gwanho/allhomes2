@@ -13,48 +13,6 @@ public class HomeboardCommentVO {
 	private int comment_no;
 	private String m_pic;
 	
-	//페이징
-	private int limit;
-	private int page;
-	private int startPage;
-	private int endPage;
-	private int maxPage;
-	
-	
-	public int getLimit() {
-		return limit;
-	}
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
-	public int getPage() {
-		return page;
-	}
-	public void setPage(int page) {
-		this.page = page;
-	}
-	public int getStartPage() {
-		return startPage;
-	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-	public int getEndPage() {
-		return endPage;
-	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-	public int getMaxPage() {
-		return maxPage;
-	}
-	public void setMaxPage(int maxPage) {
-		this.maxPage = maxPage;
-	}
-	
-	
-	
-	
 	public String getM_pic() {
 		return m_pic;
 	}
@@ -85,7 +43,6 @@ public class HomeboardCommentVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-
 	public String getWritedate() {
 		return writedate;
 	}
@@ -116,8 +73,5 @@ public class HomeboardCommentVO {
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
 	}
-	
-	
-	
 
 }
