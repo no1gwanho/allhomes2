@@ -17,6 +17,12 @@
   	]]>
   	</select>
   	
+  	<!-- 질문게시판 게시글 개수 구하기 -->
+  	<select id="countQnaTotal" resultType="int">
+  		select count(q_no) from qnaboard 
+  	</select>
+  	
+  	
   	<!-- 질문게시판 답변개수 모든 리스트에서 구하기 -->
   	<select id="qnaAnwerList" resultType="com.allhomes.myapp.qna.QnaVO">
   		select a.q_no, nvl(count(b.q_c_no),0) answer from qnaboard a join qna_comment b on a.q_no = b.q_no(+) group by a.q_no order by q_no desc
@@ -52,6 +58,17 @@
 	<update id="qnaHit" parameterType="int">
 		update qnaboard set hit=hit+1 where q_no=#{param1}
 	</update>
+	
+	<!-- 질문게시판 answer개수 1 증가 -->
+	<update id="addAnswer" parameterType="int">
+		update qnaboard set answer=answer+1 where q_no=#{param1}
+	</update>
+	
+	<!-- 질문게시판 answer개수 1빼기 -->
+	<update id="minusAnswer" parameterType="int">
+		update qnaboard set answer=answer-1 where q_no=#{param1}
+	</update>	
+	
 	
 	<!-- 질문게시판 작성자 구하기 -->
 	<select id="getQnaWriter" resultType="String">

@@ -28,15 +28,33 @@ public class QnaController {
 	}
 	
 	@RequestMapping("/qnaMain")
-	public ModelAndView qnaMain() {
+	public ModelAndView qnaMain(QnaPagingVO vo
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
 		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
 		
-		List<QnaVO> list = dao.qnaAllList();
-		List<QnaVO> answerList = dao.qnaAnwerList();
+		//Paging//
+		int total = dao.countQnaTotal(); //총 질문게시판 게시글 수 
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}else if(nowPage == null) {
+			nowPage = "1";
+		}else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+		
+		vo = new QnaPagingVO (total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		//paging//
+
 		ModelAndView mav = new ModelAndView();
 		
+		List<QnaVO> list = dao.qnaAllList(vo);
+		
+		
 		mav.addObject("list", list);
-		mav.addObject("answerList", answerList);
+		mav.addObject("paging", vo);
 		mav.setViewName("/qna/qnaMain");
 		
 		

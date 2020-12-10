@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -38,10 +39,13 @@ public class QnaCommentController {
 	
 	@RequestMapping(value="/qnaCommentWrite", method= RequestMethod.GET)
 	@ResponseBody
-	public int commentInsert(QnaCommentVO vo, HttpSession ses) {
+	public int commentInsert(QnaCommentVO vo, HttpSession ses, @RequestParam("q_no")int q_no) {
 		vo.setUserid((String)ses.getAttribute("userid")); //현재 로그인한 사람의 아이디를 Comment-UserID로 넣음
 		QnaCommentDaoImp commentDao = sqlSession.getMapper(QnaCommentDaoImp.class);
 		int result = commentDao.commentInsert(vo);
+		
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		dao.addAnswer(q_no);
 		
 		return result;
 	}
@@ -59,9 +63,12 @@ public class QnaCommentController {
 	
 	@RequestMapping(value="/qnaCommentDel")
 	@ResponseBody
-	public int commentDelete(int q_c_no) {
+	public int commentDelete(int q_c_no, @RequestParam("q_no") int q_no) {
 		QnaCommentDaoImp commentDao = sqlSession.getMapper(QnaCommentDaoImp.class);
 		int result = commentDao.commentDelete(q_c_no);
+		
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		dao.minusAnswer(q_no);
 		
 		return result;	
 	}

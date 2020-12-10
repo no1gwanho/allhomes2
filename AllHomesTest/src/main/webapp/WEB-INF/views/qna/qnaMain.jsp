@@ -144,7 +144,7 @@
 				
 				<div class="qna-info"> <!-- 아이디 정보  -->
 				<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
-				 <a href="#">${vo.userid }</a>&nbsp;&nbsp;&nbsp;&nbsp; ${vo.writedate } &nbsp;&nbsp; 답글 :<span class="num-of-answer" style="font-weight:bold" title="${answerList[status.index].answer}"> ${answerList[status.index].answer}</span>개  &nbsp;&nbsp; 조회 : ${vo.hit }회
+				 <a href="#">${vo.userid }</a>&nbsp;&nbsp;&nbsp;&nbsp; ${vo.writedate } &nbsp;&nbsp; 답글 :<span class="num-of-answer" style="font-weight:bold" title="${vo.answer}"> ${vo.answer}</span>개  &nbsp;&nbsp; 조회 : ${vo.hit }회
 				</div>
 				
 				<!-- 본문내용 -->

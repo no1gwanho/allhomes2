@@ -283,7 +283,7 @@
 					<img class="profile_pic" src="<%=request.getContextPath() %>/resources/upload/register/${vo.m_pic }">&nbsp; 
 					<a href="#">${vo.userid }</a>
 					· ${vo.writedate} &nbsp;&nbsp;조회수 ${vo.hit} · 답변 ${answerNum}개
-					
+					&nbsp;&nbsp;&nbsp;
 					<c:if test="${loginId == vo.userid}">
 						<a href="/myapp/qnaEdit?q_no=${vo.q_no }">수정</a>&nbsp;
 					<a href="javascript:qnaDelCheck(${vo.q_no })">삭제</a>
