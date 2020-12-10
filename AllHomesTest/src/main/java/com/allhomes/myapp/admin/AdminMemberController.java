@@ -28,7 +28,8 @@ public class AdminMemberController {
 	//회원관리 페이지로 이동(메인)
 	@RequestMapping("/adminMemberMain")
 	public ModelAndView adminMember() {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
+		
 		List<RegisterVO> list = dao.memberSelectMain();
 		
 		
@@ -54,7 +55,7 @@ public class AdminMemberController {
 	//회원관리 회원정보 상세 페이지로 이동
 	@RequestMapping("/adminMemberDetail")
 	public ModelAndView MemberDetail(@RequestParam("m_no") int m_no) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
 		RegisterVO mVo = dao.memberSelect(m_no);
 		
 		ModelAndView mav = new ModelAndView();
@@ -69,7 +70,7 @@ public class AdminMemberController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
 		
 		
 		//paging//
@@ -102,7 +103,8 @@ public class AdminMemberController {
 										, @RequestParam(value="nowPage", required=false)String nowPage
 										, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 			
-			RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+			AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
+			
 			//paging//
 			int total = dao.countRegisterTotal(); //총회원수
 			if (nowPage == null && cntPerPage == null) {
@@ -137,7 +139,10 @@ public class AdminMemberController {
 									,AdminPagingVO vo
 									, @RequestParam(value="nowPage", required=false)String nowPage
 									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
+		
+		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
+		
 		//paging//
 		int total = dao.countRegisterTotal(); //총회원수
 		if (nowPage == null && cntPerPage == null) {
@@ -172,7 +177,9 @@ public class AdminMemberController {
 									,AdminPagingVO vo
 									, @RequestParam(value="nowPage", required=false)String nowPage
 									, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
+		
+		
 		//paging//
 		int total = dao.countRegisterTotal(); //총회원수
 		if (nowPage == null && cntPerPage == null) {
