@@ -182,12 +182,12 @@ td{
 								<th>작성일</th>
 								<th>조회수</th>
 								<th>스크랩</th>
-								<th>삭제</th>
+								
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
-								<tr onClick="location.href='/myapp/adminHomeBoardView?b_no=${vo.b_no}'">
+								<tr onClick="location.href='<%=request.getContextPath()%>/adminHomeBoardView?b_no=${list.b_no}'">
 									<td>${list.b_no}</td>
 									<td>${list.title}</td>
 									<td>${list.theme}</td>
@@ -195,9 +195,7 @@ td{
 									<td>${list.writedate}</td>
 									<td>${list.hit}</td>
 									<td>${list.scrap}</td>
-									<td><a href="<%=request.getContextPath()%>/adminHomeboardDelete?b_no=${vo.b_no}" class="btn alert-secondary btn-circle"> <i
-											class="fas fa-trash" id="HBDelBtn"></i>
-									</a></td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>

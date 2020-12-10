@@ -3,18 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(function(){
-		//글 삭제 
-		$("#HBDelBtn").click(function(){
-			var result = confirm("글을 삭제하시겠습니까?");
-			if(result){
-				 location.href= "<%=request.getContextPath()%>/adminHomeboardDelete?b_no=${list.b_no}";
-			}
-		});
 		
 		//댓글리스트 구하기
 		function commentListSelect() {
 			var url = "/myapp/commentList";
-			var data = "b_no=${vo.b_no}";
+			var data = "q_no=${vo.q_no}";
 		
 			
 			$.ajax({
@@ -84,56 +77,76 @@
 						
 					});
 				}
+		
+		//글 삭제 
+		$("#qnaDelBtn").click(function(){
+			var result = confirm("글을 삭제하시겠습니까?");
+			if(result){
+				/* location.href=""; */
+			}
+		});
+		
+		
 	});
 </script>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class=" card shadow mb-4">
-				<div class="card-header">
-					<h6 class="m-0  font-weight-bold text-primary" style="float: left;height:35px;line-height:35px;">집들이게시판 글 보기</h6>
-					<button class="btn btn-user alert-danger shadow-sm" id="HBDelBtn" style="float:right;height:35px">삭제</button>
-				</div>
-				<div class="card-body">
-					<h6 style="color: gray">
-						테마 > ${vo.theme}
-					</h6>
-					<h3>${vo.title}</h3>
-					<div class="row">
-						<div class="col-md-auto" style="font-size: 13px;">
-							<i class="fas fa-user-circle fa-2x"></i>&nbsp; <a href="#">${vo.userid }</a>
-							· ${vo.writedate} ·
+	<div class="col-lg-12">
+		<div class=" card shadow mb-4">
+			<div class="card-header">
+				<h6 class="m-0  font-weight-bold text-primary" style="float: left;height:35px;line-height:35px;">질문과 답변 글 보기</h6>
+				<button class="btn btn-user alert-danger shadow-sm" id="qnaDelBtn" style="float:right;height:35px">삭제</button>
+			</div>
+			<div class="card-body">
+				<div class="row justify-content-md-center hb-view-border">
+					<div class="col-lg-12 col-md-auto">
+						
+						<h3 id="title">${vo.title}</h3>
+						<div class="row">
+							<div class="col-md-auto hb-view-content" style="font-size: 13px;">
+								<img class="profile_pic" style="width:30px;height:30px;border-radius:70%"
+									src="<%=request.getContextPath() %>/resources/upload/register/${vo.m_pic }">&nbsp;
+								<a href="#">${vo.userid }</a> · ${vo.writedate} &nbsp;
+								<c:if test="${loginId == vo.userid}">
+									<a href="/myapp/qnaEdit?q_no=${vo.q_no }">수정</a>&nbsp;
+					<a href="javascript:qnaDelCheck(${vo.q_no })">삭제</a>
+								</c:if>
+							</div>
 						</div>
-						<div class="col"></div>
+
+
+
+						<hr />
+						<br />
+						<div class="contentDiv">${vo.content}</div>
+						<br /><br/>
+						<h6 style="font-size: 13px; color: gray;">조회수 ${vo.hit} · 답변
+							${vo.answer}개</h6>
+						
+
+						<br/>
+						<hr />
+
+						<!-- 댓글개수 표시창 -->
+						<div style="margin: 20px;">
+							<span style="font-size: 15px; color: gray;">댓글&nbsp;&nbsp;</span><span
+								id="commentNum"
+								style="font-size: 15px; color: #E98374; font-weight: bold">3</span>
+						</div>
+
+
+
+
+
+						<br /> <br />
+						<!-- 댓글 리스트 -->
+						<div id="commentList">
+							<!-- 댓글리스트 나오는 곳 -->
+						</div>
+
+						<div class="col col-lg-2"></div>
+
 					</div>
-
-					<hr />
-					<br />
-					<div class="contentDiv">${vo.content}</div>
-
-					<h6 style="font-size: 13px; color: gray;">조회수 ${vo.hit} · 스크랩
-						${vo.scrap}회 · 댓글 3</h6>
-					<div id="hashtag">
-						<c:forEach var="i" items="${hashtagList}">
-							<a href="#" class="badge badge-light"><span>#</span>${i}</a>
-						</c:forEach>
-					</div>
-
-
-					<hr />
-
-					<!-- 댓글개수 표시창 -->
-					<div style="margin: 20px;">
-						<span style="font-size: 15px; color: gray;">댓글 3개</span>
-					</div>
-
-					<br/>
-					<!-- 댓글 리스트 -->
-					<div id="commentList">
-						<!-- 댓글리스트 나오는 곳 -->
-					</div>
-
-					<div class="col col-lg-2"></div>
+					<!-- row -->
 				</div>
 			</div>
 		</div>

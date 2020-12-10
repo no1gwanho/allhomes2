@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<style>
+	footer{
+		
+	}
+</style>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -44,10 +48,6 @@
     
 
 
-	<!--애니메이션-->
-    <!-- <script src="/myapp/resources/js/animations-extended.min.js"></script>
-    <script src="/myapp/resources/js/mdb.js"></script>
-	<script src="/myapp/resources/js/popper.js"></script> -->
 	
 	
     <!-- <script src="/myapp/resources/vendor/jquery/jquery.min.js"></script> -->
