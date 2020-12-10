@@ -17,22 +17,15 @@
 <div class="container">
 <!-- Collapse buttons -->
 	<br/>
-	<div>
-		<button style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff" class="btn btn" type="button" data-toggle="collapse" data-target="#collapseHis" aria-expanded="false" aria-controls="collapseExample">
-			역대베스트
-		</button>
-		<button style="outline:0;border:0;margin-bottom:3px;background-color:#ee8374;color:#fff" class="btn btn" type="button" data-toggle="collapse" data-target="#collapseMon" aria-expanded="false" aria-controls="collapseExample">
-			이달의베스트
-		</button>
-	</div>
-	<div class="collapse" id="collapseHis">
-		<div class="mt-3">
-			<button style="color:#ee8374;" class="btn btn">카테고리별</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >최신순</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >리뷰순</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >브랜드별</button>
+	<div class="row">
+		<div class="col-lg-9" style="text-align:left;">
+			<h6>베스트 스토어</h6>
 		</div>
-	</div>
-	<div class="collapse" id="collapseMon">
-		<div class="mt-3">
-			<button style="color:#ee8374;" class="btn btn" >카테고리별</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >최신순</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >리뷰순</button>&nbsp;&nbsp;<button style="color:#ee8374;" class="btn btn" >브랜드별</button>
+		<div class="col-3" style="text-align:center;">
+			<select class="selectpicker" name="sortPd" id="sortPd">
+				<option value="saled" <c:if test="${bestPd == 'recent' }">selected</c:if>>최근인기순</option>
+				<option value="recent" <c:if test="${bestPd == 'history' }">selected</c:if>>역대인기순</option>
+			</select>
 		</div>
 	</div>
 	<br/>

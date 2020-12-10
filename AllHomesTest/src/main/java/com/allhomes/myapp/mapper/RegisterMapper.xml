@@ -6,9 +6,7 @@
  	<select id="login" resultType="com.allhomes.myapp.register.RegisterVO">
  		select userid, username, nickname, regcode, m_pic from register where userid=#{userid} and userpwd=#{userpwd}
  	</select>
- 	<!-- 테이블 수정 !! -->
- 	
-
+ 
  	
  	<!-- =============여기부터 관리자============================================ -->
  	<!--  메인-회원 (10개) -->
@@ -136,8 +134,9 @@
 
 
 
+ 	<!-- ============ 회원가입 =============== -->
  	
- 	<!-- 회원정보 입력     테이블명 교체 시퀀스 교체 reg_sq-->	
+ 	<!-- 회원정보 입력 -->	
  	<insert id="registerMember" parameterType="com.allhomes.myapp.register.RegisterVO">
 
  		insert into register(m_no, userid,userpwd,username,nickname,tel,m_pic,email,regdate,regcode)
@@ -145,25 +144,46 @@
 
  	</insert>
  	
- 	<!-- 아이디 중복검사  테이블명 교체-->
+ 	<!-- 아이디 중복검사 -->
  	<select id="dupFilter" resultType="String">
  		select userid from register where userid=#{userid}
  	</select>
  	
  	  	  	
- 	<!-- 이메일 인증코드 	테이블명 변경   원하는 레코드만 집어서 reg코드를 바꿀거 -->
+ 	<!-- 이메일 인증코드  -->
  	<update id="regFinal" parameterType="com.allhomes.myapp.register.RegisterVO">
  		update register set regcode=1
  	</update> 
  	
- 	<!-- 이메일 중복검사 테이블명 변경-->
+ 	<!-- 이메일 중복검사 -->
  	<select id="mailFilter" resultType="String">
  		select email from register where email=#{email}
+ 	</select>
+
+ 	
+ 		
+ 	
+ 	<!-- =============회원정보수정================ -->
+ 												<!-- 1차 m_no 판별문 -->
+ 	<select id="m_noSelector" resultType="int">
+ 		select m_no from register 
+ 	</select>
+ 	
+ 	<select id="userEdit" resultType="String">	<!-- 2차 기본정보 -->
+ 		select email, nickname,m_pic, tel from register where userid=#{userid}
+ 	</select>
+ 	
+ 	<select id="addrEdit" resultType="String"><!-- 3차 주소지정보 1차 판별번호가지고 추출-->
+ 		select receiver, zipcode, addr,addrdetail,tel from address where m_no = #{m_no}
  	</select>
  	
  	
  	
  	
  	
+ 	
+ 	
+ 	
+
 </mapper> 
 

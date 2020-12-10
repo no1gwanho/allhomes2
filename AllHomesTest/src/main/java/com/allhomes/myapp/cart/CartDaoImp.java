@@ -8,9 +8,11 @@ public interface CartDaoImp {
 	
 	public CartVO selectCartList();
 	
-	public int addCartList(CartVO vo);
+	public int addCartList(int pd_no);
 	
 	public int editCartList(CartVO vo);
 	
 	public int delCartList(int pd_no, int m_no);
+
+	public List<CartJoinVO> joinCart(int pd_no);
 }

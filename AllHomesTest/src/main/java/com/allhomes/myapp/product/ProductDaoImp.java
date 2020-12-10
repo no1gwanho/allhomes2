@@ -28,5 +28,5 @@ public interface ProductDaoImp {
 	
 	public ProductVO joinProductStore();
 	
-	public List<ProductVO> productCateList(String pdCate);
+	public List<ProductJoinVO> productCateList(int c_code);
 }

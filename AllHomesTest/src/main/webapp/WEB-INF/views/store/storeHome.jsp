@@ -70,20 +70,6 @@
     	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     		//실행할 로직 (콘텐츠 추가)
         	count++;
-<%--     		var tag = '<div class="block">';
-        	tag += '<hr/><div class="row">';
-        	tag += '<c:forEach var="vo" items="${list}">';
-        	tag += '<div class="col-3">';
-        	tag += '<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">';
-        	tag += '<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>';
-        	tag += '[${vo.s_no}]${vo.pd_name }<br/>';
-        	tag += '<c:if test="${vo.discount != 0}">';
-        	tag += '${vo.price - (vo.price*vo.discount/100)}원 </c:if>';
-        	tag += '<c:if test="${vo.discount == 0 }">';
-        	tag += '${vo.price }원<br/></c:if>';
-        	tag += '<h6><c:if test="${vo.status!=null }">';
-        	tag += '<span class="badge badge-secondary">${vo.status }</span>';
-        	tag += '</c:if></h6></a></div></c:forEach></div>'; --%>    		
         	var addContent = '<div class="block"><p>'+ count +'</p></div></div>';
         	//article에 추가되는 콘텐츠를 append
         	$('article').append(addContent);
@@ -131,7 +117,7 @@
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 							<span style="font-size:0.8em;">[${s_name}]</span>${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
-								${vo.dc_price}원 
+								${vo.discount}원 
 							</c:if>
 							<c:if test="${vo.discount == 0 }">
 								${vo.price }원<br/>

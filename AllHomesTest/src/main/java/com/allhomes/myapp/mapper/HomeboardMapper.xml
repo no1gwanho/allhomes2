@@ -13,7 +13,7 @@
     	on a.userid = c.userid
 		order by b_no desc
  	</select>
-  	
+  	  	
   	<!-- 집들이 글작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
   	  	insert into homeboard

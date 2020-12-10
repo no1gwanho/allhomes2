@@ -8,10 +8,14 @@
 	select m_no, pd_no, num, price, o_no from cart order by pd_no
 </select>
 <select id="selectCartList" parameterType="int" resultType="com.allhomes.myapp.cart.CartVO">
-	select m_no, pd_no, num, price, o_no from cart where m_no=#{m_no}
+	select m_no, pd_no, num, price from cart where m_no=#{m_no}
+</select>
+<select id="joinCart" parameterType="int" resultType="com.allhomes.myapp.cart.CartJoinVO">
+	select * from (select c.m_no m_no, c.pd_no pd_no, c.num num, p.pd_name pd_name, p.s_no s_no, p.main_img main_img, p.o_value o_value, p.price price, p.discount discount, round(p.price-(p.price*p.discount/100), -1) as dc_price, p.shipping_c shipping_c
+	from product p, cart c where c.pd_no=p.pd_no) where pd_no=#{pd_no} 
 </select>
 <insert id="addCartList" parameterType="com.allhomes.myapp.cart.CartVO">
-	insert into cart(m_no, pd_no, num, price, o_no) values(#{m_no}, #{pd_no}, #{num}, #{price}, #{o_no})
+	insert into cart(m_no, pd_no, num, price) values(#{m_no}, #{pd_no}, #{num}, #{price})
 </insert>
 <update id="editCartList" parameterType="com.allhomes.myapp.cart.CartVO">
 	update cart set m_no=#{m_no}, pd_no=#{pd_no}, num=#{num}, price=#{price}, o_no=#{o_no} where m_no=#{m_no} and pd_no=#{pd_no}  
