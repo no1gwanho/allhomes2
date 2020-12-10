@@ -84,7 +84,7 @@ public class RegisterController {
 	
 	
 	//로그인 
-	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
+	@RequestMapping(value="/loginOk", method=RequestMethod.POST,produces="application/text;charset=UTF-8")
 	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
 		
 		
@@ -94,23 +94,22 @@ public class RegisterController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(resultVO == null){
-			
-
+	
 			ses.setAttribute("logStatus","N");
 			mav.setViewName("landing/loginResult");			
+		
 		}else {
-			ses.setAttribute("userid", resultVO.getUserid());
-			ses.setAttribute("username", resultVO.getUsername());
-			System.out.println(resultVO.getUsername());
-			
-			ses.setAttribute("nickname", resultVO.getNickname());
-			
-			System.out.println(resultVO.getNickname());
 			ses.setAttribute("logStatus", "Y");
 			
+			ses.setAttribute("userid", resultVO.getUserid());
+			ses.setAttribute("username", resultVO.getUsername());
+			ses.setAttribute("nickname", resultVO.getNickname());
+			ses.setAttribute("email", resultVO.getEmail());
+			ses.setAttribute("m_pic", resultVO.getM_pic());
 			ses.setAttribute("m_no", resultVO.getM_no());
-			
 			ses.setAttribute("regcode", resultVO.getRegcode());
+			
+			System.out.println(resultVO.getNickname());
 			
 			Object dest = ses.getAttribute("dest");
 			if(dest==null) {

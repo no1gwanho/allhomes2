@@ -41,6 +41,6 @@ public interface RegisterDaoImp {
 	//회원가입 메일인증
 	public int regFinal(RegisterVO vo);
 	
-	
+
 	
 }

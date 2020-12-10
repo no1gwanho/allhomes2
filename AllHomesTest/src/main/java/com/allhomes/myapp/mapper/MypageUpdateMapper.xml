@@ -5,11 +5,11 @@
 <mapper namespace="com.allhomes.myapp.mypage.MypageUpdateDaoImp">
  	
  	
- 												<!-- 1차 m_no 판별문 -->
- 	<select id="m_noSelector" resultType="int">
- 		select m_no from register 
- 	</select>
- 	
+ 	<!-- 최초 접속자의 주소관련 데이터 유무 판별 -->
+ 	<select id="addrSelect" resultType="com.allhomes.myapp.mypage.MypageUpdateVO">
+ 		select receiver,zipcode, addr, addrdetail, tel from address where m_no=#{m_no}
+	</select>
+ 	 	
  	<select id="userEdit" resultType="String">	<!-- 2차 기본정보 -->
  		select email, nickname,m_pic, tel from register where userid=#{userid}
  	</select>
