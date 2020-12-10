@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.register.RegisterDaoImp">
  	<select id="login" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select userid, username, nickname, regcode, m_pic from register where userid=#{userid} and userpwd=#{userpwd}
+ 		select m_no, userid, username, nickname, regcode,email,tel,m_pic from register where userid=#{userid} and userpwd=#{userpwd}
  	</select>
  
  	
@@ -159,31 +159,5 @@
  	<select id="mailFilter" resultType="String">
  		select email from register where email=#{email}
  	</select>
-
- 	
- 		
- 	
- 	<!-- =============회원정보수정================ -->
- 												<!-- 1차 m_no 판별문 -->
- 	<select id="m_noSelector" resultType="int">
- 		select m_no from register 
- 	</select>
- 	
- 	<select id="userEdit" resultType="String">	<!-- 2차 기본정보 -->
- 		select email, nickname,m_pic, tel from register where userid=#{userid}
- 	</select>
- 	
- 	<select id="addrEdit" resultType="String"><!-- 3차 주소지정보 1차 판별번호가지고 추출-->
- 		select receiver, zipcode, addr,addrdetail,tel from address where m_no = #{m_no}
- 	</select>
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
-
 </mapper> 
 

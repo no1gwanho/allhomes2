@@ -8,7 +8,19 @@
 	</script>
 </c:if>
 
+<script>
+	$(function(){
+		$("updateBtn").click(function(){
+			
+			
+			
+			
+			$("updataFrm").submit();		
+			
+		});
+	});
 
+</script>
 <style>
 	.row{text-align:center;}
 	
@@ -47,7 +59,7 @@
 	<br/><br/>
 	
 	<!-- 폼테그 시작 -->
-	<form>
+	<form id="updataFrm" method="post" action="/myapp/updateOk" enctype="multipart/form-data">
 		<div class="row">
 			<div class="hBlank2"></div>
 			
@@ -68,45 +80,39 @@
 		    <label class="labelTag" for="email" class="col-sm-2 col-form-label">이메일</label>
 		    	<div class="wBlank2"></div>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="email">
+		      <input type="text" class="form-control" id="email" name="email" value=<%=session.getAttribute("email")%>>
 		    </div>
 		  </div>
 		   <div class="mb-3 row">
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">닉네임</label>
 		    	 <div class="wBlank2"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="nickname" name="nickname" value=<%=session.getAttribute("nickname")%>>
 		    </div>
 		  </div>
 		   <div class="mb-3 row">
 		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="m_pic">
+		      <input type="text" class="form-control" id="m_pic" name="m_pic" value=<%=session.getAttribute("m_pic")%>>
 		    </div>
 		  </div>
 		<!-- 박스종료 -->
 		<br/>
 		
-		 <!-- 배송정보 -->
+		
+		
+		
+		<!-- 배송정보 -->
 		<div class="row">
 			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">배송지정보</h5></div>
 		</div>
-		 <br/>
-		 
-		 <!--  	 
+		<br/>
+					  
 		<div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">배송지명</label>
-		    	 <div class="wBlank3"></div>
-		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
-		    </div>
-		  </div>-->
-		  
-		   <div class="mb-3 row">
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">받는분</label>
 		    	 <div class="wBlank2"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="receiver" name="receiver" placeholder="실수령자 성함" value="${receiver}">
 		    </div>
 		  </div>
 		  
@@ -114,15 +120,15 @@
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">연락처</label>
 		    	 <div class="wBlank2"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="tel" name="tel" placeholder="연락처" value="${tel}">
 		    </div>
 		  </div>
 			
 		 <div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">우편번호</label>
+		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label" >우편번호</label>
 		    	<div class="wBlank3"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호" value="${zipcode}">
 		    </div>
 		  </div>
 		  
@@ -131,7 +137,7 @@
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">주소</label>
 		    	 <div class="wBlank4"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="addr" name="addr" placeholder="주소입력" value="${addr}">
 		    </div>
 		  </div>
 		
@@ -139,7 +145,7 @@
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">상세주소</label>
 		    	 <div class="wBlank3"></div>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="nickname" name="nickname">
+		      <input type="text" class="form-control" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" value="${addrdetail}">
 		    </div>
 		  </div>
 		
@@ -149,8 +155,14 @@
 	
 	<br/>
 	<div class="row">
-		<div class="col-6" style="text-align:right;"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button></div>
-		<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button></div>
+		<div class="col-6" style="text-align:right;">
+			<button id="updateBtn"class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
+		</div>
+		
+		
+		<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
+			<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
+		</div>
 	</div>
 	
 	

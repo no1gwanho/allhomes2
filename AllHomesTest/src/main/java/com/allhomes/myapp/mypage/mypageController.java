@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.register.RegisterDaoImp;
-import com.allhomes.myapp.review.ReviewDaoImp;
-import com.allhomes.myapp.store.StoreDaoImp;
-import com.allhomes.myapp.store.StoreVO;
+import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
 public class mypageController {
@@ -29,35 +26,67 @@ public class mypageController {
 	}
 	
 	//mypage 회원정보수정으로이동
-	@RequestMapping("/userEdit")
-	public String userEdit(HttpSession session) {
+	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
+	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1) {
+		
+		MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
+		ModelAndView mav = new ModelAndView();	
 				
+		if(session.getAttribute("m_no")!=null) {	//로그인 성공하고 들어올때 명령 1.주소데이터가 있을대와 2.주소데이터가 없을때
+					
+			int m_no = (Integer)session.getAttribute("m_no");
+			vo.setM_no(m_no);
+						
+			MypageUpdateVO resultVO = dao.addrSelect(vo);
+				
+			if(resultVO==null) {	//주소지 데이터가 없을때
+									
+			}else {//주소지 데이터가 있을때
+						
+//					//만약에 이 사람이 배송을 안시켜서 주소 데이터가 없다면 공란으로 남겨두기
+//					if(resultVO.getReceiver()==null || resultVO.getZipcode()==0 || resultVO.getAddr()==null || resultVO.getAddrdetail()==null ||resultVO.getTel()==null) {
+//						mav.addObject("receiver","");
+//						mav.addObject("zipcode",0);
+//						mav.addObject("addr","");
+//						mav.addObject("addrdetail","");
+//						mav.addObject("tel","");
+//										
+//						mav.setViewName("mypage/userEditForm");	//어차피 전부 not null값들이라 하나 비었으면 다비었을것 그냥 view로 보냄
+//					
+					//}else {
+						mav.addObject("receiver",resultVO.getReceiver());
+						mav.addObject("zipcode",resultVO.getZipcode());
+						mav.addObject("addr",resultVO.getAddr());
+						mav.addObject("addrdetail",resultVO.getAddrdetail());
+						mav.addObject("tel",resultVO.getTel());
+						
+						mav.setViewName("mypage/userEditForm");
+				//	}
+				}
+			
+		}else {	//로그인 안하고 들어올때 돌려보내야함	
+			
+			}
+			mav.setViewName("mypage/userEditForm");
 		
-		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-		
-		
-		session.getAttribute("m_no");
-		
-		
-		//로그인 성공해서 들어오는 경우 ->데이터 셀렉트작업[세션 아이디 값이랑 같은정보 db추출]
-		
-		
-		
-		
-		//1차 기본정보 쿼리(userEdit)
-		//RegisterVO resultVO = dao.
-		
-		//2차 배송지정보 쿼리(addrEdit)
-		
-		
-		
-//		if(session.getAttribute("logStatus") == "N" || session.getAttribute("logStatus") == null) {
-//			session.setAttribute("logStatus","N");
-//		}
-		
-	
-		return "mypage/userEditForm";
+		return mav;
 	}
+	
+	//수정버튼 눌렀을때
+	@RequestMapping("updateOk")
+	public String updateOk() {
+		//vo가 주소 그리고 register 두개로 나눠져있기때문에	=>아이디는 빼고 업데이트 하면됨
+		//update도 각각따로 날려줘야한다.
+		
+		
+		
+		
+		return "";
+	}
+	
+	
+	
+	
 	
 	
 	//mypage 나의 쇼핑으로 이동

@@ -75,7 +75,12 @@ public class RegisterVO {
 		return email=email1+"@"+email2;
 	}
 	public void setEmail(String email) {
-		this.email = email1+"@"+email2;
+		String emailSplit[]=email.split("@");
+			
+			email1 = emailSplit[0];
+			email2 = emailSplit[1];
+			
+		this.email = email1+email2;
 	}
 	public String getRegdate() {
 		return regdate;

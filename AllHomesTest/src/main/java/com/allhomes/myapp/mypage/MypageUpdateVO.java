@@ -8,6 +8,16 @@ public class MypageUpdateVO {
 	private int zipcode;
 	private String addr;
 	private String addrdetail;
+	private String tel;
+	
+	
+	
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 	public int getM_no() {
 		return m_no;
 	}
