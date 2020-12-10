@@ -14,5 +14,5 @@ public interface CartDaoImp {
 	
 	public int delCartList(int pd_no, int m_no);
 
-	public List<CartJoinVO> joinCart(int pd_no);
+	
 }
