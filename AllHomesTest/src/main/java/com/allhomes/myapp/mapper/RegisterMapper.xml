@@ -159,7 +159,7 @@
  	<select id="mailFilter" resultType="String">
  		select email from register where email=#{email}
  	</select>
- 	
+
  	
  		
  	
@@ -184,5 +184,6 @@
  	
  	
  	
+
 </mapper> 
 

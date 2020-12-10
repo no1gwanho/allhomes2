@@ -11,8 +11,8 @@
     	from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
 	</select>
   	<!-- 모든 제품 조회 -->
-  	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
-  	    select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img from product
+  	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
+  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img from product
   	    <choose>
   	    	<when test="sortPd!=null and sortPd.equals('recent')">
   	    		order by pd_no desc
@@ -26,15 +26,17 @@
   	    </choose>
   	</select>
   	<!-- 카테고리별 제품 조회 -->
-	<select id="productCateList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
-  		select s_no, pd_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, sub_c from product
-  		<if test="pdCate!=null and pdCate.equals('all')">
-  			order by pd_no desc
-  		</if>
-  		<if test="pdCate!=null and !pdCate.equals('all')">
-  			where sub_c=#{param1} order by pd_no desc
-  		</if>
-  	</select> 
+	<select id="productCateList" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
+		select * from (select s.main_c as main_c, s.c_code as c_code, p.s_no as s_no, p.pd_no as pd_no, p.pd_name as pd_name, p.price as price, p.discount as discount, round(p.price-(p.price*p.discount/100), -1) as dc_price, 
+		p.main_img as main_img, p.sub_c as sub_c from product p, sub_c s where p.sub_c=s.sub_c)
+		<if test="c_code==0">
+			order by pd_no desc
+		</if>
+		<if test="c_code>=1">
+			where c_code=#{c_code} orde by pd_no desc
+		</if>
+  	</select>
+  	 
   	<!-- 제품 리뷰 조회 -->
   	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
   		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
@@ -53,7 +55,7 @@
   	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
   	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">
