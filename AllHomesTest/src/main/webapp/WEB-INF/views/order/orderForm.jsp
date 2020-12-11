@@ -47,6 +47,7 @@
 		<c:forEach var="vo" items="${oList}">
 			<div class="col-lg-12 mr-2 ml-2 mb-2">
 				<div class="row">
+					<input type="hidden" value="${vo.c_no}"/>
 					<div class="col-2" style="border-bottom: 1px solid #eee">
 						<img
 							src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
@@ -168,10 +169,10 @@
 							<input class="col-lg-8 form-control" type="text"  id="zipcode"value="${aVO.zipcode}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">주소</span>
 							<input class="col-lg-8 form-control" type="text" id="addr" value="${aVO.addr}" /><br />
-							 <span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
-							 <input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
+							<input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
-							 <input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
+							<input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
 
 						</div>
 					</div>
@@ -228,7 +229,6 @@
 			</div>
 			<div class="col-10">
 				<input type="text" name="tel" value="${rVO.tel}"/><br/>
-				<!-- <input type="checkbox">SMS 수신 동의-->
 			</div>						
 		</div>
 		<br/>
@@ -237,9 +237,11 @@
 		<div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>		
 		<div class="row">
 			<div class="col-3" style="margin-bottom:5px;">
+				<input type="radio" value="card" name="payment">
 				<img src=""/>카드결제
 			</div>
 			<div class="col-3" style="margin-bottom:5px;">
+				<input type="radio" value="account" name="payment">
 				<img src=""/>계좌이체
 			</div>
 		</div>
@@ -250,6 +252,7 @@
 		<br/>
 		<div>
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
+			
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
 		</div>
 
