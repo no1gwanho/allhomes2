@@ -81,14 +81,6 @@
 						</div>
 					</div>
 					<div id="banner" class="sticky-top">
-						옵션 : 
-
-							<select class="input-select" style="margin-bottom:8px;">
-								<c:if test="${vo.o_value!=null}">
-									<option value="${o_value}">${o_value}</option>
-								</c:if>
-							</select><br/>
-						수량 : <input type="text" name="num" id="num"/> (<span style="font-size:0.8em;">재고: ${vo.stock} 개</span>)<br/>
 						<script>
 							function numCheck(){
 						    	var num = document.getElementById("num");

@@ -26,6 +26,8 @@ import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.scrap.ScrapDaoImp;
+import com.allhomes.myapp.scrap.ScrapVO;
 
 @Controller
 public class mypageController {
@@ -44,10 +46,13 @@ public class mypageController {
 		RegisterVO vo = reg.oneMeberSelect(userid);
 		
 		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-		
 		List<MypageWishlistVO> list = wish.selectWishlist(userid);
 		
+		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
+		List<ScrapVO> sList = scrap.selectScrap(userid);
+		
 		mv.addObject("list", list);		
+		mv.addObject("sList", sList);
 		mv.addObject("vo", vo);
 		
 		mv.setViewName("mypage/mypageHome");
