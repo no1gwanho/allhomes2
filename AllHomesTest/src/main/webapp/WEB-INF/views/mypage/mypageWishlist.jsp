@@ -6,8 +6,8 @@
 	margin-bottom:10px;
 	}
 	.storeImg img {
-		width:320px;
-		height: 207px;
+		width:260px;
+		height:147px;
 		border-radius: 5%;
 		text-align: center;
 	}

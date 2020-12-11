@@ -35,8 +35,13 @@
 					
 					<!-- 위시리스트, 스크랩 -->
 					<div style="float:left; margin-left:40px;">
-						<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist.png" style="width:60px"/><br/>
-						<a href="">위시리스트</a>
+						<a href="/myapp/mypageWishlist?userid=${vo.userid }">
+							<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist.png" style="width:60px"/>
+						</a>
+						<br/>
+						<a href="/myapp/mypageWishlist?userid=${vo.userid }">
+							위시리스트
+						</a>
 					</div style="float:right">
 					<div>
 						<img src="<%=request.getContextPath()%>/resources/img/mypage/like.png" style="width:60px"/><br/>
