@@ -1,5 +1,9 @@
 package com.allhomes.myapp.register;
 
+import java.util.HashMap;
+import java.util.List;
+
+import com.allhomes.myapp.admin.AdminPagingVO;
 
 public interface RegisterDaoImp {
 	
