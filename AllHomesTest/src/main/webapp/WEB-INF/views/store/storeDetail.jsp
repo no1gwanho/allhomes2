@@ -53,7 +53,6 @@
 					<input type="hidden" name="price" value="${vo.price }"/>
 					<input type="hidden" name="discount" value="${vo.discount }"/>
 					<input type="hidden" name="shipping_c" value="${vo.shipping_c }"/>
-					<input type="hidden" name="o_value" value="${vo.o_value }"/>
 					<input type="hidden" name="userid" value="<%=session.getAttribute("userid") %>"/>
 					<div class="product-details">
 						Category : <a href="#">${sub.main_c}</a> > <a href="#">${sub.sub_c}</a><br/>
@@ -83,6 +82,7 @@
 					</div>
 					<div id="banner" class="sticky-top">
 						옵션 : 
+
 							<select class="input-select" style="margin-bottom:8px;">
 								<c:if test="${vo.o_value!=null}">
 									<option value="${o_value}">${o_value}</option>
@@ -103,6 +103,19 @@
 						    	return true;
 						    }
 						</script>
+
+							<select class="input-select" style="margin-bottom:8px;" name="o_value">
+								<c:if test="${ options != null}">
+									<c:forEach var="o" items="${options}">
+										<option  value="${o}">${o}</option>
+									</c:forEach>
+								</c:if> 
+								<c:if test="${ options ==null}">
+									<option value="X">X</option>
+								</c:if>
+							</select><br/>
+						수량 : <input type="number" min="1" name="num" max="${vo.stock }"/> (<span style="font-size:0.8em;">재고: ${vo.stock} 개</span>)<br/>
+
 						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
 						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
 					</div>
