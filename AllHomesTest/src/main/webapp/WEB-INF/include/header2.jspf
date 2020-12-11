@@ -146,7 +146,7 @@
 							
 	
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="top:60px;">
-								<a class="dropdown-item" href="/myapp/mypageHome">마이페이지홈</a> <a
+								<a class="dropdown-item" href="/myapp/mypageHome?userid=${userid }">마이페이지홈</a> <a
 									class="dropdown-item" href="/myapp/mypageShopping">나의쇼핑</a> <a
 									class="dropdown-item" href="/myapp/mypageWishlist">위시리스트</a> <a
 									class="dropdown-item" href="/myapp/userEdit">회원정보</a>

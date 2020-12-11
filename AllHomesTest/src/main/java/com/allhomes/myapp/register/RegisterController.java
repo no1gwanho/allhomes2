@@ -77,8 +77,7 @@ public class RegisterController {
 	
 	@RequestMapping("/login")	//로그인 이동
 	public String login() {
-		
-		
+			
 		return "landing/loginForm";
 	}
 	
@@ -105,7 +104,7 @@ public class RegisterController {
 			ses.setAttribute("nickname", resultVO.getNickname());
 			ses.setAttribute("email", resultVO.getEmail());
 			ses.setAttribute("m_pic", resultVO.getM_pic());
-  		ses.setAttribute("m_no", resultVO.getM_no());
+			ses.setAttribute("m_no", resultVO.getM_no());
 			ses.setAttribute("regcode", resultVO.getRegcode());
 			
      	System.out.println("프로필사진주소 =" +resultVO.getM_pic());

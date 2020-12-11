@@ -2,28 +2,29 @@ package com.allhomes.myapp.cart;
 
 public class CartVO {
 	private String userid;		// 회원번호
+	private int m_no;
 	private int pd_no;		// 제품번호
 	private int num;		// 개수
 	private int price;		// 가격
 	private int shipping_c;
 	private int discount;
 	private String o_value;
-	private int c_no;
 	
 	
 	
 	
-	public int getC_no() {
-		return c_no;
-	}
-	public void setC_no(int c_no) {
-		this.c_no = c_no;
-	}
+	
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
 	}
 	public int getPd_no() {
 		return pd_no;
