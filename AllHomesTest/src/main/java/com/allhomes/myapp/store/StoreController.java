@@ -1,6 +1,8 @@
 package com.allhomes.myapp.store;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
 
 import javax.servlet.http.HttpSession;
 
@@ -116,8 +118,23 @@ public class StoreController {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
 		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
-				
-		mav.addObject("vo", dao.selectProduct(pd_no));
+		
+		ProductVO vo = dao.selectProduct(pd_no);
+		
+		try {
+			if(!vo.getO_value().isEmpty()) {
+				String options[] = vo.getO_value().split(",");			
+				mav.addObject("options", options);
+			}else {
+				String options = "";
+				mav.addObject("options", options);
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
+		
+		mav.addObject("vo", vo);
 		mav.addObject("sub", sub.selectSubC(pd_no));
 		mav.addObject("result", rDao.countReview(pd_no));	
 		mav.setViewName("store/storeDetail");	

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.admin.AdminMemberDaoImp">
+ 
+ 	<!--  메인-회원 (10개) -->
+ 	<select id="memberSelectMain" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		<![CDATA[
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode 
+ 		from register
+ 		where rownum <= 10
+ 		order by regdate desc
+ 		]]>
+ 	</select> 
+ 	
+ 	<!-- 회원 전체 조회(페이징) -->
+ 	<select id="memberAllSelect" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode 
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									)A
+ 							)
+		where RN between #{start} and #{end}	 		
+ 			
+ 	</select>
+ 	
+ 	<!-- 회원 전체 조회(정렬) -->
+ 	<select id="memberAllSelectOrder" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<choose>
+										<when test="order!=null and order.equals('userid')">
+							   				order by userid
+							   			</when>
+							   			<when test="order!=null and order.equals('email')">
+							   				order by email
+							   			</when>
+							   			<when test="order!=null and order.equals('username')">
+							   				order by username
+							   			</when>
+							   			<when test="order!=null and order.equals('regdate')">
+							   				order by regdate desc
+							   			</when>
+									</choose>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 		
+ 	</select>
+ 	
+ 	<!-- 회원 선택 검색 -->
+ 	<select id="memberSearch" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<where>
+								 		<choose>
+								 			<when test="value == 'userid'">
+								 				userid LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'username'">
+								 				username LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'email'">
+								 				 email LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'tel'">
+								 				 tel LIKE '%'||#{key}||'%'
+								 			</when>
+								 		</choose>
+							 		</where>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 	</select>
+ 	
+ 	<!-- 회원 상세 검색 -->
+ 	<select id="memberSearchDetail" parameterType="HashMap" resultType="com.allhomes.myapp.register.RegisterVO">
+ 	select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode
+ 	from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from register
+ 									<where>
+								 		<trim prefixOverrides="and">
+									 		<if test="userid != null">and userid LIKE '%'||#{userid}||'%' </if>
+									 		<if test="username != null">and username LIKE '%'||#{username}||'%' </if>
+									 		<if test="nickname != null">and nickname LIKE '%'||#{nickname}||'%' </if>
+									 		<if test="email != null">and email LIKE '%'||#{email}||'%' </if>
+									 		<if test="tel != null">and tel LIKE '%'||#{tel}||'%' </if>
+									 		<if test="date != null">and to_date(regdate, 'YY/MM/DD')  between to_date(#{date}, 'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')</if>
+								 		</trim>
+							 		</where>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+ 	</select>
+ 	
+ 	<!-- 회원번호로 조회 -->
+ 	<select id="memberSelect" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select m_no, userid, username,userpwd, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate, regcode from register where m_no=#{m_no}
+ 	</select>
+ 	
+ 	<!-- 오늘 가입한 회원 수 -->
+ 	<select id="countRegisterToday" resultType="int">
+ 		select count(*) from register where to_char(regdate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+ 	</select>
+ 	<!-- 이번달에 가입한 회원 수 -->
+ 	<select id="countRegisterMonth" resultType="int">
+ 		select count(*) from register where to_char(regdate, 'YYYY-MM') = to_char(sysdate, 'YYYY-MM')
+ 	</select>
+ 	<!-- 총회원수 -->
+ 	<select id="countRegisterTotal" resultType="int">
+ 		select count(*) from register
+ 	</select>
+ 	
+ 	<!-- 회원 정보 count -->
+ 	<select id="memberHBCnt" resultType="int">
+ 		select count(*)	from homeboard where userid=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberQnaCnt" resultType="int">
+ 		select count(*)	from qnaboard where userid=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberReviewCnt" resultType="int">
+ 		select count(*)	from review where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberWishCnt" resultType="int">
+ 		select count(*)	from wishlist where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberScrapCnt" resultType="int">
+ 		select count(*)	from scrap where m_no=#{param1}
+ 	</select>
+ 	
+ 	<select id="memberOrderCnt" resultType="int">
+ 		select count(*)	from purchase where userid=#{param1}
+ 	</select>
+ 	
+ 	
+ 	<!-- 회원 주문 가져오기 -->
+ 	<select id="memberPurchase" resultType="com.allhomes.myapp.admin.AdminOrderVO">
+		select purchase.pc_no, purchase.pd_no, product.pd_name, store.s_name, address.zipcode,
+		address.addr, address.addrdetail, purchase.userid, to_char(purchase.pc_date, 'YYYY-MM-DD') pc_date, purchase.status,
+		purchase.num, purchase.total_p, purchase.o_value
+		from purchase, product, store,address
+		where purchase.s_no = store.s_no and purchase.pd_no = product.pd_no and address.a_code = purchase.a_code and purchase.userid = #{param1}
+		order by pc_date desc
+	</select>
+ 	
+ 
+ 	
+</mapper> 
+

@@ -128,7 +128,7 @@
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardMain">게시판 메인</a>
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminHomeBoard">집들이 게시판</a>
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminQnaBoard">Q&A 게시판</a>
-                        <a class="collapse-item" href="#">리뷰</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminReview">리뷰</a>
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminBoardCategory">집들이 게시판 카테고리</a>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ public class CartController {
 	public ModelAndView addCart(HttpServletRequest req, CartVO vo, @RequestParam("pd_no") int pd_no) {
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println(vo.getO_value());
 		HttpSession ses = req.getSession();				
 		String userid=(String)ses.getAttribute("userid");
 
