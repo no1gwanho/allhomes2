@@ -20,17 +20,17 @@
     			jQuery("#chase").css("position", "static");
     		}
     	}); */
-       	$( document ).ready( function() {
-       	  var offSet = $( '#chase' ).offset();
-       	  $( window ).scroll( function() {
-       	    if ( $( document ).scrollTop() > offSet.top ) {
-       	      $( '#chase' ).addClass( 'active' );
-       	    }
-       	    else {
-       	      $( '#chase' ).removeClass( 'active' );
-       	    }
-       	  });
-       	});
+    	
+/*      	  var offSet = $( '#chase' ).offset();
+    	
+     	  $( window ).scroll( function() {
+     	    if ( $( document ).scrollTop() > offSet.top ) {
+     	      $( '#chase' ).addClass( 'active' );
+     	    }
+     	    else {
+     	      $( '#chase' ).removeClass( 'active' );
+     	    }
+     	  }); */
    });
 </script>
 <style>
@@ -49,7 +49,7 @@
 		<!-- 상품명/재고/설명/옵션 -->
 		<div class="col-md-7" style="left:350px;">
 			<div class="product-details">
-				<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no}"> <!-- 액션 넣어주세요 -->
+				<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no}" onsubmit="numCheck()"> <!-- 액션 넣어주세요 -->
 					<input type="hidden" name="price" value="${vo.price }"/>
 					<input type="hidden" name="discount" value="${vo.discount }"/>
 					<input type="hidden" name="shipping_c" value="${vo.shipping_c }"/>
@@ -82,6 +82,28 @@
 					</div>
 					<div id="banner" class="sticky-top">
 						옵션 : 
+
+							<select class="input-select" style="margin-bottom:8px;">
+								<c:if test="${vo.o_value!=null}">
+									<option value="${o_value}">${o_value}</option>
+								</c:if>
+							</select><br/>
+						수량 : <input type="text" name="num" id="num"/> (<span style="font-size:0.8em;">재고: ${vo.stock} 개</span>)<br/>
+						<script>
+							function numCheck(){
+						    	var num = document.getElementById("num");
+						    	
+						    	if(num.value=="") {
+						            alert("구매수량을 입력해주세요");
+						            num.focus();
+						            
+						            return false;
+						        }
+						    	
+						    	return true;
+						    }
+						</script>
+
 							<select class="input-select" style="margin-bottom:8px;" name="o_value">
 								<c:if test="${ options != null}">
 									<c:forEach var="o" items="${options}">
@@ -93,6 +115,7 @@
 								</c:if>
 							</select><br/>
 						수량 : <input type="number" min="1" name="num" max="${vo.stock }"/> (<span style="font-size:0.8em;">재고: ${vo.stock} 개</span>)<br/>
+
 						<i class="fa fa-shopping-cart" style="color:#ee8374"></i><input type="submit" id="cart" class="btn" value="장바구니"/>
 						<img src="<%=request.getContextPath()%>/resources/img/icon/card.png"><input type="button" id="buy" class="btn" value="바로구매"/>
 					</div>

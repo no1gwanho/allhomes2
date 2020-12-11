@@ -28,6 +28,7 @@ public class OrderController {
 		String userid = (String)ses.getAttribute("userid");
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 		vo.setUserid(userid);
+	
 		int result = dao.insertPurchaseList(vo);
 		
 		List<PurchaseJoinVO> list = dao.joinPurchase(userid);

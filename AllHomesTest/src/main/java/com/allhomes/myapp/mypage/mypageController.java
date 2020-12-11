@@ -1,5 +1,8 @@
 package com.allhomes.myapp.mypage;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 
@@ -21,8 +25,25 @@ public class mypageController {
 
 	//mypage홈으로 이동
 	@RequestMapping("/mypageHome")
-	public String mypageHome() {
-		return "mypage/mypageHome";
+	public ModelAndView mypageHome(HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+				
+		HttpSession ses = req.getSession();
+		String userid = (String)ses.getAttribute("userid");
+		
+		RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);		
+		RegisterVO vo = reg.oneMeberSelect(userid);
+		
+		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		
+		List<MypageWishlistVO> list = wish.selectWishlist(userid);
+		
+		mv.addObject("list", list);		
+		mv.addObject("vo", vo);
+		
+		mv.setViewName("mypage/mypageHome");
+		
+		return mv;
 	}
 	
 	//mypage 회원정보수정으로이동
@@ -123,10 +144,22 @@ public class mypageController {
 		return mav;
 	}
 
-	//mypage 위시리스트로 이동
 	@RequestMapping("/mypageWishlist")
-	public String mypageWishlist() {
-		return "mypage/mypageWishlist";
+	public ModelAndView wishListAdd(MypageWishlistVO vo, HttpServletRequest r) {
+		ModelAndView mv = new ModelAndView();
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		
+		System.out.println(r.getParameter("m_no"));
+		
+		HttpSession ses = r.getSession();
+		String userid = (String)ses.getAttribute("userid");
+		
+		List<MypageWishlistVO> list = dao.selectWishlist(userid);
+		
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypageWishlist");
+				
+		return mv;
 	}
 	
 	//mypage 스크랩으로 이동

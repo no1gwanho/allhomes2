@@ -10,7 +10,6 @@ public class PurchaseJoinVO {
 	private int shipping_c;
 	private int total_p;
 	private int a_code;
-	private String pc_date;
 	private String payment;
 	private String status;
 	private String confirm;
@@ -28,7 +27,15 @@ public class PurchaseJoinVO {
 	private String addr;
 	private String addrdetail;
 	private String tel;
-
+	
+	private String m_pic;
+	
+	public String getM_pic() {
+		return m_pic;
+	}
+	public void setM_pic(String m_pic) {
+		this.m_pic = m_pic;
+	}
 	public int getPc_no() {
 		return pc_no;
 	}
@@ -99,14 +106,6 @@ public class PurchaseJoinVO {
 
 	public void setA_code(int a_code) {
 		this.a_code = a_code;
-	}
-
-	public String getPc_date() {
-		return pc_date;
-	}
-
-	public void setPc_date(String pc_date) {
-		this.pc_date = pc_date;
 	}
 
 	public String getPayment() {
