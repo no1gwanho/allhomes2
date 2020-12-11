@@ -3,13 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.order.OrderDaoImp">
- 
+ 	<!-- 장바구니 정보 얻어오기 -->
  	<select id="selectOrderCart" resultType="com.allhomes.myapp.order.OrderVO">
  		select p.main_img,c.c_no,c.pd_no, p.pd_name, s.s_no, s.s_name, c.num,c.price, c.shipping_c, c.discount, c.userid, c.o_value
 		from cart c, product p , store s
 		where c.pd_no = p.pd_no and p.s_no = s.s_no and c.c_no= #{c_no}
 	</select>
- 	 	
  	
+ 	<!-- 회원번호 가져오기 -->
+ 	<select id="selectM_no" parameterType="String" resultType="int">
+ 		select m_no from register where userid=#{param1}
+ 	</select>
+ 	
+ 	<!-- 회원정보 얻어오기 -->
+ 	<select id="selectRegis" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select username, email, tel from register where m_no=#{param1}
+ 	</select>
+ 	
+ 	<!-- 주소지 가져오기 -->
+ 	<select id="selectAddr" resultType="com.allhomes.myapp.order.AddressVO">
+ 		select receiver, a_code, zipcode, addr, addrdetail, tel, m_no from address where m_no = #{param1}
+ 	</select>
 </mapper> 
 

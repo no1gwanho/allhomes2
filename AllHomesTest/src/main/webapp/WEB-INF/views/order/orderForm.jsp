@@ -10,6 +10,22 @@
 		$('#payBtn').click(function(){
 			location.href="/myapp/payForm"
 		});
+		
+		//배송지 선택
+		$("#selectAddrBtn").click(function(){
+			$("#addrListDiv").css("display","block");
+		});
+		
+		//배송지 선택 OK
+		$("#selectAddrOkBtn").click(function(){
+			$("#receiverOk").val($("#receiver").val());
+			$("#zipcodeOk").val($("#zipcode").val());
+			$("#addrOk").val($("#addr").val()); 
+			$("#addrdetailOk").val($("#addrdetail").val());
+			$("#telOk").val($("#tel").val());  
+			
+			$("#addrListDiv").css("display","none");
+		});
 	});
 </script>
 <br/>
@@ -73,69 +89,83 @@
 		<div class="row">
 			<div class="col-2" style="border-bottom:1px solid #eee"><h4>배송지</h4></div>
 			<div class="col-10" style="border-bottom:1px solid #eee">
-				<button style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
+				<button id="selectAddrBtn" style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-2">
-				받는분
+
+		<div class="col-lg-12" id="addrListDiv" style="display:none">
+			<div class="row">
+				<c:forEach var="aVO" items="${aList}">
+					<div class="col-lg-6">
+						<input type="radio" name="a_code" value="${aVO.a_code}" />
+						<div class="row">
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
+							<input class="col-lg-8 form-control" type="text" id="receiver" value="${aVO.receiver}" /> 
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">우편번호</span>
+							<input class="col-lg-8 form-control" type="text"  id="zipcode"value="${aVO.zipcode}" />
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">주소</span>
+							<input class="col-lg-8 form-control" type="text" id="addr" value="${aVO.addr}" /><br />
+							 <span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
+							 <input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
+							 <input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
+
+						</div>
+					</div>
+				</c:forEach>
 			</div>
-			<div class="col-10">
-				<input type="text" name="username"/>
+			<div class="col-lg-12">
+				<button id="selectAddrOkBtn"
+					style="outline: 0; border: 0; background-color: #ee8374; color: #fff; margin: 0 auto;">선택</button>
 			</div>
-			<div class="col-2">
-				우편번호
-			</div>
-			<div class="col-10">
-				<input type="text" name="a_code"/>
-			</div>
-			<div class="col-2">
-				주소
-			</div>
-			<div class="col-10">
-				<input type="text" name="addr"/><br/>
-				<input type="text" name="addrdetail"/>
-			</div>			
-			<div class="col-2">
-				휴대전화
-			</div>
-			<div class="col-10">
-				<input type="text" name="tel"/>
-			</div>
-			<div class="col-2">
-				배송메모
-			</div>
-			<div class="col-10">
-				<input type="text" name="memo"/>
-			</div>
+			
+			<br/><hr/><br/>
+			
+						
+			
 		</div>
-		<br/>
+			<div class="row">
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
+							<input class="col-lg-8 form-control" type="text" id="receiverOk"
+								name="receiver"/>
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">우편번호</span>
+							<input class="col-lg-8 form-control" type="text" name="zipcode" id="zipcodeOk"/>
+							<span class="col-lg-4"style="color: #000000; line-height: 40px;">주소</span> 
+							<input class="col-lg-8 form-control" type="text" name="addr" id="addrOk"/><br />
+							<span class="col-lg-4"style="color: #000000; line-height: 40px;"></span>
+							<input class="col-lg-8 form-control" type="text" name="addrdetail" id="addrdetailOk"/> 
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
+							<input class="col-lg-8 form-control" type="text" name="tel" id="telOk"/>
+							<span class="col-lg-4" style="color: #000000; line-height: 40px;">배송 메모</span>
+							<input class="col-lg-8 form-control" type="text" name="memo" id="telOk"/>
+							  
+
+			</div>
+		
 		<!-- ---------------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-2" style="border-bottom:1px solid #eee"><h4>주문자</h4></div>
-			<div class="col-10" style="border-bottom:1px solid #eee">
-				<button style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송정보와 동일</button>
-			</div>
-		</div>
+		<div class="my-2"></div><br/><br/>
+		<div class="col-2"><h4>주문자</h4></div>
+		<hr>
+		
 		<div class="row">
 			<div class="col-2">
 				이름
 			</div>
 			<div class="col-10">
-				<input type="text" name="username"/>
+				<input type="text" name="username" value="${rVO.username}"/>
 			</div>
 			<div class="col-2">
 				이메일
 			</div>
 			<div class="col-10">
-				<input type="text" name="email"/>
+				<input type="text" name="email" value="${rVO.email}"/>
 			</div>
 			<div class="col-2">
 				휴대전화
 			</div>
 			<div class="col-10">
-				<input type="text" name="tel"/><br/>
-				<input type="checkbox">SMS 수신 동의
+				<input type="text" name="tel" value="${rVO.tel}"/><br/>
+				<!-- <input type="checkbox">SMS 수신 동의-->
 			</div>						
 		</div>
 		<br/>
