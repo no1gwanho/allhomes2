@@ -23,22 +23,52 @@
 		</div>		
 	</div>
 	<div id="orderPd">
-		<div style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
+		<div class="mb-4" style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
+		
+		<c:set var="totalP" value="0"/>
+		<c:forEach var="vo" items="${oList}">
+			<div class="col-lg-12 mr-2 ml-2 mb-2">
+				<div class="row">
+					<div class="col-2" style="border-bottom: 1px solid #eee">
+						<img
+							src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
+							style="height:200px;" />
+					</div>
+					<div class="col-7" style="border-bottom: 1px solid #eee">
+						<p>${vo.s_name}] ${vo.pd_name }</p>
+						<p>옵션:${vo.o_value} / ${vo.num}개</p>
+						<p>가격:${vo.price}<br /> (-)할인: ${vo.discount}%<br />
+						<b>최종 가격: ${vo.price-(vo.discount*vo.price)}원</b></p>
+						<c:set var="totalP" value="${totalP + (vo.price-(vo.discount*vo.price)) }"/>
+					</div>
+					<div class="col-2" style="border-bottom: 1px solid #eee">
+						배송비: ${vo.shipping_c}원<br /> 
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+		
+		<br/>
+		<!-- ---------------------------------------------------------------- -->
 		<div class="row">
-			<div class="col-3" style="border-bottom:1px solid #eee">
-				<img src=""/>
+			<div class="col-9">
+				총 상품 금액
 			</div>
-			<div class="col-7" style="border-bottom:1px solid #eee">
-				[스토어명] 상품명<br>
-				옵션 / 수량<br/>
-				<b>가격</b>
+			<div class="col-3">
+				<b><c:out value="${totalP}"/>원</b>
 			</div>
-			<div class="col-2" style="border-bottom:1px solid #eee">
-				배송료<br/>
-				배송회사
+			<div class="col-9">
+				배송비
+			</div>
+			<div class="col-3">
+				2,500
+			</div>
+			<div class="col-12" style="margin-left:1025px;">
+				<h4><b></b></h4>
 			</div>
 		</div>
-		<br/>
+		<hr/>
+		<br/>	
 		<!-- ---------------------------------------------------------------- -->
 		<div class="row">
 			<div class="col-2" style="border-bottom:1px solid #eee"><h4>배송지</h4></div>
@@ -109,26 +139,7 @@
 			</div>						
 		</div>
 		<br/>
-		<!-- ---------------------------------------------------------------- -->
-		<div style="border-bottom:1px solid #eee"><h4>주문자</h4></div>
-		<div class="row">
-			<div class="col-9">
-				총 상품 금액
-			</div>
-			<div class="col-3">
-				30,500
-			</div>
-			<div class="col-9">
-				배송비
-			</div>
-			<div class="col-3">
-				2,500
-			</div>
-			<div class="col-12" style="margin-left:1025px;">
-				<h4><b>33,000원</b></h4>
-			</div>
-		</div>
-		<br/>	
+		
 		<!-- ---------------------------------------------------------------- -->		
 		<div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>		
 		<div class="row">
