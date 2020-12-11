@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface CategoryDaoImp {
 	
-	public List<CategoryVO> categoriList();
+	public List<CategoryVO> categoryList();
+	
+	
 }

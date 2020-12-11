@@ -40,6 +40,8 @@
 		//미리보기
 		$("#mainImgFile").on("change", selectImgPreview);
 		
+
+		
 	});
 
 	//미리보기 function
@@ -83,14 +85,29 @@
 		       					<div class="col-lg -6 form-check">
 		       						<div class="col-lg-8 shadow-sm" style="border:1px solid #dddddd;border-radius:10px;float:left;">
 		       							<br/>
+			       						
+			       						
+			       						
+			       						
+			       						<!--기존 체크박스로 서브카테고리만 수정하던 곳 -->
 			       						<c:forEach var="list" items="${subList}">
 			       								<div class="col-lg-4" style="float:left">
 			       									<p>
 									  				<input class="form-check-input" id="sub_c" type="checkbox" name="sub_c" value="${list.sub_c}">
 									  				<label class="form-check-label" for="sub_c">${list.sub_c}(${list.main_c})</label>
+									  						
+												
+									  					
+	
 									  				</p>
 									  			</div>
 										</c:forEach>
+										
+										<!-- 테스트중 -->
+									
+									  					
+										
+			
 									</div>
 								</div>
 							<br/><br/><br/><br/><br/>

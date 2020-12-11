@@ -63,12 +63,15 @@ public class QnaCommentController {
 	
 	@RequestMapping(value="/qnaCommentDel")
 	@ResponseBody
-	public int commentDelete(int q_c_no, @RequestParam("q_no") int q_no) {
-		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
-		dao.minusAnswer(q_no);
-		
+	public int commentDelete(int q_c_no) {
+
 		QnaCommentDaoImp commentDao = sqlSession.getMapper(QnaCommentDaoImp.class);
-		int result = commentDao.commentDelete(q_c_no);
+		int q_no = commentDao.originalNum(q_c_no);
+		
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		dao.minusAnswer(q_no); //Qnaboard에서 댓글개수 하나 줄이기 
+
+		int result = commentDao.commentDelete(q_c_no); //댓글삭제 쿼리 실행 
 		
 		
 		

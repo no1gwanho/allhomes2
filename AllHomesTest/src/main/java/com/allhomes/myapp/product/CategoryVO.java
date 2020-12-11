@@ -5,7 +5,15 @@ public class CategoryVO {
 	private int priority;
 	private String img;
 	private String sub_c;
+	private int main_c_no;
 	
+
+	public int getMain_c_no() {
+		return main_c_no;
+	}
+	public void setMain_c_no(int main_c_no) {
+		this.main_c_no = main_c_no;
+	}
 	public String getMain_c() {
 		return main_c;
 	}

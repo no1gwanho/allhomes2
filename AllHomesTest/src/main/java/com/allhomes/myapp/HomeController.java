@@ -16,6 +16,7 @@ import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
 import com.allhomes.myapp.review.ReviewVO;
 import com.allhomes.myapp.store.StoreDaoImp;
+import com.allhomes.myapp.store.StoreProductCategoryVO;
 import com.allhomes.myapp.store.StoreVO;
 
 @Controller
@@ -33,25 +34,16 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
-		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
-		List<ProductVO> list = pDao.productMainList();	
+		
 		StoreDaoImp sDao = sqlSession.getMapper(StoreDaoImp.class);
-		List<StoreVO> sList = sDao.storeAll();
-		
-		String s_name="";
-		
-		for(int i=0; i<sList.size(); i++) {
-			StoreVO vo = sList.get(i);
-			s_name=vo.getS_name();
-		}
+		List<StoreProductCategoryVO> sList = sDao.storeAllList();
 		
 		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
 		List<HomeboardVO> hbList = hbDao.homeboardListForMain();
 		
 		ModelAndView mav = new ModelAndView();			
 		mav.addObject("hbList", hbList);
-		mav.addObject("list", list);
-		mav.addObject("s_name", s_name);
+		mav.addObject("list", sList);
 				
 		mav.setViewName("home");
 				
