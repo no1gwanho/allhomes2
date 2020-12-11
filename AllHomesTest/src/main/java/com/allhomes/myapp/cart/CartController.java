@@ -38,4 +38,10 @@ public class CartController {
 
 		return mv; 
 	}
+	
+	@RequestMapping("/cartList")
+	public String viewCart() {
+		
+		return "cart/cartForm";
+	}
 }

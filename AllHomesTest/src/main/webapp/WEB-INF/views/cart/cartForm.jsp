@@ -55,8 +55,9 @@
 		</div>
 	</div>
 	<br/>
-	<form method="post" action="/myapp/order?userid=${c.userid }">
-		<c:forEach var="c" items="${list }">
+	<c:forEach var="c" items="${list }">
+		<form method="post" action="/myapp/order?userid=${c.userid }">
+			<input type="hidden" name="${c.m_no }" value="${c.m_no }">
 			<div class="row" style="margin-top:15px;">
 				<div class="col-3">
 					<input type="checkbox" name="chBox" class="chBox" value="${c.c_no }">
@@ -90,11 +91,11 @@
 				</div>
 				<div class="col-5">
 					<input type="submit" class="btn btn" style="font-size:0.7em;background-color:#ee8374;color:#fff;border:0;margin-top:15px;" value="상품구매"/>
-					<button class="btn btn" style="font-size:0.7em;background-color:#ee8374;color:#fff;border:0;margin-top:15px;">위시리스트</button>
+					<a href="/myapp/wishList?pd_no=${c.pd_no}"><button id="wish" class="btn btn" style="font-size:0.7em;background-color:#ee8374;color:#fff;border:0;margin-top:15px;">위시리스트</button></a>
 				</div>
 			</div>
-		</c:forEach>
 	</form>
+	</c:forEach>
 </div>
 
 <br/>

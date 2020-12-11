@@ -21,7 +21,11 @@
 	 		<mvc:mapping path="/qnaWrite"/>
 	 		<mvc:mapping path="/homeboardEdit"/>
 	 		<mvc:mapping path="/homeboardEditOk"/>
+
+	 		<mvc:mapping path="/mypageHome"/>
+	 		<mvc:mapping path="/cartInsert"/>
 	 		
+
 	 		<mvc:mapping path="/replyLogin"/>
 	 		<mvc:mapping path="/qnaReplyLogin"/>
 	 		<bean class="com.allhomes.myapp.interceptor.LoginInterceptor"/>

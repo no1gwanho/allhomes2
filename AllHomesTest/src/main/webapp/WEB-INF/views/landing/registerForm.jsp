@@ -86,7 +86,7 @@
 					
 			//닉네임 검사
 			if($("#nickname").val()==""){
-				$("#nickname").val("사용자");
+				$("#nickname").val("membUs");
 										
 			}else{
 				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
