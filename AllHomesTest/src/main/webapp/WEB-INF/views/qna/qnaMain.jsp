@@ -85,6 +85,11 @@
 		height:20px;
 		border-radius: 45%;
 	}
+	
+
+	
+	
+	
 
 </style>
 
@@ -164,25 +169,48 @@
 		</div>
 		<hr>
 		</c:forEach>
-		</div>
+		
+					<!-- pagination -->
+					
+					<div style="display: inline-block;">
+						<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center" style="text-align:center;">
+							<c:if test="${paging.startPage != 1 }">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/qnaMain?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+								var="p">
+								<c:choose>
+									<c:when test="${p == paging.nowPage }">
+										<li class="page-item disabled">
+											<a class="page-link">${p }</a>
+										</li>
+									</c:when>
+									<c:when test="${p != paging.nowPage }">
+										<li class="page-item">
+										<a class="page-link"
+											href="<%=request.getContextPath()%>/qnaMain?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+										</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<li class="page-item">
+									<a class="page-link"
+										href="<%=request.getContextPath()%>/qnaMain?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								</li>
+							</c:if>
+						</ul>
+						</nav>
+					</div>
+					<!-- pagination 끝 -->
+	</div>
 
 
-		<!-- pagination ===========================================================-->
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
-						class="sr-only">Previous</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">Next</span>
-				</a></li>
-			</ul>
-		</nav>
+
 		
 </div><!--container  -->
 	

@@ -22,19 +22,26 @@
 			</div>
 		</div>		
 	</div>
+	<c:forEach var="o" items="${list }">
 	<div id="orderPd">
 		<div style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
 		<div class="row">
+
 			<div class="col-3" style="border-bottom:1px solid #eee">
 				<img src=""/>
 			</div>
 			<div class="col-7" style="border-bottom:1px solid #eee">
-				[스토어명] 상품명<br>
-				옵션 / 수량<br/>
-				<b>가격</b>
+				[${o.s_no }] 상품명<br>
+				<c:if test="${o.o_value == null }">
+					옵션 : 없음
+				</c:if>
+				<c:if test="${o.o_value != null }">
+					옵션 : ${o.o_value }
+				</c:if>  수량 : ${o.num }<br/>
+				<b>결제금액 : </b>
 			</div>
 			<div class="col-2" style="border-bottom:1px solid #eee">
-				배송료<br/>
+				배송료 : ${o.shipping_c }<br/>
 				배송회사
 			</div>
 		</div>
@@ -48,35 +55,35 @@
 		</div>
 		<div class="row">
 			<div class="col-2">
-				받는분
+				받는분 : ${o.receiver }
 			</div>
 			<div class="col-10">
-				<input type="text" name="username"/>
+				<input type="text" name="reciever" value="${o.reciever }"/>
 			</div>
 			<div class="col-2">
 				우편번호
 			</div>
 			<div class="col-10">
-				<input type="text" name="a_code"/>
+				<input type="text" name="a_code" value="${o.zipcode }"/>
 			</div>
 			<div class="col-2">
 				주소
 			</div>
 			<div class="col-10">
-				<input type="text" name="addr"/><br/>
-				<input type="text" name="addrdetail"/>
+				<input type="text" name="addr" value="${o.addr }"/><br/>
+				<input type="text" name="addrdetail" value="${o.addrdetail }"/>
 			</div>			
 			<div class="col-2">
 				휴대전화
 			</div>
 			<div class="col-10">
-				<input type="text" name="tel"/>
+				<input type="text" name="tel" value="${o.tel }"/>
 			</div>
 			<div class="col-2">
 				배송메모
 			</div>
 			<div class="col-10">
-				<input type="text" name="memo"/>
+				<input type="text" name="memo" value="${o.memo }"/>
 			</div>
 		</div>
 		<br/>
@@ -139,6 +146,7 @@
 				<img src=""/>계좌이체
 			</div>
 		</div>
+
 		<div id="payNotice" style="width:1400px;height:300px;background-color:#eee;">
 			공지사항 및 결제 주의사항			
 		</div>		
@@ -146,7 +154,9 @@
 		<div>
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
-		</div>	
-	</div>
+		</div>
+
+	</div>	
+	</c:forEach>	
 </div>
 <br/>

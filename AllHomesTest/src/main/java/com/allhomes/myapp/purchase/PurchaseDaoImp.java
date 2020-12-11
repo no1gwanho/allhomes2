@@ -7,11 +7,7 @@ import com.allhomes.myapp.review.ReviewVO;
 public interface PurchaseDaoImp {
 	public List<PurchaseVO> allPurchaseList();
 	
-	public List<PurchaseVO> joinPurchaseReview(String userid);
-	
-	public PurchaseVO selectPurchaseListString(String userid);
-	
-	public PurchaseVO selectPurchaseListInt(int pd_no);
+	public PurchaseVO selectPurchaseList();
 	
 	public int insertPurchaseList(PurchaseVO vo);
 	
@@ -20,4 +16,6 @@ public interface PurchaseDaoImp {
 	public int editConfirmCheck(int pc_no);
 	
 	public int delPurchaseList(PurchaseVO vo);
+	
+	public List<PurchaseJoinVO> joinPurchase(String userid);
 }

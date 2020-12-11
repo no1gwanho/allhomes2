@@ -7,10 +7,7 @@
 	<select id="allPurchaseList" resultType="com.allhomes.myapp.purchase.PurchaseVO">
 		select pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo from purchase order by pc_date desc
 	</select>
-	<select id="selectPurchaseListString" parameterType="String" resultType="com.allhomes.myapp.purchase.PurchaseVO">
-		select pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo from purchase where userid=#{userid}
-	</select>  
-	<select id="selectPurchaseListInt" parameterType="int" resultType="com.allhomes.myapp.purchase.PurchaseVO">
+	<select id="selectPurchaseList" resultType="com.allhomes.myapp.purchase.PurchaseVO">
 		select pc_no, pd_no, userid, pc_date from purchase where pd_no=#{pd_no}
 	</select>
 	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
@@ -31,4 +28,8 @@
 <!-- 	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
 		select p.pd_no, p.s_no, p.pd_name, p.price, p.discount, p.main_img, p.stock, p.status, p.sub_c, p.pd_img, p.pd_exp, p.shipping_c, r.userid, r.img, r.content, r.writedate, r.rating_price, r.rating_delivery, r.rating_design, r.rating_durability from product p, review r where p.pd_no=r.pd_no and p.s_no=r.s_no;
   	</select> -->
+  	<select id="joinPurchase" parameterType="String" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
+  		select p.userid, p.pc_no, p.pd_no, p.s_no, p.userid, p.num, p.price, p.shipping_c, p.total_p, p.a_code, p.pc_date, p.memo,
+  		a.receiver, a.zipcode, a.addr, a.addrdetail, a.tel from purchase p, address a where p.a_code=a.a_code
+  	</select>
 </mapper>

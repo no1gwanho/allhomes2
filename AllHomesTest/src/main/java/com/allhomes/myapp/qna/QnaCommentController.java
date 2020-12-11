@@ -64,11 +64,13 @@ public class QnaCommentController {
 	@RequestMapping(value="/qnaCommentDel")
 	@ResponseBody
 	public int commentDelete(int q_c_no, @RequestParam("q_no") int q_no) {
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		dao.minusAnswer(q_no);
+		
 		QnaCommentDaoImp commentDao = sqlSession.getMapper(QnaCommentDaoImp.class);
 		int result = commentDao.commentDelete(q_c_no);
 		
-		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
-		dao.minusAnswer(q_no);
+		
 		
 		return result;	
 	}
