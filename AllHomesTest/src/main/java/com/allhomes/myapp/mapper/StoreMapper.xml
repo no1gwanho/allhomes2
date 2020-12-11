@@ -3,6 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.store.StoreDaoImp">
+ 	
+ 	<select id="storeAllList" parameterType="com.allhomes.myapp.store.StoreProductCategoryVO">
+ 		select a.pd_no, a.s_no, b.s_name, a.pd_name, a.price, a.discount, a.main_img, a.status, a.sub_c, c.main_c
+		from product a, store b, sub_c c
+		where a.s_no = b.s_no
+		and a.sub_c = c.sub_c;
+ 	</select>
+ 	
+ 	
+ 	<!--  
  	<insert id="storeAdd" parameterType="com.allhomes.myapp.store.StoreVO">
  		insert into store(s_no,s_num,s_name,s_pic,openingdate,s_id,staff_n,staff_t,staff_e,s_homepage,status)
  		 values(store_sq.nextval, #{s_num},#{s_name},#{s_pic},sysdate,#{s_id},#{staff_n},#{staff_t},#{staff_e},#{s_homepage},'Y')
@@ -22,5 +32,6 @@
  	<update id="storeEdit" parameterType="com.allhomes.myapp.store.StoreVO">
  		update store set s_num=#{s_num}, s_name=#{s_name}, s_id=#{s_id}, staff_n=#{staff_n}, staff_e=#{staff_e}, staff_t=#{staff_t}, s_homepage=#{s_homepage} where s_no=#{s_no} 
  	</update>
+ 	-->
  	
 </mapper>

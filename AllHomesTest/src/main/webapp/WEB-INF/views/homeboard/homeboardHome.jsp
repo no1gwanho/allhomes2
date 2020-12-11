@@ -6,10 +6,10 @@
 <style>
 
 	#bxslider img{
-			width:1400px;
-			height:450px;
-			border-radius:30px;
-		}
+		width:1400px;
+		height:450px;
+		border-radius:30px;
+	}
 	.bx-wrapper {
 	       -moz-box-shadow: none !important;
 	        -webkit-box-shadow: none !important;

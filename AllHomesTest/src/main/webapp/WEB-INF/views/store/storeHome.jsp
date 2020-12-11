@@ -3,10 +3,20 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
+
 <style>
 	#bxslider img{
 		width:1400px;
-		height:500px;
+		height:450px;
+		border-radius:30px;
+	}
+	
+	.bx-wrapper {
+	       -moz-box-shadow: none !important;
+	        -webkit-box-shadow: none !important;
+	        box-shadow: none !important;
+	        padding:0;
+	        margin:0;
 	}
 	.col-3 {
 		text-align:center;
@@ -31,6 +41,18 @@
 		width:25%;
 		text-align:center;
 	}
+	
+	.container{
+		max-width:1400px;
+		margin: 0 auto;
+		font-family: 'SCDream3';
+	}
+	
+	.category-image-menu{
+		margin-top:80px;
+		
+	}
+	
 </style>
 <script>
 	$(function() {
@@ -53,6 +75,7 @@
 			useCSS : false
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
 		});
+		
 		var selectOption = $('#sortPd').val();
 		
 		$('#sortPd').change(function(){
@@ -61,21 +84,7 @@
 		});
 	});	
 </script>
-<script>
-	var count = 0;
-	//스크롤 바닥 감지
-	window.onscroll = function(e) {
-    	//추가되는 임시 콘텐츠
-    	//window height + window scrollY 값이 document height보다 클 경우,
-    	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    		//실행할 로직 (콘텐츠 추가)
-        	count++;
-        	var addContent = '<div class="block"><p>'+ count +'</p></div></div>';
-        	//article에 추가되는 콘텐츠를 append
-        	$('article').append(addContent);
-    	}
-	};
-</script>
+
 <div class="container">
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
@@ -84,15 +93,22 @@
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner4.png"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner5.png"/></a></li>
 	</ul>
-	<div class="row">
+	<div class="row category-image-menu">
+			<div class="col-1"></div>
+	
 <%-- 		<c:forEach var="c" items="cate"> --%>
-			<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
-			<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
-			<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
-			<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
-			<div class="col" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate6.png"/><br/>&nbsp;DIY/공구</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate6.png"/><br/>&nbsp;DIY/공구</a></div>
 <%-- 		</c:forEach> --%>
+			<div class="col-1"></div>
+	
+	
+	
 	</div>
+	
 	<br/>
 	<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품리스트 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 	<div class="row">
@@ -115,7 +131,7 @@
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
-							<span style="font-size:0.8em;">[${s_name}]</span>${vo.pd_name }<br/>
+							<span style="font-size:0.8em;">${vo.s_name }</span>${vo.pd_name }<br/>
 							<c:if test="${vo.discount != 0}">
 								${vo.discount}원 
 							</c:if>

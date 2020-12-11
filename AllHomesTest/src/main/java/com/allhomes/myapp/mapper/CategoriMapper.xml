@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.product.CategoryDaoImp">
-	<select id="categoriList" resultType="com.allhomes.myapp.product.CategoryVO">
-		select main_c, img, priority from main_c order by priority
+	<select id="categoryList" resultType="com.allhomes.myapp.product.CategoryVO">
+		select main_c, img, priority, main_c_no from main_c order by priority
 	</select>
 </mapper>
