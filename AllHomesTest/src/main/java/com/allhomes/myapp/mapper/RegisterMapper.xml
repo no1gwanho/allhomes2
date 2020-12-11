@@ -159,5 +159,9 @@
  	<select id="mailFilter" resultType="String">
  		select email from register where email=#{email}
  	</select>
+ 	
+ 	<select id="oneMeberSelect" parameterType="String" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select * from register where userid=#{userid}
+ 	</select>
 </mapper> 
 

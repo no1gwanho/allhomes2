@@ -30,6 +30,7 @@ public interface RegisterDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
+	public RegisterVO oneMeberSelect(String userid);
 	
 	
 	//회원가입
