@@ -71,7 +71,7 @@
 			<!-- 위시리스트 -->
 			<div class="card card border-light mb-3">
 				<div class="card-header">
-					위시리스트<a href="/myapp/mypageWishlist?userid=${w.userid }" style="float:right;">더보기</a>
+					위시리스트<a href="/myapp/mypageWishlist?userid=${vo.userid }" style="float:right;">더보기</a>
 				</div>
 				<div class="card-body"><!-- card-body 시작 -->
 					<div class="col-12">
@@ -124,13 +124,14 @@
 				
 				<div class="card-body"><!-- card-body 시작 -->
 					<div id="scrap">
+						<c:forEach var="s" items="${sList }">
 						<div id="scrapImg">
-							<img src="/myapp/resources/img/main/ah01.jpg"/><br/>
-							제목제목제목제목<br/>
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;ID<br/>
-							조회수:132 좋아요:32
+							<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${s.thumbnail }"/><br/>
+							${s.title }<br/>
+							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;${s.userid }<br/>
+							조회수:${s.hit } 좋아요:${s.scrap }
 						</div>
-						
+						</c:forEach><%-- 
 						<div id="scrapImg">
 							<img src="/myapp/resources/img/main/ah02.jpg"/>
 							<b>제목제목제목제목</b><br/>
@@ -150,7 +151,7 @@
 							<b>제목제목제목제목</b><br/>
 							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;ID<br/>
 							조회수:132 좋아요:32
-						</div>
+						</div> --%>
 					</div>
 				</div>
 			</div>

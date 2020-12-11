@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.scrap.ScrapDaoImp">
+	<select id="selectScrap" parameterType="String" resultType="com.allhomes.myapp.scrap.ScrapVO">
+		select * from (select * from (select s.m_no, s.b_no, h.title, h.userid, h.thumbnail, h.hit, h.scrap, h.writedate from scrap s, homeboard h where s.b_no=h.b_no order by h.b_no desc)
+	 	where userid=#{userid}) where rownum <![CDATA[<]]> 4
+	</select>
+</mapper>

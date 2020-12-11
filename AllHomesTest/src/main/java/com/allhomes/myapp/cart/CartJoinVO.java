@@ -3,6 +3,7 @@ package com.allhomes.myapp.cart;
 public class CartJoinVO {
 	private String userid;		// 회원번호
 	private int pd_no;		// 제품번호
+	private int m_no;
 	private int num;		// 개수
 	private int price;		// 가격
 	private int shipping_c;
@@ -12,6 +13,13 @@ public class CartJoinVO {
 	private String pd_name;
 	private int s_no;
 	private String main_img;
+	
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
 	public String getUserid() {
 		return userid;
 	}
