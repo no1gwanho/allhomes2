@@ -16,5 +16,6 @@ public interface QnaCommentDaoImp {
 	//질문게시판 댓글 삭제
 	public int commentDelete(int q_c_no);
 	
-
+	//질문게시판 댓글의 원글 번호 찾기 
+	public int originalNum(int q_c_no);
 }

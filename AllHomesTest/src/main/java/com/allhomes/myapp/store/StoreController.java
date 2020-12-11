@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.product.CategoryDaoImp;
+import com.allhomes.myapp.product.CategoryVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductJoinVO;
 import com.allhomes.myapp.product.ProductVO;
@@ -24,17 +25,77 @@ import com.allhomes.myapp.review.ReviewDaoImp;
 
 @Controller
 public class StoreController {
-	@Autowired 
+	
 	SqlSession sqlSession;
-	 
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	
+	@Autowired 
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	@Autowired 
 	DataSourceTransactionManager transactionManager;
 		
+	@RequestMapping("/storeHome")
+	public ModelAndView storeHome(@RequestParam("order") String order) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
+		
+		mav.addObject("shList", shList);
+		mav.addObject("order", order);
+		mav.setViewName("store/storeHome");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/storeBest")
+	public ModelAndView storeBest(@RequestParam("order") String order) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		List<StoreProductCategoryVO> bestList = dao.storeOrderList(order);
+		
+		mav.addObject("bestList", bestList);
+		mav.addObject("order", order);
+		mav.setViewName("store/storeBest");
+		
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/storeCategory")
+	public ModelAndView storeCatey(@RequestParam("main_c") String main_c) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(main_c);
+		
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("main_c", main_c);
+		mav.setViewName("store/storeCate");
+		
+		return mav;
+	}
+	
+	
+	
+	/* @은빈
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		List<ProductVO> list = dao.productAllList(sortPd);
+		
+		CategoryDaoImp cateDao = sqlSession.getMapper(CategoryDaoImp.class);
+		List<CategoryVO> categoryList = cateDao.categoryList();
 		
 		StoreDaoImp sdao = sqlSession.getMapper(StoreDaoImp.class);
 		List<StoreVO> lst = sdao.selectStoreJoin();
@@ -42,6 +103,7 @@ public class StoreController {
 		for(int i=0; i<lst.size(); i++) {
 			StoreVO vo = lst.get(i);
 			String s_name = vo.getS_name();
+			
 			
 			mav.addObject("list", list);
 			mav.addObject("lst", lst);
@@ -55,12 +117,12 @@ public class StoreController {
 	
 		return mav;	
 	 }
+	 
+	
 
 	@RequestMapping("/storeCategory")
 	public ModelAndView storeCate(@RequestParam(value="c_code", required=false) int c_code) {
 		
-		System.out.println("스토어 카테고리 넘어가?");
-		System.out.println("카테고리값: "+c_code);
 		ModelAndView mav = new ModelAndView();
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		List<ProductJoinVO> cList = dao.productCateList(c_code);
@@ -75,11 +137,6 @@ public class StoreController {
 		return mav;	
 	}
 	
-	@RequestMapping("/storeBest")
-	public String storeBest() {
-		
-		return "store/storeBest";
-	}
 	
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
@@ -111,4 +168,5 @@ public class StoreController {
 			
 		return mav;
 	}
+	 */
 }

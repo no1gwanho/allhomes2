@@ -14,8 +14,31 @@ public class ProductVO {
 	private String pd_exp;      // 짧은 제품설명
 	private int shipping_c;		// 배송비
 	private String o_value;		//옵션
+	private String main_c;		//메인카테고리
+	private int wishlist;		//위시리스트 (혹시몰라추가 -은지)
+	private int sale;			//판매 (혹시몰라추가 -은지)ㅊ
+	
 
 	
+	
+	public String getMain_c() {
+		return main_c;
+	}
+	public void setMain_c(String main_c) {
+		this.main_c = main_c;
+	}
+	public int getWishlist() {
+		return wishlist;
+	}
+	public void setWishlist(int wishlist) {
+		this.wishlist = wishlist;
+	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
 	public int getPd_no() {
 		return pd_no;
 	}

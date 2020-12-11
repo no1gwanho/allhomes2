@@ -185,7 +185,7 @@
 				<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;스토어</h3>
 			</div>
 			<div class="col-2" style="text-align:right;">
-				<a href="/myapp/storeHome">더보기</a>
+				<a href="/myapp/storeHome?order=recent">더보기</a>
 			</div>
 			
 			<c:forEach var="v" items="${list }">
@@ -194,15 +194,13 @@
 						
 						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/>
 							<br/>
-							<span style="font-size:0.5em;">[${s_name}] </span><span style="font-size:0.8em">${v.pd_name }</span>
+							<span style="font-size:0.5em;">${v.s_name } </span><span style="font-size:0.8em">${v.pd_name }</span>
 							<br/>
-						<span style="font-size:0.8em">	
-						<c:if test="${v.discount != 0}">
-							${v.price - (v.price*v.discount/100)}원 <del>${v.price }원</del><br/> 
+						<c:if test="${v.discount != 0 }">
+						<span class="badge badge-danger">${v.discount }%</span>
 						</c:if>
-						<c:if test="${v.discount == 0 }">
+						<span style="font-size:0.8em">
 							${v.price }원<br/>
-						</c:if>
 						<c:if test="${v.status!=null }">
 							<h6><span class="badge badge-secondary">${v.status }</span></h6>
 						</c:if>		

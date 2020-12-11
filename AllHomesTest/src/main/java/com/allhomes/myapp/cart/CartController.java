@@ -25,6 +25,8 @@ public class CartController {
 		HttpSession ses = req.getSession();				
 		String userid=(String)ses.getAttribute("userid");
 
+		System.out.println("123123"+userid);
+		
 		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
 		vo.setUserid(userid);		
 		int result = dao.addCartList(vo);

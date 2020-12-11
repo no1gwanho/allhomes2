@@ -9,7 +9,14 @@ public class CartJoinVO {
 	private int shipping_c;
 	private int discount;
 	private String o_value;
+	private int c_no;
 	
+	public int getC_no() {
+		return c_no;
+	}
+	public void setC_no(int c_no) {
+		this.c_no = c_no;
+	}
 	private String pd_name;
 	private int s_no;
 	private String main_img;
