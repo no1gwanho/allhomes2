@@ -1,5 +1,10 @@
 package com.allhomes.myapp.mypage;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
@@ -24,6 +30,12 @@ public class mypageController {
 	public String mypageHome() {
 		return "mypage/mypageHome";
 	}
+	
+	
+	
+	
+	
+	
 	
 	//mypage 회원정보수정으로이동
 	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
@@ -72,16 +84,152 @@ public class mypageController {
 		return mav;
 	}
 	
+	
+	
+	
+	
+	
+	
 	//수정버튼 눌렀을때
-	@RequestMapping("updateOk")
-	public String updateOk() {
-		//vo가 주소 그리고 register 두개로 나눠져있기때문에	=>아이디는 빼고 업데이트 하면됨
-		//update도 각각따로 날려줘야한다.
+	@RequestMapping(value="/updateOk",produces="application/text;charset=UTF-8")
+	public ModelAndView updateOk(RegisterVO vo,HttpServletResponse req,HttpSession session) {
+		
+		
+		//@RequestParam("m_pic") MultipartFile m_pic 파라미터에 추가
+		
+		
+		//기본정보 업데이트
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+						
+		String originEmail = (String)session.getAttribute("email");
+		String splEmail[] = originEmail.split("@");
+		vo.setEmail1(splEmail[0]);
+		vo.setEmail2(splEmail[1]);	//이메일 세팅
+		vo.setNickname((String)session.getAttribute("nickname"));//닉네임 세팅
+				
+				
+		RegisterVO dupCheck = dao.dupCheck(vo);
+		ModelAndView mav = new ModelAndView();
+				
+		if(dupCheck==null){//db에 중복되는 값이 없다면 값이 달라졌다는 뜻이니깐 db update! 
+					
+//			///////////프로필 사진 업로드////////////
+//			String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
+//			
+//			String fileNames = "";
+//					
+//				String fName = m_pic.getOriginalFilename();
+//				
+//				if(fName!=null && !fName.equals("")) {
+//					//앞쪽 이름구하기
+//					String originFileName = fName.substring(0,fName.lastIndexOf("."));
+//					//확장자구하기
+//					String originLast = fName.substring(fName.lastIndexOf(".")+1);
+//					
+//					//파일 이름바꾸기
+//					File f=new File(path,fName);
+//					if(f.exists()) {		//기존에 동일한게 올라가 있다면 실행시키는 영역
+//						for(int renameNum=1;;renameNum++) {
+//							String renameFile = originFileName+renameNum+"."+originLast;	//변경된파일명
+//							f = new File(path,renameFile);
+//							
+//							//파일이 위치에 있나없나 확인
+//							if(!f.exists()) {
+//								fName = renameFile;
+//								break;
+//							}
+//						}
+//					}
+//					fileNames = fName;
+//					try {
+//						if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
+//							m_pic.transferTo(f);	//확장자명이 맞을때만 업로드
+//						
+//						
+//							vo.setM_pic(fileNames);
+//							
+//							////////////////////////
+//							
+//							int resultVO = dao.userMebUpdate(vo); //업데이트를 시켜줬는데 =>여기서 update 쿼리 다날려주면됨
+//							
+//							if(resultVO<=0) {	//업데이트가 안일어나면 
+//								if(fileNames!=null) {	//근데 파일이름은 그대로 남아있다면 
+//									File ff = new File(path,fileNames);	//지워라
+//										ff.delete();
+//											
+//									}
+//								}
+//						
+//							
+//							//session.setAttribute("resultVO",resultVO);	
+//						
+//						}else {
+//							//이미지 파일이 아닐때 경고문구 날려주기
+//							mav.setViewName("landing/registerUnSuitImg");				
+//						}
+//									
+//					}catch(Exception e) {e.printStackTrace();}
+//										 
+//					
+//				}else {	//파일이름이 없거나 공백이면 기본 이미지가 이미 세팅돼있으니 아무것도 안하면됨
+////					fileNames = "basicprofile.png";
+////					vo.setM_pic(fileNames);
+////
+////					int resultVO = dao.registerMember(vo);
+////					
+////					mav.setViewName("landing/registerOkPage");
+////					session.setAttribute("resultVO",resultVO);		
+//							
+//				}
+			
+			
+			mav.setViewName("/home");
+			req.setContentType("text/html;charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = req.getWriter();
+				out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
+				out.flush();
+			
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+				
 		
 		
 		
 		
-		return "";
+		
+		
+		
+		
+		
+		}else {	//db에 중복되는 값이 있다면 그대로 냅둔것임 근데! 이건 다른사람 닉네임이랑 겹치거나 이메일(이메일도 중복검사가 필요함)이 중복됐다는 뜻
+			
+			mav.setViewName("/home");
+			req.setContentType("text/html;charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = req.getWriter();
+				out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
+				out.flush();
+				System.out.println("test3");
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		//주소지는 중복돼도 상관없음 주소지는 무조건 업데이트		
+		
+		
+		
+		
+		
+		return mav;
 	}
 	
 	

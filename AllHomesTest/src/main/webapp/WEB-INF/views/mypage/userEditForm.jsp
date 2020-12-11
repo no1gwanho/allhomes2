@@ -9,27 +9,30 @@
 </c:if>
 
 <script>
+	
+	
 	$(function(){
 		$("updateBtn").click(function(){
-			
-			
-			
-			
-			$("updataFrm").submit();		
+						
+			$("updateFrm").submit();		
 			
 		});
 	});
-
+	
+	
 </script>
 <style>
 	.row{text-align:center;}
-	
-	
 	
 	.inputbox{height:100%;}
 
 	#addr1,#addr2{margin:0;height:40%;}
 	#notice{line-height:80%;margin-top:20px;}
+	#zipcode{width:449px;}
+	#zipBtn{float:left;margin-right:10px;}
+	#m_pic{width:230px;}
+	
+	
 	
 	.wBlank{margin-left:200px;}
 	.hBlank{margin-top:50px;}
@@ -42,7 +45,7 @@
 	.wBlank2{margin-left:51px;}	/*7자*/
 	.wBlank3{margin-left:35px;}	/*4자*/
 	.wBlank4{margin-left:67px;}	/*4자*/
-	
+	.wBlank5{margin-left:200px;}
 
 </style>
 <br/>    
@@ -59,7 +62,7 @@
 	<br/><br/>
 	
 	<!-- 폼테그 시작 -->
-	<form id="updataFrm" method="post" action="/myapp/updateOk" enctype="multipart/form-data">
+	<form id="updateFrm" method="post" action="/myapp/updateOk" enctype="multipart/form-data">
 		<div class="row">
 			<div class="hBlank2"></div>
 			
@@ -90,10 +93,11 @@
 		      <input type="text" class="form-control" id="nickname" name="nickname" value=<%=session.getAttribute("nickname")%>>
 		    </div>
 		  </div>
-		   <div class="mb-3 row">
+		  <div class="mb-3 row">
 		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="m_pic" name="m_pic" value=<%=session.getAttribute("m_pic")%>>
+		      <input id="m_pic" type="file" class="form-control" value=<%=session.getAttribute("m_pic")%>><!-- name 추가후 작업 -->
+		      <img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
 		    </div>
 		  </div>
 		<!-- 박스종료 -->
@@ -128,6 +132,7 @@
 		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label" >우편번호</label>
 		    	<div class="wBlank3"></div>
 		    <div class="col-sm-10">
+		      <input type="button" id="zipBtn" value="우편번호검색">
 		      <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호" value="${zipcode}">
 		    </div>
 		  </div>
@@ -148,22 +153,28 @@
 		      <input type="text" class="form-control" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" value="${addrdetail}">
 		    </div>
 		  </div>
+	
+	
+	
+	
+		<br/>
+		<div class="row">
+			<div class="col-6" style="text-align:right;">
+				<button id="updateBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
+			</div>
+			
+			
+			<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
+				<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
+			</div>
+		</div>
+	
 		
 		</form>
 	</div>
 
 	
-	<br/>
-	<div class="row">
-		<div class="col-6" style="text-align:right;">
-			<button id="updateBtn"class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
-		</div>
-		
-		
-		<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
-			<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
-		</div>
-	</div>
+	
 	
 	
 	

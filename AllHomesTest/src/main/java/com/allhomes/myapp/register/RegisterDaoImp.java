@@ -41,4 +41,14 @@ public interface RegisterDaoImp {
 	//회원가입 메일인증
 	public int regFinal(RegisterVO vo);
 
+	//회원정보 수정 중복검사
+	public RegisterVO dupCheck(RegisterVO vo);
+	//회원 기본정보 업데이트
+	public int userMebUpdate(RegisterVO vo);
+	
+	
+	
+	
+	
+
 }

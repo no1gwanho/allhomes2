@@ -159,5 +159,16 @@
  	<select id="mailFilter" resultType="String">
  		select email from register where email=#{email}
  	</select>
+ 	
+ 	<!-- 정보수정 중복검사 -->
+ 	<select id="dupCheck" resultType="com.allhomes.myapp.register.RegisterVO">
+ 		select email, nickname from register where email=#{email} and nickname!='membUs' and nickname=#{nickname}
+ 	</select>
+  	
+  	<!-- 회원정보 업데이트 m_pic 추가-->
+  	<update id="userMebUpdate" parameterType="com.allhomes.myapp.register.RegisterVO">
+  		update into register set email=#{email}, nickname=#{nickname}
+  	</update>
+  	
 </mapper> 
 
