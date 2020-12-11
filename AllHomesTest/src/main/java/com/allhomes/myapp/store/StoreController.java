@@ -41,14 +41,46 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome() {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView storeHome(@RequestParam("order") String order) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
 		
-		List<StoreProductCategoryVO> list = dao.storeAll();
+		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
 		
-		mav.addObject("list",list);
+		mav.addObject("shList", shList);
+		mav.addObject("order", order);
 		mav.setViewName("store/storeHome");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/storeBest")
+	public ModelAndView storeBest(@RequestParam("order") String order) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		List<StoreProductCategoryVO> bestList = dao.storeOrderList(order);
+		
+		mav.addObject("bestList", bestList);
+		mav.addObject("order", order);
+		mav.setViewName("store/storeBest");
+		
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/storeCategory")
+	public ModelAndView storeCatey(@RequestParam("main_c") String main_c) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(main_c);
+		
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("main_c", main_c);
+		mav.setViewName("store/storeCate");
 		
 		return mav;
 	}
@@ -105,11 +137,6 @@ public class StoreController {
 		return mav;	
 	}
 	
-	@RequestMapping("/storeBest")
-	public String storeBest() {
-		
-		return "store/storeBest";
-	}
 	
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){

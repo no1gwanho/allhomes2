@@ -76,11 +76,11 @@
 		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
 		});
 		
-		var selectOption = $('#sortPd').val();
+		var selectOption = $('#order').val();
 		
-		$('#sortPd').change(function(){
-			var selectedPd = $('#sortPd option:selected').val();
-			location.href="/myapp/storeHome?sortPd="+selectedPd;
+		$('#order').change(function(){
+			var selectedOrder = $('#order option:selected').val();
+			location.href="/myapp/storeHome?order="+selectedOrder;
 		});
 	});	
 </script>
@@ -97,7 +97,7 @@
 			<div class="col-1"></div>
 	
 <%-- 		<c:forEach var="c" items="cate"> --%>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=가구"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
 			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
 			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
 			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
@@ -116,10 +116,10 @@
 			<h6>상품 리스트</h6>
 		</div>
 		<div class="col-3" style="text-align:center;">
-			<select class="selectpicker" name="sortPd" id="sortPd">
-				<option value="recent" <c:if test="${sortPd == 'recent' }">selected</c:if>>최신순</option>
-				<option value="saled" <c:if test="${sortPd == 'saled' }">selected</c:if>>판매순</option>
-				<option value="rowPrice" <c:if test="${sortPd == 'rowPrice' }">selected</c:if>>최저가순</option>
+			<select class="selectpicker" name="order" id="order">
+				<option value="recent" <c:if test="${order == 'recent' }">selected</c:if>>최신순</option>
+				<option value="sale" <c:if test="${order == 'sale' }">selected</c:if>>판매순</option>
+				<option value="price" <c:if test="${order == 'price' }">selected</c:if>>최저가순</option>
 			</select>
 		</div>
 	</div>
@@ -127,23 +127,22 @@
 	<div class="block">
 			<hr/>
 			<div class="row">
-				<c:forEach var="vo" items="${list}">
+				<c:forEach var="vo" items="${shList}">
 					<div class="col-3">
 						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
-							<span style="font-size:0.8em;">${vo.s_name }</span>${vo.pd_name }<br/>
-							<c:if test="${vo.discount != 0}">
-								${vo.discount}원 
+							<c:if test="${vo.discount != 0 }">
+							<span class="badge badge-danger">${vo.discount }%</span>
 							</c:if>
-							<c:if test="${vo.discount == 0 }">
-								${vo.price }원<br/>
-							</c:if>
+							<span style="font-size:0.8em">${vo.price }원 ${vo.sale }개판매(테스트후삭제예정)</span><br/>
 							<c:if test="${vo.status!=null }">
 								<span class="badge badge-secondary">${vo.status }</span>
 							</c:if>
 						</a>
 					</div>
 				</c:forEach>
+					
+				
 			</div>	
 		</div>
 	</article>
