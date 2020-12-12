@@ -29,7 +29,7 @@
 					<img class="card-img-top" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}" alt="Card image cap" style="width:200px;">
 					<div class="my-2"></div>
 					<div><!-- 닉네임 -->
-						<br/><h4>${vo.userid }</h4><br/>
+						<br/><h4>${vo.nickname}</h4><br/>
 					</div>
 					<hr style="width:70%"><br/>
 					

@@ -1,15 +1,14 @@
 package com.allhomes.myapp.review;
 
-public class ReviewVO {
+public class ReviewJoinVO {
 	private String userid;
 	private int pd_no;
 	private double rating;
+	private double avg_rate;
 	private String img;
 	private String content;
 	private String writedate;
 	private int s_no;
-	private int hit;
-	
 	public String getUserid() {
 		return userid;
 	}
@@ -27,6 +26,12 @@ public class ReviewVO {
 	}
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	public double getAvg_rate() {
+		return avg_rate;
+	}
+	public void setAvg_rate(double avg_rate) {
+		this.avg_rate = avg_rate;
 	}
 	public String getImg() {
 		return img;
@@ -52,11 +57,6 @@ public class ReviewVO {
 	public void setS_no(int s_no) {
 		this.s_no = s_no;
 	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
+	
 	
 }
