@@ -15,6 +15,7 @@ public class ProductJoinVO {
 	private int shipping_c;		// 배송비
 	private String o_value;		//옵션
 	private int dc_price;
+	private int num;
 	
 	private String s_name;
 	private String userid;
@@ -180,4 +181,11 @@ public class ProductJoinVO {
 	public void setPc_date(String pc_date) {
 		this.pc_date = pc_date;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
 }

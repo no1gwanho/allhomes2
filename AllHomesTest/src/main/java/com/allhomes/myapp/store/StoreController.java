@@ -1,9 +1,11 @@
 package com.allhomes.myapp.store;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
 import java.util.List;
-import java.util.Spliterator;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.product.CategoryDaoImp;
-import com.allhomes.myapp.product.CategoryVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductJoinVO;
-import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.product.Sub_cDaoImp;
-import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.review.ReviewDaoImp;
+import com.allhomes.myapp.review.ReviewVO;
 
 @Controller
 public class StoreController {
@@ -123,7 +122,40 @@ public class StoreController {
 			
 		return mav;
 	}
-	
+		
+  
+  @RequestMapping("/storeDetail")
+	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
+		ModelAndView mav = new ModelAndView();
+		
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
+
+		ProductJoinVO vo = dao.selectDetailPage(pd_no);
+		
+		try {
+			if(!vo.getO_value().isEmpty()) {
+				String options[] = vo.getO_value().split(",");			
+				mav.addObject("options", options);
+			}else {
+				String options = "";
+				mav.addObject("options", options);
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
+		mav.addObject("vo", vo);
+		mav.addObject("sub", sub.selectSubC(pd_no));
+		mav.addObject("rvo", rDao.avgReview(pd_no));
+		mav.addObject("rList", rDao.selectReview(pd_no));		
+		mav.addObject("result", rDao.countReview(pd_no));
+		
+		mav.setViewName("store/storeDetail");	
+			
+		return mav;
+	}
 	
 	/* @은빈
 	@RequestMapping("/storeHome")	
@@ -174,8 +206,8 @@ public class StoreController {
 
 		return mav;	
 	}
+		 */
 	
+
+
 	
-	
-	 */
-}
