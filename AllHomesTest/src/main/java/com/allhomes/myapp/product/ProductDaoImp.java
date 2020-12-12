@@ -29,4 +29,6 @@ public interface ProductDaoImp {
 	public ProductVO joinProductStore();
 	
 	public List<ProductJoinVO> productCateList(int c_code);
+	
+	public ProductJoinVO selectDetailPage(int pd_no);	
 }

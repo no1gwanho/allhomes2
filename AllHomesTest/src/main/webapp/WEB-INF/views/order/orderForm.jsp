@@ -1,32 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-	input{
-		margin-top:5px;
-	}
+   input{
+      margin-top:5px;
+   }
 </style>
 <script>
-	$(function(){
-		$('#payBtn').click(function(){
-			location.href="/myapp/payForm"
-		});
-		
-		//배송지 선택
-		$("#selectAddrBtn").click(function(){
-			$("#addrListDiv").css("display","block");
-		});
-		
-		//배송지 선택 OK
-		$("#selectAddrOkBtn").click(function(){
-			$("#receiverOk").val($("#receiver").val());
-			$("#zipcodeOk").val($("#zipcode").val());
-			$("#addrOk").val($("#addr").val()); 
-			$("#addrdetailOk").val($("#addrdetail").val());
-			$("#telOk").val($("#tel").val());  
-			
-			$("#addrListDiv").css("display","none");
-		});
-	});
+   $(function(){
+      $('#payBtn').click(function(){
+         location.href="/myapp/payForm"
+      });
+      
+      //배송지 선택
+      $("#selectAddrBtn").click(function(){
+         $("#addrListDiv").css("display","block");
+      });
+      
+      //배송지 선택 OK
+      $("#selectAddrOkBtn").click(function(){
+         $("#receiverOk").val($("#receiver").val());
+         $("#zipcodeOk").val($("#zipcode").val());
+         $("#addrOk").val($("#addr").val()); 
+         $("#addrdetailOk").val($("#addrdetail").val());
+         $("#telOk").val($("#tel").val());  
+      
+         $("#addrListDiv").css("display","none");
+      });
+   });
+
 </script>
 <br/>
 <div class="container">
@@ -256,7 +257,23 @@
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
 		</div>
 
-	</div>	
-	</c:forEach>	
+      <div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>      
+      <div class="row">
+         <div class="col-3" style="margin-bottom:5px;">
+            <img src=""/>카드결제
+         </div>
+         <div class="col-3" style="margin-bottom:5px;">
+            <img src=""/>계좌이체
+         </div>
+      </div>
+      <div id="payNotice" style="width:1400px;height:300px;background-color:#eee;">
+         공지사항 및 결제 주의사항         
+      </div>      
+      <br/>
+      <div>
+         <input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
+         <button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
+      </div>   
+   </div>
 </div>
-<br/>
+<br/>c
