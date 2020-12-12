@@ -45,15 +45,19 @@ function numCheck(){
 		<span style="font-size:0.8em;">Category : ${sub.main_c } > <a href="/myapp/storeCategory">${sub.sub_c }</a></span>
 		<div class="row">
 			<div class="col-8">
-				<img style="margin-top:15px;border-radius:5%;width:900px;height:720px"src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
+				<img style="margin-top:15px;border-radius:5%;width:900px;height:720px" src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 			</div>
 			<div class="col-4" style="padding-top:15px;">
 				<div class="row">
 					<div class="col-12">
-						<span style="font-size:0.7em;">${vo.s_name }<br/></span>	
-						<span style="font-size:1.8em;color:#343a40"><b>${vo.pd_name }</b></span>
+						<div style="height:40px;">
+							<span style="font-size:0.9em;">${vo.s_name }<br/></span>	
+						</div>
+						<div style="height:105px;">
+							<span style="font-size:1.8em;color:#343a40"><b>${vo.pd_name }</b></span>
+						</div>
 					</div>
-					<div class="col-12" style="margin-top:20px;">
+					<div class="col-12" style="margin-top:20px;height:55px">
 						<c:if test="${result==0 }">
 							<c:if test="${rvo.rating==0 }">
 								<span style="color:#aaa">
@@ -64,7 +68,7 @@ function numCheck(){
 									<i class="fa fa-star"></i>								
 								</span>							
 							</c:if>
-							아직 등록된 리뷰가 없습니다
+							<span style="font-size:1.3em;">아직 등록된 리뷰가 없습니다</span>
 						</c:if>
 						<c:if test="${result!=0 }">
 							<c:if test="${rvo.rating >= 1.0 && rvo.rating < 1.8 }">
@@ -118,21 +122,16 @@ function numCheck(){
 						</c:if>
 					</div>
 					<c:if test="${vo.discount!=0}">
-						<div class="col-12" style="margin-top:20px;">
-							<del> 
-								<span style="font-size:1.5em;color:#aaa;">판매가격	</span>
-								<span style="font-size:1.5em;margin-left:40px;color:#aaa;">${vo.price }원</span>
-							</del>
-						</div>
-						<div class="col-12">
-							<span style="font-size:1.5em;color:#343a40;"> 할인가격</span>
-							<b style="font-size:1.8em;margin-left:40px;">
-							${vo.dc_price}원</b>
-							<span style="color:#ee7384;font-size:1.8em;margin-left:25px;">${vo.discount }%↓</span>
+						<div class="col-12" style="margin-top:15px;height:55px">
+							<span style="font-size:1.5em;color:#343a40;"> 판매가격</span>
+							<b style="font-size:1.8em;margin-left:25px;">
+								${vo.dc_price}원
+							</b>
+							<span style="color:#ee7384;font-size:1.8em;">${vo.discount }%↓</span>
 						</div>
 					</c:if>
 					<c:if test="${vo.discount==0 }">
-						<div class="col-12" style="margin-top:20px;">
+						<div class="col-12" style="margin-top:20px;height:55px">
 							<span style="font-size:1.5em;color:#333;"> 판매가격</span>
 							<b style="font-size:1.8em;margin-left:25px;color:#333;">${vo.price }원 </b>
 						</div>
@@ -142,12 +141,12 @@ function numCheck(){
 							<span style="font-size:1.5em;color:#343a40;">무료배송</span>
 						</c:if>
 						<c:if test="${vo.shipping_c!=0 }">
-							<span style="font-size:1.5em;color:#343a40;">배송료</span><span style="margin-left:75px;font-size:1.5em;color:#343a40">${vo.shipping_c }원</span>
+							<span style="font-size:1.5em;color:#343a40;">배송료</span><span style="margin-left:57px;font-size:1.5em;color:#343a40">${vo.shipping_c }원</span>
 						</c:if>
 					</div>
 					<div class="col-12" style="margin-top:20px;">
 						<span style="font-size:1.5em;color:#343a40">옵션</span>
-						<select class="input-select" style="font-size:1.5em;margin-bottom:8px;width:265px;height:45px;margin-left:100px" name="o_value">
+						<select class="input-select" style="font-size:1.5em;margin-bottom:8px;width:285px;height:45px;margin-left:78px" name="o_value">
 							<c:if test="${ options != null}">
 								<c:forEach var="o" items="${options}">
 									<option  value="${o}">${o}</option>
@@ -160,12 +159,12 @@ function numCheck(){
 					</div>
 					<div class="col-12">
 						<span style="font-size:1.5em;color:#343a40">수량</span>
-						<input type="number" name="num" style="font-size:1.2em;margin-bottom:8px;width:265px;height:45px;margin-left:100px"/>
+						<input type="number" name="num" style="font-size:1.2em;margin-bottom:8px;width:285px;height:45px;margin-left:78px"/>
 					</div>
-					<div class="col-12" style="height:233px;margin-top:20px;">
-						<input type="submit" class="btn btn-outline-dark" style="width:430px;height:58px;color:#ee8374;" value="장바구니">
-						<button class="btn btn-outline-dark" style="width:430px;height:58px;margin-top:15px;color:#ee8374;">바로구매</button>
-						<button class="btn btn-outline-dark" style="width:430px;height:58px;margin-top:15px;color:#ee8374;">위시리스트</button>
+					<div class="col-12" style="height:233px;margin-top:50px;">
+						<input type="submit" class="btn btn-block" style="width:430px;height:58px;color:#fff;background-color:#ee8374;" value="장바구니">
+						<button class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
+						<button class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button>
 					</div>
 				</div>
 			</div>
@@ -187,7 +186,9 @@ function numCheck(){
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }" style="width:900px;"/>		
+					<c:if test="${vo.pd_img !=null }">
+						<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }" style="width:900px;"/>
+					</c:if>		
            		</div>
            		<div class="tab-pane fade" id="info">
        				<div class="row">
@@ -240,11 +241,11 @@ function numCheck(){
        				<p></p>
            		</div>
            		<c:if test="${result==0 }">
-           		<div class="tab-pane fade" id="review">
+           		<div class="tab-pane fade" id="review" style="margin-top:15px;">
 					<h5> 등록된 리뷰가 없습니다. </h5>
 					<div class="row">
-						<div class="col-5">
-							<h2 style="position:absolute;top:50%;margin-top:-50px;height:200px;">
+						<div class="col-5" style="text-align:center;">
+							<h2 style="position:absolute;top:23%;height:200px;">
 								<span style="color:#aaa">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -252,7 +253,7 @@ function numCheck(){
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>								
 								</span><br/>
-								평점 : 0.0	
+								<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">0.0</b></span>
 							</h2>							
 						</div>
 						<div class="col-7">
@@ -435,7 +436,7 @@ function numCheck(){
 								${r.content}
 							</div>
 							<div class="col-12" style="margin-top:35px;text-align:right">
-								<button class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/>
+								<button id="likeBtn" class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/>
 							</div>
 							<div class="col-12" style="margin-top:5px;text-align:right">
 								${r.hit } 명에게 도움이 되었습니다.

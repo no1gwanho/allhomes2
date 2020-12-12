@@ -13,6 +13,9 @@
 <select id="avgReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
 	select * from (select pd_no, avg(rating) as rating from review group by pd_no) where pd_no=#{pd_no}
 </select>
+<select id="reviewRatingCnt" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
+	select count(case when rating=5 then 5 end) from review where pd_no=#{pd_no}
+</select>
 <select id="allReviewList" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating, img, content, writedate, s_no from review order by writedate desc
 </select>
