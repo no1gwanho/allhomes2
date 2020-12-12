@@ -97,11 +97,11 @@
 			<div class="col-1"></div>
 	
 <%-- 		<c:forEach var="c" items="cate"> --%>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=가구"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
-			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory"><img src="${pageContext.request.contextPath}/resources/img/category/cate6.png"/><br/>&nbsp;DIY/공구</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=가구&sub_c=total"><img src="${pageContext.request.contextPath}/resources/upload/category/cate1.png"/><br/>&nbsp;가구</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=홈데코&sub_c=total"><img src="${pageContext.request.contextPath}/resources/img/category/cate2.png"/><br/>&nbsp;홈데코</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=가전&sub_c=total"><img src="${pageContext.request.contextPath}/resources/img/category/cate4.png"/><br/>&nbsp;가전</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=수납&sub_c=total"><img src="${pageContext.request.contextPath}/resources/img/category/cate3.png"/><br/>&nbsp;수납</a></div>
+			<div class="col-2" style="text-align:center;"><a href="/myapp/storeCategory?main_c=DIY/공구&sub_c=total"><img src="${pageContext.request.contextPath}/resources/img/category/cate6.png"/><br/>&nbsp;DIY/공구</a></div>
 <%-- 		</c:forEach> --%>
 			<div class="col-1"></div>
 	
