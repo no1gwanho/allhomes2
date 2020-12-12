@@ -39,6 +39,9 @@ function numCheck(){
 	.nav nav-tabs, .nav-item{
 		list-style-type:none;
 	}
+	ol>li{
+		line-height:30px;
+	}
 </style>
 <div class="container" style="margin:15px auto">
 	<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no }" onsubmit="numChek()">
@@ -68,7 +71,7 @@ function numCheck(){
 									<i class="fa fa-star"></i>								
 								</span>							
 							</c:if>
-							<span style="font-size:1.3em;">아직 등록된 리뷰가 없습니다</span>
+							아직 등록된 리뷰가 없습니다
 						</c:if>
 						<c:if test="${result!=0 }">
 							<c:if test="${rvo.rating >= 1.0 && rvo.rating < 1.8 }">
@@ -123,8 +126,8 @@ function numCheck(){
 					</div>
 					<c:if test="${vo.discount!=0}">
 						<div class="col-12" style="margin-top:15px;height:55px">
-							<span style="font-size:1.5em;color:#343a40;"> 판매가격</span>
-							<b style="font-size:1.8em;margin-left:25px;">
+							<span style="color:#343a40;"> 판매가격</span>
+							<b style="font-size:1.8em;margin-left:28px;">
 								${vo.dc_price}원
 							</b>
 							<span style="color:#ee7384;font-size:1.8em;">${vo.discount }%↓</span>
@@ -132,21 +135,21 @@ function numCheck(){
 					</c:if>
 					<c:if test="${vo.discount==0 }">
 						<div class="col-12" style="margin-top:20px;height:55px">
-							<span style="font-size:1.5em;color:#333;"> 판매가격</span>
-							<b style="font-size:1.8em;margin-left:25px;color:#333;">${vo.price }원 </b>
+							<span style="color:#333;"> 판매가격</span>
+							<b style="font-size:1.8em;margin-left:28px;color:#333;">${vo.dc_price }원 </b>
 						</div>
 					</c:if>
 					<div class="col-12">
 						<c:if test="${vo.shipping_c==0 }">
-							<span style="font-size:1.5em;color:#343a40;">무료배송</span>
+							<span style="color:#343a40;">무료배송</span>
 						</c:if>
 						<c:if test="${vo.shipping_c!=0 }">
-							<span style="font-size:1.5em;color:#343a40;">배송료</span><span style="margin-left:57px;font-size:1.5em;color:#343a40">${vo.shipping_c }원</span>
+							<span style="color:#343a40;">배송료</span><span style="margin-left:57px;color:#343a40">${vo.shipping_c }원</span>
 						</c:if>
 					</div>
 					<div class="col-12" style="margin-top:20px;">
-						<span style="font-size:1.5em;color:#343a40">옵션</span>
-						<select class="input-select" style="font-size:1.5em;margin-bottom:8px;width:285px;height:45px;margin-left:78px" name="o_value">
+						<span style="color:#343a40">옵션</span>
+						<select class="input-select" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px" name="o_value">
 							<c:if test="${ options != null}">
 								<c:forEach var="o" items="${options}">
 									<option  value="${o}">${o}</option>
@@ -158,8 +161,8 @@ function numCheck(){
 						</select><br/>
 					</div>
 					<div class="col-12">
-						<span style="font-size:1.5em;color:#343a40">수량</span>
-						<input type="number" name="num" style="font-size:1.2em;margin-bottom:8px;width:285px;height:45px;margin-left:78px"/>
+						<span style="color:#343a40">수량</span>
+						<input type="number" name="num" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px"/>
 					</div>
 					<div class="col-12" style="height:233px;margin-top:50px;">
 						<input type="submit" class="btn btn-block" style="width:430px;height:58px;color:#fff;background-color:#ee8374;" value="장바구니">
@@ -171,14 +174,13 @@ function numCheck(){
 		</div>
 	</form>
 	<div class="row">
-		<div class="col-12"><hr/></div>
 		<div class="col-8">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a class="nav-link active" data-toggle="tab" href="#descript">상품정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#info">배송환불</a>
+					<a class="nav-link" data-toggle="tab" href="#info">교환/환불</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#review">구매리뷰</a>
@@ -186,178 +188,235 @@ function numCheck(){
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="descript">
-					<c:if test="${vo.pd_img !=null }">
-						<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }" style="width:900px;"/>
-					</c:if>		
-           		</div>
-           		<div class="tab-pane fade" id="info">
-       				<div class="row">
-       					<div class="col-10" style="margin-bottom:18px;">
-       						<span style="font-size:1.5em;">배송 안내</span>
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						배송		
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						일반택배
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						배송비
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						${vo.shipping_c }
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						도서산간 추가 배송비
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						5000원
-       					</div>
-       				</div>
-       				
-       				<div class="row" style="margin-top:30px;">
-       					<div class="col-10" style="margin-bottom:18px;">
-       						<span style="font-size:1.5em">교환/환불 안내</span>
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						반품배송비
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						2500원 (최초 배송비가 무료인 경우 5000원 부과)
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						교환배송비
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						5000원
-       					</div>
-       					<div class="col-3" style="border-bottom:1px solid #eee;">
-       						교환/반품 주소
-       					</div>
-       					<div class="col-7" style="border-bottom:1px solid #eee;">
-       						주소 : 서울시 서대문구 올홈즈스토리 / 대표전화 : 02-222-1111 
-       					</div>
-       				</div>
-       				<p></p>
-           		</div>
-           		<c:if test="${result==0 }">
-           		<div class="tab-pane fade" id="review" style="margin-top:15px;">
-					<h5> 등록된 리뷰가 없습니다. </h5>
 					<div class="row">
-						<div class="col-5" style="text-align:center;">
-							<h2 style="position:absolute;top:23%;height:200px;">
-								<span style="color:#aaa">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>								
-								</span><br/>
-								<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">0.0</b></span>
-							</h2>							
-						</div>
-						<div class="col-7">
-							5점 : 
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							4점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							3점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							2점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							1점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>						
+						<div class="col-12">
+							<br/>
+							<c:if test="${vo.pd_img !=null }">
+								<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }" style="width:900px;"/>
+							</c:if>		
+							<c:if test="${vo.pd_img == null }">
+								<span style="margin-top:25px;">상품 설명이 없습니다</span>
+							</c:if>
 						</div>
 					</div>
-				</div>
-				</c:if>
-				<c:if test="${result!=0 }">
-           		<div class="tab-pane fade" id="review" style="margin-top:15px;">
-					<h5><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h5>
-           			<div class="row">
-						<div class="col-5" style="text-align:center;">
-							<h2 style="position:absolute;top:23%;height:200px;">
-							<c:if test="${rvo.rating >= 1 && rvo.rating < 1.8}">
-								<i class="fa fa-star"></i>
-								<span style="color:#aaa">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</span>
-							</c:if>
-							<c:if test="${rvo.rating >= 1.8 && rvo.rating < 2.8}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<span style="color:#aaa">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</span><br/>
-							</c:if>
-							<c:if test="${rvo.rating >= 2.8 && rvo.rating < 3.8 }">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<span style="color:#aaa">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</span>
-							</c:if>
-							<c:if test="${rvo.rating >= 3.8 && rvo.rating < 4.8}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<span style="color:#aaa">
-									<i class="fa fa-star"></i>
-								</span>								
-							</c:if>
-							<c:if test="${rvo.rating >= 4.8 && rvo.rating == 5}">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</c:if><br/><br/>
-							<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">${rvo.rating }</b></span>
-							</h2>
-							
+           		</div>
+           		<div class="tab-pane fade" id="info">
+           			<br/>
+       				<span style="font-size:1.5em;margin-top:15px;color:#343a40;font-weight:bold">교환/반품 정보</span>
+       				<div class="row">
+       					<div class="col-12">
+							<hr/>
+       					</div>
+       					<div class="col-3">
+       						반품배송비
+       					</div>
+       					<div class="col-9">
+       						편도 2500원
+       					</div>
+       					<div class="col-3">
+       						보내실 곳
+       					</div>
+       					<div class="col-9">
+       						<div class="row">
+       							<div class="col-7">서울시 서대문구 백범로23 올홈즈스토리 앞</div>
+       							<div class="col-5">tel : 02-222-1111</div>
+       						</div>
+       					</div>
+       					<div class="col-12">
+       						<hr/>
+       					</div>       					<div class="col-12" style="margin-top:25px;">
+       						<span style="font-size:1.5em;margin-top:15px;color:#343a40;font-weight:bold">판매자 정보</span>
+       					</div>
+       					<div class="col-12">
+							<hr/>
+       					</div>
+       					<div class="col-3">
+       						상호 / 대표자
+       					</div>
+       					<div  class="col-9">
+       						올홈즈스토리
+       					</div>
+       					<div class="col-3">
+       						연락처
+       					</div>
+       					<div class="col-9">
+       						02-222-1111
+       					</div>
+       					<div class="col-3">
+       						응대가능시간
+       					</div>
+       					<div class="col-9">
+       						10시 ~ 17시
+       					</div>
+       					<div class="col-3">
+       						E-mail
+       					</div>
+       					<div class="col-9">
+       						cs@homes.com
+       					</div>
+       					<div class="col-3">
+       						FAX
+       					</div>
+       					<div class="col-9">
+       						02-222-1111
+       					</div>
+       					<div class="col-3">
+       						사업자 등록번호
+       					</div>
+       					<div class="col-9">
+       						142-50-98345
+       					</div>
+       					<div class="col-3">
+       						통신판매업 신고
+       					</div>
+       					<div class="col-9">
+       						2011-서대문공-0231
+       					</div>
+       					<div class="col-3">
+       						영업소재지
+       					</div>
+       					<div class="col-9">
+       						서울시 서대문구 백범로23 올홈즈스토리
+       					</div>
+						<br/>  
+       					<div class="col-12" style="margin-top:25px;">
+       						<h6>거래 조건에 대한 정보</h6>
+ 							<ol>
+ 								<li>소화물 택배의 배송은 발송일로부터 1~2 영업일이 소요되나, 지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라질 수 있습니다.</li>
+ 								<li>상품의 특성과 거래조건에 따라 청약철회(변심반품/취소)가 일부 제한되거나 청약철회에 소요되는 비용이 다르게 책정될 수 있습니다.</li>
+ 								<li>청약철회는 상품 수령일로부터 7일 이내에 신청하실 수 있으며, 판매자는 ‘전자상거래등에서의소비자보호에관한법률’이 정하는 바에 따른 지연이자 지급의 책임이 있습니다.</li>
+ 								<li>제품 사용 상 불만과 피해보상에 관하여는 제조사, 수입원, 판매자 등에게 문의하여주시기 바라며, 당사의 고객센터로 문의 주시면 관계법령과 규정에 부합하는 기준에 따라 문제 해결에 도움을 드리겠습니다.</li>
+ 							</ol>
+       					</div>
+						<div class="col-12">
+							<hr/>
 						</div>
-						<div class="col-7">
-							5점 : 
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+       					<div class="col-12" style="margin-top:25px;">
+       						<h6>거래 주의사항</h6>
+       						<ol>
+       							<li>당사의 결제시스템을 통하지 않고 판매자에게 직접 상품대금을 지급하는 직거래 시 피해가 발생할 수 있으므로 주의 바랍니다.</li>
+       							<li>직거래로 인해 발생한 피해에 대해 올홈즈스토리는 책임을 지지 않습니다.</li>
+       							<li>전자상거래 등에서의 소비자보호법에 관한 법률에 의거하여 미성년자가 체결한 계약은 법정대리인이 동의하지 않은 경우 본인 또는 법정대리인이 취소할 수 있습니다.</li>
+       						</ol>
+       					</div>
+       				</div>	
+       			</div>
+           		<div class="tab-pane fade" id="review" style="margin-top:15px;">       				
+           			<c:if test="${result==0 }">
+						<h5> 등록된 리뷰가 없습니다. </h5>
+						<div class="row">
+							<div class="col-5" style="text-align:center;">
+								<h2 style="position:absolute;top:23%;height:200px;">
+									<span style="color:#aaa">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>								
+									</span><br/>
+									<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">0.0</b></span>
+								</h2>							
 							</div>
-							4점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							3점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							2점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							1점 :
-							<div class="progress">
-  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="col-7">
+								5점 : 
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								4점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								3점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								2점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								1점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>						
 							</div>
 						</div>
-
-					</div>	
+					</c:if>
+					<c:if test="${result!=0 }">
+           				<h5><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h5>
+	           			<div class="row">
+							<div class="col-5" style="text-align:center;">
+								<h2 style="position:absolute;top:23%;height:200px;">
+								<c:if test="${rvo.rating >= 1 && rvo.rating < 1.8}">
+									<i class="fa fa-star"></i>
+									<span style="color:#aaa">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</span>
+								</c:if>
+								<c:if test="${rvo.rating >= 1.8 && rvo.rating < 2.8}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<span style="color:#aaa">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</span><br/>
+								</c:if>
+								<c:if test="${rvo.rating >= 2.8 && rvo.rating < 3.8 }">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<span style="color:#aaa">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</span>
+								</c:if>
+								<c:if test="${rvo.rating >= 3.8 && rvo.rating < 4.8}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<span style="color:#aaa">
+										<i class="fa fa-star"></i>
+									</span>								
+								</c:if>
+								<c:if test="${rvo.rating >= 4.8 && rvo.rating == 5}">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</c:if><br/><br/>
+								<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">${rvo.rating }</b></span>
+								</h2>
+								
+							</div>
+							<div class="col-7">
+								5점 : 
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								4점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								3점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:33%;background-color:#ee8374" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								2점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								1점 :
+								<div class="progress">
+	  								<div class="progress-bar" role="progressbar" style="width:0%;background-color:#ee8374" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+						</div>
+					</c:if>	
 					<br/>
 					<hr/>
 					<div class="row">
@@ -445,9 +504,28 @@ function numCheck(){
 						<hr/>	
 					</c:forEach>		
 				</div>
-				</c:if>
            	</div>
          	<br/>
+		</div>
+		<div class="col4" style="margin-top:20px;position:absolute;left:1450px;">
+			<span style="color:#343a40">옵션</span>
+			<select class="input-select" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px" name="o_value">
+				<c:if test="${ options != null}">
+					<c:forEach var="o" items="${options}">
+						<option  value="${o}">${o}</option>
+					</c:forEach>
+				</c:if> 
+				<c:if test="${ options ==null}">
+					<option value="X">옵션없음</option>
+				</c:if>
+			</select><br/>
+			<span style="color:#343a40">수량</span>
+			<input type="number" name="num" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px"/>
+			<div class="col-12" style="height:233px;margin-top:50px;">
+				<input type="submit" class="btn btn-block" style="width:410px;color:#fff;background-color:#ee8374;" value="장바구니">
+				<button class="btn btn-block" style="width:410px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
+				<button class="btn btn-block" style="width:410px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button>
+			</div>			
 		</div>
 	</div>
 </div>
