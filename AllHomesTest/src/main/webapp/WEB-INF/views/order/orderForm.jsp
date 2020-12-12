@@ -6,6 +6,7 @@
    }
 </style>
 <script>
+
    $(function(){
       $('#payBtn').click(function(){
          location.href="/myapp/payForm"
@@ -28,6 +29,7 @@
       });
    });
 
+
 </script>
 <br/>
 <div class="container">
@@ -39,9 +41,7 @@
 			</div>
 		</div>		
 	</div>
-	<c:forEach var="o" items="${list }">
 	<div id="orderPd">
-
 		<div class="mb-4" style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
 		
 		<c:set var="totalP" value="0"/>
@@ -79,73 +79,12 @@
 			</div>
 			<div class="col-9">
 				배송비
-
-		<div style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
-		<div class="row">
-
-			<div class="col-3" style="border-bottom:1px solid #eee">
-				<img src=""/>
-			</div>
-			<div class="col-7" style="border-bottom:1px solid #eee">
-				[${o.s_no }] 상품명<br>
-				<c:if test="${o.o_value == null }">
-					옵션 : 없음
-				</c:if>
-				<c:if test="${o.o_value != null }">
-					옵션 : ${o.o_value }
-				</c:if>  수량 : ${o.num }<br/>
-				<b>결제금액 : </b>
-			</div>
-			<div class="col-2" style="border-bottom:1px solid #eee">
-				배송료 : ${o.shipping_c }<br/>
-				배송회사
-			</div>
-		</div>
-		<br/>
-		<!-- ---------------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-2" style="border-bottom:1px solid #eee"><h4>배송지</h4></div>
-			<div class="col-10" style="border-bottom:1px solid #eee">
-				<button style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-2">
-				받는분 : ${o.receiver }
-			</div>
-			<div class="col-10">
-				<input type="text" name="reciever" value="${o.reciever }"/>
-			</div>
-			<div class="col-2">
-				우편번호
-			</div>
-			<div class="col-10">
-				<input type="text" name="a_code" value="${o.zipcode }"/>
-			</div>
-			<div class="col-2">
-				주소
-			</div>
-			<div class="col-10">
-				<input type="text" name="addr" value="${o.addr }"/><br/>
-				<input type="text" name="addrdetail" value="${o.addrdetail }"/>
-			</div>			
-			<div class="col-2">
-				휴대전화
-			</div>
-			<div class="col-10">
-				<input type="text" name="tel" value="${o.tel }"/>
-
 			</div>
 			<div class="col-3">
 				2,500
 			</div>
-
 			<div class="col-12" style="margin-left:1025px;">
 				<h4><b></b></h4>
-
-			<div class="col-10">
-				<input type="text" name="memo" value="${o.memo }"/>
-
 			</div>
 		</div>
 		<hr/>
@@ -157,7 +96,7 @@
 				<button id="selectAddrBtn" style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
 			</div>
 		</div>
-
+ 
 		<div class="col-lg-12" id="addrListDiv" style="display:none">
 			<div class="row">
 				<c:forEach var="aVO" items="${aList}">
@@ -173,7 +112,9 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
 							<input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
+
 							<input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
+
 
 						</div>
 					</div>
@@ -184,10 +125,10 @@
 					style="outline: 0; border: 0; background-color: #ee8374; color: #fff; margin: 0 auto;">선택</button>
 			</div>
 			
-			<br/><hr/><br/>
-			
-						
-			
+
+			<br/><hr/><br/>	
+				
+		
 		</div>
 			<div class="row">
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
@@ -204,14 +145,15 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">배송 메모</span>
 							<input class="col-lg-8 form-control" type="text" name="memo" id="telOk"/>
 							  
-
+ 
 			</div>
 		
 		<!-- ---------------------------------------------------------------- -->
 		<div class="my-2"></div><br/><br/>
 		<div class="col-2"><h4>주문자</h4></div>
 		<hr>
-		
+
+	
 		<div class="row">
 			<div class="col-2">
 				이름
@@ -235,6 +177,7 @@
 		<br/>
 		
 		<!-- ---------------------------------------------------------------- -->		
+
 		<div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>		
 		<div class="row">
 			<div class="col-3" style="margin-bottom:5px;">
@@ -246,7 +189,6 @@
 				<img src=""/>계좌이체
 			</div>
 		</div>
-
 		<div id="payNotice" style="width:1400px;height:300px;background-color:#eee;">
 			공지사항 및 결제 주의사항			
 		</div>		
@@ -255,6 +197,7 @@
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
 			
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
+
 		</div>
 
       <div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>      
@@ -275,5 +218,6 @@
          <button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
       </div>   
    </div>
+
 </div>
 <br/>c

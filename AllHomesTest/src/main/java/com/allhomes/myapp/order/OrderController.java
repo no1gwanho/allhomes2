@@ -30,15 +30,7 @@ public class OrderController {
 		ModelAndView mv = new ModelAndView();
 		
 		HttpSession ses = req.getSession();		
-
 		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
-
-		String userid = (String)ses.getAttribute("userid");
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-		vo.setUserid(userid);
-	
-		int result = dao.insertPurchaseList(vo);
-
 		
 		int m_no = dao.selectM_no((String)ses.getAttribute("userid"));
 		RegisterVO rVO = dao.selectRegis(m_no); //회원정보 얻어오기
@@ -77,7 +69,7 @@ public class OrderController {
 		
 		return mv; 
 	}
-	
-	
+
 }
+
 

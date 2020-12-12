@@ -63,14 +63,14 @@
   	</select>
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value)
-  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
+  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, main_c, pd_img, pd_exp, shipping_c, o_value)
+  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{main_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
   	</insert>
   	
   	<!-- 제품 수정 테스트-->
   	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
+  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, main_c=#{main_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
   	</update>
   	
   	<!--제품수정

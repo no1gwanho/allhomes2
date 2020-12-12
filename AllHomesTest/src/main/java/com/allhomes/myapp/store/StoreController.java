@@ -1,5 +1,10 @@
 package com.allhomes.myapp.store;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -67,20 +72,90 @@ public class StoreController {
 	
 	
 	@RequestMapping("/storeCategory")
-	public ModelAndView storeCatey(@RequestParam("main_c") String main_c) {
+	public ModelAndView storeCatey(@RequestParam("main_c") String main_c, @RequestParam("sub_c") String sub_c) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
-		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(main_c);
+		HashMap<String, Object> paramMap = new HashMap();
+		paramMap.put("main_c", main_c);
+		paramMap.put("sub_c", sub_c);
+		
+		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(paramMap);
 		
 		mav.addObject("categoryList", categoryList);
 		mav.addObject("main_c", main_c);
+		mav.addObject("sub_c", sub_c);
+		mav.addObject("paramMap", paramMap);
 		mav.setViewName("store/storeCate");
 		
 		return mav;
 	}
 	
 	
+	@RequestMapping("/storeDetail")
+	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
+		ModelAndView mav = new ModelAndView();
+		
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
+		
+		ProductVO vo = dao.selectProduct(pd_no);
+		
+		try {
+			if(!vo.getO_value().isEmpty()) {
+				String options[] = vo.getO_value().split(",");			
+				mav.addObject("options", options);
+			}else {
+				String options = "";
+				mav.addObject("options", options);
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
+		
+		mav.addObject("vo", vo);
+		mav.addObject("sub", sub.selectSubC(pd_no));
+		mav.addObject("result", rDao.countReview(pd_no));	
+		mav.setViewName("store/storeDetail");	
+			
+		return mav;
+	}
+		
+  
+  @RequestMapping("/storeDetail")
+	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
+		ModelAndView mav = new ModelAndView();
+		
+		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
+		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
+
+		ProductJoinVO vo = dao.selectDetailPage(pd_no);
+		
+		try {
+			if(!vo.getO_value().isEmpty()) {
+				String options[] = vo.getO_value().split(",");			
+				mav.addObject("options", options);
+			}else {
+				String options = "";
+				mav.addObject("options", options);
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
+		mav.addObject("vo", vo);
+		mav.addObject("sub", sub.selectSubC(pd_no));
+		mav.addObject("rvo", rDao.avgReview(pd_no));
+		mav.addObject("rList", rDao.selectReview(pd_no));		
+		mav.addObject("result", rDao.countReview(pd_no));
+		
+		mav.setViewName("store/storeDetail");	
+			
+		return mav;
+	}
 	
 	/* @은빈
 	@RequestMapping("/storeHome")	
@@ -133,37 +208,6 @@ public class StoreController {
 	}
 		 */
 	
-	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
-		ModelAndView mav = new ModelAndView();
-		
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
-		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
 
-		ProductJoinVO vo = dao.selectDetailPage(pd_no);
-		
-		try {
-			if(!vo.getO_value().isEmpty()) {
-				String options[] = vo.getO_value().split(",");			
-				mav.addObject("options", options);
-			}else {
-				String options = "";
-				mav.addObject("options", options);
-			}
-		}catch(NullPointerException e) {
-			
-		}
-		
-		mav.addObject("vo", vo);
-		mav.addObject("sub", sub.selectSubC(pd_no));
-		mav.addObject("rvo", rDao.avgReview(pd_no));
-		mav.addObject("rList", rDao.selectReview(pd_no));		
-		mav.addObject("result", rDao.countReview(pd_no));
-		
-		mav.setViewName("store/storeDetail");	
-			
-		return mav;
-	}
+
 	
-}
