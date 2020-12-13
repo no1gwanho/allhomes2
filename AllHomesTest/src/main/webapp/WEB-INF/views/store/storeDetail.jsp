@@ -507,7 +507,7 @@
 								${r.content}
 							</div>
 							<div class="col-12" style="margin-top:35px;text-align:right">
-								<button id="likeBtn" class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/>
+								<a href="/myapp/reviewHitAdd?pd_no=${vo.pd_no }&r_no=${r.r_no }"><button type="button" class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/></a>
 							</div>
 							<div class="col-12" style="margin-top:5px;text-align:right">
 								${r.hit } 명에게 도움이 되었습니다.
