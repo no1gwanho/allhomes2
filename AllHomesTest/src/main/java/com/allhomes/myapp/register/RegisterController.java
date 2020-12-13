@@ -106,6 +106,7 @@ public class RegisterController {
 			ses.setAttribute("m_pic", resultVO.getM_pic());
 			ses.setAttribute("m_no", resultVO.getM_no());
 			ses.setAttribute("regcode", resultVO.getRegcode());
+			ses.setAttribute("tel", resultVO.getTel());
 			
      	System.out.println("프로필사진주소 =" +resultVO.getM_pic());
                        
@@ -127,7 +128,9 @@ public class RegisterController {
 	
 	//회원가입페이지 이동 매핑
 	@RequestMapping(value="/register")
-	public String register() {
+	public String register(HttpSession session) {
+		session.setAttribute("m_pic","basicprofile.png");
+		
 		return "landing/registerForm";
 	}
 	
@@ -236,7 +239,7 @@ public class RegisterController {
 			}else {	//파일이름이 없거나 공백이면
 				fileNames = "basicprofile.png";
 				vo.setM_pic(fileNames);
-
+					
 				int resultVO = dao.registerMember(vo);
 				
 				mav.setViewName("landing/registerOkPage");
@@ -258,19 +261,50 @@ public class RegisterController {
 	}
 	
 	
+	//닉네임 중복검사
+	@RequestMapping(value="/nicknameCheck",produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String nicknameCheck(String nickname,RegisterVO vo) {
+		
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		System.out.println("test0");
+		String resultVO = dao.nicknameCheck(nickname);
+		
+		return resultVO;
+	}
+	
 	
 	
 	//이메일 중복검사
 	@RequestMapping(value="/mailFilter")
 	@ResponseBody
-	public String mailFilter(RegisterVO vo,String email1,String email2) {
+	public String mailFilter(RegisterVO vo,String email1,String email2,String email,HttpSession session) {
 		
-		vo.setEmail1(email1);
-		vo.setEmail2(email2);
-					
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 		
-		String resultVO = dao.mailFilter(vo);
+		String resultVO="";
+		if(email==null) {//회원가입으로 들어올때
+			vo.setEmail1(email1);
+			vo.setEmail2(email2);
+			resultVO = dao.mailFilter(vo);
+			
+				
+		}else {			 //회원정보 수정으로 들어올때
+			String emailset[]=email.split("@");
+			vo.setEmail1(emailset[0]);
+			vo.setEmail2(emailset[1]);	//vo에는 정보수정에서 넣은 주소가 담겨있음
+						
+			String exiMail = (String)session.getAttribute("email");	//기존에 DB 있는메일
+			resultVO = dao.mailFilter(vo); //중복검사 뭐가됐든 겹치면
+				if(resultVO!=null) {		
+					if(vo.getEmail().equals(exiMail)){//기존 메일과 같은지 비교해주기
+						//기존메일과 같다면 통과시켜주기
+						resultVO="";
+					}else {
+						//기존메일과 다른거라면 false
+					}
+				}
+			}
 		
 		return resultVO;
 	}	
