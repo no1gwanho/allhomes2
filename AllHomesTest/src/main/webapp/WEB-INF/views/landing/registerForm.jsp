@@ -36,8 +36,6 @@
 	#dupFilter,#photoBtn{background-color:#ee8374;color:white;}
 	#photoBtn{width:65%;}
 	
-	
-	
 </style>
 <script>
 
@@ -85,7 +83,19 @@
 				alert("이름은 한글 2~6자 사이로 입력해주세요.");
 				return false;
 			}
-				
+					
+			//닉네임 검사
+			if($("#nickname").val()==""){
+				$("#nickname").val("membUs");
+										
+			}else{
+				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
+				var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
+				if(nicknameTestResult!=true){
+					alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
+					return false;
+				}
+			}
 						
 			//연락처 검사
 			if($("#tel").val()==""){
@@ -99,58 +109,7 @@
 				alert("연락처는 '-'생략하고 입력해주세요.")
 				return false;
 			}
-			
 						
-			//닉네임 검사
-			if($("#nickname").val()==""){
-				$("#nickname").val("membUs");
-										
-			}else if($("#nickname").val()!=""){
-					
-				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
-				var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
-				
-				if(nicknameTestResult!=true){
-					alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
-					return false;
-				
-				}	
-							
-				var checker;			
-				var url="/myapp/nicknameCheck"	;
-				var data="nickname="+document.getElementById("nickname").value;
-					
-						$.ajax({
-							url:url,
-							data:data,
-							success:function(result){
-								console.log("test4");								
-								
-								if(result!=""){
-									alert("사용할 수 없는 닉네임 입니다.");
-									checker = false;
-									return false;
-								}else{
-									console.log("test5");
-									checker = true;
-									next();
-								}
-							},error:function(error){
-								}
-							
-						});
-								
-				if(checker!=true){
-					return false;
-				}	
-				
-			}
-					
-		function next(){}//ajax 탈출 함수	
-			
-		
-		
-		
 			//이메일 검사
 			if($("#emailText").val()=="" || $("#email2").val()==""){
 				alert("이메일은 필수 입력사항입니다..");
@@ -174,10 +133,6 @@
 			//	return false;
 		//	}
 					
-				
-				
-		
-			
 			
 			if($("#emailText").val()!="" && $("#email2").val()!=""){
 				
@@ -204,31 +159,6 @@
 							
 		});
 	
-		
-	$(function(){
-		//이미지 미리보기 
-		$("#photoBtn").on("change",preViewset);
-		
-	});
-			
-		function preViewset(e){
-						
-			var files = e.target.files;
-			var filesArr = Array.prototype.slice.call(files);
-			
-			filesArr.forEach(function(f){
-				sel_file = f;
-				
-				var reader = new FileReader();
-				reader.onload = function(e){
-					$("#preProfile").attr("src", e.target.result);
-				}
-				reader.readAsDataURL(f);
-			});
-		}
-	
-		
-		
 	//중복검사 의무화 	
 	$(function(){
 		$("#userid").on("change",function(){
@@ -343,8 +273,7 @@
 	
 		<label for="photoBtn">프로필 사진</label>
 		<input id="photoBtn" type="file" name="photoBtn" class="form-control"></input>												<!-- 프로필사진 업로드 -->
-		<img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
-		<br/>	
+			
 		
 		<label for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->
  		<input type="text" name="tel" id="tel" placeholder="'-생략 입력'" class="form-control"/>

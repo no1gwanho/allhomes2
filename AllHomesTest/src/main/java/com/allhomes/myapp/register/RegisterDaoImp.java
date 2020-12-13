@@ -43,9 +43,7 @@ public interface RegisterDaoImp {
 	public String mailFilter(RegisterVO vo);
 	//회원가입 메일인증
 	public int regFinal(RegisterVO vo);
-	//회원가입 닉네임 중복검사
-	public String nicknameCheck(String nickname);
-	
+
 	//회원정보 수정 중복검사
 	public RegisterVO dupCheck(RegisterVO vo);
 	//회원 기본정보 업데이트
