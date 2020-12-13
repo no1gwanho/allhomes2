@@ -16,20 +16,6 @@
        	});
    });
 </script>
-<script>
-function numCheck(){
-   	var num = document.getElementByName("num");
-   	
-   	if(num.value=="") {
-           alert("구매수량을 입력해주세요");
-           num.focus();
-           
-           return false;
-    }
-   	
-   	return true;
-}
-</script>
 <style>
 	.container{
 		max-width:1400px;
@@ -162,13 +148,27 @@ function numCheck(){
 					</div>
 					<div class="col-12">
 						<span style="color:#343a40">수량</span>
-						<input type="number" name="num" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px"/>
+						<input type="number" name="num" id="num" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px"/>
 					</div>
 					<div class="col-12" style="height:233px;margin-top:50px;">
 						<input type="submit" class="btn btn-block" style="width:430px;height:58px;color:#fff;background-color:#ee8374;" value="장바구니">
-						<button class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
+						<button class="btn btn-block" id="buy" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
 						<a href="/myapp/wishAdd?pd_no=${vo.pd_no }"><button type="button" class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button></a>
-					</div>
+					</div>	
+					<script>
+						function numCheck(){
+						   	var num = document.getElementById("num");
+						   	
+						   	if(num.value=="") {
+						           alert("구매수량을 입력해주세요");
+						           num.focus();
+						           
+						           return false;
+						    }
+						   	
+						   	return true;
+						}
+					</script>				
 				</div>
 			</div>
 		</div>
@@ -285,7 +285,7 @@ function numCheck(){
  								<li>소화물 택배의 배송은 발송일로부터 1~2 영업일이 소요되나, 지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라질 수 있습니다.</li>
  								<li>상품의 특성과 거래조건에 따라 청약철회(변심반품/취소)가 일부 제한되거나 청약철회에 소요되는 비용이 다르게 책정될 수 있습니다.</li>
  								<li>청약철회는 상품 수령일로부터 7일 이내에 신청하실 수 있으며, 판매자는 ‘전자상거래등에서의소비자보호에관한법률’이 정하는 바에 따른 지연이자 지급의 책임이 있습니다.</li>
- 								<li>제품 사용 상 불만과 피해보상에 관하여는 제조사, 수입원, 판매자 등에게 문의하여주시기 바라며, 당사의 고객센터로 문의 주시면 관계법령과 규정에 부합하는 기준에 따라 문제 해결에 도움을 드리겠습니다.</li>
+ 								<li>제품 사용 상 불만과 피해보상에 관하여는 당사의 고객센터로 문의 주시면 관계법령과 규정에 부합하는 기준에 따라 문제 해결에 도움을 드리겠습니다.</li>
  							</ol>
        					</div>
 						<div class="col-12">

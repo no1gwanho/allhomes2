@@ -8,5 +8,5 @@ public interface MypageWishlistDaoImp {
 	
 	public List<MypageWishlistJoinVO> wishlistPage(String userid);
 	
-	public int addWishlist(MypageWishlistVO vo);
+	public int addWishlist(MypageWishlistJoinVO vo);
 }

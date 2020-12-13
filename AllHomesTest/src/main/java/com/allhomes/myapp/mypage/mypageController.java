@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,9 @@ public class mypageController {
 	@Autowired
 	SqlSession sqlSession;
 
+	@Autowired 
+	DataSourceTransactionManager transactionManager;
+	
 	//mypage홈으로 이동
 	@RequestMapping("/mypageHome")
 	public ModelAndView mypageHome(HttpServletRequest req) {
@@ -321,16 +325,18 @@ public class mypageController {
 		ModelAndView mv = new ModelAndView();
 		
 		HttpSession s = r.getSession();
-		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		String userid = (String)s.getAttribute("userid");
+		MypageWishlistJoinVO vo = new MypageWishlistJoinVO();
+		vo.setUserid(userid);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userid", userid);
-		map.put("pd_no", pd_no);
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		int result = dao.addWishlist(vo);
+		System.out.println(result);
 		
-		mv.addObject("map", map);
-		mv.setViewName("redircet:/mypaa/wishAdd");
-				
+		mv.addObject("r", result);
+		mv.addObject("pd_no", pd_no);
+		mv.setViewName("landing/wishConfirm");
+		
 		return mv;
 	}	
 	

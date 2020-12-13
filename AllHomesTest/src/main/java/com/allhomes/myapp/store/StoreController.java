@@ -94,6 +94,7 @@ public class StoreController {
 		return mav;
 	}
 
+	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
