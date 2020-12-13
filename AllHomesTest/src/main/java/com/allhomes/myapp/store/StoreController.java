@@ -1,6 +1,7 @@
 package com.allhomes.myapp.store;
 
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,9 +42,10 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome(@RequestParam("order") String order) {
+	public ModelAndView storeHome(@RequestParam("order") String order, StoreProductCategoryVO vo) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+	
 		
 		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
 		
@@ -91,39 +93,7 @@ public class StoreController {
 		return mav;
 	}
 	
-	
-	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
-		ModelAndView mav = new ModelAndView();
-		
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
-		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
-		
-		ProductVO vo = dao.selectProduct(pd_no);
-		
-		try {
-			if(!vo.getO_value().isEmpty()) {
-				String options[] = vo.getO_value().split(",");			
-				mav.addObject("options", options);
-			}else {
-				String options = "";
-				mav.addObject("options", options);
-			}
-		}catch(NullPointerException e) {
-			
-		}
-		
-		
-		mav.addObject("vo", vo);
-		mav.addObject("sub", sub.selectSubC(pd_no));
-		mav.addObject("result", rDao.countReview(pd_no));	
-		mav.setViewName("store/storeDetail");	
-			
-		return mav;
-	}
-		
-  
+
   @RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
 		ModelAndView mav = new ModelAndView();
@@ -156,6 +126,7 @@ public class StoreController {
 			
 		return mav;
 	}
+}
 	
 	/* @은빈
 	@RequestMapping("/storeHome")	
