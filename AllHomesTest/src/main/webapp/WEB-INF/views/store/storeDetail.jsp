@@ -278,8 +278,17 @@
        					<div class="col-9">
        						서울시 서대문구 백범로23 올홈즈스토리
        					</div>
-						<br/>  
-       					<div class="col-12" style="margin-top:25px;">
+       					<div class="col-12">
+							<hr/>
+       					</div> 							       					
+						<br/> 
+						<div class="col-12" style="margin-top:25px;">
+       						<span style="font-size:1.5em;margin-top:15px;color:#343a40;font-weight:bold">거래 관련 공지사항</span>
+       					</div>
+       					<div class="col-12">
+							<hr/>
+       					</div> 
+       					<div class="col-12" style="margin-top:15px;">
        						<h6>거래 조건에 대한 정보</h6>
  							<ol>
  								<li>소화물 택배의 배송은 발송일로부터 1~2 영업일이 소요되나, 지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라질 수 있습니다.</li>
