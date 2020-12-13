@@ -1,13 +1,13 @@
 package com.allhomes.myapp.mypage;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,15 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
-import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.scrap.ScrapDaoImp;
@@ -34,6 +33,9 @@ public class mypageController {
 	@Autowired
 	SqlSession sqlSession;
 
+	@Autowired 
+	DataSourceTransactionManager transactionManager;
+	
 	//mypage홈으로 이동
 	@RequestMapping("/mypageHome")
 	public ModelAndView mypageHome(HttpServletRequest req) {
@@ -46,7 +48,7 @@ public class mypageController {
 		RegisterVO vo = reg.oneMeberSelect(userid);
 		
 		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-		List<MypageWishlistVO> list = wish.selectWishlist(userid);
+		List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
 		
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
 		List<ScrapVO> sList = scrap.selectScrap(userid);
@@ -323,13 +325,33 @@ public class mypageController {
 		HttpSession ses = r.getSession();
 		String userid = (String)ses.getAttribute("userid");
 		
-		List<MypageWishlistVO> list = dao.wishlistPage(userid);
+		List<MypageWishlistJoinVO> list = dao.wishlistPage(userid);
 		
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");
 				
 		return mv;
 	}
+	
+	@RequestMapping("/wishAdd")
+	public ModelAndView wishAdd(@RequestParam("pd_no") int pd_no, HttpServletRequest r) {
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession s = r.getSession();
+		String userid = (String)s.getAttribute("userid");
+		MypageWishlistJoinVO vo = new MypageWishlistJoinVO();
+		vo.setUserid(userid);
+
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		int result = dao.addWishlist(vo);
+		System.out.println(result);
+		
+		mv.addObject("r", result);
+		mv.addObject("pd_no", pd_no);
+		mv.setViewName("landing/wishConfirm");
+		
+		return mv;
+	}	
 	
 	//mypage 스크랩으로 이동
 	@RequestMapping("/mypageScrap")
