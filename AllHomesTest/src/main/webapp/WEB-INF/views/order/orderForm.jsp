@@ -200,7 +200,6 @@
 
 		</div>
 
-
       <div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>      
       <div class="row">
          <div class="col-3" style="margin-bottom:5px;">
@@ -219,7 +218,6 @@
          <button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
       </div>   
    </div>
-
 
 </div>
 <br/>c
