@@ -8,6 +8,7 @@ public class ReviewVO {
 	private String content;
 	private String writedate;
 	private int s_no;
+	private int r_no;
 	private int hit;
 	
 	public String getUserid() {
@@ -57,6 +58,12 @@ public class ReviewVO {
 	}
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+	public int getR_no() {
+		return r_no;
+	}
+	public void setR_no(int r_no) {
+		this.r_no = r_no;
 	}
 	
 }

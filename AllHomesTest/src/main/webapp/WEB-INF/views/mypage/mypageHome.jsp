@@ -88,11 +88,8 @@
 							</c:if>		
 							<c:if test="${!empty w }">
 								<div style="float:left;width:33%;text-align:center">
-								<a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" style="width:200px;height:130px;border-radius:5%;"/></a><br/>
-								<span style="font-size:0.5em;">
-									<b>[${w.s_name}] ${w.pd_name }</b><br/>
-									${w.price }
-								</span>
+									<a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" style="width:230px;height:130px;border-radius:5%;"/></a><br/>
+								 	<span style="font-size:0.8em;">${w.pd_name }</span><br/>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -179,3 +176,4 @@
 			
 		</div><!-- col-lg-8끝 -->		
 	</div>
+</div>

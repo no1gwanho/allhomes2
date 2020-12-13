@@ -3,15 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.mypage.MypageWishlistDaoImp">
-	<select id="selectWishlist" parameterType="String" resultType="com.allhomes.myapp.mypage.MypageWishlistVO">
-		select * from (select * from (select a.m_no, a.pd_no, b.userid, c.main_img, c.s_no, c.price, c.pd_name, d.s_name from wishlist a, register b, product c, store d
-		 where a.m_no = b.m_no and a.pd_no = c.pd_no and c.s_no = d.s_no order by a.pd_no desc) where userid=#{userid}) where rownum <![CDATA[<]]> 4
+	<select id="selectWishlist" parameterType="String" resultType="com.allhomes.myapp.mypage.MypageWishlistJoinVO">
+		select * from (select * from (select a.pd_no, b.userid, c.main_img, c.s_no, c.price, c.pd_name, d.s_name from wishlist a, register b, product c, store d
+		 where a.userid = b.userid and a.pd_no = c.pd_no and c.s_no = d.s_no order by a.pd_no desc) where userid=#{userid}) where rownum <![CDATA[<]]> 4
 	</select>
-	<select id="wishlistPage" parameterType="String" resultType="com.allhomes.myapp.mypage.MypageWishlistVO">
-		select * from (select a.m_no, a.pd_no, b.userid, c.main_img, c.s_no, c.price, c.pd_name, d.s_name from wishlist a, register b, product c, store d
-		 where a.m_no = b.m_no and a.pd_no = c.pd_no and c.s_no = d.s_no order by a.pd_no desc) where userid=#{userid}
+	<select id="wishlistPage" parameterType="String" resultType="com.allhomes.myapp.mypage.MypageWishlistJoinVO">
+		select * from (select a.pd_no, b.userid, c.main_img, c.s_no, c.price, c.pd_name, d.s_name from wishlist a, register b, product c, store d
+		 where a.userid = b.userid and a.pd_no = c.pd_no and c.s_no = d.s_no order by a.pd_no desc) where userid=#{userid}
 	</select>	
 	<insert id="addWishlist">
-		insert into wishlist(m_no, pd_no) values(m_no=#{m_no}, pd_no=#{pd_no})
+		insert into wishlist(pd_no, userid) select #{pd_no}, #{userid} from dual a where not exists(select pd_no from wishlist where pd_no=#{pd_no} and userid=#{userid})
 	</insert>
 </mapper>

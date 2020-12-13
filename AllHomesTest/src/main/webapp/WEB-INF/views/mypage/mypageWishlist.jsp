@@ -27,10 +27,8 @@
 		<c:forEach var="v" items="${list }">
 		<div class="col-3 storeImg">		
 			<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-				<img src="${pageContext.request.contextPath}/resources/upload/productMainImg/${v.s_no}/${v.main_img}"/><br/>
-				[${v.s_name }] / ${v.pd_name }<br/>
-				할인율 / ${v.price }<br/>
-				<h6>별 / 리뷰&nbsp;&nbsp;</h6>
+				<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/><br/>
+				<span style="font-size:0.8em">${v.pd_name }</span>
    			</a>
 		</div>	
 		</c:forEach>

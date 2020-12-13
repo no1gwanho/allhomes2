@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface MypageWishlistDaoImp {
 
-	public List<MypageWishlistVO> selectWishlist(String userid);
+	public List<MypageWishlistJoinVO> selectWishlist(String userid);
 	
-	public List<MypageWishlistVO> wishlistPage(String userid);
+	public List<MypageWishlistJoinVO> wishlistPage(String userid);
 	
-	public int addWishlist();
+	public int addWishlist(MypageWishlistJoinVO vo);
 }

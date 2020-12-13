@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductJoinVO;
 import com.allhomes.myapp.product.Sub_cDaoImp;
+import com.allhomes.myapp.register.RegisterDaoImp;
+import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
 import com.allhomes.myapp.review.ReviewVO;
 
@@ -92,15 +95,14 @@ public class StoreController {
 		
 		return mav;
 	}
-	
 
-  @RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
+
+	@RequestMapping("/storeDetail")
+	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
-		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
 
 		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
@@ -117,10 +119,9 @@ public class StoreController {
 		}
 		
 		mav.addObject("vo", vo);
-		mav.addObject("sub", sub.selectSubC(pd_no));
 		mav.addObject("rvo", rDao.avgReview(pd_no));
-		mav.addObject("rList", rDao.selectReview(pd_no));		
 		mav.addObject("result", rDao.countReview(pd_no));
+		mav.addObject("rList", rDao.selectReview(pd_no));		
 		
 		mav.setViewName("store/storeDetail");	
 			
@@ -129,6 +130,7 @@ public class StoreController {
 }
 	
 	/* @은빈
+
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
@@ -178,7 +180,3 @@ public class StoreController {
 		return mav;	
 	}
 		 */
-	
-
-
-	

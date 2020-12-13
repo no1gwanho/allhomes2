@@ -1,13 +1,13 @@
 package com.allhomes.myapp.mypage;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,15 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
-import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.scrap.ScrapDaoImp;
@@ -34,6 +33,9 @@ public class mypageController {
 	@Autowired
 	SqlSession sqlSession;
 
+	@Autowired 
+	DataSourceTransactionManager transactionManager;
+	
 	//mypage홈으로 이동
 	@RequestMapping("/mypageHome")
 	public ModelAndView mypageHome(HttpServletRequest req) {
@@ -46,7 +48,7 @@ public class mypageController {
 		RegisterVO vo = reg.oneMeberSelect(userid);
 		
 		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-		List<MypageWishlistVO> list = wish.selectWishlist(userid);
+		List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
 		
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
 		List<ScrapVO> sList = scrap.selectScrap(userid);
@@ -113,8 +115,11 @@ public class mypageController {
 		return mav;
 	}
 	
-	
-	
+	@RequestMapping(value="/addrEditForm")
+	public String addrEditForm() {
+
+		return "mypage/addrEditForm";
+	}
 	
 	
 	
@@ -124,7 +129,9 @@ public class mypageController {
 	public ModelAndView updateOk(RegisterVO vo,HttpServletResponse req,HttpSession session) {
 		
 		
-		//@RequestParam("m_pic") MultipartFile m_pic 파라미터에 추가
+//		@RequestParam("m_pic") MultipartFile m_pic
+		 
+			System.out.println("test1");
 		
 		
 		//기본정보 업데이트
@@ -140,7 +147,12 @@ public class mypageController {
 		RegisterVO dupCheck = dao.dupCheck(vo);
 		ModelAndView mav = new ModelAndView();
 				
-		if(dupCheck==null){//db에 중복되는 값이 없다면 값이 달라졌다는 뜻이니깐 db update! 
+		if(dupCheck==null){
+//			
+//			//db에 중복되는 값이 없다면 값이 달라졌다는 뜻이니깐 db update! ㅅㅂ 사진은 중복되든 말든 체크할 필요없음 그냥 아무것도  이전거랑 똑같은 걸 올렸다면? 
+//				
+//			
+//			System.out.println("test3");
 					
 //			///////////프로필 사진 업로드////////////
 //			String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
@@ -201,13 +213,14 @@ public class mypageController {
 //										 
 //					
 //				}else {	//파일이름이 없거나 공백이면 기본 이미지가 이미 세팅돼있으니 아무것도 안하면됨
-////					fileNames = "basicprofile.png";
-////					vo.setM_pic(fileNames);
-////
-////					int resultVO = dao.registerMember(vo);
-////					
-////					mav.setViewName("landing/registerOkPage");
-////					session.setAttribute("resultVO",resultVO);		
+////					System.out.println("test4");
+//			fileNames = "basicprofile.png";
+//			vo.setM_pic(fileNames);
+//
+//			int resultVO = dao.registerMember(vo);   //여기서 update
+//			
+//			mav.setViewName("landing/registerOkPage");
+//			session.setAttribute("resultVO",resultVO);			
 //							
 //				}
 			
@@ -236,12 +249,14 @@ public class mypageController {
 		
 		}else {	//db에 중복되는 값이 있다면 그대로 냅둔것임 근데! 이건 다른사람 닉네임이랑 겹치거나 이메일(이메일도 중복검사가 필요함)이 중복됐다는 뜻
 			
+			
+			//////여기서 제한 걸어줘야함
 			mav.setViewName("/home");
 			req.setContentType("text/html;charset=UTF-8");
 			PrintWriter out;
 			try {
 				out = req.getWriter();
-				out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
+				out.println("<script>alert('회원정보가 수정되면 안됩니다..');</script>");
 				out.flush();
 				System.out.println("test3");
 				
@@ -310,13 +325,33 @@ public class mypageController {
 		HttpSession ses = r.getSession();
 		String userid = (String)ses.getAttribute("userid");
 		
-		List<MypageWishlistVO> list = dao.wishlistPage(userid);
+		List<MypageWishlistJoinVO> list = dao.wishlistPage(userid);
 		
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");
 				
 		return mv;
 	}
+	
+	@RequestMapping("/wishAdd")
+	public ModelAndView wishAdd(@RequestParam("pd_no") int pd_no, HttpServletRequest r) {
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession s = r.getSession();
+		String userid = (String)s.getAttribute("userid");
+		MypageWishlistJoinVO vo = new MypageWishlistJoinVO();
+		vo.setUserid(userid);
+
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		int result = dao.addWishlist(vo);
+		System.out.println(result);
+		
+		mv.addObject("r", result);
+		mv.addObject("pd_no", pd_no);
+		mv.setViewName("landing/wishConfirm");
+		
+		return mv;
+	}	
 	
 	//mypage 스크랩으로 이동
 	@RequestMapping("/mypageScrap")

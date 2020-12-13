@@ -9,6 +9,9 @@ public class ReviewJoinVO {
 	private String content;
 	private String writedate;
 	private int s_no;
+	private int cnt;
+	private int avg;
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -56,6 +59,18 @@ public class ReviewJoinVO {
 	}
 	public void setS_no(int s_no) {
 		this.s_no = s_no;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public int getAvg() {
+		return avg;
+	}
+	public void setAvg(int avg) {
+		this.avg = avg;
 	}
 	
 	
