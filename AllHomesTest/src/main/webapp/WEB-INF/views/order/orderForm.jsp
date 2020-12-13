@@ -6,6 +6,7 @@
    }
 </style>
 <script>
+
    $(function(){
       $('#payBtn').click(function(){
          location.href="/myapp/payForm"
@@ -27,6 +28,10 @@
          $("#addrListDiv").css("display","none");
       });
    });
+
+
+
+
 </script>
 <br/>
 <div class="container">
@@ -186,6 +191,7 @@
 				<img src=""/>계좌이체
 			</div>
 		</div>
+
 		
 		<div style="margin-top:45px;border-bottom:1px solid #eee"><h4>거래 관련 공지사항</h4></div>		
 		<div id="payNotice">
@@ -197,12 +203,16 @@
 				<li>직거래로 인해 발생한 피해에 대해 올홈즈스토리는 책임을 지지 않습니다.</li>
 				<li>전자상거래 등에서의 소비자보호법에 관한 법률에 의거하여 미성년자가 체결한 계약은 법정대리인이 동의하지 않은 경우 본인 또는 법정대리인이 취소할 수 있습니다.</li>
 			</ul>			
-		</div>		
+	
 		<br/>
 		<div>
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
 			
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
+
+
+		</div>
+
 
 		</div>
    </div>
