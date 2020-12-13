@@ -25,10 +25,10 @@ function numCheck(){
            num.focus();
            
            return false;
-       }
+    }
    	
    	return true;
-   }
+}
 </script>
 <style>
 	.container{
@@ -45,7 +45,7 @@ function numCheck(){
 </style>
 <div class="container" style="margin:15px auto">
 	<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no }" onsubmit="numChek()">
-		<span style="font-size:0.8em;">Category : ${sub.main_c } > <a href="/myapp/storeCategory">${sub.sub_c }</a></span>
+		<span style="font-size:0.8em;">Category : ${vo.main_c } > <a href="/myapp/storeCategory">${vo.sub_c }</a></span>
 		<div class="row">
 			<div class="col-8">
 				<img style="margin-top:15px;border-radius:5%;width:900px;height:720px" src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
@@ -167,12 +167,12 @@ function numCheck(){
 					<div class="col-12" style="height:233px;margin-top:50px;">
 						<input type="submit" class="btn btn-block" style="width:430px;height:58px;color:#fff;background-color:#ee8374;" value="장바구니">
 						<button class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
-						<button class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button>
+						<a href="/myapp/wishAdd?pd_no=${vo.pd_no }"><button type="button" class="btn btn-block" style="width:430px;height:58px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button></a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+
 	<div class="row">
 		<div class="col-8">
 			<ul class="nav nav-tabs">
@@ -303,7 +303,6 @@ function numCheck(){
        			</div>
            		<div class="tab-pane fade" id="review" style="margin-top:15px;">       				
            			<c:if test="${result==0 }">
-						<h5> 등록된 리뷰가 없습니다. </h5>
 						<div class="row">
 							<div class="col-5" style="text-align:center;">
 								<h2 style="position:absolute;top:23%;height:200px;">
@@ -313,7 +312,7 @@ function numCheck(){
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>								
-									</span><br/>
+									</span><br/><br/>
 									<b style="margin-top:5px;left:45px;">평점 <span style="margin-left:55px;color:#343a40;">0.0</b></span>
 								</h2>							
 							</div>
@@ -342,7 +341,7 @@ function numCheck(){
 						</div>
 					</c:if>
 					<c:if test="${result!=0 }">
-           				<h5><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h5>
+           				<h6><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h6>
 	           			<div class="row">
 							<div class="col-5" style="text-align:center;">
 								<h2 style="position:absolute;top:23%;height:200px;">
@@ -443,6 +442,10 @@ function numCheck(){
 						</div>
 					</div>					
 					<hr/>
+					<c:if test="${result == 0 }">
+						등록된 리뷰가 없습니다.
+					</c:if>
+					<c:if test="${result != 0 }">
 					<c:forEach var="r" items="${rList}">
 					<div class="row">
 						<div class="col-12">
@@ -502,30 +505,12 @@ function numCheck(){
 							</div>
 						</div>
 						<hr/>	
-					</c:forEach>		
+					</c:forEach>	
+					</c:if>	
 				</div>
            	</div>
          	<br/>
 		</div>
-		<div class="col4" style="margin-top:20px;position:absolute;left:1450px;">
-			<span style="color:#343a40">옵션</span>
-			<select class="input-select" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px" name="o_value">
-				<c:if test="${ options != null}">
-					<c:forEach var="o" items="${options}">
-						<option  value="${o}">${o}</option>
-					</c:forEach>
-				</c:if> 
-				<c:if test="${ options ==null}">
-					<option value="X">옵션없음</option>
-				</c:if>
-			</select><br/>
-			<span style="color:#343a40">수량</span>
-			<input type="number" name="num" style="margin-bottom:8px;width:300px;height:45px;margin-left:78px"/>
-			<div class="col-12" style="height:233px;margin-top:50px;">
-				<input type="submit" class="btn btn-block" style="width:410px;color:#fff;background-color:#ee8374;" value="장바구니">
-				<button class="btn btn-block" style="width:410px;margin-top:15px;color:#fff;background-color:#ee8374;">바로구매</button>
-				<button class="btn btn-block" style="width:410px;margin-top:15px;color:#fff;background-color:#ee8374;">위시리스트</button>
-			</div>			
-		</div>
 	</div>
+	</form>
 </div>
