@@ -25,6 +25,9 @@
 <insert id="insertReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	insert into review(userid, pd_no, rating, img, content, writedate, s_no) values(userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no})
 </insert>
+<update id="reviewHitAdd" parameterType="com.allhomes.myapp.review.ReviewVO">
+	update review set hit = hit+1 where r_no=#{r_no}
+</update>
 <update id="editReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	update review set userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no} where userid=#{userid} and pd_no=#{pd_no}
 </update>
