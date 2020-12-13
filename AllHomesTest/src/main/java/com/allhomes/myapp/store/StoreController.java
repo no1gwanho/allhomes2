@@ -1,5 +1,10 @@
 package com.allhomes.myapp.store;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,73 +75,25 @@ public class StoreController {
 	
 	
 	@RequestMapping("/storeCategory")
-	public ModelAndView storeCatey(@RequestParam("main_c") String main_c) {
+	public ModelAndView storeCatey(@RequestParam("main_c") String main_c, @RequestParam("sub_c") String sub_c) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
-		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(main_c);
+		HashMap<String, Object> paramMap = new HashMap();
+		paramMap.put("main_c", main_c);
+		paramMap.put("sub_c", sub_c);
+		
+		List<StoreProductCategoryVO> categoryList = dao.storeCategoryList(paramMap);
 		
 		mav.addObject("categoryList", categoryList);
 		mav.addObject("main_c", main_c);
+		mav.addObject("sub_c", sub_c);
+		mav.addObject("paramMap", paramMap);
 		mav.setViewName("store/storeCate");
 		
 		return mav;
 	}
-	
-	
-	
-	/* @은빈
-	@RequestMapping("/storeHome")	
-	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
-		ModelAndView mav = new ModelAndView();
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		List<ProductVO> list = dao.productAllList(sortPd);
-		
-		CategoryDaoImp cateDao = sqlSession.getMapper(CategoryDaoImp.class);
-		List<CategoryVO> categoryList = cateDao.categoryList();
-		
-		StoreDaoImp sdao = sqlSession.getMapper(StoreDaoImp.class);
-		List<StoreVO> lst = sdao.selectStoreJoin();
-		
-		for(int i=0; i<lst.size(); i++) {
-			StoreVO vo = lst.get(i);
-			String s_name = vo.getS_name();
-			
-			
-			mav.addObject("list", list);
-			mav.addObject("lst", lst);
-			mav.addObject("s_name", s_name);
-			mav.addObject("sortPd", sortPd);
-			mav.setViewName("store/storeHome");	
-		}
-		
-		String sql = sqlSession.getConfiguration().getMappedStatement("productAllList").getBoundSql(sortPd).getSql();
-		System.out.println("sql->"+sql);
-	
-		return mav;	
-	 }
-	 
-	
 
-	@RequestMapping("/storeCategory")
-	public ModelAndView storeCate(@RequestParam(value="c_code", required=false) int c_code) {
-		
-		ModelAndView mav = new ModelAndView();
-		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
-		List<ProductJoinVO> cList = dao.productCateList(c_code);
-		
-		StoreDaoImp sdao = sqlSession.getMapper(StoreDaoImp.class);
-		List<StoreVO> lst = sdao.selectStoreJoin();
-		
-		mav.addObject("cList", cList);
-		mav.addObject("c_code", c_code);
-		mav.setViewName("store/storeCate");			
-
-		return mav;	
-	}
-		 */
-	
-	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
@@ -166,5 +123,4 @@ public class StoreController {
 			
 		return mav;
 	}
-	
 }

@@ -40,19 +40,21 @@
  	</select>
  	
  	<!-- 상품리스트 카테고리별로 정렬 -->
- 	<select id="storeCategoryList" parameterType="String" resultType="com.allhomes.myapp.store.StoreProductCategoryVO">
+ 	<select id="storeCategoryList" parameterType="hashmap" resultType="com.allhomes.myapp.store.StoreProductCategoryVO">
  		select a.pd_no, a.s_no, b.s_name, a.pd_name, a.price-(a.price*a.discount/100) price, 
 		a.discount, a.sale, a.main_img, a.status, a.sub_c, c.main_c, a.wishlist 
 		from product a join store b
 		on a.s_no = b.s_no
 		join sub_c c
 		on a.sub_c = c.sub_c
-		where c.main_c=#{param1};
+			<if test="sub_c!=null and sub_c.equals('total')">
+				where c.main_c=#{main_c}
+			</if>
+			<if test="!sub_c.equals('total')">
+				where c.main_c=#{main_c} and c.sub_c=#{sub_c}
+			</if>
  	</select>
  
-
- 	
- 	
  	
  	<insert id="storeAdd" parameterType="com.allhomes.myapp.store.StoreVO">
  		insert into store(s_no,s_num,s_name,s_pic,openingdate,s_id,staff_n,staff_t,staff_e,s_homepage,status)

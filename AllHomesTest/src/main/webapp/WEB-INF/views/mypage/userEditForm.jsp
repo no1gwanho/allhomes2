@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${logStatus == '' || logStatus == 'N'}">
+<c:if test="${logStatus == null || logStatus == 'N'}">
 	<script>
 		alert{"로그인 후 이동이 가능합니다."};
 		location.href="/myapp/";
