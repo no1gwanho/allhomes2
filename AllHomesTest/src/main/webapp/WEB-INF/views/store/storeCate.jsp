@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 .container{
-			max-width:1400px;
-			margin: 0 auto;
-			font-family: 'SCDream3';
+		max-width:1400px;
+		margin: 0 auto;
+		font-family: 'SCDream3';
 	}
 
 .col-2, .col-3, .col-4 {
@@ -47,6 +47,37 @@ font-family: 'SCDream5';
 .open-list{
 	display:block;
 }
+
+	.thumbnail img {
+		width:100%;
+		text-align: center;
+		overflow: hidden;
+		}
+		
+	.card-body {
+		padding-top:10px;
+		height:150px;
+		flex: none;
+		overflow: hidden;
+		}
+	.product-name{
+		font-family:'SCDream5'
+	}
+	.store-name{
+		color:gray;
+		font-size:12px;
+	}
+	.store-discount{
+		font-family:'SCDream5';
+		font-size:20px;
+		color: #E98374
+	}
+	
+	.store-price{
+		color: black;
+		font-family:'SCDream5';
+		font-size:20px;
+	}
 
 </style>
 <script>
@@ -186,33 +217,33 @@ font-family: 'SCDream5';
 		<div class="col-9">
 			<div class="row">
 				<c:forEach var="vo" items="${categoryList}">
-					<div class="col-3">
-						<a href="/myapp/storeDetail?pd_no=${vo.pd_no}">
+					<div class="col-4" style="cursor:pointer;" onclick="window.location='/myapp/storeDetail?pd_no=${vo.pd_no}'">
+						<div class="thumbnail">
 							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
+						</div>	
+						<div class="card-body">	
+							<div class="store-name">${vo.s_name }</div>
+							<div class="product-name">  ${vo.pd_name }</div>
 							<c:if test="${vo.discount != 0 }">
-							<span class="badge badge-danger">${vo.discount }%</span>
+							<span class="store-discount">${vo.discount }%</span>
 							</c:if>
-							<span style="font-size:0.8em">${vo.price }원 ${vo.sale }개판매(테스트후삭제예정)</span><br/>
-							<c:if test="${vo.status!=null }">
+							<span class="store-price">${vo.price }원</span>
+							
+							<c:if test="${vo.status!=null && vo.status == '판매중'}">
+								<span class="badge badge-info">${vo.status }</span>
+							</c:if>
+							<c:if test="${vo.status!=null && vo.status == '품절임박'}">
+								<span class="badge badge-warning">${vo.status }</span>
+							</c:if>
+							<c:if test="${vo.status!=null && vo.status == '입고대기'}">
 								<span class="badge badge-secondary">${vo.status }</span>
 							</c:if>
-						</a>
+						</div>	
 					</div>
 				</c:forEach>														
 			</div>
 		</div>
 	</div>
 	<br/>
-	<!-- 페이징 -->
-<!-- 	<div>
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-			<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-		</ul>
-	</div> -->
+	
 </div>

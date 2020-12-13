@@ -1,6 +1,7 @@
 package com.allhomes.myapp.store;
 
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,9 +45,10 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome(@RequestParam("order") String order) {
+	public ModelAndView storeHome(@RequestParam("order") String order, StoreProductCategoryVO vo) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+	
 		
 		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
 		
@@ -94,6 +96,7 @@ public class StoreController {
 		return mav;
 	}
 
+
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
@@ -125,8 +128,9 @@ public class StoreController {
 		return mav;
 	}
 }
+	
+	/* @은빈
 
-/* @은빈
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
