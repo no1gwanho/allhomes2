@@ -15,7 +15,7 @@
 		join register b
 		on a.userid=b.userid
 		where b_no=#{b_no} 
-		order by a.hb_c_no
+		order by a.hb_c_no desc
 	</select>
 	
 	

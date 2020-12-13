@@ -314,7 +314,7 @@ public class mypageController {
 		HttpSession ses = r.getSession();
 		String userid = (String)ses.getAttribute("userid");
 		
-		List<MypageWishlistVO> list = dao.selectWishlist(userid);
+		List<MypageWishlistVO> list = dao.wishlistPage(userid);
 		
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");

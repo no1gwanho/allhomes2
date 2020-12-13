@@ -63,14 +63,14 @@
   	</select>
   	<!-- 제품 추가 -->
   	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value)
-  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
+  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, main_c, pd_img, pd_exp, shipping_c, o_value)
+  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{main_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
   	</insert>
   	
   	<!-- 제품 수정 테스트-->
   	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
+  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, main_c=#{main_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
   	</update>
   	
   	<!--제품수정
@@ -89,4 +89,13 @@
   		select count(*) from product where s_no=#{s_no}
   	</select>
   	
+  	  	
+  	
+  	
+  	<!-- 디테일 -->
+  	<select id="selectDetailPage" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
+  		select * from (select p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.price as price, p.discount as discount, round(p.price-(p.price*discount/100), -1) as dc_price, p.shipping_c as shipping_c, p.o_value as o_value, 
+		s.s_name from store s join product p on s.s_no=p.s_no) where pd_no=#{pd_no}
+  	</select> 
+  	<!--          -->
   </mapper>

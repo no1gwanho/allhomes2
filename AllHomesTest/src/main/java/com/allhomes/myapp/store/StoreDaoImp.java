@@ -1,5 +1,6 @@
 package com.allhomes.myapp.store;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface StoreDaoImp {
@@ -12,7 +13,13 @@ public interface StoreDaoImp {
 	
 	
 	//스토어 리스트 - 카테고리별 
-	public List<StoreProductCategoryVO> storeCategoryList(String main_c);
+	public List<StoreProductCategoryVO> storeCategoryList(HashMap<String, Object> paramMap);
+	
+	//제품 카테고리 불러오기 
+	public List<StoreProductCategoryVO> mainCategoryList();
+	
+	
+	
 	
 	
 	//=====은빈=======
