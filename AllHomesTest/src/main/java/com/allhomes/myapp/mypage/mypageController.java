@@ -214,17 +214,31 @@ public class mypageController {
 	}
 	
 	
-	//우편번호 찾기 버튼 눌렀을때
-	@RequestMapping(value="/zipsearch",produces="application/text;charset=UTF-8")
-	public String zipcodesearch() {
+	@RequestMapping(value="/outcheckpoint")
+	public ModelAndView outcheckpoint(HttpServletRequest request) {	//배열로 바꾸는걸 생각해보자
+		System.out.println("테스트테스트");
+		
+		String finalCheck = request.getParameter("finalCheck");
+		String useless = request.getParameter("useless");
+		String rereg = request.getParameter("rereg");
+		String conless = request.getParameter("conless");
+		String indi = request.getParameter("indi");
+		String etc = request.getParameter("etc");
 		
 		
-		return "/mypage/zipcodesearch";
+	
+		
+		
+		
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/home");
+		
+		
+		return mav;
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -239,11 +253,11 @@ public class mypageController {
 		String originEmail = (String)session.getAttribute("email");
 		String splEmail[] = originEmail.split("@");
 		vo.setEmail1(splEmail[0]);
-		vo.setEmail2(splEmail[1]);	//이메일 세팅
-		vo.setNickname((String)session.getAttribute("nickname"));//로그인할때 session정보 가져옴
+		vo.setEmail2(splEmail[1]);	
+		vo.setNickname((String)session.getAttribute("nickname"));
 		vo.setM_pic((String)session.getAttribute("m_pic"));
 		
-		//이제 비교할 신규데이터 입력
+		//비교할 신규데이터 입력
 		String updEmail = email;
 		String splupdEmail [] = email.split("@");
 		vo1.setEmail1(splupdEmail[0]);
@@ -259,33 +273,28 @@ public class mypageController {
 		
 		RegisterVO dupCheck = dao.dupCheck(vo1);
 		ModelAndView mav = new ModelAndView();
-				
-		
-		
-		
-		if(dupCheck==null){//이메일이랑 닉네임이랑 겹치는게 없다면
 			
-			
-					
+		if(dupCheck==null){
+							
 			///////////프로필 사진 업로드////////////
 			String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
 			String fileNames = "";
 			String fName = picBox.getOriginalFilename();
 			
-				if(fName!=null && !fName.equals("")) {	//이미지를 뭔가는 선택을했을때
-					//앞쪽 이름구하기
+				if(fName!=null && !fName.equals("")) {	
+					
 					String originFileName = fName.substring(0,fName.lastIndexOf("."));
-					//확장자구하기
+					
 					String originLast = fName.substring(fName.lastIndexOf(".")+1);
 				
-					//파일 이름바꾸기
+					
 					File f=new File(path,fName);
-					if(f.exists()) {		//기존에 동일한게 올라가 있다면 실행시키는 영역
+					if(f.exists()) {		
 						for(int renameNum=1;;renameNum++) {
-							String renameFile = originFileName+renameNum+"."+originLast;	//변경된파일명
+							String renameFile = originFileName+renameNum+"."+originLast;	
 						f = new File(path,renameFile);
 							
-						//파일이 위치에 있나없나 확인
+						
 						if(!f.exists()) {
 								fName = renameFile;
 								break;
@@ -295,22 +304,22 @@ public class mypageController {
 					fileNames = fName;
 					try {
 						if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
-							picBox.transferTo(f);	//확장자명이 맞을때만 업로드
+							picBox.transferTo(f);	
 							vo.setM_pic(fileNames);
 							vo.setM_no((Integer)session.getAttribute("m_no"));
 						
-							int resultVO = dao.userMebUpdate(vo); //업데이트를 시켜줬는데 =>여기서 update 쿼리 다날려주면됨
+							int resultVO = dao.userMebUpdate(vo); 
 							
-							if(resultVO<=0) {	//업데이트가 안일어나면 
-								if(fileNames!=null) {	//근데 파일이름은 그대로 남아있다면 
-									File ff = new File(path,fileNames);	//지워라
+							if(resultVO<=0) {	
+								if(fileNames!=null) {	
+									File ff = new File(path,fileNames);	
 										ff.delete();
 								}
 							}
 							mav.setViewName("landing/registerOkPage");
 							session.setAttribute("resultVO",resultVO);	
 					
-						}else{//이미지 파일이 아닐때 경고문구 날려주기
+						}else{
 							mav.setViewName("landing/registerUnSuitImg");				
 						}
 					}catch(Exception e) {e.printStackTrace();}
@@ -363,20 +372,20 @@ public class mypageController {
 				String fileNames = "";
 				String fName = picBox.getOriginalFilename();
 				
-					if(fName!=null && !fName.equals("")) {	//이미지를 뭔가는 선택을했을때
-						//앞쪽 이름구하기
+					if(fName!=null && !fName.equals("")) {	
+						
 						String originFileName = fName.substring(0,fName.lastIndexOf("."));
-						//확장자구하기
+						
 						String originLast = fName.substring(fName.lastIndexOf(".")+1);
 					
-						//파일 이름바꾸기
+						
 						File f=new File(path,fName);
-						if(f.exists()) {		//기존에 동일한게 올라가 있다면 실행시키는 영역
+						if(f.exists()) {		
 							for(int renameNum=1;;renameNum++) {
-								String renameFile = originFileName+renameNum+"."+originLast;	//변경된파일명
+								String renameFile = originFileName+renameNum+"."+originLast;	
 							f = new File(path,renameFile);
 								
-							//파일이 위치에 있나없나 확인
+						
 							if(!f.exists()) {
 									fName = renameFile;
 									break;
@@ -386,18 +395,18 @@ public class mypageController {
 						fileNames = fName;
 						try {
 							if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
-								picBox.transferTo(f);	//확장자명이 맞을때만 업로드
+								picBox.transferTo(f);	
 							
 							
 								vo.setM_pic(fileNames);
 								
-								////////////////////////
-								vo.setM_no((Integer)session.getAttribute("m_no"));
-								int resultVO = dao.userMebUpdate(vo); //업데이트를 시켜줬는데 =>여기서 update 쿼리 다날려주면됨
 								
-								if(resultVO<=0) {	//업데이트가 안일어나면 
-									if(fileNames!=null) {	//근데 파일이름은 그대로 남아있다면 
-										File ff = new File(path,fileNames);	//지워라
+								vo.setM_no((Integer)session.getAttribute("m_no"));
+								int resultVO = dao.userMebUpdate(vo);
+								
+								if(resultVO<=0) {	
+									if(fileNames!=null) {	
+										File ff = new File(path,fileNames);	
 											ff.delete();
 												
 										}
@@ -423,7 +432,7 @@ public class mypageController {
 								}
 						
 					}else {
-								//이미지 파일이 아닐때 경고문구 날려주기
+								
 								mav.setViewName("landing/registerUnSuitImg");				
 							}
 										
@@ -436,9 +445,9 @@ public class mypageController {
 						
 						
 						
-					}else {	//이메일이랑 닉네임이 겹치지 않으면서 + 파일이름이 없거나(따로선택안했거나) 공백이면 기본 이미지가 이미 세팅돼있으니 아무것도 안하면됨
+					}else {	
 						System.out.println("test4");
-						fileNames = "basicprofile.png";	//이게 초기값이 다른거였는데 바뀌는지 확인해야함
+						fileNames = "basicprofile.png";	
 						vo.setM_pic(fileNames);
 
 						int resultVO = dao.userMebUpdate(vo1);   
@@ -471,11 +480,6 @@ public class mypageController {
 		
 		return mav;
 	}
-	
-	
-	
-	
-	
 	
 	//mypage 나의 쇼핑으로 이동
 	@RequestMapping("/mypageShopping")
