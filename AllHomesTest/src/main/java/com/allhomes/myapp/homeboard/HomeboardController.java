@@ -282,8 +282,9 @@ public class HomeboardController {
 		
 
 		// 해시태그 가져오기 
+	
+		if(vo.getHashtag()!=null) {
 		String hashtag = vo.getHashtag(); 
-		if (hashtag != null) {
 			String hashtagStr[] = hashtag.split(",");
 			List<String> hashtagList = new ArrayList<String>();
 			hashtagList = Arrays.asList(hashtagStr);
