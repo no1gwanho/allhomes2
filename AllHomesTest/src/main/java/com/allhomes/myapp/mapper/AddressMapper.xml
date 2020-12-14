@@ -20,7 +20,14 @@
 		addrdetail=#{addrdetail}, tel=#{tel} where a_code=#{a_code}
 	</update>
 	
+	<!-- 주소지 삭제 -->
 	<delete id="addressDel" parameterType="int">
 		delete from address where a_code = #{param1}
 	</delete>
+	
+	<!-- 주소지 추가 -->
+	<insert id="addressInsert" parameterType="com.allhomes.myapp.order.AddressVO">
+		insert into address(receiver, a_code, zipcode, addr, addrdetail, tel, m_no)
+		 values(#{receiver}, a_code_sq.nextval, #{zipcode}, #{addr}, #{addrdetail}, #{tel}, #{m_no})
+	</insert>
 </mapper>

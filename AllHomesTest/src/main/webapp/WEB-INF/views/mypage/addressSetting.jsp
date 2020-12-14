@@ -50,6 +50,26 @@
             }
         }).open();
     }
+    
+	function addrInsertSubmit(){
+		
+		if($("#receiverAdd").val()==""){
+			alert("수신자를 입력해주십시오.");
+			return false;
+		}else if($("#sample6_postcode").val()==""){
+			alert("우편번호를 입력해주십시오.");
+			return false;
+		}else if($("#sample6_address").val()==""){
+			alert("주소를 입력해주십시오.");
+			return false;
+		}else if($("#sample6_detailAddress").val()==""){
+			alert("상세주소를 입력해주십시오.");
+			return false;
+		}else if($("#telAdd").val()==""){
+			alert("연락처를 입력해주십시오.");
+			return false;
+		}
+	}
 </script>
 <div class="container">
 	<div class="row">
@@ -143,10 +163,13 @@
 				</div>
 				
 				<div class="card-body"><!-- card-body 시작 -->
-					<form method="post" action="<%=request.getContextPath()%>/addressInsert">
+					
+					<!-- 배송지 추가 form -->
+					<form id="addrInsertForm" method="post" onsubmit="return addrInsertSubmit();" action="<%=request.getContextPath()%>/addressInsert">
 						<div class="row">
+							<input type="hidden" name="m_no" value="${m_no}"/>
 							<div class="col-lg-3 mb-3 mt-3">수신자</div>
-							<input class="col-lg-5  mb-3 mt-3 form-control" name="receiver"/><br/>
+							<input class="col-lg-5  mb-3 mt-3 form-control" name="receiver" id="receiverAdd"/><br/>
 						</div>
 						
 						<div class="row">
@@ -162,14 +185,16 @@
 							<input  class="col-lg-9  mb-3 form-control"  type="text" 
 							name="addr" id="sample6_address"><br>
 							<div class="col-lg-3 mb-3">상세 주소</div>
-							<input  class="col-lg-9  mb-3 form-control"  type="text" 
+							<input  class="col-lg-9  mb-3 form-control"  type="text"
 							name="addrdetail" id="sample6_detailAddress">
 						</div>
 						
 						<div class="row">
 							<div class="col-lg-3 mb-3">연락처</div>
-							<input class="col-lg-9 mb-3 form-control" name="tel"/><br/>
-						</div>
+							<input class="col-lg-9 mb-3 form-control" name="tel" id="telAdd"/><br/>
+						</div><br/>
+						
+						<button type="submit" class="col-lg-2 alert-primary form-control">추가</button>
 					</form>
 					
 				</div>

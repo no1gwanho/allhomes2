@@ -39,7 +39,7 @@ public class AddressController {
 		
 		mav.addObject("aList", aList);
 		mav.setViewName("mypage/addressSetting");
-		
+		mav.addObject("m_no", dao.selectm_no((String)s.getAttribute("userid")));//회원 번호
 		return mav;
 	}
 	
@@ -85,6 +85,24 @@ public class AddressController {
 		mav.addObject("aList", aList);
 		mav.setViewName("mypage/addressSetting");
 		
+		return mav;
+	}
+	
+	//배송지 추가
+	@RequestMapping(value="/addressInsert", method=RequestMethod.POST)
+	public ModelAndView addressInsert(AddressVO vo, HttpSession s) {
+		AddressDaoImp dao = sqlSession.getMapper(AddressDaoImp.class);
+		
+		dao.addressInsert(vo);
+		
+	
+		//주소지 정보 가져오기
+		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
+						
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("aList", aList);
+		mav.setViewName("mypage/addressSetting");
+				
 		return mav;
 	}
 }

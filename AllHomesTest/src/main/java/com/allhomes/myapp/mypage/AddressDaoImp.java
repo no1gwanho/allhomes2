@@ -13,5 +13,7 @@ public interface AddressDaoImp {
 	public int addressUpdate(AddressVO vo);
 	//주소지 삭제
 	public int addressDel(int a_code);
+	//주소지 추가
+	public int addressInsert(AddressVO vo);
 	
 }
