@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+	.col-3, .col-lg-3, .col-xs-6{
+			text-align:center;
+			margin-bottom:10px;
+	}
+	
+	.container{
+			font-family: 'SCDream3';
+	}
+</style>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -82,10 +92,10 @@
 				</div>
 				<!-- card body 시작 -->
 				<div class="card-body my-auto">
-					<img class="card-img-top" src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png" alt="Card image cap" style="width:200px;">
+					<img class="card-img-top"  src="<%=request.getContextPath()%>/resources/upload/register/${rVO.m_pic}" alt="Card image cap" style="width:200px;">
 					<div class="my-2"></div>
 					<div><!-- 닉네임 -->
-						<br/><h4>seran22</h4><br/>
+						<br/><h4>${rVO.userid}</h4><br/>
 					</div>
 					<hr style="width:70%"><br/>
 					
@@ -113,39 +123,43 @@
 				<div class="card-body"><!-- card-body 시작 -->
 					<c:forEach var="vo" items="${aList}">
 						<form method="post" action="<%=request.getContextPath()%>/addressEdit?a_code=${vo.a_code}">
-							<div class="col-lg-9">
+							
 								<div class="row">
 									<input type="hidden" name="a_code" value="${vo.a_code}"/>
-									<input type="hidden" name="a_code" value="${vo.m_no}"/>
+									<input type="hidden" name="m_no" value="${vo.m_no}"/>
 									<div class="col-lg-3 mb-3 mt-3">수신자</div>
-									<input class="col-lg-9  mb-3 mt-3 form-control" name="receiver" value="${vo.receiver}"/>
+									<input class="col-lg-5  mb-3 mt-3 form-control" name="receiver" value="${vo.receiver}"/>
 								</div>
 								
 								<div class="row">
 									<div class="col-lg-3 mb-3">우편번호</div>
-									<input class="col-lg-3 mb-3 form-control" name="zipcode" value="${vo.zipcode}"/>
-									<button class="btn alert-secondaryr col-lg-2" value="우편번호 검색"></button><br/>
+									<input class="col-lg-5 mr-3 mb-3 form-control" type="text" 
+									name="zipcode" id="sample6_postcode" value="${vo.zipcode}">
+									<input  class="col-lg-2 mb-3 form-control btn-secondary" type="button"
+									 onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 								</div>
 								
 								<div class="row">
 									<div class="col-lg-3 mb-3">주소</div>
-									<input class="col-lg-9 mb-3 form-control" name="addr" value="${vo.addr}"/>
+									<input class="col-lg-8 mb-3 form-control" name="addr" value="${vo.addr}"/>
 								</div>
 								
 								<div class="row">
 									<div class="col-lg-3 mb-3">상세 주소</div>
-									<input class="col-lg-9 mb-3 form-control" name="addrdetail" value="${vo.addrdetail}"/>
+									<input class="col-lg-8 mb-3 form-control" name="addrdetail" value="${vo.addrdetail}"/>
 								</div>
 								
 								<div class="row">
 									<div class="col-lg-3 mb-3">연락처</div>
-									<input class="col-lg-9 mb-3 form-control" name="tel" value="${vo.tel}"/><br/>
+									<input class="col-lg-8 mb-3 form-control" name="tel" value="${vo.tel}"/><br/>
 								</div>
 								
-									<button type="submit" class="col-lg-1">수정</button>
-									<a href="<%=request.getContextPath() %>/addressDel?a_code=${vo.a_code}">삭제</a>
-									
-							</div>
+								<div style="text-align:center">
+									<button type="submit"  class="btn btn-light shadow-sm mr-3">수정</button>
+									<a href="<%=request.getContextPath() %>/addressDel?a_code=${vo.a_code}"
+										class="btn btn-light shadow-sm">삭제</a>
+								</div>
+							
 						</form>
 						<hr/>
 					</c:forEach>
@@ -176,25 +190,27 @@
 							<div class="col-lg-3 mb-3">우편번호</div>
 							<input class="col-lg-5 mr-3 mb-3 form-control" type="text" 
 							name="zipcode" id="sample6_postcode" placeholder="우편번호">
-							<input  class="col-lg-2 mb-3 form-control" type="button"
+							<input  class="col-lg-2 mb-3 form-control btn-secondary" type="button"
 								 onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 						</div>
 						
 						<div class="row">
 							<div class="col-lg-3 mb-3">주소</div>
-							<input  class="col-lg-9  mb-3 form-control"  type="text" 
+							<input  class="col-lg-8  mb-3 form-control"  type="text" 
 							name="addr" id="sample6_address"><br>
 							<div class="col-lg-3 mb-3">상세 주소</div>
-							<input  class="col-lg-9  mb-3 form-control"  type="text"
+							<input  class="col-lg-8  mb-3 form-control"  type="text"
 							name="addrdetail" id="sample6_detailAddress">
 						</div>
 						
 						<div class="row">
 							<div class="col-lg-3 mb-3">연락처</div>
-							<input class="col-lg-9 mb-3 form-control" name="tel" id="telAdd"/><br/>
+							<input class="col-lg-8 mb-3 form-control" name="tel" id="telAdd"/><br/>
 						</div><br/>
 						
-						<button type="submit" class="col-lg-2 alert-primary form-control">추가</button>
+						<div style="text-align:center">
+						<button type="submit" class="btn col-lg-2 btn-primary form-control">추가</button>
+						</div>
 					</form>
 					
 				</div>

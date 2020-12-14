@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.admin.AdminMemberDaoImp;
 import com.allhomes.myapp.order.AddressVO;
+import com.allhomes.myapp.register.RegisterDaoImp;
+import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
 public class AddressController {
@@ -31,13 +34,17 @@ public class AddressController {
 	@RequestMapping("/mypageAddress")
 	public ModelAndView mypageAddress(HttpSession s) {
 		AddressDaoImp dao = sqlSession.getMapper(AddressDaoImp.class);
+		AdminMemberDaoImp mDao = sqlSession.getMapper(AdminMemberDaoImp.class);
+		RegisterVO rVO = mDao.memberSelect(dao.selectm_no((String)s.getAttribute("userid"))); //회원정보 가져오기
 		
+	
 		//주소지 정보 가져오기
 		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("aList", aList);
+		mav.addObject("rVO", rVO); //회원정보
 		mav.setViewName("mypage/addressSetting");
 		mav.addObject("m_no", dao.selectm_no((String)s.getAttribute("userid")));//회원 번호
 		return mav;
