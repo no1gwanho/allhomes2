@@ -260,11 +260,14 @@ public class HomeboardController {
 	
 	//집들이 글 보기
 	@RequestMapping("/homeboardView")
-	public ModelAndView homeboardView(int b_no, HttpSession ses, ScrapVO scrapVO) {
+	public ModelAndView homeboardView(int b_no, HttpServletRequest req, ScrapVO scrapVO) {
 
+		
+		HttpSession ses = req.getSession();
 		ModelAndView mav = new ModelAndView();
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		
+		String logStatus = (String)ses.getAttribute("logStatus");
 		String loginNickname = (String)ses.getAttribute("nickname");
 		String loginId = (String)ses.getAttribute("userid");
 		String writer = dao.getHomeboardWriter(b_no);
@@ -288,35 +291,31 @@ public class HomeboardController {
 		}
 		
 		//해당글을 스크랩했는지 여부 확인
-		try{
-			
-			
+		
+		if (ses.getAttribute("m_no")!= null) {
 			ScrapDaoImp scrapDao = sqlSession.getMapper(ScrapDaoImp.class);
-		
-		
-		
-		scrapVO.setB_no(b_no);
-		int m_no = (Integer) ses.getAttribute("m_no");
-		scrapVO.setM_no(m_no);
-		
-		ScrapVO scrapResultVO = scrapDao.scrapCheck(scrapVO);
-		
-		
-		if(scrapResultVO == null) {
-			mav.addObject("scrapCheck", "N");
+			int m_no = (Integer)ses.getAttribute("m_no");
+			scrapVO.setM_no(m_no);
+			scrapVO.setB_no(b_no);
+			ScrapVO scrapResultVO = scrapDao.scrapCheck(scrapVO);
+			System.out.println("스크랩여부:"+ scrapResultVO);
 			
-		}else {
-			mav.addObject("scrapCheck", "Y");
+			if(scrapResultVO == null) {
+				mav.addObject("scrapCheck", "N");
+			}else {
+				mav.addObject("scrapCheck", "Y");
+			}
+			
 		}
-		}catch(Exception e) {
-			e.getStackTrace();
-		}
-				
+
+	
 
 		mav.addObject("vo", vo);
+		mav.addObject("logStatus", logStatus);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginNickname", loginNickname);
 		mav.addObject("writer", writer);
+		
 		mav.setViewName("homeboard/homeboardView");
 
 		return mav;
