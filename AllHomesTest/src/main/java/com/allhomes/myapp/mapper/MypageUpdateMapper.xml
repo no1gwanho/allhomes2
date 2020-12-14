@@ -13,7 +13,7 @@
  	 	
  	 <!-- 주소지 정보수정 -->	
  	 <update id="addrUpdate" parameterType="com.allhomes.myapp.mypage.MypageUpdateVO">
- 	 	update address set receiver=#{receiver}, tel=#{tel}, zipcode=#{zipcode}, addr=#{addr}, addrdetail=#{addrdetail}
+ 	 	update address set receiver=#{receiver}, tel=#{tel}, zipcode=#{zipcode}, addr=#{addr}, addrdetail=#{addrdetail} where m_no=#{m_no}
  	 </update>	
  	 
  	 

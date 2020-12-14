@@ -1,11 +1,11 @@
 package com.allhomes.myapp.store;
 
 
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
 import java.util.HashMap;
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.product.ProductDaoImp;
-import com.allhomes.myapp.product.ProductJoinVO;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.product.Sub_cDaoImp;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
-import com.allhomes.myapp.review.ReviewVO;
 
 @Controller
 public class StoreController {
@@ -104,6 +103,8 @@ public class StoreController {
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
 
+
+
 		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
 		try {
@@ -128,7 +129,7 @@ public class StoreController {
 		return mav;
 	}
 }
-	
+
 	/* @은빈
 
 	@RequestMapping("/storeHome")	
