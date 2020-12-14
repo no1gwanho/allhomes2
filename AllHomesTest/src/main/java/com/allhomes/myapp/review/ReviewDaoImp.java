@@ -10,9 +10,13 @@ public interface ReviewDaoImp {
 	
 	public List<ReviewVO> reviewRatingCnt(int pd_no);
 	
+	public List<ReviewVO> reviewOrder(int pd_no);
+	
 	public ReviewVO avgReview(int pd_no);	
 	
 	public ReviewVO selectOneReview();
+	
+	public int reviewHitAdd(int r_no);
 	
 	public int countReview(int pd_no);
 		

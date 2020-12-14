@@ -1,9 +1,14 @@
 package com.allhomes.myapp.store;
 
 
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.product.Sub_cDaoImp;
+import com.allhomes.myapp.register.RegisterDaoImp;
+import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
 
 @Controller
@@ -37,9 +44,10 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome(@RequestParam("order") String order) {
+	public ModelAndView storeHome(@RequestParam("order") String order, StoreProductCategoryVO vo) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+	
 		
 		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
 		
@@ -86,17 +94,18 @@ public class StoreController {
 		
 		return mav;
 	}
-	
-	
+
+
 	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpSession ses){
+	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
-		Sub_cDaoImp sub = sqlSession.getMapper(Sub_cDaoImp.class);
-		
-		ProductVO vo = dao.selectProduct(pd_no);
+
+
+
+		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
 		try {
 			if(!vo.getO_value().isEmpty()) {
@@ -110,20 +119,19 @@ public class StoreController {
 			
 		}
 		
-		
 		mav.addObject("vo", vo);
-		mav.addObject("sub", sub.selectSubC(pd_no));
-		mav.addObject("result", rDao.countReview(pd_no));	
+		mav.addObject("rvo", rDao.avgReview(pd_no));
+		mav.addObject("result", rDao.countReview(pd_no));
+		mav.addObject("rList", rDao.selectReview(pd_no));		
+		
 		mav.setViewName("store/storeDetail");	
 			
 		return mav;
-		}
-	
-}		
-  
+	}
+}
 
-	
 	/* @은빈
+
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();
@@ -173,7 +181,3 @@ public class StoreController {
 		return mav;	
 	}
 		 */
-	
-
-
-	

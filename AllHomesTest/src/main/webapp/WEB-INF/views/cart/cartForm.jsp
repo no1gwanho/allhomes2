@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(function() {
-
 		$("#allCheck").click(function() {
 			var chk = $("#allCheck").prop("checked");
 			if (chk) {
@@ -11,14 +10,11 @@
 				$(".chBox").prop("checked", false);
 			}
 		});
-
 		$("#selectDelBtn").click(function() {
 			var confirm_val = confir("정말 삭제하시겠습니까?");
-
 			if (confirm_val) {
 				var checkArr = new Array();
 				$("input[class='chBox']:checked").each(function() {
-
 				});
 			}
 		});

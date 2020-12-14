@@ -20,13 +20,6 @@ public class CartJoinVO {
 	private String pd_name;
 	private int s_no;
 	private String main_img;
-	
-	public int getM_no() {
-		return m_no;
-	}
-	public void setM_no(int m_no) {
-		this.m_no = m_no;
-	}
 	public String getUserid() {
 		return userid;
 	}
@@ -86,5 +79,11 @@ public class CartJoinVO {
 	}
 	public void setMain_img(String main_img) {
 		this.main_img = main_img;
+	}
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
 	}
 }

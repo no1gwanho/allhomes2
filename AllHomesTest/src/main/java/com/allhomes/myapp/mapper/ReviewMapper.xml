@@ -11,10 +11,7 @@
 	select * from review where pd_no=#{pd_no} order by writedate desc
 </select>
 <select id="avgReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select * from (select pd_no, avg(rating) as rating from review group by pd_no) where pd_no=#{pd_no}
-</select>
-<select id="reviewRatingCnt" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select count(case when rating=5 then 5 end) from review where pd_no=#{pd_no}
+	select * from (select pd_no, count(rating) as cnt from review group by pd_no) where pd_no=#{pd_no}
 </select>
 <select id="allReviewList" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating, img, content, writedate, s_no from review order by writedate desc
@@ -28,6 +25,9 @@
 <insert id="insertReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	insert into review(userid, pd_no, rating, img, content, writedate, s_no) values(userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no})
 </insert>
+<update id="reviewHitAdd" parameterType="com.allhomes.myapp.review.ReviewVO">
+	update review set hit = hit+1 where r_no=#{r_no}
+</update>
 <update id="editReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	update review set userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no} where userid=#{userid} and pd_no=#{pd_no}
 </update>
