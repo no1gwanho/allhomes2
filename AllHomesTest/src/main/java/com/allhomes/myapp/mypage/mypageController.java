@@ -452,14 +452,16 @@ public class mypageController {
 	@RequestMapping("/wishAdd")
 	public ModelAndView wishAdd(@RequestParam("pd_no") int pd_no, HttpServletRequest r) {
 		ModelAndView mv = new ModelAndView();
-		
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		HttpSession s = r.getSession();
+		
 		String userid = (String)s.getAttribute("userid");
 		MypageWishlistJoinVO vo = new MypageWishlistJoinVO();
 		vo.setUserid(userid);
-
-		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		vo.setPd_no(pd_no);
+		
 		int result = dao.addWishlist(vo);
+
 		System.out.println(result);
 		
 		mv.addObject("r", result);

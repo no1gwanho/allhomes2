@@ -8,7 +8,7 @@
 </c:if>
 <c:if test="${r==0}">
 	<script>
-		alert("이미 위시리스트에 등록된 제품입니다.");
+		alert("이미 위시리스트에 등록된 제품입니다");
 		history.back();
 	</script>
 </c:if>
