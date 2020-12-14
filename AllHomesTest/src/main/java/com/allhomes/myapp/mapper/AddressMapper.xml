@@ -19,4 +19,8 @@
 		update address set receiver=#{receiver}, zipcode=#{zipcode}, addr=#{addr},
 		addrdetail=#{addrdetail}, tel=#{tel} where a_code=#{a_code}
 	</update>
+	
+	<delete id="addressDel" parameterType="int">
+		delete from address where a_code = #{param1}
+	</delete>
 </mapper>

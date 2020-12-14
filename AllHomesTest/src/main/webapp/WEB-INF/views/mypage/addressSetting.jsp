@@ -64,6 +64,7 @@
 									<input class="col-lg-9 mb-3 form-control" name="tel" value="${vo.tel}"/><br/>
 									
 									<button type="submit" class="col-lg-1">수정</button>
+									<a href="<%=request.getContextPath() %>/addressDel?a_code=${vo.a_code}">삭제</a>
 								</div>	
 							</div>
 						</form>

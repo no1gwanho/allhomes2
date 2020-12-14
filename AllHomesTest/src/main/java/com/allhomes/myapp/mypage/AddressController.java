@@ -65,4 +65,26 @@ public class AddressController {
 		return mav;
 	}
 	
+	//배송지 삭제
+	@RequestMapping("/addressDel")
+	public ModelAndView addressDel(@RequestParam("a_code") int a_code, HttpSession s) {
+		AddressDaoImp dao = sqlSession.getMapper(AddressDaoImp.class);
+		
+		int result = dao.addressDel(a_code);
+		
+		if(result>=1) { //삭제 성공
+			
+		}else { //삭제 실패
+			
+		}
+		
+		//주소지 정보 가져오기
+		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("aList", aList);
+		mav.setViewName("mypage/addressSetting");
+		
+		return mav;
+	}
 }
