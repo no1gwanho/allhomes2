@@ -29,7 +29,7 @@
 	#content{
 		max-width:1400px;
 		margin:15px auto;
-		font-family:'SCDream3'';
+		font-family:'SCDream3';
 	}
 	#imgWrapper>img{
 		margin-top:15px;
