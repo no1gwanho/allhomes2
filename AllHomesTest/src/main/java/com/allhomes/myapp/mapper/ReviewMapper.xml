@@ -5,19 +5,10 @@
 
 <mapper namespace="com.allhomes.myapp.review.ReviewDaoImp">
 <select id="reviewList" resultType="com.allhomes.myapp.review.ReviewVO">
-	select pd_no, avg(rating) as rating from review group by pd_no
-</select>
-<select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
-	select * from review where pd_no=#{pd_no} order by writedate desc
-</select>
-<select id="avgReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select * from (select pd_no, count(rating) as cnt from review group by pd_no) where pd_no=#{pd_no}
+	select pd_no, avg(rating) as rating from review group by pd_no 
 </select>
 <select id="allReviewList" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating, img, content, writedate, s_no from review order by writedate desc
-</select>
-<select id="countReview" parameterType="int" resultType="int">
-	select count(pd_no) from review where pd_no=#{pd_no}
 </select>
 <select id="selectOneReview" resultType="com.allhomes.myapp.review.ReviewVO">
 	select userid, pd_no, rating, img, content, writedate, s_no from review
@@ -37,4 +28,32 @@
 <delete id="delReviwPd_no" parameterType="int">
 	delete from review where pd_no=#{pd_no}
 </delete>
+
+
+
+<!-- 스토어디테일 페이지 -->
+<select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
+	select * from review where pd_no=#{pd_no} order by writedate desc
+</select>
+<select id="ratioReview1" parameterType="int" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select rating, ratio_to_report(rating) over() as ratio_r from (select * from (select pd_no, rating, count(rating) from review group by pd_no, rating) where pd_no=#{pd_no})) where rating=1
+</select>
+<select id="ratioReview2" parameterType="int" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select rating, ratio_to_report(rating) over() as ratio_r from (select * from (select pd_no, rating, count(rating) from review group by pd_no, rating) where pd_no=#{pd_no})) where rating=2
+</select>
+<select id="ratioReview3" parameterType="int" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select rating, ratio_to_report(rating) over() as ratio_r from (select * from (select pd_no, rating, count(rating) from review group by pd_no, rating) where pd_no=#{pd_no})) where rating=3
+</select>
+<select id="ratioReview4" parameterType="int" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select rating, ratio_to_report(rating) over() as ratio_r from (select * from (select pd_no, rating, count(rating) from review group by pd_no, rating) where pd_no=#{pd_no})) where rating=4
+</select>
+<select id="ratioReview5" parameterType="int" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select rating, ratio_to_report(rating) over() as ratio_r from (select * from (select pd_no, rating, count(rating) from review group by pd_no, rating) where pd_no=#{pd_no})) where rating=5
+</select>
+<select id="avgReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
+	select * from (select pd_no, avg(rating) as rating from review group by pd_no) where pd_no=#{pd_no}
+</select>
+<select id="countReview" parameterType="int" resultType="int">
+	select count(pd_no) from review where pd_no=#{pd_no}
+</select>
 </mapper>
