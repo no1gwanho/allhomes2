@@ -207,6 +207,15 @@ public class mypageController {
 	}
 	
 	
+	//우편번호 찾기 버튼 눌렀을때
+	@RequestMapping(value="/zipsearch",produces="application/text;charset=UTF-8")
+	public String zipcodesearch() {
+		
+		
+		return "/mypage/zipcodesearch";
+	}
+	
+	
 	
 	
 	
