@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${logStatus == '' || logStatus == 'N'}">
+<c:if test="${logStatus == null || logStatus == 'N'}">
 	<script>
 		alert{"로그인 후 이동이 가능합니다."};
 		location.href="/myapp/";
@@ -9,27 +9,134 @@
 </c:if>
 
 <script>
+	
+	
 	$(function(){
-		$("updateBtn").click(function(){
+		$("#updateBtn").click(function(){	//회원정보 수정 form 데이터 submit 근데 submit일어나기전에 유효성검사 check
 			
+			//닉네임 검사
+			if($("#nickname").val()==""){
+				$("#nickname").val("membUs");
+										
+			}else{
+				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
+				var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
+				if(nicknameTestResult!=true){
+					alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
+					return false;
+				}
+			}
+		
+			//연락처 검사
+			if($("#tel").val()==""){
+				alert("연락처는 필수 입력사항입니다..");
+				return false;
+			}
+			var telPattern = /^[0-9]{11}$/;
+			var telTestResult = telPattern.test($("#tel").val());
 			
+			if(telTestResult!=true){
+				alert("연락처는 '-'생략하고 입력해주세요.")
+				return false;
+			}
+						
 			
+			//이메일 검사
+			if($("#email").val()==""){
+				alert("이메일은 필수 입력사항입니다..");
+				return false;
+			}
+		
+			var emailPattern = /^[A-Za-z0-9@.]{4,25}$/;
+			var emailTestResult = emailPattern.test($("#email").val());
+			if(emailTestResult != true){
+				alert("이메일 주소는 4~25글자 내로 적어주세요");
+				return false;
+			}
+		
+					
 			
-			$("updataFrm").submit();		
+			if($("#email").val()!=""){
+				
+				var url = "/myapp/mailFilter";
+				var data = "email="+document.getElementById("email").value;
+				
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						
+						if(result==""){
+							
+							$("#updateFrm").submit();
+						}else{
+							alert("이미 등록된 이메일 주소입니다.");
+							
+						}									
+					},error:function(error){
+						console.log("test에러잡기 5"+ error.responseText);
+					}
+				});				
+			}
+			
+										
+			});		
+	
+	
+	
+		$("#updateAddr").click(function(){	//주소지정보수정 버튼 클릭 시 페이지 이동영역
+			location.href="/addrEditForm";
+		});
+	
+		
+		$("#membOutBtn").click(function(){//탈퇴 버튼 눌렀을때
+			
 			
 		});
+	
+		
+		$(function(){
+			//이미지 미리보기 
+			$("#picBox").on("change",preViewset);
+			
+		});
+				
+			function preViewset(e){
+							
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f){
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#preProfile").attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		
+		
+		
+		
+		
 	});
-
+	
+	
 </script>
 <style>
 	.row{text-align:center;}
-	
-	
 	
 	.inputbox{height:100%;}
 
 	#addr1,#addr2{margin:0;height:40%;}
 	#notice{line-height:80%;margin-top:20px;}
+	#zipcode{width:449px;}
+	#zipBtn{float:left;margin-right:10px;}
+	#picBox{width:230px;}
+	
+	
 	
 	.wBlank{margin-left:200px;}
 	.hBlank{margin-top:50px;}
@@ -42,7 +149,7 @@
 	.wBlank2{margin-left:51px;}	/*7자*/
 	.wBlank3{margin-left:35px;}	/*4자*/
 	.wBlank4{margin-left:67px;}	/*4자*/
-	
+	.wBlank5{margin-left:200px;}
 
 </style>
 <br/>    
@@ -53,13 +160,13 @@
 	
 	
 	<div id="notice">
-		  <div class=wBlank>* 비밀번호 변경은 <b style="color:#ee8374">아이디/비밀번호 찾기</b>를 통해 변경해주세요.</div><br/><br/>
-		  <div class=wBlank>* 배송혼선을 막기위해 주소가 정확히 입력됐는지 다시 한번 확인해주세요.</div>
+		  <div class=wBlank>* 비밀번호 변경은 <a href="/myapp/find"><b style="color:#ee8374">아이디/비밀번호 찾기</b></a>를 통해 변경해주세요.</div><br/><br/>
+		  <div class=wBlank>* 배송지 정보 수정은 아래 배송지 수정버튼을 눌러주세요.</div>
 	</div>
 	<br/><br/>
 	
 	<!-- 폼테그 시작 -->
-	<form id="updataFrm" method="post" action="/myapp/updateOk" enctype="multipart/form-data">
+	<form id="updateFrm" method="post" action="/myapp/updateOk" enctype="multipart/form-data">
 		<div class="row">
 			<div class="hBlank2"></div>
 			
@@ -90,80 +197,51 @@
 		      <input type="text" class="form-control" id="nickname" name="nickname" value=<%=session.getAttribute("nickname")%>>
 		    </div>
 		  </div>
-		   <div class="mb-3 row">
+		      <div class="mb-3 row">
+		    <label class="labelTag" for="tel" class="col-sm-2 col-form-label">연락처</label>
+		    	 <div class="wBlank2"></div>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="tel" name="tel" value=<%=session.getAttribute("tel")%>>
+		    </div>
+		  </div>
+		  <div class="mb-3 row">
 		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="m_pic" name="m_pic" value=<%=session.getAttribute("m_pic")%>>
+		      <input id="picBox" name="picBox" type="file" class="form-control"><!-- name 추가후 작업 -->
+		      <img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
 		    </div>
 		  </div>
 		<!-- 박스종료 -->
+		
 		<br/>
 		
-		
-		
-		
-		<!-- 배송정보 -->
-		<div class="row">
-			<div class="col-12" style="border-bottom:1px solid #eee;margin-bottom:5px;"><h5 style="color:#ee8374">배송지정보</h5></div>
-		</div>
-		<br/>
-					  
-		<div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">받는분</label>
-		    	 <div class="wBlank2"></div>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="receiver" name="receiver" placeholder="실수령자 성함" value="${receiver}">
-		    </div>
-		  </div>
-		  
-		  <div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">연락처</label>
-		    	 <div class="wBlank2"></div>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="tel" name="tel" placeholder="연락처" value="${tel}">
-		    </div>
-		  </div>
+	</form>
 			
-		 <div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label" >우편번호</label>
-		    	<div class="wBlank3"></div>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호" value="${zipcode}">
-		    </div>
-		  </div>
-		  
-		  
-		<div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">주소</label>
-		    	 <div class="wBlank4"></div>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="주소입력" value="${addr}">
-		    </div>
-		  </div>
+	
+		<div class="row">
+			<div class="col-4" style="text-align:right;">
+				<button id="updateBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
+			</div>
+			
+			
+				<div class="col-4" style="text-align:center;">
+				<a href="/myapp/addrEditForm" id="updateAddr" name="updateAddr" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">주소정보 수정</a>
+			</div>
 		
-		<div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">상세주소</label>
-		    	 <div class="wBlank3"></div>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" value="${addrdetail}">
-		    </div>
-		  </div>
-		
-		</form>
+			<div class="col-4" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
+	
+			
+				<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
+			</div>
+		</div>
+	
 	</div>
+	<br/>
+	
+	
 
 	
-	<br/>
-	<div class="row">
-		<div class="col-6" style="text-align:right;">
-			<button id="updateBtn"class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
-		</div>
-		
-		
-		<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
-			<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
-		</div>
-	</div>
+	
 	
 	
 	
@@ -221,7 +299,7 @@
           	</div>
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        	<button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">탈퇴</button>
+	        	<button id="membOutBtn" type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">탈퇴</button>
 	      	</div>
 	    	</div>
 	  	</div>

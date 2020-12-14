@@ -67,6 +67,7 @@ public class OrderController {
 		
 		return mv; 
 	}
+
 	
 	@RequestMapping(value="/orderPurchase",method = RequestMethod.POST)
 	public ModelAndView orderPurchase(HttpSession ses, OrderPurchaseVO vo) {
@@ -149,4 +150,7 @@ public class OrderController {
 		
 		return mav;
 	}
+
 }
+
+

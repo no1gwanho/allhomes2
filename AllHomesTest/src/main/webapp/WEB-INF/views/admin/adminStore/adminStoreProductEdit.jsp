@@ -57,8 +57,9 @@
 			       						<c:forEach var="list" items="${subList}">
 			       								<div class="col-lg-4" style="float:left">
 			       									<p>
-									  				<input class="form-check-input" id="sub_c" type="checkbox" name="sub_c" value="${list.sub_c}">
+									  				<input class="form-check-input" id="sub_c" type="radio" name="sub_c" value="${list.sub_c}">
 									  				<label class="form-check-label" for="sub_c">${list.sub_c}(${list.main_c})</label>
+									  				<input type="hidden" name="main_c" value="${list.main_c}">
 									  				</p>
 									  			</div>
 										</c:forEach>

@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
-	input{
-		margin-top:5px;
-	}
+   input{
+      margin-top:5px;
+   }
 </style>
 <script>
 	$(function(){
@@ -27,6 +27,7 @@
 			$("#addrListDiv").css("display","none");
 		});
 	});
+
 </script>
 <br/>
 <div class="container">
@@ -98,7 +99,7 @@
 				<button id="selectAddrBtn" style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
 			</div>
 		</div>
-
+ 
 		<div class="col-lg-12" id="addrListDiv" style="display:none">
 			<div class="row">
 				<c:forEach var="aVO" items="${aList}">
@@ -115,7 +116,9 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
 							<input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
+
 							<input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
+
 
 						</div>
 					</div>
@@ -126,10 +129,10 @@
 					style="outline: 0; border: 0; background-color: #ee8374; color: #fff; margin: 0 auto;">선택</button>
 			</div>
 			
-			<br/><hr/><br/>
-			
-						
-			
+
+			<br/><hr/><br/>	
+				
+		
 		</div>
 			<form action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
 			<input type="text" name="c_no" value="${c_no}"/>
@@ -150,14 +153,15 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">배송 메모</span>
 							<input class="col-lg-8 form-control" type="text" name="memo" id="memo"/>
 							  
-
+ 
 			</div>
 		
 		<!-- ---------------------------------------------------------------- -->
 		<div class="my-2"></div><br/><br/>
 		<div class="col-2"><h4>주문자</h4></div>
 		<hr>
-		
+
+	
 		<div class="row">
 			<input type="hidden" name="c_no" value="${oList}"/>
 			<input type="hidden" name="m_no" value="${rVO.m_no}"/><!-- 회원번호 -->
@@ -186,6 +190,7 @@
 		<br/>
 		
 		<!-- ---------------------------------------------------------------- -->		
+
 		<div style="border-bottom:1px solid #eee"><h4>결제수단</h4></div>		
 		<div class="row">
 			<div class="col-3" style="margin-bottom:5px;">
@@ -197,17 +202,41 @@
 				<img src=""/>계좌이체
 			</div>
 		</div>
+
 		
 		<div id="payNotice" style="width:1400px;height:300px;background-color:#eee;">
 			공지사항 및 결제 주의사항			
 		</div>		
+
+
+		
+		<div style="margin-top:45px;border-bottom:1px solid #eee"><h4>거래 관련 공지사항</h4></div>		
+		<div id="payNotice">
+			<ul>
+				<li>올홈즈스토리의 모든 판매자는 안전거래를 위해 구매금액, 결제수단에 상관없이 모든거래에 대하여 이베이코리아 유한책임회사의 구매안전서비스(에스크로)를 제공하고 있습니다.</li>
+				<li>이베이코리아 유한책임회사의 전자금융거래법에 의해 결제대금예치업 등록번호는 02-016-00003입니다. </li>
+				<li>등록여부는 금융감독원 홈페이지(www.fss.or.kr)의 업무자료>인허가업무안내>전자금융업등록현황에서 확인하실수 있습니다.</li>
+				<li>당사의 결제시스템을 통하지 않고 판매자에게 직접 상품대금을 지급하는 직거래 시 피해가 발생할 수 있으므로 주의 바랍니다.</li>
+				<li>직거래로 인해 발생한 피해에 대해 올홈즈스토리는 책임을 지지 않습니다.</li>
+				<li>전자상거래 등에서의 소비자보호법에 관한 법률에 의거하여 미성년자가 체결한 계약은 법정대리인이 동의하지 않은 경우 본인 또는 법정대리인이 취소할 수 있습니다.</li>
+			</ul>			
+	
+
 		<br/>
 		<div>
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
-			
+		
 			<button id="payBtn" type="submit" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
 		</div>	
 		</form><!-- 여기까지 폼 -->
 	</div>
+			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
+
+
+		</div>
+
+
+		</div>
+   </div>
 </div>
 <br/>

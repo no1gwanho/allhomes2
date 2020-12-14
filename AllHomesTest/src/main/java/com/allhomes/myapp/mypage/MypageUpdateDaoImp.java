@@ -8,6 +8,10 @@ public interface MypageUpdateDaoImp {
 	public MypageUpdateVO addrSelect(MypageUpdateVO vo);
 	
 	
+	//배송지 업데이트
+	public int addrUpdate(MypageUpdateVO vo);
+			
+	
 	//회원정보수정(기본정보)
 		public String userEdit(RegisterVO vo);
 		

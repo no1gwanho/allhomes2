@@ -8,11 +8,7 @@ public class CartVO {
 	private int shipping_c;
 	private int discount;
 	private String o_value;
-	
-	
-	
-	
-	
+		
 	public String getUserid() {
 		return userid;
 	}

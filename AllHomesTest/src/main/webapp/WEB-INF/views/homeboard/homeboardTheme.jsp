@@ -150,10 +150,10 @@
 
 	<br/>
 	<br/>
+	
 	<!-- 내용시작 -->
 	<div class="row text-center">
 		<c:forEach var="vo" items="${themeList}">
-
 		<div class="col-3">
 			<div class="thumbnail">
 				<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
