@@ -40,259 +40,266 @@
 <script>
 
 
-	$(function(){
-		$("#button").click(function(){
-							
-			//아이디 검사
-			if($("#userid").val()==""){
-				alert("아이디는 필수입력사항입니다.");
-				return false;
-			}
-			if($("#idStatus").val()=="N"){
-				alert("아이디 중복검사를 해주세요.");
-				return false;
-			}
-			
-	
-			//비밀번호 검사
-			if($("#userpwd").val()=="" || $("#userpwdChk").val()==""){
-				alert("비밀번호는 필수입력사항입니다.");
-				return false;
-			}
-			if($("#userpwd").val()!= $("#userpwdChk").val()){
-				alert("비밀번호가 일치하지 않습니다.");
-				return false;
-			}
-			var pwdPattern = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{6,15}$/;
-			var pwdTestResult = pwdPattern.test($("#userpwd").val());
-			
-			if(pwdTestResult!=true){
-				alert("비밀번호는 영문,숫자,특수문자 조합 6~15자로 입력해주세요.");
-				return false;
-			}
-									
-			//이름 검사
-			if($("#username").val()==""){
-				alert("이름은 필수입력 사항입니다.");
-				return false;
-			}
-			var	namePattern = /^[가-힣]{2,6}$/;
-			var nameTestResult = namePattern.test($("#username").val());
-			
-			if(nameTestResult!=true){
-				alert("이름은 한글 2~6자 사이로 입력해주세요.");
-				return false;
-			}
-					
-		
+$(function(){
+	$("#button").click(function(){
 						
-			//연락처 검사
-			if($("#tel").val()==""){
-				alert("연락처는 필수 입력사항입니다..");
-				return false;
-			}
-			var telPattern = /^[0-9]{11}$/;
-			var telTestResult = telPattern.test($("#tel").val());
-			
-			if(telTestResult!=true){
-				alert("연락처는 '-'생략하고 입력해주세요.")
-				return false;
-			}
-			
-			
-			//닉네임 검사
-			if($("#nickname").val()==""){
-				$("#nickname").val("membUs");
-										
-			}else if($("#nickname").val()!=""){
-					
-				var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
-				var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
-				
-				if(nicknameTestResult!=true){
-					alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
-					return false;
-				
-				}	
-							
-				var checker;			
-				var url="/myapp/nicknameCheck"	;
-				var data="nickname="+document.getElementById("nickname").value;
-					
-						$.ajax({
-							url:url,
-							data:data,
-							success:function(result){
-								console.log("test4");								
-								
-								if(result!=""){
-									alert("사용할 수 없는 닉네임 입니다.");
-									checker = false;
-									return false;
-								}else{
-									console.log("test5");
-									checker = true;
-									next();
-								}
-							},error:function(error){
-								}
-							
-						});
-								
-				if(checker!=true){
-					return false;
-				}	
-				
-			}
-					
-		function next(){}//ajax 콜백 함수	
-			
-			
-			
-			
-			
-			
-			//이메일 검사
-			if($("#emailText").val()=="" || $("#email2").val()==""){
-				alert("이메일은 필수 입력사항입니다..");
-				return false;
-			}
-			
-			var emailPattern = /^[A-Za-z0-9]{4,20}$/;
-			var emailPattern2 = /^[A-Za-z0-9]{4,20}$/;
-			
-			var emailTestResult = emailPattern.test($("#emailText").val());
-			var emailTestResult2 = emailPattern.test($("#email2").val());
-			
-			
-			
-			if(emailTestResult != true){
-				alert("이메일 주소는 4~20글자 내로 적어주세요");
-				return false;
-			}
-			//if(emailTestResult2 != true){
-		//		alert("@이하 주소는 4~15글자 내로 적어주세요");
-			//	return false;
-		//	}
-					
-			
-			if($("#emailText").val()!="" && $("#email2").val()!=""){
-				
-				var url = "/myapp/mailFilter";
-				var data = "email1="+document.getElementById("emailText").value+"&email2="+document.getElementById("email2").value;
-				
-				$.ajax({
-					url:url,
-					data:data,
-					success:function(result){
-						
-						if(result==""){
-							
-							$("#regFrm").submit();
-						}else{
-							alert("이미 등록된 이메일 주소입니다.");
-							
-						}									
-					},error:function(error){
-						console.log("test에러잡기 5"+ error.responseText);
-					}
-				});				
-			}						
-							
-		});
-		
-		$(function(){
-			//이미지 미리보기 
-			$("#photoBtn").on("change",preViewset);
-			
-		});
-				
-			function preViewset(e){
-							
-				var files = e.target.files;
-				var filesArr = Array.prototype.slice.call(files);
-				
-				filesArr.forEach(function(f){
-					sel_file = f;
-					
-					var reader = new FileReader();
-					reader.onload = function(e){
-						$("#preProfile").attr("src", e.target.result);
-					}
-					reader.readAsDataURL(f);
-				});
-			}
-			
-		
-	
-	//중복검사 의무화 	
-	$(function(){
-		$("#userid").on("change",function(){
-			$("#idStatus").val("N");		
-						
-		});
-		
-	});
+		//아이디 검사
+		if($("#userid").val()==""){
+			alert("아이디는 필수입력사항입니다.");
+			return false;
+		}
+		if($("#idStatus").val()=="N"){
+			alert("아이디 중복검사를 해주세요.");
+			return false;
+		}
 		
 
-	//중복검사 버튼 클릭 시
-	$(function(){
-		$("#dupFilter").click(function(){
-			var url = "/myapp/dupFilter";
-			var data = "userid="+document.getElementById("userid").value;			
-			console.log("data=",data);
-			//아이디 정규식 설정(영문 숫자조합 최소5~13글자)
-			var idPattern =  /^[A-Za-z0-9]{5,13}$/;
-			
-			//정규식 결과 저장
-			var pattResult = idPattern.test($("#userid").val());
+		//비밀번호 검사
+		if($("#userpwd").val()=="" || $("#userpwdChk").val()==""){
+			alert("비밀번호는 필수입력사항입니다.");
+			return false;
+		}
+		if($("#userpwd").val()!= $("#userpwdChk").val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		}
+		var pwdPattern = /^[A-Za-z0-9~!@#$%^&*()_+|<>?:{}]{6,15}$/;
+		var pwdTestResult = pwdPattern.test($("#userpwd").val());
+		
+		if(pwdTestResult!=true){
+			alert("비밀번호는 영문,숫자,특수문자 조합 6~15자로 입력해주세요.");
+			return false;
+		}
+								
+		//이름 검사
+		if($("#username").val()==""){
+			alert("이름은 필수입력 사항입니다.");
+			return false;
+		}
+		var	namePattern = /^[가-힣]{2,6}$/;
+		var nameTestResult = namePattern.test($("#username").val());
+		
+		if(nameTestResult!=true){
+			alert("이름은 한글 2~6자 사이로 입력해주세요.");
+			return false;
+		}
 					
-			if($("#userid").val()==""){
-				alert("아이디를 입력해주세요.");
-			}else if(pattResult!=true){
-				alert("아이디는 영문 숫자 조합 5~13자로 입력해주세요.")
-			}else{
-				$.ajax({
-					url:url,
-					data:data,
-					success:function(retData){
-						if(retData==""){
-							$("#dupResult").css("display","block");
-							$("#dupResult").css("color","#ee8374");
-							
-							$("#dupResult").html($("#userid").val()+"는 사용가능한 아이디 입니다.");
-							
-							idcheckR = $("#userid").val();
-							
-						}else{
-							$("#dupResult").css("display","block");
-							$("#dupResult").css("color","blue");
-							$("#dupResult").html($("#userid").val()+"는 사용불가한 아이디 입니다.");
-						}
-						$("#idStatus").val("Y");
-						
-					},error:function(error){
-						console.log("정보받기 에러 발생", error.reponseText);	
-					}
-				});
-			}
-		});
-	});	
+		
+		//연락처 검사
+		if($("#tel").val()==""){
+			alert("연락처는 필수 입력사항입니다..");
+			return false;
+		}
+		var telPattern = /^[0-9]{11}$/;
+		var telTestResult = telPattern.test($("#tel").val());
+		
+		if(telTestResult!=true){
+			alert("연락처는 '-'생략하고 입력해주세요.")
+			return false;
+		}
+		
+		
+		
+		
 	
-	
-	
-	//이메일 dropdown버튼 클릭 시 다시 생성??
-	$(function(){
-		$(".dropdown-item").click(function(){
-			
-			$("#email2").val($(this).val()); //div 박스에는 html text로 가능 inputbox는 val로 입력 => 이벤트가 발생하는 곳의 값을 넣어라
-			$("#splitbtn3").css("display","none");
-						
-			});
+		var checker;
+		//닉네임 검사
+		if($("#nickname").val()==""){
+			$("#nickname").val("membUs");
+									
+		}else if($("#nickname").val()!=""){
 				
+			var nicknamePattern = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{3,10}$/;
+			var nicknameTestResult = nicknamePattern.test($("#nickname").val());				
+			
+			if(nicknameTestResult!=true){
+				alert("닉네임은 특수문자 제외 3~10자로 입력해주세요.");
+				return false;
+			
+			}	
+							
+		}///////					
+	/*		var url="/myapp/nicknameCheck"	;
+			var data="nickname="+document.getElementById("nickname").value;
+				
+					$.ajax({
+						url:url,
+						data:data,
+						success:function(result){
+												
+							
+							if(result!=""){
+								alert("사용할 수 없는 닉네임 입니다.");
+								checker = false;
+								return false;
+							}else{
+								
+								checker = true;
+								//next();
+								
+								
+							}	
+						},error:function(error){
+						
+						}
+					});
+							
+			
+			}
+		
+			if(checker!=true){
+				return false;
+		}
+				
+	function next(){}*/
+	
+						
+		
+					
+	//이메일 검사
+	if($("#emailText").val()=="" || $("#email2").val()==""){
+		alert("이메일은 필수 입력사항입니다..");
+		return false;
+	}
+	
+	var emailPattern = /^[A-Za-z0-9]{4,20}$/;
+	var emailPattern2 = /^[A-Za-z0-9]{4,20}$/;
+	
+	var emailTestResult = emailPattern.test($("#emailText").val());
+	var emailTestResult2 = emailPattern.test($("#email2").val());
+	
+	
+	
+	if(emailTestResult != true){
+		alert("이메일 주소는 4~20글자 내로 적어주세요");
+		return false;
+	}
+	//if(emailTestResult2 != true){
+//		alert("@이하 주소는 4~15글자 내로 적어주세요");
+	//	return false;
+//	}
+					
+	if($("#emailText").val()!="" && $("#email2").val()!=""){
+		
+		var url = "/myapp/mailFilter";
+		var data = "email1="+document.getElementById("emailText").value+"&email2="+document.getElementById("email2").value;
+		
+		$.ajax({
+			url:url,
+			data:data,
+			success:function(result){
+				
+				if(result==""){
+					
+					$("#regFrm").submit();
+				}else{
+					alert("이미 등록된 이메일 주소입니다.");
+					
+				}									
+			},error:function(error){
+				console.log("test에러잡기 5"+ error.responseText);
+			}
+		});				
+	}						
+					
 		});
+
+		
+	$(function(){
+		//이미지 미리보기 
+		$("#photoBtn").on("change",preViewset);
 		
 	});
+			
+		function preViewset(e){
+						
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			
+			filesArr.forEach(function(f){
+				sel_file = f;
+				
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$("#preProfile").attr("src", e.target.result);
+				}
+				reader.readAsDataURL(f);
+			});
+		}
+			
+		
+	
+		//중복검사 의무화 	
+		$(function(){
+			$("#userid").on("change",function(){
+				$("#idStatus").val("N");		
+							
+			});
+			
+		});
+		
+
+		//중복검사 버튼 클릭 시
+		$(function(){
+			$("#dupFilter").click(function(){
+				var url = "/myapp/dupFilter";
+				var data = "userid="+document.getElementById("userid").value;			
+				console.log("data=",data);
+				//아이디 정규식 설정(영문 숫자조합 최소5~13글자)
+				var idPattern =  /^[A-Za-z0-9]{5,13}$/;
+				
+				//정규식 결과 저장
+				var pattResult = idPattern.test($("#userid").val());
+						
+				if($("#userid").val()==""){
+					alert("아이디를 입력해주세요.");
+				}else if(pattResult!=true){
+					alert("아이디는 영문 숫자 조합 5~13자로 입력해주세요.")
+				}else{
+					$.ajax({
+						url:url,
+						data:data,
+						success:function(retData){
+							if(retData==""){
+								$("#dupResult").css("display","block");
+								$("#dupResult").css("color","#ee8374");
+								
+								$("#dupResult").html($("#userid").val()+"는 사용가능한 아이디 입니다.");
+								
+								idcheckR = $("#userid").val();
+								
+							}else{
+								$("#dupResult").css("display","block");
+								$("#dupResult").css("color","blue");
+								$("#dupResult").html($("#userid").val()+"는 사용불가한 아이디 입니다.");
+							}
+							$("#idStatus").val("Y");
+							
+						},error:function(error){
+							console.log("정보받기 에러 발생", error.reponseText);	
+						}
+					});
+				}
+			});
+		});	
+		
+		
+		
+		//이메일 dropdown버튼 클릭 시 다시 생성??
+		$(function(){
+			$(".dropdown-item").click(function(){
+				
+				$("#email2").val($(this).val()); //div 박스에는 html text로 가능 inputbox는 val로 입력 => 이벤트가 발생하는 곳의 값을 넣어라
+				$("#splitbtn3").css("display","none");
+							
+				});
+					
+			});
+		
+	});
+		
+			
+	
 	
 		
 	
@@ -336,17 +343,18 @@
 		<label for="nickname">닉네임</label>
 		<input type="text" name="nickname" id="nickname" placeholder="특수문자 제외 3~10자" class="form-control"/>						<!-- 닉네임 input 영역 -->
 	
-	
+
 		<label for="photoBtn">프로필 사진</label>
 		<input id="photoBtn" type="file" name="photoBtn" class="form-control"></input>												<!-- 프로필사진 업로드 -->
 		<img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
-		<br/>
+		<br/>	
 			
 		
-		<label for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->
+	<label for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->
  		<input type="text" name="tel" id="tel" placeholder="'-생략 입력'" class="form-control"/>
 	
 		
+	
 		<label for="email">*이메일</label>
 		<div class="form-row align-items-center">
 			<div id=mailbox1 class="col-auto"><!-- 이메일 입력박스 1 -->
