@@ -19,6 +19,13 @@
 </script>
 
 <style>
+	#floatingbanner {
+		position:absolute;
+		width:440px;
+		top:120px;
+		left:1400px;
+		z-index:100;
+	}
 	#content{
 		max-width:1400px;
 		margin:15px auto;
@@ -30,11 +37,10 @@
 		width:900px;
 		height:720px;
 	}
-	.input-select, #num {
+	#opt, #num {
 		margin-bottom:8px;
-		width:300px;
+		width:270px;
 		height:45px;
-		margin-left:78px;
 	}
 	#cart, #buy, #wish{
 		width:430px;
@@ -55,7 +61,7 @@
 			<div class="col-8" id="imgWrapper">
 				<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 			</div>
-			<div class="col-4" style="padding-top:15px;">
+			<div class="col-4" style="padding-top:15px;" id="floatingbanner">
 				<div class="row">
 					<div class="col-12">
 						<div style="height:30px;"><span>${vo.s_name}</span></div>
@@ -123,12 +129,12 @@
 					<div class="col-12" style="margin-top:15px;height:55px;">
 						<c:if test="${vo.discount!=0 }">
 							<span style="color:#343a40;"> 판매가격</span>
-							<b style="font-size:1.8em;margin-left:30px;">${vo.dc_price}원</b>
+							<b style="font-size:1.8em;margin-left:55px;">${vo.dc_price}원</b>
 							<span style="color:#ee7384;font-size:1.8em;">${vo.discount }%↓</span>
 						</c:if>
 						<c:if test="${vo.discount==0 }">
 							<span style="color:#333;"> 판매가격</span>
-							<b style="font-size:1.8em;margin-left:30px;color:#333;">${vo.dc_price }원 </b>							
+							<b style="font-size:1.8em;margin-left:55px;color:#333;">${vo.dc_price }원 </b>							
 						</c:if>
 					</div>
 					<div class="col-12">
@@ -139,9 +145,11 @@
 							<span style="color:#343a40;">배송료</span><span style="margin-left:57px;color:#343a40">${vo.shipping_c }원</span>
 						</c:if>
 					</div>
-					<div class="col-12" style="margin-top:35px;">
+					<div class="col-3" style="margin-top:35px;">
 						<span style="color:#343a40">옵션</span>
-						<select class="input-select" name="o_value">
+					</div>
+					<div class="col-9" style="margin-top:35px;text-align:right;">
+						<select class="input-select" id="opt" name="o_value">
 							<c:if test="${ options != null}">
 								<c:forEach var="o" items="${options}">
 									<option  value="${o}">${o}</option>
@@ -152,8 +160,10 @@
 							</c:if>
 						</select>
 					</div>		
-					<div class="col-12" style="margin-top:15px;">
+					<div class="col-3" style="margin-top:15px;">
 						<span style="color:#343a40">수량</span>
+					</div>
+					<div class="col-9" style="margin-top:15px;text-align:right;">
 						<input type="number" name="num" id="num"/>
 					</div>	
 					<div class="col-12" style="height:233px;margin-top:50px;">
@@ -494,5 +504,27 @@
 	}
 	ol>li{
 		line-height:30px;
-	}	
+	}
 </style>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+	$(function(){
+		var floatPosition = parseInt($("#floatingbanner").css('top'));
+		
+		$(window).scroll(function() {
+			// 현재 스크롤 위치를 가져온다.
+			var scrollTop = $(window).scrollTop();
+			var newPosition = scrollTop + floatPosition + "px";
+
+			/* 애니메이션 없이 바로 따라감
+			 $("#floatMenu").css('top', newPosition);
+			 */
+
+			$("#floatingbanner").stop().animate({
+				"top" : newPosition
+			}, 500);
+
+		}).scroll();
+	});
+</script>
