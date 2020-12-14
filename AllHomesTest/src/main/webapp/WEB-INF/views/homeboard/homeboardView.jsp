@@ -298,9 +298,18 @@
 				</div>
 				<div class="col"></div>
 				<div class="col-lg-2 col-md-auto">
-					<button type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
-						<i class="fas fa-heart">&nbsp;</i>스크랩하기
+				
+				<c:if test="${scrapCheck == 'Y' }">
+					<button type="button" class="btn btn-allhomes">
+						스크랩&nbsp;<i class="fas fa-heart"></i>
 					</button>
+				</c:if>
+				
+				<c:if test="${scrapCheck == 'N' }">
+					<button type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
+						스크랩&nbsp;<i class="far fa-heart"></i>
+					</button>
+				</c:if>
 				</div>
 			</div>
 			
