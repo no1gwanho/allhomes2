@@ -1,10 +1,11 @@
 package com.allhomes.myapp.store;
 
 
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
+
 import java.util.HashMap;
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.product.ProductDaoImp;
-import com.allhomes.myapp.product.ProductJoinVO;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.product.Sub_cDaoImp;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
+
 import com.allhomes.myapp.review.ReviewJoinVO;
 import com.allhomes.myapp.review.ReviewVO;
+
 
 @Controller
 public class StoreController {
@@ -46,9 +49,10 @@ public class StoreController {
 	DataSourceTransactionManager transactionManager;
 		
 	@RequestMapping("/storeHome")
-	public ModelAndView storeHome(@RequestParam("order") String order) {
+	public ModelAndView storeHome(@RequestParam("order") String order, StoreProductCategoryVO vo) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ModelAndView mav = new ModelAndView();
+	
 		
 		List<StoreProductCategoryVO> shList = dao.storeOrderList(order);
 		
@@ -96,12 +100,15 @@ public class StoreController {
 		return mav;
 	}
 
+
 	@RequestMapping("/storeDetail")
 	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+
+
 
 		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
@@ -128,7 +135,8 @@ public class StoreController {
 	}
 }
 
-/* @은빈
+	/* @은빈
+
 	@RequestMapping("/storeHome")	
 	public ModelAndView storeHome(@RequestParam(value="sortPd", required=false) String sortPd) {
 		ModelAndView mav = new ModelAndView();

@@ -1,8 +1,6 @@
 package com.allhomes.myapp.order;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.purchase.PurchaseDaoImp;
-import com.allhomes.myapp.purchase.PurchaseJoinVO;
-import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
