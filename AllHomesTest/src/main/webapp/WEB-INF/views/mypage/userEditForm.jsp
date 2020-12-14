@@ -77,8 +77,9 @@
 						console.log("test에러잡기 5"+ error.responseText);
 					}
 				});				
-			}						
-							
+			}
+			
+										
 			});		
 	
 	
@@ -94,10 +95,34 @@
 		});
 	
 		
+		$(function(){
+			//이미지 미리보기 
+			$("#picBox").on("change",preViewset);
+			
+		});
+				
+			function preViewset(e){
+							
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f){
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#preProfile").attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		
+		
+		
 		
 		
 	});
-	//유효성검사
+	
 	
 </script>
 <style>
@@ -182,7 +207,7 @@
 		  <div class="mb-3 row">
 		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
 		    <div class="col-sm-10">
-		      <input id="picBox" type="file" class="form-control"><!-- name 추가후 작업 -->
+		      <input id="picBox" name="picBox" type="file" class="form-control"><!-- name 추가후 작업 -->
 		      <img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
 		    </div>
 		  </div>
