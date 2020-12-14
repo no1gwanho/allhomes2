@@ -31,10 +31,7 @@ public interface RegisterDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
-	public RegisterVO oneMeberSelect(String userid);
 	
-	
-
 	//회원가입
 	public int registerMember(RegisterVO vo);
 	//회원가입 아이디 중복검사
@@ -51,6 +48,10 @@ public interface RegisterDaoImp {
 	//회원 기본정보 업데이트
 	public int userMebUpdate(RegisterVO vo);
 	
+	
+	//-------------------마이페이지 관련----------------------//
+	//회원 한명의 정보 가지고 오기
+	public RegisterVO oneMeberSelect(String userid);
 	
 	
 	

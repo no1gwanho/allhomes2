@@ -5,11 +5,17 @@ public class ScrapVO {
 	private int m_no;
 	private int b_no;
 	private String title;
-	private String userid;
 	private String thumbnail;
-	private int hit;
-	private int scrap;
+	private String writedate;
 	
+	
+	
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
 	public int getM_no() {
 		return m_no;
 	}
@@ -28,31 +34,13 @@ public class ScrapVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	public int getScrap() {
-		return scrap;
-	}
-	public void setScrap(int scrap) {
-		this.scrap = scrap;
-	}
-	
+
 	
 	
 }

@@ -112,13 +112,9 @@
     
     <!-- 메인페이지용 집들이 최근인기글 8개 -->
     <select id="homeboardListForMain" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select a.b_no, a.thumbnail, a.title, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
-    	from homeboard a
-    	join register b
-    	on a.userid=b.userid
-    	where a.b_no 
-    	in (select b_no from (select b_no from homeboard order by hit desc) where rownum  <![CDATA[<]]>  9 ) 
-    	order by a.b_no asc
+    	select b_no, thumbnail, title, userid, hit, scrap, writedate, m_pic from 
+		(select a.b_no, a.thumbnail, a.title, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic from homeboard a join register b
+		on a.userid=b.userid order by hit desc, b_no desc) where rownum <![CDATA[<]]>  9
     </select>
 
 </mapper>

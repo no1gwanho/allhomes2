@@ -69,6 +69,13 @@
 		width:25px;
 		border-radius: 45%;
 	}
+	
+	#homeboardTitle {
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 20px;
+		font-family:'SCDream5'
+	}
 
 </style>
 
@@ -109,7 +116,7 @@
 <div class="container" style="margin-top:45px;">
 	<div class="row">
 		<div class="col-10">
-			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;새로 올라온 집들이</h3>
+			<h3 id="homeboardTitle">새로 올라온 집들이</h3>
 		</div>
 		<div class="col-2" style="text-align:right">
 			<a href="/myapp/homeboardTop?order=0">더보기</a>
@@ -140,7 +147,7 @@
 
 	<!-- 해시태그 리스트 (이 기능 없앨지 말지 고민중)--> 
 	<div>
-		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;올홈즈 해시태그</h3>
+		<h3 id="homeboardTitle">올홈즈 해시태그</h3>
 	</div>
 	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
 	<div style="text-align: right;">

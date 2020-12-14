@@ -30,14 +30,18 @@ import com.allhomes.myapp.scrap.ScrapVO;
 
 @Controller
 public class mypageController {
-	@Autowired
 	SqlSession sqlSession;
-
-	@Autowired 
-	DataSourceTransactionManager transactionManager;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	
 	//mypage홈으로 이동
-	@RequestMapping("/mypageHome")
+	@RequestMapping("/mypageHome") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
 	public ModelAndView mypageHome(HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 				
@@ -50,10 +54,13 @@ public class mypageController {
 		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
 		
+		int m_no = (Integer)ses.getAttribute("m_no");
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
-		List<ScrapVO> sList = scrap.selectScrap(userid);
+		List<ScrapVO> sList = scrap.selectScrap(m_no);
 		
-		mv.addObject("list", list);		
+		
+		
+		mv.addObject("list", list);	
 		mv.addObject("sList", sList);
 		mv.addObject("vo", vo);
 		
@@ -61,11 +68,6 @@ public class mypageController {
 		
 		return mv;
 	}
-	
-	
-	
-	
-	
 	
 	
 	//mypage 회원정보수정으로이동
@@ -353,11 +355,7 @@ public class mypageController {
 		return mv;
 	}	
 	
-	//mypage 스크랩으로 이동
-	@RequestMapping("/mypageScrap")
-	public String mypageScrap() {
-		return "mypage/mypageScrap";
-	}
+	
 	
 	//mypage 나의 작성글로 이동
 	@RequestMapping("/mypageMyboard")
