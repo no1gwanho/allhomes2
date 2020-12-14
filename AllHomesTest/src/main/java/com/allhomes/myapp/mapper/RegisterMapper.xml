@@ -49,7 +49,7 @@
   	
   	<!-- 회원정보 업데이트 m_pic 추가-->
   	<update id="userMebUpdate" parameterType="com.allhomes.myapp.register.RegisterVO">
-  		update register set email=#{email}, nickname=#{nickname},tel=#{tel}
+  		update register set email=#{email}, nickname=#{nickname},tel=#{tel},m_pic=#{m_pic} where m_no=#{m_no}
   	</update>
   	
 
