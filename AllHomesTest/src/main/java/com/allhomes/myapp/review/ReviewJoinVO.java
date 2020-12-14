@@ -11,7 +11,14 @@ public class ReviewJoinVO {
 	private int s_no;
 	private int cnt;
 	private int avg;
+	private double ratio_r;
 	
+	public double getRatio_r() {
+		return ratio_r;
+	}
+	public void setRatio_r(double ratio_r) {
+		this.ratio_r = ratio_r;
+	}
 	public String getUserid() {
 		return userid;
 	}

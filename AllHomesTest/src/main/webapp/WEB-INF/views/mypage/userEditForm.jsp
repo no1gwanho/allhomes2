@@ -77,23 +77,53 @@
 						console.log("test에러잡기 5"+ error.responseText);
 					}
 				});				
-			}						
-							
+			}
+			
+										
 			});		
-	});	
 	
-	//유효성검사
 	
 	
 		$("#updateAddr").click(function(){	//주소지정보수정 버튼 클릭 시 페이지 이동영역
 			location.href="/addrEditForm";
+		});
+	
 		
+		$("#membOutBtn").click(function(){//탈퇴 버튼 눌렀을때
 			
 			
+		});
+	
+		
+		$(function(){
+			//이미지 미리보기 
+			$("#picBox").on("change",preViewset);
+			
+		});
+				
+			function preViewset(e){
+							
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f){
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#preProfile").attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		
+		
+		
+		
 		
 	});
 	
-	}
+	
 </script>
 <style>
 	.row{text-align:center;}
@@ -104,7 +134,7 @@
 	#notice{line-height:80%;margin-top:20px;}
 	#zipcode{width:449px;}
 	#zipBtn{float:left;margin-right:10px;}
-	#m_pic{width:230px;}
+	#picBox{width:230px;}
 	
 	
 	
@@ -167,8 +197,8 @@
 		      <input type="text" class="form-control" id="nickname" name="nickname" value=<%=session.getAttribute("nickname")%>>
 		    </div>
 		  </div>
-		    <div class="mb-3 row">
-		    <label class="labelTag" for="nickname" class="col-sm-2 col-form-label">연락처</label>
+		      <div class="mb-3 row">
+		    <label class="labelTag" for="tel" class="col-sm-2 col-form-label">연락처</label>
 		    	 <div class="wBlank2"></div>
 		    <div class="col-sm-10">
 		      <input type="text" class="form-control" id="tel" name="tel" value=<%=session.getAttribute("tel")%>>
@@ -177,39 +207,38 @@
 		  <div class="mb-3 row">
 		    <label class="labelTag" for="profileimg" class="col-sm-2 col-form-label">프로필 이미지</label>
 		    <div class="col-sm-10">
-		      <input id="m_pic" type="file" class="form-control" value=<%=session.getAttribute("m_pic")%>><!-- name 추가후 작업 -->
+		      <input id="picBox" name="picBox" type="file" class="form-control"><!-- name 추가후 작업 -->
 		      <img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
 		    </div>
 		  </div>
 		<!-- 박스종료 -->
+		
 		<br/>
 		
-		</form>
-		
-		
-		
+	</form>
+			
 	
-	
-	
-	
-		<br/>
 		<div class="row">
 			<div class="col-4" style="text-align:right;">
 				<button id="updateBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
 			</div>
 			
 			
-			<div class="col-4" style="text-align:center;">
+				<div class="col-4" style="text-align:center;">
 				<a href="/myapp/addrEditForm" id="updateAddr" name="updateAddr" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">주소정보 수정</a>
 			</div>
-		</div>
+		
+			<div class="col-4" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
 	
-		
-		
+			
 				<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
 			</div>
 		</div>
+	
 	</div>
+	<br/>
+	
+	
 
 	
 	
@@ -270,7 +299,7 @@
           	</div>
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        	<button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">탈퇴</button>
+	        	<button id="membOutBtn" type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">탈퇴</button>
 	      	</div>
 	    	</div>
 	  	</div>

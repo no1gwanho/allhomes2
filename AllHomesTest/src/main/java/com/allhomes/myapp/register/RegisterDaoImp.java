@@ -42,6 +42,7 @@ public interface RegisterDaoImp {
 	public int regFinal(RegisterVO vo);
 	//회원가입 닉네임 중복검사
 	public String nicknameCheck(String nickname);
+
 	
 	//회원정보 수정 중복검사
 	public RegisterVO dupCheck(RegisterVO vo);

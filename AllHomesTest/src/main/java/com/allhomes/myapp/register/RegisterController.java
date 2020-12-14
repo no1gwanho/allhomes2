@@ -281,7 +281,6 @@ public class RegisterController {
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 
-		
 		String resultVO="";
 		if(email==null) {//회원가입으로 들어올때
 			vo.setEmail1(email1);

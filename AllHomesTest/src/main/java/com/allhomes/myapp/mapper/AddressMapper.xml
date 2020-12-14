@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allhomes.myapp.mypage.AddressDaoImp">
+	<!-- 회원 m_no 가져오기 -->
+	<select id="selectm_no" parameterType="String" resultType="int">
+		select m_no from register where userid=#{param1}
+	</select>
+
+	<!-- 주소지 목록 가져오기 -->
+	<select id="selectAddress" parameterType="int" resultType="com.allhomes.myapp.order.AddressVO">
+		select receiver, a_code, zipcode, addr, addrdetail, tel, m_no
+		from address where m_no = #{param1}
+	</select>
+	
+	<!-- 주소지 수정 -->
+	<update id="addressUpdate" parameterType="com.allhomes.myapp.order.AddressVO">
+		update address set receiver=#{receiver}, zipcode=#{zipcode}, addr=#{addr},
+		addrdetail=#{addrdetail}, tel=#{tel} where a_code=#{a_code}
+	</update>
+	
+	<!-- 주소지 삭제 -->
+	<delete id="addressDel" parameterType="int">
+		delete from address where a_code = #{param1}
+	</delete>
+	
+	<!-- 주소지 추가 -->
+	<insert id="addressInsert" parameterType="com.allhomes.myapp.order.AddressVO">
+		insert into address(receiver, a_code, zipcode, addr, addrdetail, tel, m_no)
+		 values(#{receiver}, a_code_sq.nextval, #{zipcode}, #{addr}, #{addrdetail}, #{tel}, #{m_no})
+	</insert>
+</mapper>
