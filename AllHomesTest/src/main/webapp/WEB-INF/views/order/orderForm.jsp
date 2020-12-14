@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 	input{
 		margin-top:5px;
@@ -7,9 +8,7 @@
 </style>
 <script>
 	$(function(){
-		$('#payBtn').click(function(){
-			location.href="/myapp/payForm"
-		});
+		
 		
 		//배송지 선택
 		$("#selectAddrBtn").click(function(){
@@ -23,6 +22,7 @@
 			$("#addrOk").val($("#addr").val()); 
 			$("#addrdetailOk").val($("#addrdetail").val());
 			$("#telOk").val($("#tel").val());  
+			$("#a_codeOk").val($("#a_code").val());  
 			
 			$("#addrListDiv").css("display","none");
 		});
@@ -41,11 +41,14 @@
 	<div id="orderPd">
 		<div class="mb-4" style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
 		
+		
 		<c:set var="totalP" value="0"/>
+		
 		<c:forEach var="vo" items="${oList}">
 			<div class="col-lg-12 mr-2 ml-2 mb-2">
 				<div class="row">
 					<input type="hidden" value="${vo.c_no}"/>
+					
 					<div class="col-2" style="border-bottom: 1px solid #eee">
 						<img
 							src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
@@ -54,9 +57,10 @@
 					<div class="col-7" style="border-bottom: 1px solid #eee">
 						<p>${vo.s_name}] ${vo.pd_name }</p>
 						<p>옵션:${vo.o_value} / ${vo.num}개</p>
-						<p>가격:${vo.price}<br /> (-)할인: ${vo.discount}%<br />
-						<b>최종 가격: ${vo.price-(vo.discount*vo.price)}원</b></p>
-						<c:set var="totalP" value="${totalP + (vo.price-(vo.discount*vo.price)) }"/>
+						<p>가격:${vo.price * vo.num}<br /> (-)할인: ${vo.discount}%<br />
+						<b>최종 가격: ${(vo.price*vo.num)-(vo.discount*vo.price*vo.num/100)}원</b></p>
+						<c:set var="totalP" value="${totalP + vo.price*vo.num-(vo.discount*vo.price*vo.num/100) }"/>
+						
 					</div>
 					<div class="col-2" style="border-bottom: 1px solid #eee">
 						배송비: ${vo.shipping_c}원<br /> 
@@ -65,6 +69,7 @@
 			</div>
 		</c:forEach>
 		
+		
 		<br/>
 		<!-- ---------------------------------------------------------------- -->
 		<div class="row">
@@ -72,7 +77,7 @@
 				총 상품 금액
 			</div>
 			<div class="col-3">
-				<b><c:out value="${totalP}"/>원</b>
+				<b><fmt:parseNumber value="${totalP}" integerOnly="true"/>원</b>
 			</div>
 			<div class="col-9">
 				배송비
@@ -98,8 +103,9 @@
 			<div class="row">
 				<c:forEach var="aVO" items="${aList}">
 					<div class="col-lg-6">
-						<input type="radio" name="a_code" value="${aVO.a_code}" />
+					
 						<div class="row">
+							<input type="number" id="a_code" value="${aVO.a_code}"/>
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
 							<input class="col-lg-8 form-control" type="text" id="receiver" value="${aVO.receiver}" /> 
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">우편번호</span>
@@ -125,7 +131,11 @@
 						
 			
 		</div>
+			<form action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
+			<input type="text" name="c_no" value="${c_no}"/>
 			<div class="row">
+							<input type="number" name="a_code" id="a_codeOk"/>
+							<input type="hidden" name="shipping_c" value="2500"/>
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
 							<input class="col-lg-8 form-control" type="text" id="receiverOk"
 								name="receiver"/>
@@ -138,7 +148,7 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
 							<input class="col-lg-8 form-control" type="text" name="tel" id="telOk"/>
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">배송 메모</span>
-							<input class="col-lg-8 form-control" type="text" name="memo" id="telOk"/>
+							<input class="col-lg-8 form-control" type="text" name="memo" id="memo"/>
 							  
 
 			</div>
@@ -149,6 +159,11 @@
 		<hr>
 		
 		<div class="row">
+			<input type="hidden" name="c_no" value="${oList}"/>
+			<input type="hidden" name="m_no" value="${rVO.m_no}"/><!-- 회원번호 -->
+			<input type="text" name="userid" value="${rVO.userid}"/> <!-- 아이디 -->
+			<input type="number" name="total_p" value="${totalP}"/><!-- 결제 총 가격 -->
+			
 			<div class="col-2">
 				이름
 			</div>
@@ -165,7 +180,7 @@
 				휴대전화
 			</div>
 			<div class="col-10">
-				<input type="text" name="tel" value="${rVO.tel}"/><br/>
+				<input type="text" value="${rVO.tel}"/><br/>
 			</div>						
 		</div>
 		<br/>
@@ -182,6 +197,7 @@
 				<img src=""/>계좌이체
 			</div>
 		</div>
+		
 		<div id="payNotice" style="width:1400px;height:300px;background-color:#eee;">
 			공지사항 및 결제 주의사항			
 		</div>		
@@ -189,8 +205,9 @@
 		<div>
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
 			
-			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
+			<button id="payBtn" type="submit" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
 		</div>	
+		</form><!-- 여기까지 폼 -->
 	</div>
 </div>
 <br/>
