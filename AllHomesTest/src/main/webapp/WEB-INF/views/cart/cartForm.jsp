@@ -23,17 +23,27 @@
 				$(".chBox").prop("checked", false);
 			}
 		});
+		
+		//장바구니 삭제
 		$("#selectDelBtn").click(function() {
-			var confirm_val = confirm("정말 삭제하시겠습니까?");
+			var confirm_val = confirm("장바구니를 삭제하시겠습니까?");
 			if (confirm_val) {
-				var checkArr = new Array();
-				$("input[class='chBox']:checked").each(function() {
+				
+				var chkList="";
+				
+				$("input[class='chBox']:checked").each(function(i) {
+					if(i > 0){
+						chkList += ",";
+					}
+					chkList += $(this).val();
 				});
+				
+				location.href='<%=request.getContextPath()%>/cartDel?c_no='+chkList;
 			}
 		});
 		
 		
-		
+		//구매 페이지로 이동
 		$("#purchaseBtn").click(function(){
 			var chkList="";
 			
@@ -43,7 +53,7 @@
 				}
 				chkList += $(this).val();
 			});
-			alert(chkList); //c_no 배열로 저장
+			//alert(chkList); //c_no 배열로 저장
 			
 			location.href='<%=request.getContextPath()%>/order?c_no='+chkList;
 		});
@@ -52,7 +62,29 @@
 		$(".chBox").click(function(){
 			$("#allCheck").prop("checked", false);
 		});
-	
+		
+		var shipping_c = 0; //배송비
+		var price = 0; //상품가격
+		
+		
+		//가격과 배송가격 값 출력
+		$(".chBox").change(function(){
+		    
+		     if($(this).is(":checked")){
+		    	shipping_c += Number($(this).next().val()); //배송비
+		    	price += Number($(this).next().next().val()); //가격
+			     
+		     }else{
+		    	 shipping_c -= Number($(this).next().val()); //배송비
+			     price -= Number($(this).next().next().val()); //가격
+		     }
+		     
+		     //alert("price="+price+"ship"+shipping_c);
+		     
+		     $("#price").html(price);
+		     $("#ship").html(shipping_c);
+		     $("#totalPrice").html(price+shipping_c);
+		});
 	});
 </script>
 <br/>
@@ -63,6 +95,10 @@
 					장바구니
 				</div>
 				<div class="card-body"><!-- card-body 시작 -->
+					<div class="col-lg-12" style="height:50px;">
+						<button class="btn btn-secondary" id="selectDelBtn" style="float:right">선택 삭제</button>
+					</div>
+					
 					<table class="table">
 						<thead>
 							<tr>
@@ -79,11 +115,13 @@
 						<tbody>
 							<c:forEach var="c" items="${list }">
 								<form method="post" action="<%=request.getContextPath()%>/cartEdit">
-										<input type="hidden" name="${c.m_no }" value="${c.m_no }">
-										
+										<input type="hidden" name="${c.m_no }" value="${c.m_no }" >
+										<input type="hidden" name="c_no" value="${c.c_no}"/>
 											<tr>										
 												<td>
 													<input type="checkbox" name="chBox" class="chBox" value="${c.c_no }">
+													<input type="hidden" id="shipping_c" value="${c.shipping_c}"/>
+													<input type="hidden" id="shipping_c" value="${c.price*c.num}"/>
 												</td>
 											
 												<td>
@@ -103,10 +141,10 @@
 												</td>
 												
 												<td>
-													<input type="number" class="form-control" style="width:70px" value="${c.num}"/>
+													<input type="number" name="num" class="form-control" style="margin-top:45px;width:70px" value="${c.num}"/>
 												</td>
 												<td>
-													 ${c.price}원
+													 ${c.price*c.num}원
 												</td>
 												
 												<td>
@@ -124,8 +162,37 @@
 					<hr/>
 					
 					<div>
-						<div style="float:right">
+						<div class="col-lg-6" style="float:right;font-size:20px;">
+							<div class="row">
+								<div class="col-lg-6">
+									배송비
+								</div>
+								<div class="col-lg-6" style="text-align:right">
+									<span id="ship" style="color:black;">0</span> 원
+								</div>
+								
+								<div class="col-lg-6">
+									상품
+								</div>
+								<div class="col-lg-6" style="text-align:right">
+									<span id="price" style="color:black;">0</span> 원
+								</div>
+								
+								
+							</div>
+								
+						</div>
+						<br/><br/><br/><hr/>
 						
+						<div class="col-lg-6" style="float:right;font-size:20px;">
+							<div class="row">
+								<div class="col-lg-6" style="font-size:30px;">
+									<b>총 가격</b>
+								</div>
+								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
+									 = <span id="totalPrice" style="color:#EE8374">0</span> 원 
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -134,13 +201,9 @@
 	
 	
 	
-	<div class="row">
-		
-		<div class="col-md-2">
-			<button class="btn btn" id="selectDelBtn" style="font-size:0.8em;background-color:#ee8374;color:#fff;border:0;">선택 삭제</button>
-			<button class="btn btn" id="purchaseBtn" style="font-size:0.8em;background-color:#ee8374;color:#fff;border:0;">구매</button>
-			
-		</div>
+	<div class="col-lg-12" style="text-align:center">
+			<button class="btn" id="purchaseBtn" 
+			style="background-color:#ee8374;font-size:25px;width:150px;color:#fff;border:0;">구매</button>
 	</div>
 	<br/>
 	
