@@ -15,6 +15,10 @@ public class PurchaseJoinVO {
 	private String confirm;
 	private String memo;
 	private String o_value;
+	private String pc_date;
+	private String main_img;
+	private String pd_name;
+	private String s_name;
 	
 	private int rating;
 	private String img;
@@ -30,6 +34,38 @@ public class PurchaseJoinVO {
 	
 	private String m_pic;
 	
+	private String id;
+		
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+	public String getPd_name() {
+		return pd_name;
+	}
+	public void setPd_name(String pd_name) {
+		this.pd_name = pd_name;
+	}
+	public String getMain_img() {
+		return main_img;
+	}
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
+	public String getPc_date() {
+		return pc_date;
+	}
+	public void setPc_date(String pc_date) {
+		this.pc_date = pc_date;
+	}
 	public String getM_pic() {
 		return m_pic;
 	}

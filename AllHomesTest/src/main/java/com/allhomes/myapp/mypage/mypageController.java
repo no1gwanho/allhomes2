@@ -20,8 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
+import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.review.ReviewDaoImp;
+import com.allhomes.myapp.review.ReviewVO;
 import com.allhomes.myapp.scrap.ScrapDaoImp;
 import com.allhomes.myapp.scrap.ScrapVO;
 
@@ -483,14 +487,27 @@ public class mypageController {
 	
 	//mypage 나의 쇼핑으로 이동
 	@RequestMapping("/mypageShopping")
-	public ModelAndView purchaseList(HttpSession ses) {
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-
-		String userid = (String)ses.getAttribute("userid");
+	public ModelAndView purchaseList(HttpServletRequest r) {
 		ModelAndView mav = new ModelAndView();
-				
-		mav.addObject("pList", dao.allPurchaseList());
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		HttpSession ses = r.getSession();
+		
+		String userid = (String)ses.getAttribute("userid");
+		PurchaseJoinVO vo = new PurchaseJoinVO();
 
+		vo.setUserid(userid);
+			
+		List<PurchaseJoinVO> list = dao.joinPurchase(userid);
+		for(int i=0; i<list.size(); i++) {
+			vo = list.get(i);
+			int pd_no = vo.getPd_no();
+			
+			System.out.println("제품번호는 얼마야??????????????????????"+pd_no);
+			mav.addObject("pd_no", pd_no);
+		}
+		
+		mav.addObject("list", list);
 		mav.setViewName("mypage/mypageShopping");
 		
 		return mav;
