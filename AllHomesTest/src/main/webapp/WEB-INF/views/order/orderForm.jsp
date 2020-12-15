@@ -161,14 +161,13 @@
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;"></span>
 							<input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
-
 							<input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
+							<input type="text" id="a_code" value="${aVO.a_code}"/>
 
 							<br/><br/>
 						</div>
 						<div style="text-align:center" class="mt-3 mb-3">
 							<button class="selectAddrOkBtn btn btn-clean shadow-sm">선택</button>
-							<input type="hidden" id="a_code" value="${aVO.a_code}"/>
 						</div>
 					</div>
 				</c:forEach>
@@ -184,7 +183,7 @@
 			<form action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
 			<input type="hidden" name="c_no" value="${c_no}"/>
 			<div class="row">
-							<input type="hidden" name="a_code" id="a_codeOk"/>
+							<input type="text" name="a_code" id="a_codeOk"/>
 							<input type="hidden" name="shipping_c" value="${shipping_c}"/>
 							<span class="col-lg-4 mb-2" style="color: #000000; line-height: 40px;">받는분</span>
 							<input class="col-lg-5 mb-2 form-control" type="text" id="receiverOk"
@@ -215,6 +214,7 @@
 			<div class="card-body"><!-- card-body 시작 -->
 			`	
 				<!-- 회원정보 -->
+					<input type="hidden" name="userid" value="${rVO.userid}"/>
 					<input type="hidden" name="c_no" value="${oList}"/>
 					<input type="hidden" name="m_no" value="${rVO.m_no}"/><!-- 회원번호 -->
 					<input type="hidden" name="total_p" value="${totalP}"/><!-- 결제 총 가격 -->

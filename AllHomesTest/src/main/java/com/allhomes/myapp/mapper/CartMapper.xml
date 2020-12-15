@@ -10,7 +10,7 @@
 	</select>
 	<insert id="addCartList" parameterType="com.allhomes.myapp.cart.CartVO">
 		insert into cart(c_no, userid, pd_no, num, price,shipping_c, o_value) 
-		values(c_sq.nextval, #{userid}, #{pd_no}, #{num}, #{price}, #{discount}, #{shipping_c}, #{o_value})
+		values(c_sq.nextval, #{userid}, #{pd_no}, #{num}, #{price},  #{shipping_c}, #{o_value})
 	</insert>
 	
 	<update id="cartUpdate" parameterType="com.allhomes.myapp.cart.CartVO">

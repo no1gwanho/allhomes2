@@ -17,7 +17,7 @@
  	
  	<!-- 회원정보 얻어오기 -->
  	<select id="selectRegis" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select userid, username, email, tel from register where m_no=#{param1}
+ 		select m_no, userid, username, email, tel from register where m_no=#{param1}
  	</select>
  	
  	<!-- 회원별 주소지 가져오기 -->
