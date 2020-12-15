@@ -145,7 +145,7 @@
 												</td>
 												<td>
 													 <%-- ${c.price*c.num*c.discount*0.01}원 --%>
-													 ${c.discount}
+													 ${c.price}
 												</td>
 												
 												<td>

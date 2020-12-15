@@ -41,8 +41,7 @@ public class CartController {
 		ProductVO pVO = pDao.selectProduct(pd_no); 
 		
 		
-		vo.setPrice(pVO.getPrice()); //가격
-		vo.setDiscount(pVO.getDiscount()); //할인율
+		vo.setPrice(pVO.getDiscount()); //가격
 		vo.setShipping_c(pVO.getShipping_c()); //배송비
 		
 		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
