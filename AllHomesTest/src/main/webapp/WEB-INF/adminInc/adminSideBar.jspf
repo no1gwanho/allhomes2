@@ -35,28 +35,33 @@
 	<!-- jquery js -->
 	<script src="/myapp/resources/vendor/jquery/jquery.min.js"></script>
  	
+ 	
     <title>Admin Home</title>
 </head>
 <style>
-@font-face{
-	font-family:"lot";
-	src:url("/myapp/resources/css/font/Lot-Regular.otf") format("truetype");
-	font-style:normal;
-	font-weight:normal;
-}
-
-#homesLogo span{
-	font-family:'lot';
-	font-size:50px;
-}
-#homesLogo span:hover { text-decoration: none; } 
+	@font-face{
+		font-family:"lot";
+		src:url("/myapp/resources/css/font/Lot-Regular.otf") format("truetype");
+		font-style:normal;
+		font-weight:normal;
+	}
+	
+	#homesLogo span{
+		font-family:'lot';
+		font-size:50px;
+	}
+	#homesLogo span:hover { text-decoration: none; } 
 </style>
 <script>
 	$(function(){
+		
+		//통합검색
 		$("#IntegSearchBtn").click(function(){
 			var key = $("#searchKey").val();
 			location.href="/myapp/adminSearchMain?key="+key;
 		});
+		
+		
 	});
 </script>
 <body id="page-top">

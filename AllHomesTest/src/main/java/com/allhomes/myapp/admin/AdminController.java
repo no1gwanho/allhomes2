@@ -50,7 +50,6 @@ public class AdminController {
 		float ratingFour = Math.round((float)bDao.selectReviewFour() / dao.countAllReview()*100);
 		float ratingFive = Math.round((float)bDao.selectReviewFive() / dao.countAllReview()*100);
 		
-		System.out.println("a;sldf"+ratingThree);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/adminHome");
@@ -65,7 +64,9 @@ public class AdminController {
 		mav.addObject("four", ratingFour);
 		mav.addObject("five", ratingFive);
 		
-		//rating 별점 비율
+		AdminRegisterDaoImp rDao = sqlSession.getMapper(AdminRegisterDaoImp.class);
+		mav.addObject("aList",rDao.adminAll()); //관리자 정보
+		
 		
 		return mav;	
 	}
