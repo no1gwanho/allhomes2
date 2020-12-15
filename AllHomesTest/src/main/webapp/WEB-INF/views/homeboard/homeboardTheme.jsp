@@ -164,7 +164,7 @@
 				</div>
 				<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
 				<a href="#" class="card-text">${vo.userid }</a>
-				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }
 				</p>
 				</div> 
 		</div>

@@ -41,7 +41,7 @@ public class HomeboardController {
 	@RequestMapping("/homeboardHome")
 	public ModelAndView homeboardHome() {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardAllList(); //집들이 전체 리스트 - 시간 순수대로 
+		List<HomeboardVO> list = dao.homeboardRecent(); //집들이 전체 리스트 - 시간 순수대로 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+
 
 @Controller
 public class ScrapController {
@@ -61,6 +63,9 @@ SqlSession sqlSession;
 		vo.setM_no ((Integer)ses.getAttribute("m_no"));
 		ScrapDaoImp dao = sqlSession.getMapper(ScrapDaoImp.class);
 		
+		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		hbDao.homeboardScrapAdd(b_no);
+		
 		int result = dao.scrapAdd(vo);
 		mav.addObject("result", result);
 		mav.addObject("b_no", b_no);
@@ -78,8 +83,10 @@ SqlSession sqlSession;
 		vo.setM_no ((Integer)ses.getAttribute("m_no"));
 		ScrapDaoImp dao = sqlSession.getMapper(ScrapDaoImp.class);
 		
-		
 		dao.scrapAdd(vo);
+		
+		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		hbDao.homeboardScrapAdd(b_no);
 		
 		mav.setViewName("redirect:mypageScrap");
 		
@@ -94,6 +101,10 @@ SqlSession sqlSession;
 		ModelAndView mav = new ModelAndView();
 		ScrapDaoImp dao= sqlSession.getMapper(ScrapDaoImp.class);
 		int result = dao.scrapCancel(b_no);
+		
+		
+		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		hbDao.homeboardSrapMinus(b_no);
 		
 		
 		mav.addObject("b_no", b_no);
