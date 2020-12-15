@@ -5,6 +5,19 @@
    input{
       margin-top:5px;
    }
+ 
+	.col-3, .col-lg-3, .col-xs-6{
+		text-align:center;
+		margin-bottom:10px;
+	}
+	.container{
+		font-family: 'SCDream3';
+	}
+	td{
+		height:120px; 
+		line-height:120px;
+	}
+
 </style>
 <script>
 	$(function(){
@@ -31,74 +44,108 @@
 </script>
 <br/>
 <div class="container">
-	<div id="title">
-		<div class="row">
-			<div class="col-12">
-				<h2>주문/결제</h2>
-				<br/>
-			</div>
-		</div>		
-	</div>
-	<div id="orderPd">
-		<div class="mb-4" style="border-bottom:1px solid #eee"><h4>주문상품</h4></div>
-		
-		
-		<c:set var="totalP" value="0"/>
-		
-		<c:forEach var="vo" items="${oList}">
-			<div class="col-lg-12 mr-2 ml-2 mb-2">
-				<div class="row">
-					<input type="hidden" value="${vo.c_no}"/>
+	<div class="col-lg-12">
+		<div class="card mb-3" style="border:0px">
+				<div class="card-header">
+					상품
+				</div>
+				<div class="card-body"><!-- card-body 시작 -->
 					
-					<div class="col-2" style="border-bottom: 1px solid #eee">
-						<img
-							src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
-							style="height:200px;" />
-					</div>
-					<div class="col-7" style="border-bottom: 1px solid #eee">
-						<p>${vo.s_name}] ${vo.pd_name }</p>
-						<p>옵션:${vo.o_value} / ${vo.num}개</p>
-						<p>가격:${vo.price * vo.num}<br /> (-)할인: ${vo.discount}%<br />
-						<b>최종 가격: ${(vo.price*vo.num)-(vo.discount*vo.price*vo.num/100)}원</b></p>
-						<c:set var="totalP" value="${totalP + vo.price*vo.num-(vo.discount*vo.price*vo.num/100) }"/>
+					<table class="table">
+						<thead>
+							<tr>
+								
+								<th>IMAGE</th>
+								<th>상품명</th>
+								<th>수량</th>
+								<th>가격</th>
+								
+							</tr>
+						</thead>
+						<tbody>
 						
-					</div>
-					<div class="col-2" style="border-bottom: 1px solid #eee">
-						배송비: ${vo.shipping_c}원<br /> 
+							<c:set var="totalP" value="0"/>
+		
+							<c:forEach var="vo" items="${oList}">
+								
+										<input type="hidden" value="${vo.c_no}"/>
+										<td>
+											<img
+												src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
+												style="height:200px;" />
+										</td>
+										<td>
+											${vo.s_name}] ${vo.pd_name } [옵션:${vo.o_value}]
+										</td>
+										<td>
+											${vo.num}개
+										</td>
+										<td>
+											${vo.price * vo.num - vo.discount}원
+										
+										</td>
+											
+											<c:set var="totalP" value="${totalP + vo.price*vo.num-(vo.discount*vo.price*vo.num/100) }"/>
+								
+											<c:set var="shipping_c" value="${shipping_c + vo.shipping_c}"/>
+										
+							</c:forEach>
+								
+						</tbody>
+					</table>
+					
+					<br/>
+					<br/>
+					<hr/>
+					
+					<div>
+						<div class="col-lg-6" style="float:right;font-size:20px;">
+							<div class="row">
+								<div class="col-lg-6">
+									배송비
+								</div>
+								<div class="col-lg-6" style="text-align:right">
+									<b><fmt:parseNumber value="${shippint_c}" integerOnly="true"/>원</b>
+								</div>
+								
+								<div class="col-lg-6">
+									상품
+								</div>
+								<div class="col-lg-6" style="text-align:right">
+									<b><fmt:parseNumber value="${totalP}" integerOnly="true"/>원</b>
+								</div>
+								
+								
+							</div>
+								
+						</div>
+						<br/><br/><br/><hr/>
+						
+						<div class="col-lg-6" style="float:right;font-size:20px;">
+							<div class="row">
+								<div class="col-lg-6" style="font-size:30px;">
+									<b>총 가격</b>
+								</div>
+								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
+									 = <span id="totalPrice" style="color:#EE8374">0</span> 원 
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</c:forEach>
+		</div><!-- card 끝 -->
+	
+	
+	
+	
+	<div class="card mb-3" style="border:0px">
+				<div class="card-header">
+					배송지
+				</div>
+				<div class="card-body"><!-- card-body 시작 -->
+					<button id="selectAddrBtn" class="btn btn-secondary mb-3 mt-3">배송지 선택</button>
+					
 		
-		
-		<br/>
-		<!-- ---------------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-9">
-				총 상품 금액
-			</div>
-			<div class="col-3">
-				<b><fmt:parseNumber value="${totalP}" integerOnly="true"/>원</b>
-			</div>
-			<div class="col-9">
-				배송비
-			</div>
-			<div class="col-3">
-				2,500
-			</div>
-			<div class="col-12" style="margin-left:1025px;">
-				<h4><b></b></h4>
-			</div>
-		</div>
-		<hr/>
-		<br/>	
-		<!-- ---------------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-2" style="border-bottom:1px solid #eee"><h4>배송지</h4></div>
-			<div class="col-10" style="border-bottom:1px solid #eee">
-				<button id="selectAddrBtn" style="outline:0;border:0;background-color:#ee8374;color:#fff;">배송지 선택</button>
-			</div>
-		</div>
  
 		<div class="col-lg-12" id="addrListDiv" style="display:none">
 			<div class="row">
@@ -106,7 +153,7 @@
 					<div class="col-lg-6">
 					
 						<div class="row">
-							<input type="number" id="a_code" value="${aVO.a_code}"/>
+							<input type="hidden" id="a_code" value="${aVO.a_code}"/>
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">받는분</span>
 							<input class="col-lg-8 form-control" type="text" id="receiver" value="${aVO.receiver}" /> 
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">우편번호</span>
@@ -155,6 +202,16 @@
 							  
  
 			</div>
+				</div>
+		</div><!-- card 끝 -->
+	
+	
+	
+		
+		
+		
+		<!-- ---------------------------------------------------------------- -->
+		
 		
 		<!-- ---------------------------------------------------------------- -->
 		<div class="my-2"></div><br/><br/>
@@ -232,11 +289,4 @@
 	</div>
 			<button id="payBtn" class="btn-block" style="outline:0;border:0;background-color:#ee8374;color:#fff;">결제하기</button>
 
-
-		</div>
-
-
-		</div>
-   </div>
 </div>
-<br/>
