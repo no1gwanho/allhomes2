@@ -45,11 +45,6 @@ public class CartController {
 		return mv; 
 	}
 	
-	@RequestMapping("/cartList")
-	public String viewCart() {
-		
-		return "cart/cartForm";
-	}
 	
 	//장바구니 리스트
 	@RequestMapping("/cartList")

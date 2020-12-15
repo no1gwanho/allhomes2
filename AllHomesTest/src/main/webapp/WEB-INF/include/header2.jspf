@@ -81,13 +81,22 @@
 }
 </style>
 <script>
-	$(".dropdown").hover(function(event){
-		if($(".dropdown-menu").css("display","none")){
-			$(".dropdown-menu").show("fast");
-		}else if(!$(".dropdown-menu").css("display","none")){
-			$(".dropdown-menu").hide("fast");
-		}
-				
+	$(function(){
+		/* $(".dropdown").hover(function(event){
+			if($(".dropdown-menu").css("display","none")){
+				$(".dropdown-menu").show("fast");
+			}else if(!$(".dropdown-menu").css("display","none")){
+				$(".dropdown-menu").hide("fast");
+			}
+					
+		}); */
+		
+		
+		//검색
+		$("#searchBtn").click(function(){
+			var key = $("#searchKey").val();
+			location.href="<%=request.getContextPath()%>/search?key="+key;
+		});
 	});
 </script>
 <body>
@@ -157,7 +166,7 @@
 					<form class="form-inline">
 						<div class="input-group" style="margin-right: 20px;">
 							
-								<a href="#" class="btn searchBtn" id="searchA" style="border-radius:30px;background-color:#EE8374;color:white;border:none;margin-right:10px;">
+								<a href="#" id="searchBtn" class="btn searchBtn" id="searchA" style="border-radius:30px;background-color:#EE8374;color:white;border:none;margin-right:10px;">
 									<i class="fas fa-search" id="searchI"></i>
 								</a>
 							
