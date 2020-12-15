@@ -3,23 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.search.SearchDaoImp">
-	<!-- 회원 관련 결과 -->
-	<select id="searchMember" resultType="com.allhomes.myapp.register.RegisterVO">
-		select m_no, userid, username, nickname, m_pic, tel, email, to_char(regdate, 'YYYY-MM-DD') regdate from register
-		 where userid LIKE '%'||#{param1}||'%' or username LIKE '%'||#{param1}||'%' or
-		 nickname LIKE '%'||#{param1}||'%' or tel LIKE '%'||#{param1}||'%' or email LIKE '%'||#{param1}||'%'
-	</select>
 	
-	<!-- homeboard 결과 -->
-	<select id="searchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, thumbnail, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
-		where userid LIKE '%'||#{param1}||'%' or title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
-	</select>
-	<!-- homeboard 결과 개수 -->
-	<select id="searchHBCount" resultType="int">
-		select count(*) from homeboard
-		where userid LIKE '%'||#{param1}||'%' or title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
-	</select>
 	
 	<!-- product 결과 -->
 	<select id="searchProduct" resultType="com.allhomes.myapp.search.ProductStoreJoinVO">
@@ -33,6 +17,29 @@
 		select count(*) from product,store
 		where product.pd_name LIKE '%'||#{param1}||'%' or product.status LIKE '%'||#{param1}||'%' or
 		product.sub_c LIKE '%'||#{param1}||'%' or product.pd_exp LIKE '%'||#{param1}||'%' or store.s_name LIKE '%'||#{param1}||'%' 
+	</select>
+	
+	<!-- homeboard 결과 -->
+	<select id="searchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select b_no, title, theme, userid, thumbnail, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
+		where title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+	</select>
+	<!-- homeboard 결과 개수 -->
+	<select id="searchHBCount" resultType="int">
+		select count(*) from homeboard
+		where title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+	</select>
+	
+	<!-- 질문게시판 결과 -->
+	<select id="searchQNA" resultType="com.allhomes.myapp.qna.QnaVO">
+		select q_no, title, userid, thumbnail, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
+		where title LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+	</select>
+	
+	<!-- 질문게시판 결과 개수 -->
+	<select id="searchQNACount" resultType="int">
+		select count(*) from qnaboard
+		where title LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
 	</select>
 	
 </mapper>

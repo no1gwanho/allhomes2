@@ -4,20 +4,29 @@ import java.util.List;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 public interface SearchDaoImp {
-	//회원 검색
-	//public List<RegisterVO> searchMember(String key);
-	//homeboard 검색
+
+	//메인에서는 회원검색은 안하기로 함 (다른회원 스크랩 보기 기능 등이 아직 없음)
+	
+	//집들이 검색
 	public List<HomeboardVO> searchHB(String key);
-	//product 검색
+	
+	//집들이 검색결과 (개수)
+	public int searchHBCount(String key);
+	
+	//스토어 검색
 	public List<ProductVO> searchProduct(String key);
 	//질문게시판 검색
 	
-	//product 검색 결과 개수
+	//스토어 검색 결과 개수
 	public int searchProductCount(String key);
-	//homeboard 검색 결과 개수
-	public int searchHBCount(String key);
+	
+	//질문게시판 검색
+	public List<QnaVO> searchQNA(String key);
+	
 	//질문 게시판 검색 결과 개수
+	public int searchQNACount(String key);
 }

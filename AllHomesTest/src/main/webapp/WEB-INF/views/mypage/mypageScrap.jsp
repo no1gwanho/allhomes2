@@ -28,7 +28,7 @@
 		padding:0px;
 		margin:0 auto;
 		width:270px;
-		height: 207px;
+		height: 180px;
 		overflow: hidden;
 		border-radius: 5%;
 	}

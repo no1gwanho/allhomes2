@@ -1,92 +1,100 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-    <!-- 가로 폭 기준 1400px -->	
-    <!-- bootstrap 중복방지를 위해 처음 시작과 끝에 div class container를 넣어줌 -->
 <style>
   
-#inner{margin:20px 0 20px 0;}
-
-.txtbtn{float:right;color:#ee8374;}
-
-.reptitle{
-	color:black;
-}
-.repcontent{
-	color:black;
-}
-.repprofile{
-	color:black;
-}
-
-
-.card-body {
-	height: 150px;
-	padding: 10px;
-	flex: none;
-	overflow: hidden;
-}
-
-.card-img-top {
-	border-radius: 5%;
-	width: 320px;
-	height: 207px;
-	overflow: hidden;
-}
-
-.card-img-top>a>img {
-	width: 325px;
-	text-align: center;
-}
-
-.card {
-	border: none;
-}
-
-.card-title {
-	font-size: 20px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.card-title-post{
-	font-size: 20px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color:black;
-}
-
-.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
-	.card-title>a:active {
-	text-decoration: none;
-}
-
-.card-text {
-	font-size: 12px;
-	color:black;
-}
-
-.card-text-profile {
-	font-size: 18px;
-	color:black;
-}
-
-.card-detail {
-	font-size: 8px;
-}
-
-.keyword{
-	color:#ee8374;
-}
-
-
-#repbox{border:1px solid #E98374;}
+  	.container{
+			max-width:1400px;
+			margin: 0 auto;
+			font-family: 'SCDream3';
+	}
+  
+  	.col-3{
+		text-align:center;
+		margin-bottom:10px;
+	}
+	#inner{margin:20px 0 20px 0;}
+	
+	.txtbtn{float:right;color:#ee8374;}
+	
+	.reptitle{
+		color:black;
+	}
+	.repcontent{
+		color:black;
+	}
+	.repprofile{
+		color:black;
+	}
+	
+	
+	.card-body {
+		height: 150px;
+		padding: 10px;
+		flex: none;
+		overflow: hidden;
+	}
+	
+	.card-img-top {
+		border-radius: 5%;
+		width: 320px;
+		height: 207px;
+		overflow: hidden;
+	}
+	
+	.card-img-top>a>img {
+		width: 325px;
+		text-align: center;
+	}
+	
+	.card {
+		border: none;
+	}
+	
+	.card-title {
+		font-size: 20px;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	.card-title-post{
+		font-size: 20px;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color:black;
+	}
+	
+	.card-title>a:link, .card-title>a:visited, .card-title>a:hover,
+		.card-title>a:active {
+		text-decoration: none;
+	}
+	
+	.card-text {
+		font-size: 12px;
+		color:black;
+	}
+	
+	.card-text-profile {
+		font-size: 18px;
+		color:black;
+	}
+	
+	.card-detail {
+		font-size: 8px;
+	}
+	
+	.keyword{
+		color:#ee8374;
+	}
+	
+	
+	#repbox{border:1px solid #E98374;}
 </style>
-<script src="https://kit.fontawesome.com/69f9d4fad2.js" crossorigin="anonymous"></script>
+
 <script>
 	$(function(){
 		var pNum = ${pCount};
@@ -104,11 +112,11 @@
 
 
 <div class="container"><!-- ==============container오류 방지 div============== -->
-  	
+  	<br/>
   	<div id="inner">
-  		<h7>'${key}'에 대한 통합검색 결과 <span class="keyword">1421412개</span></h7>
+  		<h6>'${key}'에 대한 통합검색 결과 <span class="keyword">${totalCount }</span></h6>
   		<hr>
-  		<h7>스토어 <span class="keyword">${pCount}</span></h7><a href="#" class=txtbtn>더보기</a>
+  		<h6>스토어 <span class="keyword">${pCount}</span></h6><a href="#" class=txtbtn>더보기</a>
   	</div>
 	<div id="storeDiv">
 		<div class="row">
@@ -136,12 +144,9 @@
 
 	<!-- ==============================================================집들이================================================================== -->
   		
-  		
-  		
-  		
-  		
+  			
   <div id="inner">
-  	<h7>집들이 <span class="keyword">${hCount}</span></h7><a href="#" class=txtbtn>더보기</a>
+  	<h6>집들이 <span class="keyword">${hCount}</span></h6><a href="#" class=txtbtn>더보기</a>
   	</div>
 
 	<div id="HBDiv">
@@ -151,7 +156,7 @@
 					<div class="card h-100">
 						<div class="card-img-top">
 							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img
-								src="<%=request.getContextPath() %>${vo.thumbnail }" /></a>
+								src="<%=request.getContextPath() %>/resources/upload/homeboardImg/${vo.thumbnail }" /></a>
 						</div>
 						<div class="card-body">
 							<div class="card-title">
@@ -168,7 +173,7 @@
 	<hr />
 
 	<div id="inner">
-  	<h7>질문과 답변 <span class="keyword">1244</span></h7><a href="#" class=txtbtn>더보기</a>
+  	<h6>질문과 답변 <span class="keyword">1244</span></h6><a href="#" class=txtbtn>더보기</a>
   	</div>
   	
   	

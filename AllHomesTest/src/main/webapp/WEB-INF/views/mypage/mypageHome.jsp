@@ -55,15 +55,15 @@
 		padding:0px;
 		margin:0px;
 		width:220px;
-		height: 207px;
+		height:160px;
 		overflow: hidden;
 		border-radius: 5%;
 		}
 		
 	.thumbnail img {
-		width:100%;
+		width:220px;height:100%;
 		text-align: center;
-		overflow: hidden;
+		
 		}
 
 	.card-title {
@@ -159,8 +159,10 @@
 				</div><!-- card-body 끝 -->
 			</div><!-- card끝 -->			
 			<br/>
+			
+			
 			<!-- 스크랩 -->
-			<div class="card card border-light mb-3">
+			<div class="card border-light mb-3" style="height:290px;">
 				<div class="card-header">
 					스크랩<a href="/myapp/mypageScrap" style="float:right;">더보기</a>
 				</div>
@@ -188,9 +190,8 @@
 				</div>
 			</div>
 			
-			<br/>
 			<!-- 나의 작성글-->
-			<div class="card card border-light mb-3">
+			<div class="card border-light mb-3">
 				<div class="card-header">
 					나의 작성 글<a href="/myapp/mypageMyboard" style="float:right;">더보기</a>
 				</div>
