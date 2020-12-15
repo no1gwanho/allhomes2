@@ -8,19 +8,11 @@ public interface ReviewDaoImp {
 	
 	public List<ReviewVO> selectReview(int pd_no);
 	
-	public ReviewJoinVO ratioReview1(int pd_no);
-	
-	public ReviewJoinVO ratioReview2(int pd_no);
-	
-	public ReviewJoinVO ratioReview3(int pd_no);
-	
-	public ReviewJoinVO ratioReview4(int pd_no);
-	
-	public ReviewJoinVO ratioReview5(int pd_no);
+	public ReviewJoinVO reviewSetting(ReviewJoinVO vo);
 	
 	public ReviewVO avgReview(int pd_no);	
 	
-	public ReviewVO selectOneReview();
+	public ReviewVO selectOneReview(ReviewVO vo);
 	
 	public int reviewHitAdd(int r_no);
 	
