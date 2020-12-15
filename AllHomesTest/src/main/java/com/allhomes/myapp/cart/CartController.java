@@ -21,6 +21,8 @@ public class CartController {
 	@Autowired 
 	DataSourceTransactionManager transactionManager;
 	
+	
+	//장바구니 추가
 	@RequestMapping("/cartInsert")
 	public ModelAndView addCart(HttpServletRequest req, CartVO vo, @RequestParam("pd_no") int pd_no) {
 		ModelAndView mv = new ModelAndView();
@@ -43,9 +45,22 @@ public class CartController {
 		return mv; 
 	}
 	
+	
+	//장바구니 리스트
 	@RequestMapping("/cartList")
-	public String viewCart() {
+	public ModelAndView cartList(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
 		
-		return "cart/cartForm";
+		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
+		List<CartJoinVO> list = dao.joinCart(userid);
+		
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("list", list);
+		mv.setViewName("cart/cartForm");
+
+		return mv; 
+		
 	}
 }
