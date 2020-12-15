@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminRegisterHeader.jspf"%>
+<style>
+	.profile img{
+		width:60px;
+		border-radius:70%;
+		border:0.2px solid gray;
+	}
+</style>
 <script>
 	$(function(){
 		
 		var idChk = 0; //ID 중복검사
-		var emailChk = 0; //email 중복검사
+
+		//var emailChk = 0; //email 중복검사
 		
 		//아이디 중복체크
 		$("#idChk").click(function(){
+			
 			if($("#userid").val()==""){
 				alert("ID를 입력하세요.");
 				return false;
 			}
 			
-			var url = "/myapp/idCheck";
 			var data = $("#userid").val();
+			var url = "<%=request.getContextPath()%>/idCheck?userid="+data;
 			
 			$.ajax({
 				url: url,
@@ -36,14 +45,37 @@
 		});
 		
 		
-		// 입력사항 체크
+		//회원가입 submit
 		$("#regForm").submit(function(){			
 			
+			// 입력사항 체크
 			if($("#userid").val()==""){
 				alert("ID를 입력하세요.");
 				return false;
+			}else if($("#emppwd").val()==""){
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}else if($("#emppwdChk").val()==""){
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}else if($("#email").val()==""){
+				alert("이메일을 입력하세요.");
+				return false;
+			}else if($("#tel").val()==""){
+				alert("연락처를 입력하세요.");
+				return false;
+			}else if($("#emppwd").val()!=$("#emppwdChk").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}else if($("#username").val()==""){
+				alert("이름을 입력하세요.");
+				return false;
 			}
-		
+			
+			if(idChk==0){
+				alert("아이디 중복검사를 시행하세요.");
+				return false;
+			}
 			
 			var url = "/myapp/adminRegisterOk"
 			var data = $("#regForm").serialize();
@@ -54,7 +86,7 @@
 				data : data,
 				success : function(result){
 					if(result > 0){
-						alert("회원 가입 완료")
+						alert("회원 가입이 완료됐습니다.");
 						location.href="/myapp/adminLogin";
 					} else{
 						alert("회원가입에 실패하였습니다.");
@@ -80,7 +112,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block">
-                    	<img src="/myapp/resources/img/admin/03.jpg" style="width:105%"/>
+                    	<img src="<%=request.getContextPath()%>/resources/img/admin/03.jpg" style="width:105%"/>
                     </div>
                     <div class="col-lg-7  my-auto">
                         <div class="p-5">
@@ -130,6 +162,39 @@
                                            name="emppwdChk" id="emppwdChk" placeholder="Repeat Password">
                                     </div>
                                 </div>
+                                
+                                <div class="col-lg-12 mt-3 mb-3" style="background-color:#eeeeee">
+                                	프로필 선택
+                                </div>
+                                
+                                <div class="form-group row mr-3 ml-3">
+                                	
+                                	<div class="profile ml-3 mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile1.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile1.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile2.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile2.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile3.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile3.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile4.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile4.png"/>
+                                	</div>
+                                	
+                                	<div class="profile" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile5.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile5.png"/>
+                                	</div>
+                                </div>
+                                
                                 
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account"/>
                                 

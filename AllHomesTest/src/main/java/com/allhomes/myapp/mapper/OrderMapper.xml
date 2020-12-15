@@ -5,7 +5,7 @@
 <mapper namespace="com.allhomes.myapp.order.OrderDaoImp">
  	<!-- 장바구니 정보 얻어오기 -->
  	<select id="selectOrderCart" resultType="com.allhomes.myapp.order.OrderVO">
- 		select p.main_img,c.c_no,c.pd_no, p.pd_name, s.s_no, s.s_name, c.num,c.price, c.shipping_c, c.discount, c.userid, c.o_value
+ 		select p.main_img,c.c_no,c.pd_no, p.pd_name, s.s_no, s.s_name, c.num,c.price, c.shipping_c, c.userid, c.o_value
 		from cart c, product p , store s
 		where c.pd_no = p.pd_no and p.s_no = s.s_no and c.c_no= #{c_no}
 	</select>
@@ -17,7 +17,7 @@
  	
  	<!-- 회원정보 얻어오기 -->
  	<select id="selectRegis" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select userid, username, email, tel from register where m_no=#{param1}
+ 		select m_no, userid, username, email, tel from register where m_no=#{param1}
  	</select>
  	
  	<!-- 회원별 주소지 가져오기 -->
@@ -27,7 +27,7 @@
  	
  	<!-- 주문 테이블 선택 -->
  	<select id="selectCart" resultType="com.allhomes.myapp.order.CartOrderVO">
- 		select pd_no, num, price, shipping_c, discount, userid, o_value, c_no
+ 		select pd_no, num, price, shipping_c, userid, o_value, c_no
  		from cart where c_no = #{param1}
  	</select>
  	

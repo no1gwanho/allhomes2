@@ -2,7 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminRegisterHeader.jspf"%>
 
+<script>
+	function loginChk(){
+		
+		if($("#userid").val()==""){
+			alert("ID를 입력해주십시오.");
+			return false;
+		}else if($("#emppwd").val()==""){
+			alert("비밀번호를 입력해주십시오.");
+			return false;
+		}
+		
+	}
 
+</script>
 <body class="bg-gradient-secondary">
 
     <div class="container">
@@ -24,7 +37,7 @@
                                     </div>
                                     
                                     <!-- 로그인 폼 -->
-                                    <form method="post" id="login" action="/myapp/adminLogin" class="user">
+                                    <form method="post" id="login" onsubmit="return loginChk()" action="<%=request.getContextPath()%>/adminLogin" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="userid" name="userid" aria-describedby="emailHelp"
@@ -32,7 +45,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="userpwd" name="userpwd" placeholder="Password">
+                                                id="emppwd" name="emppwd" placeholder="Password">
                                         </div>
                                         
                                         <button type="submit" class="btn btn-user btn-block" style="background-color:#EE8374; color:white">Login</button>

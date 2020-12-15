@@ -4,14 +4,10 @@ public class PayApiVO {
 	private String itemName; //구매 이름
 	private int total_p; //총 결제 가격
 	private String method; //구매유형
-	
 	private String[] pd_name; //아이템 이름
 	private int[] pd_no; //제품 번호
 	private int[] num; //개수
 	private int[] price; //가격
-	
-	private String username; //이름(수신자)
-	//private String email; //메일(")
 	private String addr; //주소
 	private String tel; //연락처(")
 	private String userid; //구매자 id
@@ -61,12 +57,7 @@ public class PayApiVO {
 	public void setPrice(int[] price) {
 		this.price = price;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	
 	public String getAddr() {
 		return addr;
