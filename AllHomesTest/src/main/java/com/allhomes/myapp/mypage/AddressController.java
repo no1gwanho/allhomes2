@@ -43,6 +43,8 @@ public class AddressController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		System.out.println("아이디"+rVO.getUserid()+rVO.getM_pic());
+		
 		mav.addObject("aList", aList);
 		mav.addObject("rVO", rVO); //회원정보
 		mav.setViewName("mypage/addressSetting");
@@ -61,14 +63,8 @@ public class AddressController {
 		}else { //수정 실패
 			
 		}
-		
-		//주소지 정보 가져오기
-		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
-				
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("aList", aList);
-		mav.setViewName("mypage/addressSetting");
-		
+		mav.setViewName("redirect:mypageAddress");
 		return mav;
 	}
 	
@@ -89,9 +85,8 @@ public class AddressController {
 		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
 				
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("aList", aList);
-		mav.setViewName("mypage/addressSetting");
 		
+		mav.setViewName("redirect:mypageAddress");
 		return mav;
 	}
 	
@@ -107,9 +102,7 @@ public class AddressController {
 		List<AddressVO> aList = dao.selectAddress(dao.selectm_no((String)s.getAttribute("userid")));
 						
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("aList", aList);
-		mav.setViewName("mypage/addressSetting");
-				
+		mav.setViewName("redirect:mypageAddress");		
 		return mav;
 	}
 }
