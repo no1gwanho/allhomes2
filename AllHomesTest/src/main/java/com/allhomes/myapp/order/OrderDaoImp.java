@@ -3,6 +3,7 @@ package com.allhomes.myapp.order;
 
 import java.util.List;
 
+import com.allhomes.myapp.cart.CartVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 public interface OrderDaoImp {
@@ -17,4 +18,10 @@ public interface OrderDaoImp {
 	
 	//주소지 얻어오기
 	public List<AddressVO> selectAddr(int m_no);
+	
+	//cart 선택
+	public CartOrderVO selectCart(int c_no);
+	
+	//주소지 번호로 선택
+	public AddressVO selectA_code(int a_code);
 }

@@ -143,6 +143,7 @@
 </script>
 
 <div class="container">
+<br/>
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
@@ -198,7 +199,7 @@
 							<c:if test="${vo.discount != 0 }">
 							<span class="store-discount">${vo.discount }%</span>
 							</c:if>
-							<span class="store-price">${vo.price }</span>
+							<span class="store-price">${vo.price }원</span>
 							
 							<c:if test="${vo.status!=null && vo.status == '판매중'}">
 								<span class="badge badge-info">${vo.status }</span>

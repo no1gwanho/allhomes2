@@ -20,21 +20,29 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
+import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.review.ReviewDaoImp;
+import com.allhomes.myapp.review.ReviewVO;
 import com.allhomes.myapp.scrap.ScrapDaoImp;
 import com.allhomes.myapp.scrap.ScrapVO;
 
 @Controller
 public class mypageController {
-	@Autowired
 	SqlSession sqlSession;
-
-	@Autowired 
-	DataSourceTransactionManager transactionManager;
+	
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	
 	//mypage홈으로 이동
-	@RequestMapping("/mypageHome")
+	@RequestMapping("/mypageHome") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
 	public ModelAndView mypageHome(HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 				
@@ -47,10 +55,13 @@ public class mypageController {
 		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
 		
+		int m_no = (Integer)ses.getAttribute("m_no");
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
-		List<ScrapVO> sList = scrap.selectScrap(userid);
+		List<ScrapVO> sList = scrap.selectScrap(m_no);
 		
-		mv.addObject("list", list);		
+		
+		
+		mv.addObject("list", list);	
 		mv.addObject("sList", sList);
 		mv.addObject("vo", vo);
 		
@@ -60,7 +71,7 @@ public class mypageController {
 	}
 	
 	
-	
+
 	//mypage 회원정보수정으로이동
 	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
 	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1) {
@@ -538,14 +549,27 @@ public class mypageController {
 	
 	//mypage 나의 쇼핑으로 이동
 	@RequestMapping("/mypageShopping")
-	public ModelAndView purchaseList(HttpSession ses) {
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-
-		String userid = (String)ses.getAttribute("userid");
+	public ModelAndView purchaseList(HttpServletRequest r) {
 		ModelAndView mav = new ModelAndView();
-				
-		mav.addObject("pList", dao.allPurchaseList());
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		HttpSession ses = r.getSession();
+		
+		String userid = (String)ses.getAttribute("userid");
+		PurchaseJoinVO vo = new PurchaseJoinVO();
 
+		vo.setUserid(userid);
+			
+		List<PurchaseJoinVO> list = dao.joinPurchase(userid);
+		for(int i=0; i<list.size(); i++) {
+			vo = list.get(i);
+			int pd_no = vo.getPd_no();
+			
+			System.out.println("제품번호는 얼마야??????????????????????"+pd_no);
+			mav.addObject("pd_no", pd_no);
+		}
+		
+		mav.addObject("list", list);
 		mav.setViewName("mypage/mypageShopping");
 		
 		return mav;
@@ -610,11 +634,7 @@ public class mypageController {
 		return mv;
 	}	
 	
-	//mypage 스크랩으로 이동
-	@RequestMapping("/mypageScrap")
-	public String mypageScrap() {
-		return "mypage/mypageScrap";
-	}
+	
 	
 	//mypage 나의 작성글로 이동
 	@RequestMapping("/mypageMyboard")

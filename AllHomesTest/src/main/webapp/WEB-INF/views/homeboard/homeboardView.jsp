@@ -105,12 +105,11 @@
 		}
 	}
 
+	
+	
 	$(function() {
 		
-		$('#move-to-scrap').click(function(){
-			location.href="/myapp/mypageHome";
-		});
-		
+
 		//댓글 수정버튼 클릭시  - 수정폼 보여주기 
 		$(document).on('click', '.editBtn', function(){
 			$(this).parent().parent().css("display", "none");
@@ -264,6 +263,35 @@
 		//글내용 보여줄때 댓글 내용도 보여주기
 		commentListSelect();
 
+		
+		
+		
+		//-------------여기서부터 스크랩-------------//
+		//스크랩버튼 누르면 
+		
+		
+		
+		$('#scrapAdd').click(function(){
+			if (${logStatus ==null || logStatus != 'Y'}){
+				alert("로그인 후에 스크랩이 가능합니다.");
+				location.href="/myapp/login";
+				return false;
+			}
+		});
+		
+		$('#move-to-scrap').click(function(){
+			location.href= "/myapp/scrapAddAndMyScrap?b_no="+${vo.b_no};
+		});
+		
+		$('#modal-close').click(function(){
+			location.href="/myapp/scrapAdd?b_no="+${vo.b_no};
+		});
+		
+		$('#scrapCancel').click(function(){
+			location.href="/myapp/scrapCancel?b_no="+${vo.b_no};
+		});
+		
+		
 	}); //jquery
 	
 
@@ -298,9 +326,20 @@
 				</div>
 				<div class="col"></div>
 				<div class="col-lg-2 col-md-auto">
-					<button type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
-						<i class="fas fa-heart">&nbsp;</i>스크랩하기
-					</button>
+				
+				<c:if test="${scrapCheck == 'Y' }">
+						<button id="scrapCancel" type="button" class="btn btn-allhomes">
+						스크랩&nbsp;<i class="fas fa-heart"></i>
+						</button>
+					
+				</c:if>
+				
+				<c:if test="${scrapCheck == null || scrapCheck == 'N' }">
+							<button id="scrapAdd" type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
+							스크랩&nbsp;<i class="far fa-heart"></i>
+							</button>
+						
+				</c:if>
 				</div>
 			</div>
 			
@@ -312,7 +351,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <h5 class="modal-title" id="scarpBtnModalLabel">올홈즈 스크랩</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        <button type="button" class="close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
@@ -320,7 +359,7 @@
 				        선택하신 글이 스크랩에 담겼습니다 :) 
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close">닫기</button>
 				        <button type="button" class="btn btn-allhomes" id="move-to-scrap">스크랩북 보기</button>
 				      </div>
 				    </div>

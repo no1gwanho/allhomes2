@@ -3,8 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.scrap.ScrapDaoImp">
-	<select id="selectScrap" parameterType="String" resultType="com.allhomes.myapp.scrap.ScrapVO">
-		select * from (select * from (select s.m_no, s.b_no, h.title, h.userid, h.thumbnail, h.hit, h.scrap, h.writedate from scrap s, homeboard h where s.b_no=h.b_no order by h.b_no desc)
-	 	where userid=#{userid}) where rownum <![CDATA[<]]> 4
+	<!-- 마이페이지 스크랩 4개만 미리보기 -->
+	<select id="selectScrap" parameterType="int" resultType="com.allhomes.myapp.scrap.ScrapVO">
+		<![CDATA[
+		select m_no, b_no, title, thumbnail from (select a.m_no, a.b_no, b.title, b.thumbnail from scrap a join homeboard b on a.b_no = b.b_no where a.m_no=#{m_no} order by a.writedate desc) where rownum<5 
+	 	]]>
 	</select>
+	
+	<!-- 마이페이지 스크랩페이지 -  전체보기 -->
+	<select id="mypageScrapList" parameterType="int" resultType="com.allhomes.myapp.scrap.ScrapVO">
+		select a.m_no, a.b_no, b.title, b.thumbnail from scrap a join homeboard b on a.b_no = b.b_no where a.m_no=#{m_no} order by a.writedate desc
+	</select>
+	
+	<!-- 집들이 보기에서 해당 글 스크랩 여부 확인하기  -->
+	<select id="scrapCheck" resultType="com.allhomes.myapp.scrap.ScrapVO">
+		select m_no, b_no from scrap where m_no=#{m_no} and b_no=#{b_no}
+	</select>
+	
+	<!-- 스크랩하기 -->
+	<insert id="scrapAdd" parameterType="com.allhomes.myapp.scrap.ScrapVO">
+		insert into scrap (m_no, b_no) values (#{m_no}, #{b_no})
+	</insert>
+	
+	<!-- 스크랩하기 -->
+	<insert id="scrapAddAnd" parameterType="com.allhomes.myapp.scrap.ScrapVO">
+		insert into scrap (m_no, b_no) values (#{m_no}, #{b_no})
+	</insert>
+
+	<!-- 스크랩 취소하기 -->
+	<delete id="scrapCancel" parameterType="int">
+		delete from scrap where b_no=#{param1}
+	</delete>
 </mapper>

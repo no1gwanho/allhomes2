@@ -129,8 +129,9 @@
 	}); //Jquery 
 </script>
 <!-- 메인 홈페이지 배너 -->
-
+<br/>
 <div class="container" style="width:1400px">
+
 	
 		<ul id="bxslider">
 		  	<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner_christmas_01.jpg"/></a></li>
@@ -145,6 +146,7 @@
 
 <!-- 집들이 리스트 -->
 <div class="container homeboard-container" style="margin-top:45px;">
+
 	<div class="row">
 		<div class="col-10">
 			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;인기집들이</h3>

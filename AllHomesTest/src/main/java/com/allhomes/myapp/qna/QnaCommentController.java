@@ -44,6 +44,7 @@ public class QnaCommentController {
 		QnaCommentDaoImp commentDao = sqlSession.getMapper(QnaCommentDaoImp.class);
 		int result = commentDao.commentInsert(vo);
 		
+		//질문 등록되면 DB에 answer개수 1개 올리기 
 		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
 		dao.addAnswer(q_no);
 		

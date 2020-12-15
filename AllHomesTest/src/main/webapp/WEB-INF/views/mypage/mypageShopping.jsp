@@ -28,27 +28,6 @@
 	}
 	
 </style>
-<script>
-	$(function(){
-		$("#searchFrm").click(function(){
-			$("#searchDetail").css("display","block");
-		});
-		$("#reviewBtn").click(function(){
-			var pc_date = $(this).data('${vo.pc_date}');
-			var s_name = $(this).data('${pvo.s_name}');
-			var pd_name = $(this).data('${pvo.pd_name}');
-			var o_value = $(this).data('${vo.o_value}');
-			var num = $(this).data('${vo.num}');
-			
-			$(".modal-body>#pc_date").append("구매일 : "+pc_date +"");
-			$(".modal-body>#s_name").append("업체명 : "+s_name +"");
-			$(".modal-body>#pd_name").append("상품명 : "+pd_name+"");
-			$(".modal-body>#o_value").append("옵션 : "+o_value+"");
-			$(".modal-body>#num").append("수량 : "+num+"");
-		});
-	});
-</script>
-
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -97,171 +76,125 @@
 		</div>
 		</div><!-- col-lg-12 끝 -->
 	</div>
-	<br/>	
-	<c:forEach var="p" items="${pList}">
-		<form method="post" action="/myapp/setInPurchase?pc_no=${p.pc_no }">
-			<div class="row">
-				<div class="col-lg-3">		
-					주문번호 : ${p.pc_no }
-				</div>
-				<div class="col-lg-9">
-					주문일자: ${p.pc_date }
-				</div>
+	<br/>
+	<c:forEach var="p" items="${list }">
+		<div class="row">
+			<div class="col-3" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
+				주문번호 : ${p.pc_no }
 			</div>
-			<br/>
-			<div class="row">
-				<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>$"/></div>
-				<div class="col-md-4">
-					<b style="font-size:1.5em;">${p.pd_no }</b><br/>
-					<b>결제금액 : ${p.total_p }</b>
-				</div>
-				<div class="col-md-2">
-					옵션 : ${p.o_value } /  수량 : ${p.num }
-				</div>
-			<c:if test="${confirm!=Y }">
-				<div class="col-md-2">
-					<a href="#">업체명 : ${p.s_no }</a><br/>
-					<a href="#">문의하기</a>
-				</div>
-				<div class="col-md-2">
+			<div class="col-9" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;text-align:right;">
+				주문일자 : ${p.pc_date }
+			</div>
+		</div>
+		<div class="row" style="margin-bottom:35px;">
+			<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+				<input type="checkbox"/>
+				<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${p.s_no}/${p.main_img}" style="border-radius:5%;width:180px;height:100px;margin-right:10px;margin-bottom:10px;"/></a>
+			</div>
+			<div class="col-5" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+				<b style="padding-top:10px;">${p.pd_name }</b><br/>
+				결제금액 : ${p.price * p.num + p.shipping_c }원<br/>
+				<c:if test="${p.o_value == null }">
+					수량 : ${p.num }	/ 업체명 : ${p.s_name }<br/>
+				</c:if>
+				<c:if test="${p.o_value != null }">
+					옵션 : ${p.o_value} / 수량 : ${p.num } / 업체명 : ${p.s_name }<br/>
+				</c:if>
+				
+			</div>
+			<div class="col-4" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+				<c:if test="${p.confirm != 'Y' }">
 					<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
 					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
 					<input type="submit" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;" value="구매확정"/>
-				</div>
-			</c:if>
+				</c:if>
+				<c:if test="${p.confirm == 'Y' }">
+					<button data-toggle="modal" data-target="#reviewModal" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button></a>
+					<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button></a>
+				</c:if>
 			</div>
-		</form>
-		<div class="row">
-			<c:if test="${confirm!=null && confirm==Y }">
-				<div class="col-md-2">
-					<a href="#">업체명 : ${pvo.s_name}</a><br/>
-				</div>
-				<div class="col-md-2">
-					<button id="reviewBtn" class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
-					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
-				</div>
-			</c:if>
+			<hr/>
 		</div>
 	</c:forEach>
-
-<%--  
-	<div id="list1">
-		<div class="row">
-			<div class="col-lg-3">
-				주문번호 : 3493284032
-			</div>
-			<div class="col-lg-9">
-				주문일자:2020-10-10
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></div>
-			<div class="col-md-4">
-				<b style="font-size:1.5em;">상품명</b><br/>
-				<b>결제금액&nbsp;&nbsp;125,800</b>
-			</div>
-			<div class="col-md-2">
-				옵션 / 수량
-			</div>
-			<div class="col-md-2">
-				<a href="#">업체명</a><br/>
-				<a href="#">문의하기</a>
-			</div>
-			<div class="col-md-2">
-				<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
-				<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
-				<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">구매확정</button>
-			</div>
-		</div>
-	</div>		
-	<br/>
-	<div id="list1">
-		<div class="row">
-			<div class="col-lg-3">
-				주문번호 : 3493284032
-			</div>
-			<div class="col-lg-9">
-				주문일자:2020-10-10
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-md-2"><input type="checkbox"/>&nbsp;<img style="width:150px; height:125px;" src="<%=request.getContextPath()%>/resources/img/pd/tb01.png"/></div>
-			<div class="col-md-4">
-				<b style="font-size:1.5em;">상품명</b><br/>
-				<b>결제금액&nbsp;&nbsp;125,800</b>
-			</div>
-			<div class="col-md-2">
-				옵션 / 수량
-			</div>
-			<div class="col-md-2">
-				<a href="#">업체명</a><br/>
-			</div>
-			<div class="col-md-2">
-				<button class="btn btn" data-toggle="modal" data-target="#reviewModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">리뷰쓰기</button>
-				<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button>
-			</div>
-		</div>
-	</div> --%>
 </div>
 <!-- 리뷰 내용 -->
-<form method="post" action="/myapp/reviewWriteOk">
 	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content contentSize">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="reviewModalTitle">리뷰쓰기</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-        	<div id="pc_date">
-        		구매일 : 2020-10-10<br/>
-        	</div>
-        	<div id="s_name">
-        		회사명 : All Homes Corea<br/>
-        	</div>
-        	<div id="pd_name">
-        		제품명 : 미니 홈바 테이블<br/>
-        	</div>
-        	<div id="o_value">
-        		옵션명 : Basic(기본옵션)<br/>
-        	</div>
-        	<div id="num">
-        		수량 : 1개
-        	</div>
-        	<br/>
-        	<div>
-        		상품평가
-        	</div>
-        	<div>
-        		<label>
-		        	평점
-        			<select>
-        				<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
-        			</select>
-        		</label>
-       		</div>
-       		<br/>
-        	<div>
-        		<h6>사진첨부(최대 1장)</h6>
-				<input type="file" name="img">
-        	</div>
-        	<br/>
-        	<textarea placeholder="내용을 입력하세요." style="width:450px;height:150px;"></textarea>
-          </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">등록</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>	
-</form>
-<br/>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content contentSize">
+	      		<div class="modal-header">
+	        		<h5 class="modal-title" id="reviewModalTitle">리뷰쓰기</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          		<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<form method="post" action="/myapp/reviewWriteOk?pd_no=${pc.pd_no }" enctype="multipart/form-data">
+		      		<div class="modal-body">
+		      			<select name="pd_name" style="margin-bottom:20px;">
+							<c:forEach var="pc" items="${list }">
+								<option value="<c:out value='${pc.pd_name }'/>">
+									<c:if test="${result.pd_name == pc.pd_name }">selected="selected"</c:if>
+									<c:out value="${pc.pd_name }"/>
+								</option>
+							</c:forEach>			
+						</select>			
+		      			<div class="row">
+							<div class="col-3" style="margin-bottom:15px;">
+		      					구매일
+		      				</div> 
+		      				<div class="col-9" style="margin-bottom:15px;text-align:center">
+		      					<input type="text" name="pc_date" id="pc_date" size="33" value="${pc.pc_date }"/>
+		      				</div>
+		      				<div class="col-3" style="margin-bottom:15px;">
+		      					상품명
+		      				</div>
+		      				<div class="col-9" style="margin-bottom:15px;text-align:center">
+		      					<input type="text" name="pd_name" id="pd_name" size="33" value="${pc.pd_name }"/>	
+		      				</div>
+		      				<c:if test="${pc.o_value != null }">
+			      				<div class="col-3" style="margin-bottom:15px;">
+			      					옵션
+			      				</div>
+			      				<div class="col-9" style="margin-bottom:15px;text-align:center">
+		      						<input type="text" name="o_value" id="o_value" size="33" value="${pc.o_value }"/>
+		      					</div>
+		      				</c:if>
+		      				<div class="col-3" style="margin-bottom:15px;">
+		      					수량
+		      				</div>
+		      				<div class="col-9" style="margin-bottom:15px;text-align:center">
+		      					<input type="text" name="num" id="num" size="33" value="${pc.num }"/>
+		      				</div>
+							<input type="hidden" name="pd_no" id="pd_no" value="${pc.pd_no }"/>	
+							<input type="hidden" name="s_no" value="${pc.s_no }"/>
+							<div class="col-3">
+								별정
+							</div>
+		        			<div class="col-9">
+		        				<input type="radio" name="rating" value="5"> <span style="margin-right:11px;">5점</span>
+		        				<input type="radio" name="rating" value="4"> <span style="margin-right:11px;">4점</span>
+		        				<input type="radio" name="rating" value="3"> <span style="margin-right:11px;">3점</span>
+		        				<input type="radio" name="rating" value="2"> <span style="margin-right:11px;">2점</span>
+		        				<input type="radio" name="rating" value="1"> <span style="margin-right:11px;">1점</span>
+	        	      		</div>											
+						</div>
+       					<br/>
+	        			<div style="margin-bottom:20px;">
+	        				<h6>사진첨부(최대 1장)</h6>
+							<input type="file" name="img">
+	        			</div>
+	        			<br/>
+	        				<textarea name="content" placeholder="내용을 입력하세요." style="width:450px;height:150px;"></textarea>
+          			</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        		<input type="submit" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;" value="등록"/>
+	      		</div>
+	      		</form>
+	    	</div>
+	  	</div>
+	</div>
+ <br/>
+ <!-- 페이징 -->
+  <div>
+ 
+ </div>

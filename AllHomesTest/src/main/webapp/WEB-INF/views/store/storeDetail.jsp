@@ -29,7 +29,7 @@
 	#content{
 		max-width:1400px;
 		margin:15px auto;
-		font-family:'SCDream3'';
+		font-family:'SCDream3';
 	}
 	#imgWrapper>img{
 		margin-top:15px;
@@ -56,7 +56,7 @@
 <div class="container" id="content">
 	<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no}" onsubmit="numchek()">
 	<!-- 상품 정보  -->
-		<span style="font-size:0.8em;">Category : ${vo.main_c} > <a href="/myapp/sotreCategory">${vo.sub_c}</a></span>
+		<span>Category : ${vo.main_c} > <a href="/myapp/sotreCategory">${vo.sub_c}</a></span>
 		<div class="row">
 			<div class="col-8" id="imgWrapper">
 				<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
@@ -70,11 +70,11 @@
 					<div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
 						<c:if test="${result==0 && rvo.rating == 0}">
 							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>								
+								<i class="fas fas-star"></i>
+								<i class="fas fas-star"></i>
+								<i class="fas fas-star"></i>
+								<i class="fas fas-star"></i>
+								<i class="fas fas-star"></i>								
 							</span>	
 							아직 등록된 리뷰가 없습니다
 						</c:if>
@@ -130,7 +130,7 @@
 						<c:if test="${vo.discount!=0 }">
 							<span style="color:#343a40;"> 판매가격</span>
 							<b style="font-size:1.8em;margin-left:55px;">${vo.dc_price}원</b>
-							<span style="color:#ee7384;font-size:1.8em;">${vo.discount }%↓</span>
+							<span style="color:#ee7384;font-size:1.5em;">${vo.discount }%↓</span>
 						</c:if>
 						<c:if test="${vo.discount==0 }">
 							<span style="color:#333;"> 판매가격</span>

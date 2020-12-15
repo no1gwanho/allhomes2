@@ -2,6 +2,7 @@ package com.allhomes.myapp.homeboard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.admin.HomeBoardThemeDaoImp;
 import com.allhomes.myapp.admin.HomeBoardThemeVO;
+import com.allhomes.myapp.scrap.ScrapDaoImp;
+import com.allhomes.myapp.scrap.ScrapVO;
+
 
 @Controller
 public class HomeboardController {
@@ -37,7 +41,7 @@ public class HomeboardController {
 	@RequestMapping("/homeboardHome")
 	public ModelAndView homeboardHome() {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardAllList(); //집들이 전체 리스트 - 시간 순수대로 
+		List<HomeboardVO> list = dao.homeboardRecent(); //집들이 전체 리스트 - 시간 순수대로 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -256,34 +260,63 @@ public class HomeboardController {
 	
 	//집들이 글 보기
 	@RequestMapping("/homeboardView")
-	public ModelAndView homeboardView(int b_no, HttpSession ses) {
+	public ModelAndView homeboardView(int b_no, HttpServletRequest req, ScrapVO scrapVO) {
 
+		
+		HttpSession ses = req.getSession();
+		ModelAndView mav = new ModelAndView();
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
 		
+		String logStatus = (String)ses.getAttribute("logStatus");
 		String loginNickname = (String)ses.getAttribute("nickname");
 		String loginId = (String)ses.getAttribute("userid");
 		String writer = dao.getHomeboardWriter(b_no);
 		
+		//로그인아이디와 글쓴이가 같지 않으면 조회수 1증가 
 		if(loginId==null || !loginId.equals(writer)) {
-			dao.homeboardHit(b_no); //로그인아이디와 글쓴이가 같지 않으면 조회수 1증가 
+			dao.homeboardHit(b_no); 
 		}
-		
+	
+		//Homeboard 글 가지고 오기 
 		HomeboardVO vo = dao.homeboardSelect(b_no);
-		ModelAndView mav = new ModelAndView();
+		
 
 		// 해시태그 가져오기 
+	
+		if(vo.getHashtag()!=null) {
 		String hashtag = vo.getHashtag(); 
-		if (hashtag != null) {
 			String hashtagStr[] = hashtag.split(",");
 			List<String> hashtagList = new ArrayList<String>();
 			hashtagList = Arrays.asList(hashtagStr);
 			mav.addObject("hashtagList", hashtagList); //해시태그는 잘라서 뷰 페이지에 넘기기
 		}
+		
+		//해당글을 스크랩했는지 여부 확인
+		
+		if (ses.getAttribute("m_no")!= null) {
+			ScrapDaoImp scrapDao = sqlSession.getMapper(ScrapDaoImp.class);
+			int m_no = (Integer)ses.getAttribute("m_no");
+			scrapVO.setM_no(m_no);
+			scrapVO.setB_no(b_no);
+			ScrapVO scrapResultVO = scrapDao.scrapCheck(scrapVO);
+			System.out.println("스크랩여부:"+ scrapResultVO);
+			
+			if(scrapResultVO == null) {
+				mav.addObject("scrapCheck", "N");
+			}else {
+				mav.addObject("scrapCheck", "Y");
+			}
+			
+		}
+
+	
 
 		mav.addObject("vo", vo);
+		mav.addObject("logStatus", logStatus);
 		mav.addObject("loginId", loginId);
 		mav.addObject("loginNickname", loginNickname);
 		mav.addObject("writer", writer);
+		
 		mav.setViewName("homeboard/homeboardView");
 
 		return mav;

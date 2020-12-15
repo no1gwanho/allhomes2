@@ -17,12 +17,23 @@
  	
  	<!-- 회원정보 얻어오기 -->
  	<select id="selectRegis" resultType="com.allhomes.myapp.register.RegisterVO">
- 		select username, email, tel from register where m_no=#{param1}
+ 		select userid, username, email, tel from register where m_no=#{param1}
  	</select>
  	
- 	<!-- 주소지 가져오기 -->
+ 	<!-- 회원별 주소지 가져오기 -->
  	<select id="selectAddr" resultType="com.allhomes.myapp.order.AddressVO">
  		select receiver, a_code, zipcode, addr, addrdetail, tel, m_no from address where m_no = #{param1}
+ 	</select>
+ 	
+ 	<!-- 주문 테이블 선택 -->
+ 	<select id="selectCart" resultType="com.allhomes.myapp.order.CartOrderVO">
+ 		select pd_no, num, price, shipping_c, discount, userid, o_value, c_no
+ 		from cart where c_no = #{param1}
+ 	</select>
+ 	
+ 	<!-- 주소지 번호로 주소지 가져오기 -->
+ 	<select id="selectA_code" resultType="com.allhomes.myapp.order.AddressVO">
+ 		select receiver, a_code, zipcode, addr, addrdetail, tel, m_no from address where a_code = #{param1}
  	</select>
 </mapper> 
 

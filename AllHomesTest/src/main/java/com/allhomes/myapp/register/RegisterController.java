@@ -98,7 +98,6 @@ public class RegisterController {
 		
 		}else {
 			ses.setAttribute("logStatus", "Y");
-			
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("nickname", resultVO.getNickname());
@@ -283,6 +282,7 @@ public class RegisterController {
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
 
+		
 		String resultVO="";
 		if(email==null) {//회원가입으로 들어올때
 			vo.setEmail1(email1);

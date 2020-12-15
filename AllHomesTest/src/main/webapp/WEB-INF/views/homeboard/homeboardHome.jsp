@@ -69,49 +69,107 @@
 		width:25px;
 		border-radius: 45%;
 	}
+	
+	#homeboardTitle {
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 20px;
+		font-family:'SCDream5'
+	}
+	
+	.carousel-item {
+		text-align:center;
+		width:100%;
+		height:500px;
+		overflow:hidden;
+		
+	}
+	
+	.slide-title>span{
+		background-color:white;
+		color:black;
+		font-family:'SCDream5'
+	}
+	
+	.carousel-caption>p>span{
+		color:white;
+		background-color:rgba(255,255,255, 0.3);
+		
+	}
+	
 
 </style>
 
 <script>
 	$(function() {
-		$("#bxslider").bxSlider({
-			mode : 'horizontal'//'horizontal'(기본), 'vertical', 'fade'
-			,
-			slideWidth : 1700,
-			slideHeight : 600,
-			slideWidth : 1400,
-			slideHeight : 450,
-			speed : 1000 //변환속도
-			,
-			auto : false //자동시작(true,false)
-			,
-			randomStart : true,
-			captions : false//true, falase/ title값을 설명으로 표시 
-			,
-			infiniteLoop : false,
-			hideControlOnEnd : true//처음과 마지막 컨트롤러 표시 여부 결정 
-			//easing
-			,
-			useCSS : false
-		//easing 사용여부 설정(true,false) true-> easing사용안함, false-> easing사용함
-		});
+		$('.carousel').carousel({
+			interval : 3000,
+			
+		})
+		
+		$("#hb1").click(function({
+			window.location.href="myapp/homeboardView?b_no=124";
+		}));
+		
 	});
 </script>
 
 <!-- Page Content -->
 <div class="container" style="width:1400px">
-	<ul id="bxslider">
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" title="room01" /></a></li>
-		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png" title="room02" /></a></li>
+<br/>
 
-	</ul>
+		<div id="hbSlide" class="carousel slide" data-ride="carousel">
+		 	<ol class="carousel-indicators">
+			    <li data-target="#hbSlide" data-slide-to="0" class="active"></li>
+			    <li data-target="#hbSlide" data-slide-to="1"></li>
+			    <li data-target="#hbSlide" data-slide-to="2"></li>
+		  	</ol>
+	  <div class="carousel-inner">
+	    	<div class="carousel-item active">
+	      		<a href="/myapp/homeboardView?b_no=139">
+	      		<img class="w-100" src="<%=request.getContextPath()%>/resources/img/banner/hb_banner01.JPG" alt="First slide" id="hb1">
+	      		 </a>
+	      			<div class="carousel-caption d-none d-md-block">
+				    <h4 class="slide-title"><span>홈파티를 위한 인테리어</span></h4>
+				    <p><span>2.5단계에 걸칠 생일에 조촐하게 친구들을 불러...</span></p>
+				 </div>
+				
+	    	</div>
+	    <div class="carousel-item">
+	    	<a href="/myapp/homeboardView?b_no=124">
+	      <img class="d-block w-100" src="<%=request.getContextPath()%>/resources/img/banner/hb_banner02.JPG" id="hb2">
+	      </a>
+	      			<div class="carousel-caption d-none d-md-block">
+	      			<h4 class="slide-title"><span>크리스마스 준비🎄🐶</span></h4>
+				    <p><span>강아지들과 함께 하는 크리스마스 준비!</span></p>
+				    </div>
+	    </div>
+	    <div class="carousel-item">
+	    <a href="/myapp/homeboardView?b_no=142">
+	      <img class="d-block w-100" src="<%=request.getContextPath()%>/resources/img/banner/hb_banner03.JPG" id="hb3">
+	      </a>
+	      			<div class="carousel-caption d-none d-md-block">
+	      			<h4 class="slide-title"><span>북촌의 작은 주택</span></h4>
+				    <p><span>모든 소품과 가구 하나하나에 이야기가 서려있답니다...</span></p>
+				    </div>
+	    </div>
+	  </div>
+	  <a class="carousel-control-prev" href="#hbSlide" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#hbSlide" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
 
 <div class="container" style="margin-top:45px;">
 	<div class="row">
 		<div class="col-10">
-			<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;새로 올라온 집들이</h3>
+			<h3 id="homeboardTitle">새로 올라온 집들이</h3>
 		</div>
-		<div class="col-2" style="text-align:right">
+		<div class="col-2" style="text-align:right;margin-top:100px;">
 			<a href="/myapp/homeboardTop?order=0">더보기</a>
 		</div>
 	
@@ -130,7 +188,7 @@
 				</div>
 				<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
 				<a href="#" class="card-text">${vo.userid }</a>
-				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }(확인후지울예정)
+				<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }
 				</p>
 				</div> 
 		</div>
@@ -140,7 +198,7 @@
 
 	<!-- 해시태그 리스트 (이 기능 없앨지 말지 고민중)--> 
 	<div>
-		<h3 style="font-size:22px;font-weight:bold">&nbsp;&nbsp;올홈즈 해시태그</h3>
+		<h3 id="homeboardTitle">올홈즈 해시태그</h3>
 	</div>
 	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
 	<div style="text-align: right;">

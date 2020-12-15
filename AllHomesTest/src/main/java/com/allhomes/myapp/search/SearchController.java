@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
@@ -38,21 +39,38 @@ public class SearchController {
 		List<HomeboardVO> hList = dao.searchHB(key);// 집들이게시판 결과 
 		int hCount = dao.searchHBCount(key);
 		
-		//List<RegisterVO> mList = dao.searchMember(key);// 회원 결과 
-		//질문과 답변 결과
+		List<QnaVO> qList = dao.searchQNA(key);
+		int qCount = dao.searchQNACount(key);
+		
+		int totalCount = pCount + hCount + qCount;
+		
+		
 
 		ModelAndView mav = new ModelAndView();
 
-		//mav.addObject("mList", mList);
+		
 		mav.addObject("hList", hList);
 		mav.addObject("hCount", hCount);
 		mav.addObject("pList", pList);
 		mav.addObject("pCount", pCount);
+		mav.addObject("qList", qList);
+		mav.addObject("qCount", qCount);
+		
 		mav.addObject("key", key);
+		mav.addObject("totalCount", totalCount);
+		
 
 		mav.setViewName("/search/search");
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/searchStore")
 	public String storeResult() {

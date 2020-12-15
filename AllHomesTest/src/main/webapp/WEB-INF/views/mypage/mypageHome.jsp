@@ -14,46 +14,108 @@
 	#myShopping hr{
 		width:70%;
 	}
+	
+	.col-3{
+		text-align:center;
+		margin-bottom:10px;
+	}
+	
+	.container{
+		max-width:1400px;
+		margin: 0 auto;
+		font-family: 'SCDream3';
+	}
+	#mypage-title {
+		margin-top: 40px;
+		margin-bottom: 15px;
+		margin-left:20px;
+		font-family:'SCDream5'
+	}
+	.profile-img{
+		width:200px;
+		height:200px;
+		
+		
+		
+	}
+	
+	.profile-img>img{
+		width:200px;
+		height:200px;
+		border-radius: 50%;
+		border: 0.5px solid #8f8d8d;
+		
+	}
+	
+	.profile-img{
+		margin: 0 auto;
+	}
+	
+	.thumbnail{
+		padding:0px;
+		margin:0px;
+		width:220px;
+		height:160px;
+		overflow: hidden;
+		border-radius: 5%;
+		}
+		
+	.thumbnail img {
+		width:220px;height:100%;
+		text-align: center;
+		
+		}
+
+	.card-title {
+		text-align:center;
+		padding:0px;
+		font-size: 17px;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		}
+	
 </style>
 <div class="container">
+	<h3 id="mypage-title">마이페이지</h3>
+	
 	<div class="row">
-		<div class="col-lg-3"><br/>
-			<div class="card border-light mb-3 text-center"><!-- card시작 -->
-				<div class="my-2"></div>
-				<div style="float:right">
-					<a href="/myapp/mypageEdit" class="btn btn-user alert-clean shadow-sm" style="float:right;color:#bbbbbb">설정</a>
-				</div>
-
-				<!-- card body 시작 -->
-				<div class="card-body my-auto">
-					<img class="card-img-top" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}" alt="Card image cap" style="width:200px;">
-					<div class="my-2"></div>
-					<div><!-- 닉네임 -->
-						<br/><h4>${vo.nickname}</h4><br/>
-					</div>
-					<hr style="width:70%"><br/>
-					
-					<!-- 위시리스트, 스크랩 -->
-					<div style="float:left; margin-left:40px;">
-						<a href="/myapp/mypageWishlist?userid=${vo.userid }">
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist.png" style="width:60px"/>
-						</a>
-						<br/>
-						<a href="/myapp/mypageWishlist?userid=${vo.userid }">
-							위시리스트
-						</a>
-					</div style="float:right">
-					<div>
-						<img src="<%=request.getContextPath()%>/resources/img/mypage/like.png" style="width:60px"/><br/>
-						<a href="">스크랩</a>
-					</div>
-					
-				</div><!-- card-body 끝 -->
-				<hr>
-			</div><!-- card 끝 -->
-		</div><!-- col-lg-2끝 -->
 		
-		<div class="col-lg-9"><br/>
+		<div class="card col-3 mypage-profile"><br/>
+			<!-- 프로필이미지 -->
+			<div class="profile-img" style="text-align:center;">
+				<img src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}">
+			</div><br/>
+			<!-- 닉네임 -->
+			<h4 style="font-family:SCDream5;">${vo.nickname}</h4>
+			<a href="/myapp/mypageEdit" class="btn btn-user alert-clean" style="float:right;color:gray">회원정보수정</a>
+			<hr>
+			<div class="row">
+			<!-- 위시리스트 바로가기버튼-->
+			<div class="col-2"></div>
+			<div class="col-4">
+				<a href="/myapp/mypageWishlist?userid=${vo.userid }">
+					<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist2.png" style="width:60px"/><br/>
+					위시리스트
+				</a>
+			</div>
+			<!-- 스크랩 바로가기버튼 -->
+			<div class="col-4">
+			<a href="/myapp/mypageScrap">
+			<img src="<%=request.getContextPath()%>/resources/img/mypage/scrap2.png" style="width:60px"/><br/>
+			스크랩</a>
+			</div>
+			<div class="col-2"></div>
+			</div>
+			
+			<hr>
+		</div><!-- mypage 프로필부분 끝 -->
+		
+		
+		<!-- 마이페이지 요약기능 -->
+		
+		<div class="col-9"><br/>
 			<div class="card card border-light mb-3">
 				<div class="card-header">
 					나의 쇼핑<a href="/myapp/mypageShopping" style="float:right;">더보기</a>
@@ -97,70 +159,39 @@
 				</div><!-- card-body 끝 -->
 			</div><!-- card끝 -->			
 			<br/>
+			
+			
 			<!-- 스크랩 -->
-			<div class="card card border-light mb-3">
+			<div class="card border-light mb-3" style="height:290px;">
 				<div class="card-header">
 					스크랩<a href="/myapp/mypageScrap" style="float:right;">더보기</a>
 				</div>
-				
-				<style>					
-					#scrap>div>img{
-						width:100%;
-    					height:180px; 
-   						background-position:center;
-   						overflow:hidden;
-					}
-					#scrapImg>img:nth-child(2n+2){
-						width:45px;
-						height:45px;
-					}
-					#scrapImg{
-						width:20%;
-						margin-right:10px;
-					}
-					#scrap div{
-						float:left;
-						text-align:center;
-					}
-				</style>
-				
+
 				<div class="card-body"><!-- card-body 시작 -->
-					<div id="scrap">
-						<c:forEach var="s" items="${sList }">
-						<div id="scrapImg">
-							<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${s.thumbnail }"/><br/>
-							${s.title }<br/>
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;${s.userid }<br/>
-							조회수:${s.hit } 좋아요:${s.scrap }
+					<div class="row">
+						<c:if test ="${empty sList }">
+						<span style="margin:0 auto">관심있는 글이 없습니다</span>
+						</c:if>
+						<c:if test="${!empty sList }">
+						<c:forEach var="vo" items="${sList }">
+						<div class="col-3">
+							<div class="thumbnail">
+								<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
+							</div>
+							<div class="card-body">
+								<div class="card-title">
+									<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+								</div>
+							</div>
 						</div>
-						</c:forEach><%-- 
-						<div id="scrapImg">
-							<img src="/myapp/resources/img/main/ah02.jpg"/>
-							<b>제목제목제목제목</b><br/>
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;ID<br/>
-							조회수:132 좋아요:32
-						</div>
-						
-						<div id="scrapImg">
-							<img src="/myapp/resources/img/main/ah03.jpg"/>
-							<b>제목제목제목제목</b><br/>
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;ID<br/>
-							조회수:132 좋아요:32
-						</div>
-						
-						<div id="scrapImg">
-							<img src="/myapp/resources/img/main/ah04.jpg"/>
-							<b>제목제목제목제목</b><br/>
-							<img src="<%=request.getContextPath()%>/resources/img/mypage/user_basic.png"/>&nbsp;&nbsp;&nbsp;ID<br/>
-							조회수:132 좋아요:32
-						</div> --%>
+						</c:forEach>
+						</c:if>
 					</div>
 				</div>
 			</div>
 			
-			<br/>
 			<!-- 나의 작성글-->
-			<div class="card card border-light mb-3">
+			<div class="card border-light mb-3">
 				<div class="card-header">
 					나의 작성 글<a href="/myapp/mypageMyboard" style="float:right;">더보기</a>
 				</div>
@@ -174,6 +205,6 @@
 				</div>
 			</div>
 			
-		</div><!-- col-lg-8끝 -->		
+		</div>		
 	</div>
 </div>

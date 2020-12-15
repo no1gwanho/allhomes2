@@ -18,31 +18,39 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			String logStatus = (String)ses.getAttribute("logStatus");
 			//로그인이 안된 경우, 로그인폼으로 이동하고 현재 진행을 중단시킴
-			if(logStatus==null || !logStatus.equals("Y")) {
+			
+			
+			if("true".equals(request.getHeader("AJAX"))) {
 				
-				String requestURI = request.getRequestURI();
-				String contextPath = request.getContextPath();
-				
-				String uri = requestURI.substring(contextPath.length() + 1);
-				
-				String query = request.getQueryString();
+				if(logStatus==null || !logStatus.equals("Y")) {
+					
+					String requestURI = request.getRequestURI();
+					String contextPath = request.getContextPath();
+					
+					String uri = requestURI.substring(contextPath.length() + 1);
+					
+					String query = request.getQueryString();
 
-				System.out.println("인터셉터 쿼리: "+query);				
-				System.out.println("인터셉터 URI : "+uri);
-				
-				
-				// 실제 주소만들기
-				if (query == null || query.equals("null")) {
-					query = "";
-				} else {
-					query = "?" + query;
+					System.out.println("인터셉터 쿼리: "+query);				
+					System.out.println("인터셉터 URI : "+uri);
+					
+					
+					// 실제 주소만들기
+					if (query == null || query.equals("null")) {
+						query = "";
+					} else {
+						query = "?" + query;
+					}
+					
+					//세션에 주소 저장하기 
+					ses.setAttribute("dest", uri+query);
+					response.sendRedirect(request.getContextPath()+"/login");
+					return false;
+		
 				}
-				
-				//세션에 주소 저장하기 
-				ses.setAttribute("dest", uri+query);
-				response.sendRedirect(request.getContextPath()+"/login");
-				return false;
+			
 			}
+
 			
 			return true;
 		}
