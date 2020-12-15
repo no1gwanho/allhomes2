@@ -6,13 +6,13 @@
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
 	<!-- 제품 + 리뷰 + 스토어 -->
 	<select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
-		select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as discount, p.status as status, 
+		select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as dc_price, p.status as status, 
     	r.pd_no as pd_no, r.userid as userid, r.img as img, r.content as content, r.writedate as writedate, r.rating as rating 
     	from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
 	</select>
   	<!-- 모든 제품 조회 -->
   	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img from product
+  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img from product
   	    <choose>
   	    	<when test="sortPd!=null and sortPd.equals('recent')">
   	    		order by pd_no desc
@@ -55,7 +55,7 @@
   	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
   	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">

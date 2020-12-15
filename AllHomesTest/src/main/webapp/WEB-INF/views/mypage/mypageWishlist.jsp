@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
-
 	.col-3 {
 	text-align:center;
 	margin-bottom:10px;
@@ -32,5 +31,33 @@
    			</a>
 		</div>	
 		</c:forEach>
+	</div>
+	<div id="paging" style="margin-top:30px;">
+		<ul class="pagination" style="margin-left:470px;">
+			<li class="page-item">
+				<c:if test="${pageVO.nowPage==1 }">
+					<a class="page-link">Prev</a>
+				</c:if>
+				<c:if test="${pageVO.nowPage>1}">
+					<a class="page-link" href="/myapp/mypageWishlist?nowPage=${pageVO.nowPage-1}">Prev</a>
+				</c:if>
+			</li>
+			<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageRecord-1}">
+				<c:if test="${p<=pageVO.totalPage}">	
+					<li class="page-item">
+						<c:if test="${p==pageVO.nowPage}"></c:if>
+						<a class="page-link" href="/myapp/mypageWishlist?nowPage=${p}">${p}</a>
+					</li>
+				</c:if>
+			</c:forEach>
+			<li class="page-item">
+				<c:if test="${pageVO.nowPage==pageVO.totalPage }">
+					<a class="page-link">Next</a>
+				</c:if>
+				<c:if test="${pageVO.nowPage<pageVO.totalPage}">
+					<a class="page-link" href="/myapp/mypageWishlist?nowPage=${pageVO.nowPage+1}">Next</a>
+				</c:if>
+			</li>
+		</ul>
 	</div>
 </div>

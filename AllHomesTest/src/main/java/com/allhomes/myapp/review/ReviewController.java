@@ -1,6 +1,7 @@
 package com.allhomes.myapp.review;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Multipart;
@@ -16,10 +17,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.order.OrderDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
+import com.allhomes.myapp.purchase.PurchaseVO;
+import com.allhomes.myapp.register.RegisterVO;
+
 @Controller
 public class ReviewController {
 	@Autowired 
 	SqlSession sqlSession;
+	
+	@RequestMapping(value="/reviewWrite", method=RequestMethod.POST)
+	public ModelAndView reviewWriteForm(HttpServletRequest req, @RequestParam("pc_no") int pc_no) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession ses = req.getSession();		
+		ReviewDaoImp dao = sqlSession.getMapper(ReviewDaoImp.class);
+		
+		String userid = (String)ses.getAttribute("userid");
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		pvo.setPc_no(pc_no);
+	
+		ReviewJoinVO rvo = dao.reviewInfo(pvo);
+		
+		
+		mv.addObject("rvo", rvo);
+		mv.setViewName("review/reviewForm");
+		
+		return mv;
+	}
 	
 	@RequestMapping(value="/reviewWriteOk", method=RequestMethod.POST)
 	public ModelAndView reviewWriteOk(ReviewVO vo, 

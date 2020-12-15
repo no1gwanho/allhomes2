@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductJoinVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
@@ -95,14 +97,12 @@ public class StoreController {
 
 
 	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(HttpServletRequest r, @RequestParam("pd_no") int pd_no){
+	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
-
-
-
+		
 		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
 		try {
