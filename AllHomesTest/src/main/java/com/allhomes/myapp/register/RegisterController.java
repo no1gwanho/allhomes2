@@ -41,11 +41,13 @@ public class RegisterController {
 	
 	//이메일 인증
 	@RequestMapping("/regConf")
-	public ModelAndView regConf(RegisterVO vo,String userid) {
+	public ModelAndView regConf(RegisterVO vo,String userid,HttpServletRequest req) {//폼에서 보내준거나 마찬가지니깐 request로 불러보자 
 		
 		System.out.println(userid);
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
+		
 		
 		vo.setUserid(userid);//가입할때 아이디
 		
@@ -150,13 +152,13 @@ public class RegisterController {
 		String subject = "[Allhomes]회원가입을 환영합니다!!";
 		String content = "<div style='background:lightgray;border:1px solid gray;"
 						 + "border-radius:5px 5px 5px 5px;margin:30px;padding:30px;width:80%'>"
-						 
+						 + "<img src='myapp/resources/img/allhomes3.png'/>"
 						 + "<p>\r\n"
 						 + "  		안녕하세요?<br/><br/>\r\n"
 						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
 						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
 						 + "		아래 링크를 누르시면 회원가입이 완료되며 로그인 페이지로 이동합니다.<br/>\r\n"
-						 + "		<a href=\"http://localhost:9090/myapp/regConf?"+userid+"\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
+						 + "		<a id='corona' href=\"http://localhost:9090/myapp/regConf?userid="+userid+"\"><u>회원가입 완료 링크</u></a><br/><br/>\r\n"
 						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
 						 + "		감사합니다."		
 						 + "  		</p>"
