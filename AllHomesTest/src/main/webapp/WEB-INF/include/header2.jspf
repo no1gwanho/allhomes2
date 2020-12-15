@@ -81,26 +81,27 @@
 }
 </style>
 <script>
+
+
+
 	$(function(){
-		/* $(".dropdown").hover(function(event){
-			if($(".dropdown-menu").css("display","none")){
-				$(".dropdown-menu").show("fast");
-			}else if(!$(".dropdown-menu").css("display","none")){
-				$(".dropdown-menu").hide("fast");
-			}
-					
-		}); */
 		
 		
-		//검색
-		$("#searchBtn").click(function(){
+		function searchKeyword(){
 			var key = $("#searchKey").val();
 			location.href="<%=request.getContextPath()%>/search?key="+key;
-		});
+		}
+		//검색--검색버튼 클릭시 
+			$("#searchBtn").click(function(){
+				searchKeyword();
+			});
+
+		
 	});
 </script>
 <body>
 	<div class="container-fluid">
+	
 			<div style="width:1400px;height:70px;line-height:70px;margin:0 auto;">
 			<nav class="navbar navbar-expand-lg navbar-light bg-white">
 				<div id="home" style="padding-left:10px;padding-right:50px;">
@@ -163,7 +164,7 @@
 						</li>
 					</ul>
 	
-					<form class="form-inline">
+					<form class="form-inline" id="searchForm">
 						<div class="input-group" style="margin-right: 20px;">
 							
 								<a href="#" id="searchBtn" class="btn searchBtn" id="searchA" style="border-radius:30px;background-color:#EE8374;color:white;border:none;margin-right:10px;">
@@ -171,7 +172,7 @@
 								</a>
 							
 							<input type="text" class="form-control" placeholder="Search"
-								id="searchKey" aria-label="Search"
+								id="searchKey" aria-label="Search" 
 								aria-describedby="searchA" style="width:200px;border-radius:30px;">
 						</div>
 					</form>

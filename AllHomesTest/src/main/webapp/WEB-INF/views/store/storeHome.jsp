@@ -143,6 +143,7 @@
 </script>
 
 <div class="container">
+<br/>
 	<ul id="bxslider">
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner1.png"/></a></li>
 		<li><a href="#"><img src="<%=request.getContextPath()%>/resources/img/banner/banner2.png"/></a></li>
