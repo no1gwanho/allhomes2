@@ -7,6 +7,9 @@ public interface HomeboardDaoImp {
 	//레코드 전체 
 	public List<HomeboardVO> homeboardAllList();
 	
+	//레코드 최신 8개만
+	public List<HomeboardVO> homeboardRecent();
+	
 	//메인페이지용 집들이 글 리스트 (최근인기글 8개)
 	public List<HomeboardVO> homeboardListForMain();
 	
@@ -31,8 +34,6 @@ public interface HomeboardDaoImp {
 	//집들이 글보기 
 	public HomeboardVO homeboardSelect(int b_no);
 	
-	//집들이 글 클릭할때마다 조회수 증가
-	public void homeboardHit(int b_no);
 	
 	//집들이 글 수정 내용보기
 	public HomeboardVO homeboardEditSelect(int b_no);
@@ -42,5 +43,21 @@ public interface HomeboardDaoImp {
 	
 	//집들이 글 삭제하기
 	public int homeboardDelete(int b_no);
+	
+	//집들이 글 클릭할때마다 조회수 증가
+	public void homeboardHit(int b_no);
+	
+	//집들이 스크랩 클릭할때마다 스크랩 증가
+	public void homeboardScrapAdd(int b_no);
+	
+	//집들이 스크랩 취소할떄마다 스크랩 감소
+	public void homeboardSrapMinus(int b_no);
+	
+	
+	
+	
+	
+	
+	
 	
 }

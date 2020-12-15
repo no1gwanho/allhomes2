@@ -9,7 +9,35 @@
 	}
 	
 	.container{
-			font-family: 'SCDream3';
+		max-width:1400px;
+		margin: 0 auto;
+		font-family: 'SCDream3';
+	}
+	
+	#mypage-title {
+		margin-top: 40px;
+		margin-bottom: 15px;
+		margin-left:20px;
+		font-family:'SCDream5'
+	}
+	.profile-img{
+		width:200px;
+		height:200px;
+		
+		
+		
+	}
+	
+	.profile-img>img{
+		width:200px;
+		height:200px;
+		border-radius: 50%;
+		border: 0.5px solid #8f8d8d;
+		
+	}
+	
+	.profile-img{
+		margin: 0 auto;
 	}
 </style>
 <script>
@@ -45,16 +73,15 @@
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    //document.getElementById("sample6_extraAddress").value = extraAddr;
-                
+                   
                 } else {
-                    //document.getElementById("sample6_extraAddress").value = '';
+                   
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                // 우편번호와 주소 정보를 해당 필드
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
+                
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
             }
@@ -82,38 +109,41 @@
 	}
 </script>
 <div class="container">
+	<h3 id="mypage-title">배송지 설정</h3>
+	
 	<div class="row">
 		
-		<div class="col-lg-3"><br/>
-			<div class="card border-light mb-3 text-center"><!-- card시작 -->
-				<div class="my-2"></div>
-				<div style="float:right">
-					<a href="/myapp/mypageEdit" class="btn btn-user alert-clean shadow-sm" style="float:right;color:#bbbbbb">설정</a>
-				</div>
-				<!-- card body 시작 -->
-				<div class="card-body my-auto">
-					<img class="card-img-top"  src="<%=request.getContextPath()%>/resources/upload/register/${rVO.m_pic}" alt="Card image cap" style="width:200px;">
-					<div class="my-2"></div>
-					<div><!-- 닉네임 -->
-						<br/><h4>${rVO.userid}</h4><br/>
-					</div>
-					<hr style="width:70%"><br/>
-					
-					<!-- 위시리스트, 스크랩 -->
-					<div style="float:left; margin-left:40px;">
-						<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist.png" style="width:60px"/><br/>
-						<a href="">위시리스트</a>
-					</div>
-					
-					<div>
-						<img src="<%=request.getContextPath()%>/resources/img/mypage/like.png" style="width:60px"/><br/>
-						<a href="">스크랩</a>
-					</div>
-					
-				</div><!-- card-body 끝 -->
-				<hr>
-			</div><!-- card 끝 -->
-		</div><!-- col-lg-2끝 -->
+		<div class="card col-3 mypage-profile"><br/>
+			<!-- 프로필이미지 -->
+			<div class="profile-img" style="text-align:center;">
+				<img src="<%=request.getContextPath()%>/resources/upload/register/${rVO.m_pic}">
+			</div><br/>
+			<!-- 닉네임 -->
+			<h4 style="font-family:SCDream5;">${rVO.nickname}</h4>
+			<a href="/myapp/mypageEdit" class="btn btn-user alert-clean" style="float:right;color:gray">회원정보수정</a>
+			<hr>
+			<div class="row">
+			<!-- 위시리스트 바로가기버튼-->
+			<div class="col-2"></div>
+			<div class="col-4">
+				<a href="/myapp/mypageWishlist?userid=${vo.userid }">
+					<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist2.png" style="width:60px"/><br/>
+					위시리스트
+				</a>
+			</div>
+			<!-- 스크랩 바로가기버튼 -->
+			<div class="col-4">
+			<a href="/myapp/mypageScrap">
+			<img src="<%=request.getContextPath()%>/resources/img/mypage/scrap2.png" style="width:60px"/><br/>
+			스크랩</a>
+			</div>
+			<div class="col-2"></div>
+			</div>
+			
+			<hr>
+		</div><!-- mypage 프로필부분 끝 -->
+		
+		
 		
 		<div class="col-lg-9"><br/>
 			<div class="card card border-light mb-3">

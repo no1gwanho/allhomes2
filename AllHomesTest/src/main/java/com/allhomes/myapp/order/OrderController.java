@@ -33,10 +33,10 @@ public class OrderController {
 		int m_no = dao.selectM_no((String)ses.getAttribute("userid"));
 		RegisterVO rVO = dao.selectRegis(m_no); //회원정보 얻어오기
 		System.out.println("이름"+rVO.getUserid());
+		
+		
 		String StrC_no[] = c_no.split(",");
 		int[] c_noList = new int[StrC_no.length]; //장바구니 번호 배열
-		
-		
 		
 		for(int i=0; i<StrC_no.length; i++) { //장바구니 배열 String-> int로 변환
 			c_noList[i] = Integer.parseInt(StrC_no[i]);

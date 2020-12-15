@@ -260,7 +260,7 @@
           			<div>
           				<h5>allHomes를 탈퇴 사유 (복수선택 가능)</h5>
 	          				<input id="useless" name="useless" type="checkbox" value="이용빈도 낮음"/>이용빈도 낮음<br/>
-	          				<input id="rereg" name="rereg" type="checkbox"/>재가입<br/>
+	          				<input id="rereg" name="rereg" type="checkbox" value="재가입"/>재가입<br/>
 	          				<input id="conless" name="conless" type="checkbox" value="콘텐츠/제품정보/상품 부족"/>콘텐츠/제품정보/상품 부족<br/>
 	          				<input id="indi" name="indi" type="checkbox" value="개인정보보호"/>개인정보보호<br/>
 	          				<input id="etc" name="etc" type="checkbox" value="기타"/>기타<br/>

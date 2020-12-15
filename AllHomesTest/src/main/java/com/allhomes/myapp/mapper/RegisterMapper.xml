@@ -47,11 +47,23 @@
  		select email, nickname from register where email=#{email} and nickname!='membUs' and nickname=#{nickname}
  	</select>
   	
-  	<!-- 회원정보 업데이트 m_pic 추가-->
+  	<!-- 회원정보 업데이트-->
   	<update id="userMebUpdate" parameterType="com.allhomes.myapp.register.RegisterVO">
   		update register set email=#{email}, nickname=#{nickname},tel=#{tel},m_pic=#{m_pic} where m_no=#{m_no}
   	</update>
   	
+	<!-- 회원탈퇴자 로그인 block -->
+	<update id="memLogBlock" parameterType="int">
+		update register set regcode=2 where m_no=#{m_no}
+	</update>
+
+
+	<!-- 회원탈퇴 정보 수집 -->
+	<insert id="memOutData" parameterType="com.allhomes.myapp.register.RegisterVO">
+		insert into memwithdraw (out_no,userid,nickname,outmemo) values (outmem_no_sq.nextval,#{userid},#{nickname},#{outmemo})
+	</insert>
+
+
 
  	<select id="oneMeberSelect" parameterType="String" resultType="com.allhomes.myapp.register.RegisterVO">
  		select * from register where userid=#{userid}

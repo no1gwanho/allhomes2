@@ -17,6 +17,22 @@
 		order by b_no desc
  	</select>
   	  	
+  	  	
+  	 <!-- 집들이 메인 새로올라온 페이지 12개만 -->
+ 	<select id="homeboardRecent"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		<![CDATA[ 
+ 		select b_no, thumbnail, title, m_pic, userid, hb_theme_no, hit, scrap, writedate from(select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+    	from homeboard a 
+		join hb_theme b 
+   		on a.theme = b.theme 
+		join register c
+    	on a.userid = c.userid
+		order by b_no desc) where rownum <13
+		]]>
+ 	</select>
+  	  	
+  	  	
+  	  	
   	<!-- 집들이 글작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
   	  	insert into homeboard
@@ -39,6 +55,21 @@
   	<update id="homeboardHit" parameterType="int">
   		update homeboard set hit=hit+1 where b_no=#{param1}
   	</update>
+  	
+  	
+  	<!-- 집들이 스크랩 증가 -->
+  	<update id="homeboardScrapAdd" parameterType="int">
+  		update homeboard set scrap=scrap+1 where b_no=#{param1}
+  	</update>
+  	
+  	
+  	<!-- 집들이 스크랩 감소-->
+  	<update id="homeboardSrapMinus" parameterType="int">
+  		update homeboard set scrap=scrap-1 where b_no=#{param1}
+  	</update>
+  	
+  	
+  	
   	
   	<!-- 집들이 수정 내용보기 -->
   	<select id="homeboardEditSelect" parameterType="int" resultType="com.allhomes.myapp.homeboard.HomeboardVO">

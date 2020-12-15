@@ -15,8 +15,21 @@ public class RegisterVO {
 	//이메일 조합변수
 	private String email1;
 	private String email2;
-		
+	//탈퇴관련 변수
+	private String outmemo;
 	
+	
+	
+	
+	
+	
+	
+	public String getOutmemo() {
+		return outmemo;
+	}
+	public void setOutmemo(String outmemo) {
+		this.outmemo = outmemo;
+	}
 	public String getEmail1() {
 		return email1;
 	}
