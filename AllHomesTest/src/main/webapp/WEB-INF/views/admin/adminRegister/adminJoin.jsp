@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminRegisterHeader.jspf"%>
+<style>
+	.profile img{
+		width:60px;
+		border-radius:70%;
+		border:0.2px solid gray;
+	}
+</style>
 <script>
 	$(function(){
 		
@@ -67,6 +74,7 @@
 			
 			if(idChk==0){
 				alert("아이디 중복검사를 시행하세요.");
+				return false;
 			}
 			
 			var url = "/myapp/adminRegisterOk"
@@ -154,6 +162,39 @@
                                            name="emppwdChk" id="emppwdChk" placeholder="Repeat Password">
                                     </div>
                                 </div>
+                                
+                                <div class="col-lg-12 mt-3 mb-3" style="background-color:#eeeeee">
+                                	프로필 선택
+                                </div>
+                                
+                                <div class="form-group row mr-3 ml-3">
+                                	
+                                	<div class="profile ml-3 mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile1.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile1.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile2.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile2.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile3.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile3.png"/>
+                                	</div>
+                                	
+                                	<div class="profile mr-4" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile4.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile4.png"/>
+                                	</div>
+                                	
+                                	<div class="profile" style="text-align:center;">
+                                		<input type="radio" name="profile" value="profile5.png"/>
+                                		<img src="<%=request.getContextPath()%>/resources/img/admin/profile5.png"/>
+                                	</div>
+                                </div>
+                                
                                 
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account"/>
                                 
