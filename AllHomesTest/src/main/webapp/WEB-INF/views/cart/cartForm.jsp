@@ -144,7 +144,8 @@
 													<input type="number" name="num" class="form-control" style="margin-top:45px;width:70px" value="${c.num}"/>
 												</td>
 												<td>
-													 ${c.price*c.num}원
+													 <%-- ${c.price*c.num*c.discount*0.01}원 --%>
+													 ${c.discount}
 												</td>
 												
 												<td>
