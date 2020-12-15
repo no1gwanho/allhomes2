@@ -208,8 +208,9 @@ public class mypageController {
 	
 	
 	@RequestMapping(value="/outcheckpoint")
-	public ModelAndView outcheckpoint(HttpServletRequest request) {	//배열로 바꾸는걸 생각해보자
-		System.out.println("테스트테스트");
+	public ModelAndView outcheckpoint(HttpServletRequest request,HttpSession session,RegisterVO vo,HttpServletResponse resp) {	//배열로 바꾸는걸 생각해보자
+		
+		ModelAndView mav = new ModelAndView();
 		
 		String finalCheck = request.getParameter("finalCheck");
 		String useless = request.getParameter("useless");
@@ -218,15 +219,76 @@ public class mypageController {
 		String indi = request.getParameter("indi");
 		String etc = request.getParameter("etc");
 		
+		//종합변수(위에 변수들 다합친거) = split으로 null을 기배열 꺼집어내서 담아주고 substring으로 잘라서 null기준으로  합쳐준다.
 		
-	
+		String totalVal = useless+"&"+rereg+"&"+conless+"&"+indi+"&"+etc;
+		String [] resultVal =totalVal.split("&null"); 
+		String finalResult="";
+		
+		
+		for(int i=0;i<resultVal.length;i++) {
+			finalResult += resultVal[i];
+		}
+		
+		System.out.println(finalResult);
+		
+		//1.finalcheck를 클릭하면 regcode를 0으로 만들어서 로그인이 불가능하도록 만들어준다
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
+		System.out.println((Integer)session.getAttribute("m_no"));//번호나옴
+		vo.setM_no((Integer)session.getAttribute("m_no"));
+		
+		
+		int resultVO = dao.memLogBlock((Integer)session.getAttribute("m_no"));
 		
 		
 		
+		if(finalCheck != null && resultVO>0) {
+			//로그인 블락에 성공하면 데이터수집
+			
+			vo.setUserid((String)session.getAttribute("userid"));
+			vo.setNickname((String)session.getAttribute("nickname"));
+			vo.setOutmemo(finalResult);
+			
+			
+			int resultOutData = dao.memOutData(vo);
+			
+			if(resultOutData>0) {
+				resp.setContentType("text/html;charset=UTF-8");
+				PrintWriter out;
+				try {
+					out = resp.getWriter();
+					out.println("<script>alert('회원탈퇴가 완료되었습니다.');</script>");
+					out.flush();
+					mav.setViewName("/home");		
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+			
+			
+			
+		}else if(finalCheck ==null){
+			
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter out;
+			
+			try {
+				out = resp.getWriter();
+				out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
+				out.flush();
+				mav.setViewName("/outcheckpoint");		
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+			
 		
 		
-		
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/home");
 		
 		

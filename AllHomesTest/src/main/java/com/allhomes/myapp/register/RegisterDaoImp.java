@@ -45,15 +45,14 @@ public interface RegisterDaoImp {
 	public int regFinal(RegisterVO vo);
 	//회원가입 닉네임 중복검사
 	public String nicknameCheck(String nickname);
-
-	
 	//회원정보 수정 중복검사
 	public RegisterVO dupCheck(RegisterVO vo);
 	//회원 기본정보 업데이트
 	public int userMebUpdate(RegisterVO vo);
-	
-	
-	
+	//회원탈퇴 정보수집 
+	public int memOutData(RegisterVO vo);
+	//회원탈퇴자 로그인 block
+	public int memLogBlock(int m_no);
 	
 	
 
