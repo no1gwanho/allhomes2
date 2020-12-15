@@ -8,9 +8,9 @@
 		values (admin_sq.nextval,#{userid},#{emppwd},#{empname}, #{tel}, #{email},sysdate)
 	</insert>
 	<select id="adminLogin" parameterType="com.allhomes.myapp.admin.AdminRegisterVO" resultType="com.allhomes.myapp.admin.AdminRegisterVO">
-		select userid,empname,emppwd from admin where userid=#{userid}
+		select userid,empname,emppwd from admin where userid=#{userid} and emppwd = #{emppwd}
 	</select>
 	<select id="idCheck" parameterType="String" resultType="int">
-		select userid from admin where userid=#{userid}
+		select count(userid) from admin where userid=#{userid}
 	</select>
 </mapper>
