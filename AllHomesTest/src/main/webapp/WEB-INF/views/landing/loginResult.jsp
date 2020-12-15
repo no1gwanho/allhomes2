@@ -7,13 +7,19 @@
 </c:if>
 <c:if test="${logStatus=='N' }">	<!-- DB에서 정보못받은 경우-->	
 	<script>
-		alert("로그인 실패! 다시 시도해주세요.");
+		alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 시도해주세요.");
 		history.go(-1);
 	</script>
 </c:if>
-<c:if test="${logStatus!='N' && regcode!= 1 }">	<!-- DB에서 정보 잘받고 인증이 안된경우 즉,최초 회원가입인경우  -->
+<c:if test="${logStatus!='N' && regcode == 0 }">	<!-- DB에서 정보 잘받고 인증이 안된경우 즉,최초 회원가입인경우  -->
 	<script>
 		alert("이메일 회원가입 인증을 해주세요.");
+		history.go(-1);
+	</script>
+</c:if>
+<c:if test="${logStatus!='N' && regcode == 2 }">	<!-- 회원 탈퇴했던경우  -->
+	<script>
+		alert("등록되지 않은 회원정보입니다 회원가입을 해주세요.");
 		history.go(-1);
 	</script>
 </c:if>
