@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +32,6 @@ public class CartController {
 		HttpSession ses = req.getSession();				
 		String userid=(String)ses.getAttribute("userid");
 
-		System.out.println("123123"+userid);
 		
 		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
 		vo.setUserid(userid);		
@@ -62,5 +62,18 @@ public class CartController {
 
 		return mv; 
 		
+	}
+	
+	//장바구니 수정
+	@RequestMapping(value="/cartEdit",method=RequestMethod.POST)
+	public ModelAndView cartEdit(CartVO vo) {
+		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
+		
+		int result = dao.cartUpdate(vo); //장바구니 수정
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:cartList");
+		
+		return mv;
 	}
 }

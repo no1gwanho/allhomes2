@@ -78,10 +78,10 @@
 						</thead>
 						<tbody>
 							<c:forEach var="c" items="${list }">
-									
+								<form method="post" action="<%=request.getContextPath()%>/cartEdit">
 										<input type="hidden" name="${c.m_no }" value="${c.m_no }">
 										
-											<tr class="mb-3">										
+											<tr>										
 												<td>
 													<input type="checkbox" name="chBox" class="chBox" value="${c.c_no }">
 												</td>
@@ -110,9 +110,10 @@
 												</td>
 												
 												<td>
-													<button class="btn btn-secondary">수정</button>
+													<button type="submit" class="btn btn-secondary">수정</button>
 												</td>
-																		
+											</tr>
+									</form>									
 								
 								</c:forEach>
 						</tbody>
