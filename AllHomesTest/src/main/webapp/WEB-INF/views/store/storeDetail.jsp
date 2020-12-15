@@ -19,6 +19,10 @@
 </script>
 
 <style>
+	.col-3{
+      text-align:center;
+      margin-bottom:10px;
+   }
 	#floatingbanner {
 		position:absolute;
 		width:440px;
