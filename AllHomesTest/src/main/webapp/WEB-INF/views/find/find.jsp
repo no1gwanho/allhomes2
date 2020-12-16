@@ -13,6 +13,22 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/signin.css" type="">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
 <style>
+	
+   @font-face{
+	   font-family:"SCDream3";
+	   src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+   @font-face{
+	   font-family:"SCDream5";
+	   src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+	
+	
+	
 	#idpw{text-align:center;}
 	#logo img{width:200px; display: block; margin: 0px auto;}
 	#button {background-color:#ee8374;border:none;}
@@ -33,6 +49,9 @@
 	#smallcontainer{max-width:350px;}
 	#userid,#userpwd,#idnote,#emailnote,#btnrepwd{display:none;}/*기본접속화면 숨김 세팅 이메일박스, 등록아이디 안내창, 이메일전송 안내창, 비밀번호 재설정버튼*/
 	
+	
+	.btn-lg,.form-control,.btn-block{font-family:'SCDream3';}
+	.form-signin-heading{font-family:'SCDream5';font-size:30px;}
 </style>
 <script>
 	$(function(){		//아이디찾기 버튼
@@ -134,7 +153,7 @@
 	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
 	</div>
 	<form id="smallcontainer" class="form-signin" method="post" action="/myapp/findOk">
-		<h3 class="form-signin-heading text-center">아이디/비밀번호 찾기</h3>
+		<div class="form-signin-heading text-center">아이디/비밀번호 찾기</div>
 			<div class="blank1"></div>
 		<input type="button" id="findid" name="findid" class="btn btn-primary btn-lg" value="아이디 찾기"/>	
 		<input type="button" id="findpwd" name="findpwd" class="btn btn-primary btn-lg" value="비밀번호 찾기"/>	
