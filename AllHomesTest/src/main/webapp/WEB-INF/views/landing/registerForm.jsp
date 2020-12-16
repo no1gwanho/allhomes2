@@ -127,9 +127,7 @@ $(function(){
 		
 		
 		
-		
-	
-		var checker;
+		var checker=false;
 		//닉네임 검사
 		if($("#nickname").val()==""){
 			$("#nickname").val("membUs");
@@ -145,8 +143,8 @@ $(function(){
 			
 			}	
 							
-		}///////					
-	/*		var url="/myapp/nicknameCheck"	;
+						
+			var url="/myapp/nicknameCheck"	;
 			var data="nickname="+document.getElementById("nickname").value;
 				
 					$.ajax({
@@ -158,11 +156,13 @@ $(function(){
 							if(result!=""){
 								alert("사용할 수 없는 닉네임 입니다.");
 								checker = false;
-								return false;
+								return false;							
+								/*next(checker);*/
+															
 							}else{
 								
 								checker = true;
-								//next();
+								/*next(checker);*/
 								
 								
 							}	
@@ -170,15 +170,21 @@ $(function(){
 						
 						}
 					});
+					
+			/*function next(checker){	
+						if(checker==true){
 							
-			
-			}
+						}else{
+							
+							return false;
+						}
+					}	*/		
+							
+		}	
 		
-			if(checker!=true){
-				return false;
-		}
-				
-	function next(){}*/
+		
+	
+		
 	
 						
 		
@@ -216,21 +222,42 @@ $(function(){
 			data:data,
 			success:function(result){
 				
-				if(result==""){
+				if(result=="" && checker==true){
 					
 					$("#regFrm").submit();
-				}else{
+				}else if(result!="" && checker==true){
 					alert("이미 등록된 이메일 주소입니다.");
-					
+				}else if(result=="" && checker==false){
+					return false;
+				}else if(result!=""){
+					alert("이미 등록된 이메일 주소입니다.");
 				}									
 			},error:function(error){
 				console.log("test에러잡기 5"+ error.responseText);
 			}
 		});				
 	}						
-					
+	
+	
+
+	
+
+			
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		});
 
+	
+	
 		
 	$(function(){
 		//이미지 미리보기 

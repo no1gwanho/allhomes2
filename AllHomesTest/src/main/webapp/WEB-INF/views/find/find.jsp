@@ -38,7 +38,7 @@
 	.blank2{margin:5px 0 5px 0;}
 	
 	
-	#findid{background-color:#ee8374;border:none;}	/*초기 중단버튼 컬러세팅*/
+	#findid{background-color:#ee8374;border:none;}	
 	#findpwd{background-color:lightgray;border:none;}
 	
 	
@@ -50,8 +50,15 @@
 	#userid,#userpwd,#idnote,#emailnote,#btnrepwd{display:none;}/*기본접속화면 숨김 세팅 이메일박스, 등록아이디 안내창, 이메일전송 안내창, 비밀번호 재설정버튼*/
 	
 	
-	.btn-lg,.form-control,.btn-block{font-family:'SCDream3';}
+	.btn-lg,.form-control,.btn-block,.movetext{font-family:'SCDream3';}
 	.form-signin-heading{font-family:'SCDream5';font-size:30px;}
+	
+	#moveMenu{text-align:center;color:#ee8374}
+	.movetext{color:#ee8374;margin-left:10px;}
+	a:hover{text-decoration:none;}
+	
+	#blankWidth{margin-right:0 10px 0 10px;float:left;}
+	
 </style>
 <script>
 	$(function(){		//아이디찾기 버튼
@@ -167,10 +174,16 @@
 			<div class="blank2"></div>
 		<input type="button" id="btnfindid" class="btn btn-lg btn-primary btn-block" value="아이디 찾기"/><br/>
 		<input type="button" id="btnrepwd" class="btn btn-lg btn-primary btn-block" value="비밀번호 재설정"/><br/>
-		<div id=emailnote></div>
-		<div id="resultData"></div>
+			<div id=emailnote></div>
+			<div id="resultData"></div>
+		<div id="moveMenu">
+			<a class="movetext" href="/myapp/">홈으로</a>
+				
+			<a class="movetext" href="/myapp/login">로그인</a>
+		</div>
 	</form>
-	<br/>
+	
+	
 		
 </div>
 </body>

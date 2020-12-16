@@ -62,7 +62,7 @@
 		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="로그인"/><br/>
 	</form>
 	<div id="idpw">
-		<a href="/myapp/" class="loginMenu">홈으로</a>
+		<a href="/myapp/" class="loginMenu">홈으로</a> &nbsp;&nbsp;
 		<a href="/myapp/find" class="loginMenu">아이디/비밀번호찾기</a> &nbsp;&nbsp;
 		<a href="/myapp/register" class="loginMenu">회원가입</a>
 	</div>
@@ -74,7 +74,7 @@
 		<a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_naver.jfif" ></a>
 		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_cacao.jfif" ></a>
 	</div>
-	<hr/>
+	
 	
 </div>
 </body>
