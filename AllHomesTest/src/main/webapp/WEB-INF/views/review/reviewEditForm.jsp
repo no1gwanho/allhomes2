@@ -41,7 +41,7 @@
 </head>
 <body>
 <div class="container">
-	<form method="post" action="/myapp/reviewWriteOk?pc_no=${rvo.pc_no }&pd_no=${rvo.pd_no}&s_no=${rvo.s_no}"  enctype="multipart/form-data">
+	<form method="post" action="/myapp/reviewEditOk?pc_no=${rvo.pc_no }&pd_no=${rvo.pd_no}&s_no=${rvo.s_no}"  enctype="multipart/form-data">
 		<input type="hidden" name="pd_no" value="${rvo.pd_no }">
 		<h1>리뷰쓰기</h1>
 		<div class="row">

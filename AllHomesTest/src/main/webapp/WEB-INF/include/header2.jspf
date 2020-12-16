@@ -59,6 +59,18 @@
 	font-style:normal;
 	font-weight:normal;
 }
+	@font-face{
+   font-family:"SCDream3";
+   src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+   font-style:normal;
+   font-weight:normal;
+}
+	@font-face{
+   font-family:"SCDream5";
+   src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
+   font-style:normal;
+   font-weight:normal;
+}
 
 
 

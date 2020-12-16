@@ -152,11 +152,20 @@
 	.wBlank4{margin-left:67px;}	/*4자*/
 	.wBlank5{margin-left:200px;}
 
+
+	#notice,.labelTag,#updateBtn,#updateAddr,#memoutBtn,.col-12,#picBox{ font-family:'SCDream3'}
+	#editTitle{font-family:'SCDream5';font-size:35px;}
+	
+	.modal-dialog{max-width:580px;}
+	
+	.modal-body{font-family:'SCDream3';}
+	.bodyTitle{font-family:'SCDream5';font-size:20px;}
+	
 </style>
 <br/>    
 <div class="container">
 <br/><br/>
-	<h2 style="text-align:center;">회원정보수정</h2>
+	<div id="editTitle" style="text-align:center;">회원정보수정</div>
 	<div class="hBlank"></div>
 	
 	
@@ -275,13 +284,13 @@
           		<br/>
           
           		<div>
-          			<h5><b>회원탈퇴 시 소비자 관련 정보 처리 내용</b></h5>
+          			<div class="bodyTitle"><b>회원탈퇴 시 소비자 관련 정보 처리 내용</b></div>
           			<ul>
           				<li>올홈즈 구매 정보가 삭제됩니다.</li>
           				<li>소비자보호에 관한 법률 제6조에 의거, 개인정보가 일정기간 보관됩니다.</li>
           				<li>법률에 의한 보유 목적 외에 다른 목적으로는 이용되지 않습니다.</li>
           			</ul>
-          			<h5><b>회원탈퇴 시 게시물 관리 내용</b></h5>
+          			<div class="bodyTitle"><b>회원탈퇴 시 게시물 관리 내용</b></div>
           			<ul>
           				<li>회원탈퇴 후 기존에 입력된 게시물 및 댓글은 삭제되지 않습니다.</li>
           				<li>회원탈퇴 후 기존 게시물 편집 및 삭제를 할 수 없습니다.</li>
@@ -289,7 +298,7 @@
           			</ul>
           			<br/>
           		
-          			<input id="finalCheck" name="finalCheck" type="checkbox" value="위 내용을 모두 확인하였습니다."> 위 내용을 모두 확인하였습니다.<span style="font-color:pink;">(필수)</span>
+          			<input id="finalCheck" name="finalCheck" type="checkbox" value="위 내용을 모두 확인하였습니다."><b>위 내용을 모두 확인하였습니다.</b><span style="color:#ee8374">(필수)</span>
           			
           		</div>
 				<div>

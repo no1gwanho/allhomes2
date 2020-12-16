@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
@@ -74,7 +75,7 @@ public class mypageController {
 
 	//mypage 회원정보수정으로이동
 	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
-	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1) {
+	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1,HttpServletResponse req) {
 		
 		MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
 		ModelAndView mav = new ModelAndView();	
@@ -116,9 +117,22 @@ public class mypageController {
 			mav.setViewName("mypage/userEditForm");
 			
 		}else {	//로그인 안하고 들어올때 돌려보내야함	
+				req.setContentType("text/html;charset=UTF-8");
+				PrintWriter out;
+				try {
+					mav.setViewName("/home");
+					out = req.getWriter();
+					out.println("<script>alert('로그인 후 수정이 가능합니다.');</script>");
+					out.flush();
+							
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			
 			
 			}
-			mav.setViewName("mypage/userEditForm");
+			
 		
 		return mav;
 	}
@@ -601,13 +615,21 @@ public class mypageController {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		
-		System.out.println(r.getParameter("m_no"));
-		
 		HttpSession ses = r.getSession();
-		String userid = (String)ses.getAttribute("userid");
+		String userid = (String)ses.getAttribute("userid");	
 		
+		PagingVO pageVO = new PagingVO();
+		pageVO.setUserid(userid);
+		
+		String nowPageTxt = r.getParameter("nowPage");	// 현재페이지
+		if(nowPageTxt!=null) {								// 페이지 번호를 서버로 가져온 경우
+			pageVO.setNowPage(Integer.parseInt(nowPageTxt));
+		}
+		
+		pageVO.setTotalRecord(dao.getAllListCount(pageVO));		// 총 레코드 수		
 		List<MypageWishlistJoinVO> list = dao.wishlistPage(userid);
 		
+		mv.addObject("pageVO", pageVO);
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");
 				
