@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.cart.CartDaoImp;
 import com.allhomes.myapp.cart.CartVO;
+import com.allhomes.myapp.mypage.AddressDaoImp;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 
@@ -134,6 +135,8 @@ public class OrderController {
 			CartOrderVO cVO = new CartOrderVO();
 			OrderVO oVO = new OrderVO();
 			
+			int pc_no = 0; //결제번호
+			
 			 for(int i=0; i<oList.size(); i++) {
 				 oVO = oList.get(i);
 				 cVO = dao.selectCart(oVO.getC_no()); //장바구니 VO 가져오기
@@ -144,7 +147,8 @@ public class OrderController {
 				 pVO.setShipping_c(cVO.getShipping_c()); //배송비
 				 pVO.setO_value(cVO.getO_value()); //옵션 세팅
 				 pVO.setS_no(oVO.getS_no()); //스토어 번호 세팅
-				 pVO.setPc_no(dao.getLastSQ()); //시퀀스 세팅
+				 pc_no = dao.getLastSQ();
+				 pVO.setPc_no(pc_no); //시퀀스 세팅
 				 
 				 if(i==0) {
 					 dao.insertPurchaseCurrval(pVO); //다음 상품
@@ -156,9 +160,12 @@ public class OrderController {
 		   AddressVO aVO = dao.selectA_code(vo.getA_code());
 		  
 		   
-		   
+		
+		   mav.addObject("aVO",dao.selectA_code(vo.getA_code())); //주소지 세팅
 		   mav.addObject("oList", oList); // 장바구니 상품 리스트
 		   mav.setViewName("order/purchaseOk");
+		   mav.addObject("itemName", itemName); //결제 이름
+		   mav.addObject("pc_no", pc_no);
 		   mav.addObject("vo", vo);
 		   mav.addObject("pVO", pVO);
 		
