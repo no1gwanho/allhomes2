@@ -271,6 +271,8 @@ public class mypageController {
 					out = resp.getWriter();
 					out.println("<script>alert('회원탈퇴가 완료되었습니다.');</script>");
 					out.flush();
+				//	session.invalidate();
+					session.removeAttribute("logStatus");
 					mav.setViewName("/home");		
 				} catch (IOException e) {
 					
