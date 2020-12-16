@@ -7,7 +7,7 @@ public class CartJoinVO {
 	private int num;		// 개수
 	private int price;		// 가격
 	private int shipping_c;
-	private int discount;
+
 	private String o_value;
 	private int c_no;
 	
@@ -50,12 +50,7 @@ public class CartJoinVO {
 	public void setShipping_c(int shipping_c) {
 		this.shipping_c = shipping_c;
 	}
-	public int getDiscount() {
-		return discount;
-	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
+	
 	public String getO_value() {
 		return o_value;
 	}

@@ -88,13 +88,7 @@
 			location.href="/addrEditForm";
 		});
 	
-		
-		$("#membOutBtn").click(function(){//탈퇴 버튼 눌렀을때
-			
-			
-		});
 	
-		
 		$(function(){
 			//이미지 미리보기 
 			$("#picBox").on("change",preViewset);
@@ -117,7 +111,14 @@
 				});
 			}
 		
-		
+
+			$("#membOutBtn").click(function(){//회원탈퇴 버튼 클릭 시
+				$("#memOutFrm").submit();
+				
+				/*여기까지 잘옴
+				location.href="/myapp/outcheckpoint";*/
+				
+			});	
 		
 		
 		
@@ -151,11 +152,20 @@
 	.wBlank4{margin-left:67px;}	/*4자*/
 	.wBlank5{margin-left:200px;}
 
+
+	#notice,.labelTag,#updateBtn,#updateAddr,#memoutBtn,.col-12,#picBox{ font-family:'SCDream3'}
+	#editTitle{font-family:'SCDream5';font-size:35px;}
+	
+	.modal-dialog{max-width:580px;}
+	
+	.modal-body{font-family:'SCDream3';}
+	.bodyTitle{font-family:'SCDream5';font-size:20px;}
+	
 </style>
 <br/>    
 <div class="container">
 <br/><br/>
-	<h2 style="text-align:center;">회원정보수정</h2>
+	<div id="editTitle" style="text-align:center;">회원정보수정</div>
 	<div class="hBlank"></div>
 	
 	
@@ -256,53 +266,64 @@
 	
 	
 	
-	<!-- 회원탈퇴 Modal -->
+		<!-- 회원탈퇴 Modal -->
+<form id="memOutFrm" method="post" action="/myapp/outcheckpoint">
 	<div class="modal fade" id="secessionModal" tabindex="-1" role="dialog" aria-labelledby="secessionModalTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 	   		<div class="modal-content">
+	   		
 	      		<div class="modal-header">
 	        		<h5 class="modal-title" id="secessionModalTitle">회원탈퇴</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
+	      
 	      	<div class="modal-body">
           		<h5>회원 탈퇴 전에 아래 내용을 반드시 확인해 주세요.</h5>
           		<br/>
+          
           		<div>
-          			<h5><b>회원탈퇴 시 소비자 관련 정보 처리 내용</b></h5>
+          			<div class="bodyTitle"><b>회원탈퇴 시 소비자 관련 정보 처리 내용</b></div>
           			<ul>
           				<li>올홈즈 구매 정보가 삭제됩니다.</li>
           				<li>소비자보호에 관한 법률 제6조에 의거, 개인정보가 일정기간 보관됩니다.</li>
           				<li>법률에 의한 보유 목적 외에 다른 목적으로는 이용되지 않습니다.</li>
           			</ul>
-          			<h5><b>회원탈퇴 시 게시물 관리 내용</b></h5>
+          			<div class="bodyTitle"><b>회원탈퇴 시 게시물 관리 내용</b></div>
           			<ul>
           				<li>회원탈퇴 후 기존에 입력된 게시물 및 댓글은 삭제되지 않습니다.</li>
           				<li>회원탈퇴 후 기존 게시물 편집 및 삭제를 할 수 없습니다.</li>
           				<li>게시물 삭제 후 탈퇴를 신청하시기 바랍니다.</li>
           			</ul>
           			<br/>
-          			<input type="checkbox"> 위 내용을 모두 확인하였습니다.<span style="font-color:pink;">(필수)</span>
+          		
+          			<input id="finalCheck" name="finalCheck" type="checkbox" value="위 내용을 모두 확인하였습니다."><b>위 내용을 모두 확인하였습니다.</b><span style="color:#ee8374">(필수)</span>
+          			
           		</div>
 				<div>
           			<br/>
           			<div>
           				<h5>allHomes를 탈퇴 사유 (복수선택 가능)</h5>
-	          				<input type="checkbox"/>이용빈도 낮음<br/>
-	          				<input type="checkbox"/>재가입<br/>
-	          				<input type="checkbox"/>콘텐츠/제품정보/상품 부족<br/>
-	          				<input type="checkbox"/>개인정보보호<br/>
-	          				<input type="checkbox"/>기타<br/>
+	          				<input id="useless" name="useless" type="checkbox" value="이용빈도 낮음"/>이용빈도 낮음<br/>
+	          				<input id="rereg" name="rereg" type="checkbox" value="재가입"/>재가입<br/>
+	          				<input id="conless" name="conless" type="checkbox" value="콘텐츠/제품정보/상품 부족"/>콘텐츠/제품정보/상품 부족<br/>
+	          				<input id="indi" name="indi" type="checkbox" value="개인정보보호"/>개인정보보호<br/>
+	          				<input id="etc" name="etc" type="checkbox" value="기타"/>기타<br/>
+                    		
                     </div>
-		   		</div>	
+		   		</div>
+		   			
           	</div>
+         	
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	        	<button id="membOutBtn" type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">탈퇴</button>
 	      	</div>
+	     
 	    	</div>
 	  	</div>
 	</div>		
-</div>
+ </form>		
+
 <br/>

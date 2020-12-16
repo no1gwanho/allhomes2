@@ -10,6 +10,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
+	
+
 	//컨트롤러가 호출되기 전에 실행된다.
 		@Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -18,41 +20,35 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			String logStatus = (String)ses.getAttribute("logStatus");
 			//로그인이 안된 경우, 로그인폼으로 이동하고 현재 진행을 중단시킴
-			
-			
-			if("true".equals(request.getHeader("AJAX"))) {
+			if(logStatus==null || !logStatus.equals("Y")) {
 				
-				if(logStatus==null || !logStatus.equals("Y")) {
-					
-					String requestURI = request.getRequestURI();
-					String contextPath = request.getContextPath();
-					
-					String uri = requestURI.substring(contextPath.length() + 1);
-					
-					String query = request.getQueryString();
+				String requestURI = request.getRequestURI();
+				String contextPath = request.getContextPath();
+				
+				String uri = requestURI.substring(contextPath.length() + 1);
+				
+				String query = request.getQueryString();
 
-					System.out.println("인터셉터 쿼리: "+query);				
-					System.out.println("인터셉터 URI : "+uri);
-					
-					
-					// 실제 주소만들기
-					if (query == null || query.equals("null")) {
-						query = "";
-					} else {
-						query = "?" + query;
-					}
-					
-					//세션에 주소 저장하기 
-					ses.setAttribute("dest", uri+query);
-					response.sendRedirect(request.getContextPath()+"/login");
-					return false;
-		
+				System.out.println("인터셉터 쿼리: "+query);				
+				System.out.println("인터셉터 URI : "+uri);
+				
+				
+				// 실제 주소만들기
+				if (query == null || query.equals("null")) {
+					query = "";
+				} else {
+					query = "?" + query;
 				}
-			
+				
+				//세션에 주소 저장하기 
+				ses.setAttribute("dest", uri+query);
+				response.sendRedirect(request.getContextPath()+"/login");
+				return false;
 			}
-
 			
 			return true;
+			
+			
 		}
 		
 		//컨트롤러 실행후, 뷰페이지 이동 전에 호출된다.  

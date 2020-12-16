@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.admin.AdminProductController;
+import com.allhomes.myapp.order.OrderDaoImp;
 import com.allhomes.myapp.product.ProductDaoImp;
 import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
 public class CartController {
@@ -41,8 +43,7 @@ public class CartController {
 		ProductVO pVO = pDao.selectProduct(pd_no); 
 		
 		
-		vo.setPrice(pVO.getPrice()); //가격
-		vo.setDiscount(pVO.getDiscount()); //할인율
+		vo.setPrice(pVO.getDiscount()); //가격
 		vo.setShipping_c(pVO.getShipping_c()); //배송비
 		
 		CartDaoImp dao = sqlSession.getMapper(CartDaoImp.class);
@@ -71,7 +72,8 @@ public class CartController {
 		
 		mv.addObject("list", list);
 		mv.setViewName("cart/cartForm");
-
+		
+		
 		return mv; 
 		
 	}

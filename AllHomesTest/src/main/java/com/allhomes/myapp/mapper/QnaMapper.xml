@@ -91,7 +91,18 @@
   		delete qnaboard where q_no=#{q_no}
   	</delete>
   	
-  	<!-- 질문게시판 답변개수구하기 -->
+  	<!-- 내가쓴 질문글 구하기 -->
+  	<select id="myQnaList" parameterType="String" resultType="com.allhomes.myapp.qna.QnaVO">
+  	<![CDATA[
+  	select a.q_no, a.title, regexp_replace(a.content, '<.*??>') content, a.thumbnail, a.userid, a.hit, a.answer, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
+	from qnaboard a
+	join register b
+	on a.userid=b.userid
+	where a.userid=#{param1}
+	order by q_no desc
+	]]>
+  	</select>
+  	
   	
   	
  

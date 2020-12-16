@@ -12,7 +12,25 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bootstrap.css" type="">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/signin.css" type="">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
+
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/error/font-awesome.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Kanit:200" rel="stylesheet">
+
 <style>
+	@font-face{
+   font-family:"SCDream3";
+   src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+   font-style:normal;
+   font-weight:normal;
+}
+	@font-face{
+   font-family:"SCDream5";
+   src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
+   font-style:normal;
+   font-weight:normal;
+}
+	
+	
 	#idpw{text-align:center;}
 	#logo img{width:200px; display: block; margin: 0px auto;}
 	#button {background-color:#ee8374;border:none;}
@@ -22,9 +40,13 @@
 	.login_logo{text-align:center;}
 	.login_logo img{width:50px;height:50px;}
 	
-	.loginMenu{color:#ee8374;text-decoration:none;}
+	.loginMenu{color:#ee8374;text-decoration:none; font-family: 'SCDream3';}
 	a:hover{text-decoration:none;color:#ee8374}
 	a:visited{text-decoration:none;}
+	
+	.form-control,#snslogtitle,#button{font-family: 'SCDream3';}
+	#formTilte{font-family: 'SCDream5'; font-size:30px;}
+	
 	
 </style>
 </head>
@@ -34,13 +56,13 @@
 	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
 	</div>
 	<form class="form-signin" method="post" action="/myapp/loginOk">
-		<h2 class="form-signin-heading">로그인하세요</h2>
+		<div id="formTilte" class="form-signin-heading">로그인하세요</div>
 		<input type="text" id="userid" name="userid" class="form-control" placeholder="아이디" required autofocus>
 		<input type="password" id="userpwd" name="userpwd" class="form-control" placeholder="비밀번호" required>
 		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="로그인"/><br/>
 	</form>
 	<div id="idpw">
-		<a href="/myapp/" class="loginMenu">홈으로</a>
+		<a href="/myapp/" class="loginMenu">홈으로</a> &nbsp;&nbsp;
 		<a href="/myapp/find" class="loginMenu">아이디/비밀번호찾기</a> &nbsp;&nbsp;
 		<a href="/myapp/register" class="loginMenu">회원가입</a>
 	</div>
@@ -52,7 +74,7 @@
 		<a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_naver.jfif" ></a>
 		<a href="#"><img src="<%=request.getContextPath()%>/resources/img/login/Logo_cacao.jfif" ></a>
 	</div>
-	<hr/>
+	
 	
 </div>
 </body>

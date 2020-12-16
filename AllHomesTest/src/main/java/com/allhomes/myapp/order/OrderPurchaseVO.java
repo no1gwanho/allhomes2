@@ -12,8 +12,6 @@ public class OrderPurchaseVO {
 	private String memo; //배송메모
 	private String email; //이메일
 	private String tel; //전화번호
-	private String username; //수신자 
-	
 	
 
 	public String getEmail() {
@@ -27,12 +25,6 @@ public class OrderPurchaseVO {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getC_no() {
 		return c_no;

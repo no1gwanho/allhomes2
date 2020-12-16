@@ -3,14 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.admin.AdminRegisterDaoImp">
+	<!-- 관리자 회원가입 -->
 	<insert id="adminInsert" parameterType="com.allhomes.myapp.admin.AdminRegisterVO">
-		insert into admin(empno,userid,emppwd,empname,tel,email,regdate)
-		values (admin_sq.nextval,#{userid},#{emppwd},#{empname}, #{tel}, #{email},sysdate)
+		insert into admin(empno,userid,emppwd,empname,tel,email,regdate,profile)
+		values (admin_sq.nextval,#{userid},#{emppwd},#{empname}, #{tel}, #{email},sysdate,#{profile})
 	</insert>
+	
+	<!-- 로그인 -->
 	<select id="adminLogin" parameterType="com.allhomes.myapp.admin.AdminRegisterVO" resultType="com.allhomes.myapp.admin.AdminRegisterVO">
-		select userid,empname,emppwd from admin where userid=#{userid}
+		select profile,userid,empname,emppwd from admin where userid=#{userid} and emppwd = #{emppwd}
 	</select>
+	
+	<!-- 아이디 중복확인 -->
 	<select id="idCheck" parameterType="String" resultType="int">
-		select userid from admin where userid=#{userid}
+		select count(userid) from admin where userid=#{userid}
+	</select>
+	
+	<!-- 모든 관리자 정보 가져오기 -->
+	<select id="adminAll" resultType="com.allhomes.myapp.admin.AdminRegisterVO">
+		select empno,userid,empname, tel, email, regdate, profile from admin
 	</select>
 </mapper>

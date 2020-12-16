@@ -15,7 +15,7 @@
 import BootPay from "bootpay-js"</script>
 <script>
 BootPay.request({
-    price:'${pVO.total_p}', //실제 결제되는 가격
+    price: '${pVO.total_p}', //실제 결제되는 가격
     name: '${pVO.itemName}', //결제창에서 보여질 이름
     pg: 'danal',
     show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
@@ -25,16 +25,14 @@ BootPay.request({
             qty: 1, //수량
             unique: '123', //해당 상품을 구분짓는 primary key
             price: 1000, //상품 단가
-            cat1: 'TOP', // 대표 상품의 카테고리 상, 50글자 이내
-            cat2: '티셔츠', // 대표 상품의 카테고리 중, 50글자 이내
-            cat3: '라운드 티', // 대표상품의 카테고리 하, 50글자 이내
+            
         }
     ],
+    
     user_info: {
-        username: '사용자 이름',
-        email: '사용자 이메일',
-        addr: '사용자 주소',
-        phone: '010-1234-4567'
+        username: '${pVO.userid}',
+        addr: ' ${pVO.addr}',
+        phone: '${pVO.tel}'
     },
     method: 'card', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
     order_id: '고유order_id_1234', //관리하시는 고유 주문번호를 입력해주세요
