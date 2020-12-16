@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
@@ -601,13 +602,21 @@ public class mypageController {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		
-		System.out.println(r.getParameter("m_no"));
-		
 		HttpSession ses = r.getSession();
-		String userid = (String)ses.getAttribute("userid");
+		String userid = (String)ses.getAttribute("userid");	
 		
+		PagingVO pageVO = new PagingVO();
+		pageVO.setUserid(userid);
+		
+		String nowPageTxt = r.getParameter("nowPage");	// 현재페이지
+		if(nowPageTxt!=null) {								// 페이지 번호를 서버로 가져온 경우
+			pageVO.setNowPage(Integer.parseInt(nowPageTxt));
+		}
+		
+		pageVO.setTotalRecord(dao.getAllListCount(pageVO));		// 총 레코드 수		
 		List<MypageWishlistJoinVO> list = dao.wishlistPage(userid);
 		
+		mv.addObject("pageVO", pageVO);
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");
 				

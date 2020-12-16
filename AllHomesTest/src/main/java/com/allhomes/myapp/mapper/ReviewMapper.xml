@@ -14,7 +14,8 @@
 	select userid, pd_no, rating, img, content, writedate, s_no from review where userid=#{userid} and pd_no=#{pd_no}
 </select>
 <insert id="insertReview" parameterType="com.allhomes.myapp.review.ReviewVO">
-	insert into review(userid, pd_no, rating, img, content, writedate, s_no) values(userid=#{userid}, pd_no=#{pd_no}, rating=#{rating}, img=#{img}, content=#{content}, writedate=#{writedate}, s_no=#{s_no})
+	insert into review(userid, pd_no, rating, img, content, writedate, s_no) select #{userid}, #{pd_no}, #{rating}, #{img}, #{content}, sysdate, #{s_no} from dual a
+	where not exists(select pd_no from wishlist where pd_no=#{pd_no} and userid=#userid})
 </insert>
 <update id="reviewHitAdd" parameterType="com.allhomes.myapp.review.ReviewVO">
 	update review set hit = hit+1 where r_no=#{r_no}
@@ -29,7 +30,14 @@
 	delete from review where pd_no=#{pd_no}
 </delete>
 
-
+<select id="selectReviewList" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select from (select c.pc_no, c.pc_date, c.userid, c.pd_no, c.num, c.o_value, p.pd_name, 
+	r.userid, r.img, r.content, r.writedate, r.rating from purchase c join product p on c.pd_no=p.pd_no join review r on c.userid=r.userid) 
+	where chk_no=#{chk_no}
+</select>
+<select id="reviewInfo" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO" resultType="com.allhomes.myapp.review.ReviewJoinVO">
+	select * from (select c.pc_no, c.pd_no, to_char(c.pc_date, 'YYYY-MM-DD') pc_date, c.o_value, c.num, c.userid, c.s_no, p.pd_name, p.main_img from purchase c, product p where p.pd_no = c.pd_no) where pc_no=#{pc_no} and userid=#{userid}
+</select>
 
 <!-- 스토어디테일 페이지 -->
 <select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
@@ -43,5 +51,8 @@
 </select>
 <select id="countReview" parameterType="int" resultType="int">
 	select count(pd_no) from review where pd_no=#{pd_no}
+</select>
+<select id="getAllReview" parameterType="com.allhomes.myapp.product.PagingVO">
+	select count(pd_no) from review where pd_no=#{pd_no} and userid=#{userid}
 </select>
 </mapper>

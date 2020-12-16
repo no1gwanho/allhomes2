@@ -29,8 +29,8 @@
 		select p.pd_no, p.s_no, p.pd_name, p.price, p.discount, p.main_img, p.stock, p.status, p.sub_c, p.pd_img, p.pd_exp, p.shipping_c, r.userid, r.img, r.content, r.writedate, r.rating_price, r.rating_delivery, r.rating_design, r.rating_durability from product p, review r where p.pd_no=r.pd_no and p.s_no=r.s_no;
   	</select> -->
   	<select id="joinPurchase" parameterType="String" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
-		select * from (select c.pc_no, c.pd_no, c.s_no, c.userid, c.num, c.pc_date, c.status, c.confirm, c.payment, c.memo, c.o_value, p.pd_name,
- 		round(p.price-(p.price*p.discount/100), 1) as price, p.shipping_c, p.main_img, s.s_name from purchase c join product p on c.pd_no=p.pd_no join store s on s.s_no = c.s_no) where userid=#{userid}
+		select * from (select c.pc_no, c.pd_no, c.pc_date, c.userid, r.img, r.content, r.rating, r.s_no, r.writedate 
+		from purchase c, review r where c.userid=r.userid) where pc_no=#{pc_no} and userid=#{userid}
   	</select>
   	<select id="purchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
   		select * from purchase where userid=#{userid} and pd_no=#{pd_no}
