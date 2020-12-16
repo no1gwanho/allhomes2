@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.cart.CartDaoImp;
+import com.allhomes.myapp.cart.CartVO;
+import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
@@ -22,8 +25,7 @@ public class OrderController {
 	@Autowired
 	SqlSession sqlSession;
 
-	
-	//주문폼으로 이동
+	// 주문폼으로 이동
 	@RequestMapping("/order")
 	public ModelAndView orderPage(HttpServletRequest req, @RequestParam("c_no") String c_no) {
 		ModelAndView mv = new ModelAndView();
@@ -42,7 +44,6 @@ public class OrderController {
 			c_noList[i] = Integer.parseInt(StrC_no[i]);
 		}
 
-
 		String itemName = "";
 
 		// itemName 세팅
@@ -51,8 +52,7 @@ public class OrderController {
 		} else if (c_noList.length <= 1) { // 하나만 구매
 			itemName = dao.selectOrderCart(c_noList[0]).getPd_name();
 		}
-		
-	
+
 		List<OrderVO> oList = new ArrayList<OrderVO>(); // orderVO 배열
 
 		try { // c_no 넣어서 주문 VO로 들고 나오기
@@ -76,28 +76,26 @@ public class OrderController {
 		mv.addObject("rVO", rVO); // 회원정보
 		mv.setViewName("order/orderForm");
 		mv.addObject("purchaseName", itemName);
-		
+
 		return mv;
 	}
 
-	
-	//결제 완료 후
+	// 결제 완료 후
 	@RequestMapping(value = "/orderPurchase", method = RequestMethod.POST)
 	public ModelAndView orderPurchase(HttpSession ses, OrderPurchaseVO vo) {
 		ModelAndView mav = new ModelAndView();
 		
 		
 		  OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
-		   
-		   
-		   
-		   PurchaseVO pVO = new PurchaseVO();
+		  CartDaoImp cDao = sqlSession.getMapper(CartDaoImp.class);
+		  
+		   PurchaseVO pVO = new PurchaseVO(); //구매 VO
 		   
 		   String c_noStr = (String)ses.getAttribute("c_no");
 		   
 		   String[] c_noStrList = c_noStr.split(",");
 		  
-		   
+		   //장바구니 번호 배열
 		   int[] c_noList = new int[c_noStrList.length];
 		   
 		   for(int i=0; i<c_noList.length; i++) {
@@ -114,17 +112,52 @@ public class OrderController {
 				  dao.selectOrderCart(c_noList[0]).getPd_name();
 		   }
 		   
-		   pVO.setItemName(itemName);
-		   pVO.setTotal_p(vo.getTotal_p());
-		   pVO.setMethod(vo.getPayment());
+		   
+		   //주문VO
+		   List<OrderVO> oList = new ArrayList<OrderVO>(); // orderVO 배열
+			try { // c_no 넣어서 주문 VO로 들고 나오기
+				for (int i = 0; i < c_noList.length; i++) {
+					oList.add(dao.selectOrderCart(c_noList[i]));
+				}
+			} catch (NullPointerException e) {
+			}
+			
+			pVO.setTotal_p(vo.getTotal_p()+vo.getShipping_c()); //총가격 세팅
+			pVO.setUserid((String)ses.getAttribute("userid")); //id
+			pVO.setM_no(dao.selectM_no((String)ses.getAttribute("userid"))); //m_no 세팅
+			pVO.setPayment(vo.getPayment()); //구매 유형
+			pVO.setStatus("결제완료"); //상태 세팅
+			pVO.setA_code(vo.getA_code()); //주소 번호
+			pVO.setConfirm("Y");
+			pVO.setMemo(vo.getMemo()); //배송 메모
+			
+			CartOrderVO cVO = new CartOrderVO();
+			OrderVO oVO = new OrderVO();
+			
+			 for(int i=0; i<oList.size(); i++) {
+				 oVO = oList.get(i);
+				 cVO = dao.selectCart(oVO.getC_no()); //장바구니 VO 가져오기
+				 
+				 pVO.setPd_no(cVO.getPd_no()); //제품 번호 세팅
+				 pVO.setNum(cVO.getNum()); //개수 세팅
+				 pVO.setPrice(cVO.getPrice()*cVO.getNum()); //제품당 가격 세팅
+				 pVO.setShipping_c(cVO.getShipping_c()); //배송비
+				 pVO.setO_value(cVO.getO_value()); //옵션 세팅
+				 pVO.setS_no(oVO.getS_no()); //스토어 번호 세팅
+				 pVO.setPc_no(dao.getLastSQ()); //시퀀스 세팅
+				 
+				 if(i==0) {
+					 dao.insertPurchaseCurrval(pVO); //다음 상품
+				 }else {
+					 dao.insertPurchase(pVO); //장바구니 처음 상품 
+				 }
+			 }
 		   
 		   AddressVO aVO = dao.selectA_code(vo.getA_code());
-		   pVO.setAddr(aVO.getAddr() + " " + aVO.getAddrdetail()); //주소 세팅
-		   pVO.setTel(aVO.getTel()); //연락처 세팅
-		   pVO.setUserid((String)ses.getAttribute("userid"));
+		  
 		   
 		   
-		 
+		   mav.addObject("oList", oList); // 장바구니 상품 리스트
 		   mav.setViewName("order/purchaseOk");
 		   mav.addObject("vo", vo);
 		   mav.addObject("pVO", pVO);
@@ -132,30 +165,9 @@ public class OrderController {
 		   return mav;
 	}
 
-	
-	@RequestMapping("/purchaseName")
-	@ResponseBody
-	public String purchaseName(HttpSession ses) {
-		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
-
-		String c_noStr = (String) ses.getAttribute("c_no");
-
-		String[] c_noStrList = c_noStr.split(",");
-
-		int[] c_noList = new int[c_noStrList.length];
-
-		for (int i = 0; i < c_noList.length; i++) {
-			c_noList[i] = Integer.parseInt(c_noStrList[i]); // 장바구니 번호 int로 바꿔서 넣기
-		}
-
-		String itemName = "";
-
-		// itemName 세팅
-		if (c_noList.length > 1) { // 두 제품 이상 구매
-			itemName = dao.selectOrderCart(c_noList[0]).getPd_name() + " 외 " + (c_noList.length - 1) + "건";
-		} else if (c_noList.length <= 1) { // 하나만 구매
-			itemName = dao.selectOrderCart(c_noList[0]).getPd_name();
-		}
-		return itemName;
+	@RequestMapping("/pp")
+	public String pp() {
+		return "order/purchaseOk";
 	}
+
 }

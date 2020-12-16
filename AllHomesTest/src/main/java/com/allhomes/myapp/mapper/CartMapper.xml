@@ -21,4 +21,8 @@
 		delete from cart where c_no = #{param1}
 	</delete>
 
+	<!-- 장바구니 선택 -->
+	<select id="selectCart" parameterType="com.allhomes.myapp.cart.CartVO">
+		select userid, pd_no, num, price, shipping_c, o_value, c_no from cart where c_no = #{param1}
+	</select>
 </mapper>

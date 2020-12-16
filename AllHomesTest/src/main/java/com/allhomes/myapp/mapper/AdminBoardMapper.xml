@@ -109,21 +109,21 @@
 	
 	<!-- homeboard 선택 검색 Count-->
 	<select id="adminHBSearchCount" parameterType="HashMap" resultType="int">
-		select count(*) from homeboard
-							 		<where>
-								 		<choose>
-								 			<when test="value == 'userid'">
-								 				userid LIKE '%'||#{key}||'%'
-								 			</when>
-								 			<when test="value == 'title'">
-								 				title LIKE '%'||#{key}||'%'
-								 			</when>
-								 			<when test="value == 'content'">
-								 				 content LIKE '%'||#{key}||'%'
-								 			</when>
-								 		</choose>
-							 		</where>
-							 		
+	select count(*) from homeboard
+		<where>
+			<choose>
+				<when test="value == 'userid'">
+					userid LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'title'">
+					title LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'content'">
+					content LIKE '%'||#{key}||'%'
+				</when>
+			</choose>
+		</where>
+
 	</select>
 	
 	
