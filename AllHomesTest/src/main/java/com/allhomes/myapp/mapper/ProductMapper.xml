@@ -12,7 +12,7 @@
 	</select>
   	<!-- 모든 제품 조회 -->
   	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img from product
+  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img from product
   	    <choose>
   	    	<when test="sortPd!=null and sortPd.equals('recent')">
   	    		order by pd_no desc
@@ -55,7 +55,7 @@
   	</select>  	
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
   	</select>
   	<!-- 제품+스토어 조인 -->
   	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">

@@ -49,13 +49,11 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/reviewWriteOk", method=RequestMethod.POST)
-	public ModelAndView reviewWriteOk(ReviewVO vo, 
-									@RequestParam("img") MultipartFile mf, 
+	public ModelAndView reviewWriteOk(@RequestParam("img") MultipartFile mf, 
 									@RequestParam("pd_no") int pd_no,
 									@RequestParam("s_no") int s_no,
 									@RequestParam("content") String content,
 									@RequestParam("rating") Double rating,
-									@RequestParam("writedate") String writedate,
 									HttpServletRequest r) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -63,18 +61,20 @@ public class ReviewController {
 		
 		String userid = (String)ses.getAttribute("userid");
 		String path = ses.getServletContext().getRealPath("/") + "resources\\upload\\reviewImg\\";	// 파일 저장 위치
-
+		
 		// 폼의 파일 첨부 객체 변수
 		String imgParamName = mf.getName();
 		// 원래 파일명 구하기
 		String oriImgName = mf.getOriginalFilename();
 		
+		ReviewVO vo = new ReviewVO();
+		
 		vo.setImg(oriImgName);
 		vo.setUserid(userid);
 		vo.setPd_no(pd_no);
+		vo.setS_no(s_no);
 		vo.setContent(content);
 		vo.setRating(rating);
-		vo.setWritedate(writedate);
 		
 		//=================================
 		try {
@@ -90,7 +90,31 @@ public class ReviewController {
 		
 		System.out.println("result값 얼마야????????????????? " + result);
 		
+		mav.addObject("result", result);		
+		mav.setViewName("landing/reviewResult");
+		
 		return mav;
+	}
+	
+	@RequestMapping("/reviewEdit")
+	public ModelAndView reviewEdit(HttpServletRequest req, @RequestParam("pc_no") int pc_no) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession ses = req.getSession();		
+		ReviewDaoImp dao = sqlSession.getMapper(ReviewDaoImp.class);
+		
+		String userid = (String)ses.getAttribute("userid");
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		pvo.setPc_no(pc_no);
+	
+		ReviewJoinVO vo = dao.reviewInfo(pvo);
+		
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("review/reviewEditForm");
+		
+		return mv;
 	}
 	
 	@RequestMapping("/reviewHitAdd")

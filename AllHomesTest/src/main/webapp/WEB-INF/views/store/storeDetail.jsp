@@ -428,8 +428,8 @@
 								<c:forEach var="r" items="${rList}">
 									<div class="row">
 										<div class="col-12" style="margin-top:15px;">
-											<a href="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no }" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;">수정</a>
-											<a href="/myapp/reviewDel?pd_no=${vo.pd_no }&r_no=${r.r_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
+											<a href="/myapp/reviewEdit?pd_no=${vo.pd_no }&userid=${r.userid }" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;">수정</a>
+											<a href="/myapp/reviewDel?pd_no=${vo.pd_no }&userid=${r.userid }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
 										</div>
 										<div class="col-12">
 											<c:if test="${r.img != null}">

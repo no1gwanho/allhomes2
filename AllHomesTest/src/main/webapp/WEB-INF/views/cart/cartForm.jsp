@@ -64,7 +64,7 @@
 		});
 		
 		var shipping_c = 0; //배송비
-		var price = 0; //상품가격
+		var dc_price = 0; //상품가격
 		
 		
 		//가격과 배송가격 값 출력
@@ -72,14 +72,14 @@
 		    
 		     if($(this).is(":checked")){
 		    	shipping_c += Number($(this).next().val()); //배송비
-		    	price += Number($(this).next().next().val()); //가격
+		    	dc_price += Number($(this).next().next().val()); //가격
 			     
 		     }else{
 		    	 shipping_c -= Number($(this).next().val()); //배송비
-			     price -= Number($(this).next().next().val()); //가격
+			     dc_price -= Number($(this).next().next().val()); //가격
 		     }
 		     
-		     //alert("price="+price+"ship"+shipping_c);
+		     //alert("dc_price="+price+"ship"+shipping_c);
 		     
 		     $("#price").html(price);
 		     $("#ship").html(shipping_c);
@@ -121,7 +121,7 @@
 												<td>
 													<input type="checkbox" name="chBox" class="chBox" value="${c.c_no }">
 													<input type="hidden" id="shipping_c" value="${c.shipping_c}"/>
-													<input type="hidden" id="shipping_c" value="${c.price*c.num}"/>
+													<input type="hidden" id="shipping_c" value="${c.dc_price*c.num}"/>
 												</td>
 											
 												<td>

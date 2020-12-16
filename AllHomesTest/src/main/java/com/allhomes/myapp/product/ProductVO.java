@@ -16,11 +16,17 @@ public class ProductVO {
 	private String o_value;		//옵션
 	private String main_c;		//메인카테고리
 	private int wishlist;		//위시리스트 (혹시몰라추가 -은지)
-	private int sale;			//판매 (혹시몰라추가 -은지)ㅊ
-	
+	private int sale;			//판매 (혹시몰라추가 -은지)
+	private int dc_price;
 
 	
 	
+	public int getDc_price() {
+		return dc_price;
+	}
+	public void setDc_price(int dc_price) {
+		this.dc_price = dc_price;
+	}
 	public String getMain_c() {
 		return main_c;
 	}
