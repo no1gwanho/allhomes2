@@ -75,7 +75,7 @@ public class mypageController {
 
 	//mypage 회원정보수정으로이동
 	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
-	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1) {
+	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1,HttpServletResponse req) {
 		
 		MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
 		ModelAndView mav = new ModelAndView();	
@@ -117,9 +117,22 @@ public class mypageController {
 			mav.setViewName("mypage/userEditForm");
 			
 		}else {	//로그인 안하고 들어올때 돌려보내야함	
+				req.setContentType("text/html;charset=UTF-8");
+				PrintWriter out;
+				try {
+					mav.setViewName("/home");
+					out = req.getWriter();
+					out.println("<script>alert('로그인 후 수정이 가능합니다.');</script>");
+					out.flush();
+							
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			
 			
 			}
-			mav.setViewName("mypage/userEditForm");
+			
 		
 		return mav;
 	}
