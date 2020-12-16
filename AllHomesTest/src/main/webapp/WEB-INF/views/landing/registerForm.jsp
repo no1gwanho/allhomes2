@@ -14,6 +14,21 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
 <style>
+	
+   @font-face{
+	   font-family:"SCDream3";
+	   src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+   @font-face{
+	   font-family:"SCDream5";
+	   src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+	
+	
 	#ul,li{list-style-type:none;}
 	#logo img{width:200px; display: block; margin: 0px auto;}
 	#signup{text-align:center;}
@@ -30,11 +45,23 @@
 	#widthblank2{margin-left:161px;}
 	#widthblank{margin-left:225px;}
 	#dupResult{color:#ee8374;display:none;}
-	#logo{margin-top:230px;}
+	#logo{margin-top:500px;}
 	#proPhoto{width:45%;}
+	#signup{margin-bottom:50px;}
 	
 	#dupFilter,#photoBtn{background-color:#ee8374;color:white;}
 	#photoBtn{width:65%;}
+	
+	
+	
+	
+	.form-control,#dupFilter,.boxTitle,#button,#signup{font-family:'SCDream3';}
+	.form-signin-heading{font-family: 'SCDream5'; font-size:30px;}
+	
+	.quesBtn{color:#ee8374}
+	a:hover{text-decoration:none;color:#ee8374}
+	a:visited{text-decoration:none;}
+	
 	
 </style>
 <script>
@@ -313,11 +340,11 @@ $(function(){
 	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
 	</div>
 	<form class="form-signin" method="post" id="regFrm" action="/myapp/registerOk" enctype="multipart/form-data">
-	<h2 class="form-signin-heading">회원가입</h2>
+	<div class="form-signin-heading">회원가입</div>
 				
  		
 		<div class="form-row align-items-center">
-			<label for="userid">*아이디</label> 
+			<label class="boxTitle" for="userid">*아이디</label> 
 				<div id="widthblank"></div>
 			
 				
@@ -330,32 +357,32 @@ $(function(){
 		<input type="text" name="userid" id="userid" placeholder="영문,숫자조합 6~13글자" class="form-control"/>							<!-- 아이디 input 영역 -->
  		<input type="hidden" name="idStatus" id="idStatus" value="N"/>
  		 		
- 		<label for="userpwd">*비밀번호</label>
+ 		<label class="boxTitle" for="userpwd">*비밀번호</label>
  		<input type="password" name="userpwd" id="userpwd" class="form-control" placeholder="영문,숫자,특수문자조합 6~15글자" />			<!-- 비밀번호 input 영역 -->
  		
- 		<label for="userpwd">*비밀번호 확인</label>
+ 		<label class="boxTitle" for="userpwd">*비밀번호 확인</label>
  		<input type="password" id="userpwdChk" class="form-control" placeholder="비밀번호 확인" />										<!-- 비밀번호 확인 input 영역 -->
  		
- 		<label for="username">*이름</label> 
+ 		<label class="boxTitle" for="username">*이름</label> 
  		<input type="text" name="username" id="username" placeholder="본명으로 입력해주세요" class="form-control"/>						<!-- 이름 input 영역 -->
 				
 		
-		<label for="nickname">닉네임</label>
+		<label class="boxTitle" for="nickname">닉네임</label>
 		<input type="text" name="nickname" id="nickname" placeholder="특수문자 제외 3~10자" class="form-control"/>						<!-- 닉네임 input 영역 -->
 	
 
-		<label for="photoBtn">프로필 사진</label>
+		<label class="boxTitle" for="photoBtn">프로필 사진</label>
 		<input id="photoBtn" type="file" name="photoBtn" class="form-control"></input>												<!-- 프로필사진 업로드 -->
 		<img id="preProfile" style="width:150px;height:150px" src="/myapp/resources/upload/register/<%=session.getAttribute("m_pic")%>"/>
 		<br/>	
 			
 		
-	<label for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->
+	<label class="boxTitle" for="username">*연락처</label> 																						<!-- 연락처 input 영역 -->
  		<input type="text" name="tel" id="tel" placeholder="'-생략 입력'" class="form-control"/>
 	
 		
 	
-		<label for="email">*이메일</label>
+		<label class="boxTitle" for="email">*이메일</label>
 		<div class="form-row align-items-center">
 			<div id=mailbox1 class="col-auto"><!-- 이메일 입력박스 1 -->
 				<input type="text" class="form-control mb-2" id="emailText" name="email1" placeholder="이메일 입력"/>					<!-- 이메일1 input 영역 -->
@@ -385,7 +412,7 @@ $(function(){
  		
  		</form>
  		<div id="signup">
- 		<a href="/myapp/login">이미 가입하셨나요?</a><a href="/myapp/"> 홈으로</a>
+ 		<a class="quesBtn" href="/myapp/login">이미 가입하셨나요?</a><a class="quesBtn" href="/myapp/"> 홈으로</a>
  		</div>
  		
 	</div>

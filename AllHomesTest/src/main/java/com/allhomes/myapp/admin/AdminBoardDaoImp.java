@@ -3,8 +3,6 @@ package com.allhomes.myapp.admin;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.qna.QnaVO;
