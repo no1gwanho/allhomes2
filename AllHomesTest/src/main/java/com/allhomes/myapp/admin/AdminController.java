@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.order.OrderDaoImp;
+
 @Controller
 public class AdminController {
 
@@ -28,6 +30,11 @@ public class AdminController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	
+	@RequestMapping("/test3")
+	public String ee() {
+		return "admin/test";
+	}
 	
 	
 	
@@ -67,6 +74,13 @@ public class AdminController {
 		AdminRegisterDaoImp rDao = sqlSession.getMapper(AdminRegisterDaoImp.class);
 		mav.addObject("aList",rDao.adminAll()); //관리자 정보
 		
+		//주문 현황
+		OrderDaoImp oDao = sqlSession.getMapper(OrderDaoImp.class);
+		mav.addObject("confirm",oDao.statusConfirm()); //구매확정
+		mav.addObject("delivery",oDao.statusDelivery()); //배송중
+		mav.addObject("deliveryPre",oDao.statusDeliveryPre()); //배송준비
+		mav.addObject("waiting",oDao.statusDepositWaiting()); //입금대기
+		mav.addObject("payment",oDao.statusPayment()); //결제완료
 		
 		return mav;	
 	}

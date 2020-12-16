@@ -26,6 +26,9 @@ public interface AdminMemberDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
+	//메인화면-최근 일주일 사이 가입한 회원 수
+	public int countRegisMain(int date);
+	
 	//==========infoCnt===================
 	//회원-게시글 수(집들이)
 	public int memberHBCnt(String userid);

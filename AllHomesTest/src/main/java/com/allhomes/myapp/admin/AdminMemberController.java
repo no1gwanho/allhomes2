@@ -40,7 +40,13 @@ public class AdminMemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-
+		//일주일 간 가입한 회원 수
+		
+		for(int i=0; i<7; i++) {
+			mav.addObject("count"+i,dao.countRegisMain(i));
+			
+		}
+		
 		mav.addObject("month", month);
 		mav.addObject("allCnt", allCnt);
 		mav.addObject("today", today);

@@ -5,6 +5,7 @@
 <!-- bxslider -->
  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/jquery.bxslider.css" type="">
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
 	.sec3_list li {
 	transition: 0.5s all;
@@ -97,6 +98,7 @@
 			prevText : "",
 			nextText : ""
 		});
+			
 	});
 </script>
 <!-- Begin Page Content -->
@@ -207,7 +209,7 @@
 					
 				</div>
 				<!-- Card Body -->
-				<div class="card-body">
+				<div class="card-body" >
 					<div id="banner_list">
 						<ul class="sec3_list">
 							<c:forEach var="vo" items="${aList}">
@@ -238,38 +240,47 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-					<div class="dropdown no-arrow">
-						<a class="dropdown-toggle" href="#" role="button"
-							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <i
-							class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-						</a>
-						<div
-							class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-							aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
-					</div>
+					<h6 class="m-0 font-weight-bold text-primary">주문 상태 현황</h6>
+			
 				</div>
 				<!-- Card Body -->
-				<div class="card-body">
-					<div class="chart-pie pt-4 pb-2">
-						<canvas id="myPieChart"></canvas>
-					</div>
-					<div class="mt-4 text-center small">
-						<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-							Direct
-						</span> <span class="mr-2"> <i class="fas fa-circle text-success"></i>
-							Social
-						</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-							Referral
-						</span>
-					</div>
+				<div class="card-body" style="padding-bottom:90px">
+					<input type="hidden" value="${waiting}" id="w"/>
+					<input type="hidden" value="${payment}" id="p"/>
+					<input type="hidden" value="${deliveryPre}" id="dp"/>
+					<input type="hidden" value="${delivery}" id="d"/>
+					<input type="hidden" value="${confirm}" id="c"/>
+					
+					<canvas id="doughnutChart" style="margin-top:50px"></canvas>
+						<script>
+							//doughnut
+							var ctxD = document.getElementById("doughnutChart").getContext('2d');
+							var myLineChart = new Chart(ctxD, {
+								type : 'doughnut',
+								data : {
+									
+									datasets : [ {
+										
+										backgroundColor : [ "#5C484B",
+												"#E1B0B9", "#A85161",
+												"#DB5A51", "#A82C2C" ],
+										hoverBackgroundColor : ["#5C484B",
+											"#E1B0B9", "#A85161",
+											"#DB5A51", "#A82C2C" ],
+									    data : [ $("#w").val(), $("#p").val(), $("#dp").val(),
+									    	$("#d").val(), $("#c").val()]
+									} ],
+									labels : [ "입금대기", "결제완료", "배송준비",
+										"배송중", "구매확정" ]
+								},
+								options : {
+									responsive : true
+								}
+							});
+						</script>
+					
+					
+					
 				</div>
 			</div>
 		</div>
@@ -330,73 +341,7 @@
 				</div>
 			</div>
 
-			<!-- Color System -->
-			<div class="row">
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-primary text-white shadow">
-						<div class="card-body">
-							Primary
-							<div class="text-white-50 small">#4e73df</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-success text-white shadow">
-						<div class="card-body">
-							Success
-							<div class="text-white-50 small">#1cc88a</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-info text-white shadow">
-						<div class="card-body">
-							Info
-							<div class="text-white-50 small">#36b9cc</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-warning text-white shadow">
-						<div class="card-body">
-							Warning
-							<div class="text-white-50 small">#f6c23e</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-danger text-white shadow">
-						<div class="card-body">
-							Danger
-							<div class="text-white-50 small">#e74a3b</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-secondary text-white shadow">
-						<div class="card-body">
-							Secondary
-							<div class="text-white-50 small">#858796</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-light text-black shadow">
-						<div class="card-body">
-							Light
-							<div class="text-black-50 small">#f8f9fc</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 mb-4">
-					<div class="card bg-dark text-white shadow">
-						<div class="card-body">
-							Dark
-							<div class="text-white-50 small">#5a5c69</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 
 		</div>
 
@@ -446,21 +391,5 @@
 </div>
 <!-- /.container-fluid -->
 
-</div>
-<!-- End of Main Content -->
 
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-	<div class="container my-auto">
-		<div class="copyright text-center my-auto">
-			<span>Copyright &copy; Your Website 2020</span>
-		</div>
-	</div>
-</footer>
-<!-- End of Footer -->
-
-</div>
-<!-- End of Content Wrapper -->
-
-</div>
 <%@ include file="/WEB-INF/adminInc/adminFooter.jspf"%>

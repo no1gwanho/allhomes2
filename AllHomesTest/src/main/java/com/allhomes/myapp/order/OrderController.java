@@ -64,15 +64,6 @@ public class OrderController {
 		}
 
 		mv.addObject("aList", dao.selectAddr(m_no)); // 주소지 리스트
-
-		/*
-		 * / PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-		 * vo.setUserid(userid); int result = dao.insertPurchaseList(vo);
-		 * 
-		 * List<PurchaseJoinVO> list = dao.joinPurchase(userid); mv.addObject("list",
-		 * list); /
-		 */
-
 		mv.addObject("oList", oList); // 장바구니 리스트
 		mv.addObject("rVO", rVO); // 회원정보
 		mv.setViewName("order/orderForm");
@@ -172,9 +163,5 @@ public class OrderController {
 		   return mav;
 	}
 
-	@RequestMapping("/pp")
-	public String pp() {
-		return "order/purchaseOk";
-	}
-
+	
 }

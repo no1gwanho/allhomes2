@@ -126,6 +126,13 @@
  		select count(*) from register
  	</select>
  	
+ 	
+ 	<!-- main->일주일간 가입한 회원 수 -->
+ 	<select id="countRegisMain" parameterType="int" resultType="int">
+ 		select count(*) from register 
+ 		where to_char(regdate, 'YY/MM/DD') = to_char(sysdate-#{param1},'YY/MM/DD')
+ 	</select>
+ 	
  	<!-- 회원 정보 count -->
  	<select id="memberHBCnt" resultType="int">
  		select count(*)	from homeboard where userid=#{param1}
