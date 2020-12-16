@@ -117,6 +117,24 @@ public class SearchController {
 	}
 	
 	
+	@RequestMapping("/searchQna")
+	public ModelAndView searchQna(@RequestParam("key")String key) {
+		ModelAndView mav = new ModelAndView();
+		
+		SearchDaoImp dao = sqlSession.getMapper(SearchDaoImp.class);
+		List<QnaVO> qList = dao.searchQNA(key);
+		int qCount = dao.searchQNACount(key);
+		
+		
+		mav.addObject("key", key);
+		mav.addObject("qList", qList);
+		mav.addObject("qCount", qCount);
+		mav.setViewName("/search/searchQna");
+		
+		return mav;
+		
+	}
+	
 	
 	
 	

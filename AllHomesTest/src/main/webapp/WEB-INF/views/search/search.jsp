@@ -105,6 +105,7 @@
 	}
 	
 	.keyword{
+		text-weight:bold;
 		color:#ee8374;
 	}
 	
@@ -290,7 +291,7 @@
   	
   	
   	<c:if test="${qCount > 0 }">
-  		<a href="#" class=txtbtn>더보기</a>
+  		<a href="/myapp/searchQna?key=${key }" class=txtbtn>더보기</a>
   	</c:if>
   	
     <br/>

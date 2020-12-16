@@ -115,6 +115,11 @@
 		padding:0 50px 0 20px;
 		
 	}
+	
+	.bootstrap-select{
+		border: 1px solid gray;
+		border-radius:5px;
+	}
 
 	
 	#repbox{border:1px solid #E98374;}

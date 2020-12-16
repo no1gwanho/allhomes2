@@ -136,6 +136,10 @@
 	
 	#repbox{border:1px solid #E98374;}
 	
+	.bootstrap-select{
+		border: 1px solid gray;
+		border-radius:5px;
+	}
 	
 </style>
 
