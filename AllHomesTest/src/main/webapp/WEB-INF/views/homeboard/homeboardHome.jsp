@@ -5,18 +5,7 @@
 
 <style>
 
-	#bxslider img{
-		width:1400px;
-		height:450px;
-		border-radius:30px;
-	}
-	.bx-wrapper {
-	       -moz-box-shadow: none !important;
-	        -webkit-box-shadow: none !important;
-	        box-shadow: none !important;
-	        padding:0;
-	        margin:0;
-	}
+
 	.col-3, .col-lg-3, .col-xs-6{
 			text-align:center;
 			margin-bottom:10px;
