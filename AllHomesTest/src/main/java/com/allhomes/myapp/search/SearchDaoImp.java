@@ -38,5 +38,8 @@ public interface SearchDaoImp {
 	public List<StoreProductCategoryVO> searchProductOrder(HashMap<String, Object> paramMap);
 	
 	
+	//====집들이검색=====//
+	public List<StoreProductCategoryVO> searchHBOrder(HashMap<String, Object> paramMap);
+	
 	
 }

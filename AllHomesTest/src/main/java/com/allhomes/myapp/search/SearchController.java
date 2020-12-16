@@ -73,7 +73,7 @@ public class SearchController {
 		ModelAndView mav = new ModelAndView();
 		
 
-		HashMap<String, Object> paramMap = new HashMap();
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("key", key);
 		paramMap.put("order", order);
 		
@@ -92,4 +92,32 @@ public class SearchController {
 
 		return mav;
 	}
+	
+	
+	@RequestMapping("/searchHb")
+	public ModelAndView searchHb(@RequestParam("key") String key, @RequestParam("order") String order) {
+		ModelAndView mav = new ModelAndView();
+		SearchDaoImp dao = sqlSession.getMapper(SearchDaoImp.class);
+		
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("key", key);
+		paramMap.put("order", order);
+		
+		List<StoreProductCategoryVO> hList = dao.searchHBOrder(paramMap);
+		
+		int hCount = dao.searchHBCount(key);
+		
+		mav.addObject("hList", hList);
+		mav.addObject("hCount", hCount);
+		mav.addObject("key", key);
+		mav.addObject("order", order);
+		mav.setViewName("/search/searchHomeboard");
+
+		return mav;
+	}
+	
+	
+	
+	
+	
 }

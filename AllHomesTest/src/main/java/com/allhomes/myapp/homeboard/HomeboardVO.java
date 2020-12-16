@@ -14,7 +14,16 @@ public class HomeboardVO {
 	private int scrap;
 	private String ip;
 	private String writedate;
+	private String order;
 	
+	
+	
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
 	//조인을 위한 프로필 사진
 	private String m_pic;
 	

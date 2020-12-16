@@ -255,7 +255,7 @@
 	  	<br/>
 	  	
 	  	<c:if test="${hCount > 0 }">
-  		<a href="#" class=txtbtn>더보기</a>
+  		<a href="/myapp/searchHb?key=${key }&order=recent" class=txtbtn>더보기</a>
   		</c:if>
 		<br/>
 		<div id="hbDiv">
