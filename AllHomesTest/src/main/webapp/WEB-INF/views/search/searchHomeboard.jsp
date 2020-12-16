@@ -108,38 +108,22 @@
 		color:#ee8374;
 	}
 	
-		.product-name{
-		font-family:'SCDream5'
-	}
-	.store-name{
-		color:gray;
-		font-size:12px;
-	}
-	.store-discount{
-		font-family:'SCDream5';
-		font-size:20px;
-		color: #E98374
-	}
-	
-	.store-price{
-		color: black;
-		font-family:'SCDream5';
-		font-size:20px;
-	}
+
 	
 	
 	.inner{
 		padding:0 50px 0 20px;
 		
 	}
-
-	
-	#repbox{border:1px solid #E98374;}
 	
 	.bootstrap-select{
 		border: 1px solid gray;
 		border-radius:5px;
 	}
+
+	
+	#repbox{border:1px solid #E98374;}
+	
 	
 </style>
 
@@ -152,7 +136,7 @@
 		
 		$('#order').change(function(){
 			var selectedOrder = $('#order option:selected').val();
-			location.href="/myapp/searchStore?key="+key+"&order="+selectedOrder;
+			location.href="/myapp/searchHb?key="+key+"&order="+selectedOrder;
 		});
 		
 		
@@ -165,7 +149,7 @@
 <div class="container"><!-- ==============container오류 방지 div============== -->
   	<br/>
   	<br/>
-  	<h5>'${key}'에 대한 스토어검색 결과 <span class="keyword">${pCount }</span></h5>
+  	<h5>'${key}'에 대한 집들이 검색 결과 <span class="keyword">${hCount }</span></h5>
   	<hr>
   	
   	<div class="row">
@@ -174,46 +158,33 @@
 			<div class="col-3" style="text-align:center;">
 			<select class="selectpicker" name="order" id="order">
 				<option value="recent" <c:if test="${order == 'recent' }">selected</c:if>>최신순</option>
-				<option value="sale" <c:if test="${order == 'sale' }">selected</c:if>>판매순</option>
-				<option value="price" <c:if test="${order == 'price' }">selected</c:if>>최저가순</option>
 				<option value="recentBest" <c:if test="${order == 'recentBest' }">selected</c:if>>최근인기순</option>
 				<option value="best" <c:if test="${order == 'best' }">selected</c:if>>인기순</option>
 			</select>
 			</div>
 	</div>
   	
-	<div id="storeDiv">
-		<div class="row">
-				<c:forEach var="pVo" items="${pList}">
-					<div class="col-3 store-list" style="cursor:pointer;" onclick="window.location='/myapp/storeDetail?pd_no=${pVo.pd_no}'">
+		<div id="hbDiv">
+			<div class="row">
+				<c:forEach var="vo" items="${hList}">
+					<div class="col-lg-3">
 						<div class="thumbnail">
-							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${pVo.s_no}/${pVo.main_img}"/>
-						</div>	
-						<div class="card-body">	
-							<div class="store-name">${pVo.s_name }</div>
-							<div class="product-name">  ${pVo.pd_name }</div>
-							<c:if test="${pVo.discount != 0 }">
-							<span class="store-discount">${pVo.discount }%</span>
-							</c:if>
-							<span class="store-price">${pVo.price }원</span>
-							
-							<c:if test="${pVo.status!=null && pVo.status == '판매중'}">
-								<span class="badge badge-info">${pVo.status }</span>
-							</c:if>
-							<c:if test="${pVo.status!=null && pVo.status == '품절임박'}">
-								<span class="badge badge-warning">${pVo.status }</span>
-							</c:if>
-							<c:if test="${pVo.status!=null && pVo.status == '입고대기'}">
-								<span class="badge badge-secondary">${pVo.status }</span>
-							</c:if>
-						</div>	
+							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
+						</div>
+						<div class="card-body">
+							<div class="card-title">
+								<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+							</div>
+						<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
+							<a href="#" class="card-text">${vo.userid }</a>
+							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }</p>
+					</div> 
 					</div>
 				</c:forEach>
+			</div>
 		</div>
-	</div>
-	
 	<hr />
 
 	<div style="margin-top:100px;"></div>
    
-</div><!-- ==============container오류 방지 div============== -->
+</div>

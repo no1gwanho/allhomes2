@@ -77,6 +77,31 @@
 		content LIKE '%'||#{param1}||'%'
 	</select>
 	
+	<!-- homeboard 결과 - 정렬순서포함(제목, 내용, 유저아이디) -->
+	<select id="searchHBOrder" parameterType="hashmap" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+		from homeboard a 
+		join register c 
+		on a.userid = c.userid 
+		where a.title LIKE '%'||#{key}||'%' or 
+		a.content LIKE '%'||#{key}||'%' or
+		a.userid LIKE '%'||#{key}||'%'
+			<choose>
+				<when test="order!=null and order.equals('recent')">
+				 	order by b_no desc
+				</when>
+				<when test="order!=null and order.equals('best')">
+					order by scrap desc
+				</when>
+				<when test="order!=null and order.equals('recentBest')">
+					order by b_no desc, scrap desc 
+				</when>
+			</choose>
+	</select>
+		
+	
+	
+	
 	
 	<!-- 질문게시판 결과(제목, 내용, 유저아이디) -->
 	<select id="searchQNA" resultType="com.allhomes.myapp.qna.QnaVO">
