@@ -12,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.cart.CartDaoImp;
+import com.allhomes.myapp.cart.CartVO;
+import com.allhomes.myapp.mypage.AddressDaoImp;
+import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
@@ -21,6 +26,7 @@ public class OrderController {
 	@Autowired
 	SqlSession sqlSession;
 
+	// 주문폼으로 이동
 	@RequestMapping("/order")
 	public ModelAndView orderPage(HttpServletRequest req, @RequestParam("c_no") String c_no) {
 		ModelAndView mv = new ModelAndView();
@@ -39,7 +45,15 @@ public class OrderController {
 			c_noList[i] = Integer.parseInt(StrC_no[i]);
 		}
 
-		
+		String itemName = "";
+
+		// itemName 세팅
+		if (c_noList.length > 1) { // 두 제품 이상 구매
+			itemName = dao.selectOrderCart(c_noList[0]).getPd_name() + " 외 " + (c_noList.length - 1) + "건";
+		} else if (c_noList.length <= 1) { // 하나만 구매
+			itemName = dao.selectOrderCart(c_noList[0]).getPd_name();
+		}
+
 		List<OrderVO> oList = new ArrayList<OrderVO>(); // orderVO 배열
 
 		try { // c_no 넣어서 주문 VO로 들고 나오기
@@ -62,27 +76,27 @@ public class OrderController {
 		mv.addObject("oList", oList); // 장바구니 리스트
 		mv.addObject("rVO", rVO); // 회원정보
 		mv.setViewName("order/orderForm");
+		mv.addObject("purchaseName", itemName);
 
 		return mv;
 	}
 
-	
-	
+	// 결제 완료 후
 	@RequestMapping(value = "/orderPurchase", method = RequestMethod.POST)
 	public ModelAndView orderPurchase(HttpSession ses, OrderPurchaseVO vo) {
 		ModelAndView mav = new ModelAndView();
 		
 		
 		  OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
+		  CartDaoImp cDao = sqlSession.getMapper(CartDaoImp.class);
+		  
+		   PurchaseVO pVO = new PurchaseVO(); //구매 VO
 		   
-		   
-		   
-		   PayApiVO pVO = new PayApiVO();//결제 VO
 		   String c_noStr = (String)ses.getAttribute("c_no");
 		   
-		  String[] c_noStrList = c_noStr.split(",");
+		   String[] c_noStrList = c_noStr.split(",");
 		  
-		   
+		   //장바구니 번호 배열
 		   int[] c_noList = new int[c_noStrList.length];
 		   
 		   for(int i=0; i<c_noList.length; i++) {
@@ -99,57 +113,68 @@ public class OrderController {
 				  dao.selectOrderCart(c_noList[0]).getPd_name();
 		   }
 		   
-		   pVO.setItemName(itemName);
-		   pVO.setTotal_p(vo.getTotal_p());
-		   pVO.setMethod(vo.getPayment());
+		   
+		   //주문VO
+		   List<OrderVO> oList = new ArrayList<OrderVO>(); // orderVO 배열
+			try { // c_no 넣어서 주문 VO로 들고 나오기
+				for (int i = 0; i < c_noList.length; i++) {
+					oList.add(dao.selectOrderCart(c_noList[i]));
+				}
+			} catch (NullPointerException e) {
+			}
+			
+			pVO.setTotal_p(vo.getTotal_p()+vo.getShipping_c()); //총가격 세팅
+			pVO.setUserid((String)ses.getAttribute("userid")); //id
+			pVO.setM_no(dao.selectM_no((String)ses.getAttribute("userid"))); //m_no 세팅
+			pVO.setPayment(vo.getPayment()); //구매 유형
+			pVO.setStatus("결제완료"); //상태 세팅
+			pVO.setA_code(vo.getA_code()); //주소 번호
+			pVO.setConfirm("Y");
+			pVO.setMemo(vo.getMemo()); //배송 메모
+			
+			CartOrderVO cVO = new CartOrderVO();
+			OrderVO oVO = new OrderVO();
+			
+			int pc_no = 0; //결제번호
+			
+			 for(int i=0; i<oList.size(); i++) {
+				 oVO = oList.get(i);
+				 cVO = dao.selectCart(oVO.getC_no()); //장바구니 VO 가져오기
+				 
+				 pVO.setPd_no(cVO.getPd_no()); //제품 번호 세팅
+				 pVO.setNum(cVO.getNum()); //개수 세팅
+				 pVO.setPrice(cVO.getPrice()*cVO.getNum()); //제품당 가격 세팅
+				 pVO.setShipping_c(cVO.getShipping_c()); //배송비
+				 pVO.setO_value(cVO.getO_value()); //옵션 세팅
+				 pVO.setS_no(oVO.getS_no()); //스토어 번호 세팅
+				 pc_no = dao.getLastSQ();
+				 pVO.setPc_no(pc_no); //시퀀스 세팅
+				 
+				 if(i==0) {
+					 dao.insertPurchaseCurrval(pVO); //다음 상품
+				 }else {
+					 dao.insertPurchase(pVO); //장바구니 처음 상품 
+				 }
+			 }
 		   
 		   AddressVO aVO = dao.selectA_code(vo.getA_code());
-		   pVO.setAddr(aVO.getAddr() + " " + aVO.getAddrdetail()); //주소 세팅
-		   pVO.setTel(aVO.getTel()); //연락처 세팅
-		   pVO.setUserid((String)ses.getAttribute("userid"));
-		   
-		   
-		   
-		   /*
-			 
-			 * if(c_noList.length>1) { //구매에 2개 이상 itemName =
-			 * dao.selectOrderCart(c_noList[0]).getPd_name()+"외 "+(c_noList.length-1)+"건";
-			 * //ex)원목테이블 외 3건
-			 * 
-			 * 
-			 * }else if(c_noList.length<=1) { //하나만 구매 itemName =
-			 * dao.selectOrderCart(c_noList[0]).getPd_name(); }
-			 * 
-			 * OrderVO oVO = new OrderVO(); String[] pd_name = new String[c_noList.length];
-			 * //제품 이름 int[] pd_no = new int[c_noList.length]; //제품 번호 int[] num = new
-			 * int[c_noList.length]; //개수 int[] price = new int[c_noList.length]; //가격
-			 * 
-			 * for(int i=0; i<c_noList.length;i++) { oVO = dao.selectOrderCart(c_noList[i]);
-			 * pd_name[i] = oVO.getPd_name(); pd_no[i] = oVO.getPd_no(); num[i] =
-			 * oVO.getNum(); price[i] = oVO.getPrice(); }
-			 * 
-			 * AddressVO aVO = dao.selectA_code(vo.getA_code());
-			 * 
-			 * 
-			 * pVO.setItemName(itemName); //구매이름
-			 * //pVO.setTotal_p(vo.getTotal_p()+vo.getShipping_c()); //총 가격
-			 * pVO.setMethod(vo.getPayment()); //구매 유형
-			 * 
-			 * pVO.setPd_name(pd_name);//아이템 이름 pVO.setPd_no(pd_no);//제품 번호
-			 * pVO.setNum(num);//개수 pVO.setPrice(price);//가격
-			 * 
-			 */
-		   
-		   
 		  
+		   
+		
+		   mav.addObject("aVO",dao.selectA_code(vo.getA_code())); //주소지 세팅
+		   mav.addObject("oList", oList); // 장바구니 상품 리스트
+		   mav.setViewName("order/purchaseOk");
+		   mav.addObject("itemName", itemName); //결제 이름
+		   mav.addObject("pc_no", pc_no);
+		   mav.addObject("vo", vo);
+		   mav.addObject("pVO", pVO);
+		
+		   return mav;
+	}
 
-		
-		//mav.setViewName("order/purchaseTest");
-		mav.setViewName("pay/payApi");
-		mav.addObject("vo", vo);
-		mav.addObject("pVO", pVO);
-		
-		return mav;
+	@RequestMapping("/pp")
+	public String pp() {
+		return "order/purchaseOk";
 	}
 
 }

@@ -24,4 +24,13 @@ public interface OrderDaoImp {
 	
 	//주소지 번호로 선택
 	public AddressVO selectA_code(int a_code);
+	
+	//결제 후 구매 테이블에 추가 (시퀀스 +1)
+	public int insertPurchase(PurchaseVO pVO);
+	
+	//결제 후 구매 테이블에 추가 (시퀀스 +0)
+	public int insertPurchaseCurrval(PurchaseVO pVO);
+	
+	//결제번호 현재 시퀀스 가져오기
+	public int getLastSQ();
 }

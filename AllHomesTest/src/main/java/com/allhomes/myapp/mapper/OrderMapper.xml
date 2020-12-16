@@ -35,5 +35,22 @@
  	<select id="selectA_code" resultType="com.allhomes.myapp.order.AddressVO">
  		select receiver, a_code, zipcode, addr, addrdetail, tel, m_no from address where a_code = #{param1}
  	</select>
+ 	
+ 	<!-- 구매 테이블에 추가 -->
+ 	<insert id="insertPurchase" parameterType="com.allhomes.myapp.order.PurchaseVO">
+ 		insert into purchase(pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo, o_value, m_no)
+ 		 values(pc_sq.nextval, #{pd_no}, #{s_no}, #{userid}, #{num}, #{price}, #{shipping_c}, #{total_p}, #{a_code}, sysdate, #{payment}, #{status}, #{confirm}, #{memo}, #{o_value}, #{m_no})
+ 	</insert>
+ 	
+ 	<!-- 구매테이블에 추가(시퀀스 그대로) -->
+ 	<insert id="insertPurchaseCurrval" parameterType="com.allhomes.myapp.order.PurchaseVO">
+ 		insert into purchase(pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo, o_value, m_no)
+ 		 values(#{pc_no}, #{pd_no}, #{s_no}, #{userid}, #{num}, #{price}, #{shipping_c}, #{total_p}, #{a_code}, sysdate, #{payment}, #{status}, #{confirm}, #{memo}, #{o_value}, #{m_no})
+ 	</insert>
+ 	
+ 	<!-- 결제번호 현재 시퀀스 가져오기 -->
+ 	<select id="getLastSQ" resultType="int">
+ 		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE  SEQUENCE_NAME = 'PC_SQ'
+ 	</select>
 </mapper> 
 
