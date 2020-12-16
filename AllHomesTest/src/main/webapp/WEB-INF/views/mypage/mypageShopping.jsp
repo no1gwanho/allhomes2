@@ -11,19 +11,25 @@
 			}
 		});
 
-		$("#delBtn").click(function() {
-			var confirm_val = confir("정말 삭제하시겠습니까?");
-			if (confirm_val) {
-				var checkArr = new Array();
-				$("input[class='chBox']:checked").each(function() {
-					
-				});
-			}
-		});
-
 		$(".chBox").click(function(){
 			$("#allCheck").prop("checked", false);
 		});
+		
+		$("#orderCancel").click(function(){
+			var confirm_val = confirm("주문을 취소하시겠습니까?");
+			if(confirm_val){
+				var chkList="";
+				
+				$("input[class='chBox']:checked").each(function(i){
+					if(i>0){
+						chkList += ",";
+					}
+					chkList += $(this).val();
+				});
+				
+				location.href='<%=request.getContextPath() %>/orderCancel?pc_no='+chkList;
+			}
+		})
 	})
 </script>
 <style>
@@ -51,8 +57,11 @@
 	#searchDetail input{
 		margin-right:10px;
 	}
-	
+	.nav nav-tabs, .nav-item{
+		list-style-type:none;
+	}
 </style>
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -102,56 +111,115 @@
 		</div><!-- col-lg-12 끝 -->
 	</div>
 	<br/>
-	<c:forEach var="p" items="${list }">
-	<form method="post" action="/myapp/reviewWrite?pc_no=${p.pc_no }">
-		<div class="row">
-			<div class="col-3" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
-				주문번호 : ${p.pc_no }
+<!-- 탭메뉴 시작 -->
+	<div class="row">
+		<div class="col-12">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#order">주문내역</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#cancel">취소내역</a>
+				</li>				
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="order">
+						<c:if test="${empty list }">
+							<div style="margin:50px auto;height:800px;">
+								<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 내역이 없습니다.</span>
+							</div>
+						</c:if>
+						<c:if test="${!empty list }">
+							<div class="row" style="margin:25px;">
+								<div class="col-md-9">
+									<input type ="checkbox" name="allCheck" id="allCheck" style="background-color:#ee8374;margin-right:10px;"/><label for = "allCheck">모두 선택</label>
+								</div>
+								<div class="col-md-3" style="text-align:right;">
+									<button class="btn btn" id="orderCancel" style="font-size:0.8em;background-color:#ee8374;color:#fff;border:0;">주문취소</button>
+								</div>
+							</div>
+						</c:if>
+						<c:forEach var="p" items="${list }">
+							<div class="row">
+								<div class="col-3" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
+									주문번호 : ${p.pc_no }
+								</div>
+								<div class="col-9" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;text-align:right;">
+									주문일자 : ${p.pc_date }
+								</div>
+							</div>
+							<div class="row" style="margin-bottom:35px;">
+								<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+									<input type="checkbox" name="chBox" class="chBox" value=${p.pc_no }/>
+									<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${p.s_no}/${p.main_img}" style="border-radius:5%;width:180px;height:100px;margin-right:10px;margin-bottom:10px;"/></a>
+								</div>
+								<div class="col-6" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+									<b style="padding-top:10px;">${p.pd_name }</b><br/>
+									결제금액 : ${p.price * p.num + p.shipping_c }원<br/>
+									<c:if test="${p.o_value == null }">
+										수량 : ${p.num }	/ 업체명 : ${p.s_name }<br/>
+									</c:if>
+									<c:if test="${p.o_value != null }">
+										옵션 : ${p.o_value} / 수량 : ${p.num } / 업체명 : ${p.s_name }<br/>
+									</c:if>
+									
+								</div>
+								<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+									<c:if test="${p.confirm != 'Y' }">
+										<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button></a>
+										<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">구매확정</button>
+									</c:if>
+									<c:if test="${p.confirm == 'Y' }">
+										<form method="post" action="/myapp/reviewWrite?pc_no=${p.pc_no }">
+											<input type="submit" class="btn btn" value="리뷰쓰기" id="reviewBtn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;"/>
+										</form>
+										<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button></a>
+									</c:if>
+								</div>
+								<hr/>
+							</div>
+					</c:forEach>
+           		</div>
+				<div class="tab-pane fade" id="cancel">
+					<c:if test="${empty plist }">
+						<div style="margin:50px auto;height:800px;">
+							<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 취소 내역이 없습니다.</span>
+						</div>
+					</c:if>	
+					<c:forEach var="c" items="${pList }">
+						<c:if test="${c.chk_c==1 }">
+						<div class="row">
+							<div class="col-12" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
+								주문번호 : ${c.pc_no }
+							</div>
+						</div>
+						<div class="row" style="margin-bottom:35px;">
+							<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+								상품명
+							</div>
+							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+								<b style="padding-top:10px;">${c.pd_name }</b><br/>				
+							</div>
+							<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+								취소금액
+							</div>
+							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
+								${c.total_p }
+							</div>
+							<hr/>					
+						</div>	
+						</c:if>
+					</c:forEach>				
+				</div>
 			</div>
-			<div class="col-9" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;text-align:right;">
-				주문일자 : ${p.pc_date }
-			</div>
-		</div>
-		<div class="row" style="margin-bottom:35px;">
-			<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-				<input type="checkbox" name="chBox" class="chBox" value="${chk_no }"/>
-				<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${p.s_no}/${p.main_img}" style="border-radius:5%;width:180px;height:100px;margin-right:10px;margin-bottom:10px;"/></a>
-			</div>
-			<div class="col-5" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-				<b style="padding-top:10px;">${p.pd_name }</b><br/>
-				결제금액 : ${p.price * p.num + p.shipping_c }원<br/>
-				<c:if test="${p.o_value == null }">
-					수량 : ${p.num }	/ 업체명 : ${p.s_name }<br/>
-				</c:if>
-				<c:if test="${p.o_value != null }">
-					옵션 : ${p.o_value} / 수량 : ${p.num } / 업체명 : ${p.s_name }<br/>
-				</c:if>
-				
-			</div>
-			<div class="col-4" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-				<c:if test="${p.confirm != 'Y' }">
-					<a href="/myapp/order"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">취소/교환</button></a>
-					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button>
-					<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">구매확정</button>
-				</c:if>
-				<c:if test="${p.confirm == 'Y' }">
-					<input type="submit" class="btn btn" value="리뷰쓰기" id="reviewBtn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;"/>
-					<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button></a>
-				</c:if>
-			</div>
-			<hr/>
-		</div>
-			</form>
-	</c:forEach>
-		<div class="row" style="margin-bottom:35px;">
-			<div class="col-md-9">
-				<input type ="checkbox" name="allCheck" id="allCheck" style="background-color:#ee8374;margin-right:10px;"/><label for = "allCheck">모두 선택</label>
-			</div>
-			<div class="col-md-3" style="text-align:right;">
-				<button class="btn btn" id="delBtn" style="font-size:0.8em;background-color:#ee8374;color:#fff;border:0;">선택 삭제</button>
-			</div>
-		</div>
+		</div>	
+	</div>	      
 </div>
+
+	
+	
+	
+
 <!-- 페이징 -->
  <div>
  

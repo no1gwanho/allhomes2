@@ -97,11 +97,14 @@ public class StoreController {
 
 
 	@RequestMapping("/storeDetail")
-	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no){
+	public ModelAndView storeDetail(@RequestParam("pd_no") int pd_no, HttpServletRequest r){
 		ModelAndView mav = new ModelAndView();
 		
 		ProductDaoImp dao = sqlSession.getMapper(ProductDaoImp.class);
 		ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
+		HttpSession ses = r.getSession();
+		
+		String userid = (String)ses.getAttribute("userid");
 		
 		ProductJoinVO vo = dao.selectDetailPage(pd_no);
 		
@@ -118,6 +121,7 @@ public class StoreController {
 		}
 		
 		mav.addObject("vo", vo);
+		mav.addObject("userid", userid);
 		mav.addObject("rvo", rDao.avgReview(pd_no));
 		mav.addObject("result", rDao.countReview(pd_no));
 		mav.addObject("rList", rDao.selectReview(pd_no));		

@@ -13,4 +13,6 @@ public interface MypageWishlistDaoImp {
 	public int addWishlist(MypageWishlistJoinVO vo);
 	
 	public int getAllListCount(PagingVO vo);
+	
+	public int wishDel(int pd_no);
 }

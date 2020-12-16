@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.scripting.xmltags.TrimSqlNode;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.mypage.MypageWishlistDaoImp;
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.product.ProductVO;
+import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
+import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
@@ -150,7 +157,68 @@ public class OrderController {
 		
 		return mav;
 	}
-
+	
+	@RequestMapping("/orderCancel")
+	public ModelAndView orderDel(@RequestParam("pc_no") String pc_no, HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession ses = req.getSession();
+		String userid = (String)ses.getAttribute("userid");
+		
+		String strPc_no[] = pc_no.split("/");
+		int[] pc_noList = new int[strPc_no.length];
+		
+		for(int i=0; i<strPc_no.length; i++) {
+			pc_noList[i] = Integer.parseInt(strPc_no[i]);
+		}
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		
+		try {
+			for(int i=0; i<pc_noList.length; i++) {
+				pvo.setPc_no(pc_noList[i]);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}					
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		PurchaseJoinVO vo = dao.puchaseSelect(pvo);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("order/orderCancel");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/orderCancelOk", method = RequestMethod.POST)
+	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req,
+									@RequestParam("pd_name") String pd_name, @RequestParam("total_p") int total_p) {
+		ModelAndView mv = new ModelAndView();
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		
+		HttpSession ses = req.getSession();
+		String userid = (String)ses.getAttribute("userid");
+		int chk_c=1;
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		pvo.setPc_no(pc_no);
+		pvo.setPd_name(pd_name);
+		pvo.setTotal_p(total_p);
+		pvo.setChk_c(chk_c);
+	
+		System.out.println("주문 취소 잘 됐어?????????? " + pvo.getChk_c());
+		
+		List<PurchaseJoinVO> list = dao.orderCancelList(pvo);
+		
+		mv.addObject("pList", list);
+		mv.setViewName("redirect:mypageShopping");
+		
+		return mv;
+	}
 }
 
 

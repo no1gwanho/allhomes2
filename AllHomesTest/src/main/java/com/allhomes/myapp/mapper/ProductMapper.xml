@@ -72,7 +72,12 @@
   		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
   		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, main_c=#{main_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
   	</update>
-  	
+  	<update id="updateWishlistAdd" parameterType="com.allhomes.myapp.product.ProductVO">
+  		update product set wishlist = wishlist+1 where pd_no=#{pd_no}
+  	</update>
+  	<update id="updateWishlistRevert" parameterType="com.allhomes.myapp.product.ProductVO">
+  		update product set wishlist = wishlist-1 where pd_no=#{pd_no}
+  	</update>
   	<!--제품수정
   	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
   		update product set  pd_name=#{pd_name}, price=#{price}, discount=#{discount},

@@ -8,8 +8,16 @@ public class AdminRegisterVO {
 	private String tel;
 	private String email;
 	private String regdate;
+	private String profile;
 	
 	
+	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public int getEmpno() {
 		return empno;
 	}

@@ -24,18 +24,30 @@ public class PurchaseJoinVO {
 	private String img;
 	private String content;
 	private String writedate;
+	private int r_no;
 	
 	private int m_no;
 	private String receiver;
 	private int zipcode;
 	private String addr;
 	private String addrdetail;
-	private String tel;
-	
-	private String m_pic;
-	
-	private String id;
-		
+	private String tel;	
+	private String m_pic;	
+	private String id;	
+	private int chk_c;
+
+	public int getChk_c() {
+		return chk_c;
+	}
+	public void setChk_c(int chk_c) {
+		this.chk_c = chk_c;
+	}	
+	public int getR_no() {
+		return r_no;
+	}
+	public void setR_no(int r_no) {
+		this.r_no = r_no;
+	}
 	public String getId() {
 		return id;
 	}

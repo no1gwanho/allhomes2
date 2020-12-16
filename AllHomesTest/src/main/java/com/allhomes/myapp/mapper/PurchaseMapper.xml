@@ -13,26 +13,34 @@
 	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
 		select p.pc_no, p.userid, p.pc_date, p.o_value, r.img, r.content, r.writedate, r.rating from purchase p, review r where p.userid=r.userid(+) and r.userid(+)=#{userid}
 	</select>
+	<select id="orderCancelList" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
+		select * from purchase where chk_c=1 and userid=#{userid}
+	</select>
 	<insert id="insertPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
 		insert into purchase(pc_no, pd_no, s_no, userid, num, price, shipping_c, total_p, a_code, pc_date, payment, status, confirm, memo) values(pc_sq.nextval, pd_no=#{pd_no}, s_no=#{s_no}, userid=#{userid}, num=#{num}, price=#{price}, shipping_c=#{shipping_c}, total_p=#{total_p}, a_code=#{a_code}, pc_date=#{pc_date}, payment=#{payment}, status=#{status}, confirm=#{confirm}, memo=#{memo})
 	</insert>
-	<update id="editPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
-	
+	<update id="editPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO">
+		update purchase set chk_c = chk_c+1 where pc_no=#{pc_no} and userid=#{userid}
 	</update>
 	<update id="editConfirmCheck">
 		update purchase set confirm = 'Y' where pc_no=#{pc_no}
 	</update>
 	<delete id="delPurchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseVO">
-	
+		delete from purchase where userid=#{userid} and pc_no=#{pc_no}
 	</delete>
 <!-- 	<select id="joinPurchaseReview" resultType="com.allhomes.myapp.purchase.PurchaseVO">
 		select p.pd_no, p.s_no, p.pd_name, p.price, p.discount, p.main_img, p.stock, p.status, p.sub_c, p.pd_img, p.pd_exp, p.shipping_c, r.userid, r.img, r.content, r.writedate, r.rating_price, r.rating_delivery, r.rating_design, r.rating_durability from product p, review r where p.pd_no=r.pd_no and p.s_no=r.s_no;
   	</select> -->
+  	
   	<select id="joinPurchase" parameterType="String" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
-		select * from (select c.pc_no, c.pd_no, c.pc_date, c.userid, r.img, r.content, r.rating, r.s_no, r.writedate 
-		from purchase c, review r where c.userid=r.userid) where pc_no=#{pc_no} and userid=#{userid}
+       select * from (select c.pc_no, c.pd_no, to_char(c.pc_date, 'YYYY-MM-DD') as pc_date, c.userid, c.o_value, c.num, c.confirm, p.pd_name, p.s_no, p.main_img, p.price, p.discount, round(p.price-(p.price*discount/100), -1) as dc_price, p.shipping_c,
+        s.s_name from purchase c, product p, store s where c.pd_no=p.pd_no and p.s_no=s.s_no) where userid=#{userid}
   	</select>
   	<select id="purchaseList" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
   		select * from purchase where userid=#{userid} and pd_no=#{pd_no}
+  	</select>
+  	<select id="puchaseSelect" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO" resultType="com.allhomes.myapp.purchase.PurchaseJoinVO">
+  		select * from (select c.userid, c.pc_no, c.pd_no, c.o_value, c.num, to_char(c.pc_date, 'YYYY-MM-DD') as pc_date, c.payment, round(p.price-(p.price*p.discount/100), -1)*c.num+c.shipping_c as total_p, c.shipping_c, p.pd_name, p.main_img from purchase c, product p where c.pd_no=p.pd_no)
+		where pc_no=#{pc_no} and userid=#{userid}
   	</select>
 </mapper>

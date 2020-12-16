@@ -17,4 +17,7 @@
 	<insert id="addWishlist" parameterType="com.allhomes.myapp.mypage.MypageWishlistJoinVO">
 		insert into wishlist(pd_no, userid) select #{pd_no}, #{userid} from dual a where not exists(select pd_no from wishlist where pd_no=#{pd_no} and userid=#{userid})
 	</insert>
+	<delete id="wishDel">
+		delete from wishlist where pd_no=#{pd_no}
+	</delete>
 </mapper>
