@@ -133,6 +133,11 @@
  		where to_char(regdate, 'YY/MM/DD') = to_char(sysdate-#{param1},'YY/MM/DD')
  	</select>
  	
+ 	<!-- 탈퇴한 사람 -->
+ 	<select id="countRegisOut" resultType="int">
+ 		select count(*) from memwithdraw
+ 	</select>
+ 	
  	<!-- 회원 정보 count -->
  	<select id="memberHBCnt" resultType="int">
  		select count(*)	from homeboard where userid=#{param1}

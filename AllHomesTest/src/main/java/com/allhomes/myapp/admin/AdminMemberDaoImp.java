@@ -28,6 +28,8 @@ public interface AdminMemberDaoImp {
 	
 	//메인화면-최근 일주일 사이 가입한 회원 수
 	public int countRegisMain(int date);
+	//탈퇴 회원 수
+	public int countRegisOut();
 	
 	//==========infoCnt===================
 	//회원-게시글 수(집들이)

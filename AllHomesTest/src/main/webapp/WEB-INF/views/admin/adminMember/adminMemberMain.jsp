@@ -156,7 +156,7 @@ td {
 								<div
 									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
 									Loss</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">-412</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">-${out}</div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-users fa-2x text-gray-300"></i>
