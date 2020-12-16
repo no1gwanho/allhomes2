@@ -130,7 +130,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
 				</div>
-				<input type="text" class="form-control" placeholder="Search" aria-label="Search">
+				<input id="qnaSearch" type="text" class="form-control" placeholder="Search" aria-label="Search">
 			</div>
 		
 	</div>

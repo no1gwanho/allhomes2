@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.PagingVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
+import com.allhomes.myapp.qna.QnaDaoImp;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
@@ -58,12 +62,21 @@ public class mypageController {
 		
 		int m_no = (Integer)ses.getAttribute("m_no");
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
-		List<ScrapVO> sList = scrap.selectScrap(m_no);
+		List<ScrapVO> sList = scrap.mypageScrapList(m_no);
 		
+		//나의글리스트 (집들이/질문답변 따로 불러오기)
+		//집들이
+		HomeboardDaoImp myHbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		List<HomeboardVO> myHbList = myHbDao.myHomeboardList(userid);
 		
+		//질문답변 
+		QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
+		List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
 		
-		mv.addObject("list", list);	
-		mv.addObject("sList", sList);
+		mv.addObject("list", list);	 //위시리스트
+		mv.addObject("sList", sList); //스크랩
+		mv.addObject("myHbList", myHbList); //내가쓴 집들이
+		mv.addObject("myQnaList", myQnaList); //내가 쓴 질문글 
 		mv.addObject("vo", vo);
 		
 		mv.setViewName("mypage/mypageHome");
@@ -660,11 +673,9 @@ public class mypageController {
 	
 	
 	
-	//mypage 나의 작성글로 이동
-	@RequestMapping("/mypageMyboard")
-	public String mypageMyboard() {
-		return "mypage/mypageMyboard";
-	}
+	
+	
+	
 	
 	//mypage 회원 정보 수정으로 이동
 	@RequestMapping("/mypageEdit")

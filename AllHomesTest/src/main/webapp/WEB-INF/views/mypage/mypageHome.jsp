@@ -75,6 +75,18 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		}
+		
+	.qna-content{
+		height:100px;
+		overflow:hidden;
+		text-overflow: ellipsis;
+		
+	}
+	
+	.qna-card{
+		border: 1px solid #c2c1c0;
+		border-radius: 5%
+	}
 	
 </style>
 <div class="container">
@@ -164,16 +176,22 @@
 			<!-- 스크랩 -->
 			<div class="card border-light mb-3" style="height:290px;">
 				<div class="card-header">
-					스크랩<a href="/myapp/mypageScrap" style="float:right;">더보기</a>
+					
+					스크랩<a href="/myapp/mypageScrap" style="float:right;">
+					<c:if test ="${!empty sList }">
+						더보기
+					</c:if>
+					</a>
+	
 				</div>
 
 				<div class="card-body"><!-- card-body 시작 -->
 					<div class="row">
 						<c:if test ="${empty sList }">
-						<span style="margin:0 auto">관심있는 글이 없습니다</span>
+						<span style="margin:0 auto;color:black;">아직 관심있는 글이 없습니다</span>
 						</c:if>
 						<c:if test="${!empty sList }">
-						<c:forEach var="vo" items="${sList }">
+						<c:forEach var="vo" items="${sList }" end="3">
 						<div class="col-3">
 							<div class="thumbnail">
 								<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
@@ -190,16 +208,69 @@
 				</div>
 			</div>
 			
+			
 			<!-- 나의 작성글-->
 			<div class="card border-light mb-3">
 				<div class="card-header">
-					나의 작성 글<a href="/myapp/mypageMyboard" style="float:right;">더보기</a>
+					나의 작성 글
+					<c:if test="${!empty myHbList and !empty myQnaList}">
+					<a href="/myapp/mypageMylist?order=homeboard" style="float:right;">더보기</a>
+					</c:if>
+					<c:if test="${!empty myHbList and empty myQnaList}">
+					<a href="/myapp/mypageMylist?order=homeboard" style="float:right;">더보기</a>
+					</c:if>
+					<c:if test="${!empty myQnaList and empty myHbList}">
+					<a href="/myapp/mypageMylist?order=qnaboard" style="float:right;">더보기</a>
+					</c:if>
+					
 				</div>
 				
 				<div class="card-body"><!-- card-body 시작 -->
+					<div class="row">
+					<c:if test="${empty myHbList and empty myQnaList}">
 					<div style="width:100%;height:100px;text-align:center;line-height:100px;">
 							아직 작성한 글이 없습니다
 					</div>
+					</c:if>
+					
+					
+					<c:if test="${!empty myHbList}">
+					
+					<c:forEach var="vo" items="${myHbList }" end="3">
+					
+						<div class="col-3">
+							<div class="thumbnail">
+								<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
+							</div>
+							<div class="card-body">
+								<div class="card-title">
+									<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
+								</div>
+							</div>
+						</div>
+					
+					</c:forEach>
+					</c:if>
+					
+					<c:if test="${!empty myQnaList}">
+					<c:forEach var="vo" items="${myQnaList }" end="3">
+						<div class="col-3">
+							<div class="card-body qna-card">
+								<div class="card-title">
+									<a href="/myapp/qnaView?q_no=${vo.q_no }">${vo.title }</a>
+								</div>
+								<hr/>
+								<div class="qna-content">
+									${vo.content }
+								</div>
+								
+							</div>
+						</div>
+					</c:forEach>
+					</c:if>
+					</div>
+					
+					
 					
 				
 				</div>

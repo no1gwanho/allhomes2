@@ -3,12 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.allhomes.myapp.scrap.ScrapDaoImp">
-	<!-- 마이페이지 스크랩 4개만 미리보기 -->
-	<select id="selectScrap" parameterType="int" resultType="com.allhomes.myapp.scrap.ScrapVO">
-		<![CDATA[
-		select m_no, b_no, title, thumbnail from (select a.m_no, a.b_no, b.title, b.thumbnail from scrap a join homeboard b on a.b_no = b.b_no where a.m_no=#{m_no} order by a.writedate desc) where rownum<5 
-	 	]]>
-	</select>
 	
 	<!-- 마이페이지 스크랩페이지 -  전체보기 -->
 	<select id="mypageScrapList" parameterType="int" resultType="com.allhomes.myapp.scrap.ScrapVO">
