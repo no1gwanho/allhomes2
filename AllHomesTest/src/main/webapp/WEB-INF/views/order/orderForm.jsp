@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.1.min.js" type="application/javascript">
+import BootPay from "bootpay-js"</script>
+
 <style>
    input{
       margin-top:5px;
@@ -22,7 +29,15 @@
 <script>
 	$(function(){
 		
-		
+		/* //상품이름 세팅
+		$.ajax({
+			url: "<$=request.getContextpath%>/purchaseName",
+			success: function(data) {
+		       $("#purchaseName").val()==data;
+		    }
+
+		});
+		 */
 		//배송지 선택
 		$("#selectAddrBtn").click(function(){
 			$("#addrListDiv").css("display","block");
@@ -40,7 +55,52 @@
 			
 			$("#addrListDiv").css("display","none");
 		});
+		
+		//결제
+		$("#payBtn").click(function () {
+			
+			
+			
+			var IMP = window.IMP; // 생략가능
+			IMP.init('imp82360984');
+			// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+			IMP.request_pay({
+				pg: 'html5_inicis', // 결제방식
+				pay_method: 'card',
+				merchant_uid : new Date().getTime(), //주문번호 생성
+				name: $("#purchaseName").val(),
+				amount: $("#totalPrice").val(), 
+				//가격
+				buyer_email: 'iamport@siot.do',
+				buyer_name: $("#receiverOk").val(),
+				buyer_tel: $("#telOk").val(),
+				buyer_addr: $("#addrOk").val() + ' ' +$("#addrdetailOk").val(),
+				buyer_postcode: $("#zipcodeOk").val(),
+				
+				}, function (rsp) {
+				console.log(rsp);
+				if (rsp.success) {  // 결제 성공 시:
+					var order_code = rsp.merchant_uid;
+					var msg = '결제가 완료되었습니다.';
+					/* msg += '고유ID : ' + rsp.imp_uid+"\n"; 
+					msg += '상점 거래ID : ' + rsp.merchant_uid+"\n"; 
+					msg += '결제 금액 : ' + rsp.paid_amount+"\n"; 
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					 */
+					$("#orderForm").submit();
+					
+				} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+				}
+				alert(msg);
+				});
+			});
+		
 	});
+
+
 
 </script>
 <br/>
@@ -123,10 +183,18 @@
 						<div class="col-lg-6" style="float:right;font-size:20px;">
 							<div class="row">
 								<div class="col-lg-6" style="font-size:30px;">
+									<b>상품</b>
+								</div>
+								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
+									 = <b><input type="text" id="purchaseName" readonly
+									  style="color:black;border:0" value="${purchaseName}"/></b> 
+								</div>
+								<div class="col-lg-6" style="font-size:30px;">
 									<b>총 가격</b>
 								</div>
 								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
-									 = <b><span id="totalPrice" style="color:#EE8374">${totalP+shipping_c}</span> 원</b> 
+									 = <b><input type="number" id="totalPrice" readonly
+									  style="color:#EE8374;border:0" value="${totalP+shipping_c}"/>원</b> 
 								</div>
 							</div>
 						</div>
@@ -180,7 +248,7 @@
 				
 		
 		</div>
-			<form action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
+			<form id="orderForm" action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
 			<input type="hidden" name="c_no" value="${c_no}"/>
 			<div class="row">
 							<input type="text" name="a_code" id="a_codeOk"/>
@@ -257,7 +325,7 @@
 		<div style="text-align:center">
 			<input type="checkbox"> 결제 진행 필수사항 제공에 동의합니다.
 			<br/><br/>
-			<button id="payBtn" type="submit" class="btn col-lg-3 btn-primary">결제</button>
+			<button id="payBtn" type="button" class="btn col-lg-3 btn-primary">결제</button>
 		</div>	
 		</form><!-- 여기까지 폼 -->
 	</div>

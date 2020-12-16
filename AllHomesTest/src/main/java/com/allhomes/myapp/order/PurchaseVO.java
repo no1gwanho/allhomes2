@@ -1,6 +1,6 @@
 package com.allhomes.myapp.order;
 
-public class PayApiVO {
+public class PurchaseVO {
 	private String itemName; //구매 이름
 	private int total_p; //총 결제 가격
 	private String method; //구매유형
