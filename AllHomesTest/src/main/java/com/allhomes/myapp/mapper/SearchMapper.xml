@@ -5,41 +5,98 @@
 <mapper namespace="com.allhomes.myapp.search.SearchDaoImp">
 	
 	
-	<!-- product 결과 -->
+	<!-- product 결과 (상품이름, 상품설명)-->
 	<select id="searchProduct" resultType="com.allhomes.myapp.search.ProductStoreJoinVO">
-		select product.pd_no, product.s_no, product.pd_name, product.price, product.discount, product.main_img, product.stock, product.status, product.sub_c, product.pd_img, product.pd_exp, product.shipping_c
-		, store.s_name from product, store
-		where product.pd_name LIKE '%'||#{param1}||'%' or product.status LIKE '%'||#{param1}||'%' or
-		product.sub_c LIKE '%'||#{param1}||'%' or product.pd_exp LIKE '%'||#{param1}||'%' or store.s_name LIKE '%'||#{param1}||'%' 
-	</select>
-	<!-- product 결과 개수-->
-	<select id="searchProductCount" resultType="int">
-		select count(*) from product,store
-		where product.pd_name LIKE '%'||#{param1}||'%' or product.status LIKE '%'||#{param1}||'%' or
-		product.sub_c LIKE '%'||#{param1}||'%' or product.pd_exp LIKE '%'||#{param1}||'%' or store.s_name LIKE '%'||#{param1}||'%' 
+		select b.s_name, a.pd_no, a.s_no, a.pd_name, a.price, a.discount, a.main_img, a.stock, a.status, a.sub_c, a.pd_img, a.pd_exp, a.shipping_c
+		from product a
+		join store b
+		on a.s_no = b.s_no
+		where a.pd_name LIKE '%'||#{param1}||'%' or 
+		a.pd_exp LIKE '%'||#{param1}||'%' 
 	</select>
 	
-	<!-- homeboard 결과 -->
-	<select id="searchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select b_no, title, theme, userid, thumbnail, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate from homeboard
-		where title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+	<!-- product 결과 개수-->
+	<select id="searchProductCount" resultType="int">
+		select count(*) from product
+		where pd_name LIKE '%'||#{param1}||'%' or
+		pd_exp LIKE '%'||#{param1}||'%'
 	</select>
+	
+	
+	<!-- Product결과 - 정렬순서 포함  -->
+	
+	<select id="searchProductOrder" parameterType="hashmap" resultType="com.allhomes.myapp.store.StoreProductCategoryVO">
+	select a.pd_no, a.s_no, b.s_name, a.pd_name, a.price-(a.price*a.discount/100) price, 
+		a.discount, a.sale, a.main_img, a.status, a.sub_c, c.main_c, a.wishlist 
+		from product a join store b
+		on a.s_no = b.s_no
+		join sub_c c
+		on a.sub_c = c.sub_c
+		where a.pd_name LIKE '%'||#{key}||'%' or 
+		a.pd_exp LIKE '%'||#{key}||'%' or 
+		b.s_name LIKE '%'||#{key}||'%'
+		<choose>
+		<when test="order!=null and order.equals('recent')">
+			 order by pd_no desc
+		</when>
+		<when test="order!=null and order.equals('sale')">
+			order by sale desc
+		</when>
+		<when test="order!=null and order.equals('best')">
+			order by wishlist desc
+		</when>
+		<when test="order!=null and order.equals('recentBest')">
+			order by pd_no desc, wishlist desc 
+		</when>
+		<when test="order!=null and order.equals('price')">
+			order by price
+		</when>
+		</choose>
+		
+	</select>
+	
+	
+	
+	
+	<!-- homeboard 결과(제목, 내용, 유저아이디) -->
+	<select id="searchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+		from homeboard a 
+		join register c 
+		on a.userid = c.userid 
+		where a.title LIKE '%'||#{param1}||'%' or 
+		a.content LIKE '%'||#{param1}||'%' or
+		a.userid LIKE '%'||#{param1}||'%'
+	</select>
+	
 	<!-- homeboard 결과 개수 -->
 	<select id="searchHBCount" resultType="int">
 		select count(*) from homeboard
-		where title LIKE '%'||#{param1}||'%' or theme LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+		where title LIKE '%'||#{param1}||'%' or 
+		userid LIKE '%'||#{param1}||'%' or 
+		content LIKE '%'||#{param1}||'%'
 	</select>
 	
-	<!-- 질문게시판 결과 -->
+	
+	<!-- 질문게시판 결과(제목, 내용, 유저아이디) -->
 	<select id="searchQNA" resultType="com.allhomes.myapp.qna.QnaVO">
-		select q_no, title, userid, thumbnail, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate from qnaboard
-		where title LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+		<![CDATA[
+		select a.q_no, a.title, regexp_replace(a.content, '<.*??>') content, a.thumbnail, a.userid, a.hit, a.answer, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic
+		from qnaboard a
+		join register b
+		on a.userid=b.userid
+		where a.title LIKE '%'||#{param1}||'%' or 
+		a.content LIKE '%'||#{param1}||'%' or
+		a.userid LIKE '%'||#{param1}||'%' 
+		]]>
 	</select>
 	
 	<!-- 질문게시판 결과 개수 -->
 	<select id="searchQNACount" resultType="int">
 		select count(*) from qnaboard
-		where title LIKE '%'||#{param1}||'%' or content LIKE '%'||#{key}||'%'
+		where title LIKE'%'||#{param1}||'%' or 
+		content LIKE'%'||#{param1}||'%' or
+		userid LIKE '%'||#{param1}||'%' 
 	</select>
 	
 </mapper>

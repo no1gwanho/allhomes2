@@ -1,5 +1,6 @@
 package com.allhomes.myapp.search;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +14,7 @@ import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.store.StoreProductCategoryVO;
 
 @Controller
 public class SearchController {
@@ -44,7 +46,6 @@ public class SearchController {
 		
 		int totalCount = pCount + hCount + qCount;
 		
-		
 
 		ModelAndView mav = new ModelAndView();
 
@@ -64,17 +65,31 @@ public class SearchController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping("/searchStore")
-	public String storeResult() {
+	public ModelAndView searchStore(@RequestParam("key") String key, @RequestParam("order") String order) {
+		
+		SearchDaoImp dao = sqlSession.getMapper(SearchDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
 
-		return "/search/storeSearch";
+		HashMap<String, Object> paramMap = new HashMap();
+		paramMap.put("key", key);
+		paramMap.put("order", order);
+		
+		
+		List<StoreProductCategoryVO> pList = dao.searchProductOrder(paramMap);
+		
+		int pCount = dao.searchProductCount(key);
+		
+		
+		mav.addObject("pList", pList);
+		mav.addObject("pCount", pCount);
+		mav.addObject("key", key);
+		mav.addObject("order", order);
+		mav.setViewName("/search/searchStore");
+		
+
+		return mav;
 	}
 }

@@ -16,7 +16,7 @@
 	}
 	
 	
-	.txtbtn{float:right;color:#ee8374;}
+	.txtbtn{float:right;color:#ee8374;margin-right:40px;}
 	
 	.reptitle{
 		color:black;
@@ -140,26 +140,67 @@
 		padding:0 50px 0 20px;
 		
 	}
+	
+	.qna-title{
+		color:black;
+		font-family: 'SCDream5';
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 20px;
+		
+	}
+	.qna-title>a:link{
+		font-size:20px;
+		color:black;
+	}
+	.qna-content{
+		font-size:15px;
+		margin-top:10px;
+		height:45px;
+		white-space: normal;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
 	#repbox{border:1px solid #E98374;}
+	
+	
+	.marker {
+  		font-size:16px;
+  		font-weight: bold;
+  		color:#E98374;
+	}
+	
 </style>
 
 <script>
+
+	
+
 	$(function(){
 		var pNum = ${pCount};
 		var hNum = ${hCount};
+		var qNum = ${qCount};
 		
 		if(pNum==0){
 			$("#storeDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
 		} 
 		if(hNum==0){
-			$("#HBDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+			$("#hbDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
 		}
+		if(qNum==0){
+			$("#qnaDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+		}
+
+		
 	});
 
 </script>
 
 
 <div class="container"><!-- ==============container오류 방지 div============== -->
+  	<br/>
   	<br/>
   	<h5>'${key}'에 대한 통합검색 결과 <span class="keyword">${totalCount }</span></h5>
   	<hr>
@@ -168,8 +209,9 @@
   		<h6>스토어 <span class="keyword">${pCount}</span></h6>
   		
   		<c:if test="${pCount > 0 }">
-  		<a href="#" class=txtbtn>더보기</a>
+  		<a href="/myapp/searchStore?key=${key }&order=recent" class=txtbtn>더보기</a>
   		</c:if>
+  	<br/>
   	<br/>
 	<div id="storeDiv">
 		<div class="row">
@@ -209,10 +251,12 @@
   		
   			
   	<div class="inner">
-	  	<h6>집들이 <span class="keyword">${hCount}</span>
+	  	<h6>집들이 <span class="keyword">${hCount}</span></h6>
 	  	<br/>
-	  	</h6><a href="#" class=txtbtn>더보기</a>
 	  	
+	  	<c:if test="${hCount > 0 }">
+  		<a href="#" class=txtbtn>더보기</a>
+  		</c:if>
 		<br/>
 		<div id="hbDiv">
 			<div class="row">
@@ -242,13 +286,17 @@
    <!-- ==============================================================게시판 글 시작================================================================== -->
    
     <div class="inner">
-  	<h6>질문과 답변 <span class="keyword">${qCount }</span></h6><a href="#" class=txtbtn>더보기</a>
+  	<h6>질문과 답변 <span class="keyword">${qCount }</span></h6>
+  	
+  	
+  	<c:if test="${qCount > 0 }">
+  		<a href="#" class=txtbtn>더보기</a>
+  	</c:if>
   	
     <br/>
     
     <div id="qnaDiv">
 
-		
 		<c:forEach var="Qvo" items="${qList }" end="3">
 		<div class="row qna-main-row" style="cursor:pointer;" onclick="window.location='/myapp/qnaView?q_no=${Qvo.q_no}'">
 			<div class="col-9">
@@ -264,7 +312,7 @@
 				
 				<!-- 본문내용 -->
 				<div class="qna-content">
-				${vo.content }
+				${Qvo.content }
 				</div>
 			
 			</div>
