@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.allhomes.myapp.homeboard.HomeboardDaoImp;
 import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.product.PagingVO;
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
@@ -62,6 +64,7 @@ public class mypageController {
 		
 		int m_no = (Integer)ses.getAttribute("m_no");
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
+
 		List<ScrapVO> sList = scrap.mypageScrapList(m_no);
 		
 		//나의글리스트 (집들이/질문답변 따로 불러오기)
@@ -586,17 +589,9 @@ public class mypageController {
 		
 		String userid = (String)ses.getAttribute("userid");
 		PurchaseJoinVO vo = new PurchaseJoinVO();
-
 		vo.setUserid(userid);
 			
 		List<PurchaseJoinVO> list = dao.joinPurchase(userid);
-		for(int i=0; i<list.size(); i++) {
-			vo = list.get(i);
-			int pd_no = vo.getPd_no();
-			
-			System.out.println("제품번호는 얼마야??????????????????????"+pd_no);
-			mav.addObject("pd_no", pd_no);
-		}
 		
 		mav.addObject("list", list);
 		mav.setViewName("mypage/mypageShopping");
@@ -624,7 +619,7 @@ public class mypageController {
 	}
 
 	@RequestMapping("/mypageWishlist")
-	public ModelAndView wishListAdd(MypageWishlistVO vo, HttpServletRequest r) {
+	public ModelAndView wishListView(HttpServletRequest r) {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		
@@ -653,6 +648,7 @@ public class mypageController {
 	public ModelAndView wishAdd(@RequestParam("pd_no") int pd_no, HttpServletRequest r) {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
 		HttpSession s = r.getSession();
 		
 		String userid = (String)s.getAttribute("userid");
@@ -660,18 +656,51 @@ public class mypageController {
 		vo.setUserid(userid);
 		vo.setPd_no(pd_no);
 		
+		ProductVO pvo = new ProductVO();
+		pvo.setPd_no(pd_no);
+		
+		int pResult = pDao.updateWishlistAdd(pvo);		
 		int result = dao.addWishlist(vo);
 
 		System.out.println(result);
 		
-		mv.addObject("r", result);
+		mv.addObject("resultWishAdd", result);
 		mv.addObject("pd_no", pd_no);
-		mv.setViewName("landing/wishConfirm");
+		mv.setViewName("landing/resultCheck");
 		
 		return mv;
 	}	
 	
-	
+	@RequestMapping("/wishDel")
+	public ModelAndView wishDel(@RequestParam("pd_no") String pd_no) {
+		ModelAndView mv = new ModelAndView();
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
+		
+		ProductVO pvo = new ProductVO();
+		
+		String strPd_no[] = pd_no.split(",");
+		int[] pd_noList = new int[strPd_no.length];
+		
+		for(int i=0; i<strPd_no.length; i++) {
+			pd_noList[i] = Integer.parseInt(strPd_no[i]);
+		}
+		
+		try {
+			for(int i=0; i<pd_noList.length; i++) {
+				dao.wishDel(pd_noList[i]);
+				pvo.setPd_no(pd_noList[i]);
+				
+				int result = pDao.updateWishlistRevert(pvo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}			
+		
+		mv.setViewName("redirect:mypageWishlist");
+				
+		return mv;
+	}
 	
 	
 	

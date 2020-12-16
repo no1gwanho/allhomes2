@@ -3,7 +3,7 @@ package com.allhomes.myapp.review;
 public class ReviewJoinVO {
 	private String userid;
 	private int pd_no;
-	private double rating;
+	private int rating;
 	private double avg_rate;
 	private String img;
 	private String content;
@@ -18,8 +18,14 @@ public class ReviewJoinVO {
 	private String pc_date;	
 	private int num;
 	private String main_img;
+	private int r_no;
 	
-	
+	public int getR_no() {
+		return r_no;
+	}
+	public void setR_no(int r_no) {
+		this.r_no = r_no;
+	}
 	public String getMain_img() {
 		return main_img;
 	}
@@ -74,10 +80,10 @@ public class ReviewJoinVO {
 	public void setPd_no(int pd_no) {
 		this.pd_no = pd_no;
 	}
-	public double getRating() {
+	public int getRating() {
 		return rating;
 	}
-	public void setRating(double rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 	public double getAvg_rate() {

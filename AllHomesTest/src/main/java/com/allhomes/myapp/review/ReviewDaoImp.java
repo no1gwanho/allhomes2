@@ -28,11 +28,11 @@ public interface ReviewDaoImp {
 	
 	public int editReview(ReviewVO vo);
 	
-	public int delReviewUserid(String userid);
-	
-	public int delReviewPd_no(int pd_no);
+	public int delReview(ReviewVO vo);
 	
 	public int getAllReview(PagingVO vo);
 	
-	public ReviewJoinVO reviewInfo(PurchaseJoinVO vo);
+	public ReviewJoinVO productInfo(PurchaseJoinVO vo);
+	
+	public ReviewVO reviewInfo(ReviewVO vo);
 }
