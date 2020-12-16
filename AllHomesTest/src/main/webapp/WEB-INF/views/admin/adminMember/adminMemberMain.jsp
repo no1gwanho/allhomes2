@@ -8,7 +8,7 @@ td {
 	line-height: 50px;
 }
 #memberChart {
-	height: 500px;
+	height: 505px;
 }
 .cardSize {
 	height: 240px;
@@ -96,15 +96,14 @@ td {
 				<div class="card border-left-info shadow h-100 py-2">
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
-							<div class="col-auto">
-								<div class="h3 font-weight-bold text-info text-uppercase mb-1"
-									style="float: right">Today</div>
-								<i class="fas fa-user fa-3x text-gray-300"></i>
+							<div class="col mr-2">
+								<div
+									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
+									Today</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">+${today}</div>
 							</div>
-							<div class="col-lg-12 mr-2">
-								<br />
-								<br />
-								<div class="h1 mb-0 font-weight-bold text-gray-600">&nbsp;&nbsp;&nbsp;+${today}</div>
+							<div class="col-auto">
+								<i class="fas fa-users fa-2x text-gray-300"></i>
 							</div>
 						</div>
 					</div>
