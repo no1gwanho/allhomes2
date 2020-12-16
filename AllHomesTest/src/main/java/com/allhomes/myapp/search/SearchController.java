@@ -41,6 +41,8 @@ public class SearchController {
 		List<HomeboardVO> hList = dao.searchHB(key);// 집들이게시판 결과 
 		int hCount = dao.searchHBCount(key);
 		
+		
+		
 		List<QnaVO> qList = dao.searchQNA(key);
 		int qCount = dao.searchQNACount(key);
 		

@@ -43,4 +43,7 @@ public interface QnaDaoImp {
 		//질문게시판 댓글 삭제 
 		public void minusAnswer(int q_no); 
 		
+		//내가쓴 질문게시판 글
+		public List<QnaVO> myQnaList(String userid);
+		
 }

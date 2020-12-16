@@ -15,9 +15,15 @@ public class HomeboardVO {
 	private String ip;
 	private String writedate;
 	private String order;
+	private String hashtaglist;
 	
 	
-	
+	public String getHashtaglist() {
+		return hashtaglist;
+	}
+	public void setHashtaglist(String hashtaglist) {
+		this.hashtaglist = hashtaglist;
+	}
 	public String getOrder() {
 		return order;
 	}

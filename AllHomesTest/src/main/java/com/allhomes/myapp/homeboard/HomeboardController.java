@@ -3,6 +3,7 @@ package com.allhomes.myapp.homeboard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +42,18 @@ public class HomeboardController {
 	@RequestMapping("/homeboardHome")
 	public ModelAndView homeboardHome() {
 		HomeboardDaoImp dao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> list = dao.homeboardRecent(); //집들이 전체 리스트 - 시간 순수대로 
+		List<HomeboardVO> list = dao.homeboardAllList(); //집들이 전체 리스트 
+		
+		String hashtagList = dao.hashtagList();
+		System.out.println("해시태그리스트: "+hashtagList);
+		
+		
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("hashtagList", hashtagList);
 		mav.setViewName("/homeboard/homeboardHome");
 
 		return mav;
@@ -321,6 +330,7 @@ public class HomeboardController {
 
 		return mav;
 	}
+
 	
 	//집들이 글보기에서 로그인페이지로 이동할때 
 	@RequestMapping("/replyLogin")

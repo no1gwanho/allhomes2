@@ -60,12 +60,13 @@
 	
 	<!-- homeboard 결과(제목, 내용, 유저아이디) -->
 	<select id="searchHB" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+		select a.b_no, a.hashtag, a.thumbnail, a.title, c.m_pic, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
 		from homeboard a 
 		join register c 
 		on a.userid = c.userid 
 		where a.title LIKE '%'||#{param1}||'%' or 
 		a.content LIKE '%'||#{param1}||'%' or
+		a.hashtag LIKE '%'||#{param1}||'%' or
 		a.userid LIKE '%'||#{param1}||'%'
 	</select>
 	
@@ -74,7 +75,8 @@
 		select count(*) from homeboard
 		where title LIKE '%'||#{param1}||'%' or 
 		userid LIKE '%'||#{param1}||'%' or 
-		content LIKE '%'||#{param1}||'%'
+		content LIKE '%'||#{param1}||'%' or
+		hashtag LIKE '%'||#{param1}||'%'
 	</select>
 	
 	<!-- homeboard 결과 - 정렬순서포함(제목, 내용, 유저아이디) -->
@@ -85,7 +87,8 @@
 		on a.userid = c.userid 
 		where a.title LIKE '%'||#{key}||'%' or 
 		a.content LIKE '%'||#{key}||'%' or
-		a.userid LIKE '%'||#{key}||'%'
+		a.userid LIKE '%'||#{key}||'%' or
+		hashtag LIKE '%'||#{key}||'%'
 			<choose>
 				<when test="order!=null and order.equals('recent')">
 				 	order by b_no desc
