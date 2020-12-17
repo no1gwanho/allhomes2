@@ -4,7 +4,6 @@
 <style>
 	#orderStatus>div{float:left;}
 	.wordCut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-	td:nth-child(9n+6){width:20%}
 </style>
 <script>
 	$(function(){
@@ -15,90 +14,27 @@
 			}else{
 				$("#searchD").css("display", "none");
 			}
-		}); 
+		});
+		 
+		
+		
 	});
+	
+	function orderEdit(){
+		alert("sd;f");
+		var sel = document.getElementById("status");
+		var val = sel.options[sel.selectedIndex].value;
+		document.$(this).status.value = val;
+		document.$(this).submit();
+		
+	}
 </script>
 
 		
 		
 <div class="container-fluid">
 	<div class="row">
-	
-	
-<!-- <!-- Modal 
-		<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalTitle" aria-hidden="true">
-			<div class="modal-dialog modal-xl" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="orderModalTitle">주문상세</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      
-					</div>
-					<div class="modal-body">
-						<div>
-							<table class="table-bordered">
-								<thead>
-									<tr>
-										<th>주문번호</th>
-										<th>상품번호</th>
-										<th>상품명</th>
-										<th>스토어명</th>
-										<th>우편번호</th>
-										<th>배송지</th>
-										<th>주문자ID</th>
-										<th>구매일</th>
-										<th>상태</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>142345123</td>
-										<td>512312</td>
-										<td>빈티지 체크 커튼</td>
-										<td>자연가구</td>
-										<td>42101</td>
-										<td class="wordCut">서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101서울시 마포구 노고산동 101</td>
-										<td>seran11</td>
-										<td>2020-11-11</td>
-										<td>배송중</td>
-									</tr>
-								</tbody>
-							</table>
-							<hr>
-							<div class="col-lg-12" id="orderStatus">
-								<div class="col-lg-3">
-									<select id="Select1" class="selectpicker">
-										<option value="">입금대기</option>
-										<option value="">결제완료</option>
-										<option value="">배송중</option>
-										<option value="">배송완료</option>
-										<option value="">구매확정</option>
-									</select>
-								</div>
-								<div class="col-lg-2">
-									<a href="" class="btn btn-user alert-secondary">상태 변경</a>
-								</div>
-								<div class="col-lg-3">
-									<input type="text" class="form-control" id=""/>
-								</div>
-								<div class="col-lg-3">
-									<a href="" class="btn btn-user alert-danger">송장번호입력</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>modal body 끝
-			</div>
-		</div>
-		
-		모달 버튼
-		<button class="btn" data-toggle="modal" data-target="#orderModal" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">모달</button>
-Modal -->
 
-
-		
 		<div class="col-lg-12">
 			<!-- 검색 옵션 -->
 			<a href="#" class="btn btn-user alert-clean shadow-sm">                
@@ -136,13 +72,12 @@ Modal -->
             <!-- 테이블 -->
             <div class="card shadow mb-4">
             	<div class="card-body" style="text-align:center">
-		            <table style="cursor:pointer;" class="table table-hover" id="order">
+		            <table style="cursor:pointer;" class="table table-hover" id="orderTable">
 						<thead>
 						<tr>
 							<th>주문번호</th>
 							<th>상품번호</th>
 							<th>상품명</th>
-							<th>스토어명</th>
 							<th>우편번호</th>
 							<th>배송지</th>
 							<th>주문자ID</th>
@@ -151,24 +86,53 @@ Modal -->
 							<th>옵션</th>
 							<th>결제액</th>
 							<th>상태</th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="vo" items="${list }">
-							<tr onClick="location.href='#'">
-								<td>${vo.pc_no}</td>
-								<td>${vo.pd_no}</td>
-								<td>${vo.pd_name}</td>
-								<td>${vo.s_name}</td>
-								<td>${vo.zipcode}</td>
-								<td class="wordCut">${vo.addr}${vo.addrdetail}</td>
-								<td>${vo.userid}</td>
-								<td>${vo.pc_date}</td>
-								<td>${vo.num}</td>
-								<td>${vo.o_value}</td>
-								<td>${vo.total_p}</td>
-								<td>${vo.status}</td>
-							</tr>
+							<form method="post" onsubmit="return orderEdit()" action="<%=request.getContextPath()%>/orderStatusEdit">
+								<tr onClick="return modalOpen()">
+									<input type="hidden" value="${vo.pc_no}" name="pc_no"/>
+									<input type="hidden" value="${vo.pd_no}" name="pd_no"/>
+									
+									<td>${vo.pc_no}</td>
+									<td>${vo.pd_no}</td>
+									<td>${vo.pd_name}</td>
+									<td>${vo.zipcode}</td>
+									<td class="wordCut">${vo.addr}${vo.addrdetail}</td>
+									<td>${vo.userid}</td>
+									<td>${vo.pc_date}</td>
+									<td>${vo.num}</td>
+									<td>${vo.o_value}</td>
+									<td>${vo.total_p}</td>
+									<td>
+										<select class="selectpicker col-lg-12" name="status">
+											<option value="입금대기"
+												<c:if test="${vo.status}=='입금대기'">selected</c:if>
+												>입금대기</option>
+											<option value="결제완료"
+												<c:if test="${vo.status}=='결제완료'">selected</c:if>
+												>결제완료</option>
+											<option value="배송준비"
+												<c:if test="${vo.status}=='배송준비'">selected</c:if>
+												>배송준비</option>
+											<option value="배송중"
+												<c:if test="${vo.status}=='배송중'">selected</c:if>
+												>배송중</option>
+											<option value="구매확정"
+												<c:if test="${vo.status}=='구매확정'">selected</c:if>
+												>구매확정</option>
+										</select>
+										
+
+
+									</td>
+									<td>
+										<button class="btn alert-primary">수정</button>
+									</td>
+								</tr>
+							</form>
 						</c:forEach>
 						</tbody>	
 					</table>
