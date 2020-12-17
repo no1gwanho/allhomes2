@@ -183,18 +183,19 @@ import BootPay from "bootpay-js"</script>
 						<div class="col-lg-6" style="float:right;font-size:20px;">
 							<div class="row">
 								<div class="col-lg-6" style="font-size:30px;">
-									<b>상품</b>
+									<b>상품명</b>
 								</div>
 								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
-									 = <b><input type="text" id="purchaseName" readonly
+									 <b><input type="text" id="purchaseName" readonly
 									  style="color:black;border:0" value="${purchaseName}"/></b> 
 								</div>
 								<div class="col-lg-6" style="font-size:30px;">
 									<b>총 가격</b>
 								</div>
 								<div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
-									 = <b><input type="number" id="totalPrice" readonly
-									  style="color:#EE8374;border:0" value="${totalP+shipping_c}"/>원</b> 
+									<b><input type="number" id="totalPrice" readonly
+									  style="color:#EE8374;border:0" value="${totalP+shipping_c}"/></b>
+									 
 								</div>
 							</div>
 						</div>
@@ -230,7 +231,7 @@ import BootPay from "bootpay-js"</script>
 							<input class="col-lg-8 form-control" type="text" id="addrdetail" value="${aVO.addrdetail}" />
 							<span class="col-lg-4" style="color: #000000; line-height: 40px;">연락처</span>
 							<input class="col-lg-8 form-control" type="text"  id="tel" value="${aVO.tel}" />
-							<input type="text" id="a_code" value="${aVO.a_code}"/>
+							<input type="hidden" id="a_code" value="${aVO.a_code}"/>
 
 							<br/><br/>
 						</div>
@@ -251,7 +252,7 @@ import BootPay from "bootpay-js"</script>
 			<form id="orderForm" action="<%=request.getContextPath()%>/orderPurchase" method="post"><!-- 폼 시작 -->
 			<input type="hidden" name="c_no" value="${c_no}"/>
 			<div class="row">
-							<input type="text" name="a_code" id="a_codeOk"/>
+							<input type="hidden" name="a_code" id="a_codeOk"/>
 							<input type="hidden" name="shipping_c" value="${shipping_c}"/>
 							<span class="col-lg-4 mb-2" style="color: #000000; line-height: 40px;">받는분</span>
 							<input class="col-lg-5 mb-2 form-control" type="text" id="receiverOk"
