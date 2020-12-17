@@ -156,7 +156,7 @@
 		</div>
 		<br/>
 		<!-- 집들이 리스트 나오는 곳  -->
-		<c:forEach var="vo" items="${hbList }">
+		<c:forEach var="vo" items="${hbList }" end="7">
 
 		<div class="col-3">
 				<div class="thumbnail">
@@ -190,7 +190,7 @@
 				<a href="/myapp/storeHome?order=recent">더보기</a>
 			</div>
 			
-			<c:forEach var="v" items="${list }">
+			<c:forEach var="v" items="${list }" end="7">
 				<div class="col-3 storeThumbnail">
 					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
 						

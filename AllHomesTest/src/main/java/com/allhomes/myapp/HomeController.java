@@ -39,7 +39,7 @@ public class HomeController {
 		List<StoreProductCategoryVO> sList = sDao.storeAllList();
 		
 		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
-		List<HomeboardVO> hbList = hbDao.homeboardListForMain();
+		List<HomeboardVO> hbList = hbDao.homeboardAllListHit();
 		
 		ModelAndView mav = new ModelAndView();			
 		mav.addObject("hbList", hbList);

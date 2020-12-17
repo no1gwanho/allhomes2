@@ -22,6 +22,12 @@
 	 		<mvc:mapping path="/homeboardEdit"/>
 	 		<mvc:mapping path="/homeboardEditOk"/>
 	 		<mvc:mapping path="/mypageHome"/>
+	 		<mvc:mapping path="/mypageShopping"/>
+	 		<mvc:mapping path="reviewWrite"/>
+	 		<mvc:mapping path="reviewWriteOk"/>
+	 		<mvc:mapping path="/reviewEdit"/>
+	 		<mvc:mapping path="/reviewEditOk"/>
+	 		<mvc:mapping path="/reviewDel"/>
 	 		<mvc:mapping path="/mypageScrap"/>
 	 		<mvc:mapping path="/wishAdd"/>
 	 		<mvc:mapping path="/replyLogin"/>

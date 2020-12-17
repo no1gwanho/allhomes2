@@ -6,6 +6,7 @@
   	.container{
 			max-width:1400px;
 			margin: 0 auto;
+			
 			font-family: 'SCDream3';
 	}
   
@@ -13,9 +14,9 @@
 		text-align:center;
 		margin-bottom:10px;
 	}
-	#inner{margin:20px 0 20px 0;}
 	
-	.txtbtn{float:right;color:#ee8374;}
+	
+	.txtbtn{float:right;color:#ee8374;margin-right:40px;}
 	
 	.reptitle{
 		color:black;
@@ -29,6 +30,7 @@
 	
 	
 	.card-body {
+		text-align: center;
 		height: 150px;
 		padding: 10px;
 		flex: none;
@@ -50,14 +52,32 @@
 	.card {
 		border: none;
 	}
-	
+
+	.thumbnail{
+		
+		padding:0px;
+		margin:0px;
+		width:270px;
+		height: 207px;
+		overflow: hidden;
+		border-radius: 5%;
+		}
+		
+	.thumbnail img {
+		width:100%;
+		height:100%;
+		text-align: center;
+		overflow: hidden;
+		}
 	.card-title {
-		font-size: 20px;
+		padding:0px;
+		font-size: 17px;
 		font-weight: bold;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	
 	
 	.card-title-post{
 		font-size: 20px;
@@ -72,40 +92,109 @@
 		.card-title>a:active {
 		text-decoration: none;
 	}
-	
 	.card-text {
-		font-size: 12px;
-		color:black;
+		font-size: 14px;
 	}
-	
-	.card-text-profile {
-		font-size: 18px;
-		color:black;
-	}
-	
 	.card-detail {
-		font-size: 8px;
+		font-size: 11px;
+	}
+	
+	.profile_pic{
+		width:25px;
+		border-radius: 45%;
 	}
 	
 	.keyword{
+		text-weight:bold;
 		color:#ee8374;
 	}
 	
+		.product-name{
+		font-family:'SCDream5'
+	}
+	.store-name{
+		color:gray;
+		font-size:12px;
+	}
+	.store-discount{
+		font-family:'SCDream5';
+		font-size:20px;
+		color: #E98374
+	}
+	
+	.store-price{
+		color: black;
+		font-family:'SCDream5';
+		font-size:20px;
+	}
+	
+	#qnaDiv{
+		border: 0.2px solid #f5f5f5;
+		padding : 10px;
+		margin-right:30px;
+	}
+	#hbDiv{
+		padding:10px;
+	}
+	
+	.inner{
+		padding:0 50px 0 20px;
+		
+	}
+	
+	.qna-title{
+		color:black;
+		font-family: 'SCDream5';
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 20px;
+		
+	}
+	.qna-title>a:link{
+		font-size:20px;
+		color:black;
+	}
+	.qna-content{
+		font-size:15px;
+		margin-top:10px;
+		height:45px;
+		white-space: normal;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	
 	#repbox{border:1px solid #E98374;}
+	
+	
+	.marker {
+  		font-size:16px;
+  		font-weight: bold;
+  		color:#E98374;
+	}
+	
 </style>
 
 <script>
+
+	
+
 	$(function(){
 		var pNum = ${pCount};
 		var hNum = ${hCount};
+		var qNum = ${qCount};
 		
 		if(pNum==0){
 			$("#storeDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
 		} 
 		if(hNum==0){
-			$("#HBDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+			$("#hbDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
 		}
+		if(qNum==0){
+			$("#qnaDiv").replaceWith("<div style='width:1400px;text-align:center;height:70px;line-height:70px;color:#EE8374'><h6>검색 결과가 존재하지 않습니다</h6></div>");
+		}
+
+		
 	});
 
 </script>
@@ -113,30 +202,47 @@
 
 <div class="container"><!-- ==============container오류 방지 div============== -->
   	<br/>
-  	<div id="inner">
-  		<h6>'${key}'에 대한 통합검색 결과 <span class="keyword">${totalCount }</span></h6>
-  		<hr>
-  		<h6>스토어 <span class="keyword">${pCount}</span></h6><a href="#" class=txtbtn>더보기</a>
-  	</div>
+  	<br/>
+  	<h5>'${key}'에 대한 통합검색 결과 <span class="keyword">${totalCount }</span></h5>
+  	<hr>
+  	
+  	<div class="inner">
+  		<h6>스토어 <span class="keyword">${pCount}</span></h6>
+  		
+  		<c:if test="${pCount > 0 }">
+  		<a href="/myapp/searchStore?key=${key }&order=recent" class=txtbtn>더보기</a>
+  		</c:if>
+  	<br/>
+  	<br/>
 	<div id="storeDiv">
 		<div class="row">
 				<c:forEach var="pVo" items="${pList}" end="3">
-					<div class="col-lg-3 col-md-6 mb-4">
-						<div class="card h-100">
-							<div class="card-img-top text-center">
-								<a href="#"><img
-									src="<c:url value='/productMainImg/${pVo.s_no}/${pVo.main_img}'/>"
-									alt="글번호" /></a>
-							</div>
-							<div class="card-body">
-								<a href="#" class="card-text">${pVo.s_name}</a><br /> <a href="#"
-									class="card-text">${pVo.pd_name}</a><br /> <a href="#"
-									class="card-title">${pVo.price}</a>
-							</div>
-						</div>
+					<div class="col-3 store-list" style="cursor:pointer;" onclick="window.location='/myapp/storeDetail?pd_no=${pVo.pd_no}'">
+						<div class="thumbnail">
+							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${pVo.s_no}/${pVo.main_img}"/>
+						</div>	
+						<div class="card-body">	
+							<div class="store-name">${pVo.s_name }</div>
+							<div class="product-name">  ${pVo.pd_name }</div>
+							<c:if test="${pVo.discount != 0 }">
+							<span class="store-discount">${pVo.discount }%</span>
+							</c:if>
+							<span class="store-price">${pVo.price }원</span>
+							
+							<c:if test="${pVo.status!=null && pVo.status == '판매중'}">
+								<span class="badge badge-info">${pVo.status }</span>
+							</c:if>
+							<c:if test="${pVo.status!=null && pVo.status == '품절임박'}">
+								<span class="badge badge-warning">${pVo.status }</span>
+							</c:if>
+							<c:if test="${pVo.status!=null && pVo.status == '입고대기'}">
+								<span class="badge badge-secondary">${pVo.status }</span>
+							</c:if>
+						</div>	
 					</div>
 				</c:forEach>
 		</div>
+	</div>
 	</div>
 	<hr />
 
@@ -145,121 +251,79 @@
 	<!-- ==============================================================집들이================================================================== -->
   		
   			
-  <div id="inner">
-  	<h6>집들이 <span class="keyword">${hCount}</span></h6><a href="#" class=txtbtn>더보기</a>
-  	</div>
-
-	<div id="HBDiv">
-		<div class="row">
-			<c:forEach var="vo" items="${hList}" end="3">
-				<div class="col-lg-3 col-md-6 mb-4">
-					<div class="card h-100">
-						<div class="card-img-top">
-							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img
-								src="<%=request.getContextPath() %>/resources/upload/homeboardImg/${vo.thumbnail }" /></a>
+  	<div class="inner">
+	  	<h6>집들이 <span class="keyword">${hCount}</span></h6>
+	  	<br/>
+	  	
+	  	<c:if test="${hCount > 0 }">
+  		<a href="/myapp/searchHb?key=${key }&order=recent" class=txtbtn>더보기</a>
+  		</c:if>
+		<br/>
+		<div id="hbDiv">
+			<div class="row">
+				<c:forEach var="vo" items="${hList}" end="3">
+					<div class="col-lg-3">
+						<div class="thumbnail">
+							<a href="/myapp/homeboardView?b_no=${vo.b_no }"><img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/></a>
 						</div>
 						<div class="card-body">
 							<div class="card-title">
 								<a href="/myapp/homeboardView?b_no=${vo.b_no }">${vo.title }</a>
 							</div>
+						<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"/>
 							<a href="#" class="card-text">${vo.userid }</a>
-							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit }</p>
-						</div>
+							<p class="card-detail">스크랩: ${vo.scrap } | 조회: ${vo.hit } | ${vo.writedate }</p>
+					</div> 
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
-	</div>
+		</div>
 	<hr />
 
-	<div id="inner">
-  	<h6>질문과 답변 <span class="keyword">1244</span></h6><a href="#" class=txtbtn>더보기</a>
-  	</div>
+	
   	
   	
    <!-- ==============================================================게시판 글 시작================================================================== -->
+   
+    <div class="inner">
+  	<h6>질문과 답변 <span class="keyword">${qCount }</span></h6>
+  	
+  	
+  	<c:if test="${qCount > 0 }">
+  		<a href="/myapp/searchQna?key=${key }" class=txtbtn>더보기</a>
+  	</c:if>
+  	
+    <br/>
     
-    
-    <div id=repbox>
-    	<div class="row">
-		
-			<div class="col-lg-9">
+    <div id="qnaDiv">
+
+		<c:forEach var="Qvo" items="${qList }" end="3">
+		<div class="row qna-main-row" style="cursor:pointer;" onclick="window.location='/myapp/qnaView?q_no=${Qvo.q_no}'">
+			<div class="col-9">
 				<!-- 제목 -->
-				<h4>
-					<strong >
-					<a href="#" class="reptitle">
-					<br/>
-						<span class="keyword">커튼</span>교체할때
-					</a>
-					</strong>
-				</h4>
+				<div class="qna-title">
+				${Qvo.title }
+				</div>
+				<div class="qna-info"> <!-- 아이디 정보  -->
+				<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${Qvo.m_pic}"/>
+				 <a href="#">${Qvo.userid }</a>
+				 <br/>${Qvo.writedate } &nbsp;&nbsp; 답글 :<span class="num-of-answer" style="font-weight:bold" title="${Qvo.answer}"> ${Qvo.answer}</span>개  &nbsp;&nbsp; 조회 : ${Qvo.hit }회
+				</div>
+				
 				<!-- 본문내용 -->
-				<p>
-				<a href="#" class="repcontent"><span class="keyword">커튼</span>형 행거 색깔이 촌스러워서 <span class="keyword">커튼</span>을 바꾸려고 해요 인테리어 고수님들~ 행거에 달 커튼은 주로 어디서 구입하시나요?</a>
-				</p>
-				
-				<p>
-					<i class="fas fa-user-circle"></i><a href="#" class="repprofile">뚝딱이네집</a>
-					&nbsp;&nbsp; 2020-10-24
-					&nbsp;&nbsp; 댓글 : 8
-					&nbsp;&nbsp; 조회 : 2961 
-					&nbsp;&nbsp; 
-				</p>
-			</div>
-		</div>
-		
-		<!-- 두번쨰 -->
-		<!-- 게시판 글 시작 -->
-	<hr>
-		<div class="row">
-			<div class="col-lg-9">
-				<!-- 제목 -->
-				<h4>
-					<strong><a href="#" class="reptitle">
-					<br/>
-					이중 <span class="keyword">커튼</span> 봉 어디서 구매하나요?</a></strong>
-				</h4>
-				<!-- 본문내용 -->
-				<p>
-				<a href="#" class="repcontent"><span class="keyword">커튼</span>을 암막커튼 두개로 이중으로 달고 싶은데 이중 <span class="keyword">커튼</span> 봉은 어디서 구입할 수 있을까요?</a>
-				</p>
-				
-				<p>
-					<i class="fas fa-user-circle"></i> <a href="#" class="repprofile">호호마녀</a>
-					&nbsp;&nbsp; 2020-10-24
-					&nbsp;&nbsp; 댓글 : 8
-					&nbsp;&nbsp; 조회 : 2961 
-					&nbsp;&nbsp; 
-				</p>
-			</div>
-		</div>
-				
-	<hr>
-		<div class="row">
+				<div class="qna-content">
+				${Qvo.content }
+				</div>
 			
-			<div class="col-lg-9">
-				<!-- 제목 -->
-				<h4>
-					<strong><a href="#" class="reptitle">
-					<br/>
-					못 없이 <span class="keyword">커튼</span> 다는 법</a></strong>
-				</h4>
-				<!-- 본문내용 -->
-				<p>
-				<a href="#" class="repcontent">커튼 다록 싶은데 압축봉에 <span class="keyword">커튼</span> 링 달고 압축봉 설치한 다음 <span class="keyword">커튼</span> 다는 거 맞나요??</a>
-				</p>
-				<p>
-					<i class="fas fa-user-circle"></i> <a href="#" class="repprofile">뚝딱이네집</a>
-					&nbsp;&nbsp; 2020-10-24
-					&nbsp;&nbsp; 댓글 : 8
-					&nbsp;&nbsp; 조회 : 2961 
-					&nbsp;&nbsp; 
-				</p>
 			</div>
 		</div>
-    </div>	
-   <br/><br/>
-     
+		<hr>
+		</c:forEach>
+		
+	</div>
+	</div>
+	<div style="margin-top:100px;"></div>
    
    
 </div><!-- ==============container오류 방지 div============== -->

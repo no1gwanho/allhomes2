@@ -376,7 +376,7 @@
 			<br/>
 			<div id="hashtag">
 				<c:forEach var="i" items="${hashtagList}">
-					<a href="#" class="badge badge-light"><span>#</span>${i}</a>
+					<a href="/myapp/search?key=${i }" class="badge badge-light"><span>#</span>${i}</a>
 				</c:forEach>
 			</div>
 
