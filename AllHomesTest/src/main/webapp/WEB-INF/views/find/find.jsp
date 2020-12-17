@@ -157,7 +157,7 @@
 <div class="container">
 	
 	<div id="logo">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	<img src="<%=request.getContextPath() %>/resources/img/new-homes-logo.png" alt=""/>
 	</div>
 	<form id="smallcontainer" class="form-signin" method="post" action="/myapp/findOk">
 		<div class="form-signin-heading text-center">아이디/비밀번호 찾기</div>
