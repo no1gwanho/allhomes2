@@ -4,103 +4,67 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
-	<!-- 제품 + 리뷰 + 스토어 -->
-	<select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
-		select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as dc_price, p.status as status, 
-    	r.pd_no as pd_no, r.userid as userid, r.img as img, r.content as content, r.writedate as writedate, r.rating as rating 
-    	from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
-	</select>
-  	<!-- 모든 제품 조회 -->
-  	<select id="productAllList" parameterType="String" resultType="com.allhomes.myapp.product.ProductVO">
-  	    select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img from product
-  	    <choose>
-  	    	<when test="sortPd!=null and sortPd.equals('recent')">
-  	    		order by pd_no desc
-  	    	</when>
-  	    	<when test="sortPd!=null and sortPd.equals('saled')">
-  	    		where pd_no in (select pd_no from (select p.pd_no, c.pc_no, c.pc_date from product p, purchase c where p.pd_no=c.pd_no order by c.pc_date desc))
-  	    	</when>
-  	    	<when test="sortPd!=null and sortPd.equals('rowPrice')">
-  	    		order by (price-(price*discount/100))
-  	    	</when>
-  	    </choose>
-  	</select>
-  	<!-- 카테고리별 제품 조회 -->
-	<select id="productCateList" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
-		select * from (select s.main_c as main_c, s.c_code as c_code, p.s_no as s_no, p.pd_no as pd_no, p.pd_name as pd_name, p.price as price, p.discount as discount, round(p.price-(p.price*p.discount/100), -1) as dc_price, 
-		p.main_img as main_img, p.sub_c as sub_c from product p, sub_c s where p.sub_c=s.sub_c)
-		<if test="c_code==0">
-			order by pd_no desc
-		</if>
-		<if test="c_code>=1">
-			where c_code=#{c_code} orde by pd_no desc
-		</if>
-  	</select>
-  	 
-  	<!-- 제품 리뷰 조회 -->
-  	<select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-  		select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
-  	</select>
-  	<!-- 메인페이지 제품리스트 -->
-  	<select id="productMainList" resultType="com.allhomes.myapp.product.ProductJoinVO">
-  		select pd_no, s_no, pd_name, price, discount, round(price-(price*discount/100), -1) as dc_price, main_img, stock, status, sub_c from product where pd_no in (select pd_no from (select pd_no from product order by pd_no desc) where rownum <![CDATA[<]]> 9)
-  	</select>
-  	<!-- 등록된 상품 수 조회 -->
-  	<select id="getAllProductCount" resultType="int">
-  		select count(pd_no) from product
-	</select>  	
-  	<!-- 스토어번호로 제품 검색 -->
-  	<select id="selectStoreProduct" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, o_value from product where s_no=#{s_no}
-  	</select>  	
-  	<!-- 제품 번호로 검색 -->
-  	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
-  		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
-  	</select>
-  	<!-- 제품+스토어 조인 -->
-  	<select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">
-  		select p.pd_no, p.pd_name, p.main_img, p.discount, p.price, s.s_no, s.s_name from product p, store s where p.s_no=s.s_no
-  	</select>
-  	<!-- 제품 추가 -->
-  	<insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, main_c, pd_img, pd_exp, shipping_c, o_value)
-  		 values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{main_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
-  	</insert>
-  	
-  	<!-- 제품 수정 테스트-->
-  	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		 stock=#{stock}, status=#{status}, sub_c=#{sub_c}, main_c=#{main_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
-  	</update>
-  	<update id="updateWishlistAdd" parameterType="com.allhomes.myapp.product.ProductVO">
-  		update product set wishlist = wishlist+1 where pd_no=#{pd_no}
-  	</update>
-  	<update id="updateWishlistRevert" parameterType="com.allhomes.myapp.product.ProductVO">
-  		update product set wishlist = wishlist-1 where pd_no=#{pd_no}
-  	</update>
-  	<!--제품수정
-  	<update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
-  		update product set  pd_name=#{pd_name}, price=#{price}, discount=#{discount},
-  		main_img=#{main_img}, stock=#{stock}, status=#{status}, sub_c=#{sub_c},pd_img=#{pd_img} where pd_no=#{pd_no}
-  	</update> -->
-  	
-  	<!-- 제품 삭제 -->
-  	<delete id="delProduct" parameterType="int">
-  		delete from product where pd_no=#{pd_no}
-  	</delete>
-  	
-  	<!-- 스토어의 총 제품 개수 검색 -->
-  	<select id="countProduct" resultType="int">
-  		select count(*) from product where s_no=#{s_no}
-  	</select>
-  	
-  	  	
-  	
-  	
-  	<!-- 디테일 -->
-  	<select id="selectDetailPage" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
-  		select * from (select sub.sub_c as sub_c, sub.main_c as main_c, p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.price as price, p.discount as discount, round(p.price-(p.price*discount/100), -1) as dc_price, p.shipping_c as shipping_c, p.o_value as o_value, 
-		s.s_name from store s, product p, sub_c sub where s.s_no=p.s_no and p.sub_c=sub.sub_c) where pd_no=#{pd_no}
-  	</select> 
-  	<!--          -->
+   <!-- 제품 + 리뷰 + 스토어 -->
+   <select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
+      select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as discount, p.status as status, 
+       r.pd_no as pd_no, r.userid as userid, r.img as img, r.content as content, r.writedate as writedate, r.rating as rating 
+       from product p, store s, review r where p.s_no=s.s_no and r.pd_no=p.pd_no
+   </select>
+  
+     <!-- 제품 리뷰 조회 -->
+     <select id="productReviewList" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
+        select userid, pd_no, rating, content, writedate, s_no from review where pd_no=#{pd_no}
+     </select>
+    
+     <!-- 등록된 상품 수 조회 -->
+     <select id="getAllProductCount" resultType="int">
+        select count(pd_no) from product
+   </select>     
+     <!-- 스토어번호로 제품 검색 -->
+     <select id="selectStoreProduct" resultType="com.allhomes.myapp.product.ProductVO">
+        select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, o_value from product where s_no=#{s_no}
+     </select>     
+     <!-- 제품 번호로 검색 -->
+     <select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
+        select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}
+     </select>
+     <!-- 제품+스토어 조인 -->
+     <select id="joinProductStore" resultType="com.allhomes.myapp.product.ProductVO">
+        select p.pd_no, p.pd_name, p.main_img, p.discount, p.price, s.s_no, s.s_name from product p, store s where p.s_no=s.s_no
+     </select>
+     <!-- 제품 추가 -->
+     <insert id="insertProduct" parameterType="com.allhomes.myapp.product.ProductVO">
+        insert into product(pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, main_c, pd_img, pd_exp, shipping_c, o_value)
+         values(pd_sq.nextval, #{s_no}, #{pd_name}, #{price}, #{discount}, #{main_img}, #{stock}, #{status},  #{sub_c}, #{main_c}, #{pd_img}, #{pd_exp}, #{shipping_c}, #{o_value})
+     </insert>
+     
+     <!-- 제품 수정 테스트-->
+     <update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
+        update product set pd_name=#{pd_name}, price=#{price}, discount=#{discount},
+         stock=#{stock}, status=#{status}, sub_c=#{sub_c}, main_c=#{main_c}, pd_exp=#{pd_exp}, shippig_c=#{shipping_c}, o_value=#{o_value} where pd_no=#{pd_no}
+     </update>
+     
+     <!--제품수정
+     <update id="editProduct" parameterType="com.allhomes.myapp.product.ProductVO">
+        update product set  pd_name=#{pd_name}, price=#{price}, discount=#{discount},
+        main_img=#{main_img}, stock=#{stock}, status=#{status}, sub_c=#{sub_c},pd_img=#{pd_img} where pd_no=#{pd_no}
+     </update> -->
+     
+     <!-- 제품 삭제 -->
+     <delete id="delProduct" parameterType="int">
+        delete from product where pd_no=#{pd_no}
+     </delete>
+     
+     <!-- 스토어의 총 제품 개수 검색 -->
+     <select id="countProduct" resultType="int">
+        select count(*) from product where s_no=#{s_no}
+     </select>
+     
+          
+     
+       <!-- 디테일 -->
+     <select id="selectDetailPage" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
+        select * from (select sub.sub_c as sub_c, sub.main_c as main_c, p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.discount as discount, round(p.price-(p.price*discount/100), -1) as price, p.shipping_c as shipping_c, p.o_value as o_value, 
+      s.s_name from store s, product p, sub_c sub where s.s_no=p.s_no and p.sub_c=sub.sub_c) where pd_no=#{pd_no}
+     </select> 
   </mapper>
