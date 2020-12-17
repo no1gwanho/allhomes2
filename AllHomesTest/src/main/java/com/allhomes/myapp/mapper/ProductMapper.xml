@@ -60,11 +60,20 @@
         select count(*) from product where s_no=#{s_no}
      </select>
      
-          
      
        <!-- 디테일 -->
      <select id="selectDetailPage" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
         select * from (select sub.sub_c as sub_c, sub.main_c as main_c, p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.discount as discount, round(p.price-(p.price*discount/100), -1) as price, p.shipping_c as shipping_c, p.o_value as o_value, 
       s.s_name from store s, product p, sub_c sub where s.s_no=p.s_no and p.sub_c=sub.sub_c) where pd_no=#{pd_no}
      </select> 
+     
+     <!-- 위시리스트 관련  -->
+      <update id="updateWishlistAdd" parameterType="com.allhomes.myapp.product.ProductVO">
+        update product set wishlist = wishlist+1 where pd_no=#{pd_no}
+     </update>
+     <update id="updateWishlistRevert" parameterType="com.allhomes.myapp.product.ProductVO">
+        update product set wishlist = wishlist-1 where pd_no=#{pd_no}
+     </update>
+     
+     
   </mapper>
