@@ -115,14 +115,8 @@ public class RegisterController {
 			
 			mav.setViewName("landing/loginResult");
 			
-//			Object dest = ses.getAttribute("dest");
-//			if(dest==null) {
-//				mav.setViewName("redirect:/");
-//			}else {
-//				mav.setViewName("redirect:/"+dest.toString());
-//			}
 		}
-		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); //LogStatus값 확인하기 
+		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); 
 		
 		return mav;
 	}
@@ -150,10 +144,24 @@ public class RegisterController {
 		UUID random = UUID.randomUUID();
 		String uuid = random.toString();
 		String subject = "[Allhomes]회원가입을 환영합니다!!";
-		String content = "<div style='background:lightgray;border:1px solid gray;"
+		String content = "<!DOCTYPE html>\r\n" + 
+				"<html>\r\n" + 
+				"<head>"+
+				"<style>"
+				+ "@font-face{\r\n" + 
+				"   font-family:\"SCDream3\";\r\n" + 
+				"   src:url(\"/myapp/resources/css/font/SCDream3.otf\") format(\"truetype\");\r\n" + 
+				"   font-style:normal;\r\n" + 
+				"   font-weight:normal;\r\n" + 
+				"}"
+				+"#test{font-family:'SCDream3'}"
+				+"</style>"
+				+"</head>"
+				+"<body>"
+				+ "<div style='background:lightgray;border:1px solid;"
 						 + "border-radius:5px 5px 5px 5px;margin:30px;padding:30px;width:80%'>"
-						 + "<img src=\"myapp/resources/img/allhomes3.png\"/>"
-						 + "<p>\r\n"
+						 + "<img src='\"<%=request.getContextPath()%>/resources/img/allhomes3.png'/>"
+						 + "<p id='test'>\r\n"
 						 + "  		안녕하세요?<br/><br/>\r\n"
 						 + "  		"+userid+"님, 안녕하세요.<br/>\r\n"
 						 + "  		Allhomes가입을 진심으로 환영합니다!!<br/>\r\n"
@@ -162,7 +170,9 @@ public class RegisterController {
 						 + "  		회원가입 중 불편하셨던 점은 info@allhomes.co.kr로 메일 부탁드립니다!\r\n\n<br/>"
 						 + "		감사합니다."		
 						 + "  		</p>"
-						 + "</div>";
+						 + "</div>"
+						 +"</body>"
+				+"</html>";
 		
 		try {
 			MimeMessage message= mailSender.createMimeMessage();

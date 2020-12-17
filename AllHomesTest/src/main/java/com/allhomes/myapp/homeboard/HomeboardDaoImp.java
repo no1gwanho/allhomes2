@@ -7,11 +7,8 @@ public interface HomeboardDaoImp {
 	//레코드 전체 
 	public List<HomeboardVO> homeboardAllList();
 	
-	//레코드 최신 8개만
-	public List<HomeboardVO> homeboardRecent();
-	
-	//메인페이지용 집들이 글 리스트 (최근인기글 8개)
-	public List<HomeboardVO> homeboardListForMain();
+	//인기순 정렬 
+	public List<HomeboardVO> homeboardAllListHit();
 	
 	//집들이 테마별 리스트
 	public List<HomeboardVO> homeboardThemeList(int bh_theme_no);
@@ -34,7 +31,6 @@ public interface HomeboardDaoImp {
 	//집들이 글보기 
 	public HomeboardVO homeboardSelect(int b_no);
 	
-	
 	//집들이 글 수정 내용보기
 	public HomeboardVO homeboardEditSelect(int b_no);
 	
@@ -53,8 +49,11 @@ public interface HomeboardDaoImp {
 	//집들이 스크랩 취소할떄마다 스크랩 감소
 	public void homeboardSrapMinus(int b_no);
 	
+	//집들이 -- 내가쓴글 보기
+	public List<HomeboardVO> myHomeboardList(String userid);
 	
-	
+	//집들이-해시태그 불러오기
+	public String hashtagList();
 	
 	
 	

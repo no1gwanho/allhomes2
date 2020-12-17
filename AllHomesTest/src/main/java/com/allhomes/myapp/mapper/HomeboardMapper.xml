@@ -6,7 +6,7 @@
 <!-- ==========집들이 글 MAPPER============ -->
 <mapper namespace="com.allhomes.myapp.homeboard.HomeboardDaoImp">
 
-  	<!-- 집들이 전체리스트 -->
+  	<!-- 집들이 전체리스트(최신순 정렬) -->
  	<select id="homeboardAllList"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
  		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
     	from homeboard a 
@@ -16,22 +16,17 @@
     	on a.userid = c.userid
 		order by b_no desc
  	</select>
-  	  	
-  	  	
-  	 <!-- 집들이 메인 새로올라온 페이지 12개만 -->
- 	<select id="homeboardRecent"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
- 		<![CDATA[ 
- 		select b_no, thumbnail, title, m_pic, userid, hb_theme_no, hit, scrap, writedate from(select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+ 	
+ 	<!-- 집들이 인기리스트(조회순 정렬) -->
+ 	<select id="homeboardAllListHit"  resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
     	from homeboard a 
 		join hb_theme b 
    		on a.theme = b.theme 
 		join register c
     	on a.userid = c.userid
-		order by b_no desc) where rownum <13
-		]]>
+		order by hit desc
  	</select>
-  	  	
-  	  	
   	  	
   	<!-- 집들이 글작성하기 -->
   	<insert id="homeboardInsert" parameterType="com.allhomes.myapp.homeboard.HomeboardVO">
@@ -141,11 +136,25 @@
    
     </select>
     
-    <!-- 메인페이지용 집들이 최근인기글 8개 -->
-    <select id="homeboardListForMain" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
-    	select b_no, thumbnail, title, userid, hit, scrap, writedate, m_pic from 
-		(select a.b_no, a.thumbnail, a.title, a.userid, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate, b.m_pic from homeboard a join register b
-		on a.userid=b.userid order by hit desc, b_no desc) where rownum <![CDATA[<]]>  9
-    </select>
+    <!-- 내가 쓴 집들이 글(최신순 정렬) -->
+ 	<select id="myHomeboardList"  parameterType="String" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
+ 		select a.b_no, a.thumbnail, a.title, c.m_pic, a.userid, b.hb_theme_no, a.hit, a.scrap, to_char(a.writedate, 'YYYY-MM-DD') writedate  
+    	from homeboard a 
+		join hb_theme b 
+   		on a.theme = b.theme 
+		join register c
+    	on a.userid = c.userid
+    	where a.userid=#{param1}
+		order by b_no desc 
+ 	</select>
+ 	
+ 	<!-- 해시태그 리스트(중복제거) -->
+ 	<select id="hashtagList" resultType="String">
+ 	SELECT regexp_replace(LISTAGG(hashtag, ',') WITHIN GROUP(ORDER BY hashtag), '([^,]+)(,\1)*(,|$)', '\1\3') hashtaglist
+  	FROM homeboard
+ 	
+ 	</select>
+    
+
 
 </mapper>

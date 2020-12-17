@@ -3,7 +3,7 @@ package com.allhomes.myapp.review;
 public class ReviewVO {
 	private String userid;
 	private int pd_no;
-	private double rating;
+	private int rating;
 	private String img;
 	private String content;
 	private String writedate;
@@ -23,10 +23,10 @@ public class ReviewVO {
 	public void setPd_no(int pd_no) {
 		this.pd_no = pd_no;
 	}
-	public double getRating() {
+	public int getRating() {
 		return rating;
 	}
-	public void setRating(double rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 	public String getImg() {

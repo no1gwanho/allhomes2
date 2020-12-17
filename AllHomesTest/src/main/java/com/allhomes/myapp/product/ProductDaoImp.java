@@ -30,5 +30,10 @@ public interface ProductDaoImp {
 	
 	public List<ProductJoinVO> productCateList(int c_code);
 	
-	public ProductJoinVO selectDetailPage(int pd_no);	
+	public ProductJoinVO selectDetailPage(int pd_no);
+	
+	public int updateWishlistAdd(ProductVO vo);
+	
+	public int updateWishlistRevert(ProductVO vo);
 }
+

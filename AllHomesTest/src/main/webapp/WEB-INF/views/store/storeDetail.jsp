@@ -19,6 +19,10 @@
 </script>
 
 <style>
+	.col-3{
+      text-align:center;
+      margin-bottom:10px;
+   }
 	#floatingbanner {
 		position:absolute;
 		width:440px;
@@ -56,7 +60,7 @@
 <div class="container" id="content">
 	<form method="post" action="/myapp/cartInsert?pd_no=${vo.pd_no}" onsubmit="numchek()">
 	<!-- 상품 정보  -->
-		<span>Category : ${vo.main_c} > <a href="/myapp/sotreCategory">${vo.sub_c}</a></span>
+		<span>Category : ${vo.main_c} > <a href="/myapp/storeCategory?main_c=${vo.main_c }&sub_c=${vo.sub_c}">${vo.sub_c}</a></span>
 		<div class="row">
 			<div class="col-8" id="imgWrapper">
 				<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
@@ -65,16 +69,16 @@
 				<div class="row">
 					<div class="col-12">
 						<div style="height:30px;"><span>${vo.s_name}</span></div>
-						<div style="heihgt:105px;"><span style="font-size:1.8em;">${vo.pd_name}</span></div>
+						<div style="heihgt:105px;"><span style="font-size:1.8em;color:#343a40">${vo.pd_name}</span></div>
 					</div>
 					<div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
 						<c:if test="${result==0 && rvo.rating == 0}">
 							<span style="color:#aaa">
-								<i class="fas fas-star"></i>
-								<i class="fas fas-star"></i>
-								<i class="fas fas-star"></i>
-								<i class="fas fas-star"></i>
-								<i class="fas fas-star"></i>								
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>					
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>																								
 							</span>	
 							아직 등록된 리뷰가 없습니다
 						</c:if>
@@ -142,7 +146,7 @@
 							<span style="color:#343a40;">무료배송</span>
 						</c:if>
 						<c:if test="${vo.shipping_c!=0 }">
-							<span style="color:#343a40;">배송료</span><span style="margin-left:57px;color:#343a40">${vo.shipping_c }원</span>
+							<span style="color:#343a40;">배송료</span><span style="margin-left:78px;color:#343a40">${vo.shipping_c }원</span>
 						</c:if>
 					</div>
 					<div class="col-3" style="margin-top:35px;">
@@ -423,6 +427,15 @@
 							<c:if test="${result != 0 }">
 								<c:forEach var="r" items="${rList}">
 									<div class="row">
+										<div class="col-12" style="margin-top:15px;">
+											<c:if test="${userid == r.userid }">
+												<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
+													<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
+												</form>
+												<a href="/myapp/reviewDel?pd_no=${vo.pd_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
+											</c:if>
+
+										</div>
 										<div class="col-12">
 											<c:if test="${r.img != null}">
 												<a href="/mypage/storeDetail?pd_no=${vo.pd_no }">
@@ -462,7 +475,7 @@
 											</c:if>							
 										</div>
 									</div>										
-									<div class="row">
+									<div class="row" style="margin-bottom:15px;border-bottom:1px solid #ddd">
 										<div class="col-12" style="margin-top:15px;">
 											상품명 : ${vo.pd_name} <br/>
 										</div>
@@ -477,18 +490,17 @@
 												<button type="button" class="btn btn" style="background-color:#ee8374;color:#fff;">좋아요</button><br/>
 											</a>
 										</div>
-										<div class="col-12" style="margin-top:5px;text-align:right">
+										<div class="col-12" style="margin-top:5px;margin-bottom:30px;text-align:right">
 											${r.hit } 명에게 도움이 되었습니다.
 										</div>
 									</div>
-									<hr/>
-								</c:forEach>
-							</c:if>
-						</div>
-					</c:if>
+									</c:forEach>
+								</c:if>
+							</div>
+						</c:if>
+ 					</div>
 				</div>
-			</div>
-		</div>	
+			</div>	
 		</div>
 	</form>
 </div>
