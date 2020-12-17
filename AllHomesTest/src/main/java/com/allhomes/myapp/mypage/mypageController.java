@@ -295,15 +295,18 @@ public class mypageController {
 			int resultOutData = dao.memOutData(vo);
 			
 			if(resultOutData>0) {
+				
 				resp.setContentType("text/html;charset=UTF-8");
 				PrintWriter out;
 				try {
 					out = resp.getWriter();
 					out.println("<script>alert('회원탈퇴가 완료되었습니다.');</script>");
 					out.flush();
-				//	session.invalidate();
+				
 					session.removeAttribute("logStatus");
-					mav.setViewName("/home");		
+					session.setAttribute("outcheck","Y");
+					
+					mav.setViewName("/mypage/memOutResult");		
 				} catch (IOException e) {
 					
 					e.printStackTrace();
@@ -314,25 +317,26 @@ public class mypageController {
 			
 			
 		}else if(finalCheck ==null){
-			
-			resp.setContentType("text/html;charset=UTF-8");
-			PrintWriter out;
-			
-			try {
-				out = resp.getWriter();
-				out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
-				out.flush();
-				mav.setViewName("/outcheckpoint");		
-			} catch (IOException e) {
+			System.out.println("test22222");
+//			resp.setContentType("text/html;charset=UTF-8");
+//			PrintWriter out;
+//			
+//			try {
+//				out = resp.getWriter();
+//				out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
+//				out.flush();
+				session.setAttribute("outcheck","N");
+				mav.setViewName("/mypage/memOutResult");		
+		//	} catch (IOException e) {
 				
-				e.printStackTrace();
-			}
+		//		e.printStackTrace();
+			//}
 		}
 		
 			
 		
 		
-		mav.setViewName("/home");
+		//mav.setViewName("/home");
 		
 		
 		return mav;

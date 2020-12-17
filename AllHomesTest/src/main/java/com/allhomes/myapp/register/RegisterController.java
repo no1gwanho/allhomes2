@@ -113,13 +113,15 @@ public class RegisterController {
                        
 			System.out.println(resultVO.getNickname());
 			
-			Object dest = ses.getAttribute("dest");
+			
+		Object dest = ses.getAttribute("dest");
 			if(dest==null) {
 				mav.setViewName("redirect:/");
 			}else {
 				mav.setViewName("redirect:/"+dest.toString());
 			}
 			
+			mav.setViewName("landing/loginResult");
 		}
 		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); 
 		
