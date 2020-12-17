@@ -6,8 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.order.OrderDaoImp;
+import com.allhomes.myapp.order.OrderEditVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
 
 @Controller
@@ -36,5 +39,25 @@ public class AdminOrderController {
 		return mav;
 	}
 
-	
+	@RequestMapping(value="/orderStatusEdit", method=RequestMethod.POST)
+	public ModelAndView orderEdit(OrderEditVO vo) {
+		OrderDaoImp dao = sqlSession.getMapper(OrderDaoImp.class);
+		
+		System.out.println("pc_no"+vo.getPc_no());
+		System.out.println("pc_no"+vo.getPd_no());
+		System.out.println("pc_no"+vo.getStatus());
+		int result = dao.orderStatusEdit(vo);
+		
+		if(result>0) {
+			
+		}else {
+			
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:adminStoreOrder");
+		
+		return mav;
+	}
+
 }
