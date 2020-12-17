@@ -4,7 +4,7 @@ public class ReviewJoinVO {
 	private String userid;
 	private int pd_no;
 	private int rating;
-	private double avg_rate;
+	private int avg_rate;
 	private String img;
 	private String content;
 	private String writedate;
@@ -13,7 +13,7 @@ public class ReviewJoinVO {
 	private String pd_name;
 	private int cnt;
 	private int avg;
-	private double ratio_r;
+	private int ratio_r;
 	private int pc_no;
 	private String pc_date;	
 	private int num;
@@ -62,10 +62,10 @@ public class ReviewJoinVO {
 	public void setPc_date(String pc_date) {
 		this.pc_date = pc_date;
 	}
-	public double getRatio_r() {
+	public int getRatio_r() {
 		return ratio_r;
 	}
-	public void setRatio_r(double ratio_r) {
+	public void setRatio_r(int ratio_r) {
 		this.ratio_r = ratio_r;
 	}
 	public String getUserid() {
@@ -86,10 +86,10 @@ public class ReviewJoinVO {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public double getAvg_rate() {
+	public int getAvg_rate() {
 		return avg_rate;
 	}
-	public void setAvg_rate(double avg_rate) {
+	public void setAvg_rate(int avg_rate) {
 		this.avg_rate = avg_rate;
 	}
 	public String getImg() {

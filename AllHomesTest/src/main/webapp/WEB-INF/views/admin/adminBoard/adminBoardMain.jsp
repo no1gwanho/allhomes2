@@ -168,7 +168,7 @@ td{
 							<c:forEach var="vo" items="${hList}">
 							<li onClick="location.href='<%=request.getContextPath()%>/adminHomeBoardView?b_no=${vo.b_no}'">
 								<span>
-									<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail}"/>
+									<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/>
 								</span>
 								<dl>
 									<dt class="wordCut">${vo.title}</dt>
@@ -231,7 +231,7 @@ td{
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
-								<th>글내용</th>
+								
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>조회수</th>
@@ -244,7 +244,7 @@ td{
 								<tr onClick="location.href='<%=request.getContextPath() %>/adminQnaView?q_no=${qVo.q_no}'">
 									<td>${qVo.q_no}</td>
 									<td class="wordCut" style="width:20%">${qVo.title}</td>
-									<td class="wordCut" style="width:20%;height:30px;">${qVo.content}</td>
+									
 									<td>${qVo.userid}</td>
 									<td>${qVo.writedate}</td>
 									<td>${qVo.hit}</td>

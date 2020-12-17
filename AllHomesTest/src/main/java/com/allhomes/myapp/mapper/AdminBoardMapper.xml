@@ -39,7 +39,7 @@
 	<!-- homeboard 10개만 가져오기 -->
 	<select id="selectHomeboardTen" resultType="com.allhomes.myapp.homeboard.HomeboardVO">
 		<![CDATA[
- 		select  b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate  
+ 		select  b_no, title, theme, userid, hit, scrap, to_char(writedate, 'YYYY-MM-DD') writedate , thumbnail
  		from homeboard
  		where rownum <= 10
  		order by writedate desc
