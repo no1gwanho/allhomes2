@@ -113,7 +113,12 @@ public class RegisterController {
                        
 			System.out.println(resultVO.getNickname());
 			
-			mav.setViewName("landing/loginResult");
+			Object dest = ses.getAttribute("dest");
+			if(dest==null) {
+				mav.setViewName("redirect:/");
+			}else {
+				mav.setViewName("redirect:/"+dest.toString());
+			}
 			
 		}
 		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); 
@@ -221,7 +226,7 @@ public class RegisterController {
 				}
 				fileNames = fName;
 				try {
-					if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
+					if(originLast.equals("gif") || originLast.contentEquals("jpg") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
 						photoBtn.transferTo(f);	//확장자명이 맞을때만 업로드
 					
 					

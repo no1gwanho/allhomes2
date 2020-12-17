@@ -194,6 +194,7 @@
 		</script>	
 		<!-- 탭메뉴 시작 -->
 		<br/><br/>
+	</form>
 		<div class="row">
 			<div class="col-8">
 				<ul class="nav nav-tabs">
@@ -324,6 +325,7 @@
 							</div>
 						</div>
 						<hr/>
+						<div>아직 등록된 리뷰가 없습니다</div>
 					</c:if>
 					<c:if test="${result != 0 }">
 						<h6><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h6>
@@ -428,13 +430,12 @@
 								<c:forEach var="r" items="${rList}">
 									<div class="row">
 										<div class="col-12" style="margin-top:15px;">
+										<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
 											<c:if test="${userid == r.userid }">
-												<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
-													<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
-												</form>
+												<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
 												<a href="/myapp/reviewDel?pd_no=${vo.pd_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
 											</c:if>
-
+										</form>
 										</div>
 										<div class="col-12">
 											<c:if test="${r.img != null}">
@@ -502,7 +503,6 @@
 				</div>
 			</div>	
 		</div>
-	</form>
 </div>
 <style>
 	.nav nav-tabs, .nav-item{

@@ -150,24 +150,31 @@
 			<!-- 위시리스트 -->
 			<div class="card card border-light mb-3">
 				<div class="card-header">
-					위시리스트<a href="/myapp/mypageWishlist?userid=${vo.userid }" style="float:right;">더보기</a>
+				<c:if test="${empty list }">
+					위시리스트
+				</c:if>
+				<c:if test="${!empty list }">
+					위시리스트<a href="/myapp/mypageWishlist?userid=${vo.userid }"style="float:right;">더보기</a>
+				</c:if>
 				</div>
 				<div class="card-body"><!-- card-body 시작 -->
-					<div class="col-12">
-						<c:forEach var="w" items="${list }">
-							<c:if test="${empty w }">
-								<div style="width:100%;height:100px;text-align:center;line-height:100px;">
-									아직 위시리스트에 담은 상품이 없습니다
-								</div>
-							</c:if>		
-							<c:if test="${!empty w }">
-								<div style="float:left;width:33%;text-align:center">
-									<a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" style="width:230px;height:130px;border-radius:5%;"/></a><br/>
-								 	<span style="font-size:0.8em;">${w.pd_name }</span><br/>
-								</div>
-							</c:if>
-						</c:forEach>
+					<c:if test="${empty list }">
+						<div style="width:100%;height:100px;text-align:center;line-height:100px;">
+							아직 위시리스트에 담은 상품이 없습니다
+						</div>
+					</c:if>
+					<c:if test="${!empty list }">
+					<c:forEach var="w" items="${list }">	
+					<div class="row">				
+						<div class="col-12">
+							<div style="float:left;width:33%;text-align:center">
+								<a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" style="width:230px;height:130px;border-radius:5%;"/></a><br/>
+							 	<span style="font-size:0.8em;">${w.pd_name }</span><br/>
+							</div>
+						</div>
 					</div>
+					</c:forEach>								
+					</c:if>
 				</div><!-- card-body 끝 -->
 			</div><!-- card끝 -->			
 			<br/>
