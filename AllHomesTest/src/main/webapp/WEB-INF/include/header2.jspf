@@ -106,6 +106,7 @@
       function searchKeyword(){
          var key = $("#searchKey").val();
          location.href="<%=request.getContextPath()%>/search?key="+key;
+
       }
       //검색--검색버튼 클릭시 
          $("#searchBtn").click(function(){
@@ -142,30 +143,25 @@
     function l() {
       if (w.ChannelIOInitialized) {
         return;
+
       }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-  ChannelIO('boot', {
-    "pluginKey": "9ea1550e-dd0d-4872-bd75-c6ed5c6183cc"
-  });
+      //검색--검색버튼 클릭시 
+         $("#searchBtn").click(function(){
+            searchKeyword();
+         });
+      
+      //엔터클릭
+      $('#searchKey').keydown(function(e){
+         if(e.keyCode==13){
+            searchKeyword();
+         }
+      });
+
+      
+   });
 </script>
 <!-- End Channel Plugin -->
+
 
 
 
@@ -235,7 +231,9 @@
 
                   <div class="searchBox" style="margin-right:80px;width:220px;">
                      <input type="text" class="form-control" placeholder="Search"
+
                         id="searchKey" aria-label="Search" <c:if test="${key !=null }"> value='${key }' </c:if>
+
                         aria-describedby="searchA" style="width:200px;border-radius:30px;">
                      <button type="button" id="searchBtn" class="btn searchBtn" style="border-radius:30px;background-color:#EE8374;color:white;border:none;margin-right:10px;">
                      <i class="fas fa-search"></i></button>

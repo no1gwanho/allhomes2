@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.allhomes.myapp.product.ProductDaoImp">
+
    <!-- 제품 + 리뷰 + 스토어 -->
    <select id="productList" parameterType="String" resultType="com.allhomes.myapp.product.ProductJoinVO">
       select s.s_name as s_name, p.pd_name as pd_name, round(p.price-(p.price*p.discount/100), -1) as discount, p.status as status, 
@@ -75,5 +76,5 @@
         update product set wishlist = wishlist-1 where pd_no=#{pd_no}
      </update>
      
-     
+
   </mapper>

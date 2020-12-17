@@ -950,7 +950,7 @@
 				</div>
 			</div>	
 		</div>
->>>>>>> e6a114d2a1888c51cd891bd9638f0122f33590c3
+
 </div>
 <style>
    .nav nav-tabs, .nav-item{

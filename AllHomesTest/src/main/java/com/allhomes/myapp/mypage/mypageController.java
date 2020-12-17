@@ -198,242 +198,249 @@ public class mypageController {
       
       return mav;
 
-   }
-   
-   //주소지 수정 버튼 눌렀을때
-   
-   @RequestMapping(value="/addrUpdateOk",produces="application/text;charset=UTF-8")
-   public ModelAndView addrUpdateOk(MypageUpdateVO vo,HttpServletResponse req,HttpSession session) {
-      
-      ModelAndView mav = new ModelAndView();
-      
-      MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
-      
-      vo.setM_no((Integer)session.getAttribute("m_no"));
-      int resultVO = dao.addrUpdate(vo);
-      
-      if(resultVO>0) {//변한값이 있을때
-         
-         
-         mav.setViewName("/home");
-         req.setContentType("text/html;charset=UTF-8");
-         PrintWriter out;
-         try {
-            out = req.getWriter();
-            out.println("<script>alert('주소지정보가 수정되었습니다.');</script>");
-            out.flush();
-                  
-         } catch (IOException e) {
-            
-            e.printStackTrace();
-         }
-            
-      }else {
-         mav.setViewName("/home");
-         req.setContentType("text/html;charset=UTF-8");
-         PrintWriter out;
-         try {
-            out = req.getWriter();
-            out.println("<script>alert('주소지정보가 수정안됐습니다.');</script>");
-            out.flush();
-                  
-         } catch (IOException e) {
-            
-            e.printStackTrace();
-         }
-         
-      }
-      
-      return mav;
-   }
-   
-   
-   @RequestMapping(value="/outcheckpoint")
-   public ModelAndView outcheckpoint(HttpServletRequest request,HttpSession session,RegisterVO vo,HttpServletResponse resp) {   //배열로 바꾸는걸 생각해보자
-      
-      ModelAndView mav = new ModelAndView();
-      
-      String finalCheck = request.getParameter("finalCheck");
-      String useless = request.getParameter("useless");
-      String rereg = request.getParameter("rereg");
-      String conless = request.getParameter("conless");
-      String indi = request.getParameter("indi");
-      String etc = request.getParameter("etc");
-      
-      //종합변수(위에 변수들 다합친거) = split으로 null을 기배열 꺼집어내서 담아주고 substring으로 잘라서 null기준으로  합쳐준다.
-      
-      String totalVal = useless+"&"+rereg+"&"+conless+"&"+indi+"&"+etc;
-      String [] resultVal =totalVal.split("&null"); 
-      String finalResult="";
-      
-      
-      for(int i=0;i<resultVal.length;i++) {
-         finalResult += resultVal[i];
-      }
-      
-      System.out.println(finalResult);
-      
-      //1.finalcheck를 클릭하면 regcode를 0으로 만들어서 로그인이 불가능하도록 만들어준다
-      RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-      
-      System.out.println((Integer)session.getAttribute("m_no"));//번호나옴
-      vo.setM_no((Integer)session.getAttribute("m_no"));
-      
-      
-      int resultVO = dao.memLogBlock((Integer)session.getAttribute("m_no"));
-      
-      
-      
-      if(finalCheck != null && resultVO>0) {
-         //로그인 블락에 성공하면 데이터수집
-         
-         vo.setUserid((String)session.getAttribute("userid"));
-         vo.setNickname((String)session.getAttribute("nickname"));
-         vo.setOutmemo(finalResult);
-         
-         
-         int resultOutData = dao.memOutData(vo);
-         
-         if(resultOutData>0) {
-            resp.setContentType("text/html;charset=UTF-8");
-            PrintWriter out;
-            try {
-               out = resp.getWriter();
-               out.println("<script>alert('회원탈퇴가 완료되었습니다.');</script>");
-               out.flush();
-            //   session.invalidate();
-               session.removeAttribute("logStatus");
-               mav.setViewName("/home");      
-            } catch (IOException e) {
-               
-               e.printStackTrace();
-            }
-            
-         }
-         
-         
-         
-      }else if(finalCheck ==null){
-         
-         resp.setContentType("text/html;charset=UTF-8");
-         PrintWriter out;
-         
-         try {
-            out = resp.getWriter();
-            out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
-            out.flush();
-            mav.setViewName("/outcheckpoint");      
-         } catch (IOException e) {
-            
-            e.printStackTrace();
-         }
-      }
-      
-         
-      
-      
-      mav.setViewName("/home");
-      
-      
-      return mav;
-   }
-   
-   
-   
-   //수정버튼 눌렀을때
-   @RequestMapping(value="/updateOk",produces="application/text;charset=UTF-8")
-   public ModelAndView updateOk(RegisterVO vo,RegisterVO vo1,HttpServletResponse req,HttpSession session,String email,String nickname,String tel,@RequestParam("picBox") MultipartFile picBox) {
-      
-               
-      //기본정보 업데이트
-      RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
-                  
-      String originEmail = (String)session.getAttribute("email");
-      String splEmail[] = originEmail.split("@");
-      vo.setEmail1(splEmail[0]);
-      vo.setEmail2(splEmail[1]);   
-      vo.setNickname((String)session.getAttribute("nickname"));
-      vo.setM_pic((String)session.getAttribute("m_pic"));
-      
-      //비교할 신규데이터 입력
-      String updEmail = email;
-      String splupdEmail [] = email.split("@");
-      vo1.setEmail1(splupdEmail[0]);
-      vo1.setEmail2(splupdEmail[1]);
-      
-      
-      vo1.setNickname(nickname);
-      vo1.setTel(tel);
-            
-      System.out.println(vo1.getEmail());
-      System.out.println(vo1.getTel());
-      System.out.println(vo1.getNickname());
-      
-      RegisterVO dupCheck = dao.dupCheck(vo1);
-      ModelAndView mav = new ModelAndView();
-         
-      if(dupCheck==null){
-                     
-         ///////////프로필 사진 업로드////////////
-         String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
-         String fileNames = "";
-         String fName = picBox.getOriginalFilename();
-         
-            if(fName!=null && !fName.equals("")) {   
-               
-               String originFileName = fName.substring(0,fName.lastIndexOf("."));
-               
-               String originLast = fName.substring(fName.lastIndexOf(".")+1);
-            
-               
-               File f=new File(path,fName);
-               if(f.exists()) {      
-                  for(int renameNum=1;;renameNum++) {
-                     String renameFile = originFileName+renameNum+"."+originLast;   
-                  f = new File(path,renameFile);
-                     
-                  
-                  if(!f.exists()) {
-                        fName = renameFile;
-                        break;
-                     }
-                  }
-               }
-               fileNames = fName;
-               try {
-                  if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
-                     picBox.transferTo(f);   
-                     vo.setM_pic(fileNames);
-                     vo.setM_no((Integer)session.getAttribute("m_no"));
-                  
-                     int resultVO = dao.userMebUpdate(vo); 
-                     
-                     if(resultVO<=0) {   
-                        if(fileNames!=null) {   
-                           File ff = new File(path,fileNames);   
-                              ff.delete();
-                        }
-                     }
-                     mav.setViewName("landing/registerOkPage");
-                     session.setAttribute("resultVO",resultVO);   
-               
-                  }else{
-                     mav.setViewName("landing/registerUnSuitImg");            
-                  }
-               }catch(Exception e) {e.printStackTrace();}
-               
-               
-               
-               int resultVO = dao.userMebUpdate(vo1);
-               mav.setViewName("/home");
-               session.setAttribute("resultVO",resultVO);   
-               
-               
-               
-            }else {   
-               System.out.println("test4");
-               fileNames = "basicprofile.png";   
-               vo.setM_pic(fileNames);
+
+
+	}
+	
+	//주소지 수정 버튼 눌렀을때
+	
+	@RequestMapping(value="/addrUpdateOk",produces="application/text;charset=UTF-8")
+	public ModelAndView addrUpdateOk(MypageUpdateVO vo,HttpServletResponse req,HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
+		
+		vo.setM_no((Integer)session.getAttribute("m_no"));
+		int resultVO = dao.addrUpdate(vo);
+		
+		if(resultVO>0) {//변한값이 있을때
+			
+			
+			mav.setViewName("/home");
+			req.setContentType("text/html;charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = req.getWriter();
+				out.println("<script>alert('주소지정보가 수정되었습니다.');</script>");
+				out.flush();
+						
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+				
+		}else {
+			mav.setViewName("/home");
+			req.setContentType("text/html;charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = req.getWriter();
+				out.println("<script>alert('주소지정보가 수정안됐습니다.');</script>");
+				out.flush();
+						
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/outcheckpoint")
+	public ModelAndView outcheckpoint(HttpServletRequest request,HttpSession session,RegisterVO vo,HttpServletResponse resp) {	//배열로 바꾸는걸 생각해보자
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String finalCheck = request.getParameter("finalCheck");
+		String useless = request.getParameter("useless");
+		String rereg = request.getParameter("rereg");
+		String conless = request.getParameter("conless");
+		String indi = request.getParameter("indi");
+		String etc = request.getParameter("etc");
+		
+		//종합변수(위에 변수들 다합친거) = split으로 null을 기배열 꺼집어내서 담아주고 substring으로 잘라서 null기준으로  합쳐준다.
+		
+		String totalVal = useless+"&"+rereg+"&"+conless+"&"+indi+"&"+etc;
+		String [] resultVal =totalVal.split("&null"); 
+		String finalResult="";
+		
+		
+		for(int i=0;i<resultVal.length;i++) {
+			finalResult += resultVal[i];
+		}
+		
+		System.out.println(finalResult);
+		
+		//1.finalcheck를 클릭하면 regcode를 0으로 만들어서 로그인이 불가능하도록 만들어준다
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+		
+		System.out.println((Integer)session.getAttribute("m_no"));//번호나옴
+		vo.setM_no((Integer)session.getAttribute("m_no"));
+		
+		
+		int resultVO = dao.memLogBlock((Integer)session.getAttribute("m_no"));
+		
+		
+		
+		if(finalCheck != null && resultVO>0) {
+			//로그인 블락에 성공하면 데이터수집
+			
+			vo.setUserid((String)session.getAttribute("userid"));
+			vo.setNickname((String)session.getAttribute("nickname"));
+			vo.setOutmemo(finalResult);
+			
+			
+			int resultOutData = dao.memOutData(vo);
+			
+			if(resultOutData>0) {
+				
+				resp.setContentType("text/html;charset=UTF-8");
+				PrintWriter out;
+				try {
+					out = resp.getWriter();
+					out.println("<script>alert('회원탈퇴가 완료되었습니다.');</script>");
+					out.flush();
+				
+					session.removeAttribute("logStatus");
+					session.setAttribute("outcheck","Y");
+					
+					mav.setViewName("/mypage/memOutResult");		
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+			
+			
+			
+		}else if(finalCheck ==null){
+			System.out.println("test22222");
+//			resp.setContentType("text/html;charset=UTF-8");
+//			PrintWriter out;
+//			
+//			try {
+//				out = resp.getWriter();
+//				out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
+//				out.flush();
+				session.setAttribute("outcheck","N");
+				mav.setViewName("/mypage/memOutResult");		
+		//	} catch (IOException e) {
+				
+		//		e.printStackTrace();
+			//}
+		}
+		
+			
+		
+		
+		//mav.setViewName("/home");
+		
+		
+		return mav;
+	}
+	
+	
+	
+	//수정버튼 눌렀을때
+	@RequestMapping(value="/updateOk",produces="application/text;charset=UTF-8")
+	public ModelAndView updateOk(RegisterVO vo,RegisterVO vo1,HttpServletResponse req,HttpSession session,String email,String nickname,String tel,@RequestParam("picBox") MultipartFile picBox) {
+		
+					
+		//기본정보 업데이트
+		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);
+						
+		String originEmail = (String)session.getAttribute("email");
+		String splEmail[] = originEmail.split("@");
+		vo.setEmail1(splEmail[0]);
+		vo.setEmail2(splEmail[1]);	
+		vo.setNickname((String)session.getAttribute("nickname"));
+		vo.setM_pic((String)session.getAttribute("m_pic"));
+		
+		//비교할 신규데이터 입력
+		String updEmail = email;
+		String splupdEmail [] = email.split("@");
+		vo1.setEmail1(splupdEmail[0]);
+		vo1.setEmail2(splupdEmail[1]);
+		
+		
+		vo1.setNickname(nickname);
+		vo1.setTel(tel);
+				
+		System.out.println(vo1.getEmail());
+		System.out.println(vo1.getTel());
+		System.out.println(vo1.getNickname());
+		
+		RegisterVO dupCheck = dao.dupCheck(vo1);
+		ModelAndView mav = new ModelAndView();
+			
+		if(dupCheck==null){
+							
+			///////////프로필 사진 업로드////////////
+			String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
+			String fileNames = "";
+			String fName = picBox.getOriginalFilename();
+			
+				if(fName!=null && !fName.equals("")) {	
+					
+					String originFileName = fName.substring(0,fName.lastIndexOf("."));
+					
+					String originLast = fName.substring(fName.lastIndexOf(".")+1);
+				
+					
+					File f=new File(path,fName);
+					if(f.exists()) {		
+						for(int renameNum=1;;renameNum++) {
+							String renameFile = originFileName+renameNum+"."+originLast;	
+						f = new File(path,renameFile);
+							
+						
+						if(!f.exists()) {
+								fName = renameFile;
+								break;
+							}
+						}
+					}
+					fileNames = fName;
+					try {
+						if(originLast.equals("gif") || originLast.equals("jpeg") || originLast.equals("png") ||  originLast.equals("jfif")) {
+							picBox.transferTo(f);	
+							vo.setM_pic(fileNames);
+							vo.setM_no((Integer)session.getAttribute("m_no"));
+						
+							int resultVO = dao.userMebUpdate(vo); 
+							
+							if(resultVO<=0) {	
+								if(fileNames!=null) {	
+									File ff = new File(path,fileNames);	
+										ff.delete();
+								}
+							}
+							mav.setViewName("landing/registerOkPage");
+							session.setAttribute("resultVO",resultVO);	
+					
+						}else{
+							mav.setViewName("landing/registerUnSuitImg");				
+						}
+					}catch(Exception e) {e.printStackTrace();}
+					
+					
+					
+					int resultVO = dao.userMebUpdate(vo1);
+					mav.setViewName("/home");
+					session.setAttribute("resultVO",resultVO);	
+					
+					
+					
+				}else {	
+					System.out.println("test4");
+					fileNames = "basicprofile.png";	
+					vo.setM_pic(fileNames);
+
 
                int resultVO = dao.userMebUpdate(vo1);   
                System.out.println("test5");
