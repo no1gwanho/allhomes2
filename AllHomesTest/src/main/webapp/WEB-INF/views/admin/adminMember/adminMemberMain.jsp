@@ -7,15 +7,19 @@ td {
 	height: 50px;
 	line-height: 50px;
 }
+
 #memberChart {
 	height: 505px;
 }
+
 .cardSize {
 	height: 240px;
 }
+
 #cards {
 	float: left
 }
+
 #cards>div {
 	float: left
 }
@@ -30,16 +34,16 @@ td {
 				</div>
 				<div class="card-body">
 					<div>
-						<input type="hidden" id="count0" value="${count0}"/>
-						<input type="hidden" id="count1" value="${count1}"/> 
-						<input type="hidden" id="count2" value="${count2}"/> 
-						<input type="hidden" id="count3" value="${count3}"/> 
-						<input type="hidden" id="count4" value="${count4}"/> 
-						<input type="hidden" id="count5" value="${count5}"/> 
-						<input type="hidden" id="count6" value="${count6}"/> 
-						
-                        <canvas id="lineChart"></canvas>
-					<script>
+						<input type="hidden" id="count0" value="${count0}" /> <input
+							type="hidden" id="count1" value="${count1}" /> <input
+							type="hidden" id="count2" value="${count2}" /> <input
+							type="hidden" id="count3" value="${count3}" /> <input
+							type="hidden" id="count4" value="${count4}" /> <input
+							type="hidden" id="count5" value="${count5}" /> <input
+							type="hidden" id="count6" value="${count6}" />
+
+						<canvas id="lineChart"></canvas>
+						<script>
 						let today = new Date();   
 						let month = today.getMonth() + 1;  // 월
 						let date = today.getDate();  // 날짜
@@ -82,7 +86,7 @@ td {
 								});
 						
 					</script>
-                    </div>
+					</div>
 
 
 				</div>
@@ -95,15 +99,17 @@ td {
 			<div class="col-xl-6 col-md-6 mb-4 cardSize">
 				<div class="card border-left-info shadow h-100 py-2">
 					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
+						<div class="row">
+							<div class="col-6 mr-2 mt-3">
 								<div
-									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-									Today</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">+${today}</div>
+									class="text-xl font-weight-bold text-info text-uppercase mb-1 ml-3 mt-3">
+									<h3>Today</h3>
+								</div>
 							</div>
-							<div class="col-auto">
-								<i class="fas fa-users fa-2x text-gray-300"></i>
+
+							<div class="col-5 mt-3">
+								<i class="fas fa-user fa-4x text-gray-300"></i>
+								<div class="h2 font-weight-bold mt-3 col-lg-12">+${today}명</div>
 							</div>
 						</div>
 					</div>
@@ -114,17 +120,20 @@ td {
 			<div class="col-xl-6 col-md-6 mb-4 cardSize">
 				<div class="card border-left-primary shadow h-100 py-2">
 					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
+						<div class="row">
+							<div class="col-6 mr-2 mt-3">
 								<div
-									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-									This Month</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">+${month}</div>
+									class="text-xl font-weight-bold text-primary text-uppercase mb-1 ml-3 mt-3">
+									<h3>this month</h3>
+								</div>
 							</div>
-							<div class="col-auto">
-								<i class="fas fa-users fa-2x text-gray-300"></i>
+
+							<div class="mt-3">
+								<i class="fas fa-user fa-4x text-gray-300"></i>
+								<div class="h2 font-weight-bold mt-3 col-lg-12">+${month}명</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -132,15 +141,17 @@ td {
 			<div class="col-xl-6 col-md-6 mb-4 cardSize">
 				<div class="card border-left-primary shadow h-100 py-2">
 					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
+						<div class="row">
+							<div class="col-6 mr-2 mt-3">
 								<div
-									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-									Total</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">+${allCnt}</div>
+									class="text-xl font-weight-bold text-primary text-uppercase mb-1 ml-3 mt-3">
+									<h3>total</h3>
+								</div>
 							</div>
-							<div class="col-auto">
-								<i class="fas fa-users fa-2x text-gray-300"></i>
+
+							<div class="col-5 mt-3">
+								<i class="fas fa-users fa-4x text-gray-300"></i>
+								<div class="h2 font-weight-bold mt-3">${allCnt}명</div>
 							</div>
 						</div>
 					</div>
@@ -148,27 +159,28 @@ td {
 			</div>
 
 			<div class="col-xl-6 col-md-6 mb-4 cardSize">
-				<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card border-left-danger shadow h-100 py-2">
 					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
+						<div class="row">
+							<div class="col-6 mr-2 mt-3">
 								<div
-									class="text-xl font-weight-bold text-primary text-uppercase mb-1">
-									Loss</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">-${out}</div>
+									class="text-xl font-weight-bold text-danger text-uppercase mb-1 ml-3 mt-3">
+									<h3>loss</h3>
+								</div>
 							</div>
-							<div class="col-auto">
-								<i class="fas fa-users fa-2x text-gray-300"></i>
+
+							<div class="col-5 mt-3">
+								<i class="fas fa-sign-out-alt fa-4x text-gray-300"></i>
+								<div class="h2 font-weight-bold mt-3">-${out}명</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
+				</div>
+
+
+			</div>
 		</div>
-
-
-
 
 		<div class="col-lg-12">
 
@@ -219,4 +231,5 @@ td {
 		</div>
 		<!-- col끝 -->
 	</div>
+
 </div>

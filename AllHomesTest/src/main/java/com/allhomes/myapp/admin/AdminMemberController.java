@@ -176,8 +176,13 @@ public class AdminMemberController {
 
 		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
 
+		
+		HashMap<String, Object> cntMap = new HashMap<String, Object>();
+		cntMap.put("value", value);
+		cntMap.put("key", key);
+		
 		// paging//
-		int total = dao.countRegisterTotal(); // 총회원수
+		int total = dao.memberSearchCnt(cntMap);//선택검색한 회원 수
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "15";
@@ -187,18 +192,24 @@ public class AdminMemberController {
 			cntPerPage = "15";
 		}
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-
-		ModelAndView mav = new ModelAndView();
-		// paging
-		mav.addObject("paging", vo);
+		//맵
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("value", value);
 		map.put("key", key);
 		map.put("start", vo.getStart());
 		map.put("end", vo.getEnd());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		// paging
+		mav.addObject("paging", vo);
+		mav.addObject("v", value);
+		mav.addObject("k", key);
+		
+		
 		mav.addObject("viewAll", dao.memberSearch(map));
-
-		mav.setViewName("admin/adminMember/adminMemberList");
+		mav.setViewName("admin/adminMember/adminMemberSearchOk");
+		
 		return mav;
 
 	}
@@ -211,7 +222,7 @@ public class AdminMemberController {
 		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
 
 		// paging//
-		int total = dao.countRegisterTotal(); // 총회원수
+		int total = dao.countRegisterTotal(); //상세 검색 한 결과의 수
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "15";
@@ -222,7 +233,7 @@ public class AdminMemberController {
 		}
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 
-		System.out.println("a;ldskfadsf" + regVo.getDate() + regVo.getDate2() + regVo.getUsername());
+		//System.out.println("a;ldskfadsf" + regVo.getDate() + regVo.getDate2() + regVo.getUsername());
 
 		ModelAndView mav = new ModelAndView();
 		// paging
@@ -237,6 +248,7 @@ public class AdminMemberController {
 
 		map.put("start", vo.getStart());
 		map.put("end", vo.getEnd());
+		
 		mav.addObject("viewAll", dao.memberSearchDetail(map));
 
 		mav.setViewName("admin/adminMember/adminMemberList");

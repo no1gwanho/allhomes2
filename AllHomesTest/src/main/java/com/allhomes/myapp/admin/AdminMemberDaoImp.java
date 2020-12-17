@@ -15,6 +15,8 @@ public interface AdminMemberDaoImp {
 	public List<RegisterVO> memberAllSelectOrder(HashMap<String, Object> map);
 	//회원 선택 검색
 	public List<RegisterVO> memberSearch(HashMap<String, Object> map);
+	public int memberSearchCnt(HashMap<String, Object> map);
+	
 	//회원 상세 검색
 	public List<RegisterVO> memberSearchDetail(HashMap<String, Object> map);
 	//관리자 회원 상위 10개

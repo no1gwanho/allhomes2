@@ -202,7 +202,7 @@ td{
 							<c:if test="${paging.startPage != 1 }">
 								<li class="page-item">
 									<a class="page-link"
-										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+										href="<%=request.getContextPath()%>/adminMemberSearch?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&value=${v}&key=${k}">&lt;</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
@@ -216,7 +216,9 @@ td{
 									<c:when test="${p != paging.nowPage }">
 										<li class="page-item">
 										<a class="page-link"
-											href="<%=request.getContextPath()%>/adminMemberList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+											href="<%=request.getContextPath()%>/adminMemberSearch?nowPage=${p }&cntPerPage=${paging.cntPerPage}&value=${v}&key=${k}">${p }</a>
+											
+								
 										</li>
 									</c:when>
 								</c:choose>
@@ -224,7 +226,7 @@ td{
 							<c:if test="${paging.endPage != paging.lastPage}">
 								<li class="page-item">
 									<a class="page-link"
-										href="<%=request.getContextPath()%>/adminMemberList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+										href="<%=request.getContextPath()%>/adminMemberSearch?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&value=${v}&key=${k}">&gt;</a>
 								</li>
 							</c:if>
 						</ul>
