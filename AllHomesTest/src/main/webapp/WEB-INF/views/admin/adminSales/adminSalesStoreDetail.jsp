@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -128,7 +130,7 @@
 										★★★★★
 										</c:if>
 									</span>
-								(${countReview})</div>
+								<fmt:formatNumber value="${avgRating}" pattern=".0"/> (${countReview})</div>
 							</div>
 						</div>
 					</div>
