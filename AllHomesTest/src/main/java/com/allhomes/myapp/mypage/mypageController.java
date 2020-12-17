@@ -136,7 +136,7 @@ public class mypageController {
             req.setContentType("text/html;charset=UTF-8");
             PrintWriter out;
             try {
-               mav.setViewName("/home");
+               mav.setViewName("landing/loginForm");
                out = req.getWriter();
                out.println("<script>alert('로그인 후 수정이 가능합니다.');</script>");
                out.flush();
