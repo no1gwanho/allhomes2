@@ -19,9 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.product.PagingVO;
+import com.allhomes.myapp.product.ProductDaoImp;
+import com.allhomes.myapp.product.ProductVO;
 import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
+import com.allhomes.myapp.qna.QnaDaoImp;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
 import com.allhomes.myapp.review.ReviewDaoImp;
@@ -57,12 +64,22 @@ public class mypageController {
 		
 		int m_no = (Integer)ses.getAttribute("m_no");
 		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
-		List<ScrapVO> sList = scrap.selectScrap(m_no);
+
+		List<ScrapVO> sList = scrap.mypageScrapList(m_no);
 		
+		//나의글리스트 (집들이/질문답변 따로 불러오기)
+		//집들이
+		HomeboardDaoImp myHbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+		List<HomeboardVO> myHbList = myHbDao.myHomeboardList(userid);
 		
+		//질문답변 
+		QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
+		List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
 		
-		mv.addObject("list", list);	
-		mv.addObject("sList", sList);
+		mv.addObject("list", list);	 //위시리스트
+		mv.addObject("sList", sList); //스크랩
+		mv.addObject("myHbList", myHbList); //내가쓴 집들이
+		mv.addObject("myQnaList", myQnaList); //내가 쓴 질문글 
 		mv.addObject("vo", vo);
 		
 		mv.setViewName("mypage/mypageHome");
@@ -74,7 +91,7 @@ public class mypageController {
 
 	//mypage 회원정보수정으로이동
 	@RequestMapping(value="/userEdit",produces="application/text;charset=UTF-8")
-	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1) {
+	public ModelAndView userEdit(HttpSession session,MypageUpdateVO vo,RegisterVO vo1,HttpServletResponse req) {
 		
 		MypageUpdateDaoImp dao = sqlSession.getMapper(MypageUpdateDaoImp.class);
 		ModelAndView mav = new ModelAndView();	
@@ -116,9 +133,22 @@ public class mypageController {
 			mav.setViewName("mypage/userEditForm");
 			
 		}else {	//로그인 안하고 들어올때 돌려보내야함	
+				req.setContentType("text/html;charset=UTF-8");
+				PrintWriter out;
+				try {
+					mav.setViewName("/home");
+					out = req.getWriter();
+					out.println("<script>alert('로그인 후 수정이 가능합니다.');</script>");
+					out.flush();
+							
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			
 			
 			}
-			mav.setViewName("mypage/userEditForm");
+			
 		
 		return mav;
 	}
@@ -559,17 +589,9 @@ public class mypageController {
 		
 		String userid = (String)ses.getAttribute("userid");
 		PurchaseJoinVO vo = new PurchaseJoinVO();
-
 		vo.setUserid(userid);
 			
 		List<PurchaseJoinVO> list = dao.joinPurchase(userid);
-		for(int i=0; i<list.size(); i++) {
-			vo = list.get(i);
-			int pd_no = vo.getPd_no();
-			
-			System.out.println("제품번호는 얼마야??????????????????????"+pd_no);
-			mav.addObject("pd_no", pd_no);
-		}
 		
 		mav.addObject("list", list);
 		mav.setViewName("mypage/mypageShopping");
@@ -597,17 +619,25 @@ public class mypageController {
 	}
 
 	@RequestMapping("/mypageWishlist")
-	public ModelAndView wishListAdd(MypageWishlistVO vo, HttpServletRequest r) {
+	public ModelAndView wishListView(HttpServletRequest r) {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
 		
-		System.out.println(r.getParameter("m_no"));
-		
 		HttpSession ses = r.getSession();
-		String userid = (String)ses.getAttribute("userid");
+		String userid = (String)ses.getAttribute("userid");	
 		
+		PagingVO pageVO = new PagingVO();
+		pageVO.setUserid(userid);
+		
+		String nowPageTxt = r.getParameter("nowPage");	// 현재페이지
+		if(nowPageTxt!=null) {								// 페이지 번호를 서버로 가져온 경우
+			pageVO.setNowPage(Integer.parseInt(nowPageTxt));
+		}
+		
+		pageVO.setTotalRecord(dao.getAllListCount(pageVO));		// 총 레코드 수		
 		List<MypageWishlistJoinVO> list = dao.wishlistPage(userid);
 		
+		mv.addObject("pageVO", pageVO);
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypageWishlist");
 				
@@ -618,6 +648,7 @@ public class mypageController {
 	public ModelAndView wishAdd(@RequestParam("pd_no") int pd_no, HttpServletRequest r) {
 		ModelAndView mv = new ModelAndView();
 		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
 		HttpSession s = r.getSession();
 		
 		String userid = (String)s.getAttribute("userid");
@@ -625,24 +656,55 @@ public class mypageController {
 		vo.setUserid(userid);
 		vo.setPd_no(pd_no);
 		
+		ProductVO pvo = new ProductVO();
+		pvo.setPd_no(pd_no);
+		
+		int pResult = pDao.updateWishlistAdd(pvo);		
 		int result = dao.addWishlist(vo);
 
 		System.out.println(result);
 		
-		mv.addObject("r", result);
+		mv.addObject("resultWishAdd", result);
 		mv.addObject("pd_no", pd_no);
-		mv.setViewName("landing/wishConfirm");
+		mv.setViewName("landing/resultCheck");
 		
 		return mv;
 	}	
 	
-	
-	
-	//mypage 나의 작성글로 이동
-	@RequestMapping("/mypageMyboard")
-	public String mypageMyboard() {
-		return "mypage/mypageMyboard";
+	@RequestMapping("/wishDel")
+	public ModelAndView wishDel(@RequestParam("pd_no") String pd_no) {
+		ModelAndView mv = new ModelAndView();
+		MypageWishlistDaoImp dao = sqlSession.getMapper(MypageWishlistDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
+		
+		ProductVO pvo = new ProductVO();
+		
+		String strPd_no[] = pd_no.split(",");
+		int[] pd_noList = new int[strPd_no.length];
+		
+		for(int i=0; i<strPd_no.length; i++) {
+			pd_noList[i] = Integer.parseInt(strPd_no[i]);
+		}
+		
+		try {
+			for(int i=0; i<pd_noList.length; i++) {
+				dao.wishDel(pd_noList[i]);
+				pvo.setPd_no(pd_noList[i]);
+				
+				int result = pDao.updateWishlistRevert(pvo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}			
+		
+		mv.setViewName("redirect:mypageWishlist");
+				
+		return mv;
 	}
+	
+	
+	
+	
 	
 	//mypage 회원 정보 수정으로 이동
 	@RequestMapping("/mypageEdit")

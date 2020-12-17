@@ -20,8 +20,14 @@ public class PurchaseVO {
 	private String img;
 	private String content;
 	private String writedate;
+	private int chk_c;
 
-
+	public int getChk_c() {
+		return chk_c;
+	}
+	public void setChk_c(int chk_c) {
+		this.chk_c = chk_c;
+	}
 	public String getO_value() {
 		return o_value;
 	}

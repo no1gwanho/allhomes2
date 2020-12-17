@@ -5,18 +5,7 @@
 
 <style>
 
-	#bxslider img{
-		width:1400px;
-		height:450px;
-		border-radius:30px;
-	}
-	.bx-wrapper {
-	       -moz-box-shadow: none !important;
-	        -webkit-box-shadow: none !important;
-	        box-shadow: none !important;
-	        padding:0;
-	        margin:0;
-	}
+
 	.col-3, .col-lg-3, .col-xs-6{
 			text-align:center;
 			margin-bottom:10px;
@@ -165,6 +154,23 @@
 	</div>
 
 <div class="container" style="margin-top:45px;">
+	
+	<!-- 해시태그 리스트 --> 
+	
+	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
+	<div style="text-align: right;">
+	</div>
+	
+	<div class="alert alert-info" role="alert">
+	<c:forTokens var="hashtag" items="${hashtagList }" delims="," end="20">
+	
+		<a href="/myapp/search?key=${hashtag }"><span>#</span>${hashtag }</a>
+	</c:forTokens>
+	</div>
+	
+	
+	
+	
 	<div class="row">
 		<div class="col-10">
 			<h3 id="homeboardTitle">새로 올라온 집들이</h3>
@@ -176,7 +182,7 @@
 	
 
 	<!-- 리스트 나오는 곳 -->
-	<c:forEach var="vo" items="${list }">
+	<c:forEach var="vo" items="${list }" end="11">
 
 		<div class="col-lg-3">
 			<div class="thumbnail">
@@ -196,24 +202,8 @@
 	</c:forEach>
 	</div>
 
-	<!-- 해시태그 리스트 (이 기능 없앨지 말지 고민중)--> 
-	<div>
-		<h3 id="homeboardTitle">올홈즈 해시태그</h3>
-	</div>
-	<h6>올홈즈에서 지금 가장 인기있는 해시태그로 검색해보세요.</h6>
-	<div style="text-align: right;">
-	</div>
 	
-	<div class="alert alert-info" role="alert">
-		<a href="#">#아기방</a><a href="#">#자취팁</a><a href="#">#셀프인테리어</a><a
-			href="#">#컨셉있는방</a><a href="#">#아기방</a><a href="#">#자취팁</a><a
-			href="#">#셀프인테리어</a><a href="#">#컨셉있는방</a><a href="#">#아기방</a><a
-			href="#">#자취팁</a><a href="#">#셀프인테리어</a><a href="#">#컨셉있는방</a><a
-			href="#">#아기방</a><a href="#">#자취팁</a><a href="#">#셀프인테리어</a><a
-			href="#">#컨셉있는방</a><a href="#">#아기방</a><a href="#">#자취팁</a><a
-			href="#">#셀프인테리어</a><a href="#">#컨셉있는방</a>
-	</div>
-	<br /> <br /> <br /> <br /> <br /> <br /> <br />
-	</div>
+
+</div>
 
 </div>
