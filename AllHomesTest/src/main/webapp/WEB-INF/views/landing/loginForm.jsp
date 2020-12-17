@@ -32,7 +32,7 @@
 	
 	
 	#idpw{text-align:center;}
-	#logo img{width:200px; display: block; margin: 0px auto;}
+	#logo img{width:250px; display: block; margin: 0px auto 10px auto;}
 	#button {background-color:#ee8374;border:none;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
 	
@@ -47,16 +47,19 @@
 	.form-control,#snslogtitle,#button{font-family: 'SCDream3';}
 	#formTilte{font-family: 'SCDream5'; font-size:30px;}
 	
+	.login_logo img{ 
+		border-radius: 50%;
+	}
 	
 </style>
 </head>
 <body>
 <div class="container">
 	<div id="logo">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	<a href="/myapp/"><img src="<%=request.getContextPath() %>/resources/img/new-homes-logo.png" alt=""/></a>
 	</div>
 	<form class="form-signin" method="post" action="/myapp/loginOk">
-		<div id="formTilte" class="form-signin-heading">로그인하세요</div>
+		<div id="formTilte" class="form-signin-heading" style="text-align:center;">로그인하세요</div>
 		<input type="text" id="userid" name="userid" class="form-control" placeholder="아이디" required autofocus>
 		<input type="password" id="userpwd" name="userpwd" class="form-control" placeholder="비밀번호" required>
 		<input id="button" class="btn btn-lg btn-primary btn-block" type="submit" value="로그인"/><br/>
