@@ -5,7 +5,7 @@ public class ProductJoinVO {
 	private int s_no;			// 스토어번호
 	private String pd_name;		// 제품명
 	private int price;			// 가격
-	private int discount;		// 할인가격
+	private int discount;		// 할인율
 	private String main_img;	// 썸네일대표이미지
 	private int stock;			// 재고
 	private String status;		// 상태(품절임박, 입고예정 등)
