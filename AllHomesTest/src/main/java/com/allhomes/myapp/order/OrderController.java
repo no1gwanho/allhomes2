@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.scripting.xmltags.TrimSqlNode;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.allhomes.myapp.mypage.MypageWishlistDaoImp;
-import com.allhomes.myapp.product.ProductDaoImp;
-import com.allhomes.myapp.product.ProductVO;
-import com.allhomes.myapp.purchase.PurchaseDaoImp;
-import com.allhomes.myapp.purchase.PurchaseJoinVO;
-import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.cart.CartDaoImp;
 import com.allhomes.myapp.cart.CartVO;
 import com.allhomes.myapp.mypage.AddressDaoImp;
+import com.allhomes.myapp.purchase.PurchaseDaoImp;
+import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
-
 import com.allhomes.myapp.register.RegisterVO;
 
 @Controller
@@ -179,6 +173,12 @@ public class OrderController {
 		
 		   return mav;
 	}
+
+	@RequestMapping("/pp")
+	public String pp() {
+		return "order/purchaseOk";
+	}
+	
 	
 	@RequestMapping("/orderCancel")
 	public ModelAndView orderDel(@RequestParam("pc_no") String pc_no, HttpServletRequest req) {
@@ -214,6 +214,7 @@ public class OrderController {
 		return mv;
 	}
 	
+	
 	@RequestMapping(value="/orderCancelOk", method = RequestMethod.POST)
 	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req,
 									@RequestParam("pd_name") String pd_name, @RequestParam("total_p") int total_p) {
@@ -241,12 +242,7 @@ public class OrderController {
 		
 		return mv;
 	}
-}
-
-	@RequestMapping("/pp")
-	public String pp() {
-		return "order/purchaseOk";
-	}
-
+	
+	
 
 }
