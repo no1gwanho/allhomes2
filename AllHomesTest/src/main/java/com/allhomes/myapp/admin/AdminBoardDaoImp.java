@@ -61,6 +61,8 @@ public interface AdminBoardDaoImp {
 	public int selectStoreReviewFive(int s_no);
 	//store 리뷰 총 개수 가져오기
 	public int storeReviewCount(int s_no);
+	//리뷰 삭제
+	public int reviewDel(int r_no);
 	
 	//모든 q&a 가져오기
 	public List<QnaVO> qnaAllList(AdminPagingVO vo);

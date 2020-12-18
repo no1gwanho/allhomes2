@@ -3,7 +3,7 @@ package com.allhomes.myapp.admin;
 import java.util.List;
 
 public interface HomeBoardThemeDaoImp {
-	//집들이 게시판 카테고리(테마) Dao
+	//집들이 게시판 카테고리(테마)
 	
 	//테마 전체
 	public List<HomeBoardThemeVO> HomeBoardThemeAll();

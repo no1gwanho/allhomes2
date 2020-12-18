@@ -56,12 +56,14 @@
 									 class="mr-2 ml-2" style="width:40px;height:40px;border-radius:70%;">
 								${list.userid}</h6>
 								<span class="ml-4" style="height:35px;line-height:40px;">${list.writedate }</span>
-								<button class="btn btn-user alert-danger" style="float:right;height:35px">삭제</button>
+								<a  href="/myapp/adminReviewDel?r_no=${list.r_no }" class="btn btn-user alert-danger" style="float:right;height:35px">삭제</a>
 							</div>
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
-										<img src="" style="width:300px;height:300px;">
+										<c:if test="${list.img != null }">
+											<img src="<%=request.getContextPath()%>/resources/upload/reviewImg/${list.img}" style="width:300px;height:300px;">
+										</c:if>
 									</div>
 									<div class="col-lg-6">
 										<p>

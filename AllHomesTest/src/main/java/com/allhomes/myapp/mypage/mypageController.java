@@ -88,7 +88,7 @@ public class mypageController {
 	}
 	
 	
-	//mypage홈으로 이동
+	//mypage홈으로 이동(관리자)
 		@RequestMapping("/adminMypage") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
 		public ModelAndView adminMypageHome(String userid) {
 			ModelAndView mv = new ModelAndView();

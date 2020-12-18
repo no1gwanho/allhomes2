@@ -191,7 +191,7 @@
 		select * from(
         	select ROWNUM RN, A.*
                     	from(
-                            	select store.s_no, store.s_name,review.img, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
+                            	select store.s_no, store.s_name,review.img, review.r_no, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
                             	from store, review, product,register
                             	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.m_no = review.m_no
                             	)A
@@ -214,6 +214,11 @@
  		order by review.writedate desc
  		]]>
 	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewDel" parameterType="int">
+		delete from review where r_no = #{param1}
+	</delete>
 	
 	<!-- 스토어별로 리뷰 가져오기 -->
 	<select id="selectStoreReview" parameterType="int" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
