@@ -52,5 +52,6 @@
  	<select id="getLastSQ" resultType="int">
  		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE  SEQUENCE_NAME = 'PC_SQ'
  	</select>
+ 	
 </mapper> 
 

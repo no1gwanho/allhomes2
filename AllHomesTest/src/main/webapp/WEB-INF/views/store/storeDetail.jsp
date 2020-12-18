@@ -433,7 +433,7 @@
 										<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
 											<c:if test="${userid == r.userid }">
 												<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
-												<a href="/myapp/reviewDel?pd_no=${vo.pd_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
+												<a href="/myapp/reviewDel?r_no=${r.r_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
 											</c:if>
 										</form>
 										</div>

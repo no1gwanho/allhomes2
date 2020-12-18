@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -590,7 +591,8 @@ public class mypageController {
 		String userid = (String)ses.getAttribute("userid");
 		PurchaseJoinVO vo = new PurchaseJoinVO();
 		vo.setUserid(userid);
-			
+
+		
 		List<PurchaseJoinVO> list = dao.joinPurchase(userid);
 		
 		mav.addObject("list", list);
