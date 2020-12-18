@@ -163,7 +163,8 @@ public class AdminMemberController {
 		map.put("end", vo.getEnd());
 		mav.addObject("viewAll", dao.memberAllSelectOrder(map));
 
-		mav.setViewName("admin/adminMember/adminMemberList");
+		mav.setViewName("admin/adminMember/adminMemberOrderOk");
+		mav.addObject("order", order);
 		return mav;
 
 	}
@@ -221,8 +222,14 @@ public class AdminMemberController {
 			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
 
+		//count 위한 map
+		HashMap<String, Object> cntMap = new HashMap<String, Object>();
+		cntMap.put("userid", regVo.getUserid());
+		cntMap.put("nickname", regVo.getNickname());
+		cntMap.put("tel", regVo.getTel());
+		cntMap.put("email", regVo.getEmail());
 		// paging//
-		int total = dao.countRegisterTotal(); //상세 검색 한 결과의 수
+		int total = dao.memberSearchDetailCnt(cntMap);//상세 검색 한 결과의 수
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "15";
@@ -233,25 +240,22 @@ public class AdminMemberController {
 		}
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 
-		//System.out.println("a;ldskfadsf" + regVo.getDate() + regVo.getDate2() + regVo.getUsername());
-
+		
 		ModelAndView mav = new ModelAndView();
-		// paging
+	
 		mav.addObject("paging", vo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", regVo.getUserid());
 		map.put("nickname", regVo.getNickname());
 		map.put("tel", regVo.getTel());
 		map.put("email", regVo.getEmail());
-		map.put("date", regVo.getDate());
-		map.put("date2", regVo.getDate2());
-
+		
 		map.put("start", vo.getStart());
 		map.put("end", vo.getEnd());
 		
 		mav.addObject("viewAll", dao.memberSearchDetail(map));
 
-		mav.setViewName("admin/adminMember/adminMemberList");
+		mav.setViewName("admin/adminMember/adminMemberDetailSearchOk");
 		return mav;
 
 	}

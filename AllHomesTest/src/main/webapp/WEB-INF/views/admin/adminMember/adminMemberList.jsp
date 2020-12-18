@@ -43,11 +43,6 @@ td{
 			location.href="/myapp/adminMemberOrder?order="+selectedOrder;
 		});
 		
-		//datepicker
-		$("#date,#date2").datepicker({
-			dateFormat: 'yy-mm-dd'
-			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
-		});
 		
 	});
 </script>
@@ -131,17 +126,7 @@ td{
 									type="text" class="form-control col-lg-4" name="email"
 									id="email" />
 							</p>
-							<p>
-								<span class="col-lg-5" style="float: left">가입일</span> 
-									<input
-									type="text" id="date" name="date" class="form-control col-lg-2"
-									style="float: left;" /> 
-									<span style="float: left">&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;</span>
-									<input type="text" id="date2" name="date2"
-									class="form-control col-lg-2" style="float: left" />
-									<br />
-								<br />
-							</p>
+							
 
 							<button class="btn btn-primary btn-icon-split"
 								id="searchDetailOkBtn">
@@ -180,7 +165,7 @@ td{
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
 								<tr
-									onClick="location.href='/myapp/adminMemberDetail?m_no=${list.m_no}'">
+									onClick="location.href='/myapp/adminMypage?userid=${list.userid}'">
 									<td>${list.m_no}</td>
 									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${list.m_pic}"
 										style="width: 50px; height: 50px;border-radius:70%"/></td>

@@ -137,10 +137,12 @@
 		 		<if test="hashtag != null or hashtag != ''">and hashtag LIKE '%'||#{hashtag}||'%' </if>
 		 		<if test="userid != null or userid != ''">and userid LIKE '%'||#{userid}||'%' </if>
 		 		<if test="nickname != null or nickname != ''">and nickname LIKE '%'||#{nickname}||'%' </if>
-		 		<if test="date != null or date != ''">and to_date(writedate, 'YY/MM/DD')  between to_date(#{date}, 'YY/MM/DD') and to_date(#{date2}, 'YY/MM/DD')</if>
+		 		
 	 		</trim>
 		</where>
 	</select>
+	
+	
 	
  	<!-- ====================================HomeBoard 끝=================================== -->
 	

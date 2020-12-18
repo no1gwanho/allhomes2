@@ -46,17 +46,13 @@ td{
 		}); 
 		
 		
-		//datepicker
-		$("#date,#date2").datepicker({
-			dateFormat: 'yy-mm-dd'
-			,numberOfMonths:1 //한번에 보여지는 달력의 개월 수 
-		});
+		
 		
 		//정렬하기
 		var orderOption = $('#order').val();
 		$('#order').change(function(){
 			var selectedOrder = $("#order option:selected").val();
-			alert(selectedOrder);
+			
 			location.href="/myapp/adminHomeBoardOrder?order="+selectedOrder;
 		});
 		
@@ -100,7 +96,7 @@ td{
 					
 				</div>
 				
-				<div class="col-lg-1" style="float:left">
+				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
 						<option class="orderName" value="title">제목 순</option>
 						<option class="orderName" value="writedate">작성일 순</option>
@@ -145,12 +141,6 @@ td{
 							<span class="col-lg-5" style="float: left">해시태그</span>
 							<input type="text" class="form-control col-lg-4" name="hashtag" id="hashtag"/>
 						</p>
-						<p>
-							<span class="col-lg-5" style="float: left">등록일</span> 
-							<input type="text" id="date" name="date" class="form-control col-lg-2" style="float:left;"/>
-							<span style="float:left">&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;</span> 
-							<input type="text" id="date2" name="date2" class="form-control col-lg-2" style="float:left"/><br/><br/>
-						</p>
 						
 						<button class="btn btn-primary btn-icon-split" id="searchDetailOkBtn">
 							<span class="icon text-white-50"> 
@@ -187,7 +177,7 @@ td{
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
-								<tr onClick="location.href='<%=request.getContextPath()%>/adminHomeBoardView?b_no=${list.b_no}'">
+								<tr onClick="location.href='<%=request.getContextPath()%>/homeboardView?b_no=${list.b_no }'">
 									<td>${list.b_no}</td>
 									<td>${list.title}</td>
 									<td>${list.theme}</td>
