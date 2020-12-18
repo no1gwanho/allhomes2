@@ -3,6 +3,8 @@ package com.allhomes.myapp.admin;
 import java.util.HashMap;
 import java.util.List;
 
+import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterVO;
 
 public interface AdminMemberDaoImp {
@@ -26,6 +28,11 @@ public interface AdminMemberDaoImp {
 	//총 회원 수
 	public int countRegisterTotal();
 	
+	//메인화면-최근 일주일 사이 가입한 회원 수
+	public int countRegisMain(int date);
+	//탈퇴 회원 수
+	public int countRegisOut();
+	
 	//==========infoCnt===================
 	//회원-게시글 수(집들이)
 	public int memberHBCnt(String userid);
@@ -34,7 +41,7 @@ public interface AdminMemberDaoImp {
 	//회원-게시글 수
 	public int memberReviewCnt(int m_no);	
 	//회원-위시리스트 수
-	public int memberWishCnt(int m_no);
+	public int memberWishCnt(String userid);
 	//회원-스크랩 수
 	public int memberScrapCnt(int m_no);
 	//회원-주문 수
@@ -42,5 +49,15 @@ public interface AdminMemberDaoImp {
 	
 	//회원 주문 가져오기
 	public List<AdminOrderVO> memberPurchase(String userid);
+	public int orderCnt(String userid);
+	
+	//회원 집들이 글 가져오기
+	public List<HomeboardVO> memberHomeboard(AdminPagingVO vo);
+	public int homeboardCnt(String userid);
+	
+	//질문과답변
+	public int qaCnt(String userid);
+	public List<QnaVO> memberQnA(AdminPagingVO vo);
+	
 	
 }

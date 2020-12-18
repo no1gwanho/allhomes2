@@ -33,4 +33,19 @@ public interface OrderDaoImp {
 	
 	//결제번호 현재 시퀀스 가져오기
 	public int getLastSQ();
+	
+	//주문 상태-입금대기 개수
+	public int statusDepositWaiting();
+	//주문 상태-결제완료 개수
+	public int statusPayment();
+	//주문 상태-배송준비 개수
+	public int statusDeliveryPre();
+	//주문 상태-배송중 개수
+	public int statusDelivery();
+	//주문 상태-구매확정 개수
+	public int statusConfirm();
+	
+	//주문 상태 수정
+	public int orderStatusEdit(OrderEditVO vo);
+	
 }

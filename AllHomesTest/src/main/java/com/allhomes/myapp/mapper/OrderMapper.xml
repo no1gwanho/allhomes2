@@ -53,5 +53,26 @@
  		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE  SEQUENCE_NAME = 'PC_SQ'
  	</select>
  	
+ 	<select id="statusDepositWaiting" resultType="int">
+ 		select count(*) from purchase where status = '입금대기'
+ 	</select>
+ 	<select id="statusPayment" resultType="int">
+ 		select count(*) from purchase where status = '결제완료'
+ 	</select>
+ 	<select id="statusDeliveryPre" resultType="int">
+ 		select count(*) from purchase where status = '배송준비'
+ 	</select>
+ 	<select id="statusDelivery" resultType="int">
+ 		select count(*) from purchase where status = '배송중'
+ 	</select>
+ 	<select id="statusConfirm" resultType="int">
+ 		select count(*) from purchase where status = '구매확정'
+ 	</select>
+ 	
+ 	<!-- 주문 상태 수정 -->
+ 	<update id="orderStatusEdit" parameterType="com.allhomes.myapp.order.OrderEditVO">
+ 		update purchase set status = #{status} where pd_no = #{pd_no} and pc_no = #{pc_no}
+ 	</update>
+
 </mapper> 
 

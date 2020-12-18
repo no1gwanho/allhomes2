@@ -35,6 +35,13 @@
 					<div class="col-lg-10" style="display: inline-block">
 
 						<div class="row mt-3 mb-3" style="text-align: right">
+							
+							<div class="col-lg-3">
+								<h3>주문번호</h3>
+							</div>
+							<div class="col-lg-9">
+								<h3>${pc_no}</h3>
+							</div>
 							<div class="col-lg-3">
 								<h3>제품명</h3>
 							</div>
