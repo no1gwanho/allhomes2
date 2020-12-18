@@ -217,12 +217,16 @@
 					        			<span class="text">수정</span>
 			                		</button>
 				    			<!-- 삭제 버튼 -->
-				    			<button id="${vo.main_c}" class="btn btn-danger btn-icon-split delMainC">
+				    			<a href="/myapp/adminMainCategoryDel?no=${vo.main_c_no }"  id="${vo.main_c}" onclick="return delchk();" class="btn btn-danger btn-icon-split delMainC">
 			                		<span class="icon text-white-50">
 				           			<i class="fas fa-trash"></i></span>
 					        		<span class="text">삭제</span>
-			               		</button>
-				    			
+			               		</a>
+				    			 <script type="text/javascript">
+									function delchk(){
+									       return confirm("삭제하시겠습니까?");
+									}
+								</script>
 			                </div>    
 				    		<br/>   
 			                <!-- 버튼 끝 -->

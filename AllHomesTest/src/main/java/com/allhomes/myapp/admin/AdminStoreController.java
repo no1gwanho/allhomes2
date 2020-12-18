@@ -113,10 +113,14 @@ public class AdminStoreController {
 
 	// 스토어-메인카테고리 삭제
 	@RequestMapping("/adminMainCategoryDel")
-	public int mainCategoryDel(String main_c) {
+	public ModelAndView mainCategoryDel(@RequestParam("no") int no) {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
-		return dao.storeMainCategoryDel(main_c);
+		ModelAndView mav = new ModelAndView();
+		int result = dao.storeMainCategoryDel(no);
+		
+		mav.setViewName("redirect:adminCategory");
+		return mav;
 	}
 
 	
