@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -442,6 +443,7 @@ public class mypageController {
 					vo.setM_pic(fileNames);
 
 
+	
                int resultVO = dao.userMebUpdate(vo1);   
                System.out.println("test5");
                mav.setViewName("/home");
@@ -554,6 +556,7 @@ public class mypageController {
                   System.out.println("test4");
                   fileNames = "basicprofile.png";   
                   vo.setM_pic(fileNames);
+
 
                   int resultVO = dao.userMebUpdate(vo1);   
                   System.out.println("test5");

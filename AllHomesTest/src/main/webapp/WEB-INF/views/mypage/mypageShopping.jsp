@@ -10,7 +10,6 @@
 				$(".chBox").prop("checked", false);
 			}
 		});
-
 		$(".chBox").click(function(){
 			$("#allCheck").prop("checked", false);
 		});
@@ -45,7 +44,6 @@
 		margin:5px;
 		display:inline-block;
 		vertical-align:middle;
-
 	}
 	#myShopping hr{
 		width:70%;
@@ -122,14 +120,16 @@
 					<a class="nav-link" data-toggle="tab" href="#cancel">취소내역</a>
 				</li>				
 			</ul>
+					<c:forEach var="p" items="${list }">
 			<div class="tab-content">
+	
 				<div class="tab-pane fade show active" id="order">
-						<c:if test="${empty list }">
+						<c:if test="${empty p && p.chk_c==0 }">
 							<div style="margin:50px auto;height:800px;">
 								<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 내역이 없습니다.</span>
 							</div>
 						</c:if>
-						<c:if test="${!empty list }">
+						<c:if test="${!empty p && p.chk_c==0 }">
 							<div class="row" style="margin:25px;">
 								<div class="col-md-9">
 									<input type ="checkbox" name="allCheck" id="allCheck" style="background-color:#ee8374;margin-right:10px;"/><label for = "allCheck">모두 선택</label>
@@ -139,7 +139,7 @@
 								</div>
 							</div>
 						</c:if>
-						<c:forEach var="p" items="${list }">
+
 							<div class="row">
 								<div class="col-3" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
 									주문번호 : ${p.pc_no }
@@ -178,19 +178,17 @@
 								</div>
 								<hr/>
 							</div>
-					</c:forEach>
            		</div>
 				<div class="tab-pane fade" id="cancel">
-					<c:if test="${empty plist }">
+					<c:if test="${empty p && p.chk_c>0}">
 						<div style="margin:50px auto;height:800px;">
 							<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 취소 내역이 없습니다.</span>
 						</div>
 					</c:if>	
-					<c:forEach var="c" items="${pList }">
-						<c:if test="${c.chk_c==1 }">
+					<c:if test="${!empty p && p.chk_c>0}">
 						<div class="row">
 							<div class="col-12" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
-								주문번호 : ${c.pc_no }
+								주문번호 : ${p.pc_no }
 							</div>
 						</div>
 						<div class="row" style="margin-bottom:35px;">
@@ -198,29 +196,20 @@
 								상품명
 							</div>
 							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								<b style="padding-top:10px;">${c.pd_name }</b><br/>				
+								<b style="padding-top:10px;">${p.pd_name }</b><br/>				
 							</div>
 							<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
 								취소금액
 							</div>
 							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								${c.total_p }
+								${p.total_p }
 							</div>
 							<hr/>					
 						</div>	
 						</c:if>
-					</c:forEach>				
 				</div>
 			</div>
+									</c:forEach>
 		</div>	
 	</div>	      
 </div>
-
-	
-	
-	
-
-<!-- 페이징 -->
- <div>
- 
- </div>
