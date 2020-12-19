@@ -101,7 +101,7 @@
 								</div>
 							<br/><br/><br/><br/><br/>
 							
-							<div id="optionDiv">
+							<div id="optionDiv" style="margin-top:30px">
 								<p>
 									<span class="col-lg-4" style="float:left">옵션1</span>
 									<span id="optionDel" class="btn alert-clean shadow-sm" style="float:right;margin-right:80px">-</span>

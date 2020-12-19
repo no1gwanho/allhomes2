@@ -166,7 +166,8 @@ td{
 					<div id="banner_list">
 						<ul class="sec3_list">
 							<c:forEach var="vo" items="${hList}">
-							<li onClick="location.href='<%=request.getContextPath()%>/adminHomeBoardView?b_no=${vo.b_no}'">
+							
+							<li onClick="location.href='<%=request.getContextPath()%>/homeboardView?b_no=${vo.b_no }'">
 								<span>
 									<img src="<%=request.getContextPath()%>/resources/upload/homeboardImg/${vo.thumbnail }"/>
 								</span>
@@ -241,7 +242,7 @@ td{
 						</thead>
 						<tbody>
 							 <c:forEach var="qVo" items="${qList}">
-								<tr onClick="location.href='<%=request.getContextPath() %>/adminQnaView?q_no=${qVo.q_no}'">
+								<tr onClick="location.href='<%=request.getContextPath() %>/qnaView?q_no=${qVo.q_no}'">
 									<td>${qVo.q_no}</td>
 									<td class="wordCut" style="width:20%">${qVo.title}</td>
 									

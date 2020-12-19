@@ -6,8 +6,6 @@ public class HomeBoardDetailSearchVO {
 	private String title;
 	private String content;
 	private String hashtag;
-	private String date;
-	private String date2;
 	
 	public String getUserid() {
 		return userid;
@@ -39,17 +37,5 @@ public class HomeBoardDetailSearchVO {
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
 	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getDate2() {
-		return date2;
-	}
-	public void setDate2(String date2) {
-		this.date2 = date2;
-	}	
 	
 }

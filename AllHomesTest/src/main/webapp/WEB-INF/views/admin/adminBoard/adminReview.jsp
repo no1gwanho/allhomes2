@@ -5,19 +5,19 @@
 	<div class="row">
 		<!-- 검색 옵션 -->
 			<div class="col-lg-12">
-				<!-- <div style="float:left">
+				 <div style="float:left">
 					<select class="selectpicker" id="searchSelect">
 						<optgroup label="검색 필터">
 							<option value="userid">회원 ID로 검색</option>
-							<option value="title">제목으로 검색</option>
+							<option value="pd_no">wpvnaqjsghfh 검색</option>
 							<option value="content">글 내용으로 검색</option>
 						</optgroup>
 					</select>
-				</div> -->
+				</div>
 
 				<!-- search 검색 -->
 				
-				<!-- <div class="input-group col-lg-3" id="searchKey" style="float:left">
+				 <div class="input-group col-lg-3" id="searchKey" style="float:left">
 					<input type="text" id="searchKeyword" class="form-control bg-light border-0 small"
 						placeholder="Search for..." aria-label="Search"
 						aria-describedby="basic-addon2">
@@ -27,20 +27,18 @@
 						</button>
 					</div>
 					
-				</div> -->
+				</div>
 				
-				<!-- <div class="col-lg-2" style="float:left">
+				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
-						<option class="orderName" value="title">제목 순</option>
+						<option class="orderName" value="rating">qufwja 순</option>
 						<option class="orderName" value="writedate">작성일 순</option>
 						<option class="orderName" value="hit">조회 순</option>
-						<option class="orderName" value="scrap">스크랩 순</option>
+						
 					</select>
-				</div> -->
+				</div>
 				<!-- search 검색 끝 -->
-				<!-- <div style="float:right">
-					<button class="btn btn-user alert-clean shadow-sm mb-4" id="searchDetailBtn">상세조회</button>
-				</div> -->
+				
 			</div>
 			<!-- 검색 옵션 끝 -->
 			
@@ -56,12 +54,14 @@
 									 class="mr-2 ml-2" style="width:40px;height:40px;border-radius:70%;">
 								${list.userid}</h6>
 								<span class="ml-4" style="height:35px;line-height:40px;">${list.writedate }</span>
-								<button class="btn btn-user alert-danger" style="float:right;height:35px">삭제</button>
+								<a  href="/myapp/adminReviewDel?r_no=${list.r_no }" class="btn btn-user alert-danger" style="float:right;height:35px">삭제</a>
 							</div>
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
-										<img src="" style="width:300px;height:300px;">
+										<c:if test="${list.img != null }">
+											<img src="<%=request.getContextPath()%>/resources/upload/reviewImg/${list.img}" style="width:300px;height:300px;">
+										</c:if>
 									</div>
 									<div class="col-lg-6">
 										<p>

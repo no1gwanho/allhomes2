@@ -153,7 +153,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Store Manage</h6>
-                        <a class="collapse-item" href="<%=request.getContextPath()%>/adminStoreOrder">주문 보기</a>
+                       
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminStore">스토어 보기</a>
                         <a class="collapse-item" href="<%=request.getContextPath()%>/storeAdd">스토어 추가</a>
                         <a class="collapse-item" href="<%=request.getContextPath()%>/adminCategory">스토어 카테고리</a>

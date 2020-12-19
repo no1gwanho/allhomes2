@@ -18,6 +18,8 @@ public interface StoreDaoImp {
 	//제품 카테고리 불러오기 
 	public List<StoreProductCategoryVO> mainCategoryList();
 	
+	//제품 누적 판매량
+	public int countPurchase(int s_no);
 	
 	
 	
