@@ -329,14 +329,14 @@
 				
 				<c:if test="${scrapCheck == 'Y' }">
 						<button id="scrapCancel" type="button" class="btn btn-allhomes">
-						스크랩&nbsp;<i class="fas fa-heart"></i>
+						<i class="fas fa-heart"></i>&nbsp;${vo.scrap }
 						</button>
 					
 				</c:if>
 				
 				<c:if test="${scrapCheck == null || scrapCheck == 'N' }">
 							<button id="scrapAdd" type="button" class="btn btn-allhomes" data-toggle="modal" data-target="#scapButton">
-							스크랩&nbsp;<i class="far fa-heart"></i>
+							<i class="far fa-heart"></i>&nbsp;${vo.scrap }
 							</button>
 						
 				</c:if>
@@ -356,11 +356,11 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				        선택하신 글이 스크랩에 담겼습니다 :) 
+				        선택하신 글이 스크랩북에 담겼습니다 :) 
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close">닫기</button>
-				        <button type="button" class="btn btn-allhomes" id="move-to-scrap">스크랩북 보기</button>
+				       
 				      </div>
 				    </div>
 				  </div>

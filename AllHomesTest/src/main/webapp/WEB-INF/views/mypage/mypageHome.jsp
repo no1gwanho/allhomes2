@@ -147,36 +147,52 @@
          </div>
          
          <br/>
+       
          <!-- 위시리스트 -->
-         <div class="card card border-light mb-3">
+         
+         <div class="card card border-light mb-3" style="height:290px;">
             <div class="card-header">
-            <c:if test="${empty list }">
                위시리스트
-            </c:if>
+
             <c:if test="${!empty list }">
-               위시리스트<a href="/myapp/mypageWishlist?userid=${vo.userid }"style="float:right;">더보기</a>
+              <a href="/myapp/mypageWishlist?userid=${vo.userid }"style="float:right;">더보기</a>
             </c:if>
             </div>
+           
+           
             <div class="card-body"><!-- card-body 시작 -->
-               <c:if test="${empty list }">
-                  <div style="width:100%;height:100px;text-align:center;line-height:100px;">
-                     아직 위시리스트에 담은 상품이 없습니다
-                  </div>
-               </c:if>
+             
+              <div class="row">  
+              	<c:if test="${empty list }">
+                 <span style="margin:0 auto;color:black;">아직 관심있는 상품이 없습니다</span>
+                 </c:if>   
+            
+               
                <c:if test="${!empty list }">
-               <c:forEach var="w" items="${list }">   
-               <div class="row">            
-                  <div class="col-12">
-                     <div style="float:left;width:33%;text-align:center">
-                        <a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" style="width:230px;height:130px;border-radius:5%;"/></a><br/>
-                         <span style="font-size:0.8em;">${w.pd_name }</span><br/>
+               
+                <c:forEach var="w" items="${list }" end="3">           
+                  <div class="col-3">
+                     <div class="thumbnail">
+                        <a href="/myapp/storeDetail?pd_no=${w.pd_no }"><img src="/myapp/resources/upload/productMainImg/${w.s_no}/${w.main_img}" /></a><br/>
+                     </div>  <br/>
+                    
+                    	 <div class="card-title">
+                          <a href="/myapp/storeDetail?pd_no=${w.pd_no }">${w.pd_name }</a>
+                         </div>
                      </div>
-                  </div>
+                    
+                     
+                    
+                  </c:forEach>     
+                
+                </c:if>  
+                </div>   
+               
                </div>
-               </c:forEach>                        
-               </c:if>
-            </div><!-- card-body 끝 -->
-         </div><!-- card끝 -->         
+                         
+               
+            </div>
+          
          <br/>
          
          
@@ -197,6 +213,8 @@
                   <c:if test ="${empty sList }">
                   <span style="margin:0 auto;color:black;">아직 관심있는 글이 없습니다</span>
                   </c:if>
+                 
+                 
                   <c:if test="${!empty sList }">
                   <c:forEach var="vo" items="${sList }" end="3">
                   <div class="col-3">
@@ -212,6 +230,8 @@
                   </c:forEach>
                   </c:if>
                </div>
+               
+               
             </div>
          </div>
          

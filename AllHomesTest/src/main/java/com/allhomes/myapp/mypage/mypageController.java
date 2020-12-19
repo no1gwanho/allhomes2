@@ -38,32 +38,57 @@ import com.allhomes.myapp.scrap.ScrapVO;
 
 @Controller
 public class mypageController {
-	SqlSession sqlSession;
-	
-	public SqlSession getSqlSession() {
-		return sqlSession;
-	}
-	@Autowired
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
-	
-	//mypage홈으로 이동
-	@RequestMapping("/mypageHome") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
-	public ModelAndView mypageHome(HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-				
-		HttpSession ses = req.getSession();
-		String userid = (String)ses.getAttribute("userid");
-		
-		RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);		
-		RegisterVO vo = reg.oneMeberSelect(userid);
-		
-		MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-		List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
-		
-		int m_no = (Integer)ses.getAttribute("m_no");
-		ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
+
+   SqlSession sqlSession;
+   
+   public SqlSession getSqlSession() {
+      return sqlSession;
+   }
+   @Autowired
+   public void setSqlSession(SqlSession sqlSession) {
+      this.sqlSession = sqlSession;
+   }
+   
+   //mypage홈으로 이동
+   @RequestMapping("/mypageHome") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
+   public ModelAndView mypageHome(HttpServletRequest req) {
+      ModelAndView mv = new ModelAndView();
+            
+      HttpSession ses = req.getSession();
+      String userid = (String)ses.getAttribute("userid");
+      
+      RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);      
+      RegisterVO vo = reg.oneMeberSelect(userid);
+      
+      MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
+      List<MypageWishlistJoinVO> list = wish.wishlistPage(userid);
+      
+      int m_no = (Integer)ses.getAttribute("m_no");
+      ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
+
+      List<ScrapVO> sList = scrap.mypageScrapList(m_no);
+      
+      //나의글리스트 (집들이/질문답변 따로 불러오기)
+      //집들이
+      HomeboardDaoImp myHbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+      List<HomeboardVO> myHbList = myHbDao.myHomeboardList(userid);
+      
+      //질문답변 
+      QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
+      List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
+      
+      mv.addObject("list", list);    //위시리스트
+      mv.addObject("sList", sList); //스크랩
+      mv.addObject("myHbList", myHbList); //내가쓴 집들이
+      mv.addObject("myQnaList", myQnaList); //내가 쓴 질문글 
+      mv.addObject("vo", vo);
+      
+      mv.setViewName("mypage/mypageHome");
+      
+      return mv;
+   }
+   
+
 
 		List<ScrapVO> sList = scrap.mypageScrapList(m_no);
 		

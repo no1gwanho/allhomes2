@@ -86,11 +86,19 @@
    }
    
    .product-review{
+   
    	margin-top:15px;
    	height:45px;
    	line-height:45px;
-   	padding:0;margin:0
+   	padding:0;
+   	margin: 0 0 0 20px;
    }
+   
+   .allhomes-color{
+   	color:#E98374
+   }
+   
+   
 </style>
 
 <div class="container" id="content">
@@ -124,7 +132,7 @@
                      아직 등록된 리뷰가 없습니다
                   </c:if>
                   <c:if test="${result != 0 && rvo.rating == 1 }">
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star allhomes-color"></i>
                      <span style="color:#aaa">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -133,8 +141,8 @@
                      </span>
                   </c:if>
                   <c:if test="${result != 0 && rvo.rating == 2 }">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
                      <span style="color:#aaa">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -142,29 +150,29 @@
                      </span>
                   </c:if>
                   <c:if test="${result != 0 && rvo.rating == 3 }">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>                                                
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>                                                
                      <span style="color:#aaa">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                      </span>
                   </c:if>
                   <c:if test="${result != 0 && rvo.rating == 4 }">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
                      <span style="color:#aaa">
                         <i class="fa fa-star"></i>
                      </span>
                   </c:if>
                   <c:if test="${result != 0 && rvo.rating == 5 }">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
+                        <i class="fa fa-star allhomes-color"></i>
                   </c:if>   
                   &nbsp;&nbsp;
                   <a class="review-link" href="#review">
