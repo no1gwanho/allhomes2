@@ -76,6 +76,16 @@ public class mypageController {
 		QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
 		List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
 		
+		//주문 현황 상태
+		MypageOrderDaoImp oDao = sqlSession.getMapper(MypageOrderDaoImp.class);
+		mv.addObject("cntConfirm",oDao.countOrderStatus(userid, "결제완료"));
+		mv.addObject("cntPre",oDao.countOrderStatus(userid, "입금대기"));
+		mv.addObject("cntDelivery",oDao.countOrderStatus(userid, "배송중"));
+		mv.addObject("cntDeliveryDone",oDao.countOrderStatus(userid, "배송완료"));
+		mv.addObject("cntConfirmPur",oDao.countOrderStatus(userid, "구매확정"));
+		mv.addObject("cntReviewDone",oDao.countOrderStatus(userid, "리뷰완료"));
+		
+		
 		mv.addObject("list", list);	 //위시리스트
 		mv.addObject("sList", sList); //스크랩
 		mv.addObject("myHbList", myHbList); //내가쓴 집들이
@@ -633,6 +643,17 @@ public class mypageController {
 		
 		mav.addObject("list", list);
 		mav.setViewName("mypage/mypageShopping");
+		
+		//주문 현황 상태
+		MypageOrderDaoImp oDao = sqlSession.getMapper(MypageOrderDaoImp.class);
+		mav.addObject("cntConfirm",oDao.countOrderStatus(userid, "결제완료"));
+		mav.addObject("cntPre",oDao.countOrderStatus(userid, "입금대기"));
+		mav.addObject("cntDelivery",oDao.countOrderStatus(userid, "배송중"));
+		mav.addObject("cntDeliveryDone",oDao.countOrderStatus(userid, "배송완료"));
+		mav.addObject("cntConfirmPur",oDao.countOrderStatus(userid, "구매확정"));
+		mav.addObject("cntReviewDone",oDao.countOrderStatus(userid, "리뷰완료"));
+				
+				
 		
 		return mav;
 	}
