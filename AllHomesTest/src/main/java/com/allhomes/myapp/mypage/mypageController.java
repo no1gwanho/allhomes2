@@ -61,7 +61,7 @@ public class mypageController {
       RegisterVO vo = reg.oneMeberSelect(userid);
       
       MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-      List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
+      List<MypageWishlistJoinVO> list = wish.wishlistPage(userid);
       
       int m_no = (Integer)ses.getAttribute("m_no");
       ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
