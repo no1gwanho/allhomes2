@@ -87,7 +87,7 @@ SqlSession sqlSession;
 		
 		HomeboardDaoImp hbDao = sqlSession.getMapper(HomeboardDaoImp.class);
 		hbDao.homeboardScrapAdd(b_no);
-		
+
 		mav.setViewName("redirect:mypageScrap");
 		
 		

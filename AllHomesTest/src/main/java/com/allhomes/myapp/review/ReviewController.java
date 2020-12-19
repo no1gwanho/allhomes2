@@ -164,20 +164,20 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviewDel")
-	public ModelAndView reviewDel(@RequestParam("pd_no") int pd_no, HttpServletRequest req) {
+	public ModelAndView reviewDel(@RequestParam("r_no") int r_no, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession ses = req.getSession();
 		String userid = (String)ses.getAttribute("userid");
 		
 		ReviewVO vo = new ReviewVO();
 		vo.setUserid(userid);
-		vo.setPd_no(pd_no);
+		vo.setR_no(r_no);
 		
 		ReviewDaoImp dao = sqlSession.getMapper(ReviewDaoImp.class);
 		int result = dao.delReview(vo);
 		
 		mv.addObject("reviewDel", result);
-		mv.addObject("pd_no", pd_no);
+		mv.addObject("pd_no", r_no);
 		mv.setViewName("landing/resultCheck");
 		
 		return mv;

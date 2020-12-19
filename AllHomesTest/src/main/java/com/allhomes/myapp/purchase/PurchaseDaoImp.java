@@ -9,7 +9,7 @@ public interface PurchaseDaoImp {
 	
 	public List<PurchaseJoinVO> purchaseList(PurchaseJoinVO vo);
 	
-	public PurchaseVO selectPurchaseList();
+	public List<PurchaseVO> selectPurchaseList(String userid);
 	
 	public int insertPurchaseList(PurchaseVO vo);
 	

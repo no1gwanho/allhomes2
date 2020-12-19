@@ -98,6 +98,25 @@
 		border-radius: 45%;
 	
 	}
+	
+		.product-name{
+		font-family:'SCDream5'
+	}
+	.store-name{
+		color:gray;
+		font-size:12px;
+	}
+	.store-discount{
+		font-family:'SCDream5';
+		font-size:20px;
+		color: #E98374
+	}
+	
+	.store-price{
+		color: black;
+		font-family:'SCDream5';
+		font-size:20px;
+	}
 </style>
 
 
@@ -189,28 +208,36 @@
 			<div class="col-2" style="text-align:right;">
 				<a href="/myapp/storeHome?order=recent">더보기</a>
 			</div>
-			
-			<c:forEach var="v" items="${list }" end="7">
-				<div class="col-3 storeThumbnail">
-					<a href="/myapp/storeDetail?pd_no=${v.pd_no }">
-						
-						<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${v.s_no}/${v.main_img }"/>
-							<br/>
-							<span style="font-size:0.5em;">${v.s_name } </span><span style="font-size:0.8em">${v.pd_name }</span>
-							<br/>
-						<c:if test="${v.discount != 0 }">
-						<span class="badge badge-danger">${v.discount }%</span>
-						</c:if>
-						<span style="font-size:0.8em">
-							${v.price }원<br/>
-						<c:if test="${v.status!=null }">
-							<h6><span class="badge badge-secondary">${v.status }</span></h6>
-						</c:if>		
-						</span>		
-					</a>					
-				</div>
-			</c:forEach>
-			
 		</div>
+		<div class="row">
+			
+			<c:forEach var="vo" items="${list }" end="7">
+				<div class="col-3 store-list" style="cursor:pointer;" onclick="window.location='/myapp/storeDetail?pd_no=${vo.pd_no}'">
+						<div class="thumbnail">
+							<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
+						</div>	
+						<div class="card-body">	
+							<div class="store-name">${vo.s_name }</div>
+							<div class="product-name">  ${vo.pd_name }</div>
+							<c:if test="${vo.discount != 0 }">
+							<span class="store-discount">${vo.discount }%</span>
+							</c:if>
+							<span class="store-price">${vo.price }원</span>
+							
+							<c:if test="${vo.status!=null && vo.status == '판매중'}">
+								<span class="badge badge-info">${vo.status }</span>
+							</c:if>
+							<c:if test="${vo.status!=null && vo.status == '품절임박'}">
+								<span class="badge badge-warning">${vo.status }</span>
+							</c:if>
+							<c:if test="${vo.status!=null && vo.status == '입고대기'}">
+								<span class="badge badge-secondary">${vo.status }</span>
+							</c:if>
+						</div>	
+					</div>
+			</c:forEach>
+		</div>
+			
+		
 	</div>
 </div>
