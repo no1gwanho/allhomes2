@@ -98,7 +98,7 @@
 		
 		$("#hb1").click(function({
 			window.location.href="myapp/homeboardView?b_no=124";
-		}));
+		});
 		
 	});
 </script>

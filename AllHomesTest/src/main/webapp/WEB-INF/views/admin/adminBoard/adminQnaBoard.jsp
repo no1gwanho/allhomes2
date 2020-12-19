@@ -54,7 +54,7 @@
 							<div class="col-lg-8 ml-4">
 								<!-- 제목 -->
 								<h4 style="padding-top: 25px;">
-									<strong><a href="/myapp/adminQnaView?q_no=${list.q_no }">${list.title }</a></strong>
+									<strong><a href='<%=request.getContextPath() %>/qnaView?q_no=${list.q_no}'>${list.title }</a></strong>
 								</h4>
 							
 								<br /> <br />

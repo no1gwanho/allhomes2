@@ -12,16 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminReviewController {
 	SqlSession sqlSession;
+
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
+
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
-	
-	//review 페이지로 이동
+
+	// review 페이지로 이동
 	@RequestMapping("/adminReview")
 	public ModelAndView adminReview(AdminPagingVO vo
 			, @RequestParam(value="nowPage", required=false)String nowPage
@@ -39,8 +40,7 @@ public class AdminReviewController {
 		} else if (cntPerPage == null) { 
 			cntPerPage = "6";
 		}
-		System.out.println("cntperpage"+cntPerPage);
-		System.out.println("nowpage"+nowPage);
+		
 		
 		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		//paging//
@@ -51,7 +51,25 @@ public class AdminReviewController {
 		mav.setViewName("admin/adminBoard/adminReview");
 		
 		return mav;
-		
-		
 	}
+	
+	
+	@RequestMapping("/adminReviewDel")
+	public ModelAndView reviewDel(@RequestParam("r_no") int r_no) {
+		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+		int result = dao.reviewDel(r_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", result);
+		mav.addObject("location", "redirect:adminReview");
+		mav.setViewName("admin/delResult");
+		
+		return mav;
+	}
+
+	
+
+	
 }
+
+

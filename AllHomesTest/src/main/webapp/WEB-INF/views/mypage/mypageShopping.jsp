@@ -64,12 +64,13 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div id="myShopping">
-				<div id="state"><br/>입금 대기<hr>0건<br/><br/></div>
-				<div id="state"><br/>결제완료<hr>0건<br/><br/></div>
-				<div id="state"><br/>배송준비<hr>0건<br/><br/></div>
-				<div id="state"><br/>배송중<hr>0건<br/><br/></div>
-				<div id="state"><br/>배송완료<hr>0건<br/><br/></div>
-				<div id="state"><br/>구매확정<hr>0건<br/><br/></div>
+				<div id="state"><br/>입금 대기<hr>${cntPre}건<br/><br/></div>
+				<div id="state"><br/>결제완료<hr>${cntConfirm}건<br/><br/></div>
+				<div id="state"><br/>배송중<hr>${cntDelivery}건<br/><br/></div>
+				<div id="state"><br/>배송완료<hr>${cntDeliveryDone}건<br/><br/></div>
+				<div id="state"><br/>구매확정<hr>${cntConfirmPur}건<br/><br/></div>
+				<div id="state"><br/>리뷰완료<hr>${cntReviewDone}건<br/><br/></div>
+				
 			</div>
 		
 		<div>
