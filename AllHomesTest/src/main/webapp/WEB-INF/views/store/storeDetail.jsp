@@ -15,7 +15,22 @@
           $("#buy").click(function(){
          location.href="/myapp/order" 
           });
+          
+        
+          
+          
+          
    });
+   
+   function handleChange(input){
+	   if(input.value<=0) {
+		   input.value= 1;
+		   alert('수량은 1이상 입력 가능합니다.');
+	   }
+	   
+	  
+	   
+   }
 </script>
 
 <style>
@@ -24,22 +39,29 @@
       margin-bottom:10px;
    }
    #floatingbanner {
-      position:absolute;
+      position:relative;
       width:440px;
-      top:120px;
-      left:1200px;
+      left:20px;
       z-index:100;
+      
+      transition: all 0.5s ease-out;
    }
    #content{
       max-width:1400px;
       margin:15px auto;
       font-family:'SCDream3';
    }
+   
+   #imgWrapper{
+   	width:900px;
+   	height:650px;
+   	overflow:hidden;
+   	}
    #imgWrapper>img{
       margin-top:15px;
-      border-radius:5%;
-      width:900px;
-      height:720px;
+      width:100%;
+      border-radius:7%;
+      max-height:650px;
    }
    #opt, #num {
       margin-bottom:8px;
@@ -55,6 +77,20 @@
    #buy, #wish{
       margin-top:15px;
    }
+   
+   .product-name>span{
+   	font-family: "SCDream5";
+   	height:105px;
+   	font-size:1.8em;
+   	color:#343a40;
+   }
+   
+   .product-review{
+   	margin-top:15px;
+   	height:45px;
+   	line-height:45px;
+   	padding:0;margin:0
+   }
 </style>
 
 <div class="container" id="content">
@@ -63,16 +99,20 @@
    <!-- 상품 정보  -->
       <span>Category : ${vo.main_c} > <a href="/myapp/storeCategory?main_c=${vo.main_c }&sub_c=${vo.sub_c}">${vo.sub_c}</a></span>
       <div class="row">
+         
          <div class="col-8" id="imgWrapper">
             <img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
          </div>
+         
+         
          <div class="col-4" style="padding-top:15px;" id="floatingbanner">
             <div class="row">
                <div class="col-12">
-                  <div style="height:30px;"><span>${vo.s_name}</span></div>
-                  <div style="heihgt:105px;"><span style="font-size:1.8em;color:#343a40">${vo.pd_name}</span></div>
+                  <div><span>${vo.s_name}</span></div>
+                  <div class="product-name"><span style="">${vo.pd_name}</span></div>
+                  
                </div>
-               <div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
+               <div class="col-12 product-review">
                   <c:if test="${result==0 && rvo.rating == 0}">
                      <span style="color:#aaa">
                         <i class="fa fa-star"></i>
@@ -131,7 +171,7 @@
                      <span style="color:#ee8374;font-size:1.2em;">${result}개 </span><span style="font-size:1.2em;">의 리뷰가 있습니다 </span>
                   </a>                                                                     
                </div>
-               <div class="col-12" style="margin-top:15px;height:55px;">
+               <div class="col-12" style="height:50px;">
                   <c:if test="${vo.discount!=0 }">
                      <span style="color:#343a40;"> 판매가격</span>
                      <b style="font-size:1.8em;margin-left:55px;">${vo.price}원</b>
@@ -142,6 +182,7 @@
                      <b style="font-size:1.8em;margin-left:55px;color:#333;">${vo.price }원 </b>                     
                   </c:if>
                </div>
+               <br/>
                <div class="col-12">
                   <c:if test="${vo.shipping_c==0 }">
                      <span style="color:#343a40;">무료배송</span>
@@ -149,11 +190,14 @@
                   <c:if test="${vo.shipping_c!=0 }">
                      <span style="color:#343a40;">배송료</span><span style="margin-left:78px;color:#343a40">${vo.shipping_c }원</span>
                   </c:if>
+                  <hr/>
                </div>
-               <div class="col-3" style="margin-top:35px;">
-                  <span style="color:#343a40">옵션</span>
+               
+               <div class="row">
+               <div class="col-3" style="text-align: center; vertical-align: middle;padding-top:10px;">
+                  <span style="color:#343a40;height:70px;">옵션</span>
                </div>
-               <div class="col-9" style="margin-top:35px;text-align:right;">
+               <div class="col-9">
                   <select class="input-select" id="opt" name="o_value">
                      <c:if test="${ options != null}">
                         <c:forEach var="o" items="${options}">
@@ -164,13 +208,19 @@
                         <option value="X">옵션없음</option>
                      </c:if>
                   </select>
-               </div>      
-               <div class="col-3" style="margin-top:15px;">
-                  <span style="color:#343a40">수량</span>
+               </div> 
                </div>
-               <div class="col-9" style="margin-top:15px;text-align:right;">
-                  <input type="number" name="num" id="num"/>
-               </div>   
+               
+              <hr/>
+              <div class="row">
+               <div class="col-3" style="text-align: center; vertical-align: middle;padding-top:10px;"">
+                  <span style="color:#343a40; height:70px;">수량</span>
+               </div>
+               <div class="col-9">
+                  <input type="number" name="num" id="num" value="1" onchange="handleChange(this);"/>
+               </div>  
+               </div> 
+              
                <div class="col-12" style="height:233px;margin-top:50px;">
                   <input type="submit" class="btn btn-block" id="cart" value="장바구니">
                   <button class="btn btn-block" id="buy">바로구매</button>
