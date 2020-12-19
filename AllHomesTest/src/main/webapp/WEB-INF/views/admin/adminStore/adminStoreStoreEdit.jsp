@@ -67,7 +67,7 @@
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">판매자 ID</span>
 			       				<input type="text" name="s_id" class="form-control col-lg-6" value="${vo.s_id }"/>
-			       				<a href="" class="btn alert-secondary">검색</a>
+			       				
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">담당자 이름</span>
@@ -89,15 +89,16 @@
 							<!-- 이미지 파일 업로드 -->
 							<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표 이미지</span>
 							<div class="col-lg-6" style="float:left">
-								<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:150px;height:150px; border-radius:70%;"/><br/>
+								 <img src="<%=request.getContextPath()%>/resources/upload/storeImg/${vo.s_pic}"
+								  style="width:150px;height:150px; border-radius:70%;"/><br/>
 					            <input type="file" name="file">
 					        </div>
 						         
 							<br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/><br/>
 							<!-- 버튼 -->
 							<div class="text-center">
-			                    <button id="storeEdit" class="btn btn-primary btn-icon-split">
-			                    	<span class="icon text-white-50"><i class="fas fa-check"></i>수정</span>
+			                    <button id="storeEdit" class="btn btn-primary">
+			                    	수정
 			                    </button>
 		                    </div><br/>
 		                    <!-- 버튼 끝 -->

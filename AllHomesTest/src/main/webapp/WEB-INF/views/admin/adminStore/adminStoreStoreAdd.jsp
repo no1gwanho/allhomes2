@@ -71,7 +71,7 @@
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">판매자 ID</span>
 			       				<input type="text" id="s_id" name="s_id" class="form-control col-lg-6"/>
-			       				<a href="" class="btn alert-secondary">검색</a>
+			       			
 		       				</p>
 		       				<p>
 			       				<span class="col-lg-4" style="float:left">담당자 이름</span>
@@ -101,8 +101,8 @@
 							<br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/><br/>
 							<!-- 버튼 -->
 							<div class="text-center">
-			                    <button id="storeAdd" class="btn btn-primary btn-icon-split">
-			                    	<span class="icon text-white-50"><i class="fas fa-check"></i>추가</span>
+			                    <button id="storeAdd" class="btn btn-primary">
+			                    	추가
 			                    </button>
 		                    </div><br/>
 		                    <!-- 버튼 끝 -->

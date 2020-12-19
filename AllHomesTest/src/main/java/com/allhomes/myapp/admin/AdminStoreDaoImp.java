@@ -44,7 +44,7 @@ public interface AdminStoreDaoImp {
 	public int storeSubCategoryDel(String sub_c);
 	
 	//category--메인카테고리 삭제
-	public int storeMainCategoryDel(String main_c);
+	public int storeMainCategoryDel(int no);
 	
 	//===========스토어 검색======================
 	

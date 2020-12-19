@@ -113,10 +113,14 @@ public class AdminStoreController {
 
 	// 스토어-메인카테고리 삭제
 	@RequestMapping("/adminMainCategoryDel")
-	public int mainCategoryDel(String main_c) {
+	public ModelAndView mainCategoryDel(@RequestParam("no") int no) {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
-		return dao.storeMainCategoryDel(main_c);
+		ModelAndView mav = new ModelAndView();
+		int result = dao.storeMainCategoryDel(no);
+		
+		mav.setViewName("redirect:adminCategory");
+		return mav;
 	}
 
 	
@@ -165,12 +169,16 @@ public class AdminStoreController {
 
 		// 스토어의 총 제품수 가지고 오기
 		int cntPd = pDao.countProduct(s_no);
+		
+		//스토어의 누적 판매 가지고 오기
+		int purPd = dao.countPurchase(s_no);
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("vo", vo); // 스토어 정보
 		mav.addObject("pVo", pVo); // 제품 정보
 		mav.addObject("cntPd", cntPd); // 제품 개수
+		mav.addObject("cntPur", purPd); //누적판매량
 		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
 		return mav;
 	}
@@ -257,10 +265,20 @@ public class AdminStoreController {
 
 	// 스토어 수정
 	@RequestMapping(value = "/storeEditOk", method = RequestMethod.POST)
-	public int storeEditOk(StoreVO vo) {
+	public ModelAndView storeEditOk(StoreVO vo) {
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		int result = dao.storeEdit(vo);
-		return result;
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {
+			String name = "admin/adminStoreStoreDetail?s_no"+vo.getS_no();
+			mav.setViewName(name);
+		}else {
+			mav.setViewName("admin/result");
+		}
+		
+		return mav;
 
 	}
 	

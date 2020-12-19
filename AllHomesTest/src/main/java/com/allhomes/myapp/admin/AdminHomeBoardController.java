@@ -91,8 +91,9 @@ public class AdminHomeBoardController {
 		map.put("start", vo.getStart());
 		map.put("end", vo.getEnd());
 		mav.addObject("viewAll", dao.selectAllHomeBoardOrder(map));
+		mav.addObject("order", order);
 		
-		mav.setViewName("admin/adminBoard/adminHomeBoard");
+		mav.setViewName("admin/adminBoard/adminHomeBoardOrderOk");
 		return mav;
 	}
 
@@ -163,10 +164,9 @@ public class AdminHomeBoardController {
 		AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
 		List<HomeboardVO> hList = dao.adminHBSearchDetail(vo);
 		
-		System.out.println(vo.getContent()+vo.getDate()+vo.getDate2()+vo.getHashtag()+vo.getNickname()+vo.getTitle()+vo.getUserid());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("hList", hList);
+		mav.addObject("viewAll", hList);
 		
 		mav.setViewName("admin/adminBoard/adminHomeBoard");
 		return mav;

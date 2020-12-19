@@ -98,10 +98,10 @@ td{
 				
 				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
-						<option class="orderName" value="title">제목 순</option>
-						<option class="orderName" value="writedate">작성일 순</option>
-						<option class="orderName" value="hit">조회 순</option>
-						<option class="orderName" value="scrap">스크랩 순</option>
+						<option class="orderName" value="title" <c:if test="${order=='title'}"> selected</c:if>>제목 순</option>
+						<option class="orderName" value="writedate"  <c:if test="${order=='writedate'}"> selected</c:if>>작성일 순</option>
+						<option class="orderName" value="hit"  <c:if test="${order=='hit'}"> selected</c:if>>조회 순</option>
+						<option class="orderName" value="scrap"  <c:if test="${order=='scrap'}"> selected</c:if>>스크랩 순</option>
 					</select>
 				</div>
 				<!-- search 검색 끝 -->
@@ -198,7 +198,7 @@ td{
 							<c:if test="${paging.startPage != 1 }">
 								<li class="page-item">
 									<a class="page-link"
-										href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+										href="<%=request.getContextPath()%>/adminHomeBoardOrder?order=${order}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
@@ -212,7 +212,7 @@ td{
 									<c:when test="${p != paging.nowPage }">
 										<li class="page-item">
 										<a class="page-link"
-											href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+											href="<%=request.getContextPath()%>/adminHomeBoardOrder?order=${order}&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 										</li>
 									</c:when>
 								</c:choose>
@@ -220,7 +220,7 @@ td{
 							<c:if test="${paging.endPage != paging.lastPage}">
 								<li class="page-item">
 									<a class="page-link"
-										href="<%=request.getContextPath()%>/adminHomeBoard?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+										href="<%=request.getContextPath()%>/adminHomeBoardOrder?order=${order}&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 								</li>
 							</c:if>
 						</ul>

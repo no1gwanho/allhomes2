@@ -6,8 +6,6 @@ public class RegisterDetailSearchVO {
 	private String nickname;
 	private String email;
 	private String tel;
-	private String date;
-	private String date2;
 	
 	public String getUsername() {
 		return username;
@@ -39,17 +37,6 @@ public class RegisterDetailSearchVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getDate2() {
-		return date2;
-	}
-	public void setDate2(String date2) {
-		this.date2 = date2;
-	}
+	
 	
 }
