@@ -53,7 +53,8 @@
                   	<div class="card-body">
                   		<div  style="text-align:center">
 	                  		<div style="display:inline-block">
-	                            <img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:150px;height:150px; border-radius:70%;"/>
+	                           <img src="<%=request.getContextPath()%>/resources/upload/storeImg/${vo.s_pic}"
+	                            style="width:150px;height:150px; border-radius:70%;"/>
 	                        </div>
                         </div>
                             <br/><hr/><br/>
@@ -63,7 +64,7 @@
 			               	<p><label class="col-6">입점일</label>${vo.openingdate}<p>
 							<hr/><br/>
 							<p><label class="col-7">제품</label><span style="color:#EE8374">${cntPd}</span><p>
-			               	<p><label class="col-7">누적 판매</label><span style="color:#EE8374">22</span><p>
+			               	<p><label class="col-7">누적 판매</label><span style="color:#EE8374">${cntPur}</span><p>
                   	</div>
             </div>
                 
@@ -76,17 +77,10 @@
 	                   <span class="icon text-white-50">
 	                   <i class="fas fa-check"></i>
 	                   </span>
-	                   <span class="text">추가</span>
-                   </a>
-                            
-                   <a href="#" class="btn btn-danger btn-icon-split">
-	                   <span class="icon text-white-50">
-	                   <i class="fas fa-trash"></i>
-	                   </span>
-	                   <span class="text">삭제</span>
+	                   <span class="text">제품추가</span>
                    </a>
                    
-                   <select class="form-control col-lg-2" style="float:right">
+                   <select id="pdOrder" class="form-control col-lg-2" style="float:right">
                        <option>제품명 순</option>
                        <option>재고 순</optoin>
                        <option>입고일 순</option>
@@ -126,20 +120,6 @@
 							</c:forEach>
 						</tbody>	
 					</table><!-- table 제품 테이블 끝 -->
-					
-					<!-- pagination -->
-					<div style="display:inline-block">
-						<ul class="pagination">
-						    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
-						    <li class="page-item"><a class="page-link" href="#">4</a></li>
-						    <li class="page-item"><a class="page-link" href="#">5</a></li>
-						    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</div>
-					<!-- pagination 끝 -->
 					
                  </div><!-- card-body 끝 -->
             </div><!-- card 끝 -->

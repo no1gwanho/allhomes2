@@ -103,7 +103,7 @@
 .my-calendar {
   width: 700px;
   margin-top: 30px;
-  padding-left:150px;
+  padding-left:70px;
   text-align: center;
   font-weight: 800;
   border: 0px;
@@ -368,7 +368,7 @@
 			
 				</div>
 				<!-- Card Body -->
-				<div class="card-body" style="padding-bottom:90px">
+				<div class="card-body" style="padding-bottom:110px;margin-top:20px;">
 					<input type="hidden" value="${waiting}" id="w"/>
 					<input type="hidden" value="${payment}" id="p"/>
 					<input type="hidden" value="${deliveryPre}" id="dp"/>
@@ -505,7 +505,7 @@
 					</div>
 					<!-- // .my-calendar -->
 					<script>
-			const init = {
+					  const init = {
 					  monList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 					  dayList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 					  today: new Date(),

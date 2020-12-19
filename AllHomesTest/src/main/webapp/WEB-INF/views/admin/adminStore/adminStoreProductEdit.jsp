@@ -66,6 +66,18 @@
 									</div>
 								</div>
 		       				<br/><br/><br/><br/><br/>
+		       				
+		       				<div id="optionDiv" style="margin-top:30px">
+								<p>
+									<span class="col-lg-4" style="float:left">옵션1</span>
+									<span id="optionDel" class="btn alert-clean shadow-sm" style="float:right;margin-right:80px">-</span>
+									<span id="optionAdd" class="btn alert-clean shadow-sm" style="float:right;margin-right:20px">+</span>
+			       					<input type="text" name="o_value" id="o_value" class="col-lg-6 form-control"/>
+			       				</p>
+								
+			       			</div>
+			       			
+			       			
 		       				<p>
 		       					<span class="col-lg-4" style="float:left">제품 설명</span>
 			       				<textarea  id="pd_exp" name="pd_exp" class="form-control col-lg-6">${vo.pd_exp}</textarea>
@@ -96,7 +108,8 @@
 								<span class="col-lg-4" style="float:left;height:170px;line-height:170px">대표이미지</span>
 								<div class="col-lg-6 shadow-sm" style="border:1px solid #dddddd;border-radius:10px;float:left;">
 									<br/>
-									<img src="<c:url value='/productMainImg/${vo.s_no}/${vo.main_img}'/>" style="width:150px;height:150px; border-radius:70%;"/><br/>
+									<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
+									 style="width:150px;height:150px; border-radius:70%;"/><br/>
 									<input type="file" name="mainImg">
 									<br/><br/>
 								</div>
@@ -115,11 +128,16 @@
 			                         	 <i class="fas fa-check"></i></span>
 			                         <span class="text">수정</span>
 			                    </button>
-			                    <a href="/myapp/productDel?pd_no=${vo.pd_no}&s_no=${vo.s_no}" id="productDel" class="btn btn-danger btn-icon-split">
+			                    <a href="/myapp/productDel?pd_no=${vo.pd_no}&s_no=${vo.s_no}" onclick="return delchk();" id="productDel" class="btn btn-danger btn-icon-split">
 			                         <span class="icon text-white-50">
 			                         	 <i class="fas fa-trash"></i></span>
 			                         <span class="text">삭제</span>
 			                    </a>
+			                    <script type="text/javascript">
+									function delchk(){
+									       return confirm("삭제하시겠습니까?");
+									}
+								</script>
 		                    </div><br/>
 		                    <!-- 버튼 끝 -->
 						</form><br/><!-- 폼 끝 -->

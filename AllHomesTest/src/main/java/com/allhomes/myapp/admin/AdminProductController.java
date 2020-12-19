@@ -2,6 +2,7 @@ package com.allhomes.myapp.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -141,10 +142,18 @@ public class AdminProductController {
 		AdminStoreDaoImp cdao = sqlSession.getMapper(AdminStoreDaoImp.class);
 		List<AdminStoreSubCategoryVO> subList = cdao.storeSubCategoryAll(); // 서브카테고리명 가져오기 
 		
+		/*String option = vo.getO_value();
+		String opionlist[] = option.split(",");
 		
+		ArrayList<String> o_val = new ArrayList<String>();
+		
+		for(int i=0; i<optionlist.) {
+			
+		}*/
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("subList", subList);// 서브카테고리명 세팅		
 		mav.addObject("vo", vo); //제품 정보 세팅
+		mav.addObject("optionOne", vo);//첫번째 옵션
 		mav.setViewName("admin/adminStore/adminStoreProductEdit");
 		
 		return mav;

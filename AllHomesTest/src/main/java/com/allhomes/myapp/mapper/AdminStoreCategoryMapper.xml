@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.allhomes.myapp.admin.AdminStoreDaoImp">
   	<select id="storeCategoryAll" resultType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
-  		select main_c, priority, img from main_c order by priority 
+  		select main_c, main_c_no, priority, img from main_c order by priority 
   	</select>
   	<insert id="storeCategoryInsert" parameterType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
   	  	insert into main_c(main_c, img, priority) values(#{main_c}, #{img}, #{priority})
@@ -21,7 +21,7 @@
   	<delete id="storeSubCategoryDel" parameterType="String">
   		delete from sub_c where sub_c=#{sub_c}
   	</delete>
-  	<delete id="storeMainCategoryDel" parameterType="String">
-  		delete from main_c where main_c=#{main_c}
+  	<delete id="storeMainCategoryDel" parameterType="int">
+  		delete from main_c where main_c_no=#{param1}
   	</delete>
   </mapper>

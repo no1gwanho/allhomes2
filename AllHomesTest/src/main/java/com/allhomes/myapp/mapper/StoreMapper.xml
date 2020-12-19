@@ -76,5 +76,9 @@
  		update store set s_num=#{s_num}, s_name=#{s_name}, s_id=#{s_id}, staff_n=#{staff_n}, staff_e=#{staff_e}, staff_t=#{staff_t}, s_homepage=#{s_homepage} where s_no=#{s_no} 
  	</update>
  	
+ 	<!-- 스토어 별 누적판매량 -->
+ 	<select id="countPurchase" parameterType="int" resultType="int">
+ 		select count(*) from purchase where s_no = #{param1}
+ 	</select>
  	
 </mapper>

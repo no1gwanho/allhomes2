@@ -135,11 +135,11 @@
             <div class="card-body"><!-- card-body 시작 -->
                         
                <div class="col-lg-12" id="myShopping" class="center-block">
-                  <div><br/>입금 대기<hr>0건<br/><br/></div>
-                  <div><br/>결제완료<hr>0건<br/><br/></div>
-                  <div><br/>배송준비<hr>0건<br/><br/></div>
-                  <div><br/>배송중<hr>0건<br/><br/></div>
-                  <div><br/>구매확정<hr>0건<br/><br/></div>
+                  <div><br/>입금대기<hr>${cntPre}건<br/><br/></div>
+                  <div><br/>결제완료<hr>${cntConfirm}건<br/><br/></div>
+                  <div><br/>배송중<hr>${cntDelivery}건<br/><br/></div>
+                  <div><br/>배송완료<hr>${cntDeliveryDone}건<br/><br/></div>
+                  <div><br/>구매확정<hr>${cntConfirmPur}건<br/><br/></div>
                </div>
             
                
