@@ -101,7 +101,7 @@ public class AdminStoreController {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
 		dao.storeSubCategoryInsert(vo);
-		return "admin/adminStoreCategory";
+		return "admina/adminStore/adminStoreCategory";
 
 	}
 
@@ -111,7 +111,7 @@ public class AdminStoreController {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
 		 dao.storeSubCategoryDel(sub_c);
-		return "admin/adminStoreCategory";
+		return "admin/adminStore/adminStoreCategory";
 	}
 
 	// 스토어-메인카테고리 삭제
@@ -323,12 +323,7 @@ public class AdminStoreController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(result>0) {
-			String name = "admin/adminStoreStoreDetail?s_no"+vo.getS_no();
-			mav.setViewName(name);
-		}else {
-			mav.setViewName("admin/result");
-		}
+		mav.setViewName("admin/adminStoreStoreDetail?s_no"+vo.getS_no());
 		
 		return mav;
 

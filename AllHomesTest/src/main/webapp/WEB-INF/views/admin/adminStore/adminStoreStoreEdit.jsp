@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/adminInc/adminSideBar.jspf"%>
 <script>
-	$(function(){
+	function editChk(){
 		//스토어 수정
 		$("#storeEdit").click(function(){
 			if($("#s_name").val()==""){
@@ -25,24 +25,7 @@
 				return false;
 			}
 			
-			var url = "/myapp/storeEditOk";
-			var data = $("#storeEditOkForm").serialize();
-			
-			$.ajax({
-				type:'POST',
-				url: url,
-				data: data,
-				success:function(result){
-					if(result>0){
-						alert("수정이 완료됐습니다.");
-					}
-				},error: function(){
-					console.log("스토어 수정 에러");
-				}
-			});
-				
-		});
-	});
+	};
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -53,7 +36,8 @@
 						<h6 class="m-0 font-weight-bold text-primary">STORE EDIT</h6>
 				</div>
 				<div class="card-body" style="text-align:center">
-		       			<form method="post" id="storeEditOkForm" class="col-lg-10"  enctype="multipart/form-data" style="display:inline-block">
+		       			<form method="post" id="storeEditOkForm" onsubmit="return editChk()"
+		       			action="<%=request.getContextPath() %>/storeEditOk" class="col-lg-10"  enctype="multipart/form-data" style="display:inline-block">
 		       				<br/><br/>
 		       				<input type="hidden" name="s_no" value="${vo.s_no}"/>
 		       				<p>
