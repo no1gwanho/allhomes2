@@ -229,6 +229,49 @@
 
 	</select>
 	
+	<select id="qnaOrder" parameterType="HashMap"  resultType="com.allhomes.myapp.qna.QnaVO">
+		<![CDATA[
+	 	select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+	 	]]>
+	 	from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from qnaboard
+ 									<choose>
+										<when test="order!=null and order.equals('title')">
+							   				order by title
+							   			</when>
+							   			<when test="order!=null and order.equals('writedate')">
+							   				order by writedate desc
+							   			</when>
+							   			<when test="order!=null and order.equals('hit')">
+							   				order by hit desc
+							   			</when>
+							   			<when test="order!=null and order.equals('scrap')">
+							   				order by scrap desc
+							   			</when>
+									</choose>
+ 									)A
+ 							)
+		where RN between #{start} and #{end}
+	</select>
+	
+	<select id="qnaSearchDetail" parameterType="com.allhomes.myapp.qna.QnaDetailSearchVO"  resultType="com.allhomes.myapp.qna.QnaVO">
+		<![CDATA[
+	 	select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+	 	]]>
+	 	from qnaboard
+	 	<where>
+			<trim prefixOverrides="and">
+		 		<if test="title != null or title != ''">and title LIKE '%'||#{title}||'%' </if>
+		 		<if test="content != null or content != ''">and content LIKE '%'||#{content}||'%' </if>
+		 		<if test="userid != null or userid != ''">and userid LIKE '%'||#{userid}||'%' </if>
+		 		
+	 		</trim>
+		</where>
+		order by writedate desc
+	</select>
   	<!-- ====================================QnaBoard 끝=================================== -->
   	
   	

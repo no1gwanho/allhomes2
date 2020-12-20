@@ -28,7 +28,7 @@
 		});
 		
 		//상세검색
-		 $("#HBDetailSearch").submit(function(){
+		 $("#qnaSearchDetail").submit(function(){
 			if($("#userid").val()=="" && $("#nickname").val()=="" && $("#title").val()=="" && $("#hashtag").val()==""
 				&& $("#content").val()=="" && $("#date").val()=="" && $("#date2").val()==""){
 				alert("검색값을 한 개 이상 작성해주십시오");
@@ -36,6 +36,16 @@
 			}
 		}); 
 		
+		
+		//정렬하기
+			var orderOption = $('#order').val();
+			$('#order').change(function(){
+				var selectedOrder = $("#order option:selected").val();
+				
+				location.href="/myapp/qnaOrder?order="+selectedOrder;
+			});
+			
+			
 	});
 </script>
 <div class="container-fluid">
@@ -69,10 +79,10 @@
 				
 				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
-						<option class="orderName" value="title">제목 순</option>
-						<option class="orderName" value="writedate">작성일 순</option>
-						<option class="orderName" value="hit">조회 순</option>
-						<option class="orderName" value="scrap">스크랩 순</option>
+						<option class="orderName" value="title" <c:if test="${order=='title'}">selected</c:if>>제목 순</option>
+						<option class="orderName" value="writedate" <c:if test="${order=='writedate'}">selected</c:if>>작성일 순</option>
+						<option class="orderName" value="hit" <c:if test="${order=='hit'}">selected</c:if>>조회 순</option>
+			
 					</select>
 				</div>
 				<!-- search 검색 끝 -->
@@ -81,7 +91,41 @@
 				</div>
 			</div>
 			<!-- 검색 옵션 끝 -->
+		
+		<!-- 상세조회 -->
+		<div class="col-lg-12" id="searchDiv" style="display: none">
+			<div class="card shadow mb-4 mt-4">
+				<div class="card-header py-3">
+					<h6 class="m-0  font-weight-bold text-primary" style="float: left">상세조회</h6>
+				</div>
+				<div class="card-body" style="text-align: center">
+					<form method="post" action="/myapp/qnaSearchDetail" id="qnaSearchDetail">
+						<p>
+							<span class="col-lg-5" style="float: left">작성자 ID</span>
+							<input type="text" class="form-control col-lg-4" name="userid" id="userid"/>
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">제목</span>
+							<input type="text" class="form-control col-lg-4" name="title" id="title"/> 
+						</p>
+						<p>
+							<span class="col-lg-5" style="float: left">글 내용</span>
+							<input type="text" class="form-control col-lg-4" name="content" id="content"/>
+						</p>
+						
+						<button class="btn btn-primary btn-icon-split" id="searchDetailOkBtn">
+							<span class="icon text-white-50"> 
+								<i class="fas fa-search"></i>
+							</span> 
+							<span class="text">조회</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
 
+		<!-- 상세조회 끝 -->
+		
 		<div class="col-lg-12">
 			<c:forEach var="list" items="${viewAll}">
 				<div class="card shadow mb-4">

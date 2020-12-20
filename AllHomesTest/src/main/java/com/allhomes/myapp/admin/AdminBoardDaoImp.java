@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.qna.QnaDetailSearchVO;
 import com.allhomes.myapp.qna.QnaVO;
 
 public interface AdminBoardDaoImp {
@@ -76,9 +77,12 @@ public interface AdminBoardDaoImp {
 	public int qnaSearchCnt(HashMap<String, Object> countMap);
 	public List<QnaVO> qnaSearch(HashMap<String, Object> map);
 	//
-	public List<QnaVO> qnaSearchDetail(HashMap<String, Object> countMap);
+
 	//
-	public List<QnaVO> qnaOrder(HashMap<String, Object> countMap);
+	public List<QnaVO> qnaOrder(HashMap<String, Object> map);
+	//
+	public List<QnaVO> qnaSearchDetail(QnaDetailSearchVO vo);
+	
 	
 	
 }
