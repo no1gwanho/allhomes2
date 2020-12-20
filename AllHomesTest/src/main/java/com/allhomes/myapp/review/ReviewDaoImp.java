@@ -35,4 +35,6 @@ public interface ReviewDaoImp {
 	public ReviewJoinVO productInfo(PurchaseJoinVO vo);
 	
 	public ReviewVO reviewInfo(ReviewVO vo);
+
+	public ReviewVO reviewSelect(String userid);
 }

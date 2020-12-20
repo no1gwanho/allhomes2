@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.allhomes.myapp.order.OrderDaoImp;
+import com.allhomes.myapp.purchase.PurchaseDaoImp;
 import com.allhomes.myapp.purchase.PurchaseJoinVO;
 import com.allhomes.myapp.purchase.PurchaseVO;
 import com.allhomes.myapp.register.RegisterVO;
@@ -50,7 +51,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/reviewWriteOk", method=RequestMethod.POST)
 	public ModelAndView reviewWriteOk(@RequestParam("img") MultipartFile mf, @RequestParam("pd_no") int pd_no,	@RequestParam("s_no") int s_no,
-									@RequestParam("content") String content, @RequestParam("rating") int rating,
+									@RequestParam("content") String content, @RequestParam("rating") int rating, @RequestParam("pc_no") int pc_no,
 									HttpServletRequest r) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -83,11 +84,19 @@ public class ReviewController {
 		}
 		
 		ReviewDaoImp dao = sqlSession.getMapper(ReviewDaoImp.class);
+		PurchaseDaoImp pDao = sqlSession.getMapper(PurchaseDaoImp.class);
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		pvo.setPc_no(pc_no);
+		
 		int result = dao.insertReview(vo);
+		int pResult = pDao.reviewStatusUpdate(pvo);
 		
 		System.out.println("result값 얼마야????????????????? " + result);
 		
-		mav.addObject("reviewWrite", result);		
+		
+		mav.addObject("reviewWrite", result);
 		mav.setViewName("landing/resultCheck");
 		
 		return mav;
@@ -164,7 +173,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviewDel")
-	public ModelAndView reviewDel(@RequestParam("r_no") int r_no, HttpServletRequest req) {
+	public ModelAndView reviewDel(@RequestParam("r_no") int r_no, @RequestParam("pd_no") int pd_no, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession ses = req.getSession();
 		String userid = (String)ses.getAttribute("userid");
@@ -172,12 +181,13 @@ public class ReviewController {
 		ReviewVO vo = new ReviewVO();
 		vo.setUserid(userid);
 		vo.setR_no(r_no);
+		vo.setPd_no(pd_no);
 		
 		ReviewDaoImp dao = sqlSession.getMapper(ReviewDaoImp.class);
 		int result = dao.delReview(vo);
 		
 		mv.addObject("reviewDel", result);
-		mv.addObject("pd_no", r_no);
+		mv.addObject("pd_no", pd_no);
 		mv.setViewName("landing/resultCheck");
 		
 		return mv;

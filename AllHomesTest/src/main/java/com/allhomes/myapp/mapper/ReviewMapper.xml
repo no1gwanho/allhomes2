@@ -15,7 +15,7 @@
 </select>
 <insert id="insertReview" parameterType="com.allhomes.myapp.review.ReviewVO">
 	insert into review(userid, pd_no, rating, img, content, writedate, s_no, r_no) select #{userid}, #{pd_no}, #{rating}, #{img}, #{content}, sysdate, #{s_no}, r_no_sq.nextval from dual a
-	where not exists(select pd_no from wishlist where pd_no=#{pd_no} and userid=#{userid})
+	where not exists(select r_no from review where r_no=#{r_no} and userid=#{userid})
 </insert>
 <update id="reviewHitAdd" parameterType="com.allhomes.myapp.review.ReviewVO">
 	update review set hit = hit+1 where r_no=#{r_no}
@@ -56,5 +56,8 @@
 </select>
 <select id="getAllReview" parameterType="com.allhomes.myapp.product.PagingVO">
 	select count(pd_no) from review where pd_no=#{pd_no} and userid=#{userid}
+</select>
+<select id="reviewSelect" parameterType="String" resultType="com.allhomes.myapp.review.ReviewVO">
+	select r_no, userid, img, content, rating, pd_no, writedate, hit from review where userid=#{userid}
 </select>
 </mapper>

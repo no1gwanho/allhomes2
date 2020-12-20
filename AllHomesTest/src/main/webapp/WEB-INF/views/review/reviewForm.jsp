@@ -92,7 +92,7 @@
 				<input type="submit" class="btn btn" style="background-color:#ee8374;color:#fff;" value="등록">
 			</div>
 			<div class="col-6" style="text-align:left">
-				<input type="button" class="btn btn-secondary" value="취소">
+				<a href="/myapp/mypageShopping"><input type="button" class="btn btn-secondary" value="취소"></a>
 			</div>
 		</div>
 	</form>
