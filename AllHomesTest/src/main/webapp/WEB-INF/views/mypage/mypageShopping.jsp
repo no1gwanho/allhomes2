@@ -150,7 +150,7 @@
 									<input type="checkbox" class="chkBox" value="${p.pc_no }">&nbsp;&nbsp;
 									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
 								</div>
-								<div class="col-7">
+								<div class="col-5">
 									<b>${p.pd_name }</b><br/>
 									<c:if test="${p.o_value == null }">
 										옵션없음 / ${p.num }
@@ -160,12 +160,15 @@
 									</c:if>
 									<br/>주문번호 : ${p.pc_no }<br/>주문일자 : ${p.pc_date }
 								</div>
+								<div class="col-2">
+									<b>현재 주문배송 상태</b><br/>${p.status }
+								</div>
 								<div class="col-3">
-									<c:if test="${p.confirm eq 'N'}">
+									<c:if test="${p.status eq '결제완료' || p.status eq '배송중' || p.status eq '배송완료'}">
 										<a href="https://www.doortodoor.co.kr/parcel/pa_004.jsp" target="_blank"><button class="btn btn-secondary">배송추적</button></a><br/>
 										<a href="/myapp/setInPurchase?pc_no=${p.pc_no }"><button class="btn btn-secondary" style="background-color:#ee8374;color:fff;border:0;margin-top:10px;">구매확정</button></a>
 									</c:if>
-									<c:if test="${p.confirm eq 'Y' && p.status ne '리뷰완료'}">
+									<c:if test="${p.status eq '구매확정' && p.confirm eq 'Y'}">
 										<form method="post" action="/myapp/reviewWrite?pc_no=${p.pc_no }">
 											<button class="btn btn-secondary" style="background-color:#ee8374;color:fff;border:0;margin-bottom:10px;">리뷰쓰기</button><br/>
 										</form>
@@ -200,19 +203,19 @@
 						</c:if>			
 						<c:if test="${!empty cList }">
 							<c:forEach var="c" items="${cList }">
-								<c:if test="${p.chk_c == 1 }">
+								<c:if test="${c.chk_c == 1 }">
 									<div class="col-12"><hr/></div>
 									<div class="col-2">
 										<input type="checkbox" class="chkBox">&nbsp;&nbsp;
-										<img src="<%=request.getContextPath() %>/resources/upload/productImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
+										<img src="<%=request.getContextPath() %>/resources/upload/productImg/${c.s_no}/${c.main_img}" style="widht:180px;height:120px;"/>
 									</div>
 									<div class="col-12">
-										<b>${p.pd_name }</b><br/>
-										<c:if test="${p.o_value == null }">
-											옵션없음 / ${p.num }
+										<b>${c.pd_name }</b><br/>
+										<c:if test="${c.o_value == null }">
+											옵션없음 / ${c.num }
 										</c:if>
-										<c:if test="${p.o_value != null }">
-											${p.o_value } / ${p.num } 개
+										<c:if test="${c.o_value != null }">
+											${c.o_value } / ${c.num } 개
 										</c:if>
 									</div>
 								</c:if>
