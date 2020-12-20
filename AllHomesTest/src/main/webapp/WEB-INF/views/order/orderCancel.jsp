@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="container">
-	<form method="post" action="/myapp/orderCancelOk?pc_no=${vo.pc_no }&pd_name=${vo.pd_name}&total_p=${vo.total_p}">
+	<form method="post" action="/myapp/orderCancelOk?pc_no=${vo.pc_no }">
 		<input type="hidden" name="pd_no" value="${vo.pd_no }">
 		<h1>주문 취소 페이지</h1>
 		<div class="row">
