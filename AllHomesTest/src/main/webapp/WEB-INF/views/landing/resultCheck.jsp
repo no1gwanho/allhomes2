@@ -56,10 +56,44 @@
 	</script>
 </c:if>
 
-<!-- 구매 취소 결과 -->
+<!-- 구매 확정 결과 -->
+<c:if test="${resultConfirm>0}">
+	<script>	
+		alert("구매확정되었습니다.");
+		location.href="/myapp/mypageShopping";
+	</script>
+</c:if>
+<c:if test="${resultConfirm==0}">
+	<script>	
+		alert("구매확정 실패했습니다.")
+		history.back();
+	</script>
+</c:if>
+
+<!-- 주문 취소 결과 -->
 <c:if test="${orderCancel>0 }">
 	<script>
-		alert("구매취소 신청이 정상적으로 이루어졌습니다.");
+		alert("주문 취소 신청이 정상적으로 이루어졌습니다.");
 		location.href="/myapp/mypageShopping";
+	</script>
+</c:if>
+<c:if test="${orderCancel==0 }">
+	<script>
+		alert("주문 취소 신청에 실패했습니다.");
+		history.back();
+	</script>
+</c:if>
+
+<!-- 주문 내역 삭제 결과 -->
+<c:if test="${orderListDelResult>0}">
+	<script>
+		alert("주문 내역이 삭제되었습니다.");
+		location.href="/myapp/mypageShopping";
+	</script>
+</c:if>
+<c:if test="${orderListDelResult==0}">
+	<script>
+		alert("주문 내역이 삭제되지 않았습니다.");
+		history.back();
 	</script>
 </c:if>
