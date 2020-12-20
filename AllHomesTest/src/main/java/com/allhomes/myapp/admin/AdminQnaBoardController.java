@@ -1,6 +1,8 @@
 package com.allhomes.myapp.admin;
 
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -54,7 +56,7 @@ public class AdminQnaBoardController {
 		//paging
 		mav.addObject("paging", vo);
 		mav.addObject("viewAll", dao.qnaAllList(vo));
-		
+		mav.addObject("value", "");
 		mav.setViewName("admin/adminBoard/adminQnaBoard");
 		return mav;
 	}
@@ -81,4 +83,63 @@ public class AdminQnaBoardController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/adminQnaDelete")
+	public ModelAndView qnaDelete(@RequestParam("no") int q_no) {
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		
+		dao.qnaDelete(q_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:adminQnaBoard");
+		return mav;
+	}
+	
+	
+	//선택검색
+		@RequestMapping("/adminQnaSearch")
+		public ModelAndView adminStoreSearch(@RequestParam("value") String value
+				,@RequestParam("key") String key
+				,AdminPagingVO vo
+				, @RequestParam(value="nowPage", required=false)String nowPage
+				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			
+			HashMap<String, Object> countMap = new HashMap<String, Object>();
+			countMap.put("value", value);
+			countMap.put("key", key);
+			
+			//paging//
+			int total = dao.qnaSearchCnt(countMap); //검색한 거의 총 개수
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			
+			vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			//paging
+					
+
+			ModelAndView mav = new ModelAndView();
+					
+			mav.addObject("paging", vo);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("value", value);
+			map.put("key", key);
+			map.put("start", vo.getStart());
+			map.put("end", vo.getEnd());
+			mav.addObject("viewAll", dao.qnaSearch(map));
+			mav.addObject("value", value);
+			
+			mav.setViewName("admin/adminBoard/adminQnaBoard");
+			return mav;
+		}
+	
+	
 }

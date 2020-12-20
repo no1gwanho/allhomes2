@@ -1,5 +1,6 @@
 package com.allhomes.myapp.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -46,11 +47,14 @@ public interface AdminStoreDaoImp {
 	//category--메인카테고리 삭제
 	public int storeMainCategoryDel(int no);
 	
+	public int storeCategoryUpdate(AdminStoreCategoryVO vo);
+	
 	//===========스토어 검색======================
 	
 	//선택 검색
-	public List<StoreVO> adminStoreSearch(@Param("key") String key, @Param("value") String value);
-	
+	public List<StoreVO> adminStoreSearch(HashMap<String, Object> map);
+	//선택검색 count
+	public int adminStoreSearchCount(HashMap<String, Object> countMap);
 	//상세검색
 	public List<StoreVO> adminStoreDetailSearch(StoreDetailSearchVO vo);
 }

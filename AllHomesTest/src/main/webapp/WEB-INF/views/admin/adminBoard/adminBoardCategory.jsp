@@ -11,13 +11,6 @@
 			}
 		}); 
 		
-		//카테고리 수정
-		/*  $(".editTheme").click(function(){
-			if(("#theme").val()==""){
-				alert("카테고리명을 입력해주십시오.");
-				return false;
-			}
-		});  유효성 검사 x 바꿔야됨*/
 		
 	});
 </script>
@@ -53,8 +46,15 @@
 							</td>
 							<td>
 								<div style="float:right">
-									<button class="btn alert-secondary editTheme">수정</button>
-									<a href="/myapp/homeBoardThemeDel?no=${vo.hb_theme_no}" class="btn alert-danger">삭제</a>
+									
+									<a href="/myapp/homeBoardThemeDel?no=${vo.hb_theme_no}" onclick="return delChk()" class="btn alert-danger">삭제</a>
+									<script>
+										function delChk(){
+											if(!confirm("정말 삭제하시겠습니까?")){
+												return false;
+											}
+										}
+									</script>
 								</div>
 							</td>
 						</tr>

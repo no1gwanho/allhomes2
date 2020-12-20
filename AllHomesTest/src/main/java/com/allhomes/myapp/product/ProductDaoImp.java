@@ -1,5 +1,6 @@
 package com.allhomes.myapp.product;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ProductDaoImp {
@@ -21,6 +22,7 @@ public interface ProductDaoImp {
 	public int delProduct(int pd_no);
 	//제품 선택(스토어 번호로)
 	public List<ProductVO> selectStoreProduct(int s_no);
+	public List<ProductVO> selectStoreProductOrder(HashMap<String, Object> map);
 	//스토어의 총 제품 개수
 	public int countProduct(int s_no);
 	//방금 insert한 제품의 제품번호

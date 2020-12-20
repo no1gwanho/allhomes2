@@ -52,7 +52,24 @@
   	<!-- 스토어번호로 제품 검색 -->
   	<select id="selectStoreProduct" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, o_value from product where s_no=#{s_no}
-  	</select>  	
+  	</select> 
+  	<select id="selectStoreProductOrder"  resultType="com.allhomes.myapp.product.ProductVO">
+  		select pd_no, s_no, pd_name, price, discount, main_img, stock, status, sub_c, pd_img, pd_exp, o_value from product where s_no=#{s_no}
+  		<choose>
+										<when test="order!=null and order.equals('pd_name')">
+							   				order by pd_name
+							   			</when>
+							   			<when test="order!=null and order.equals('stock')">
+							   				order by stock
+							   			</when>
+							   			<when test="order!=null and order.equals('wishlist')">
+							   				order by wishlist desc
+							   			</when>
+							   			<when test="order!=null and order.equals('price')">
+							   				order by price desc
+							   			</when>
+									</choose>
+  	</select>
   	<!-- 제품 번호로 검색 -->
   	<select id="selectProduct" parameterType="int" resultType="com.allhomes.myapp.product.ProductVO">
   		select pd_no, s_no, pd_name, price, round(price-(price*discount/100), -1) as discount, main_img, stock, status, sub_c, pd_img, pd_exp, shipping_c, o_value from product where pd_no=#{pd_no}

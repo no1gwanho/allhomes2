@@ -30,7 +30,7 @@
  			select ROWNUM RN, A.*
  							from(
  									select * 
- 									from homeboard
+ 									from homeboard order by writedate
  									)A
  							)
 		where RN between #{start} and #{end}	
@@ -160,7 +160,7 @@
  			select ROWNUM RN, A.*
  							from(
  									select * 
- 									from qnaboard
+ 									from qnaboard order by writedate desc
  									)A
  							)
 		where RN between #{start} and #{end}	
@@ -180,6 +180,55 @@
 		select count(*) from qnaboard
 	</select>
 	
+	<!-- 선택검색 -->
+ 	<select id="qnaSearch" parameterType="HashMap" resultType="com.allhomes.myapp.qna.QnaVO">
+ 		<![CDATA[
+	 	select q_no, title, regexp_replace(content, '<.*??>') content, thumbnail, userid, hit, answer, to_char(writedate, 'YYYY-MM-DD') writedate 
+	 	]]>
+	 	from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from qnaboard
+ 									<where>
+										<choose>
+											<when test="value == 'userid'">
+												userid LIKE '%'||#{key}||'%'
+											</when>
+											<when test="value == 'title'">
+												title LIKE '%'||#{key}||'%'
+											</when>
+											<when test="value == 'content'">
+												content LIKE '%'||#{key}||'%'
+											</when>
+										</choose>
+									</where>
+									 order by writedate desc
+ 									)A
+ 							)
+		where RN between #{start} and #{end}	
+		 	
+ 	</select>
+ 	
+ 	
+	<select id="qnaSearchCnt" parameterType="HashMap" resultType="int">
+	select count(*) from qnaboard
+		<where>
+			<choose>
+				<when test="value == 'userid'">
+					userid LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'title'">
+					title LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'content'">
+					content LIKE '%'||#{key}||'%'
+				</when>
+			</choose>
+		</where>
+
+	</select>
+	
   	<!-- ====================================QnaBoard 끝=================================== -->
   	
   	
@@ -193,7 +242,7 @@
                     	from(
                             	select store.s_no, store.s_name,review.img, review.r_no, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
                             	from store, review, product,register
-                            	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.m_no = review.m_no
+                            	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.userid = review.userid
                             	)A
                         )
 		where RN between #{start} and #{end}
@@ -214,6 +263,79 @@
  		order by review.writedate desc
  		]]>
 	</select>
+	
+	<select id="selectReviewOrder" parameterType="String" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+		select * from(
+        	select ROWNUM RN, A.*
+                    	from(
+                            	select store.s_no, store.s_name,review.img, review.r_no, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
+                            	from store, review, product,register
+                            	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.userid = review.userid
+                            	<choose>
+										<when test="order!=null and order.equals('rating')">
+							   				order by rating desc
+							   			</when>
+							   			<when test="order!=null and order.equals('writedate')">
+							   				order by writedate desc
+							   			</when>
+							   			<when test="order!=null and order.equals('hit')">
+							   				order by hit desc
+							   			</when>
+							   			
+									</choose>
+                            	)A
+                        )
+		where RN between #{start} and #{end}
+ 									
+ 		
+ 	</select>
+ 	
+ 	
+ 	<!-- 선택 검색 -->
+	<select id="searchReview" parameterType="HashMap" resultType="com.allhomes.myapp.admin.AdminReviewJoinVO">
+ 		select * from(
+        	select ROWNUM RN, A.*
+                    	from(
+                            	select store.s_no, store.s_name,review.img, review.r_no, product.pd_no, product.pd_name, review.content, review.rating, to_char(review.writedate, 'YYYY-MM-DD') writedate, register.m_no,review.userid,register.m_pic
+                            	from store, review, product,register
+                            	where review.pd_no = product.pd_no and store.s_no = review.s_no and register.userid = review.userid
+							 		
+								 		<choose>
+								 			<when test="value == 'userid'">
+								 			 and register.userid LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'pd_no'">
+								 				and product.pd_no LIKE '%'||#{key}||'%'
+								 			</when>
+								 			<when test="value == 'content'">
+								 				 and review.content LIKE '%'||#{key}||'%'
+								 			</when>
+								 		</choose>
+							 		
+							 		)A
+ 							)
+		where RN between #{start} and #{end}
+ 	</select>
+	
+	<!--선택 검색 Count-->
+	<select id="adminReviewSearchCount" parameterType="HashMap" resultType="int">
+	select count(*) from store, review, product,register
+	where review.pd_no = product.pd_no and store.s_no = review.s_no 
+	
+			<choose>
+				<when test="value == 'userid'">
+					 and register.userid LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'pd_no'">
+					 and product.pd_no LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'content'">
+					and review.content LIKE '%'||#{key}||'%'
+				</when>
+			</choose>
+	
+	</select>
+	
 	
 	<!-- 리뷰 삭제 -->
 	<delete id="reviewDel" parameterType="int">

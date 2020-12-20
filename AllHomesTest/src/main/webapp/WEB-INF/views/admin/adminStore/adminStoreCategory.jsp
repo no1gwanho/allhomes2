@@ -39,12 +39,7 @@
 			
 		});	
 		
-		//메인카테고리 수정
-		$(".editMain").click(function(){
-			var main_c = $("#main_c").val();
-			alert(main_c);
-		});
-		
+	
 		//서브카테고리 추가
 		$("#subC_add").click(function(){
 			if($("#main_cName").val()==""){
@@ -56,72 +51,11 @@
 			}
 			
 			
-			var url="/myapp/adminSubCategoryAdd";
-			var main_c = $("#main_cName").val();
-			var sub_c = $("#sub_c").val();
-			
-			//ajax
-			$.ajax({
-				url:url,
-				dataType:"text",
-				data: {"main_c":main_c, "sub_c":sub_c},
-				success: function(result){
-					if(result>0){
-						alert("서브 카테고리를 추가하였습니다.");
-					}else{
-						alert("서브 카테고리 추가에 실패했습니다.");
-					}
-				},error: function(){
-					console.log("서브 카테고리 추가 오류");	
-				}
-			});
-			return false;
-		});
-		
-		//메인카테고리 삭제
-		$(".delMainC").click(function(){
-			var main_c = $(this).attr('id'); //메인 카테고리 값
-			var url= "/myapp/adminMainCategoryDel";
-			
-			 $.ajax({
-				url:url,
-				dataType:"text",
-				data:{"main_c":main_c},
-				success: function(result){
-					if(result>0){
-						alert("메인 카테고리를 삭제했습니다.");
-					}else{
-						alert("메인 카테고리 삭제에 실패했습니다.");
-					}
-				},error: function(){
-					console.log("메인 카테고리 삭제 오류");
-				}
-			}); 
+			location.href="/myapp/adminSubCategoryAdd?main_c="+$("#main_cName option:selected").val()+"&sub_c="+$("#sub_c").val();
 			
 		});
 		
-		
-		//서브카테고리 삭제
-		$(".delSubC").click(function(){
-			var sub_c = $(this).parent().prev().text(); //서브카테고리 값
-			var url= "/myapp/adminSubCategoryDel";
-			
-			$.ajax({
-				url:url,
-				dataType:"text",
-				data:{"sub_c":sub_c},
-				success: function(result){
-					if(result>0){
-						alert("서브 카테고리를 삭제했습니다.");
-					}else{
-						alert("서브 카테고리 삭제에 실패했습니다.");
-					}
-				},error: function(){
-					console.log("서브 카테고리 삭제 오류");
-				}
-			});
-		});
-		
+	
 		//미리보기
 		$("#previewMainImg").on("change", selectImgPreview);
 	});
@@ -195,6 +129,7 @@
                 <div class="card-body">
                 	
                 	<c:forEach var="vo" items="${list}" varStatus="status">
+                		<form method="post" action="/myapp/mainCategoryUpdate" onsubmit="return updateChk()" enctype="multipart/form-data"/>
 	                	<div class="card shadow col-lg-5" id="category">
 	                		<img src="<%=request.getContextPath()%>/resources/upload/storeMainCategoryImg/${vo.img}"/>
 	                		<div class="my-2"></div>
@@ -211,13 +146,19 @@
 	                		
 	                		<!-- 버튼 -->
 	                		<div style="text-align:center">
-				    			<button class="btn btn-secondary btn-icon-split editMain">
+				    			<button type="submit" class="btn btn-secondary btn-icon-split editMain">
 			                			<span class="icon text-white-50">
 				           				<i class="fas fa-check"></i></span>
 					        			<span class="text">수정</span>
 			                		</button>
+			                		<script>
+			                		function updateChk(){
+									       return confirm("수정하시겠습니까?");
+									}
+			                		</script>
 				    			<!-- 삭제 버튼 -->
-				    			<a href="/myapp/adminMainCategoryDel?no=${vo.main_c_no }"  id="${vo.main_c}" onclick="return delchk();" class="btn btn-danger btn-icon-split delMainC">
+				    			<a href="/myapp/adminMainCategoryDel?no=${vo.main_c_no }" onclick="return delchk();" class="btn btn-danger btn-icon-split delMainC">
+			                	
 			                		<span class="icon text-white-50">
 				           			<i class="fas fa-trash"></i></span>
 					        		<span class="text">삭제</span>
@@ -231,6 +172,7 @@
 				    		<br/>   
 			                <!-- 버튼 끝 -->
 	                	</div>
+	                	</form>
                 	</c:forEach>
                 	
                 	
@@ -259,7 +201,8 @@
 								<td>${sVo.main_c}</td>
 								<td>${sVo.sub_c}</td>
 								<td>
-									<button class="btn btn-user btn-danger delSubC">삭제</button>
+									<a href="/adminSubCategoryDel?sub_c=${sVo.sub_c}" onclick="return delChk()"
+											class="btn btn-user btn-danger delSubC">삭제</a>
 								</td>
 							</tr>
 							</c:forEach>

@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(function(){
-		
 		//검색하기
 		$("#searchBtn").click(function(){
 			var value = $("#searchSelect option:selected").val();
@@ -16,7 +15,6 @@
 			location.href= "/myapp/adminReviewSearch?value="+value+"&key="+key;
 			
 		});
-		
 		
 		//정렬하기
 		var orderOption = $('#order').val();

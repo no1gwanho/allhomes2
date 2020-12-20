@@ -1,7 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script>
+	$(function(){
+		
+		//검색하기
+		$("#searchBtn").click(function(){
+			var value = $("#searchSelect option:selected").val();
+			var key = $("#searchKeyword").val();
+			
+			if(key==""){
+				alert("값을 입력해주십시오.");
+				return false;
+			}
+			location.href= "/myapp/adminQnaSearch?value="+value+"&key="+key;
+			
+		});
+		
+		//상세조회 나타나기
+		$("#searchDetailBtn").click(function(event){
+			if($("#searchDiv").css("display","none")){
+				$("#searchDiv").show("fast");
+			}else if(!$("#searchDiv").css("display","none")){
+				$("#searchDiv").hide("fast");
+			}
+					
+		});
+		
+		//상세검색
+		 $("#HBDetailSearch").submit(function(){
+			if($("#userid").val()=="" && $("#nickname").val()=="" && $("#title").val()=="" && $("#hashtag").val()==""
+				&& $("#content").val()=="" && $("#date").val()=="" && $("#date2").val()==""){
+				alert("검색값을 한 개 이상 작성해주십시오");
+				return false;
+			}
+		}); 
+		
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="my-2"></div>
@@ -11,9 +47,9 @@
 				<div style="float:left">
 					<select class="selectpicker" id="searchSelect">
 						<optgroup label="검색 필터">
-							<option value="userid">회원 ID로 검색</option>
-							<option value="title">제목으로 검색</option>
-							<option value="content">글 내용으로 검색</option>
+							<option value="userid" <c:if test="${value=='userid'}">selected</c:if>>회원 ID로 검색</option>
+							<option value="title" <c:if test="${value=='title'}">selected</c:if>>제목으로 검색</option>
+							<option value="content" <c:if test="${value=='content'}">selected</c:if>>글 내용으로 검색</option>
 						</optgroup>
 					</select>
 				</div>
@@ -54,7 +90,7 @@
 							<div class="col-lg-8 ml-4">
 								<!-- 제목 -->
 								<h4 style="padding-top: 25px;">
-									<strong><a href='<%=request.getContextPath() %>/qnaView?q_no=${list.q_no}'>${list.title }</a></strong>
+									<strong><a href='<%=request.getContextPath() %>/adminQnaView?q_no=${list.q_no}'>${list.title }</a></strong>
 								</h4>
 							
 								<br /> <br />
