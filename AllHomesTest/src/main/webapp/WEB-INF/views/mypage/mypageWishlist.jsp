@@ -100,6 +100,8 @@
 		</c:forEach>
 	</c:if>
 	</div>
+	
+	<c:if test="${!empty list }">
 	<div id="paging" style="margin-top:30px;">
 		<ul class="pagination" style="margin-left:470px;">
 			<li class="page-item">
@@ -128,4 +130,5 @@
 			</li>
 		</ul>
 	</div>
+	</c:if>
 </div>
