@@ -351,8 +351,10 @@ public class mypageController {
                out.flush();
             //   session.invalidate();
                session.removeAttribute("logStatus");
+
                session.setAttribute("outcheck","Y");
                mav.setViewName("mypage/memOutResult");      
+
             } catch (IOException e) {
                
                e.printStackTrace();
@@ -364,6 +366,7 @@ public class mypageController {
          
       }else if(finalCheck ==null){
          
+
 //         resp.setContentType("text/html;charset=UTF-8");
 //         PrintWriter out;
 //         
@@ -377,12 +380,15 @@ public class mypageController {
 //            
 //            e.printStackTrace();
 //         }
+
       }
       
          
       
       
+
       //mav.setViewName("/home");
+
       
       
       return mav;
@@ -422,7 +428,9 @@ public class mypageController {
       RegisterVO dupCheck = dao.dupCheck(vo1);
       ModelAndView mav = new ModelAndView();
          
+
       if(dupCheck==null){	//완전히 새값이 입력된상황
+
                      
          ///////////프로필 사진 업로드////////////
          String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
@@ -464,7 +472,9 @@ public class mypageController {
                               ff.delete();
                         }
                      }
+
                      mav.setViewName("landing/registerOkPage");	
+
                      session.setAttribute("resultVO",resultVO);   
                
                   }else{
@@ -481,12 +491,14 @@ public class mypageController {
                
                
             }else {   ///프로필사진 아무것도 안바꿨을때
+
                System.out.println("test4");
                fileNames = "basicprofile.png";   
                vo.setM_pic(fileNames);
 
                int resultVO = dao.userMebUpdate(vo1);   
                System.out.println("test5");
+
             //   mav.setViewName("/home");
                session.setAttribute("resultVO",resultVO);         
            //    session.setAttribute("editResult","N");  
@@ -494,6 +506,7 @@ public class mypageController {
          /////////////////파일업로드 종료////////////
       
          session.setAttribute("nickname", vo1.getNickname());		//결과값은 어쨋든 고유값이니 상관없음 결과는 무조건 수정
+
          session.setAttribute("email", vo1.getEmail());
          session.setAttribute("tel", vo1.getTel());
          session.setAttribute("m_pic", vo1.getM_pic());
@@ -511,6 +524,7 @@ public class mypageController {
 //            
 //            e.printStackTrace();
 //         }
+
    
       
    
@@ -567,6 +581,7 @@ public class mypageController {
                         session.setAttribute("m_pic", vo1.getM_pic());
                               
                         
+
                         mav.setViewName("mypage/userEditResult");	//파일확장자가 맞으면 여기로가라
                         session.setAttribute("editResult","Y");
 //                        req.setContentType("text/html;charset=UTF-8");
@@ -590,12 +605,14 @@ public class mypageController {
                   
                   int resultVO = dao.userMebUpdate(vo1);
                   
+
               //    mav.setViewName("mypage/userEditResult");
                   session.setAttribute("resultVO",resultVO);   
                 
                   
                   
                }else {   							//프로필사진란 공백으로 넘어갔을때
+
                   System.out.println("test4");
                   fileNames = "basicprofile.png";   
                   vo.setM_pic(fileNames);
@@ -604,6 +621,7 @@ public class mypageController {
                   System.out.println("test5");
                   mav.setViewName("mypage/userEditResult");
                   session.setAttribute("editResult","Y");
+
                   session.setAttribute("resultVO",resultVO);         
                         
                }
@@ -638,6 +656,7 @@ public class mypageController {
       ModelAndView mav = new ModelAndView();
       
       PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+      ReviewDaoImp rDao = sqlSession.getMapper(ReviewDaoImp.class);
       HttpSession ses = r.getSession();
       
       String userid = (String)ses.getAttribute("userid");
@@ -645,6 +664,11 @@ public class mypageController {
       vo.setUserid(userid);
          
       List<PurchaseJoinVO> list = dao.joinPurchase(userid);
+      
+      for(int i=0; i<list.size(); i++) {
+    	  vo = list.get(i);
+    	  System.out.println(vo.getPc_no());
+      }
       
       mav.addObject("list", list);
       mav.setViewName("mypage/mypageShopping");
@@ -656,32 +680,28 @@ public class mypageController {
       mav.addObject("cntDelivery",oDao.countOrderStatus(userid, "배송중"));
       mav.addObject("cntDeliveryDone",oDao.countOrderStatus(userid, "배송완료"));
       mav.addObject("cntConfirmPur",oDao.countOrderStatus(userid, "구매확정"));
-      mav.addObject("cntReviewDone",oDao.countOrderStatus(userid, "리뷰완료"));
-            
-            
+      mav.addObject("cntReviewDone",oDao.countOrderStatus(userid, "리뷰완료"));            
       
       return mav;
    }
    
-   // 나의 쇼핑 페이지에서 구매확정 버튼 눌렀을 때 
-   @RequestMapping(value="/setInPurchase", method=RequestMethod.POST)
-   public ModelAndView purchaseUpdate(@RequestParam("pc_no") int pc_no, HttpSession ses) {
-      PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-      int result = dao.editConfirmCheck(pc_no);
-      
-      ModelAndView mav = new ModelAndView();
-            
-      if(result > 0) {         
-         ses.setAttribute("confirm", "Y");
-         mav.setViewName("mypage/mypageShopping");
-      }else {
-         mav.addObject("msg", "구매확정에 실패했습니다");
-         mav.setViewName("landing/resultPage");
-      }      
-      
-      return mav;
+   @RequestMapping("/setInPurchase")
+   public ModelAndView purchaseUpdate(@RequestParam("pc_no") int pc_no, HttpServletRequest req) {
+	   ModelAndView mav = new ModelAndView();
+	   HttpSession ses = req.getSession();
+	   String userid = (String)ses.getAttribute("userid");
+	   
+	   PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+	   int result = dao.editConfirmCheck(pc_no);
+	   
+	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
+	   
+	   mav.addObject("resultConfirm", result);
+	   mav.setViewName("landing/resultCheck");
+	   
+	   return mav;
    }
-
+      
    @RequestMapping("/mypageWishlist")
    public ModelAndView wishListView(HttpServletRequest r) {
       ModelAndView mv = new ModelAndView();

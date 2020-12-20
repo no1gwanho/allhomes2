@@ -64,7 +64,7 @@
      
        <!-- 디테일 -->
      <select id="selectDetailPage" parameterType="int" resultType="com.allhomes.myapp.product.ProductJoinVO">
-        select * from (select sub.sub_c as sub_c, sub.main_c as main_c, p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.discount as discount, round(p.price-(p.price*discount/100), -1) as price, p.shipping_c as shipping_c, p.o_value as o_value, 
+        select * from (select sub.sub_c as sub_c, sub.main_c as main_c, p.pd_no as pd_no, p.s_no s_no, p.pd_name as pd_name, p.main_img as main_img, p.pd_img as pd_img, p.price as price, p.discount as discount, round(p.price-(p.price*discount/100), -1) as dc_price, p.shipping_c as shipping_c, p.o_value as o_value, 
       s.s_name from store s, product p, sub_c sub where s.s_no=p.s_no and p.sub_c=sub.sub_c) where pd_no=#{pd_no}
      </select> 
      

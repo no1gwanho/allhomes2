@@ -192,7 +192,11 @@ public class OrderController {
 		}					
 		
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-		List<PurchaseJoinVO> list = dao.purchaseList(pvo); 
+		List<PurchaseJoinVO> plist = dao.purchaseList(pvo); 
+		
+		for(int i=0; i<plist.size(); i++) {
+			pvo = plist.get(i);
+		}
 		
 		mv.setViewName("order/orderCancel");
 		
@@ -220,18 +224,28 @@ public class OrderController {
 		
 		List<PurchaseJoinVO> list = dao.orderCancelList(pvo);
 		
-		mv.addObject("pList", list);
+		mv.addObject("clist", list);
 		mv.setViewName("redirect:mypageShopping");
 		
 		return mv;
 	}
 
-
-
-	
-	
-	
-	
-
-
+	@RequestMapping("/orderListDel")
+	public ModelAndView orderListDel(@RequestParam("pc_no") String pc_no) {
+		ModelAndView mv = new ModelAndView();
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		
+		String strPc_no[] = pc_no.split(",");
+		int[] pc_noList = new int[strPc_no.length];
+		
+		for(int i=0; i<strPc_no.length; i++) {
+			pc_noList[i] = Integer.parseInt(strPc_no[i]);
+			
+			int result = dao.delPurchaseList(pc_noList[i]); 
+			mv.addObject("orderListDelResult", result);
+			mv.setViewName("landing/resultCheck");
+		}
+		
+		return mv;
+	}
 }
