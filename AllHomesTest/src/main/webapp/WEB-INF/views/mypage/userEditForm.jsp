@@ -229,18 +229,12 @@
 			
 	
 		<div class="row">
-			<div class="col-4" style="text-align:right;">
-				<button id="updateBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정</button>
+			<div class="col-6" style="text-align:right;">
+				<button id="updateBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">수정하기</button>
 			</div>
-			
-			
-				<div class="col-4" style="text-align:center;">
-				<a href="/myapp/addrEditForm" id="updateAddr" name="updateAddr" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">주소정보 수정</a>
-			</div>
+						
 		
-			<div class="col-4" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
-	
-			
+			<div class="col-6" data-toggle="modal" data-target="#secessionModal" style="text-align:left;">
 				<button id="memoutBtn" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">회원탈퇴</button>
 			</div>
 		</div>
