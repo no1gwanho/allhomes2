@@ -6,4 +6,7 @@
 	<select id="countOrderStatus" parameterType="String" resultType="int">
 		select count(*) from purchase where userid=#{param1} and status=#{param2}
 	</select>
+	<select id="statusChk">
+		select * from purchase where status=#{param1}
+	</select>
 </mapper>

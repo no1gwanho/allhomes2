@@ -30,7 +30,7 @@
 	
 	
 	#idpw{text-align:center;}
-	#logo img{width:200px; display: block; margin: 0px auto;}
+	#logo img{width:280px; display: block; margin: 0px auto;}
 	#button {background-color:#ee8374;border:none;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
 	
@@ -59,6 +59,9 @@
 	
 	#blankWidth{margin-right:0 10px 0 10px;float:left;}
 	
+	
+	
+	
 </style>
 <script>
 	$(function(){		//아이디찾기 버튼
@@ -66,7 +69,7 @@
 			$("#userid").css("display","none");/*제거하는 영역*/
 			$("#btnrepwd").css("display","none");
 			$("#findpwd").css("background-color","lightgray");
-			
+			$("#resultData").css("display","none");
 			
 			$("#btnfindid").css("display","block");		/*살리는 영역*/
 			$("#username").css("display","block");
@@ -88,6 +91,7 @@
 			$("#btnrepwd").css("display","block");
 			$("#userid").css("display","block");
 			$("#findpwd").css("background-color","#ee8374");
+			$("resultData").css("display","block");
 		});
 	});
 

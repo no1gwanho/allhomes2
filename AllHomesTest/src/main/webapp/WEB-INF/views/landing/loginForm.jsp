@@ -32,7 +32,7 @@
 	
 	
 	#idpw{text-align:center;}
-	#logo img{width:250px; display: block; margin: 0px auto 10px auto;}
+	#logo img{width:280px; display: block; margin: 0px auto 10px auto;}
 	#button {background-color:#ee8374;border:none;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
 	

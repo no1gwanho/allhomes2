@@ -17,7 +17,9 @@ public interface PurchaseDaoImp {
 	
 	public int editConfirmCheck(int pc_no);
 	
-	public int delPurchaseList(PurchaseVO vo);
+	public int reviewStatusUpdate(PurchaseJoinVO vo);
+	
+	public int delPurchaseList(int pc_no);
 	
 	public List<PurchaseJoinVO> joinPurchase(String userid);
 	

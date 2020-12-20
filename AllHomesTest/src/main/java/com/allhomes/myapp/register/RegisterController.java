@@ -78,15 +78,18 @@ public class RegisterController {
 	}
 	
 	@RequestMapping("/login")	//로그인 이동
-	public String login() {
-			
+	public String login(String logStatus,HttpSession ses) {
+		if(ses.getAttribute("logStatus")=="Y") {
+			ses.invalidate();
+		}
+		
 		return "landing/loginForm";
 	}
 	
 	
 	//로그인 
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST,produces="application/text;charset=UTF-8")
-	public ModelAndView loginOk(RegisterVO vo, HttpSession ses) {
+	public ModelAndView loginOk(RegisterVO vo, HttpSession ses,String logStatus) {
 		
 		
 		RegisterDaoImp dao = sqlSession.getMapper(RegisterDaoImp.class);		
@@ -100,7 +103,7 @@ public class RegisterController {
 		
 		}else if(resultVO != null){
 				
-			
+			if(resultVO.getRegcode()!="2") {
 			ses.setAttribute("logStatus", "Y");
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
@@ -108,7 +111,7 @@ public class RegisterController {
 			ses.setAttribute("email", resultVO.getEmail());
 			ses.setAttribute("m_pic", resultVO.getM_pic());
 			ses.setAttribute("m_no", resultVO.getM_no());
-			
+			ses.setAttribute("regcode", resultVO.getRegcode());
 			ses.setAttribute("tel", resultVO.getTel());
 			
      	System.out.println("프로필사진주소 =" +resultVO.getM_pic());
@@ -121,8 +124,17 @@ public class RegisterController {
 			}else {
 				mav.setViewName("redirect:/"+dest.toString());
 			}
+		}else {
+			ses.setAttribute("regcode", resultVO.getRegcode());
+			ses.setAttribute("logStatus", "N");
 			
-			mav.setViewName("redirect:/");
+		}
+			
+			
+			
+			
+			
+			mav.setViewName("landing/loginResult");
 		
 		}	
 
