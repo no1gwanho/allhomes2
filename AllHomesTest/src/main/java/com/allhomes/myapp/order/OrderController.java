@@ -185,25 +185,6 @@ public class OrderController {
 		pvo.setUserid(userid);
 		
 		try {
-	@RequestMapping("/orderCancel")
-	public ModelAndView orderDel(@RequestParam("pc_no") String pc_no, HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-		HttpSession ses = req.getSession();
-		
-		String userid = (String)ses.getAttribute("userid");
-		String strPc_no[] = pc_no.split("/");
-		int[] pc_noList = new int[strPc_no.length];
-		
-		for(int i=0; i<strPc_no.length; i++) {
-			pc_noList[i] = Integer.parseInt(strPc_no[i]);
-		}
-		
-		PurchaseJoinVO pvo = new PurchaseJoinVO();
-		pvo.setUserid(userid);
-		
-		try {
 			for(int i=0; i<pc_noList.length; i++) {
 				pvo.setPc_no(pc_noList[i]);
 			}

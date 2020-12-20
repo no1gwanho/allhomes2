@@ -20,7 +20,13 @@
 			}
 		});
 		
-		
+		//정렬하기
+		var orderOption = $('#pdOrder').val();
+		$('#pdOrder').change(function(){
+			var selectedOrder = $("#pdOrder option:selected").val();
+			
+			location.href="/myapp/adminPdOrder?order="+selectedOrder+"&s_no=${vo.s_no}";
+		});
 		
 	});
 	
@@ -81,10 +87,10 @@
                    </a>
                    
                    <select id="pdOrder" class="form-control col-lg-2" style="float:right">
-                       <option>제품명 순</option>
-                       <option>재고 순</optoin>
-                       <option>입고일 순</option>
-                       <option>판매량 순</option>
+                       <option value="pd_name" <c:if test="${order=='pd_name'}">selected</c:if>>제품명 순</option>
+                       <option value="stock" <c:if test="${order=='stock'}">selected</c:if>>재고 순</optoin>
+                       <option value="price" <c:if test="${order=='price'}">selected</c:if>>가격 순</option>
+                       <option value="wishlist" <c:if test="${order=='wishlist'}">selected</c:if>>위시리스트 순</option>
                    </select>
        		</div><!-- 버튼 끝 -->
        		
@@ -104,7 +110,7 @@
 								<th>카테고리</th>
 								<th>재고</th>
 								<th>상태</th>
-								<th>판매량</th>
+								<th>가격</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -115,7 +121,7 @@
 									<td>${pVo.sub_c}</td>
 									<td>${pVo.stock}</td>
 									<td>${pVo.status}</td>
-									<td>521</td>
+									<td>${pVo.price}</td>
 								</tr>
 							</c:forEach>
 						</tbody>	

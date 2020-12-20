@@ -7,8 +7,11 @@
   		select main_c, main_c_no, priority, img from main_c order by priority 
   	</select>
   	<insert id="storeCategoryInsert" parameterType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
-  	  	insert into main_c(main_c, img, priority) values(#{main_c}, #{img}, #{priority})
+  	  	insert into main_c(main_c, img, priority, main_c_no) values(#{main_c}, #{img}, #{priority},  main_c_sq.nextval)
   	</insert>
+  	<update id="storeCategoryUpdate" parameterType="com.allhomes.myapp.admin.AdminStoreCategoryVO">
+  		update main_c set main_c = #{main_c}, img=#{img}, priority=#{priority} where main_c_no = #{main_c_no}
+  	</update>
   	<insert id="storeSubCategoryInsert" parameterType="com.allhomes.myapp.admin.AdminStoreSubCategoryVO">
   		insert into sub_c(main_c, sub_c) values (#{main_c}, #{sub_c})
   	</insert>

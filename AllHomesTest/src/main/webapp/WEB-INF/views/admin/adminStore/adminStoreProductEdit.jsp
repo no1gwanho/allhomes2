@@ -109,7 +109,7 @@
 								<div class="col-lg-6 shadow-sm" style="border:1px solid #dddddd;border-radius:10px;float:left;">
 									<br/>
 									<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
-									 style="width:150px;height:150px; border-radius:70%;"/><br/>
+									 style="width:150px;height:150px;"/><br/>
 									<input type="file" name="mainImg">
 									<br/><br/>
 								</div>
