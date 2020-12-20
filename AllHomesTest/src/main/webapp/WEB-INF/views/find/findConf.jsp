@@ -21,8 +21,23 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/signin.css" type="">
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.js"></script>
 <style>
+		
+   @font-face{
+	   font-family:"SCDream3";
+	   src:url("/myapp/resources/css/font/SCDream3.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+   @font-face{
+	   font-family:"SCDream5";
+	   src:url("/myapp/resources/css/font/SCDream5.otf") format("truetype");
+	   font-style:normal;
+	   font-weight:normal;
+	}
+	
+	
 	#idpw{text-align:center;}
-	#logo img{width:200px; display: block; margin: 0px auto;}
+	#logo img{width:280px; display: block; margin: 0px auto;}
 	#changebutton {background-color:#ee8374;border:none;}
 	#changebutton:hover{background-color:#ee8374;border: 1px solid gray;}
 	
@@ -34,14 +49,19 @@
 	.blank2{margin:0 0 30px 0;}
 	
 	#pwdbox{max-width:400px;}
-	.subbox{font-weight:bold;}
+	.subbox{font-weight:bold; font-family:"SCDream3"}
 	#alertbox{margin:0 80px 0 80px;}
 	#mainnotice{font-weight:bold;}
-	#subnotice{color:#ee8374;}
+	#subnotice,#newnote{color:#ee8374;}
+	
 	
 	/*초기화면 기본 설정*/
 	#subnotice{display:none;}
 	
+	
+	
+	#mainnotice{font-family:"SCDream5";font-size:30px;}
+	#newPwd,#newPwdChk,#changebutton,#newnote{font-family:"SCDream3";}
 	
 </style>
 <script>
@@ -95,14 +115,14 @@ $(function(){
 <div class="container">
 	
 	<div id="logo">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	<img src="<%=request.getContextPath() %>/resources/img/new-homes-logo.png" alt=""/>
 	</div>
 	<form id="pwdbox"class="form-signin" method="post" action="/myapp/loginOk">
-		<h2 id="mainnotice" class="form-signin-heading text-center">새로운 비밀번호 설정</h2><br/>
+		<div id="mainnotice" class="form-signin-heading text-center">새로운 비밀번호 설정</div><br/>
 		
 		<h7 class="subbox">새 비밀번호</h7>
 			<input id="newPwd" name="userpwd" type="password"  class="form-control" placeholder="새 비밀번호 입력" required autofocus>
-				<div id=newnote>알파벳 대소문자, 숫자, 특수문자 포함(6~15글자)</div>
+				<div id=newnote>영문,숫자,특수문자 포함(6~15글자)</div>
 					<div class="blank1"></div>
 		<h7 class="subbox">비밀번호 확인</h7>
 			<input id="newPwdChk" name="userpwdChk" type="password" class="form-control" placeholder="비밀번호 재입력" required>

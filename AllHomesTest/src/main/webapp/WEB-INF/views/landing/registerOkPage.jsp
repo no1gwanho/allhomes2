@@ -33,7 +33,7 @@
 <div class="container">
 	<div id="logo">
 	<a href="/myapp/">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt="" style="width:150px;"/>
+	<img src="<%=request.getContextPath() %>/resources/img/new-homes-logo.png" alt="" style="width:280px;"/>
 	</a>
 	</div>
     <h1 class="display-5">가입이 완료되었습니다.</h1>

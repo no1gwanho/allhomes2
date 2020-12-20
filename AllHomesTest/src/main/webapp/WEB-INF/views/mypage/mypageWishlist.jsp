@@ -14,6 +14,23 @@
 	.col-lg-12{
 		margin:0 auto;
 	}
+	.wishlist-title{
+		font-family:'SCDream5';
+		margin: 50px auto 50px auto;
+		text-align:center;
+	}
+	
+	.scrap-owner-info{
+	text-align:center;
+	}
+	.profile_pic{
+		width:30px;
+		height:30px;
+		border-radius: 45%;
+		text-align:center;
+		
+	}
+	
 </style>
 <script>
 	$(function() {
@@ -48,18 +65,24 @@
 	})
 </script>
 <div class="container">
+	<h3 class="wishlist-title">스크랩북</h3>
+	
+	<div class="scrap-owner-info">
+	<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${m_pic}"/>
+	${nickname } 
+	</div>
+	<br/><br/>
+	<hr/>
+
+	<div class="row">
+	
 	<c:if test="${empty list }">
-		<div style="margin:50px auto;height:800px;">
+		<div style="margin:50px auto;height:400px;">
 			<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">아직 등록된 위시리스트가 없습니다.</span>
 		</div>
 	</c:if>
-	<div class="row">
-		<div class="col-lg-12" style="text-align:left;">
-			<br/><br/>
-			<img src="<%=request.getContextPath()%>/resources/img/mypage/wishlist.png" style="width:40px;float:left;"/>
-			<h4 style="width:30%;float:left;height:40px;line-height:40px;">&nbsp;&nbsp;위시리스트</h4>
-			<br/><br/><hr><br/>
-		</div><br/>
+	<c:if test="${!empty list }">
+		
 		<div class="col-2"><input type ="checkbox" name="allCheck" id="allCheck" style="background-color:#ee8374;margin-right:10px;"/><label for = "allCheck">모두 선택</label>
 		</div>
 		<div class="col-10" style="text-align:right;">
@@ -75,7 +98,10 @@
    			</a>
 		</div>	
 		</c:forEach>
+	</c:if>
 	</div>
+	
+	<c:if test="${!empty list }">
 	<div id="paging" style="margin-top:30px;">
 		<ul class="pagination" style="margin-left:470px;">
 			<li class="page-item">
@@ -104,4 +130,5 @@
 			</li>
 		</ul>
 	</div>
+	</c:if>
 </div>

@@ -11,7 +11,7 @@
 
 <c:if test="${outcheck=='Y'}">
 	<script>
-		location.href="/myapp";
+		location.href="/myapp/";
 	
 	</script>
 </c:if>

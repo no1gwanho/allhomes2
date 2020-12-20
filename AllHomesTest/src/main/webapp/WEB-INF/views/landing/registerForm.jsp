@@ -30,7 +30,7 @@
 	
 	
 	#ul,li{list-style-type:none;}
-	#logo img{width:200px; display: block; margin: 0px auto;}
+	#logo img{width:280px; display: block; margin: 0px auto;}
 	#signup{text-align:center;}
 	#button {background-color:#ee8374;border:none;}
 	#button:hover{background-color:#ee8374;border: 1px solid gray;}
@@ -45,7 +45,7 @@
 	#widthblank2{margin-left:161px;}
 	#widthblank{margin-left:225px;}
 	#dupResult{color:#ee8374;display:none;}
-	#logo{margin-top:500px;}
+	#logo{margin-top:100px;}
 	#proPhoto{width:45%;}
 	#signup{margin-bottom:50px;}
 	
