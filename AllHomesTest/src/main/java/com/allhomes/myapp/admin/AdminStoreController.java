@@ -127,14 +127,14 @@ public class AdminStoreController {
 		return mav;
 	}
 
-	// 스트어-메인카테고리 추가
+	// 스트어-메인카테고리 
 		@RequestMapping(value = "/mainCategoryUpdate", method = RequestMethod.POST)
 		public ModelAndView StoreCategoryUpdate(AdminStoreCategoryVO vo
 				) {
 
 			
 			AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-			int result = dao.storeCategoryUpdate(vo); // insert
+			int result = dao.storeCategoryUpdate(vo); 
 			ModelAndView mav = new ModelAndView();
 
 			if (result > 0) { // insert 성공
@@ -145,6 +145,8 @@ public class AdminStoreController {
 			}
 			return mav;
 		}
+	
+	//
 	
 	// 스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")

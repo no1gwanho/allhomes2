@@ -141,12 +141,13 @@
 	                			<p>
 	                				<span id="formC" class="col-lg-6">우선순위</span><input type="text" id="priority" class="form-control col-lg-6" value="${vo.priority}"/>
 	                			</p>
+	                			<input type="hidden" id="main_c_no" value="${vo.main_c_no}"/>
 	                		</form>
 	                		<br/>
 	                		
 	                		<!-- 버튼 -->
 	                		<div style="text-align:center">
-				    			<button type="submit" class="btn btn-secondary btn-icon-split editMain">
+				    		<!-- 	<button type="submit" class="btn btn-secondary btn-icon-split editMain">
 			                			<span class="icon text-white-50">
 				           				<i class="fas fa-check"></i></span>
 					        			<span class="text">수정</span>
@@ -155,7 +156,7 @@
 			                		function updateChk(){
 									       return confirm("수정하시겠습니까?");
 									}
-			                		</script>
+			                		</script> -->
 				    			<!-- 삭제 버튼 -->
 				    			<a href="/myapp/adminMainCategoryDel?no=${vo.main_c_no }" onclick="return delchk();" class="btn btn-danger btn-icon-split delMainC">
 			                	
