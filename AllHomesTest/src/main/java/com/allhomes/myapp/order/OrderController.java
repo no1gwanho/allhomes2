@@ -192,9 +192,8 @@ public class OrderController {
 		}					
 		
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
-		PurchaseJoinVO vo = dao.puchaseSelect(pvo);
+		List<PurchaseJoinVO> list = dao.purchaseList(pvo); 
 		
-		mv.addObject("vo", vo);
 		mv.setViewName("order/orderCancel");
 		
 		return mv;
@@ -210,15 +209,13 @@ public class OrderController {
 		
 		HttpSession ses = req.getSession();
 		String userid = (String)ses.getAttribute("userid");
-		int chk_c=1;
 		
 		PurchaseJoinVO pvo = new PurchaseJoinVO();
 		pvo.setUserid(userid);
 		pvo.setPc_no(pc_no);
 		pvo.setPd_name(pd_name);
 		pvo.setTotal_p(total_p);
-		pvo.setChk_c(chk_c);
-	
+			
 		System.out.println("주문 취소 잘 됐어?????????? " + pvo.getChk_c());
 		
 		List<PurchaseJoinVO> list = dao.orderCancelList(pvo);
@@ -228,6 +225,11 @@ public class OrderController {
 		
 		return mv;
 	}
+
+
+
+	
+	
 	
 	
 

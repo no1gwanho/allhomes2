@@ -98,7 +98,9 @@ public class RegisterController {
 			ses.setAttribute("logStatus","N");
 			mav.setViewName("landing/loginResult");			
 		
-		}else {
+		}else if(resultVO != null){
+				
+			
 			ses.setAttribute("logStatus", "Y");
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
@@ -106,21 +108,25 @@ public class RegisterController {
 			ses.setAttribute("email", resultVO.getEmail());
 			ses.setAttribute("m_pic", resultVO.getM_pic());
 			ses.setAttribute("m_no", resultVO.getM_no());
-			ses.setAttribute("regcode", resultVO.getRegcode());
+			
 			ses.setAttribute("tel", resultVO.getTel());
 			
      	System.out.println("프로필사진주소 =" +resultVO.getM_pic());
                        
 			System.out.println(resultVO.getNickname());
-			
-			Object dest = ses.getAttribute("dest");
+
+		Object dest = ses.getAttribute("dest");
 			if(dest==null) {
 				mav.setViewName("redirect:/");
 			}else {
 				mav.setViewName("redirect:/"+dest.toString());
 			}
 			
-		}
+			mav.setViewName("redirect:/");
+		
+		}	
+
+		
 		System.out.println("로그인상태= "+ses.getAttribute("logStatus")); 
 		
 		return mav;

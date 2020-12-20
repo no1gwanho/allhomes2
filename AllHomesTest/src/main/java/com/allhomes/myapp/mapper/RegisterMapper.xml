@@ -54,7 +54,7 @@
   	
 	<!-- 회원탈퇴자 로그인 block -->
 	<update id="memLogBlock" parameterType="int">
-		update register set regcode=2 where m_no=#{m_no}
+		update register set regcode='2' where m_no=#{m_no}
 	</update>
 
 

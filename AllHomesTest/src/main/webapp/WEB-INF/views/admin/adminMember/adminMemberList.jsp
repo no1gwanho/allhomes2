@@ -79,9 +79,9 @@ td{
 				<div class="col-lg-1" style="float:left">
 					<select class="form-control" id="order" name="order">
 						<option class="orderName" disabled selected>정렬</option>
-						<option class="orderName" value="userid">ID 순</option>
-						<option class="orderName" value="username">이름 순</option>
-						<option class="orderName" value="regdate">등록일 순</option>
+						<option class="orderName" value="userid" <c:if test="${order=='userid'}">selected</c:if>>ID 순</option>
+						<option class="orderName" value="username" <c:if test="${order=='username'}">selected</c:if>>이름 순</option>
+						<option class="orderName" value="regdate" <c:if test="${order=='regdate'}">selected</c:if>>등록일 순</option>
 					</select>
 				</div>
 				<!-- search 검색 끝 -->

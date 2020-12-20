@@ -239,21 +239,6 @@ $(function(){
 	}						
 	
 	
-
-	
-
-			
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		});
 
 	
@@ -364,7 +349,7 @@ $(function(){
 	
 	<div id="content">
 	<div id="logo">
-	<img src="<%=request.getContextPath() %>/resources/img/allhomes3.png" alt=""/>
+	<img src="<%=request.getContextPath() %>/resources/img/new-homes-logo.png" alt=""/>
 	</div>
 	<form class="form-signin" method="post" id="regFrm" action="/myapp/registerOk" enctype="multipart/form-data">
 	<div class="form-signin-heading">회원가입</div>

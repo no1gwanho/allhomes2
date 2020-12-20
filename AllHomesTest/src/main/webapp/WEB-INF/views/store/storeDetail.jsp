@@ -15,7 +15,33 @@
        	$("#buy").click(function(){
 			location.href="/myapp/order" 
        	});
+       	
+       
+       	
    });
+	
+   function handleChange(input){
+	   if(input.value<=0) {
+		   input.value= 1;
+		   alert('수량은 1이상 입력 가능합니다.');
+	}
+   }
+	   
+	function numCheck(){
+		  var num = document.getElementById("num");
+		   	
+		  if(num.value=="") {
+		          alert("구매수량을 입력해주세요");
+		          num.focus();
+		           
+		          return false;
+		    }
+		   	
+		   return true;
+		}
+   
+  
+	   
 </script>
 
 <style>
@@ -23,13 +49,14 @@
       text-align:center;
       margin-bottom:10px;
    }
-	#floatingbanner {
-		position:absolute;
-		width:440px;
-		top:120px;
-		left:1400px;
-		z-index:100;
-	}
+	 #floatingbanner {
+      position:relative;
+      width:440px;
+      top:0px;
+      left:20px;
+      z-index:100;
+      transition: all 0.5s ease-out;
+   }
 	#content{
 		max-width:1400px;
 		margin:15px auto;
@@ -55,6 +82,10 @@
 	#buy, #wish{
 		margin-top:15px;
 	}
+	
+	.allhomes-color{
+   	color:#E98374
+   }
 </style>
 
 <div class="container" id="content">
@@ -65,7 +96,7 @@
 			<div class="col-8" id="imgWrapper">
 				<img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"/>
 			</div>
-			<div class="col-4" style="padding-top:15px;" id="floatingbanner">
+			<div class="col-4" id="floatingbanner">
 				<div class="row">
 					<div class="col-12">
 						<div style="height:30px;"><span>${vo.s_name}</span></div>
@@ -83,7 +114,7 @@
 							아직 등록된 리뷰가 없습니다
 						</c:if>
 						<c:if test="${result != 0 && rvo.rating == 1 }">
-								<i class="fa fa-star"></i>
+								<i class="fa fa-star allhomes-color"></i>
 							<span style="color:#aaa">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
@@ -92,8 +123,8 @@
 							</span>
 						</c:if>
 						<c:if test="${result != 0 && rvo.rating == 2 }">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
 							<span style="color:#aaa">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
@@ -101,29 +132,29 @@
 							</span>
 						</c:if>
 						<c:if test="${result != 0 && rvo.rating == 3 }">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>																
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>																
 							<span style="color:#aaa">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 							</span>
 						</c:if>
 						<c:if test="${result != 0 && rvo.rating == 4 }">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
 							<span style="color:#aaa">
 								<i class="fa fa-star"></i>
 							</span>
 						</c:if>
 						<c:if test="${result != 0 && rvo.rating == 5 }">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
+								<i class="fa fa-star allhomes-color"></i>
 						</c:if>	
 						&nbsp;&nbsp;
 						<a class="review-link" href="#review">
@@ -168,7 +199,7 @@
 						<span style="color:#343a40">수량</span>
 					</div>
 					<div class="col-9" style="margin-top:15px;text-align:right;">
-						<input type="number" name="num" id="num"/>
+						<input type="number" name="num" id="num" value="1" onchange="handleChange(this)"/>
 					</div>	
 					<div class="col-12" style="height:233px;margin-top:50px;">
 						<input type="submit" class="btn btn-block" id="cart" value="장바구니">
@@ -178,23 +209,9 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			function numCheck(){
-			   	var num = document.getElementById("num");
-			   	
-			   	if(num.value=="") {
-			           alert("구매수량을 입력해주세요");
-			           num.focus();
-			           
-			           return false;
-			    }
-			   	
-			   	return true;
-			}
-		</script>	
+		
 		<!-- 탭메뉴 시작 -->
 		<br/><br/>
-	</form>
 		<div class="row">
 			<div class="col-8">
 				<ul class="nav nav-tabs">
@@ -325,7 +342,6 @@
 							</div>
 						</div>
 						<hr/>
-						<div>아직 등록된 리뷰가 없습니다</div>
 					</c:if>
 					<c:if test="${result != 0 }">
 						<h6><span style="color:#ee8374">${result}</span>개의 리뷰가 있습니다.</h6>
@@ -430,12 +446,13 @@
 								<c:forEach var="r" items="${rList}">
 									<div class="row">
 										<div class="col-12" style="margin-top:15px;">
-										<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
 											<c:if test="${userid == r.userid }">
-												<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
+												<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
+													<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
+												</form>
 												<a href="/myapp/reviewDel?pd_no=${vo.pd_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
 											</c:if>
-										</form>
+
 										</div>
 										<div class="col-12">
 											<c:if test="${r.img != null}">
@@ -503,6 +520,7 @@
 				</div>
 			</div>	
 		</div>
+	</form>
 </div>
 <style>
 	.nav nav-tabs, .nav-item{
@@ -528,15 +546,12 @@
 			// 현재 스크롤 위치를 가져온다.
 			var scrollTop = $(window).scrollTop();
 			var newPosition = scrollTop + floatPosition + "px";
-
 			/* 애니메이션 없이 바로 따라감
 			 $("#floatMenu").css('top', newPosition);
 			 */
-
 			$("#floatingbanner").stop().animate({
 				"top" : newPosition
 			}, 500);
-
 		}).scroll();
 	});
 </script>

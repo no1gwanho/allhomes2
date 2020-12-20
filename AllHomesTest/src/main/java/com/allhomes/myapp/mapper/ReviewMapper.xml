@@ -24,7 +24,7 @@
 	update review set rating=#{rating}, img=#{img}, content=#{content} where userid=#{userid} and pd_no=#{pd_no} and r_no=#{r_no}
 </update>
 <delete id="delReview" parameterType="com.allhomes.myapp.review.ReviewVO">
-	delete from review where pd_no=#{pd_no} and userid=#{userid}
+	delete from review where r_no=#{r_no} and userid=#{userid}
 </delete>
 
 <select id="selectReviewList" resultType="com.allhomes.myapp.review.ReviewJoinVO">

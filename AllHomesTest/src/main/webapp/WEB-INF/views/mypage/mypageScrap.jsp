@@ -20,7 +20,8 @@
 		margin: 50px auto 50px auto;
 	}
 	.profile_pic{
-		width:35px;
+		width:30px;
+		height:30px;
 		border-radius: 45%;
 	}
 
@@ -61,6 +62,7 @@
 	${nickname } 
 	</div>
 	<br/><br/>
+	<hr/>
 	<div class="row">
 		<c:if test ="${empty scrapList }">
 		
