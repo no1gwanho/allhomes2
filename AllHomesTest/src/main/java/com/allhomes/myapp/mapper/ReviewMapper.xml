@@ -49,7 +49,7 @@
 	select * from (select c.pc_date, c.s_no, c.pd_no, c.o_value, c.num, r.userid, r.rating, r.img, r.content from review r join purchase c on r.pd_no=c.pd_no) where pd_no=#{pd_no} and userid=#{userid}
 </select>
 <select id="avgReview" parameterType="int" resultType="com.allhomes.myapp.review.ReviewVO">
-	select * from (select pd_no, avg(rating) as rating from review group by pd_no) where pd_no=#{pd_no}
+	select * from (select pd_no, trunc(avg(rating)) as rating from review group by pd_no) where pd_no=#{pd_no}
 </select>
 <select id="countReview" parameterType="int" resultType="int">
 	select count(pd_no) from review where pd_no=#{pd_no}

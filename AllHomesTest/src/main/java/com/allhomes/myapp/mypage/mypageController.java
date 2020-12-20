@@ -671,7 +671,7 @@ public class mypageController {
 	   PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 	   int result = dao.editConfirmCheck(pc_no);
 	   
-	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
+//	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
 	   
 	   mav.addObject("resultConfirm", result);
 	   mav.setViewName("landing/resultCheck");
@@ -723,7 +723,7 @@ public class mypageController {
       int pResult = pDao.updateWishlistAdd(pvo);      
       int result = dao.addWishlist(vo);
 
-      System.out.println(result);
+//      System.out.println(result);
       
       mv.addObject("resultWishAdd", result);
       mv.addObject("pd_no", pd_no);
