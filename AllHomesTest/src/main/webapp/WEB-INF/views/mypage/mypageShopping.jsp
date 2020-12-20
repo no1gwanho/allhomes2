@@ -5,12 +5,13 @@
 		$("#allCheck").click(function() {
 			var chk = $("#allCheck").prop("checked");
 			if (chk) {
-				$(".chBox").prop("checked", true);
+				$(".chkBox").prop("checked", true);
 			} else {
-				$(".chBox").prop("checked", false);
+				$(".chkBox").prop("checked", false);
 			}
 		});
-		$(".chBox").click(function(){
+		
+		$(".chkBox").click(function(){
 			$("#allCheck").prop("checked", false);
 		});
 		
@@ -19,7 +20,7 @@
 			if(confirm_val){
 				var chkList="";
 				
-				$("input[class='chBox']:checked").each(function(i){
+				$("input[class='chkBox']:checked").each(function(i){
 					if(i>0){
 						chkList += ",";
 					}
@@ -29,9 +30,30 @@
 				location.href='<%=request.getContextPath() %>/orderCancel?pc_no='+chkList;
 			}
 		})
+		
+	      $("#selectDelBtn").click(function() {
+	          var confirm_val = confirm("주문 내역을 삭제하시겠습니까?");
+	          if (confirm_val) {
+	             
+	             var chkList="";
+	             
+	             $("input[class='chkBox']:checked").each(function(i) {
+	                if(i > 0){
+	                   chkList += ",";
+	                }
+	                chkList += $(this).val();
+	             });
+	             
+	             location.href='<%=request.getContextPath()%>/orderListDel?pc_no='+chkList;
+	          }
+	       });
 	})
 </script>
 <style>
+	.col-3{
+	      text-align:center;
+	      margin-bottom:10px;
+	}
 	#myShopping{
 		text-align:center;
 		margin-top:40px;
@@ -74,19 +96,6 @@
 			</div>
 		
 		<div>
-			<a href="" class="btn btn-secondary">
-           		<span class="text">1개월</span>
-       		</a>
-       		<a href="" class="btn btn-secondary">
-           		<span class="text">3개월</span>
-       		</a>
-       		<a href="" class="btn btn-secondary">
-           		<span class="text">6개월</span>
-       		</a>
-       		&nbsp;&nbsp;&nbsp;
-       		<a href="" class="btn" style="background-color:#EE8374;color:white"  id="searchFrm">
-           		<span class="text">상세조회</span>
-       		</a>
        		
        		
 			<form id="searchDetail" class="form-inline" style="display:none">
@@ -115,102 +124,103 @@
 		<div class="col-12">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#order">주문내역</a>
+					<a class="nav-link active" data-toggle="tab" href="#orderList">주문내역</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#cancel">취소내역</a>
-				</li>				
+					<a class="nav-link" data-toggle="tab" href="#cancelList">취소내역</a>
+				</li>               
 			</ul>
-					<c:forEach var="p" items="${list }">
 			<div class="tab-content">
-	
-				<div class="tab-pane fade show active" id="order">
-						<c:if test="${empty p && p.chk_c==0 }">
-							<div style="margin:50px auto;height:800px;">
-								<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 내역이 없습니다.</span>
-							</div>
+				<div class="tab-pane fade show active" id="orderList">
+					<div class="row" style="margin:10px 0px 0px 10px;">
+						<div class="col-8" style="margin-bottom:25px;">
+							<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
+						</div>
+						<div class="col-4" style="text-align:right;margin-bottom:25px;">
+							<button id="orderCancel" class="btn btn">주문취소</button>&nbsp;&nbsp;
+							<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
+						</div>
+						<c:if test="${empty list }">
+							아직 주문한 내역이 없습니다.
 						</c:if>
-						<c:if test="${!empty p && p.chk_c==0 }">
-							<div class="row" style="margin:25px;">
-								<div class="col-md-9">
-									<input type ="checkbox" name="allCheck" id="allCheck" style="background-color:#ee8374;margin-right:10px;"/><label for = "allCheck">모두 선택</label>
+						<c:if test="${!empty list }">
+							<c:forEach var="p" items="${list }">
+							<c:if test="${p.chk_c == 0 }">
+								<div class="col-2">
+									<input type="checkbox" class="chkBox" value="${p.pc_no }">&nbsp;&nbsp;
+									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
 								</div>
-								<div class="col-md-3" style="text-align:right;">
-									<button class="btn btn" id="orderCancel" style="font-size:0.8em;background-color:#ee8374;color:#fff;border:0;">주문취소</button>
-								</div>
-							</div>
-						</c:if>
-
-							<div class="row">
-								<div class="col-3" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
-									주문번호 : ${p.pc_no }
-								</div>
-								<div class="col-9" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;text-align:right;">
-									주문일자 : ${p.pc_date }
-								</div>
-							</div>
-							<div class="row" style="margin-bottom:35px;">
-								<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-									<input type="checkbox" name="chBox" class="chBox" value=${p.pc_no }/>
-									<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><img src="<%=request.getContextPath()%>/resources/upload/productMainImg/${p.s_no}/${p.main_img}" style="border-radius:5%;width:180px;height:100px;margin-right:10px;margin-bottom:10px;"/></a>
-								</div>
-								<div class="col-6" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-									<b style="padding-top:10px;">${p.pd_name }</b><br/>
-									결제금액 : ${p.price * p.num + p.shipping_c }원<br/>
+								<div class="col-7">
+									<b>${p.pd_name }</b><br/>
 									<c:if test="${p.o_value == null }">
-										수량 : ${p.num }	/ 업체명 : ${p.s_name }<br/>
+										옵션없음 / ${p.num }
 									</c:if>
 									<c:if test="${p.o_value != null }">
-										옵션 : ${p.o_value} / 수량 : ${p.num } / 업체명 : ${p.s_name }<br/>
+										옵션 : ${p.o_value }<br/>구매수량 : ${p.num } 개
 									</c:if>
-									
+									<br/>주문번호 : ${p.pc_no }<br/>주문일자 : ${p.pc_date }
 								</div>
-								<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-									<c:if test="${p.confirm != 'Y' }">
-										<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank"><button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">배송추적</button></a>
-										<button class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">구매확정</button>
+								<div class="col-3">
+									<c:if test="${p.confirm eq 'N'}">
+										<a href="https://www.doortodoor.co.kr/parcel/pa_004.jsp" target="_blank"><button class="btn btn-secondary">배송추적</button></a><br/>
+										<a href="/myapp/setInPurchase?pc_no=${p.pc_no }"><button class="btn btn-secondary" style="background-color:#ee8374;color:fff;border:0;margin-top:10px;">구매확정</button></a>
 									</c:if>
-									<c:if test="${p.confirm == 'Y' }">
+									<c:if test="${p.confirm eq 'Y' && p.status ne '리뷰완료'}">
 										<form method="post" action="/myapp/reviewWrite?pc_no=${p.pc_no }">
-											<input type="submit" class="btn btn" value="리뷰쓰기" id="reviewBtn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;"/>
+											<button class="btn btn-secondary" style="background-color:#ee8374;color:fff;border:0;margin-bottom:10px;">리뷰쓰기</button><br/>
 										</form>
-										<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button type="button" class="btn btn" style="font-size:1.0em;background-color:#ee8374;color:#fff;border:0;margin-bottom:3px;">재구매하기</button></a>
+										<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button class="btn btn-secondary">재구매</button></a>
 									</c:if>
+									<c:if test="${p.confirm eq 'Y' && p.status eq '리뷰완료' }">
+										<form method="post" action="/myapp/storeDetail?pd_no=${p.pd_no }">
+											<button class="btn btn-secondary" style="background-color:#ee8374;color:fff;border:0;margin-bottom:10px;">리뷰확인</button><br/>
+										</form>																						
+										<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button class="btn btn-secondary">재구매</button></a>
+									</c:if>
+
+									</div>
+								<div class="col-12" style="margin-bottom:25px;">
+									<hr/>
 								</div>
-								<hr/>
-							</div>
-           		</div>
-				<div class="tab-pane fade" id="cancel">
-					<c:if test="${empty p && p.chk_c>0}">
-						<div style="margin:50px auto;height:800px;">
-							<span style="font-size:1.2em;color:#1f1f1f;text-align:center;">주문 취소 내역이 없습니다.</span>
-						</div>
-					</c:if>	
-					<c:if test="${!empty p && p.chk_c>0}">
-						<div class="row">
-							<div class="col-12" style="margin-bottom:15px;border-bottom:1px solid #ddd;padding:5px;">
-								주문번호 : ${p.pc_no }
-							</div>
-						</div>
-						<div class="row" style="margin-bottom:35px;">
-							<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								상품명
-							</div>
-							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								<b style="padding-top:10px;">${p.pd_name }</b><br/>				
-							</div>
-							<div class="col-3" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								취소금액
-							</div>
-							<div class="col-9" style="margin-bottom:10px;border-bottom:1px solid #ddd;">
-								${p.total_p }
-							</div>
-							<hr/>					
-						</div>	
+								</c:if>
+							</c:forEach>
 						</c:if>
+					</div>
+				</div>
+				<div class="tab-pane fade show activ" id="cancelList">
+					<div class="row" style="margin:10px 0px 0px 10px;">
+						<div class="col-8" style="margin-bottom:25px;">
+							<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
+						</div>
+						<div class="col-4" style="text-align:right;margin-bottom:25px;">
+							<button id="delBtn" class="btn btn-secandary">삭제</button>							
+						</div>
+						<c:if test="${empty cList }">
+							아직 취소한 내역이 없습니다.
+						</c:if>			
+						<c:if test="${!empty cList }">
+							<c:forEach var="c" items="${cList }">
+								<c:if test="${p.chk_c == 1 }">
+									<div class="col-12"><hr/></div>
+									<div class="col-2">
+										<input type="checkbox" class="chkBox">&nbsp;&nbsp;
+										<img src="<%=request.getContextPath() %>/resources/upload/productImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
+									</div>
+									<div class="col-12">
+										<b>${p.pd_name }</b><br/>
+										<c:if test="${p.o_value == null }">
+											옵션없음 / ${p.num }
+										</c:if>
+										<c:if test="${p.o_value != null }">
+											${p.o_value } / ${p.num } 개
+										</c:if>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:if>	
+					</div>
 				</div>
 			</div>
-									</c:forEach>
-		</div>	
-	</div>	      
+		</div>
+	</div>
 </div>

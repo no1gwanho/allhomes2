@@ -209,7 +209,7 @@
 				</div>
 			</div>
 		</div>
-		
+	</form>		
 		<!-- 탭메뉴 시작 -->
 		<br/><br/>
 		<div class="row">
@@ -419,25 +419,7 @@
 						</div>
 						<br/>
 						<hr/>
-<!-- 						<div class="row">
-							<div class="col-2">
-								<a href="/myapp/reviewOrder">베스트순</a>
-							</div>
-							<div class="col-2">
-								<a href="#">최신순</a>
-							</div>
-							<div class="col-3">
-								<a href="#">사진리뷰</a>
-							</div>
-							<div class="col-5" style="text-align:right;">
-								<select>
-									<option value="1">베스트순</option>
-									<option value="2">최신순</option>
-									<option value="3">별점순</option>
-									<option value="4">사진리뷰</option>
-								</select>
-							</div>
-						</div> -->
+
 						<div class="row">
 							<c:if test="${result == 0 }">
 								등록된 리뷰가 없습니다.
@@ -449,15 +431,14 @@
 											<c:if test="${userid == r.userid }">
 												<form method="post" action="/myapp/reviewEdit?pd_no=${vo.pd_no }&r_no=${r.r_no}&content=${r.content}&pd_name=${vo.pd_name}">
 													<input type="submit" class="btn btn" style="text-align:left;background-color:#ee8374;color:#fff;" value="수정"/>
-												</form>
-												<a href="/myapp/reviewDel?pd_no=${vo.pd_no }" class="btn btn-secondary" style="color:#fff;text-align:right;">삭제</a>
+													<a href="/myapp/reviewDel?r_no=${r.r_no }&pd_no=${vo.pd_no}" class="btn btn-secondary" style="color:#fff;text-align:right;margin-left:25px;">삭제</a>
+												</form>												
 											</c:if>
-
 										</div>
 										<div class="col-12">
 											<c:if test="${r.img != null}">
 												<a href="/mypage/storeDetail?pd_no=${vo.pd_no }">
-													<img src="<%=request.getContextPath()%>${r.img}" style="width:65%;"/>
+													<img src="<%=request.getContextPath()%>/resources/upload/reviewImg/${r.img}" style="width:65%;"/>
 												</a>
 											</c:if>
 										</div>	
@@ -520,7 +501,6 @@
 				</div>
 			</div>	
 		</div>
-	</form>
 </div>
 <style>
 	.nav nav-tabs, .nav-item{
