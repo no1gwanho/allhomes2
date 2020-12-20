@@ -61,10 +61,10 @@ td{
 					<select class="selectpicker" id="searchSelect">
 						<optgroup label="검색 필터">
 							
-							<option value="userid">회원 ID로 검색</option>
-							<option value="username">이름으로 검색</option>
-							<option value="email">이메일로 검색</option>
-							<option value="tel">연락처로 검색</option>
+							<option value="userid" <c:if test="${v=='userid'}">selected</c:if>>회원 ID로 검색</option>
+							<option value="username" <c:if test="${v=='username'}">selected</c:if>>이름으로 검색</option>
+							<option value="email" <c:if test="${v=='email'}">selected</c:if>>이메일로 검색</option>
+							<option value="tel" <c:if test="${v=='tel'}">selected</c:if>>연락처로 검색</option>
 						</optgroup>
 					</select>
 				</div>
@@ -72,7 +72,7 @@ td{
 				<!-- search 검색 -->
 				<div class="input-group col-lg-3" id="searchKey" style="float:left">
 					<input type="text" id="searchKeyword" class="form-control bg-light border-0 small"
-						placeholder="Search for..." aria-label="Search"
+						placeholder="${k}" aria-label="Search"
 						aria-describedby="basic-addon2">
 					<div class="input-group-append">
 						<button class="btn btn-dark" type="button" id="searchBtn">

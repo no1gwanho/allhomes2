@@ -1,16 +1,23 @@
 package com.allhomes.myapp.admin;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
+import com.allhomes.myapp.homeboard.HomeboardVO;
 import com.allhomes.myapp.qna.QnaDaoImp;
+import com.allhomes.myapp.qna.QnaDetailSearchVO;
 import com.allhomes.myapp.qna.QnaVO;
 
 @Controller
@@ -54,7 +61,8 @@ public class AdminQnaBoardController {
 		//paging
 		mav.addObject("paging", vo);
 		mav.addObject("viewAll", dao.qnaAllList(vo));
-		
+		mav.addObject("value", "");
+		mav.addObject("order","");
 		mav.setViewName("admin/adminBoard/adminQnaBoard");
 		return mav;
 	}
@@ -81,4 +89,117 @@ public class AdminQnaBoardController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/adminQnaDelete")
+	public ModelAndView qnaDelete(@RequestParam("no") int q_no) {
+		QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+		
+		dao.qnaDelete(q_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:adminQnaBoard");
+		return mav;
+	}
+	
+	
+	//선택검색
+		@RequestMapping("/adminQnaSearch")
+		public ModelAndView adminStoreSearch(@RequestParam("value") String value
+				,@RequestParam("key") String key
+				,AdminPagingVO vo
+				, @RequestParam(value="nowPage", required=false)String nowPage
+				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			
+			HashMap<String, Object> countMap = new HashMap<String, Object>();
+			countMap.put("value", value);
+			countMap.put("key", key);
+			
+			//paging//
+			int total = dao.qnaSearchCnt(countMap); //검색한 거의 총 개수
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			
+			vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			//paging
+					
+
+			ModelAndView mav = new ModelAndView();
+					
+			mav.addObject("paging", vo);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("value", value);
+			map.put("key", key);
+			map.put("start", vo.getStart());
+			map.put("end", vo.getEnd());
+			mav.addObject("viewAll", dao.qnaSearch(map));
+			mav.addObject("value", value);
+			
+			mav.setViewName("admin/adminBoard/adminQnaBoard");
+			return mav;
+		}
+	
+	
+		// 정렬
+		@RequestMapping("/qnaOrder")
+		public ModelAndView adminHomeBoardOrder(@RequestParam("order") String order
+				,AdminPagingVO vo
+				, @RequestParam(value="nowPage", required=false)String nowPage
+				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			
+			//paging//
+			int total = dao.countQnaAll();
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			//paging//
+					
+			ModelAndView mav = new ModelAndView();
+			//paging
+			mav.addObject("paging", vo);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("order", order);
+			map.put("start", vo.getStart());
+			map.put("end", vo.getEnd());
+			mav.addObject("viewAll", dao.qnaOrder(map));
+			mav.addObject("order", order);
+			mav.addObject("value", "");
+			
+			mav.setViewName("admin/adminBoard/adminQnaBoard");
+			return mav;
+		}
+		
+		
+		//상세검색
+		@RequestMapping(value="/qnaSearchDetail", method = RequestMethod.POST)
+		public ModelAndView adminHBSearchDetail(QnaDetailSearchVO vo) {
+			AdminBoardDaoImp dao = sqlSession.getMapper(AdminBoardDaoImp.class);
+			List<QnaVO> list = dao.qnaSearchDetail(vo);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("viewAll", list);
+			
+			mav.setViewName("admin/adminBoard/adminQnaBoard");
+			mav.addObject("order", "");
+			mav.addObject("value", "");
+			
+			return mav;
+		 }
+		
 }

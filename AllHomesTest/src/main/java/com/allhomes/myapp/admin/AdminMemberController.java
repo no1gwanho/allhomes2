@@ -129,7 +129,8 @@ public class AdminMemberController {
 		// paging
 		mav.addObject("paging", vo);
 		mav.addObject("viewAll", dao.memberAllSelect(vo));
-
+		mav.addObject("order", "");
+		mav.addObject("view", "");
 		mav.setViewName("admin/adminMember/adminMemberList");
 		return mav;
 	}
@@ -163,7 +164,7 @@ public class AdminMemberController {
 		map.put("end", vo.getEnd());
 		mav.addObject("viewAll", dao.memberAllSelectOrder(map));
 
-		mav.setViewName("admin/adminMember/adminMemberOrderOk");
+		mav.setViewName("admin/adminMember/adminMemberList");
 		mav.addObject("order", order);
 		return mav;
 

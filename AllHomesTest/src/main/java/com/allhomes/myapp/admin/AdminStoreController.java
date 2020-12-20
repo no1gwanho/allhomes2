@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,7 +92,7 @@ public class AdminStoreController {
 
 	// 스토어-서브카테고리 추가
 	@RequestMapping("/adminSubCategoryAdd")
-	public int subCategoryAdd(String main_c, String sub_c) {
+	public ModelAndView subCategoryAdd(String main_c, String sub_c) {
 
 		AdminStoreSubCategoryVO vo = new AdminStoreSubCategoryVO();
 		vo.setMain_c(main_c);
@@ -99,16 +100,19 @@ public class AdminStoreController {
 
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
-		return dao.storeSubCategoryInsert(vo);
-
+		dao.storeSubCategoryInsert(vo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:adminCategory");
+		return mav;
 	}
 
 	// 스토어-서브카테고리 삭제
 	@RequestMapping("/adminSubCategoryDel")
-	public int subCategoryDel(String sub_c) {
+	public String subCategoryDel(String sub_c) {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
-		return dao.storeSubCategoryDel(sub_c);
+		 dao.storeSubCategoryDel(sub_c);
+		return "redirect:adminCategory";
 	}
 
 	// 스토어-메인카테고리 삭제
@@ -123,6 +127,26 @@ public class AdminStoreController {
 		return mav;
 	}
 
+	// 스트어-메인카테고리 
+		@RequestMapping(value = "/mainCategoryUpdate", method = RequestMethod.POST)
+		public ModelAndView StoreCategoryUpdate(AdminStoreCategoryVO vo
+				) {
+
+			
+			AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
+			int result = dao.storeCategoryUpdate(vo); 
+			ModelAndView mav = new ModelAndView();
+
+			if (result > 0) { // insert 성공
+				mav.setViewName("redirect:adminCategory");
+			} else {// 실패
+				mav.addObject("msg", "카테고리 수정에 실패했습니다.");
+				mav.setViewName("admin/result");
+			}
+			return mav;
+		}
+	
+	//
 	
 	// 스토어관리-스토어 페이지로 이동
 	@RequestMapping("/adminStore")
@@ -152,13 +176,14 @@ public class AdminStoreController {
 		mav.addObject("paging", vo);
 		mav.addObject("viewAll", dao.storeAll(vo));
 		mav.setViewName("admin/adminStore/adminStoreStore");
-
+		mav.addObject("value", "");
+		mav.addObject("key", "");
 		return mav;
 	}
 
 	// 스토어관리-스토어 상세 보기로 이동
 	@RequestMapping("/adminStoreDetail")
-	public ModelAndView StoreDetail(@RequestParam("s_no") int s_no) {
+	public ModelAndView storeDetail(@RequestParam("s_no") int s_no) {
 
 		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
 		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
@@ -179,6 +204,36 @@ public class AdminStoreController {
 		mav.addObject("pVo", pVo); // 제품 정보
 		mav.addObject("cntPd", cntPd); // 제품 개수
 		mav.addObject("cntPur", purPd); //누적판매량
+		mav.addObject("order", "");
+		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
+		return mav;
+	}
+	@RequestMapping("/adminPdOrder")
+	public ModelAndView storePdOrder(@RequestParam("order") String order, @RequestParam("s_no") int s_no) {
+		StoreDaoImp dao = sqlSession.getMapper(StoreDaoImp.class);
+		ProductDaoImp pDao = sqlSession.getMapper(ProductDaoImp.class);
+		StoreVO vo = dao.storeSelect(s_no);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("s_no", s_no);
+		map.put("order", order);
+		
+		// 스토어의 제품 가지고 오기
+		List<ProductVO> pVo = pDao.selectStoreProductOrder(map);
+
+		// 스토어의 총 제품수 가지고 오기
+		int cntPd = pDao.countProduct(s_no);
+		
+		//스토어의 누적 판매 가지고 오기
+		int purPd = dao.countPurchase(s_no);
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("vo", vo); // 스토어 정보
+		mav.addObject("pVo", pVo); // 제품 정보
+		mav.addObject("cntPd", cntPd); // 제품 개수
+		mav.addObject("cntPur", purPd); //누적판매량
+		mav.addObject("order", order);
 		mav.setViewName("admin/adminStore/adminStoreStoreDetail");
 		return mav;
 	}
@@ -271,13 +326,7 @@ public class AdminStoreController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(result>0) {
-			String name = "admin/adminStoreStoreDetail?s_no"+vo.getS_no();
-			mav.setViewName(name);
-		}else {
-			mav.setViewName("admin/result");
-		}
-		
+		mav.setViewName("redirect:adminStoreDetail?s_no="+vo.getS_no());
 		return mav;
 
 	}
@@ -285,16 +334,47 @@ public class AdminStoreController {
 	//=======================스토어 검색===================================
 	//선택검색
 	@RequestMapping("/adminStoreSearch")
-	public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value) {
+	public ModelAndView adminStoreSearch(@RequestParam("key") String key, @RequestParam("value") String value
+			,AdminPagingVO vo
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
-		System.out.println("a;lskdjfa;"+key+value);
-		List<StoreVO> list = dao.adminStoreSearch(key, value);
+		
+		HashMap<String, Object> countMap = new HashMap<String, Object>();
+		countMap.put("value", value);
+		countMap.put("key", key);
 		
 		
+		//paging//
+		int total = dao.adminStoreSearchCount(countMap); //검색한 거의 총 개수
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "15";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "15";
+		}
+				
+				
+		vo = new AdminPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		//paging
+				
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("admin/adminStore/adminStoreStore");
 		
+		mav.addObject("paging", vo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("value", value);
+		map.put("key", key);
+		map.put("start", vo.getStart());
+		map.put("end", vo.getEnd());
+		mav.addObject("viewAll", dao.adminStoreSearch(map));
+		
+		mav.setViewName("admin/adminStore/adminStoreStore");
+		mav.addObject("value", value);
+		mav.addObject("key", key);
 		return mav;
 	}
 	
@@ -309,7 +389,7 @@ public class AdminStoreController {
 		System.out.println("아이디="+vo.getS_id()+"s_name="+vo.getS_name()+"staff_e="+vo.getStaff_e()+"staff_n"+vo.getStaff_n()+"staff_t"+vo.getStaff_t());
 		
 		
-		mav.addObject("list", list);
+		mav.addObject("viewAll", list);
 		mav.setViewName("admin/adminStore/adminStoreStore");
 		
 		return mav;
