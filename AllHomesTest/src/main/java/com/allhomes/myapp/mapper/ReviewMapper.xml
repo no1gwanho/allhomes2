@@ -43,7 +43,7 @@
 
 <!-- 스토어디테일 페이지 -->
 <select id="selectReview" resultType="com.allhomes.myapp.review.ReviewVO">
-	select * from review where pd_no=#{pd_no} order by writedate desc
+	select userid, pd_no, img, content, to_char(writedate, 'YYYY-MM-DD') writedate, rating, r_no, hit from review where pd_no=#{pd_no} order by writedate desc
 </select>
 <select id="reviewSetting" parameterType="com.allhomes.myapp.review.ReviewJoinVO" resultType="com.allhomes.myapp.review.ReviewJoinVO">
 	select * from (select c.pc_date, c.s_no, c.pd_no, c.o_value, c.num, r.userid, r.rating, r.img, r.content from review r join purchase c on r.pd_no=c.pd_no) where pd_no=#{pd_no} and userid=#{userid}
