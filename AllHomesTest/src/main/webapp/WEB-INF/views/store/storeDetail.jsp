@@ -419,25 +419,7 @@
 						</div>
 						<br/>
 						<hr/>
-<!-- 						<div class="row">
-							<div class="col-2">
-								<a href="/myapp/reviewOrder">베스트순</a>
-							</div>
-							<div class="col-2">
-								<a href="#">최신순</a>
-							</div>
-							<div class="col-3">
-								<a href="#">사진리뷰</a>
-							</div>
-							<div class="col-5" style="text-align:right;">
-								<select>
-									<option value="1">베스트순</option>
-									<option value="2">최신순</option>
-									<option value="3">별점순</option>
-									<option value="4">사진리뷰</option>
-								</select>
-							</div>
-						</div> -->
+
 						<div class="row">
 							<c:if test="${result == 0 }">
 								등록된 리뷰가 없습니다.

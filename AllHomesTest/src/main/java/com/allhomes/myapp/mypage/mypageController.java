@@ -351,7 +351,10 @@ public class mypageController {
                out.flush();
             //   session.invalidate();
                session.removeAttribute("logStatus");
-               mav.setViewName("/home");      
+
+               session.setAttribute("outcheck","Y");
+               mav.setViewName("mypage/memOutResult");      
+
             } catch (IOException e) {
                
                e.printStackTrace();
@@ -363,24 +366,29 @@ public class mypageController {
          
       }else if(finalCheck ==null){
          
-         resp.setContentType("text/html;charset=UTF-8");
-         PrintWriter out;
-         
-         try {
-            out = resp.getWriter();
-            out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
-            out.flush();
-            mav.setViewName("/outcheckpoint");      
-         } catch (IOException e) {
-            
-            e.printStackTrace();
-         }
+
+//         resp.setContentType("text/html;charset=UTF-8");
+//         PrintWriter out;
+//         
+//         try {
+//            out = resp.getWriter();
+//            out.println("<script>alert('회원탈퇴 동의란에 체크해주세요.');</script>");
+//            out.flush();
+            mav.setViewName("mypage/memOutResult"); 
+            session.setAttribute("outcheck","N");
+//         } catch (IOException e) {
+//            
+//            e.printStackTrace();
+//         }
+
       }
       
          
       
       
-      mav.setViewName("/home");
+
+      //mav.setViewName("/home");
+
       
       
       return mav;
@@ -420,7 +428,9 @@ public class mypageController {
       RegisterVO dupCheck = dao.dupCheck(vo1);
       ModelAndView mav = new ModelAndView();
          
-      if(dupCheck==null){
+
+      if(dupCheck==null){	//완전히 새값이 입력된상황
+
                      
          ///////////프로필 사진 업로드////////////
          String path = session.getServletContext().getRealPath("/")+"resources\\upload\\register";
@@ -462,7 +472,9 @@ public class mypageController {
                               ff.delete();
                         }
                      }
-                     mav.setViewName("landing/registerOkPage");
+
+                     mav.setViewName("landing/registerOkPage");	
+
                      session.setAttribute("resultVO",resultVO);   
                
                   }else{
@@ -473,41 +485,46 @@ public class mypageController {
                
                
                int resultVO = dao.userMebUpdate(vo1);
-               mav.setViewName("/home");
-               session.setAttribute("resultVO",resultVO);   
+            //   mav.setViewName("/home");
+               session.setAttribute("resultVO",resultVO);   	//프로필사진 바꿨을때나 안바꿧을때나 어차피 다 고유값으로 넣은거니 결과는 하나임
                
                
                
-            }else {   
+            }else {   ///프로필사진 아무것도 안바꿨을때
+
                System.out.println("test4");
                fileNames = "basicprofile.png";   
                vo.setM_pic(fileNames);
 
                int resultVO = dao.userMebUpdate(vo1);   
                System.out.println("test5");
-               mav.setViewName("/home");
+
+            //   mav.setViewName("/home");
                session.setAttribute("resultVO",resultVO);         
-                     
+           //    session.setAttribute("editResult","N");  
             }
          /////////////////파일업로드 종료////////////
       
-         session.setAttribute("nickname", vo1.getNickname());
+         session.setAttribute("nickname", vo1.getNickname());		//결과값은 어쨋든 고유값이니 상관없음 결과는 무조건 수정
+
          session.setAttribute("email", vo1.getEmail());
          session.setAttribute("tel", vo1.getTel());
          session.setAttribute("m_pic", vo1.getM_pic());
                   
-         mav.setViewName("/home");
-         req.setContentType("text/html;charset=UTF-8");
-         PrintWriter out;
-         try {
-            out = req.getWriter();
-            out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
-            out.flush();
-                  
-         } catch (IOException e) {
-            
-            e.printStackTrace();
-         }
+         mav.setViewName("mypage/userEditResult");
+         session.setAttribute("editResult","Y");
+//         req.setContentType("text/html;charset=UTF-8");
+//         PrintWriter out;
+//         try {
+//            out = req.getWriter();
+//            out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
+//            out.flush();
+//                  
+//         } catch (IOException e) {
+//            
+//            e.printStackTrace();
+//         }
+
    
       
    
@@ -564,41 +581,47 @@ public class mypageController {
                         session.setAttribute("m_pic", vo1.getM_pic());
                               
                         
-                        mav.setViewName("/home");
-                        req.setContentType("text/html;charset=UTF-8");
-                        PrintWriter out;
-                        try {
-                           out = req.getWriter();
-                           out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
-                           out.flush();
-                                 
-                        } catch (IOException e) {
-                           
-                           e.printStackTrace();
-                        }
+
+                        mav.setViewName("mypage/userEditResult");	//파일확장자가 맞으면 여기로가라
+                        session.setAttribute("editResult","Y");
+//                        req.setContentType("text/html;charset=UTF-8");
+//                        PrintWriter out;
+//                        try {
+//                           out = req.getWriter();
+//                           out.println("<script>alert('회원정보가 수정되었습니다.');</script>");
+//                           out.flush();
+//                                 
+//                        } catch (IOException e) {
+//                           
+//                           e.printStackTrace();
+//                        }
                   
-               }else {
+               }else {													
                         
-                        mav.setViewName("landing/registerUnSuitImg");            
+                        mav.setViewName("landing/registerUnSuitImg");         	//확장자 안맞으면 여기로가라   
                      }
                               
                   }catch(Exception e) {e.printStackTrace();}
                   
                   int resultVO = dao.userMebUpdate(vo1);
                   
-                  mav.setViewName("/home");
+
+              //    mav.setViewName("mypage/userEditResult");
                   session.setAttribute("resultVO",resultVO);   
+                
                   
                   
-                  
-               }else {   
+               }else {   							//프로필사진란 공백으로 넘어갔을때
+
                   System.out.println("test4");
                   fileNames = "basicprofile.png";   
                   vo.setM_pic(fileNames);
 
                   int resultVO = dao.userMebUpdate(vo1);   
                   System.out.println("test5");
-                  mav.setViewName("/home");
+                  mav.setViewName("mypage/userEditResult");
+                  session.setAttribute("editResult","Y");
+
                   session.setAttribute("resultVO",resultVO);         
                         
                }
