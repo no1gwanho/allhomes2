@@ -201,7 +201,7 @@
 								<td>${sVo.main_c}</td>
 								<td>${sVo.sub_c}</td>
 								<td>
-									<a href="/adminSubCategoryDel?sub_c=${sVo.sub_c}" onclick="return delchk()"
+									<a href="<%=request.getContextPath() %>/adminSubCategoryDel?sub_c=${sVo.sub_c}" onclick="return delchk()"
 											class="btn btn-user btn-danger delSubC">삭제</a>
 									
 								</td>

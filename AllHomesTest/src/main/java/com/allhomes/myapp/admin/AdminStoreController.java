@@ -92,7 +92,7 @@ public class AdminStoreController {
 
 	// 스토어-서브카테고리 추가
 	@RequestMapping("/adminSubCategoryAdd")
-	public String subCategoryAdd(String main_c, String sub_c) {
+	public ModelAndView subCategoryAdd(String main_c, String sub_c) {
 
 		AdminStoreSubCategoryVO vo = new AdminStoreSubCategoryVO();
 		vo.setMain_c(main_c);
@@ -101,8 +101,9 @@ public class AdminStoreController {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
 		dao.storeSubCategoryInsert(vo);
-		return "admina/adminStore/adminStoreCategory";
-
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:adminCategory");
+		return mav;
 	}
 
 	// 스토어-서브카테고리 삭제
@@ -111,7 +112,7 @@ public class AdminStoreController {
 		AdminStoreDaoImp dao = sqlSession.getMapper(AdminStoreDaoImp.class);
 
 		 dao.storeSubCategoryDel(sub_c);
-		return "admin/adminStore/adminStoreCategory";
+		return "redirect:adminCategory";
 	}
 
 	// 스토어-메인카테고리 삭제
@@ -323,8 +324,7 @@ public class AdminStoreController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("admin/adminStoreStoreDetail?s_no"+vo.getS_no());
-		
+		mav.setViewName("redirect:adminStoreDetail?s_no="+vo.getS_no());
 		return mav;
 
 	}
