@@ -29,6 +29,8 @@
 	<resources mapping="/resources/img/**" location="file:\\\D:\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\img"/>
 	
 	<resources mapping="/resources/upload/reviewImg/**" location="file:\\\D:\git\push\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AllHomesTest\resources\upload\reviewImg"/>
+	
+	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />

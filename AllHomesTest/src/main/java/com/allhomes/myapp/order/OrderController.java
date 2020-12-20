@@ -170,9 +170,10 @@ public class OrderController {
 	public ModelAndView orderDel(@RequestParam("pc_no") String pc_no, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 		HttpSession ses = req.getSession();
-		String userid = (String)ses.getAttribute("userid");
 		
+		String userid = (String)ses.getAttribute("userid");
 		String strPc_no[] = pc_no.split("/");
 		int[] pc_noList = new int[strPc_no.length];
 		
@@ -190,14 +191,18 @@ public class OrderController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}					
+
+		PurchaseJoinVO vo = dao.puchaseSelect(pvo);
 		
-		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		
 		List<PurchaseJoinVO> plist = dao.purchaseList(pvo); 
 		
 		for(int i=0; i<plist.size(); i++) {
 			pvo = plist.get(i);
 		}
 		
+
+		mv.addObject("vo", vo);
 		mv.setViewName("order/orderCancel");
 		
 		return mv;
@@ -213,23 +218,50 @@ public class OrderController {
 		
 		HttpSession ses = req.getSession();
 		String userid = (String)ses.getAttribute("userid");
+
+		int result = dao.editChk_c(pc_no);
+		
+		System.out.println(result);
 		
 		PurchaseJoinVO pvo = new PurchaseJoinVO();
 		pvo.setUserid(userid);
-		pvo.setPc_no(pc_no);
-		pvo.setPd_name(pd_name);
-		pvo.setTotal_p(total_p);
 			
-		System.out.println("주문 취소 잘 됐어?????????? " + pvo.getChk_c());
+		List<PurchaseJoinVO> cList = dao.orderCancelList(userid);
 		
+
 		List<PurchaseJoinVO> list = dao.orderCancelList(pvo);
 		
 		mv.addObject("clist", list);
+
 		mv.setViewName("redirect:mypageShopping");
 		
 		return mv;
 	}
 
+	@RequestMapping(value="/orderCancelOk", method = RequestMethod.POST)
+	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req,
+									@RequestParam("pd_name") String pd_name, @RequestParam("total_p") int total_p) {
+		ModelAndView mv = new ModelAndView();
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		
+		HttpSession ses = req.getSession();
+		String userid = (String)ses.getAttribute("userid");
+
+		int result = dao.editChk_c(pc_no);
+		
+		System.out.println(result);
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+			
+		List<PurchaseJoinVO> cList = dao.orderCancelList(userid);
+		
+		mv.addObject("cList", cList);
+		mv.setViewName("redirect:mypageShopping");
+		
+		return mv;
+	}
 	@RequestMapping("/orderListDel")
 	public ModelAndView orderListDel(@RequestParam("pc_no") String pc_no) {
 		ModelAndView mv = new ModelAndView();
