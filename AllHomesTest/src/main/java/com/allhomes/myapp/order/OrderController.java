@@ -202,8 +202,7 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/orderCancelOk", method = RequestMethod.POST)
-	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req,
-									@RequestParam("pd_name") String pd_name, @RequestParam("total_p") int total_p) {
+	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
@@ -212,16 +211,9 @@ public class OrderController {
 		String userid = (String)ses.getAttribute("userid");
 
 		int result = dao.editChk_c(pc_no);
-		
-		System.out.println(result);
-		
-		PurchaseJoinVO pvo = new PurchaseJoinVO();
-		pvo.setUserid(userid);
-			
-		List<PurchaseJoinVO> cList = dao.orderCancelList(userid);
-		
-		mv.addObject("cList", cList);
-		mv.setViewName("redirect:mypageShopping");
+				
+		mv.addObject("cancelResult", result);
+		mv.setViewName("landing/resultCheck");
 		
 		return mv;
 	}

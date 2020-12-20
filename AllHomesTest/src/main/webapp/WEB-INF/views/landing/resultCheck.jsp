@@ -97,3 +97,17 @@
 		history.back();
 	</script>
 </c:if>
+
+<!-- 주문 취소 결과 -->
+<c:if test="${cancelResult > 0 }">
+	<script>
+		alert("주문 취소가 완료되었습니다.");
+		location.href="/myapp/mypageShopping";
+	</script>
+</c:if>
+<c:if test="${cancelResult == 0 }">
+	<script>
+		alert("주문 취소가 정상적으로 이루어지지 않았습니다.");
+		history.back();
+	</script>
+</c:if>

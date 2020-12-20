@@ -92,9 +92,7 @@
 				<div id="state"><br/>배송완료<hr>${cntDeliveryDone}건<br/><br/></div>
 				<div id="state"><br/>구매확정<hr>${cntConfirmPur}건<br/><br/></div>
 				<div id="state"><br/>리뷰완료<hr>${cntReviewDone}건<br/><br/></div>
-				
-			</div>
-		
+			</div>		
 		<div>
        		
        		
@@ -121,30 +119,24 @@
 	<br/>
 <!-- 탭메뉴 시작 -->
 	<div class="row">
-		<div class="col-12">
-			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#orderList">주문내역</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#cancelList">취소내역</a>
-				</li>               
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane fade show active" id="orderList">
-					<div class="row" style="margin:10px 0px 0px 10px;">
-						<div class="col-8" style="margin-bottom:25px;">
-							<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
-						</div>
-						<div class="col-4" style="text-align:right;margin-bottom:25px;">
-							<button id="orderCancel" class="btn btn">주문취소</button>&nbsp;&nbsp;
-							<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
-						</div>
-						<c:if test="${empty list }">
-							아직 주문한 내역이 없습니다.
-						</c:if>
-						<c:if test="${!empty list }">
-							<c:forEach var="p" items="${list }">
+		<div class="card card border-light mb-3" style="width:1140px;">
+			<div class="card-header">주문내역</div>
+			<div class="card-body"><!-- card-body 시작 -->
+				<div class="row" style="margin:10px 0px 0px 10px;">
+					<div class="col-8" style="margin-bottom:25px;">
+						<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
+					</div>
+					<div class="col-4" style="text-align:right;margin-bottom:25px;">
+						<button id="orderCancel" class="btn btn">주문취소</button>&nbsp;&nbsp;
+						<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
+					</div>
+				</div>
+				<div class="row">
+					<c:if test="${empty list }">
+						아직 주문한 내역이 없습니다.
+					</c:if>
+					<c:if test="${!empty list }">
+						<c:forEach var="p" items="${list }">
 							<c:if test="${p.chk_c == 0 }">
 								<div class="col-2">
 									<input type="checkbox" class="chkBox" value="${p.pc_no }">&nbsp;&nbsp;
@@ -180,48 +172,52 @@
 										</form>																						
 										<a href="/myapp/storeDetail?pd_no=${p.pd_no }"><button class="btn btn-secondary">재구매</button></a>
 									</c:if>
-
-									</div>
-								<div class="col-12" style="margin-bottom:25px;">
-									<hr/>
-								</div>
-								</c:if>
-							</c:forEach>
-						</c:if>
+								</div>	
+								<div class="col-12" style="margin-bottom:25px;"><hr/></div>															
+							</c:if>							
+						</c:forEach>				
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="card card border-light mb-3" style="width:1140px;">
+			<div class="card-header">취소내역</a></div>
+			<div class="card-body"><!-- card-body 시작 -->
+				<div class="row" style="margin:10px 0px 0px 10px;">
+					<div class="col-8" style="margin-bottom:25px;">
+						<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
+					</div>
+					<div class="col-4" style="text-align:right;margin-bottom:25px;">
+						<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
 					</div>
 				</div>
-				<div class="tab-pane fade show activ" id="cancelList">
-					<div class="row" style="margin:10px 0px 0px 10px;">
-						<div class="col-8" style="margin-bottom:25px;">
-							<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
-						</div>
-						<div class="col-4" style="text-align:right;margin-bottom:25px;">
-							<button id="delBtn" class="btn btn-secandary">삭제</button>							
-						</div>
-						<c:if test="${empty cList }">
-							아직 취소한 내역이 없습니다.
-						</c:if>			
-						<c:if test="${!empty cList }">
-							<c:forEach var="c" items="${cList }">
-								<c:if test="${c.chk_c == 1 }">
-									<div class="col-12"><hr/></div>
-									<div class="col-2">
-										<input type="checkbox" class="chkBox">&nbsp;&nbsp;
-										<img src="<%=request.getContextPath() %>/resources/upload/productImg/${c.s_no}/${c.main_img}" style="widht:180px;height:120px;"/>
-									</div>
-									<div class="col-12">
-										<b>${c.pd_name }</b><br/>
-										<c:if test="${c.o_value == null }">
-											옵션없음 / ${c.num }
-										</c:if>
-										<c:if test="${c.o_value != null }">
-											${c.o_value } / ${c.num } 개
-										</c:if>
-									</div>
-								</c:if>
-							</c:forEach>
-						</c:if>	
-					</div>
+				<div class="row">
+					<c:if test="${empty cList }">
+						아직 취소 내역이 없습니다.
+					</c:if>
+					<c:if test="${!empty cList }">
+						<c:forEach var="c" items="${cList }">
+							<c:if test="${c.chk_c > 0 }">
+								<div class="col-3">
+									<input type="checkbox" class="chkBox" value="${c.pc_no }">&nbsp;&nbsp;
+									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${c.s_no}/${c.main_img}" style="widht:240px;height:120px;"/>
+								</div>
+								<div class="col-9">
+									<b>${c.pd_name }</b><br/>
+									<c:if test="${c.o_value == null }">
+										옵션없음 / ${c.num }
+									</c:if>
+									<c:if test="${c.o_value != null }">
+										옵션 : ${c.o_value }<br/>구매수량 : ${c.num } 개
+									</c:if>
+									<br/>주문번호 : ${c.pc_no }<br/>주문일자 : ${c.pc_date }
+								</div>
+								<div class="col-12" style="margin-bottom:25px;"><hr/></div>															
+							</c:if>							
+						</c:forEach>				
+					</c:if>
 				</div>
 			</div>
 		</div>

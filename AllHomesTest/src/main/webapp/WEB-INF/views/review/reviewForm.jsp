@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/69f9d4fad2.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/jquery.bxslider.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" type="">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/allhomes_header2.css" type="">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <style>
 	.container{
 		font-family:'SCDream3';
@@ -38,8 +25,7 @@
 		font-size:1.5em;
 	}
 </style>
-</head>
-<body>
+
 <div class="container">
 	<form method="post" action="/myapp/reviewWriteOk?pc_no=${rvo.pc_no }&pd_no=${rvo.pd_no}&s_no=${rvo.s_no}"  enctype="multipart/form-data">
 		<input type="hidden" name="pd_no" value="${rvo.pd_no }">
@@ -97,5 +83,3 @@
 		</div>
 	</form>
 </div>
-</body>
-</html>

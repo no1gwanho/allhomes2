@@ -484,7 +484,7 @@
 											상품명 : ${vo.pd_name} <br/>
 										</div>
 										<div class="col-12" style="margin-top:15px;">
-											구매일 : <br/>
+											작성일 : ${r.writedate }<br/>
 										</div>
 										<div class="col-12" style="margin-top:15px;">
 											${r.content}
