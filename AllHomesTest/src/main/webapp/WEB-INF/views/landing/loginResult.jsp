@@ -20,6 +20,6 @@
 <c:if test="${logStatus!='N' && regcode == 2 }">	<!-- 회원 탈퇴했던경우  -->
 	<script>
 		alert("등록되지 않은 회원정보입니다 회원가입을 해주세요.");
-		history.go(-1);
+		location.href="/myapp/login/";
 	</script>
 </c:if>
