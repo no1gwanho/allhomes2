@@ -185,6 +185,25 @@ public class OrderController {
 		pvo.setUserid(userid);
 		
 		try {
+	@RequestMapping("/orderCancel")
+	public ModelAndView orderDel(@RequestParam("pc_no") String pc_no, HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		
+		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
+		HttpSession ses = req.getSession();
+		
+		String userid = (String)ses.getAttribute("userid");
+		String strPc_no[] = pc_no.split("/");
+		int[] pc_noList = new int[strPc_no.length];
+		
+		for(int i=0; i<strPc_no.length; i++) {
+			pc_noList[i] = Integer.parseInt(strPc_no[i]);
+		}
+		
+		PurchaseJoinVO pvo = new PurchaseJoinVO();
+		pvo.setUserid(userid);
+		
+		try {
 			for(int i=0; i<pc_noList.length; i++) {
 				pvo.setPc_no(pc_noList[i]);
 			}
@@ -202,8 +221,7 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/orderCancelOk", method = RequestMethod.POST)
-	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req,
-									@RequestParam("pd_name") String pd_name, @RequestParam("total_p") int total_p) {
+	public ModelAndView orderCancelOk(@RequestParam("pc_no") int pc_no, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		
 		PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
@@ -212,16 +230,9 @@ public class OrderController {
 		String userid = (String)ses.getAttribute("userid");
 
 		int result = dao.editChk_c(pc_no);
-		
-		System.out.println(result);
-		
-		PurchaseJoinVO pvo = new PurchaseJoinVO();
-		pvo.setUserid(userid);
-			
-		List<PurchaseJoinVO> cList = dao.orderCancelList(userid);
-		
-		mv.addObject("cList", cList);
-		mv.setViewName("redirect:mypageShopping");
+				
+		mv.addObject("cancelResult", result);
+		mv.setViewName("landing/resultCheck");
 		
 		return mv;
 	}
