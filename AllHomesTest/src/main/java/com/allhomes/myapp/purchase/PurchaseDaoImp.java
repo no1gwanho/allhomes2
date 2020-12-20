@@ -18,7 +18,6 @@ public interface PurchaseDaoImp {
 	public int editConfirmCheck(int pc_no);
 	
 	public int reviewStatusUpdate(PurchaseJoinVO vo);
-	
 
 	public int editChk_c(int pc_no);
 	

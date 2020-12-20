@@ -28,11 +28,9 @@
 	<update id="reviewStatusUpdate" parameterType="com.allhomes.myapp.purchase.PurchaseJoinVO">
 		update purchase set status = '리뷰완료' where pc_no=#{pc_no} and userid=#{userid}
 	</update>
-
 	<update id="editChk_c" parameterType="int">
 		update purchase set chk_c = 1 where pc_no=#{pc_no}
 	</update>
-
 	<delete id="delPurchaseList" parameterType="int">
 		delete from purchase where pc_no=#{pc_no}
 	</delete>

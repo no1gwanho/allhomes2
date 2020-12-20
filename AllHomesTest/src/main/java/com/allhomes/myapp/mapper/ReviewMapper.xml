@@ -60,5 +60,4 @@
 <select id="reviewSelect" parameterType="String" resultType="com.allhomes.myapp.review.ReviewVO">
 	select r_no, userid, img, content, rating, pd_no, writedate, hit from review where userid=#{userid}
 </select>
-
 </mapper>

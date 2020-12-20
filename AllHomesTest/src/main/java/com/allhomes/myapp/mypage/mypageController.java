@@ -659,7 +659,8 @@ public class mypageController {
 	   int result = dao.editConfirmCheck(pc_no);
 	   
 
-	  // System.out.println("업데이트 제대로 됐어??????????????? " + result);
+//	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
+
 	   mav.addObject("resultConfirm", result);
 	   mav.setViewName("landing/resultCheck");
 	   
