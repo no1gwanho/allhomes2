@@ -44,7 +44,7 @@ public interface OrderDaoImp {
 	public int statusDelivery();
 	//주문 상태-구매확정 개수
 	public int statusConfirm();
-	
+	public int statusReviewDone();
 	//주문 상태 수정
 	public int orderStatusEdit(OrderEditVO vo);
 	
