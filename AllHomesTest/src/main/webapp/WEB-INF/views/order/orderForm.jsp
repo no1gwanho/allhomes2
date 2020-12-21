@@ -29,15 +29,7 @@ import BootPay from "bootpay-js"</script>
 <script>
    $(function(){
       
-      /* //상품이름 세팅
-      $.ajax({
-         url: "<$=request.getContextpath%>/purchaseName",
-         success: function(data) {
-             $("#purchaseName").val()==data;
-          }
-
-      });
-       */
+     
       //배송지 선택
       $("#selectAddrBtn").click(function(){
          $("#addrListDiv").css("display","block");
@@ -180,21 +172,21 @@ import BootPay from "bootpay-js"</script>
                   </div>
                   <br/><br/><br/><hr/>
                   
-                  <div class="col-lg-6" style="float:right;font-size:20px;">
+                  <div class="col-lg-10" style="float:right;font-size:20px;">
                      <div class="row">
-                        <div class="col-lg-6" style="font-size:30px;">
+                        <div class="col-lg-2" style="font-size:30px;">
                            <b>상품명</b>
                         </div>
-                        <div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
-                            <b><input type="text" id="purchaseName" readonly
-                             style="color:black;border:0" value="${purchaseName}"/></b> 
+                        <div class="col-lg-10" style="font-size:30px;color:#EE8374">
+                            <input class="col-lg-12" type="text" id="purchaseName"  readonly
+                             style="color:black;border:0;text-align:right;" value="${purchaseName}"/>
                         </div>
-                        <div class="col-lg-6" style="font-size:30px;">
+                        <div class="col-lg-2" style="font-size:30px;">
                            <b>총 가격</b>
                         </div>
-                        <div class="col-lg-6" style="text-align:right;font-size:30px;color:#EE8374">
-                           <b><input type="number" id="totalPrice" readonly
-                             style="color:#EE8374;border:0" value="${totalP+shipping_c}"/></b>
+                        <div class="col-lg-10" style="text-align:right;font-size:30px;color:#EE8374">
+                           <input class="col-lg-12" type="number" id="totalPrice" readonly
+                             style="color:#EE8374;border:0;text-align:right" value="${totalP+shipping_c}"/>
                             
                         </div>
                      </div>
