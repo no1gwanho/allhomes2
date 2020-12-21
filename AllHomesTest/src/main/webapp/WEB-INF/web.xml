@@ -98,11 +98,6 @@
 			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
 		<jsp-property-group>
-			<url-pattern>/WEB-INF/views/review/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
-		</jsp-property-group>
-		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/admin/adminMember/*</url-pattern>
 			<include-prelude>/WEB-INF/adminInc/adminSideBar.jspf</include-prelude>
 			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
@@ -119,18 +114,11 @@
 			<include-coda>/WEB-INF/adminInc/adminFooter.jspf</include-coda>
 		</jsp-property-group>
 		
-		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/headerTest/*</url-pattern>
 			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
 			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>
-		<jsp-property-group>
-			<url-pattern>/WEB-INF/views/review/*</url-pattern>
-			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
-			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
-		</jsp-property-group>		
-		
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/review/*</url-pattern>
 			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
