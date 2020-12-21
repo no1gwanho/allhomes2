@@ -74,6 +74,10 @@
          });
          //alert(chkList); //c_no 배열로 저장
          
+         if(chkList==""){
+        	 alert("한 개 이상의 제품을 선택해주십시오.");
+        	 return false;
+         }
          location.href='<%=request.getContextPath()%>/order?c_no='+chkList;
       });
       
