@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 	.container{
-		font-family:'SCDream3';
+		font-family:'SCDream3'; 
 		margin:15px auto;
 		padding:0;
 		width:1400px;
