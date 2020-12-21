@@ -3,6 +3,8 @@ package com.allhomes.myapp.admin;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.allhomes.myapp.homeboard.HomeboardDaoImp;
+import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.mypage.MypageOrderDaoImp;
+import com.allhomes.myapp.mypage.MypageWishlistDaoImp;
+import com.allhomes.myapp.mypage.MypageWishlistJoinVO;
+import com.allhomes.myapp.qna.QnaDaoImp;
+import com.allhomes.myapp.qna.QnaVO;
 import com.allhomes.myapp.register.RegisterDaoImp;
 import com.allhomes.myapp.register.RegisterVO;
+import com.allhomes.myapp.scrap.ScrapDaoImp;
+import com.allhomes.myapp.scrap.ScrapVO;
 
 @Controller
 public class AdminMemberController {
@@ -55,53 +66,52 @@ public class AdminMemberController {
 		return mav;
 	}
 
-	// 회원정보 상세 페이지로 이동
-	/*
-	 * @RequestMapping("/adminMemberDetail") public ModelAndView
-	 * MemberDetail(@RequestParam("m_no") int m_no, AdminPagingVO vo
-	 * , @RequestParam(value="nowPage", required=false)String nowPage
-	 * , @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-	 * 
-	 * AdminMemberDaoImp dao = sqlSession.getMapper(AdminMemberDaoImp.class);
-	 * RegisterVO mVo = dao.memberSelect(m_no); //회원 정보
-	 * 
-	 * 
-	 * // paging// int total = dao.homeboardCnt(mVo.getUserid()); // 총 집들이게시판 수 if
-	 * (nowPage == null && cntPerPage == null) { nowPage = "1"; cntPerPage = "10"; }
-	 * else if (nowPage == null) { nowPage = "1"; } else if (cntPerPage == null) {
-	 * cntPerPage = "10"; } // paging//
-	 * 
-	 * ModelAndView mav = new ModelAndView(); mav.addObject("mVo", mVo);
-	 * 
-	 * //집들이 페이징 vo = new AdminPagingVO(total, Integer.parseInt(nowPage),
-	 * Integer.parseInt(cntPerPage)); mav.addObject("HBpaging", vo); //집들이 리스트
-	 * mav.addObject("hbList",dao.memberHomeboard(vo));
-	 * 
-	 * 
-	 * //주문 페이징
-	 * 
-	 * total = dao.orderCnt(mVo.getUserid()); vo = new AdminPagingVO(total,
-	 * Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-	 * mav.addObject("orderpaging", vo);
-	 * 
-	 * //주문 리스트 List<AdminOrderVO> oList = dao.memberPurchase(mVo.getUserid());
-	 * //주문내역
-	 * 
-	 * 
-	 * //집들이 게시판
-	 * 
-	 * //회원 정보 AdminMemberInfoCountVO infoVO = new AdminMemberInfoCountVO();
-	 * infoVO.setBoardCnt(dao.memberHBCnt(mVo.getUserid())+dao.memberQnaCnt(mVo.
-	 * getUserid())+ dao.memberReviewCnt(m_no));
-	 * infoVO.setOrderCnt(dao.memberOrderCnt(mVo.getUserid()));
-	 * infoVO.setScrapCnt(dao.memberScrapCnt(m_no));
-	 * infoVO.setWishCnt(dao.memberWishCnt(dao.memberSelect(m_no).getUserid()));
-	 * 
-	 * 
-	 * mav.addObject("infoVO", infoVO);//회원 정보 //mav.addObject("oList", oList);
-	 * //주문내역 mav.setViewName("admin/adminMember/adminMemberDetail"); return mav; }
-	 */
+	@RequestMapping("/adminMemberDetail")
+	public ModelAndView memberDetail(@RequestParam("userid") String userid) {
+		ModelAndView mv = new ModelAndView();
+      
+	     
+	      RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);      
+	      RegisterVO vo = reg.oneMeberSelect(userid);
+	      AdminMemberDaoImp mDao = sqlSession.getMapper(AdminMemberDaoImp.class);
+	      
+	      MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
+	      List<MypageWishlistJoinVO> list = wish.wishlistPage(userid);
+	      
+	      int m_no = reg.oneMeberSelect(userid).getM_no();
+	      ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
 
+	      List<ScrapVO> sList = scrap.mypageScrapList(m_no);
+	      
+	      //나의글리스트 (집들이/질문답변 따로 불러오기)
+	      //집들이
+	      HomeboardDaoImp myHbDao = sqlSession.getMapper(HomeboardDaoImp.class);
+	      List<HomeboardVO> myHbList = myHbDao.myHomeboardList(userid);
+	      
+	      //질문답변 
+	      QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
+	      List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
+	      
+	      //주문 현황 상태
+	      MypageOrderDaoImp oDao = sqlSession.getMapper(MypageOrderDaoImp.class);
+	      mv.addObject("cntConfirm",oDao.countOrderStatus(userid, "결제완료"));
+	      mv.addObject("cntPre",oDao.countOrderStatus(userid, "입금대기"));
+	      mv.addObject("cntDelivery",oDao.countOrderStatus(userid, "배송중"));
+	      mv.addObject("cntDeliveryDone",oDao.countOrderStatus(userid, "배송완료"));
+	      mv.addObject("cntConfirmPur",oDao.countOrderStatus(userid, "구매확정"));
+	      mv.addObject("cntReviewDone",oDao.countOrderStatus(userid, "리뷰완료"));
+	      
+	      
+	      mv.addObject("list", list);    //위시리스트
+	      mv.addObject("sList", sList); //스크랩
+	      mv.addObject("myHbList", myHbList); //내가쓴 집들이
+	      mv.addObject("myQnaList", myQnaList); //내가 쓴 질문글 
+	      mv.addObject("vo", vo);
+	      
+	      mv.setViewName("mypage/mypageHome");
+	      
+	      return mv;
+	}
 	
 	
 	// 멤버리스트 페이지로 이동
@@ -129,7 +139,8 @@ public class AdminMemberController {
 		// paging
 		mav.addObject("paging", vo);
 		mav.addObject("viewAll", dao.memberAllSelect(vo));
-
+		mav.addObject("order", "");
+		mav.addObject("view", "");
 		mav.setViewName("admin/adminMember/adminMemberList");
 		return mav;
 	}
@@ -163,7 +174,7 @@ public class AdminMemberController {
 		map.put("end", vo.getEnd());
 		mav.addObject("viewAll", dao.memberAllSelectOrder(map));
 
-		mav.setViewName("admin/adminMember/adminMemberOrderOk");
+		mav.setViewName("admin/adminMember/adminMemberList");
 		mav.addObject("order", order);
 		return mav;
 

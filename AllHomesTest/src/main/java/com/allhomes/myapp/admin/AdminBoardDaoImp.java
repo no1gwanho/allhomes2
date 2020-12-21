@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.allhomes.myapp.homeboard.HomeBoardDetailSearchVO;
 import com.allhomes.myapp.homeboard.HomeboardVO;
+import com.allhomes.myapp.qna.QnaDetailSearchVO;
 import com.allhomes.myapp.qna.QnaVO;
 
 public interface AdminBoardDaoImp {
@@ -44,8 +45,10 @@ public interface AdminBoardDaoImp {
 	public List<AdminReviewJoinVO> selectAllReview(AdminPagingVO vo);
 	//모든 review 개수 가져오기
 	public int countAllReview();
+	
 	public List<AdminReviewJoinVO> selectReviewOrder(HashMap<String, Object> map);
 	public List<AdminReviewJoinVO> searchReview(HashMap<String, Object> map);
+	public int adminReviewSearchCount(HashMap<String, Object> countMap);
 	
 	//스토어별로 리뷰 가져오기
 	public List<AdminReviewJoinVO> selectStoreReview(int s_no);
@@ -70,4 +73,16 @@ public interface AdminBoardDaoImp {
 	public List<QnaVO> qnaAllList(AdminPagingVO vo);
 	//qna 개수 
 	public int countQnaAll();
+	//
+	public int qnaSearchCnt(HashMap<String, Object> countMap);
+	public List<QnaVO> qnaSearch(HashMap<String, Object> map);
+	//
+
+	//
+	public List<QnaVO> qnaOrder(HashMap<String, Object> map);
+	//
+	public List<QnaVO> qnaSearchDetail(QnaDetailSearchVO vo);
+	
+	
+	
 }

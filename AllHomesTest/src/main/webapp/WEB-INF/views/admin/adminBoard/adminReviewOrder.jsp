@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(function(){
-		
 		//검색하기
 		$("#searchBtn").click(function(){
 			var value = $("#searchSelect option:selected").val();
@@ -16,7 +15,6 @@
 			location.href= "/myapp/adminReviewSearch?value="+value+"&key="+key;
 			
 		});
-		
 		
 		//정렬하기
 		var orderOption = $('#order').val();
@@ -57,9 +55,9 @@
 				
 				<div class="col-lg-2" style="float:left">
 					<select class="form-control" id="order" name="order">
-						<option class="orderName" value="rating">별점 순</option>
-						<option class="orderName" value="writedate">작성일 순</option>
-						<option class="orderName" value="hit">조회 순</option>
+						<option class="orderName" value="rating" <c:if test="${order=='rating'}"> selected</c:if>>별점 순</option>
+						<option class="orderName" value="writedate" <c:if test="${order=='writedate'}"> selected</c:if>>작성일 순</option>
+						<option class="orderName" value="hit" <c:if test="${order=='hit'}"> selected</c:if>>조회 순</option>
 						
 					</select>
 				</div>
@@ -68,7 +66,6 @@
 			</div>
 			<!-- 검색 옵션 끝 -->
 			
-		
 			<div class="col-lg-12">
 				<div class="row mt-3">
 					<c:forEach var="list" items="${viewAll}">

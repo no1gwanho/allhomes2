@@ -75,6 +75,5 @@
      <update id="updateWishlistRevert" parameterType="com.allhomes.myapp.product.ProductVO">
         update product set wishlist = wishlist-1 where pd_no=#{pd_no}
      </update>
-     
 
   </mapper>
