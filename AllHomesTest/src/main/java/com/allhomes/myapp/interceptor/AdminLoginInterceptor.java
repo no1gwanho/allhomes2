@@ -28,7 +28,6 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			
 			return true;
-			
 
 		}
 		

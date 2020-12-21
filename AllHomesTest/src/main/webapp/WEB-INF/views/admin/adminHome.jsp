@@ -374,7 +374,11 @@
 					<input type="hidden" value="${deliveryPre}" id="dp"/>
 					<input type="hidden" value="${delivery}" id="d"/>
 					<input type="hidden" value="${confirm}" id="c"/>
+<<<<<<< HEAD
 <%-- 					<input type="hidden" value="${reviewDone}" id="r"/> --%>
+=======
+	 				<input type="hidden" value="${reviewDone}" id="r"/>
+>>>>>>> 2a505a51c322f4d2d1e8ded7bd2cc2018fb686f0
 					
 					<canvas id="doughnutChart" style="margin-top:50px"></canvas>
 						<script>
@@ -388,10 +392,10 @@
 										
 										backgroundColor : [ "#5C484B",
 												"#E1B0B9", "#A85161",
-												"#DB5A51", "#A82C2C" ],
+												"#DB5A51", "#A82C2C", "#FF4061" ],
 										hoverBackgroundColor : ["#5C484B",
 											"#E1B0B9", "#A85161",
-											"#DB5A51", "#A82C2C" ],
+											"#DB5A51", "#A82C2C", "#FF4061" ],
 									    data : [ $("#w").val(), $("#p").val(), $("#dp").val(),
 									    	$("#d").val(), $("#c").val(), $("#r").val()]
 									} ],

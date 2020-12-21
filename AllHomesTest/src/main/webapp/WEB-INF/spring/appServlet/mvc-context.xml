@@ -34,6 +34,12 @@
 	 		<mvc:mapping path="/qnaReplyLogin"/>
 	 		<mvc:mapping path="/cartList"/>
 	 		<mvc:mapping path="/cartInsert"/>
+	 		<mvc:mapping path="/order"/>
+	 		<mvc:mapping path="/orderPurchase"/>
+	 		<mvc:mapping path="/orderCancel"/>
+	 		<mvc:mapping path="/orderCancelOk"/>
+	 		<mvc:mapping path="/orderListDel"/>
+	 		
 	 		<bean class="com.allhomes.myapp.interceptor.LoginInterceptor"/>
 	 	</mvc:interceptor>
 	 	

@@ -210,7 +210,7 @@ td {
 						<tbody>
 							<c:forEach var="vo" items="${list}">
 								<tr
-									onClick="location.href='/myapp/adminMemberDetail?m_no=${vo.m_no}'">
+									onClick="location.href='/myapp/adminMemberDetail?userid=${vo.userid}'">
 									<td>${vo.m_no}</td>
 									<td><img src="/myapp/resources/img/mypage/user_basic.png"
 										style="width: 50px; height: 50px" /></td>

@@ -106,7 +106,7 @@
 											<td><img
 												src="<%=request.getContextPath()%>/resources/upload/productMainImg/${vo.s_no}/${vo.main_img}"
 												style="height: 150px;" /></td>
-											<td>${vo.s_name}]${vo.pd_name } [옵션:${vo.o_value}]</td>
+											<td>${vo.pd_name } [옵션:${vo.o_value}]</td>
 											<td>${vo.num}개</td>
 											<td>${vo.price * vo.num}원</td>
 											<tr />

@@ -112,13 +112,13 @@ public class mypageController {
          int m_no = (Integer)session.getAttribute("m_no");
          vo.setM_no(m_no);         
                      
-         MypageUpdateVO resultVO = dao.addrSelect(vo);
+       //  MypageUpdateVO resultVO = dao.addrSelect(vo);
          
          
 
-         if(resultVO==null) {   //주소지 데이터가 없을때
+      //   if(resultVO==null) {   //주소지 데이터가 없을때
                         
-         }else {//주소지 데이터가 있을때
+      //   }else {//주소지 데이터가 있을때
                   
 //               //만약에 이 사람이 배송을 안시켜서 주소 데이터가 없다면 공란으로 남겨두기
 //               if(resultVO.getReceiver()==null || resultVO.getZipcode()==0 || resultVO.getAddr()==null || resultVO.getAddrdetail()==null ||resultVO.getTel()==null) {
@@ -137,9 +137,9 @@ public class mypageController {
 //                  mav.addObject("addrdetail",resultVO.getAddrdetail());
 //                  mav.addObject("tel",resultVO.getTel());
                   
-                  mav.setViewName("mypage/userEditForm");
+       //           mav.setViewName("mypage/userEditForm");
             //   }
-            }
+       //     }
             
       //   }
          mav.setViewName("mypage/userEditForm");

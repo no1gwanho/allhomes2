@@ -68,7 +68,9 @@
  	<select id="statusConfirm" resultType="int">
  		select count(*) from purchase where status = '구매확정'
  	</select>
- 	
+ 	<select id="statusReviewDone" resultType="int">
+ 		select count(*) from purchase where status = '리뷰완료'
+ 	</select>
  	<!-- 주문 상태 수정 -->
  	<update id="orderStatusEdit" parameterType="com.allhomes.myapp.order.OrderEditVO">
  		update purchase set status = #{status} where pd_no = #{pd_no} and pc_no = #{pc_no}
