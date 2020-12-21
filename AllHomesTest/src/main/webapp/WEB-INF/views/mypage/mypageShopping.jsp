@@ -83,6 +83,16 @@
 	 .container{
       font-family: 'SCDream3';
    }
+   
+   .shopping-thumbnail{
+   	width:120px;
+   	height: 100px;
+   	overflow: hidden;
+   }
+   .shopping-thumbnail img{
+   	width:100%
+   }
+   
 </style>
 
 <div class="container">
@@ -130,8 +140,7 @@
 						<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
 					</div>
 					<div class="col-4" style="text-align:right;margin-bottom:25px;">
-						<button id="orderCancel" class="btn btn">주문취소</button>&nbsp;&nbsp;
-						<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
+						<button id="orderCancel" class="btn btn">주문취소</button>&nbsp;&nbsp;		
 					</div>
 				</div>
 				<div class="row">
@@ -141,22 +150,28 @@
 					<c:if test="${!empty list }">
 						<c:forEach var="p" items="${list }">
 							<c:if test="${p.chk_c == 0 }">
+								<div class="col-1">
+								<input type="checkbox" class="chkBox" value="${p.pc_no }">
+								</div>
 								<div class="col-2">
-									<input type="checkbox" class="chkBox" value="${p.pc_no }">&nbsp;&nbsp;
-									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
+									
+									<div class="shopping-thumbnail"><img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${p.s_no}/${p.main_img}"/></div>
 								</div>
 								<div class="col-5">
-									<b>${p.pd_name }</b><br/>
+									<span style="font-size:12px;">주문번호 : ${p.pc_no }(주문일 : ${p.pc_date })</span><br/>
+									<a href="<%=request.getContextPath() %>/storeDetail?pd_no=${p.pd_no }"><b>${p.pd_name }</b></a><br/>
 									<c:if test="${p.o_value == null }">
 										옵션없음 / ${p.num }
 									</c:if>
 									<c:if test="${p.o_value != null }">
 										옵션 : ${p.o_value }<br/>구매수량 : ${p.num } 개
 									</c:if>
-									<br/>주문번호 : ${p.pc_no }<br/>주문일자 : ${p.pc_date }
+									<br/>
+									<span style="color:black;font-weight:bold">결제금액 : ${p.total_p }</span>
+									
 								</div>
-								<div class="col-2">
-									<b>현재 주문배송 상태</b><br/>${p.status }
+								<div class="col-1">
+									<br/>${p.status }
 								</div>
 								<div class="col-3">
 									<c:if test="${p.status eq '결제완료' || p.status eq '배송중' || p.status eq '배송완료'}">
@@ -188,14 +203,17 @@
 		<div class="card card border-light mb-3" style="width:1140px;">
 			<div class="card-header">취소내역</a></div>
 			<div class="card-body"><!-- card-body 시작 -->
+				
+				<c:if test="${!empty cList }">
 				<div class="row" style="margin:10px 0px 0px 10px;">
 					<div class="col-8" style="margin-bottom:25px;">
 						<input type="checkbox" id="allCheck">&nbsp;&nbsp;모두 선택
 					</div>
 					<div class="col-4" style="text-align:right;margin-bottom:25px;">
-						<button id="selectDelBtn" class="btn btn-secandary">삭제</button>							
+											
 					</div>
 				</div>
+				</c:if>
 				<div class="row">
 					<c:if test="${empty cList }">
 						아직 취소 내역이 없습니다.
@@ -215,7 +233,7 @@
 									<c:if test="${c.o_value != null }">
 										옵션 : ${c.o_value }<br/>구매수량 : ${c.num } 개
 									</c:if>
-									<br/>주문번호 : ${c.pc_no }<br/>주문일자 : ${c.pc_date }
+									
 								</div>
 								<div class="col-12" style="margin-bottom:25px;"><hr/></div>															
 							</c:if>							

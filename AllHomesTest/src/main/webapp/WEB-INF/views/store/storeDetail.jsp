@@ -65,9 +65,15 @@
 	#imgWrapper>img{
 		margin-top:15px;
 		border-radius:5%;
+		width:100%;
+		max-height:720px;
+	}
+	
+	#imgWrapper{
 		width:900px;
 		height:720px;
 	}
+	
 	#opt, #num {
 		margin-bottom:8px;
 		width:270px;
