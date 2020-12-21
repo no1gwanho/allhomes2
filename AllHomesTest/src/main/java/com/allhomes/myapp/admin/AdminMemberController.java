@@ -239,6 +239,8 @@ public class AdminMemberController {
 		cntMap.put("nickname", regVo.getNickname());
 		cntMap.put("tel", regVo.getTel());
 		cntMap.put("email", regVo.getEmail());
+		cntMap.put("username", regVo.getUsername());
+		
 		// paging//
 		int total = dao.memberSearchDetailCnt(cntMap);//상세 검색 한 결과의 수
 		if (nowPage == null && cntPerPage == null) {
@@ -260,7 +262,7 @@ public class AdminMemberController {
 		map.put("nickname", regVo.getNickname());
 		map.put("tel", regVo.getTel());
 		map.put("email", regVo.getEmail());
-		
+		map.put("username", regVo.getUsername());
 		map.put("start", vo.getStart());
 		map.put("end", vo.getEnd());
 		

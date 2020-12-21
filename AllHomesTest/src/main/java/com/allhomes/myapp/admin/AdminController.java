@@ -77,7 +77,7 @@ public class AdminController {
 		mav.addObject("deliveryPre",oDao.statusDeliveryPre()); //배송준비
 		mav.addObject("waiting",oDao.statusDepositWaiting()); //입금대기
 		mav.addObject("payment",oDao.statusPayment()); //결제완료
-		//mav.addObject("reviewDone", oDao.statusReviewDone());
+		mav.addObject("reviewDone", oDao.statusReviewDone());
 		
 		return mav;	
 	}
