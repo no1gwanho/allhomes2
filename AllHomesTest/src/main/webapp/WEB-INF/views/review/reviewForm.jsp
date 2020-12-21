@@ -24,6 +24,11 @@
 		line-height:55px;
 		font-size:1.5em;
 	}
+	
+	.col-3 {
+		text-align:center;
+		margin-bottom:10px;
+	}
 </style>
 
 <div class="container">
