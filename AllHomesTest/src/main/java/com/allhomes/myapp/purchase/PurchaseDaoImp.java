@@ -2,7 +2,6 @@ package com.allhomes.myapp.purchase;
 
 import java.util.List;
 
-import com.allhomes.myapp.review.ReviewVO;
 
 public interface PurchaseDaoImp {
 	public List<PurchaseVO> allPurchaseList();
@@ -29,3 +28,4 @@ public interface PurchaseDaoImp {
 	
 	public PurchaseJoinVO puchaseSelect(PurchaseJoinVO vo);
 }
+

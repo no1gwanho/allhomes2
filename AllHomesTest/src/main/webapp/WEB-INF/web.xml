@@ -126,6 +126,12 @@
 			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
 		</jsp-property-group>		
 		
+		<jsp-property-group>
+			<url-pattern>/WEB-INF/views/review/*</url-pattern>
+			<include-prelude>/WEB-INF/include/header2.jspf</include-prelude>
+			<include-coda>/WEB-INF/include/footer2.jspf</include-coda>
+		</jsp-property-group>		
+		
 	</jsp-config>
 	<!-- 원하는 페이지에 include -->
 

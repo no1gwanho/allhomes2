@@ -628,13 +628,15 @@ public class mypageController {
       vo.setUserid(userid);
          
       List<PurchaseJoinVO> list = dao.joinPurchase(userid);
-      
+      List<PurchaseJoinVO> cList = dao.orderCancelList(userid);
+            
       for(int i=0; i<list.size(); i++) {
     	  vo = list.get(i);
     	  System.out.println(vo.getPc_no());
       }
       
       mav.addObject("list", list);
+      mav.addObject("cList", cList);
       mav.setViewName("mypage/mypageShopping");
       
       //주문 현황 상태
