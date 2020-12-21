@@ -121,7 +121,7 @@ $(function(){
 						<ul class="sec3_list">
 							<c:forEach var="mVo" items="${mList}">
 								<li><a href="/myapp/adminMemberDetail?m_no=${mVo.m_no}"><span><img
-										src="/myapp/resources/img/mypage/user_basic.png" alt=""></span>
+										 src="<%=request.getContextPath()%>/resources/upload/register/${mVo.m_pic}"style="border-radius:70%" alt=""></span>
 									<dl>
 										<dt>${mVo.userid}</dt>
 										<dd>
@@ -197,9 +197,8 @@ $(function(){
 						<td>${vo.s_no}</td>
 						<td>${vo.s_name}</td>
 						<td>${vo.s_num}</td>
-						<td>
-							<img src="<c:url value='/storeImg/${vo.s_pic}'/>" style="width:50px;height:50px; border-radius:70%;"/>
-						</td>
+						<td><img src="<%=request.getContextPath()%>/resources/upload/storeImg/${vo.s_pic}"
+										style="width: 50px; height: 50px; border-radius: 70%;" /></td>
 						<td>${vo.s_id}</td>
 						<td>${vo.staff_t}</td>
 						<td>${vo.openingdate}</td>
@@ -228,7 +227,7 @@ $(function(){
 								<th>작성일</th>
 								<th>조회수</th>
 								<th>스크랩</th>
-								<th>삭제</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -241,9 +240,7 @@ $(function(){
 									<td>${vo.writedate}</td>
 									<td>${vo.hit}</td>
 									<td>${vo.scrap}</td>
-									<td><a href="#" class="btn alert-secondary btn-circle"> <i
-											class="fas fa-trash"></i>
-									</a></td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
