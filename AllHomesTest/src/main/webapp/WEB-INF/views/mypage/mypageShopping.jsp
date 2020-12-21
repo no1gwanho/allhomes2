@@ -155,8 +155,10 @@
 								<input type="checkbox" class="chkBox" value="${p.pc_no }">
 								</div>
 								<div class="col-2">
+
 									
 									<div class="shopping-thumbnail"><img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${p.s_no}/${p.main_img}"/></div>
+
 								</div>
 								<div class="col-5">
 									<span style="font-size:12px;">주문번호 : ${p.pc_no }(주문일 : ${p.pc_date })</span><br/>
