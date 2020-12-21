@@ -83,8 +83,7 @@
 	 .container{
       font-family: 'SCDream3';
    }
-<<<<<<< HEAD
-=======
+
    
    .shopping-thumbnail{
    	width:120px;
