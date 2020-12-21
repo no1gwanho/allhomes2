@@ -55,7 +55,7 @@ span{
 				<a href="/myapp/home" id="homes">h<span>o</span>m<span>es</span></a>
 			</div>
 			<div class="col-2 footer-col-2">
-				<a href="/myapp/ourStory">올홈즈스토리</a>
+				(주)올홈즈
 			</div>
 			<div class="col-3 footer-col-3">
 				대표자: 비트캠프 4조 | 주소:서울시 서대문구 | <br/>
