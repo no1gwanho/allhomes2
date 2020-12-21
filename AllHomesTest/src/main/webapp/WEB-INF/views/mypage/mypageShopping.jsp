@@ -80,6 +80,9 @@
 	.nav nav-tabs, .nav-item{
 		list-style-type:none;
 	}
+	 .container{
+      font-family: 'SCDream3';
+   }
 </style>
 
 <div class="container">
