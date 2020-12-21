@@ -146,7 +146,7 @@
 									<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${p.s_no}/${p.main_img}" style="widht:180px;height:120px;"/>
 								</div>
 								<div class="col-5">
-									<b>${p.pd_name }</b><br/>
+									<a href="<%=request.getContextPath() %>/storeDetail?pd_no=${p.pd_no }"><b>${p.pd_name }</b></a><br/>
 									<c:if test="${p.o_value == null }">
 										옵션없음 / ${p.num }
 									</c:if>
