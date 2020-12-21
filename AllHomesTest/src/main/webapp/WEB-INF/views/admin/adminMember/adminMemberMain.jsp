@@ -212,8 +212,8 @@ td {
 								<tr
 									onClick="location.href='/myapp/adminMemberDetail?userid=${vo.userid}'">
 									<td>${vo.m_no}</td>
-									<td><img src="/myapp/resources/img/mypage/user_basic.png"
-										style="width: 50px; height: 50px" /></td>
+									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${vo.m_pic}"
+										style="width: 50px; height: 50px;border-radius:70%"/></td>
 									<td>${vo.userid}</td>
 									<td>${vo.username}</td>
 									<td>${vo.email}</td>
