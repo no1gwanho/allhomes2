@@ -374,6 +374,7 @@
 					<input type="hidden" value="${deliveryPre}" id="dp"/>
 					<input type="hidden" value="${delivery}" id="d"/>
 					<input type="hidden" value="${confirm}" id="c"/>
+<%-- 					<input type="hidden" value="${reviewDone}" id="r"/> --%>
 					
 					<canvas id="doughnutChart" style="margin-top:50px"></canvas>
 						<script>
@@ -392,10 +393,10 @@
 											"#E1B0B9", "#A85161",
 											"#DB5A51", "#A82C2C" ],
 									    data : [ $("#w").val(), $("#p").val(), $("#dp").val(),
-									    	$("#d").val(), $("#c").val()]
+									    	$("#d").val(), $("#c").val(), $("#r").val()]
 									} ],
 									labels : [ "입금대기", "결제완료", "배송준비",
-										"배송중", "구매확정" ]
+										"배송중", "구매확정", "리뷰완료" ]
 								},
 								options : {
 									responsive : true

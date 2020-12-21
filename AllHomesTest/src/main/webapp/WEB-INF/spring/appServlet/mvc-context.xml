@@ -36,5 +36,35 @@
 	 		<mvc:mapping path="/cartInsert"/>
 	 		<bean class="com.allhomes.myapp.interceptor.LoginInterceptor"/>
 	 	</mvc:interceptor>
+	 	
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/adminMain"/>
+	 		<mvc:mapping path="/adminHomeBoard"/>
+	 		<mvc:mapping path="/adminHBSearchDetail"/>
+	 		<mvc:mapping path="/MemberDetailSearch"/>
+	 		<mvc:mapping path="/adminMemberList"/>
+	 		<mvc:mapping path="/adminMemberMain"/>
+	 		<mvc:mapping path="/adminStoreOrder"/>
+	 		<mvc:mapping path="/productAdd"/>
+	 		<mvc:mapping path="/productAddOk"/>
+	 		<mvc:mapping path="/productEdit"/>
+	 		<mvc:mapping path="/productEditOk"/>
+	 		<mvc:mapping path="/productDel"/>
+	 		<mvc:mapping path="/adminQnaBoard"/>
+	 		<mvc:mapping path="/adminReview"/>
+	 		<mvc:mapping path="/adminReviewSearch"/>
+	 		<mvc:mapping path="/adminReviewDel"/>
+	 		<mvc:mapping path="/adminSalesMain"/>
+	 		<mvc:mapping path="/adminSalesStoreDetail"/>
+	 		<mvc:mapping path="/adminSearchMain"/>
+	 		<mvc:mapping path="/adminStore"/>
+	 		<mvc:mapping path="/adminStoreDetail"/>
+	 		<mvc:mapping path="storeAdd"/>
+	 		<mvc:mapping path="/storeAddOK"/>
+	 		<mvc:mapping path="/storeDel"/>
+	 		<mvc:mapping path="/storeEdit"/>
+	 		<mvc:mapping path="/adminStoreSearch"/>
+	 		<bean class="com.allhomes.myapp.interceptor.AdminLoginInterceptor"/>
+	 	</mvc:interceptor>
 	 </mvc:interceptors>
 </beans>

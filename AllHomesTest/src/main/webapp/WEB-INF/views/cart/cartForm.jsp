@@ -22,6 +22,25 @@
          } else {
             $(".chBox").prop("checked", false);
          }
+         
+         var shipping_c = 0; //배송비
+         var price = 0; //상품가격
+         
+         $("input[name=chBox]:checked").each(function(){
+        	 if($(this).is(":checked")){
+                 shipping_c += Number($(this).next().val()); //배송비
+                 price += Number($(this).next().next().val()); //가격
+                  
+               }else{
+                  shipping_c -= Number($(this).next().val()); //배송비
+                  price -= Number($(this).next().next().val()); //가격
+               }
+         });
+         
+         $("#price").html(price);
+         $("#ship").html(shipping_c);
+         $("#totalPrice").html(price+shipping_c);
+         
       });
       
       //장바구니 삭제
