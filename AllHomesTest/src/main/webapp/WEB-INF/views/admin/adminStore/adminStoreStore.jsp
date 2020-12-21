@@ -40,11 +40,11 @@ td {
 			<div style="float: left">
 				<select class="selectpicker" id="searchSelect">
 					<optgroup label="검색 필터">
-						<option value="s_name">스토어명으로 검색</option>
-						<option value="s_id">판매자 ID로 검색</option>
-						<option value="staff_n">담당자 이름으로 검색</option>
-						<option value="staff_t">담당자 연락처로 검색</option>
-						<option value="staff_e">담당자 이메일로 검색</option>
+						<option value="s_name" <c:if test="${value=='s_name'}">selected</c:if>>스토어명으로 검색</option>
+						<option value="s_id" <c:if test="${value=='s_id'}">selected</c:if>>판매자 ID로 검색</option>
+						<option value="staff_n" <c:if test="${value=='staff_n'}">selected</c:if>>담당자 이름으로 검색</option>
+						<option value="staff_t" <c:if test="${value=='staff_t'}">selected</c:if>>담당자 연락처로 검색</option>
+						<option value="staff_e" <c:if test="${value=='staff_e'}">selected</c:if>>담당자 이메일로 검색</option>
 					</optgroup>
 				</select>
 			</div>
@@ -54,7 +54,7 @@ td {
 				<input type="text" id="searchKeyword"
 					class="form-control bg-light border-0 small"
 					placeholder="Search for..." aria-label="Search"
-					aria-describedby="basic-addon2">
+					aria-describedby="basic-addon2" <c:if test='${value}!=""'>value="${value}"</c:if>>
 				<div class="input-group-append">
 					<button class="btn btn-dark" type="button" id="searchBtn">
 						<i class="fas fa-search fa-sm"></i>

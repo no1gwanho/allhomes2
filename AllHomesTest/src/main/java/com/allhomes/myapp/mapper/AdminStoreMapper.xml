@@ -62,30 +62,55 @@
  	</select>
  	
  	<!-- 선택검색 -->
- 	<select id="adminStoreSearch" parameterType="String" resultType="com.allhomes.myapp.store.StoreVO">
- 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage from store
- 	
- 		<where>
-	 		<choose>
-	 			<when test="value == 's_name'">
-	 				s_name LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 's_id'">
-	 				 s_id LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 'staff_n'">
-	 				 staff_n LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 'staff_t'">
-	 				staff_t LIKE '%'||#{key}||'%'
-	 			</when>
-	 			<when test="value == 'staff_e'">
-	 				staff_e LIKE '%'||#{key}||'%'
-	 			</when>
-	 		</choose>
- 		</where>
+ 	<select id="adminStoreSearch" parameterType="HashMap" resultType="com.allhomes.myapp.store.StoreVO">
+ 		select s_no,s_num,s_name,s_pic,to_char(openingdate, 'YYYY-MM-DD') openingdate,s_id,staff_n,staff_t,staff_e,s_homepage
+ 		from(
+ 			select ROWNUM RN, A.*
+ 							from(
+ 									select * 
+ 									from store
+						 		<where>
+							 		<choose>
+							 			<when test="value == 's_name'">
+							 				s_name LIKE '%'||#{key}||'%'
+							 			</when>
+							 			<when test="value == 's_id'">
+							 				 s_id LIKE '%'||#{key}||'%'
+							 			</when>
+							 			<when test="value == 'staff_n'">
+							 				 staff_n LIKE '%'||#{key}||'%'
+							 			</when>
+							 			<when test="value == 'staff_t'">
+							 				staff_t LIKE '%'||#{key}||'%'
+							 			</when>
+							 			<when test="value == 'staff_e'">
+							 				staff_e LIKE '%'||#{key}||'%'
+							 			</when>
+							 		</choose>
+						 		</where>
+			)A
+ 							)
+		where RN between #{start} and #{end}
  		 
  	</select>
+ 	
+ 	<select id="adminStoreSearchCount" parameterType="HashMap" resultType="int">
+	select count(*) from store
+		<where>
+			<choose>
+				<when test="value == 'userid'">
+					userid LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'title'">
+					title LIKE '%'||#{key}||'%'
+				</when>
+				<when test="value == 'content'">
+					content LIKE '%'||#{key}||'%'
+				</when>
+			</choose>
+		</where>
+
+	</select>
 </mapper>
 
 

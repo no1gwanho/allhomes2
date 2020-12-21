@@ -177,7 +177,7 @@ td{
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
-								<tr onClick="location.href='<%=request.getContextPath()%>/homeboardView?b_no=${list.b_no }'">
+								<tr onClick="location.href='<%=request.getContextPath()%>//adminHomeBoardView?b_no=${list.b_no }'">
 									<td>${list.b_no}</td>
 									<td>${list.title}</td>
 									<td>${list.theme}</td>

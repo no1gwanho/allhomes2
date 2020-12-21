@@ -79,9 +79,9 @@ td{
 				<div class="col-lg-1" style="float:left">
 					<select class="form-control" id="order" name="order">
 						<option class="orderName" disabled selected>정렬</option>
-						<option class="orderName" value="userid">ID 순</option>
-						<option class="orderName" value="username">이름 순</option>
-						<option class="orderName" value="regdate">등록일 순</option>
+						<option class="orderName" value="userid" <c:if test="${order=='userid'}">selected</c:if>>ID 순</option>
+						<option class="orderName" value="username" <c:if test="${order=='username'}">selected</c:if>>이름 순</option>
+						<option class="orderName" value="regdate" <c:if test="${order=='regdate'}">selected</c:if>>등록일 순</option>
 					</select>
 				</div>
 				<!-- search 검색 끝 -->
@@ -165,7 +165,7 @@ td{
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
 								<tr
-									onClick="location.href='/myapp/adminMypage?userid=${list.userid}'">
+									onClick="location.href='/myapp/adminadminMemberDetail?userid=${list.userid}'">
 									<td>${list.m_no}</td>
 									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${list.m_pic}"
 										style="width: 50px; height: 50px;border-radius:70%"/></td>

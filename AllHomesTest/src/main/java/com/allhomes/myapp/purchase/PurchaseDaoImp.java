@@ -18,12 +18,14 @@ public interface PurchaseDaoImp {
 	public int editConfirmCheck(int pc_no);
 	
 	public int reviewStatusUpdate(PurchaseJoinVO vo);
+
+	public int editChk_c(int pc_no);
 	
 	public int delPurchaseList(int pc_no);
 	
 	public List<PurchaseJoinVO> joinPurchase(String userid);
 	
-	public List<PurchaseJoinVO> orderCancelList(PurchaseJoinVO vo);
+	public List<PurchaseJoinVO> orderCancelList(String userid);
 	
 	public PurchaseJoinVO puchaseSelect(PurchaseJoinVO vo);
 }

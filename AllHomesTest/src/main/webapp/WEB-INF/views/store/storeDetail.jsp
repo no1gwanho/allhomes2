@@ -102,65 +102,70 @@
 						<div style="height:30px;"><span>${vo.s_name}</span></div>
 						<div style="heihgt:105px;"><span style="font-size:1.8em;color:#343a40">${vo.pd_name}</span></div>
 					</div>
-					<div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
-						<c:if test="${result==0 && rvo.rating == 0}">
-							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>					
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>																								
-							</span>	
-							아직 등록된 리뷰가 없습니다
-						</c:if>
-						<c:if test="${result != 0 && rvo.rating == 1 }">
-								<i class="fa fa-star allhomes-color"></i>
-							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</span>
-						</c:if>
-						<c:if test="${result != 0 && rvo.rating == 2 }">
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</span>
-						</c:if>
-						<c:if test="${result != 0 && rvo.rating == 3 }">
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>																
-							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</span>
-						</c:if>
-						<c:if test="${result != 0 && rvo.rating == 4 }">
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-							<span style="color:#aaa">
-								<i class="fa fa-star"></i>
-							</span>
-						</c:if>
-						<c:if test="${result != 0 && rvo.rating == 5 }">
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-								<i class="fa fa-star allhomes-color"></i>
-						</c:if>	
-						&nbsp;&nbsp;
-						<a class="review-link" href="#review">
-							<span style="color:#ee8374;font-size:1.2em;">${result}개 </span><span style="font-size:1.2em;">의 리뷰가 있습니다 </span>
-						</a>																							
-					</div>
+					<c:if test="${result == 0}">
+						<div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
+	
+								<span style="color:#aaa">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>					
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>																								
+								</span>	
+								<span style="color:#ee8374;font-size:1.2em;">${result}개 </span><span style="font-size:1.2em;">의 리뷰가 있습니다 </span>
+						</div>
+					</c:if>
+					<c:if test="${result != 0 }">
+						<div class="col-12" style="margin-top:15px;height:45px;line-height:45px;">
+							<c:if test="${rvo.rating == 1 }">
+									<i class="fa fa-star allhomes-color"></i>
+								<span style="color:#aaa">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</span>
+							</c:if>
+							<c:if test="${rvo.rating == 2 }">
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+								<span style="color:#aaa">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</span>
+							</c:if>
+							<c:if test="${rvo.rating == 3 }">
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>																
+								<span style="color:#aaa">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</span>
+							</c:if>
+							<c:if test="${rvo.rating == 4 }">
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+								<span style="color:#aaa">
+									<i class="fa fa-star"></i>
+								</span>
+							</c:if>
+							<c:if test="${rvo.rating == 5 }">
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+									<i class="fa fa-star allhomes-color"></i>
+							</c:if>	
+							&nbsp;&nbsp;
+							<a class="review-link" href="#review">
+								<span style="color:#ee8374;font-size:1.2em;">${result}개 </span><span style="font-size:1.2em;">의 리뷰가 있습니다 </span>
+							</a>																							
+						</div>
+					</c:if>
 					<div class="col-12" style="margin-top:15px;height:55px;">
 						<c:if test="${vo.discount!=0 }">
 							<span style="color:#343a40;"> 판매가격</span>
@@ -479,7 +484,7 @@
 											상품명 : ${vo.pd_name} <br/>
 										</div>
 										<div class="col-12" style="margin-top:15px;">
-											구매일 : <br/>
+											작성일 : ${r.writedate }<br/>
 										</div>
 										<div class="col-12" style="margin-top:15px;">
 											${r.content}

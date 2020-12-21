@@ -98,43 +98,7 @@ public class mypageController {
    }
    
    
-   //mypage홈으로 이동(관리자)
-      @RequestMapping("/adminMypage") //Interceptor로 로그인되어있지 않으면 로그인 페이지로 이동 
-      public ModelAndView adminMypageHome(String userid) {
-         ModelAndView mv = new ModelAndView();
-               
-         
-         RegisterDaoImp reg = sqlSession.getMapper(RegisterDaoImp.class);      
-         RegisterVO vo = reg.oneMeberSelect(userid);
-         
-         
-         MypageWishlistDaoImp wish = sqlSession.getMapper(MypageWishlistDaoImp.class);
-         List<MypageWishlistJoinVO> list = wish.selectWishlist(userid);
-         
-         int m_no = vo.getM_no();
-         ScrapDaoImp scrap = sqlSession.getMapper(ScrapDaoImp.class);
 
-         List<ScrapVO> sList = scrap.mypageScrapList(m_no);
-         
-         //나의글리스트 (집들이/질문답변 따로 불러오기)
-         //집들이
-         HomeboardDaoImp myHbDao = sqlSession.getMapper(HomeboardDaoImp.class);
-         List<HomeboardVO> myHbList = myHbDao.myHomeboardList(userid);
-         
-         //질문답변 
-         QnaDaoImp myQnaDao = sqlSession.getMapper(QnaDaoImp.class);
-         List<QnaVO> myQnaList = myQnaDao.myQnaList(userid);
-         
-         mv.addObject("list", list);    //위시리스트
-         mv.addObject("sList", sList); //스크랩
-         mv.addObject("myHbList", myHbList); //내가쓴 집들이
-         mv.addObject("myQnaList", myQnaList); //내가 쓴 질문글 
-         mv.addObject("vo", vo);
-         
-         mv.setViewName("mypage/mypageHome");
-         
-         return mv;
-      }
    
 
    //mypage 회원정보수정으로이동
@@ -694,8 +658,9 @@ public class mypageController {
 	   PurchaseDaoImp dao = sqlSession.getMapper(PurchaseDaoImp.class);
 	   int result = dao.editConfirmCheck(pc_no);
 	   
-	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
-	   
+
+//	   System.out.println("업데이트 제대로 됐어??????????????? " + result);
+
 	   mav.addObject("resultConfirm", result);
 	   mav.setViewName("landing/resultCheck");
 	   
@@ -746,7 +711,7 @@ public class mypageController {
       int pResult = pDao.updateWishlistAdd(pvo);      
       int result = dao.addWishlist(vo);
 
-      System.out.println(result);
+//      System.out.println(result);
       
       mv.addObject("resultWishAdd", result);
       mv.addObject("pd_no", pd_no);
