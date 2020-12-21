@@ -374,7 +374,9 @@
 					<input type="hidden" value="${deliveryPre}" id="dp"/>
 					<input type="hidden" value="${delivery}" id="d"/>
 					<input type="hidden" value="${confirm}" id="c"/>
+
 	 				<input type="hidden" value="${reviewDone}" id="r"/>
+
 					
 					<canvas id="doughnutChart" style="margin-top:50px"></canvas>
 						<script>

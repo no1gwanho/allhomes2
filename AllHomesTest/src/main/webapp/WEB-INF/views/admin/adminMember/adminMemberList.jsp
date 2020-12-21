@@ -165,7 +165,11 @@ td{
 						<tbody>
 							<c:forEach var="list" items="${viewAll}">
 								<tr
-									onClick="location.href='/myapp/adminMemberDetail?userid=${list.userid}'">
+
+
+								onClick="location.href='/myapp/adminMemberDetail?userid=${list.userid}'">
+
+
 									<td>${list.m_no}</td>
 									<td><img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${list.m_pic}"
 										style="width: 50px; height: 50px;border-radius:70%"/></td>
