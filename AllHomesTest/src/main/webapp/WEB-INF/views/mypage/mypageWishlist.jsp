@@ -65,7 +65,7 @@
 	})
 </script>
 <div class="container">
-	<h3 class="wishlist-title">스크랩북</h3>
+	<h3 class="wishlist-title">위시리스트</h3>
 	
 	<div class="scrap-owner-info">
 	<img class="profile_pic" src="<%=request.getContextPath()%>/resources/upload/register/${m_pic}"/>
