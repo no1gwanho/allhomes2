@@ -226,7 +226,7 @@
 							<c:if test="${c.chk_c > 0 }">
 								<div class="col-3">
 									<input type="checkbox" class="chkBox" value="${c.pc_no }">&nbsp;&nbsp;
-									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${c.s_no}/${c.main_img}" style="widht:240px;height:120px;"/>
+									<img src="<%=request.getContextPath() %>/resources/upload/productMainImg/${c.s_no}/${c.main_img}" style="widht:240px;height:120px;"/>
 								</div>
 								<div class="col-9">
 									<b>${c.pd_name }</b><br/>
