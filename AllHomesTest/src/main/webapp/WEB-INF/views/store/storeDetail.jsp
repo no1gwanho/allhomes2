@@ -242,7 +242,7 @@
 							<div class="col-12">
 								<br/>
 								<c:if test="${vo.pd_img != null }">
-									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img }" style="width:900px;"/>
+									<img src="<%=request.getContextPath() %>/resources/upload/productImg/${vo.s_no}/${vo.pd_img}" style="width:900px;"/>
 								</c:if>		
 								<c:if test="${vo.pd_img == null }">
 									<span style="margin-top:25px;">상품 설명이 없습니다</span>

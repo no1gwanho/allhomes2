@@ -88,17 +88,13 @@ public class AdminProductController {
 
 			try {
 				mf.transferTo(new File(imgPath, imgFileName));
-				voImgName += imgFileName + ",";
+				voImgName += imgFileName;
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
 
 		vo.setPd_img(voImgName); // vo에 이미지명 세팅
 		
