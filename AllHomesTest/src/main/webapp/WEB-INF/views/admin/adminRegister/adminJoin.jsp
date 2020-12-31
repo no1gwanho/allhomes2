@@ -10,14 +10,10 @@
 </style>
 <script>
 	$(function(){
+		var idChk = 0; 
 		
-		var idChk = 0; //ID 중복검사
-
-		//var emailChk = 0; //email 중복검사
-		
-		//아이디 중복체크
+		//ID 중복검사
 		$("#idChk").click(function(){
-			
 			if($("#userid").val()==""){
 				alert("ID를 입력하세요.");
 				return false;
@@ -26,14 +22,14 @@
 			var data = $("#userid").val();
 			var url = "<%=request.getContextPath()%>/idCheck?userid="+data;
 			
+			//ajax를 통한 ID 중복검사
 			$.ajax({
 				url: url,
 				data: data,
 				success: function(result){
 					if(result==0){//사용가능
 						idChk = 1;
-						alert("사용 가능한 ID입니다.");
-												
+						alert("사용 가능한 ID입니다.");		
 					}else{
 						alert("이미 사용중인 ID입니다.");
 					}
@@ -45,10 +41,10 @@
 		});
 		
 		
-		//회원가입 submit
+		//회원가입 submit 발생
 		$("#regForm").submit(function(){			
 			
-			// 입력사항 체크
+			//입력데이터 검사
 			if($("#userid").val()==""){
 				alert("ID를 입력하세요.");
 				return false;
@@ -72,11 +68,13 @@
 				return false;
 			}
 			
+			//ID 중복검사를 시행하지 않았을 경우
 			if(idChk==0){
 				alert("아이디 중복검사를 시행하세요.");
 				return false;
 			}
 			
+			//회원가입
 			var url = "/myapp/adminRegisterOk"
 			var data = $("#regForm").serialize();
 			
